@@ -13,4 +13,4 @@ rm -rf "_build"
 MIX_ENV=prod mix release
 
 # Run migrations
-_build/prod/rel/render/bin/render eval "Kalda.Release.migrate"
+_build/prod/rel/kalda/bin/kalda eval "Kalda.Release.migrate"
