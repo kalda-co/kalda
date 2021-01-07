@@ -1,20 +1,10 @@
 # Kalda
 
-To start your Phoenix server:
+This is the Kalda app, a web application written in Elixir using the
+PostgresQL database.
 
-  * Install dependencies with `mix deps.get`
-  * Create and migrate your database with `mix ecto.setup`
-  * Install Node.js dependencies with `npm install` inside the `assets` directory
-  * Start Phoenix endpoint with `mix phx.server`
+It is deployed to <https://app.kalda.co> using <https://render.com>.
 
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+## Useful links
 
-Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
-
-## Learn more
-
-  * Official website: https://www.phoenixframework.org/
-  * Guides: https://hexdocs.pm/phoenix/overview.html
-  * Docs: https://hexdocs.pm/phoenix
-  * Forum: https://elixirforum.com/c/phoenix-forum
-  * Source: https://github.com/phoenixframework/phoenix
+- [Local developer setup](docs/developer-setup.md) documentation.
