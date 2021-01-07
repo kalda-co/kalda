@@ -1,9 +1,5 @@
 name: ci
-on:
-  pull_request:
-  push:
-    branches:
-      - main: push
+on: push
 
 jobs:
   test:
