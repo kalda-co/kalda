@@ -16,8 +16,7 @@ defmodule KaldaWeb.Router do
 
   scope "/", KaldaWeb do
     pipe_through :browser
-
-    live "/", PageLive, :index
+    get "/", PageController, :index
   end
 
   # Other scopes may use custom stacks.
@@ -37,6 +36,7 @@ defmodule KaldaWeb.Router do
 
     scope "/" do
       pipe_through :browser
+      live "/live-example", PageLive, :index
       live_dashboard "/dashboard", metrics: KaldaWeb.Telemetry
     end
   end
