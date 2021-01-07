@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+set -euf -o pipefail
+
 # Initial setup
 mix deps.get --only prod
 MIX_ENV=prod mix compile
