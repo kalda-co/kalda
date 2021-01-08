@@ -90,7 +90,7 @@ the Kalda project directory.
 Add the language plugins and their deps
 
 ```sh
-asdf plugin add erlang
+asdf plugin-add erlang
 # Ubuntu Linux
 sudo apt install build-essential autoconf m4 libncurses5-dev libpng-dev libssh-dev unixodbc-dev xsltproc fop libxml2-utils libncurses-dev
 # Apple OSX
@@ -98,18 +98,18 @@ brew install autoconf wxmac
 ```
 
 ```sh
-asdf plugin add elixir
+asdf plugin-add elixir
 ```
 
 ```sh
-asdf plugin add nodejs
+asdf plugin-add nodejs
 bash -c '${ASDF_DATA_DIR:=$HOME/.asdf}/plugins/nodejs/bin/import-release-team-keyring'
 ```
 
 Install Elixir, Erlang, and NodeJS using asdf. 
 
-This compiles Erlang from scratch and will take a long time, so this is a
-good time for a tea break ☕
+This compiles Erlang from scratch and will take up to tens of minutes, so
+this is a good time for a tea break ☕
 
 ```sh
 asdf install
