@@ -1,0 +1,19 @@
+
+html {
+  box-sizing: border-box;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+header {
+  background: #2d1c62;
+}
+
+h1 {
+  text-align: center;
+}
