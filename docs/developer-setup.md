@@ -25,6 +25,25 @@ sudo -u postgres psql
 # Now type in the password `postgres`
 ```
 
+```sh
+# On Mac
+pg_ctl -D /usr/local/var/postgres start && brew services start postgresql
+# check it works
+postgres -V
+# Connect to database with your username 'whoami'
+psql -U 'whoami' postgres
+# If this fails
+cd /usr/local/var/postgres
+initdb postgres
+# now repeat
+psql -U 'whoami' postgres
+# view users
+\du
+```
+
+On Mac, follow [these guidelines](https://www.codementor.io/@engineerapart/getting-started-with-postgresql-on-mac-osx-are8jcopb#a1-create-role-with-psql) to create a user with name postgres, role createdb and password postgres.
+
+
 ## Clone the project locally
 
 You will need to have created an SSH key and added it to your GitHub account
