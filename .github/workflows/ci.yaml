@@ -21,6 +21,10 @@ jobs:
           --health-timeout 5s
           --health-retries 5
 
+    env:
+      CI: true
+      MIX_ENV: test
+
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-elixir@v1
@@ -28,4 +32,6 @@ jobs:
           otp-version: '23.2.1'
           elixir-version: '1.11.2'
       - run: mix deps.get
+      - run: mix deps.compile
+      - run: mix compile
       - run: mix test
