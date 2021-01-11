@@ -1,7 +1,7 @@
 defmodule KaldaWeb.PageLiveTest do
   use KaldaWeb.ConnCase
 
-  import Phoenix.LiveViewTest
+  # import Phoenix.LiveViewTest
 
   # test "disconnected and connected render", %{conn: conn} do
   #   {:ok, page_live, disconnected_html} = live(conn, "/")
