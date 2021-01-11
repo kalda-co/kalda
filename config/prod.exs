@@ -11,6 +11,9 @@ use Mix.Config
 # before starting your production server.
 config :kalda, KaldaWeb.Endpoint, cache_static_manifest: "priv/static/cache_manifest.json"
 
+# Enforce basic browser auth in production
+config :kalda, :basic_auth_password, "capybara"
+
 # Do not print debug messages in production
 config :logger, level: :info
 
