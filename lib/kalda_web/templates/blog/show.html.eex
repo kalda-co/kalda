@@ -1,0 +1,20 @@
+<h1>
+  <%= @post.title %>
+</h1>
+
+<div>
+  <%= @post.date %>
+</div>
+<div>
+  <%= @post.author %>
+</div>
+
+<ul>
+  <%= for tag <- @post.tags do %>
+    <li><%= tag %>
+  <% end %>
+</ul>
+
+<article>
+  <%= raw @post.body %>
+</article>

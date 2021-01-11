@@ -61,7 +61,8 @@ config :kalda, KaldaWeb.Endpoint,
       ~r"priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$",
       ~r"priv/gettext/.*(po)$",
       ~r"lib/kalda_web/(live|views)/.*(ex)$",
-      ~r"lib/kalda_web/templates/.*(eex)$"
+      ~r"lib/kalda_web/templates/.*(eex)$",
+      ~r"posts/*/.*(md)$"
     ]
   ]
 

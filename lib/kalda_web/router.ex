@@ -17,6 +17,7 @@ defmodule KaldaWeb.Router do
   scope "/", KaldaWeb do
     pipe_through :browser
     get "/", PageController, :index
+    get "/blog/:id", BlogController, :show
   end
 
   # Other scopes may use custom stacks.
