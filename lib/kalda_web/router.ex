@@ -3,7 +3,15 @@ defmodule KaldaWeb.Router do
 
   import KaldaWeb.UserAuth
 
+  defp basic_auth(conn, _opts) do
+    case Application.get_env(:kalda, :basic_auth_password) do
+      nil -> conn
+      password -> Plug.BasicAuth.basic_auth(conn, username: "kalda", password: password)
+    end
+  end
+
   pipeline :browser do
+    plug :basic_auth
     plug :accepts, ["html"]
     plug :fetch_session
     plug :fetch_live_flash
