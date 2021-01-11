@@ -51,6 +51,8 @@ defmodule Kalda.MixProject do
       {:jason, "~> 1.0"},
       # Web server
       {:plug_cowboy, "~> 2.0"},
+      # Markdown blog post engine
+      {:nimble_publisher, "~> 0.1.0"},
       # HTML parsing
       {:floki, ">= 0.27.0", only: :test},
       # Automatic page reloading
