@@ -56,6 +56,8 @@ defmodule Kalda.MixProject do
       {:nimble_publisher, "~> 0.1.0"},
       # HTML parsing
       {:floki, ">= 0.27.0", only: :test},
+      # Secure password hashing
+      {:bcrypt_elixir, "~> 2.0"},
       # Automatic page reloading
       {:phoenix_live_reload, "~> 1.2", only: :dev},
       # Automatic test runner
