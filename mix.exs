@@ -33,20 +33,29 @@ defmodule Kalda.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
+      # Web framework
       {:phoenix, "~> 1.5.7"},
+      {:phoenix_live_view, "~> 0.15.0"},
+      {:phoenix_html, "~> 2.11"},
+      # Postgresql database access
       {:phoenix_ecto, "~> 4.1"},
       {:ecto_sql, "~> 3.4"},
       {:postgrex, ">= 0.0.0"},
-      {:phoenix_live_view, "~> 0.15.0"},
-      {:floki, ">= 0.27.0", only: :test},
-      {:phoenix_html, "~> 2.11"},
-      {:phoenix_live_reload, "~> 1.2", only: :dev},
+      # Metrics
       {:phoenix_live_dashboard, "~> 0.4"},
       {:telemetry_metrics, "~> 0.4"},
       {:telemetry_poller, "~> 0.4"},
+      # Internationalisation
       {:gettext, "~> 0.11"},
+      # JSON (de)serialization
       {:jason, "~> 1.0"},
+      # Web server
       {:plug_cowboy, "~> 2.0"},
+      # HTML parsing
+      {:floki, ">= 0.27.0", only: :test},
+      # Automatic page reloading
+      {:phoenix_live_reload, "~> 1.2", only: :dev},
+      # Automatic test runner
       {:mix_test_watch, "~> 1.0", only: :dev, runtime: false}
     ]
   end
