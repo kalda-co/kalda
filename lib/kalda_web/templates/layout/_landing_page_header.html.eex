@@ -1,0 +1,12 @@
+      <section class="container">
+        <nav role="navigation">
+          <ul>
+            <li><a href="https://github.com/kalda-co/kalda/blob/main/docs/developer-setup.md">Get Started</a></li>
+            <li><a hfref="/">Privacy Policy</a></li>
+          </ul>
+        </nav>
+        <%# # TODO change logo classname in css/html %>
+        <a href="/" class="phx-logo">
+          <img src="<%= Routes.static_path(@conn, "/images/kalda-logo-1.png") %>" alt="Kalda Logo"/>
+        </a>
+      </section>
