@@ -11,7 +11,7 @@
   </head>
   <body>
     <header>
-    <%= render "_app_header.html", assigns %>
+    <%= render "_landing_page_header.html", assigns %>
     </header>
     <%= @inner_content %>
   </body>
