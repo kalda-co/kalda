@@ -92,7 +92,7 @@ Add the language plugins and their deps
 ```sh
 asdf plugin-add erlang
 # Ubuntu Linux
-sudo apt install build-essential autoconf m4 libncurses5-dev libpng-dev libssh-dev unixodbc-dev xsltproc fop libxml2-utils libncurses-dev
+sudo apt install build-essential autoconf m4 libncurses5-dev libpng-dev libssh-dev unixodbc-dev xsltproc libxml2-utils libncurses-dev
 # Apple OSX
 brew install autoconf wxmac
 ```
@@ -119,7 +119,7 @@ asdf install
 
 ```sh
 mix deps.get
-cd assets && npm install && cd ..
+npm install --prefix assets
 ```
 
 ## Setup the Kalda database
