@@ -1,0 +1,66 @@
+html {
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  font-family: poppins-semibold, poppins, sans-serif;
+  margin: 0;
+  text-decoration: none;
+}
+
+header {
+  display: unset;
+  background: #2d1c62;
+  display: flex;
+  width: 100%;
+  padding: 1.7%;
+}
+
+img {
+  vertical-align: bottom;
+}
+svg {
+  vertical-align: bottom;
+}
+
+.display-none {
+  display: none;
+}
+
+.menu-container {
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+  vertical-align: baseline;
+  justify-content: space-between;
+}
+.logo-container {
+  max-width: 16rem;
+  display: flex;
+  justify-content: flex-start;
+  align-items: baseline;
+}
+
+.button {
+  background: linear-gradient(138.94deg, #C7FFFF 35.3%, #FFB3FC 84.65%);
+border-radius: 300px;
+  padding: 10px 22px;
+  margin-left: 2rem;
+  text-decoration: none;
+}
+.menu-rhs-links {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.login-button {
+}
+
+.contact-button {
+}
