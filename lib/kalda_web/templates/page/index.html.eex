@@ -1,13 +1,13 @@
 <section class="landing-hero">
-  <div>
+  <div class="container">
     <h1>Come as you are</h1>
     <h2>
       Join the LGBTQIA+ mental wellbeing community. Get happy, get accountable
       and get it together.
     </h2>
     <form action="TODO" method="POST">
-      <input type="text">
-      <input type="submit">
+      <input type="text" placeholder="me@email.com">
+      <input class="button" type="submit" value="Sign up">
     </form>
     <p>
       By giving your details you agree to hear Kalda’s latest news. You can
@@ -16,11 +16,11 @@
   </div>
   <img src="TODO" alt="Kalda's app viewed on a mobile phone">
 </section>
-<div class="background-white">
+<div class="landing-slice">
   <div class="container">
-    <h1 class="text-center">
+    <h2 class="text-center">
       What Kalda Does
-    </h1>
+    </h2>
     <p>
       Using Kalda improves your mood with daily reflection questions and weekly group therapy in a supportive LGBTQIA+
       community.
@@ -28,11 +28,11 @@
   </div>
 </div>
 
-<div class="background-blue">
+<div class="landing-slice background-blue">
   <div class="container">
-    <h1 class="text-center">
+    <h2 class="text-center">
       Our Mission
-    </h1>
+    </h2>
     <p>
       We know that having a supportive community is key to mental wellbeing. And we believe that everyone should be able
       to access unbiased and affordable mental health support. That's why we created Kalda, a place to access daily
@@ -41,7 +41,7 @@
   </div>
 </div>
 
-<div class="background-white">
+<div>
   <div class="full-page-width-container">
     <div class="landing-page-grid">
       <div class="landing-page-grid-item first-grid-item">
@@ -49,17 +49,17 @@
           alt="Person with a rainbow on their cheek in the crowd at a pride festival">
       </div>
       <div class="landing-page-grid-item ">
-        <h1 class="text-center">
+        <h2 class="text-center">
           Daily Reflection Questions
-        </h1>
+        </h2>
         <p>
           Within a supportive community you’ll be answering daily reflection questions.
         </p>
       </div>
       <div class="landing-page-grid-item">
-        <h1 class="text-center">
+        <h2 class="text-center">
           Weekly Group Therapy
-        </h1>
+        </h2>
         <p>
           Join a live weekly group therapy session with an experienced therapist.
         </p>
@@ -73,9 +73,9 @@
           alt="Person with a rainbow on their cheek in the crowd at a pride festival">
       </div>
       <div class="landing-page-grid-item">
-        <h1 class="text-center">
+        <h2 class="text-center">
           For The Community, By The Community
-        </h1>
+        </h2>
         <p>
           We are a queer-led team developing a digital experience for the
           community. The app has been developed through co-design with the
@@ -86,8 +86,8 @@
   </div>
 </div>
 
-<div class="container">
-  <figure>
+<div class="landing-slice background-blue">
+  <figure class="container">
     <blockquote>
       "I loved attending the group therapy session and feel incredible! I
       didn't realise how much tension I was holding on to and how badly it
@@ -99,19 +99,21 @@
   </figure>
 </div>
 
-<div class="container">
-  <h1>Early bird access</h1>
+<div class="container landing-slice">
+  <h2 class="text-center">Early bird access</h2>
   <p>
     We have limited spaces for our exclusive early bird group. This group
     recieves daily reflection questions and weekly group therapy sessions. To
     get involved, join the Facebook group or sign up for our mailing list.
     This group works on a pay-what-you-can basis.
   </p>
-  <a href="TODO" class="button-wide">Join the group</a>
+  <div class="join-the-group">
+    <a href="TODO" class="button-wide">Join the group</a>
+  </div>
 </div>
 
-<div class="container">
-  <h2>How it works</h2>
+<div class="container landing-slice">
+  <h2 class="text-center">How it works</h2>
   <ul class="tiles">
     <li>
       <h3>Evidence-based</h3>
