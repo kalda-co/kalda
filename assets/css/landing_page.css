@@ -47,6 +47,7 @@ header {
 
 img {
   vertical-align: bottom;
+  max-width: 100%;
 }
 svg {
   vertical-align: bottom;
@@ -54,6 +55,10 @@ svg {
 h1 {
   font-weight: 600;
   font-size: x-large;
+}
+
+.logo-image img {
+  width: 10rem;
 }
 
 .text-center {
@@ -64,12 +69,21 @@ h1 {
   display: none;
 }
 
+/* TODO Make responsive */
 .button {
   background: linear-gradient(138.94deg, #C7FFFF 35.3%, #FFB3FC 84.65%);
   border-radius: 300px;
   padding: 10px 22px;
   margin-left: 2rem;
   text-decoration: none;
+}
+
+.background-blue {
+  background-color: var(--color-blue)
+}
+
+.background-white {
+  background-color: var(--color-white)
 }
 
 .menu-container {
@@ -106,11 +120,28 @@ h1 {
   padding: 13px;
 }
 
-.background-blue {
-  background-color: var(--color-blue)
+.full-page-width-container {
+  display: flex;
+  justify-content: center;
 }
 
-.background-white {
-  background-color: var(--color-white)
+.landing-page-grid {
+  /* width: 900px; */
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.landing-page-grid-item{
+  width: 450px;
+  max-width: 100%;
+  min-width: 50%;
+}
+
+.grid-first-item {
+  order: 0;
 }
 

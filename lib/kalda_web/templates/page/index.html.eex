@@ -22,3 +22,47 @@
     </p>
   </div>
 </div>
+
+<div class="background-white">
+  <div class="full-page-width-container">
+    <div class="landing-page-grid">
+      <div class="landing-page-grid-item grid-first-item">
+        <h1 class="text-center">
+          Daily Reflection Questions
+        </h1>
+        <p>
+          Within a supportive community you’ll be answering daily reflection questions.
+        </p>
+      </div>
+      <div class="landing-page-grid-item">
+        <img src="/images/betzy-arosemena-Mx15HMZGQzY-unsplash-crop.jpg"
+          alt="Person with a rainbow on their cheek in the crowd at a pride festival">
+      </div>
+      <div class="landing-page-grid-item">
+        <img src="/images/betzy-arosemena-Mx15HMZGQzY-unsplash-crop.jpg"
+          alt="Person with a rainbow on their cheek in the crowd at a pride festival">
+      </div>
+      <div class="landing-page-grid-item">
+        <h1 class="text-center">
+          Weekly Group Therapy
+        </h1>
+        <p>
+          Join a live weekly group therapy session with an experienced therapist.
+        </p>
+      </div>
+      <div class="landing-page-grid-item">
+        <h1 class="text-center">
+          For The Community, By The Community
+        </h1>
+        <p>
+          We are a queer-led team developing a digital experience for the community. The app has been developed through
+          co-design with the community.
+        </p>
+      </div>
+      <div class="landing-page-grid-item">
+        <img src="/images/betzy-arosemena-Mx15HMZGQzY-unsplash-crop.jpg"
+          alt="Person with a rainbow on their cheek in the crowd at a pride festival">
+      </div>
+    </div>
+  </div>
+</div>

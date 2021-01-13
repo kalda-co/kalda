@@ -12,8 +12,8 @@
 <div class='menu-container'>
   <div class='logo-container'>
     <a href="/" class="logo-image">
-      <%# <img src="/images/kalda-logo.svg"/> %>
-      <svg><use xlink:href="#kalda-logo-svg" /></svg>
+      <img src="/images/kalda-logo.svg"/>
+      <%# <svg><use xlink:href="#kalda-logo-svg" /></svg> %>
     </a>
   </div>
   <div class='menu-rhs-links'>
