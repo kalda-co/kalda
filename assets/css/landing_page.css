@@ -111,7 +111,7 @@ h1 {
 .contact-button {
 }
 
-.standard-page-width {
+.container {
   display: block;
   max-width: 100%;
   width: 800px;
@@ -144,4 +144,3 @@ h1 {
 .grid-first-item {
   order: 0;
 }
-

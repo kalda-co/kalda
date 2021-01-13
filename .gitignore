@@ -36,4 +36,7 @@ npm-debug.log
 # Personal Files
 getting_started.md
 notes.md
-log.md
+log.m
+
+# IDE files
+.elixir_ls
