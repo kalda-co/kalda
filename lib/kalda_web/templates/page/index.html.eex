@@ -1,5 +1,23 @@
+<section class="landing-hero">
+  <div>
+    <h1>Come as you are</h1>
+    <h2>
+      Join the LGBTQIA+ mental wellbeing community. Get happy, get accountable
+      and get it together.
+    </h2>
+    <form action="TODO" method="POST">
+      <input type="text">
+      <input type="submit">
+    </form>
+    <p>
+      By giving your details you agree to hear Kalda’s latest news. You can
+      unsubscribe at any time. We will not share your data to third parties.
+    </p>
+  </div>
+  <img src="TODO" alt="Kalda's app viewed on a mobile phone">
+</section>
 <div class="background-white">
-  <div class="standard-page-width">
+  <div class="container">
     <h1 class="text-center">
       What Kalda Does
     </h1>
@@ -11,7 +29,7 @@
 </div>
 
 <div class="background-blue">
-  <div class="standard-page-width">
+  <div class="container">
     <h1 class="text-center">
       Our Mission
     </h1>
@@ -59,10 +77,62 @@
           For The Community, By The Community
         </h1>
         <p>
-          We are a queer-led team developing a digital experience for the community. The app has been developed through
-          co-design with the community.
+          We are a queer-led team developing a digital experience for the
+          community. The app has been developed through co-design with the
+          community.
         </p>
       </div>
     </div>
   </div>
+</div>
+
+<div class="container">
+  <figure>
+    <blockquote>
+      "I loved attending the group therapy session and feel incredible! I
+      didn't realise how much tension I was holding on to and how badly it
+      was affecting my life! Thank you. "
+    </blockquote>
+    <figcaption>
+      Ben, 21
+    </figcaption>
+  </figure>
+</div>
+
+<div class="container">
+  <h1>Early bird access</h1>
+  <p>
+    We have limited spaces for our exclusive early bird group. This group
+    recieves daily reflection questions and weekly group therapy sessions. To
+    get involved, join the Facebook group or sign up for our mailing list.
+    This group works on a pay-what-you-can basis.
+  </p>
+  <a href="TODO" class="button-wide">Join the group</a>
+</div>
+
+<div class="container">
+  <h2>How it works</h2>
+  <ul class="tiles">
+    <li>
+      <h3>Evidence-based</h3>
+      <p>
+        We use the latest, evidence-based techniques to improve your mental
+        wellbeing long-term.
+      </p>
+    </li>
+    <li>
+      <h3>Community strength</h3>
+      <p>
+        We’ve created a safe for the LGBTQIA+ community to come together to
+        share mental wellbeing thoughts and advice.
+      </p>
+    </li>
+    <li>
+      <h3>Regular support</h3>
+      <p>
+        Daily reflection questions and weekly meditations keeps you on track
+        to improving your mental wellbeing.
+      </p>
+    </li>
+  </ul>
 </div>
