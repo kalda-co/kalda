@@ -207,3 +207,14 @@ h1, h2, h3, h4, h5, h6 {
 .grid-first-item {
   order: 0;
 }
+
+.display-web-only {
+  display: none;
+}
+
+@media screen 
+  and (min-device-width: 900px) {
+    .display-web-only {
+      display: block;
+    }
+}

@@ -14,7 +14,7 @@
       unsubscribe at any time. We will not share your data to third parties.
     </p>
   </div>
-  <img src="TODO" alt="Kalda's app viewed on a mobile phone">
+  <img class="display-web-only" src="/images/kalda-mobile-app.png" alt="Kalda's app viewed on a mobile phone">
 </section>
 <div class="landing-slice">
   <div class="container">
