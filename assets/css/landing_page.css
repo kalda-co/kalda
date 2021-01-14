@@ -24,8 +24,11 @@
   --gap: 16px;
   --gap-l: calc(var(--gap) * 2);
   --gap-xl: calc(var(--gap) * 3);
+  --gap-xxxl: calc(var(--gap) * 5);
 
   --font-size: 14px;
+  --font-size-s: 0.8rem;
+  --font-size-m: 1.15rem;
   --font-size-l: 1.25rem;
   --font-size-xl: 1.8rem;
 }
@@ -59,6 +62,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .logo-image img {
   width: 10rem;
+  margin: var(--gap);
 }
 
 .text-center {
@@ -101,7 +105,7 @@ h1, h2, h3, h4, h5, h6 {
   align-items: center;
 } 
 
-.landing-hero input[type=text] {
+.landing-hero input[type=email] {
   border-radius: 100px;
   border: none;
   padding: var(--button-padding);
@@ -109,10 +113,27 @@ h1, h2, h3, h4, h5, h6 {
 
 .landing-hero img {
   width: 246px;
-  height: 372px;
-  margin: var(--gap);
-  padding-right: var(--gap-xl);
-  padding-left: 0px;
+}
+
+.landing-hero h1 {
+  margin-bottom: var(--gap-xl);
+  font-size: var(--font-size-xl);
+}
+
+.landing-hero h2 {
+  font-size: var(--font-size-m);
+}
+
+.landing-hero p {
+  font-size: var(--font-size-s);
+}
+
+.landing-hero .container {
+  display: flex;
+}
+
+.hero-lhs {
+  padding-top: var(--gap-xxxl);
 }
 
 .landing-slice {
@@ -169,8 +190,7 @@ h1, h2, h3, h4, h5, h6 {
 .menu-container {
   width: 100%;
   display: flex;
-  align-items: flex-end;
-  vertical-align: baseline;
+  align-items: center;
   justify-content: space-between;
 }
 
@@ -182,7 +202,15 @@ h1, h2, h3, h4, h5, h6 {
 
 .menu-rhs-links {
   display: flex;
-  justify-content: flex-end;
+}
+
+.menu-rhs-links .contact-button+.login-button {
+  margin-top: var(--gap);
+}
+
+.menu-rhs-links .contact-button {
+  margin-right: var(--gap);
+  margin-left: 4px;
 }
 
 .container {

@@ -1,25 +1,30 @@
 <section class="landing-hero">
   <div class="container">
-    <h1>Come as you are</h1>
-    <h2>
-      Join the LGBTQIA+ mental wellbeing community. Get happy, get accountable
-      and get it together.
-    </h2>
-    <form method="post" action="https://sendfox.com/form/m5dewx/1jxnrq" class="sendfox-form" id="1jxnrq" data-async="true">
-     <%# data-recaptcha="true"> %>
-      <input type="email" placeholder="me@email.com" name="email" required>
-    <!-- sendfox honeytrap-->
-    <%# <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="a_password" tabindex="-1"
-        value="" autocomplete="off" /></div> %>
-    <!-- end sendfox honeytrap-->
-      <input class="button" type="submit" value="Sign up">
-    </form>
-    <p>
-      By giving your details you agree to hear Kalda’s latest news. You can
-      unsubscribe at any time. We will not share your data to third parties.
-    </p>
+    <div class="hero-lhs">
+      <h1>Come as you are</h1>
+      <h2>
+        Join the LGBTQIA+ mental wellbeing community. Get happy, get accountable
+        and get it together.
+      </h2>
+      <form method="post" action="https://sendfox.com/form/m5dewx/1jxnrq" class="sendfox-form" id="1jxnrq"
+        data-async="true">
+        <input type="email" placeholder="me@email.com" name="email" required>
+        <!-- sendfox honeytrap-->
+        <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="a_password"
+            tabindex="-1" value="" autocomplete="off" />
+        </div>
+        <!-- end sendfox honeytrap-->
+        <input class="button" type="submit" value="Sign up">
+      </form>
+      <p>
+        By giving your details you agree to hear Kalda’s latest news. You can
+        unsubscribe at any time. We will not share your data to third parties.
+      </p>
+    </div>
+    <div>
+      <img class="display-web-only" src="/images/kalda-mobile-app.png" alt="Kalda's app viewed on a mobile phone">
+    </div>
   </div>
-  <img class="display-web-only" src="/images/kalda-mobile-app.png" alt="Kalda's app viewed on a mobile phone">
 </section>
 <div class="landing-slice">
   <div class="container">
