@@ -5,7 +5,6 @@
       Join the LGBTQIA+ mental wellbeing community. Get happy, get accountable
       and get it together.
     </h2>
-    <form action="TODO" method="POST">
     <form method="post" action="https://sendfox.com/form/m5dewx/3lej8p" class="sendfox-form" id="3lej8p" data-async="true" data-recaptcha="true">
       <input type="email" placeholder="me@email.com" name="email" required>
     <!-- sendfox honeytrap-->
