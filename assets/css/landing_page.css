@@ -24,7 +24,8 @@
   --gap: 16px;
   --gap-l: calc(var(--gap) * 2);
   --gap-xl: calc(var(--gap) * 3);
-  --gap-xxxl: calc(var(--gap) * 5);
+  --gap-xxl: calc(var(--gap) * 5);
+  --gap-xxxl: calc(var(--gap) * 7);
 
   --font-size: 14px;
   --font-size-s: 0.8rem;
@@ -133,7 +134,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .hero-lhs {
-  padding-top: var(--gap-xxxl);
+  padding-top: var(--gap-xxl);
 }
 
 .landing-slice {
@@ -224,8 +225,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .full-page-width-container {
-  display: flex;
-  justify-content: center;
+  width: 100%;
 }
 
 .display-web-only {
@@ -244,14 +244,34 @@ h1, h2, h3, h4, h5, h6 {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  justify-content: center;
+  align-items: center;
   flex-direction: row;
 }
 
+.landing-page-grid.wrap-reverse {
+  flex-wrap: wrap-reverse;
+}
+
+.landing-page-grid img {
+  width: 100%;
+  max-width: 772px;
+}
+
 .landing-page-grid-item{
-  width: 450px;
+  width: 386px;
   max-width: 100%;
   min-width: 50%;
+}
+
+.landing-page-grid-item h2 {
+ /* padding-top: var(--gap-xxxl); */
+  /* padding-left: var(--gap-xl); */
+  /* padding-right: var(--gap-xl); */
+}
+
+.landing-page-grid-item p {
+  /* padding-left: var(--gap-xl); */
+  /* padding-right: var(--gap-xl); */
 }
 
 .grid-first-item {

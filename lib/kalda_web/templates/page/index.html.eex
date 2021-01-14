@@ -51,49 +51,55 @@
   </div>
 </div>
 
-<div>
-  <div class="full-page-width-container">
-    <div class="landing-page-grid">
-      <div class="landing-page-grid-item first-grid-item">
-        <img src="/images/betzy-arosemena-Mx15HMZGQzY-unsplash-crop.jpg"
-          alt="Person with a rainbow on their cheek in the crowd at a pride festival">
-      </div>
-      <div class="landing-page-grid-item ">
-        <h2 class="text-center">
-          Daily Reflection Questions
-        </h2>
-        <p>
-          Within a supportive community you’ll be answering daily reflection questions.
-        </p>
-      </div>
-      <div class="landing-page-grid-item">
-        <h2 class="text-center">
-          Weekly Group Therapy
-        </h2>
-        <p>
-          Join a live weekly group therapy session with an experienced therapist.
-        </p>
-      </div>
-      <div class="landing-page-grid-item">
-        <img src="/images/betzy-arosemena-Mx15HMZGQzY-unsplash-crop.jpg"
-          alt="Person with a rainbow on their cheek in the crowd at a pride festival">
-      </div>
-      <div class="landing-page-grid-item">
-        <img src="/images/betzy-arosemena-Mx15HMZGQzY-unsplash-crop.jpg"
-          alt="Person with a rainbow on their cheek in the crowd at a pride festival">
-      </div>
-      <div class="landing-page-grid-item">
-        <h2 class="text-center">
-          For The Community, By The Community
-        </h2>
-        <p>
-          We are a queer-led team developing a digital experience for the
-          community. The app has been developed through co-design with the
-          community.
-        </p>
-      </div>
+<div class="full-page-width-container">
+
+  <div class="landing-page-grid">
+    <div class="landing-page-grid-item first-grid-item">
+      <img src="/images/betzy-arosemena-Mx15HMZGQzY-unsplash-crop.jpg"
+        alt="Person with a rainbow on their cheek in the crowd at a pride festival">
+    </div>
+    <div class="landing-page-grid-item ">
+      <h2>
+        Daily Reflection Questions
+      </h2>
+      <p>
+        Within a supportive community you’ll be answering daily reflection questions.
+      </p>
     </div>
   </div>
+
+  <div class="landing-page-grid wrap-reverse">
+    <div class="landing-page-grid-item">
+      <h2>
+        Weekly Group Therapy
+      </h2>
+      <p>
+        Join a live weekly group therapy session with an experienced therapist.
+      </p>
+    </div>
+    <div class="landing-page-grid-item">
+      <img src="/images/betzy-arosemena-Mx15HMZGQzY-unsplash-crop.jpg"
+        alt="Person with a rainbow on their cheek in the crowd at a pride festival">
+    </div>
+  </div>
+
+  <div class="landing-page-grid">
+    <div class="landing-page-grid-item">
+      <img src="/images/betzy-arosemena-Mx15HMZGQzY-unsplash-crop.jpg"
+        alt="Person with a rainbow on their cheek in the crowd at a pride festival">
+    </div>
+    <div class="landing-page-grid-item">
+      <h2>
+        For The Community, By The Community
+      </h2>
+      <p>
+        We are a queer-led team developing a digital experience for the
+        community. The app has been developed through co-design with the
+        community.
+      </p>
+    </div>
+  </div>
+
 </div>
 
 <div class="landing-slice background-blue">
