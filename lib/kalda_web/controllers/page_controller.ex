@@ -5,4 +5,9 @@ defmodule KaldaWeb.PageController do
     conn
     |> render("index.html")
   end
+
+  def thanks(conn, _params) do
+    conn
+    |> render("thanks.html")
+  end
 end
