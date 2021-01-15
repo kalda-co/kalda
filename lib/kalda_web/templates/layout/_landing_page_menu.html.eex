@@ -6,34 +6,22 @@
         <use xlink:href="#kalda-logo-svg" /></svg> %>
     </a>
   </div>
-  <div class='menu-rhs-links'>
-    <ul>
-      <%= if @current_user do %>
-        <li>user email</li>
-        <li>
-          <div class='login-button'>
-            <!-- <a class="button" href="">Log In</a> -->
-            <%= link "Log out" , to: Routes.user_session_path(@conn, :delete), method: :delete %>
-          </div>
-        </li>
-        <li>
-          <div class='contact-button'>
-            <a class="button" href=""> Contact Us</a>
-          </div>
-        </li>
-        <% else %>
-          <li>
-            <div class='login-button'>
-              <!-- <a class="button" href="">Log In</a> -->
-              <%= link "Log in" , to: Routes.user_session_path(@conn, :new) %>
-            </div>
-          </li>
-          <li>
-            <div class='contact-button'>
-              <a class="button" href=""> Contact Us</a>
-            </div>
-          </li>
-          <% end %>
-    </ul>
-  </div>
+  <ul class="menu-rhs-links">
+    <%= if @current_user do %>
+      <li>user email</li>
+      <li class="login-button">
+        <%= link "Log out" , to: Routes.user_session_path(@conn, :delete), class: "button" , method: :delete %>
+      </li>
+      <li class="contact-button">
+        <a class="button" href="">Contact Us</a>
+      </li>
+    <% else %>
+      <li class="login-button">
+        <%= link "Log in" , to: Routes.user_session_path(@conn, :new), class: "button" %>
+      </li>
+      <li class="contact-button">
+        <a class="button" href="">Contact Us</a>
+      </li>
+    <% end %>
+  </ul>
 </div>

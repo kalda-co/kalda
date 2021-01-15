@@ -68,7 +68,6 @@ h6 {
 
 .logo-image img {
   width: 10rem;
-  margin: var(--gap);
 }
 
 .text-center {
@@ -198,6 +197,9 @@ h6 {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding-top: var(--gap);
+  padding-left: var(--gap);
+  padding-right: var(--gap);
 }
 
 .logo-container {
@@ -208,15 +210,20 @@ h6 {
 
 .menu-rhs-links {
   display: flex;
+  flex-wrap: wrap;
+  margin-block: unset;
 }
 
-.menu-rhs-links .contact-button + .login-button {
-  margin-top: var(--gap);
-}
-
-.menu-rhs-links .contact-button {
-  margin-right: var(--gap);
+.menu-rhs-links li.login-button {
+  /* margin-top: var(--gap); */
   margin-left: 4px;
+  padding-top: 20px;
+}
+
+.menu-rhs-links li.contact-button {
+  /* margin-right: var(--gap); */
+  margin-left: 4px;
+  padding-top: 20px;
 }
 
 .container {
@@ -260,6 +267,7 @@ h6 {
 .landing-page-grid > * {
   flex-basis: 400px;
   flex-grow: 1;
+  max-width: 900px;
 }
 
 .landing-grid-img1,
