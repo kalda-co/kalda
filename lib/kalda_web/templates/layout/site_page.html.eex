@@ -15,7 +15,7 @@
   <body>
 
     <header>
-    <%= render "_landing_page_header.html", assigns %>
+    <%= render "_site_page_header.html", assigns %>
     </header>
     <%= @inner_content %>
   </body>

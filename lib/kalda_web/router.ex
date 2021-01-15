@@ -25,18 +25,8 @@ defmodule KaldaWeb.Router do
     plug :accepts, ["json"]
   end
 
-  pipeline :landing_page do
-    plug :accepts, ["html"]
-    plug :fetch_session
-    plug :fetch_live_flash
-    plug :put_root_layout, {KaldaWeb.LayoutView, :landing_page}
-    plug :protect_from_forgery
-    plug :put_secure_browser_headers
-    plug :fetch_current_user
-  end
-
   scope "/", KaldaWeb do
-    pipe_through :landing_page
+    pipe_through :browser
     get "/", PageController, :index
     get "/blog/:id", BlogController, :show
     get "/thanks", PageController, :thanks
