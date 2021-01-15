@@ -1,1 +1,0 @@
-  <%= render "_landing_page_menu.html", assigns %>
