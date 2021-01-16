@@ -268,13 +268,14 @@ h6 {
   flex-basis: 400px;
   flex-grow: 1;
   max-width: 900px;
+  height: 450px;
 }
 
 .landing-grid-img1,
 .landing-grid-img2,
 .landing-grid-img3 {
   background-size: cover;
-  background-position: center;
+  background-position: top;
   min-height: 330px;
 }
 .landing-grid-img1 {
