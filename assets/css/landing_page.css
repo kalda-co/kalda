@@ -14,6 +14,7 @@
   --button-padding: 10px 22px;
 
   --gap: 16px;
+  --gap-s: calc(var(--gap) * 0.5);
   --gap-l: calc(var(--gap) * 2);
   --gap-xl: calc(var(--gap) * 3);
   --gap-xxl: calc(var(--gap) * 5);
@@ -107,12 +108,6 @@ a.button-wide {
   align-items: center;
 }
 
-.landing-hero input[type="email"] {
-  border-radius: 100px;
-  border: none;
-  padding: var(--button-padding);
-}
-
 .landing-hero img {
   width: 246px;
 }
@@ -132,6 +127,19 @@ a.button-wide {
 
 .landing-hero .container {
   display: flex;
+}
+
+.landing-form {
+  display: flex;
+}
+
+.landing-form input[type="email"] {
+  margin-right: var(--gap-s);
+  border-radius: 100px;
+  border: none;
+  padding: var(--button-padding);
+  flex: 1;
+  min-width: 100px;
 }
 
 .hero-lhs {
@@ -239,7 +247,7 @@ a.button-wide {
   display: none;
 }
 
-@media screen and (min-device-width: 900px) {
+@media (min-width: 900px) {
   .display-web-only {
     display: block;
   }
