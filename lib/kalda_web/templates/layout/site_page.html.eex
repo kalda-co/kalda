@@ -15,5 +15,21 @@
   <body>
     <%= render "_site_page_header.html", assigns %>
     <%= @inner_content %>
+    <footer class="site-footer">
+      <div class="site-footer-content container">
+        <ul class="site-footer-column">
+          <li><ul class="site-footer-social-icons">
+              <li><a href="todo"><img src="todo" alt="Instagram"></a>
+              <li><a href="todo"><img src="todo" alt="Facebook"></a>
+              <li><a href="todo"><img src="mailto:hello@kalda.co" alt="Email"></a>
+            </ul>
+          <li><a href="todo">Privacy policy</a>
+          <li><a href="todo">Terms of use</a>
+        </ul>
+        <ul class="site-footer-column">
+          <li>Supported by <a target="_blank" href="https://www.antler.co/">Antler</a>
+        </ul>
+      </div>
+    </footer>
   </body>
 </html>
