@@ -24,7 +24,7 @@
   --font-size-s: 0.8rem;
   --font-size-m: 1.15rem;
   --font-size-l: 1.25rem;
-  --font-size-xl: 1.8rem;
+  --font-size-xl: 2.6rem;
 }
 
 html {
@@ -119,6 +119,7 @@ h6 {
 
 .landing-hero .container {
   display: flex;
+  align-items: center;
 }
 
 .landing-form {
@@ -132,10 +133,6 @@ h6 {
   padding: var(--button-padding);
   flex: 1;
   width: 100px;
-}
-
-.hero-lhs {
-  padding-top: var(--gap-xxl);
 }
 
 .landing-slice {
