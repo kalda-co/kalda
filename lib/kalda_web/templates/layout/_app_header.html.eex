@@ -1,15 +1,12 @@
-This is the app header, not landing page
-
 <section class="container">
   <nav role="navigation">
     <ul>
-      <li><a href="https://github.com/kalda-co/kalda/blob/main/docs/developer-setup.md">Get Started</a></li>
+      <li><a href="TODO">Get Started</a></li>
       <li><a hfref="/">Privacy Policy</a></li>
     </ul>
     <%= render "_user_menu.html" , assigns %>
   </nav>
-  <!-- <%# # TODO change logo classname in css/html %> -->
-  <a href="/" class="phx-logo">
-    <img src="<%= Routes.static_path(@conn, "/images/kalda-logo-1.png") %>" alt="Phoenix Framework Logo"/>
+  <a href="/" class="header-logo">
+    <img src="<%= Routes.static_path(@conn, "/images/kalda-logo.svg") %>" alt="Kalda logo coloured neon pink"/>
   </a>
 </section>
