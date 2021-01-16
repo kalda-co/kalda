@@ -3,22 +3,14 @@
 :root {
   /* Colours */
   --color-purple: #2d1c62;
-  /* --color-dark: #424040;
   --color-light: #ffffff; */
   --color-white: #ffffff;
   --color-pink: #fe00f7;
   --color-pink-light: #ffb3fc;
   --color-blue: #c7ffff;
   --font-color: var(--color-purple);
-  /* --color-black: #373b40; */
-  /* // Timings */
-  /* --hover-transition-time: 0.1s;
-  --two-times-hover-transition-time: 0.2s; */
-  /* // Sizes */
-  /* --sidebar-width: 240px;
-  --sidebar-height: 80px;
-  --page-padding: 0.875rem;
-  --line-padding: 0.625rem; */
+  /* Timings */
+  /* Sizes */
   --button-padding: 10px 22px;
 
   --gap: 16px;
@@ -220,13 +212,11 @@ a.button-wide {
 }
 
 .menu-rhs-links li.login-button {
-  /* margin-top: var(--gap); */
   margin-left: 4px;
   padding-top: 20px;
 }
 
 .menu-rhs-links li.contact-button {
-  /* margin-right: var(--gap); */
   margin-left: 4px;
   padding-top: 20px;
 }
