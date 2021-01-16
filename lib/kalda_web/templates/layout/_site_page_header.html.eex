@@ -1,27 +1,14 @@
-<div class='menu-container'>
-  <div class='logo-container'>
-    <a href="/" class="logo-image">
-      <img src="/images/kalda-logo.svg" />
-      <%# <svg>
-        <use xlink:href="#kalda-logo-svg" /></svg> %>
-    </a>
-  </div>
-  <ul class="menu-rhs-links">
+<header class='site-page-header'>
+  <a href="/"><img  class='site-page-logo' src="/images/kalda-logo.svg"></a>
+  <div class="site-page-header-spacer"></div>
+  <nav class="site-page-header-links">
     <%= if @current_user do %>
       <li>user email</li>
-      <li class="login-button">
-        <%= link "Log out" , to: Routes.user_session_path(@conn, :delete), class: "button" , method: :delete %>
-      </li>
-      <li class="contact-button">
-        <a class="button" href="">Contact Us</a>
-      </li>
+      <%= link "Log out" , to: Routes.user_session_path(@conn, :delete), class: "button" , method: :delete %>
+      <a class="button" href="">Contact Us</a>
     <% else %>
-      <li class="login-button">
-        <%= link "Log in" , to: Routes.user_session_path(@conn, :new), class: "button" %>
-      </li>
-      <li class="contact-button">
-        <a class="button" href="">Contact Us</a>
-      </li>
+      <%= link "Log in" , to: Routes.user_session_path(@conn, :new), class: "button" %>
+      <a class="button" href="">Contact Us</a>
     <% end %>
-  </ul>
-</div>
+  </nav>
+</header>

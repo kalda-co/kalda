@@ -59,10 +59,6 @@ h6 {
   margin-top: 0;
 }
 
-.logo-image img {
-  width: 10rem;
-}
-
 .text-center {
   text-align: center;
 }
@@ -71,13 +67,9 @@ h6 {
   display: none;
 }
 
-a.button,
-a.button-wide {
-  color: var(--font-color);
-}
-
 .button,
 .button-wide {
+  display: inline-block;
   background: linear-gradient(138.94deg, #c7ffff 35.3%, #ffb3fc 84.65%);
   border: none;
   color: var(--font-color);
@@ -102,8 +94,8 @@ a.button-wide {
 
 .landing-hero {
   background-color: var(--color-purple);
+  padding: var(--gap-l) 0;
   color: white;
-
   display: flex;
   align-items: center;
 }
@@ -139,7 +131,7 @@ a.button-wide {
   border: none;
   padding: var(--button-padding);
   flex: 1;
-  min-width: 100px;
+  width: 100px;
 }
 
 .hero-lhs {
@@ -197,36 +189,38 @@ a.button-wide {
   background-color: var(--color-blue);
 }
 
-.menu-container {
+.site-page-header {
   width: 100%;
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  padding-top: var(--gap);
-  padding-left: var(--gap);
-  padding-right: var(--gap);
-}
-
-.logo-container {
-  display: flex;
-  justify-content: flex-start;
-  align-items: baseline;
-}
-
-.menu-rhs-links {
-  display: flex;
+  align-items: center;
+  padding: var(--gap-s);
   flex-wrap: wrap;
-  margin-block: unset;
 }
 
-.menu-rhs-links li.login-button {
-  margin-left: 4px;
-  padding-top: 20px;
+.site-page-header > * {
+  margin: var(--gap-s);
 }
 
-.menu-rhs-links li.contact-button {
-  margin-left: 4px;
-  padding-top: 20px;
+.site-page-logo {
+  display: block;
+  height: 42px;
+  position: relative;
+  top: -5px;
+}
+
+.site-page-header-spacer {
+  flex-grow: 100;
+}
+
+.site-page-header-links {
+  display: flex;
+  flex-grow: 1;
+  justify-content: center;
+}
+
+.site-page-header-links > * {
+  margin-left: var(--gap-s);
 }
 
 .container {
