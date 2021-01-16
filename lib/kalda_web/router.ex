@@ -11,7 +11,7 @@ defmodule KaldaWeb.Router do
   end
 
   pipeline :browser do
-    # plug :basic_auth
+    plug :basic_auth
     plug :accepts, ["html"]
     plug :fetch_session
     plug :fetch_live_flash
