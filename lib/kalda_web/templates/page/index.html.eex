@@ -16,6 +16,7 @@
         <!-- end sendfox honeytrap-->
         <input class="button" type="submit" value="Sign up">
       </form>
+      <script src="https://sendfox.com/js/form.js"></script>
       <p>
         By giving your details you agree to hear Kalda’s latest news. You can
         unsubscribe at any time. We will not share your data to third parties.
