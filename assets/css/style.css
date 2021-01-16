@@ -3,14 +3,25 @@ html {
   box-sizing: border-box;
 }
 
-body {
-  margin: 0;
-}
-
 *,
 *:before,
 *:after {
   box-sizing: inherit;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:link,
+a:visited,
+a:hover,
+a:active {
+  color: inherit;
+}
+
+ul {
+  list-style: none;
 }
 
 body {
@@ -20,6 +31,7 @@ body {
 
 header {
   background: #2d1c62;
+  color: white;
 }
 
 .header-logo {
