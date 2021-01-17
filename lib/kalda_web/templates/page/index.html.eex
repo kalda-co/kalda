@@ -6,6 +6,9 @@
         Join the LGBTQIA+ mental wellbeing community. Get happy, get accountable
         and get it together.
       </h2>
+      <p>
+        Get on the waiting list here!
+      </p>
       <form method="post" action="https://sendfox.com/form/m5dewx/1jxnrq" class="landing-form sendfox-form" id="1jxnrq">
         <input type="email" placeholder="me@email.com" name="email" required>
         <%# sendfox honeytrap %>
@@ -13,8 +16,12 @@
         <input class="button" type="submit" value="Sign up">
       </form>
       <p>
-        By giving your details you agree to hear Kalda’s latest news. You can
-        unsubscribe at any time. We will not share your data to third parties.
+        By signing up you agree to be emailed when your spot comes up, and get our newsletter - you can opt out any time, but we think it's awesome.
+        <%# By giving your details you agree to hear Kalda’s latest news. You can
+        unsubscribe at any time. We will not share your data to third parties. %>
+      </p>
+      <p>
+        We will never sell your data.
       </p>
     </div>
     <div>

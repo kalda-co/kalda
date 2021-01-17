@@ -130,7 +130,9 @@ h6 {
 .landing-form input[type="email"] {
   margin-right: var(--gap-s);
   border-radius: 100px;
-  border: none;
+  border-width: thin;
+  border-style: solid;
+  border-color: var(--color-purple);
   padding: var(--button-padding);
   flex: 1;
   width: 100px;

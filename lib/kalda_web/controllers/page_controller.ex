@@ -19,4 +19,9 @@ defmodule KaldaWeb.PageController do
     conn
     |> render("privacy_policy.html")
   end
+
+  def terms(conn, _params) do
+    conn
+    |> render("terms.html")
+  end
 end

@@ -31,6 +31,7 @@ defmodule KaldaWeb.Router do
     get "/blog/:id", BlogController, :show
     get "/thanks", PageController, :thanks
     get "/privacy-policy", PageController, :privacy_policy
+    get "/terms", PageController, :terms
   end
 
   # Other scopes may use custom stacks.
