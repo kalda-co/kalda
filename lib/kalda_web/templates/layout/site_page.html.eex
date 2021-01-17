@@ -28,7 +28,7 @@
               <li><a target="_blank" href="https://www.facebook.com/groups/kalda"><img src="images/icons/facebook-icon.svg" alt="Facebook" class="facebook-icon"></a>
               <li><a href="mailto:hello@kalda.co"><img src="images/icons/mail-icon.svg" alt="Email" class="mail-icon"></a>
             </ul>
-          <li><a href="todo">Privacy policy</a>
+          <li><a href="/privacy-policy">Privacy policy</a>
           <li><a href="todo">Terms of use</a>
         </ul>
         <ul class="site-footer-column">
