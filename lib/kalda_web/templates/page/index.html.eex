@@ -9,7 +9,8 @@
       <p>
         Get on the waiting list here!
       </p>
-      <form method="post" action="https://sendfox.com/form/m5dewx/1jxnrq" class="landing-form sendfox-form" id="1jxnrq">
+
+      <form method="post" action="https://sendfox.com/form/m5dewx/3lej8p" class="landing-form sendfox-form" id="3lej8p" data-async="true" data-recaptcha="false">
         <input type="email" placeholder="me@email.com" name="email" required>
         <%# sendfox honeytrap %>
         <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="a_password" tabindex="-1" value="" autocomplete="off" /></div>

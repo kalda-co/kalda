@@ -15,4 +15,9 @@ defmodule KaldaWeb.PageControllerTest do
     conn = get(conn, "/privacy-policy")
     assert html_response(conn, 200) =~ "privacy"
   end
+
+  test "Get /terms", %{conn: conn} do
+    conn = get(conn, "/terms")
+    assert html_response(conn, 200) =~ "Terms"
+  end
 end
