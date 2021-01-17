@@ -24,9 +24,9 @@
       <div class="site-footer-content container">
         <ul class="site-footer-column">
           <li><ul class="site-footer-social-icons">
-              <li><a href="todo"><img src="todo" alt="Instagram"></a>
-              <li><a href="todo"><img src="todo" alt="Facebook"></a>
-              <li><a href="todo"><img src="mailto:hello@kalda.co" alt="Email"></a>
+              <li><a href="todo"><img src="images/icons/instagram-icon.svg" alt="Instagram" class="insta-icon"></a>
+              <li><a href="todo"><img src="images/icons/facebook-icon.svg" alt="Facebook" class="facebook-icon"></a>
+              <li><a href="mailto:hello@kalda.co"><img src="images/icons/mail-icon.svg" alt="Email" class="mail-icon"></a>
             </ul>
           <li><a href="todo">Privacy policy</a>
           <li><a href="todo">Terms of use</a>
