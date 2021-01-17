@@ -12,10 +12,14 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
     <script async defer data-domain="kalda.co" src="https://plausible.io/js/plausible.js"></script>
+    <script>window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }</script>
   </head>
   <body>
-    <%= render "_site_page_header.html", assigns %>
-    <%= @inner_content %>
+    <div class="wrapper">
+      <%= render "_site_page_header.html", assigns %>
+      <%= @inner_content %>
+      <div class="push-down-footer"></div>
+    </div>
     <footer class="site-footer">
       <div class="site-footer-content container">
         <ul class="site-footer-column">
