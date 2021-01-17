@@ -277,10 +277,10 @@ h6 {
   background-image: url("/images/betzy-arosemena-Mx15HMZGQzY-unsplash-crop.jpg");
 }
 .landing-grid-img2 {
-  background-image: url("/images/betzy-arosemena-Mx15HMZGQzY-unsplash-crop.jpg");
+  background-image: url("/images/madison-lavern-4gcqRf3-f2I-unsplash 1.png");
 }
 .landing-grid-img3 {
-  background-image: url("/images/betzy-arosemena-Mx15HMZGQzY-unsplash-crop.jpg");
+  background-image: url("/images/teddy-osterblom-owiVf9bFKHM-unsplash 1.png");
 }
 
 .landing-grid-text {
@@ -339,10 +339,11 @@ h6 {
   height: var(--size);
   width: var(--size);
   display: inline-block;
-  background-color: var(--color-white);
+  /* background-color: var(--color-white); */
   border-radius: 100px;
   margin-right: var(--gap-s);
 }
+
 
 /* for stcky footer w/ flex */
 /* html, body {
@@ -369,9 +370,13 @@ html, body {
 
   /* Equal to height of footer */
   /* But also accounting for potential margin-bottom of last child */
-  margin-bottom: -353px;
+  margin-bottom: -349px;
 }
 .footer,
 .push-down-footer {
-  height: 353px;
+  height: 349px;
 }
+
+/* .social-icon {
+  height: 0.7em;
+} */
