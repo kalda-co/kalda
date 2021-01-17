@@ -29,7 +29,7 @@
               <li><a href="mailto:hello@kalda.co"><img src="images/icons/mail-icon.svg" alt="Email" class="mail-icon"></a>
             </ul>
           <li><a href="/privacy-policy">Privacy policy</a>
-          <li><a href="todo">Terms of use</a>
+          <li><a href="/terms">Terms of use</a>
         </ul>
         <ul class="site-footer-column">
           <li>Supported by <a target="_blank" href="https://www.antler.co/">Antler</a>
