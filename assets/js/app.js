@@ -15,8 +15,8 @@ import "../css/app.css"
 // Custom JS
 // TODO import only on required pages?
 import "plausible.js"
-const registerForm = document.querySelector(".js-waitlist-form");
-import registerForm from "plausible"
+// const registerForm = document.querySelector(".js-waitlist-form");
+// import registerForm from "plausible"
 
 import "phoenix_html"
 import { Socket } from "phoenix"
