@@ -14,7 +14,7 @@ import "../css/app.css"
 //
 // Custom JS
 // TODO import only on required pages?
-import "palusible.js"
+import "plausible.js"
 
 import "phoenix_html"
 import { Socket } from "phoenix"
