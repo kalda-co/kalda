@@ -7,7 +7,7 @@
       <%= link "Log out" , to: Routes.user_session_path(@conn, :delete), class: "button" , method: :delete %>
       <a class="button" href="">Contact Us</a>
     <% else %>
-      <%= link "Log in" , to: Routes.user_session_path(@conn, :new), class: "button login-button" %>
+      <%#= link "Log in" , to: Routes.user_session_path(@conn, :new), class: "button login-button" %>
       <a class="button" href="">Contact Us</a>
     <% end %>
   </nav>
