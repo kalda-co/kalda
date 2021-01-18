@@ -30,8 +30,8 @@
   --font-weight-large: 700;
 
   /* Screen size for media queries and break points */
-  /* Note that screen sizes for media queries are standardised (see below) HOWEVER
-   Media queries don't accept css variables so they still need to be changes manually */
+  /* Note that screen sizes for media queries are standardised (see below) HOWEVER */
+  /* Media queries don't accept css variables so they still need to be changes manually */
   --screen-small: 900px;
 }
 
@@ -360,23 +360,7 @@ Media queries don't accept css variables so they still need to be changes manual
   margin-right: var(--gap-s);
 }
 
-
-/* for stcky footer w/ flex */
-/* html, body {
-  height: 100%;
-}
-body {
-  display: flex;
-  flex-direction: column;
-}
-.wrapper {
-  flex: 1,0, auto;
-}
-.site-footer {
-  flex-shrink: 0;
-} */
-
-/* for sticky footer w/ push */
+/* Push footer to end of content */
 html, body {
   height: 100%;
   margin: 0;
@@ -392,7 +376,3 @@ html, body {
 .push-down-footer {
   height: 349px;
 }
-
-/* .social-icon {
-  height: 0.7em;
-} */

@@ -27,6 +27,10 @@ header {
   color: white;
 }
 
+input[type="submit"] {
+  cursor: pointer;
+}
+
 .header-logo {
   max-height: 10rem;
 }
