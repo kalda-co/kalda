@@ -25,6 +25,14 @@
   --font-size-l: 1.1rem;
   --font-size-xl: 1.25rem;
   --font-size-xxl: 2.6rem;
+
+  --font-weight: 500;
+  --font-weight-large: 700;
+
+  /* Screen size for media queries and break points */
+  /* Note that screen sizes for media queries are standardised (see below) HOWEVER
+   Media queries don't accept css variables so they still need to be changes manually */
+  --screen-small: 900px;
 }
 
 html {
@@ -39,7 +47,7 @@ html {
 }
 
 body {
-  font-weight: 500;
+  font-weight: var(--font-weight);
   margin: 0;
   text-decoration: none;
   color: #2d1c62;
@@ -91,6 +99,10 @@ h6 {
 .join-the-group {
   padding-top: var(--gap-l);
   text-align: center;
+}
+
+.login-button {
+  display: none   ;
 }
 
 .landing-hero {
@@ -241,6 +253,8 @@ h6 {
   display: none;
 }
 
+/* Note that screen sizes for media queries are standardised (see variables)
+Media queries don't accept css variables so they still need to be changes manually */
 @media (min-width: 900px) {
   .display-web-only {
     display: block;
