@@ -12,6 +12,10 @@ import "../css/app.css"
 //     import {Socket} from "phoenix"
 //     import socket from "./socket"
 //
+// Custom JS
+// TODO import only on required pages?
+import "palusible.js"
+
 import "phoenix_html"
 import { Socket } from "phoenix"
 import NProgress from "nprogress"
