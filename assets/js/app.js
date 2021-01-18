@@ -13,7 +13,7 @@ import "../css/app.css"
 //     import socket from "./socket"
 //
 // Custom JS
-// TODO import only on required pages?
+// TODO import only on required pages see https://stackoverflow.com/questions/59171197/how-should-i-include-javascript-in-a-template-in-phoenix-1-5
 import "plausible.js"
 // const registerForm = document.querySelector(".js-waitlist-form");
 // import { registerForm } from "plausible"
