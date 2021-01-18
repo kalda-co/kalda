@@ -101,10 +101,6 @@ h6 {
   text-align: center;
 }
 
-.login-button {
-  display: none   ;
-}
-
 .landing-hero {
   background-color: var(--color-purple);
   padding: var(--gap-l) 0;
