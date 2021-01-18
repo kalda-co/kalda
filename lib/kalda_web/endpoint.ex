@@ -23,7 +23,7 @@ defmodule KaldaWeb.Endpoint do
   plug Plug.Static,
     at: "/",
     from: :kalda,
-    gzip: true,
+    gzip: false,
     only: ~w(css fonts images js favicon.ico robots.txt)
 
   # Code reloading can be explicitly enabled under the
