@@ -31,5 +31,10 @@ defmodule Kalda.ForumsTest do
       post = post_fixture()
       assert Forums.get_posts() == [post]
     end
+
+    test "change_post/1 returns a post changeset" do
+      post = post_fixture()
+      assert %Ecto.Changeset{} = Forums.change_post(post)
+    end
   end
 end

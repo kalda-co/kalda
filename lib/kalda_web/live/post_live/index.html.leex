@@ -2,6 +2,15 @@
   Daily Reflections
 <h1>
 
+<%= if @live_action in [:new] do %>
+  <%= live_modal @socket, KaldaWeb.PostLive.FormComponent,
+    id: @post.id || :new,
+    title: @page_title,
+    action: @live_action,
+    post: @post,
+    return_to: Routes.post_index_path(@socket, :index) %>
+<% end %>
+
 <table>
   <thead>
     <tr>
@@ -19,3 +28,5 @@
     <% end %>
   </tbody>
 </table>
+
+<span><%= live_patch "New Post", to: Routes.post_index_path(@socket, :new) %></span>
