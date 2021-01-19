@@ -5,6 +5,10 @@ defmodule Kalda.Forums.Post do
   schema "posts" do
     field :content, :string
 
+    belongs_to :user, Kalda.Accounts.User,
+      foreign_key: :author_id,
+      references: :id
+
     timestamps()
   end
 
@@ -13,5 +17,11 @@ defmodule Kalda.Forums.Post do
     post
     |> cast(attrs, [:content])
     |> validate_required([:content])
+  end
+
+  defp validate(changeset) do
+    changeset
+    |> validate_required([:content, :author_id])
+    |> foreign_key_constraint(:author_id)
   end
 end

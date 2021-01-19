@@ -20,8 +20,8 @@ defmodule Kalda.Forums do
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_post(attrs \\ %{}) do
-    %Post{}
+  def create_post(attrs \\ %{}, author) do
+    %Post{author_id: author.id}
     |> Post.changeset(attrs)
     |> Repo.insert()
   end
