@@ -2,7 +2,6 @@ defmodule KaldaWeb.PostLive.Index do
   use KaldaWeb, :live_view
 
   alias Kalda.Forums
-  alias Kalda.Forums.Post
 
   @impl true
   def mount(_params, _session, socket) do
