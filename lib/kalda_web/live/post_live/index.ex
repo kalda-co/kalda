@@ -5,7 +5,8 @@ defmodule KaldaWeb.PostLive.Index do
   alias Kalda.Forums.Post
 
   @impl true
-  def mount(_params, _session, socket) do
+  def mount(params, session, socket) do
+    throw({session, params, socket})
     # {:ok, assign(socket, :posts, get_posts())}
     {:ok,
      socket
