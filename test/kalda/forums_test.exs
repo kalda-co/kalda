@@ -54,5 +54,11 @@ defmodule Kalda.ForumsTest do
       post = post_fixture()
       assert Forums.get_post!(post.id) == post
     end
+
+    test "delete_post/1 deletes the post" do
+      post = post_fixture()
+      assert {:ok, %Post{}} = Forums.delete_post(post)
+      assert_raise Ecto.NoResultsError, fn -> Forums.get_post!(post.id) end
+    end
   end
 end

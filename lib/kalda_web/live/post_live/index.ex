@@ -31,6 +31,20 @@ defmodule KaldaWeb.PostLive.Index do
     |> assign(:post, %Post{})
   end
 
+  defp apply_action(socket, :edit, %{"id" => id}) do
+    socket
+    |> assign(:page_title, "Edit Post")
+    |> assign(:post, Forums.get_post!(id))
+  end
+
+  @impl true
+  def handle_event("delete", %{"id" => id}, socket) do
+    post = Forums.get_post!(id)
+    {:ok, _} = Forums.delete_post(post)
+
+    {:noreply, assign(socket, :posts, get_posts())}
+  end
+
   defp get_posts do
     Forums.get_posts()
   end

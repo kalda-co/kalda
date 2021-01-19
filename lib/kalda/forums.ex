@@ -85,4 +85,20 @@ defmodule Kalda.Forums do
 
   """
   def get_post!(id), do: Repo.get!(Post, id)
+
+  @doc """
+  Deletes a post.
+
+  ## Examples
+
+      iex> delete_post(post)
+      {:ok, %Post{}}
+
+      iex> delete_post(post)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_post(%Post{} = post) do
+    Repo.delete(post)
+  end
 end
