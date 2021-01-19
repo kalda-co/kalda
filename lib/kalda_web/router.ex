@@ -69,14 +69,6 @@ defmodule KaldaWeb.Router do
     post "/users/reset_password", UserResetPasswordController, :create
     get "/users/reset_password/:token", UserResetPasswordController, :edit
     put "/users/reset_password/:token", UserResetPasswordController, :update
-
-    # forums
-    live "/posts", PostLive.Index, :index
-    live "/posts/new", PostLive.Index, :new
-    live "/posts/:id/edit", PostLive.Index, :edit
-
-    live "/posts/:id", PostLive.Show, :show
-    live "/posts/:id/show/edit", PostLive.Show, :edit
   end
 
   scope "/", KaldaWeb do
@@ -85,6 +77,14 @@ defmodule KaldaWeb.Router do
     get "/users/settings", UserSettingsController, :edit
     put "/users/settings", UserSettingsController, :update
     get "/users/settings/confirm_email/:token", UserSettingsController, :confirm_email
+
+    # forums
+    live "/posts", PostLive.Index, :index
+    live "/posts/new", PostLive.Index, :new
+    live "/posts/:id/edit", PostLive.Index, :edit
+
+    live "/posts/:id", PostLive.Show, :show
+    live "/posts/:id/show/edit", PostLive.Show, :edit
   end
 
   scope "/", KaldaWeb do
