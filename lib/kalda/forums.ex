@@ -38,4 +38,17 @@ defmodule Kalda.Forums do
   def get_posts do
     Repo.all(Post)
   end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking post changes.
+
+  ## Examples
+
+      iex> change_post(post)
+      %Ecto.Changeset{data: %Post{}}
+
+  """
+  def change_post(%Post{} = post, attrs \\ %{}) do
+    Post.changeset(post, attrs)
+  end
 end

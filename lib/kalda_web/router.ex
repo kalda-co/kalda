@@ -72,6 +72,7 @@ defmodule KaldaWeb.Router do
 
     # forums
     live "/posts", PostLive.Index, :index
+    live "/posts/new", PostLive.Index, :new
   end
 
   scope "/", KaldaWeb do
