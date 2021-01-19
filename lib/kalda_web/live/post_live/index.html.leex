@@ -1,0 +1,21 @@
+<h1>
+  Daily Reflections
+<h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Questions</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody id="posts">
+    <%= for post <- @posts do %>
+      <tr id="post-<%= post.id %>">
+        <td><%= post.content %></td>
+
+      </tr>
+    <% end %>
+  </tbody>
+</table>
