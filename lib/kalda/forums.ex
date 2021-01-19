@@ -51,4 +51,38 @@ defmodule Kalda.Forums do
   def change_post(%Post{} = post, attrs \\ %{}) do
     Post.changeset(post, attrs)
   end
+
+  @doc """
+  Updates a post.
+
+  ## Examples
+
+      iex> update_post(post, %{field: new_value})
+      {:ok, %Post{}}
+
+      iex> update_post(post, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_post(%Post{} = post, attrs) do
+    post
+    |> Post.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Gets a single post.
+
+  Raises `Ecto.NoResultsError` if the Post does not exist.
+
+  ## Examples
+
+      iex> get_post!(123)
+      %Post{}
+
+      iex> get_post!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_post!(id), do: Repo.get!(Post, id)
 end

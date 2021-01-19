@@ -7,6 +7,7 @@ defmodule Kalda.ForumsTest do
     alias Kalda.Forums.Post
 
     @valid_post_attrs %{content: "some content"}
+    @update_post_attrs %{content: "some updated content"}
     @invalid_post_attrs %{content: ""}
 
     def post_fixture(attrs \\ %{}) do
@@ -35,6 +36,23 @@ defmodule Kalda.ForumsTest do
     test "change_post/1 returns a post changeset" do
       post = post_fixture()
       assert %Ecto.Changeset{} = Forums.change_post(post)
+    end
+
+    test "update_post/2 with valid data updates the post" do
+      post = post_fixture()
+      assert {:ok, %Post{} = post} = Forums.update_post(post, @update_post_attrs)
+      assert post.content == "some updated content"
+    end
+
+    test "update_post/2 with invalid data returns error changeset" do
+      post = post_fixture()
+      assert {:error, %Ecto.Changeset{}} = Forums.update_post(post, @invalid_post_attrs)
+      assert post == Forums.get_post!(post.id)
+    end
+
+    test "get_post!/1 returns the post with given id" do
+      post = post_fixture()
+      assert Forums.get_post!(post.id) == post
     end
   end
 end
