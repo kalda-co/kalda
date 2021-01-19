@@ -2,7 +2,7 @@
   Daily Reflections
 <h1>
 
-<%= if @live_action in [:new] do %>
+<%= if @live_action in [:new, :edit] do %>
   <%= live_modal @socket, KaldaWeb.PostLive.FormComponent,
     id: @post.id || :new,
     title: @page_title,
@@ -24,6 +24,11 @@
       <tr id="post-<%= post.id %>">
         <td><%= post.content %></td>
 
+        <td>
+          <span><%= live_redirect "Show", to: Routes.post_show_path(@socket, :show, post) %></span>
+          <span><%= live_patch "Edit", to: Routes.post_index_path(@socket, :edit, post) %></span>
+          <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: post.id, data: [confirm: "Are you sure?"] %></span>
+        </td>
       </tr>
     <% end %>
   </tbody>
