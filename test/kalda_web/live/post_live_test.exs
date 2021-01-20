@@ -20,7 +20,7 @@ defmodule KaldaWeb.PostLiveTest do
   end
 
   describe "Index" do
-    setup [:create_post]
+    setup [:create_post, :register_and_log_in_user]
 
     test "lists all posts", %{conn: conn, post: post} do
       {:ok, _index_live, html} = live(conn, Routes.post_index_path(conn, :index))
@@ -82,7 +82,7 @@ defmodule KaldaWeb.PostLiveTest do
   end
 
   describe "Show" do
-    setup [:create_post]
+    setup [:create_post, :register_and_log_in_user]
 
     test "displays post", %{conn: conn, post: post} do
       {:ok, _show_live, html} = live(conn, Routes.post_show_path(conn, :show, post))
