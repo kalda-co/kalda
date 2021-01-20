@@ -1,0 +1,76 @@
+[1mdiff --git a/test/kalda/forums_test.exs b/test/kalda/forums_test.exs[m
+[1mindex 5c02646..3690e1e 100644[m
+[1m--- a/test/kalda/forums_test.exs[m
+[1m+++ b/test/kalda/forums_test.exs[m
+[36m@@ -2,6 +2,7 @@[m [mdefmodule Kalda.ForumsTest do[m
+   use Kalda.DataCase[m
+ [m
+   alias Kalda.Forums[m
+[32m+[m[32m  alias Kalda.AccountsFixtures[m
+ [m
+   describe "posts" do[m
+     alias Kalda.Forums.Post[m
+[36m@@ -20,43 +21,55 @@[m [mdefmodule Kalda.ForumsTest do[m
+     end[m
+ [m
+     test "create_post/1 with valid attrs" do[m
+[31m-      assert {:ok, %Post{} = post} = Forums.create_post(@valid_post_attrs)[m
+[32m+[m[32m      user = AccountsFixtures.user_fixture()[m
+[32m+[m[32m      assert {:ok, %Post{} = post} = Forums.create_post(@valid_post_attrs, user)[m
+       assert post.content == "some content"[m
+     end[m
+ [m
+     test "create_post/1 with invalid attrs" do[m
+[31m-      assert {:error, %Ecto.Changeset{}} = Forums.create_post(@invalid_post_attrs)[m
+[32m+[m[32m      user = AccountsFixtures.user_fixture()[m
+[32m+[m[32m      assert {:error, %Ecto.Changeset{}} = Forums.create_post(@invalid_post_attrs, user)[m
+     end[m
+ [m
+     test "get_posts/0 returns all posts" do[m
+[31m-      post = post_fixture()[m
+[32m+[m[32m      user = AccountsFixtures.user_fixture()[m
+[32m+[m[32m      assert {:ok, %Post{} = post} = Forums.create_post(@valid_post_attrs, user)[m
+       assert Forums.get_posts() == [post][m
+     end[m
+ [m
+     test "change_post/1 returns a post changeset" do[m
+[31m-      post = post_fixture()[m
+[32m+[m[32m      user = AccountsFixtures.user_fixture()[m
+[32m+[m[32m      assert {:ok, %Post{} = post} = Forums.create_post(@valid_post_attrs, user)[m
+       assert %Ecto.Changeset{} = Forums.change_post(post)[m
+     end[m
+ [m
+     test "update_post/2 with valid data updates the post" do[m
+[31m-      post = post_fixture()[m
+[32m+[m[32m      user = AccountsFixtures.user_fixture()[m
+[32m+[m[32m      assert {:ok, %Post{} = post} = Forums.create_post(@valid_post_attrs, user)[m
+[32m+[m
+       assert {:ok, %Post{} = post} = Forums.update_post(post, @update_post_attrs)[m
+       assert post.content == "some updated content"[m
+     end[m
+ [m
+     test "update_post/2 with invalid data returns error changeset" do[m
+[31m-      post = post_fixture()[m
+[32m+[m[32m      user = AccountsFixtures.user_fixture()[m
+[32m+[m[32m      assert {:ok, %Post{} = post} = Forums.create_post(@valid_post_attrs, user)[m
+[32m+[m
+       assert {:error, %Ecto.Changeset{}} = Forums.update_post(post, @invalid_post_attrs)[m
+       assert post == Forums.get_post!(post.id)[m
+     end[m
+ [m
+     test "get_post!/1 returns the post with given id" do[m
+[31m-      post = post_fixture()[m
+[32m+[m[32m      user = AccountsFixtures.user_fixture()[m
+[32m+[m[32m      assert {:ok, %Post{} = post} = Forums.create_post(@valid_post_attrs, user)[m
+[32m+[m
+       assert Forums.get_post!(post.id) == post[m
+     end[m
+ [m
+     test "delete_post/1 deletes the post" do[m
+[31m-      post = post_fixture()[m
+[32m+[m[32m      user = AccountsFixtures.user_fixture()[m
+[32m+[m[32m      assert {:ok, %Post{} = post} = Forums.create_post(@valid_post_attrs, user)[m
+[32m+[m
+       assert {:ok, %Post{}} = Forums.delete_post(post)[m
+       assert_raise Ecto.NoResultsError, fn -> Forums.get_post!(post.id) end[m
+     end[m
