@@ -66,19 +66,31 @@ defmodule KaldaWeb.ConnCase do
     |> Phoenix.ConnTest.init_test_session(%{})
     |> Plug.Conn.put_session(:user_token, token)
   end
+end
+
+defmodule Kalda.ForumFixtures do
+  alias Kalda.Accounts.User
+  # alias Kalda.Forums.Post
 
   def unique_content, do: "Some content #{System.unique_integer()} here"
 
-  def create_unique_post(conn, user) do
-    post = Kalda.Forums.create_post(%{content: unique_content()}, user)
+  def post(author = %User{}, attrs \\ %{}) do
+    defaults = %{
+      content: unique_content()
+    }
 
-    conn
-    |> Phoenix.ConnTest.init_test_session(%{})
-    |> Plug.Conn.put_session(:post, post)
+    attrs = Map.merge(defaults, attrs)
+    {:ok, post} = Kalda.Forums.create_post(attrs, author)
+    post
   end
 
-  def create_post_by_user(%{conn: conn}) do
-    user = Kalda.AccountsFixtures.user_fixture()
-    %{conn: create_unique_post(conn, user), user: user}
-  end
+  # def comment(post = %Post{}, author = %User{}, attrs \\ %{}) do
+  #   defaults = %{
+  #     content: unique_content()
+  #   }
+
+  #   attrs = Map.merge(defaults, attrs)
+  #   {:ok, post} = Kalda.Forums.create_comment(attrs, author, post)
+  #   post
+  # end
 end
