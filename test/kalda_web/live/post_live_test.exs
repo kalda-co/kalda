@@ -82,7 +82,7 @@ defmodule KaldaWeb.PostLiveTest do
   end
 
   describe "Show" do
-    setup [:create_post, :register_and_log_in_user]
+    setup [:create_post_by_user, :register_and_log_in_user]
 
     test "displays post", %{conn: conn, post: post} do
       {:ok, _show_live, html} = live(conn, Routes.post_show_path(conn, :show, post))
