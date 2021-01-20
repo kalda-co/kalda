@@ -82,9 +82,16 @@ defmodule KaldaWeb.PostLiveTest do
   end
 
   describe "Show" do
-    setup [:create_post_by_user, :register_and_log_in_user]
+    setup [:register_and_log_in_user]
 
     test "displays post", %{conn: conn, post: post} do
+      admin = AccountsFixtures.admin()
+      user1 = AccountsFixtures.user()
+      user0 = AccountsFixtures.user()
+      post1 = ForumFixtures.post(admin)
+      post2 = ForumFixtures.post(admin)
+      comment1 = ForumFixtures.comment(post, user1)
+
       {:ok, _show_live, html} = live(conn, Routes.post_show_path(conn, :show, post))
 
       assert html =~ "Show Post"
