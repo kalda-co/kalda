@@ -1,12 +1,11 @@
 defmodule KaldaWeb.PostLive.Index do
   use KaldaWeb, :live_view
 
-  alias Kalda.Accounts
   alias Kalda.Forums
   alias Kalda.Forums.Post
 
   @impl true
-  def mount(params, session, socket) do
+  def mount(_params, session, socket) do
     # {:ok, assign(socket, :posts, get_posts())}
     socket =
       socket
