@@ -3,26 +3,21 @@ defmodule KaldaWeb.PostLiveTest do
 
   import Phoenix.LiveViewTest
 
-  alias Kalda.Forums
+  alias Kalda.AccountsFixtures
+  alias Kalda.ForumsFixtures
+  alias Kalda
 
   @create_post_attrs %{content: "some content"}
   @update_post_attrs %{content: "some updated content"}
   @invalid_post_attrs %{content: nil}
 
-  defp fixture(:post) do
-    {:ok, post} = Forums.create_post(@create_post_attrs)
-    post
-  end
-
-  defp create_post(_) do
-    post = fixture(:post)
-    %{post: post}
-  end
-
   describe "Index" do
-    setup [:create_post, :register_and_log_in_user]
+    setup [:register_and_log_in_user]
 
-    test "lists all posts", %{conn: conn, post: post} do
+    test "lists all posts", %{conn: conn} do
+      user = AccountsFixtures.user_fixture()
+      post = ForumsFixtures.post(user)
+
       {:ok, _index_live, html} = live(conn, Routes.post_index_path(conn, :index))
 
       assert html =~ "Daily Reflections"
@@ -51,7 +46,10 @@ defmodule KaldaWeb.PostLiveTest do
       assert html =~ "some content"
     end
 
-    test "updates post in listing", %{conn: conn, post: post} do
+    test "updates post in listing", %{conn: conn} do
+      user = AccountsFixtures.user_fixture()
+      post = ForumsFixtures.post(user)
+
       {:ok, index_live, _html} = live(conn, Routes.post_index_path(conn, :index))
 
       assert index_live |> element("#post-#{post.id} a", "Edit") |> render_click() =~
@@ -73,7 +71,10 @@ defmodule KaldaWeb.PostLiveTest do
       assert html =~ "some updated content"
     end
 
-    test "deletes post in listing", %{conn: conn, post: post} do
+    test "deletes post in listing", %{conn: conn} do
+      user = AccountsFixtures.user_fixture()
+      post = ForumsFixtures.post(user)
+
       {:ok, index_live, _html} = live(conn, Routes.post_index_path(conn, :index))
 
       assert index_live |> element("#post-#{post.id} a", "Delete") |> render_click()
@@ -84,13 +85,13 @@ defmodule KaldaWeb.PostLiveTest do
   describe "Show" do
     setup [:register_and_log_in_user]
 
-    test "displays post", %{conn: conn, post: post} do
-      admin = AccountsFixtures.admin()
-      user1 = AccountsFixtures.user()
-      user0 = AccountsFixtures.user()
-      post1 = ForumFixtures.post(admin)
-      post2 = ForumFixtures.post(admin)
-      comment1 = ForumFixtures.comment(post, user1)
+    test "displays post", %{conn: conn} do
+      # admin = AccountsFixtures.admin()
+      # user0 = AccountsFixtures.user()
+      user = AccountsFixtures.user_fixture()
+      post = ForumsFixtures.post(user)
+      # post2 = ForumFixtures.post(admin)
+      # comment1 = ForumFixtures.comment(post, user1)
 
       {:ok, _show_live, html} = live(conn, Routes.post_show_path(conn, :show, post))
 
@@ -98,7 +99,10 @@ defmodule KaldaWeb.PostLiveTest do
       assert html =~ post.content
     end
 
-    test "updates post within modal", %{conn: conn, post: post} do
+    test "updates post within modal", %{conn: conn} do
+      user = AccountsFixtures.user_fixture()
+      post = ForumsFixtures.post(user)
+
       {:ok, show_live, _html} = live(conn, Routes.post_show_path(conn, :show, post))
 
       assert show_live |> element("a", "Edit") |> render_click() =~
