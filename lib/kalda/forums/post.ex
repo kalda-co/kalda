@@ -16,11 +16,6 @@ defmodule Kalda.Forums.Post do
   def changeset(post, attrs) do
     post
     |> cast(attrs, [:content])
-    |> validate_required([:content])
-  end
-
-  defp validate(changeset) do
-    changeset
     |> validate_required([:content, :author_id])
     |> foreign_key_constraint(:author_id)
   end
