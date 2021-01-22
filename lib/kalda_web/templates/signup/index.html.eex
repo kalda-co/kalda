@@ -1,0 +1,21 @@
+
+<h1>Listing Signups</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Email</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for signup <- @signups do %>
+    <tr>
+      <td><%= signup.email %></td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Signup", to: Routes.signup_path(@conn, :new) %></span>

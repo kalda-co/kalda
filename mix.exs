@@ -52,14 +52,16 @@ defmodule Kalda.MixProject do
       {:jason, "~> 1.0"},
       # Web server
       {:plug_cowboy, "~> 2.0"},
-      # Markdown blog post engine
-      {:nimble_publisher, "~> 0.1.0"},
-      # HTML parsing
-      {:floki, ">= 0.27.0", only: :test},
       # Secure password hashing
       {:bcrypt_elixir, "~> 2.0"},
+      # Markdown blog post engine
+      {:nimble_publisher, "~> 0.1.0"},
+      # Http client
+      {:httpoison, "~> 1.8"},
       # Automatic page reloading
       {:phoenix_live_reload, "~> 1.2", only: :dev},
+      # HTML parsing
+      {:floki, ">= 0.27.0", only: :test},
       # Automatic test runner
       {:mix_test_watch, "~> 1.0", only: :dev, runtime: false}
     ]

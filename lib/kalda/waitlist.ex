@@ -27,8 +27,8 @@ defmodule Kalda.Waitlist do
     iex> sendfox_post_request("")
     ** throws exception
   """
-  def sendfox_post_request(email) do
-    token = Application.get_env(:kaltest, :sendfox_api_token)
+  def sendfox_post_request!(email) do
+    token = Application.get_env(:kalda, :sendfox_api_token)
 
     # This is hardcoded to the list 'Waitlist Newsletter'
     url =
@@ -38,7 +38,6 @@ defmodule Kalda.Waitlist do
     IO.inspect(url)
     headers = [Authorization: "Bearer #{token}", Accept: "application/json; charset=utf-8"]
 
-    :hackney_trace.enable(:max, :io)
     %{status_code: 200} = HTTPoison.post!(url, "", headers)
     :ok
   end
