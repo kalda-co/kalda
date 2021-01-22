@@ -37,6 +37,16 @@ _post2 =
     content: "What have you done today to make you feel proud?"
   })
 
+_signup1 =
+  Kalda.Repo.insert!(%Signup{
+    email: "al666@example.com"
+  })
+
+_signup2 =
+  Kalda.Repo.insert!(%Signup{
+    email: "al777@example.com"
+  })
+
 IO.puts("""
 You can now log in with these credentials:
 email:    demo@kalda.co
