@@ -10,12 +10,15 @@
         Get on the waiting list here!
       </p>
 
-      <form method="post" action="https://sendfox.com/form/m5dewx/3lej8p" class="landing-form sendfox-form js-waitlist-form" id="3lej8p" data-async="true" data-recaptcha="false">
-        <input type="email" placeholder="me@email.com" name="email" required>
-        <%# sendfox honeytrap %>
-        <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="a_password" tabindex="-1" value="" autocomplete="off" /></div>
-        <input class="button" type="submit" value="Sign up">
-      </form>
+      <%= if @signup_changeset.action do %>
+        <div class="alert alert-danger">
+          Oops, something went wrong! Please try again.
+        </div>
+      <% end %>
+      <%= form_for @signup_changeset, Routes.signup_path(@conn, :create), [class: "landing-form js-waitlist-form"], fn f -> %>
+        <%= email_input f, :email, required: true, placeholder: "me@email.com" %>
+        <%= submit "Sign up", class: "button" %>
+      <% end %>
       <p>
         By signing up you agree to be emailed when your spot comes up, and get our newsletter - you can opt out any time, but we think it's awesome.
         <%# By giving your details you agree to hear Kalda’s latest news. You can

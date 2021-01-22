@@ -12,23 +12,19 @@ defmodule KaldaWeb.SignupControllerTest do
     signup
   end
 
-  describe "index" do
-    test "lists all signups", %{conn: conn} do
-      conn = get(conn, Routes.signup_path(conn, :index))
-      assert html_response(conn, 200) =~ "Listing Signups"
-    end
-  end
+  # TODO when admin implemented
+  # describe "index" do
+  #   setup :register_and_log_in_admin
 
-  describe "new signup" do
-    test "renders form", %{conn: conn} do
-      conn = get(conn, Routes.signup_path(conn, :new))
-      assert html_response(conn, 200) =~ "New Signup"
-    end
-  end
+  #   test "lists all signups", %{conn: conn} do
+  #     conn = get(conn, Routes.signup_path(conn, :index))
+  #     assert html_response(conn, 200) =~ "Listing Signups"
+  #   end
+  # end
 
   describe "create signup" do
     # TODO flash for success
-    test "redirects to index when data is valid", %{conn: conn} do
+    test "redirects to /thanks when data is valid", %{conn: conn} do
       conn = post(conn, Routes.signup_path(conn, :create), signup: @create_attrs)
 
       conn = get(conn, Routes.signup_path(conn, :index))

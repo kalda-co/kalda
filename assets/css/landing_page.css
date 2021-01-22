@@ -90,6 +90,10 @@ h6 {
   font-size: var(--font-size);
 }
 
+button {
+  cursor: pointer;
+}
+
 .button-wide {
   --side: 5rem;
   padding-left: var(--side);

@@ -12,6 +12,7 @@
 
 alias Kalda.Accounts.User
 alias Kalda.Forums.Post
+alias Kalda.Waitlist.Signup
 
 _user =
   Kalda.Repo.insert!(%User{

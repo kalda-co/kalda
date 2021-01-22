@@ -1,13 +1,14 @@
 defmodule KaldaWeb.PageController do
   use KaldaWeb, :controller
 
+  alias Kalda.Waitlist
+  alias Kalda.Waitlist.Signup
+
   plug :put_root_layout, {KaldaWeb.LayoutView, :site_page}
 
   def index(conn, _params) do
-    conn.assigns.current_user
-
-    conn
-    |> render("index.html")
+    changeset = Waitlist.change_signup(%Signup{})
+    render(conn, "index.html", signup_changeset: changeset)
   end
 
   def thanks(conn, _params) do

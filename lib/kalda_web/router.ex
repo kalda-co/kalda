@@ -33,9 +33,7 @@ defmodule KaldaWeb.Router do
     get "/privacy-policy", PageController, :privacy_policy
     get "/terms", PageController, :terms
 
-    get "/signups/new", SignupController, :new
     post "/signups/new", SignupController, :create
-    get "/signups", SignupController, :index
   end
 
   # Other scopes may use custom stacks.
@@ -89,6 +87,9 @@ defmodule KaldaWeb.Router do
 
     live "/posts/:id", PostLive.Show, :show
     live "/posts/:id/show/edit", PostLive.Show, :edit
+
+    # This must require an admin!
+    # get "/signups/all", SignupController, :all
   end
 
   scope "/", KaldaWeb do
