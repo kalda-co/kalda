@@ -35,9 +35,7 @@ defmodule Kalda.Waitlist do
       "https://api.sendfox.com/contacts?" <>
         URI.encode_query(%{"email" => email, "lists[]" => "56109"})
 
-    IO.inspect(url)
     headers = [Authorization: "Bearer #{token}", Accept: "application/json; charset=utf-8"]
-
     %{status_code: 200} = HTTPoison.post!(url, "", headers)
     :ok
   end
@@ -51,9 +49,20 @@ defmodule Kalda.Waitlist do
       {:error, %Ecto.Changeset{}}
   """
   def create_signup(attrs \\ %{}) do
-    %Signup{}
-    |> Signup.changeset(attrs)
-    |> Repo.insert()
+    case get_signup_by_email(attrs["email"]) do
+      nil ->
+        %Signup{}
+        |> Signup.changeset(attrs)
+        |> Repo.insert()
+
+      signup ->
+        {:ok, signup}
+    end
+  end
+
+  def get_signup_by_email(email) do
+    from(signup in Signup, where: signup.email == ^email)
+    |> Repo.one()
   end
 
   @doc """
