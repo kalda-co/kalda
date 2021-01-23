@@ -1,6 +1,7 @@
 @import "../node_modules/nprogress/nprogress.css";
 @import "./style.css";
 @import "./landing_page.css";
+@import "./blog.css"
 
 /* LiveView specific classes for your customizations */
 .phx-no-feedback.invalid-feedback,
