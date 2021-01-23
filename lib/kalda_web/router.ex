@@ -97,7 +97,7 @@ defmodule KaldaWeb.Router do
   end
 
   scope "/", KaldaWeb do
-    pipe_through [:browser]
+    pipe_through [:basic_auth_prod, :browser]
 
     delete "/users/log_out", UserSessionController, :delete
     get "/users/confirm", UserConfirmationController, :new
