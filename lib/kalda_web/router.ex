@@ -11,7 +11,7 @@ defmodule KaldaWeb.Router do
   end
 
   pipeline :browser do
-    plug :basic_auth
+    # plug :basic_auth
     plug :accepts, ["html"]
     plug :fetch_session
     plug :fetch_live_flash
@@ -23,6 +23,10 @@ defmodule KaldaWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+  end
+
+  pipeline :basic_auth_prod do
+    plug :basic_auth
   end
 
   scope "/", KaldaWeb do
@@ -61,7 +65,7 @@ defmodule KaldaWeb.Router do
   ## Authentication routes
 
   scope "/", KaldaWeb do
-    pipe_through [:browser, :redirect_if_user_is_authenticated]
+    pipe_through [:basic_auth_prod, :browser, :redirect_if_user_is_authenticated]
 
     get "/users/register", UserRegistrationController, :new
     post "/users/register", UserRegistrationController, :create
