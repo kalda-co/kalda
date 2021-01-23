@@ -61,8 +61,14 @@ defmodule Kalda.Waitlist do
   end
 
   def get_signup_by_email(email) do
-    from(signup in Signup, where: signup.email == ^email)
-    |> Repo.one()
+    case email do
+      nil ->
+        nil
+
+      _ ->
+        from(signup in Signup, where: signup.email == ^email)
+        |> Repo.one()
+    end
   end
 
   @doc """
