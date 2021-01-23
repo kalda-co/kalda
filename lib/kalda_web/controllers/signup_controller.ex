@@ -20,7 +20,7 @@ defmodule KaldaWeb.SignupController do
 
         conn
         |> put_flash(:info, "Signup created successfully.")
-        |> redirect(to: "/")
+        |> redirect(to: "/thanks")
 
       {:error, %Ecto.Changeset{} = changeset} ->
         conn
