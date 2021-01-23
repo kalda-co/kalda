@@ -1,7 +1,7 @@
 defmodule Kalda.Blog do
   use NimblePublisher,
     build: Kalda.Blog.Post,
-    from: "posts/**/*.md",
+    from: "posts/**/**/*.md",
     as: :posts,
     highlighters: []
 
