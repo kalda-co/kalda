@@ -24,6 +24,7 @@ defmodule KaldaWeb.SignupController do
 
       {:error, %Ecto.Changeset{} = changeset} ->
         conn
+        |> put_status(422)
         |> put_root_layout({KaldaWeb.LayoutView, :site_page})
         |> put_view(KaldaWeb.PageView)
         |> render("index.html", signup_changeset: changeset)

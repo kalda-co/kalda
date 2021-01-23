@@ -15,7 +15,6 @@ defmodule Kalda.WaitlistTest do
         |> Enum.into(@valid_attrs)
         |> Waitlist.create_signup()
 
-      IO.inspect(signup)
       signup
     end
 
