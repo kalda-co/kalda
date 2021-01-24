@@ -1,20 +1,20 @@
-<h1>
+<h1 class="blog-title">
   <%= @post.title %>
 </h1>
 
-<div>
+<div class="blog-date">
   <%= @post.date %>
 </div>
-<div>
+<div class="blog-author">
   <%= @post.author %>
 </div>
 
-<ul>
+<ul class="blog-tag-list">
   <%= for tag <- @post.tags do %>
-    <li><%= tag %>
+    <li class="blog-tag-item"><%= tag %>
   <% end %>
 </ul>
 
-<article>
+<article class="blog-content">
   <%= raw @post.body %>
 </article>

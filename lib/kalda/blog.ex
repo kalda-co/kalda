@@ -9,6 +9,8 @@ defmodule Kalda.Blog do
     defexception [:message, plug_status: 404]
   end
 
+  IO.inspect()
+
   @posts Enum.sort_by(@posts, & &1.date, {:desc, Date})
   @tags @posts |> Enum.flat_map(& &1.tags) |> Enum.uniq() |> Enum.sort()
 
