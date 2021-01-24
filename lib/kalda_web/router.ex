@@ -11,7 +11,6 @@ defmodule KaldaWeb.Router do
   end
 
   pipeline :browser do
-    # plug :basic_auth
     plug :accepts, ["html"]
     plug :fetch_session
     plug :fetch_live_flash
@@ -39,11 +38,6 @@ defmodule KaldaWeb.Router do
 
     post "/signups/new", SignupController, :create
   end
-
-  # Other scopes may use custom stacks.
-  # scope "/api", KaldaWeb do
-  #   pipe_through :api
-  # end
 
   # Enables LiveDashboard only for development
   #
@@ -91,9 +85,6 @@ defmodule KaldaWeb.Router do
 
     live "/posts/:id", PostLive.Show, :show
     live "/posts/:id/show/edit", PostLive.Show, :edit
-
-    # This must require an admin!
-    # get "/signups/all", SignupController, :all
   end
 
   scope "/", KaldaWeb do
