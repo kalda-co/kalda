@@ -3,16 +3,6 @@ defmodule KaldaWeb.SignupController do
 
   alias Kalda.Waitlist
 
-  # def index(conn, _params) do
-  #   signups = Waitlist.list_signups()
-  #   render(conn, "index.html", signups: signups)
-  # end
-
-  # def all(conn, _params) do
-  #   signups = Waitlist.list_signups()
-  #   render(conn, "all.html", signups: signups)
-  # end
-
   def create(conn, %{"signup" => signup_params}) do
     case Waitlist.create_signup(signup_params) do
       {:ok, signup} ->

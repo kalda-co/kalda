@@ -28,7 +28,6 @@ config :kalda, KaldaWeb.Endpoint,
   secret_key_base: secret_key_base,
   server: true
 
-# TODO Put into render secrets
 # Sendfox api (email signups management)
 sendfox_token =
   System.get_env("SENDFOX_TOKEN") ||
