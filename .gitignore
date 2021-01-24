@@ -41,3 +41,6 @@ al-posts/
 
 # IDE files
 .elixir_ls
+
+# Secrets
+config/dev_secrets.exs

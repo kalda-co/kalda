@@ -76,7 +76,33 @@ config :phoenix, :stacktrace_depth, 20
 # Initialize plugs at runtime for faster development compilation
 config :phoenix, :plug_init_mode, :runtime
 
-sendfox_token =
-  "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjY4ZDk3MzJiMjM2YzYxNWNjOTRhNWE1ZDdjM2UzMWYwYWZiOTQzZTIwMTNlZTIyZDc0ZjRmYTE5MWNiN2FiMzRmNjFhOGRhNjBhYzVhYTBiIn0.eyJhdWQiOiI0IiwianRpIjoiNjhkOTczMmIyMzZjNjE1Y2M5NGE1YTVkN2MzZTMxZjBhZmI5NDNlMjAxM2VlMjJkNzRmNGZhMTkxY2I3YWIzNGY2MWE4ZGE2MGFjNWFhMGIiLCJpYXQiOjE2MTEzMDkwODUsIm5iZiI6MTYxMTMwOTA4NSwiZXhwIjoxNjQyODQ1MDg1LCJzdWIiOiIyMTQ0MiIsInNjb3BlcyI6W119.DgWLgBbQahDCfLaj4Wu7HXE-AbjRuBn_zgtW3SSsEKfC6EMf4C9zV-KgyG52NYHvVZNxMETStzEB55zHMT5aaA-qVRCdTNibkLtiOi6ek-QWi6PVo7nMwcPpZ3FmCa-phvpTJlwjV4YoRstwGRT4vHm1-clz4Zu8SGDRVvByDuFHYacgUSpHtNarGIHSPdELFE7ZrYoM1KR_uysTr9nV4kC4IJsIs2orvB2Yq84394NXJFcdii6ZM3aytD_IxVtFwn92jiig_r1smkzaY5Y_xO1yhOo2-KAoBH23W10T2U15YtyzLau3TyJLm_gPAvmZwWBnBEQAvsRKKaR3NXSsRZwAnLbSmoK7WR5F3LU4JpJf1DGajMBvdgSIdnekeE_li_moIiSPTPzXSLdtdlbf-zPO9cESZHjoqm_FUHLokPINf8ZrC9HZGLr09PVrcb4lyV0UJqYz8uU0GeXNVFNhwABr6xZvCgJQqipWpAfqN47Nm2D9ZgIgLlItV9fJXfHnYiTVrMm_wcUnPOSeHBBdf4U5vnVfNtud6BrtmmSQTOlCKgykh3ZHOMj7iJKLCus2q4xeGaSOpcfGcqnUn53pmw8HUmsuiiPZN1FFOm8DzEqptrvSsfq81TyyKThD6v1B1YDkM1IZaP-b-GarLcd4zNAIL5dWrxIDXPWYyYgf7dA"
+try do
+  import_config "dev_secrets.exs"
+catch
+  :error, %File.Error{reason: :enoent} ->
+    IO.puts(:stderr, """
 
-config :kalda, :sendfox_api_token, sendfox_token
+    error: Could not file the developer secrets file!
+
+    I am trying to load the file ./config/dev_secrets.exs but it
+    was not found.
+
+    Have you put the file there? If not ask one of the other
+    developers for a copy.
+    """)
+
+    :erlang.halt(1)
+
+  :error, error ->
+    IO.puts(:stderr, """
+
+    error: Could not load the developer secrets!
+
+    I am trying to load the file ./config/dev_secrets.exs but there
+    was an error.
+
+        #{inspect(error)}
+    """)
+
+    :erlang.halt(1)
+end
