@@ -57,6 +57,13 @@ git clone git@github.com:kalda-co/kalda.git
 cd kalda
 ```
 
+## Get the developer secrets
+
+There are some values (API keys, etc) that we use in dev but cannot be kept
+in the repo because they are secret or sensitive. Ask a member of the dev team
+for a copy and then place this file at `config/dev_secrets.exs` in the cloned 
+folder.
+
 
 ## Set up Elixir, Erlang, and NodeJS 
 
