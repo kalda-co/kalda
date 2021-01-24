@@ -29,7 +29,7 @@ defmodule Kalda.Waitlist do
     ** throws exception
   """
   def sendfox_post_request!(email) do
-    list_id = "56109"
+    list_id = Application.get_env(:kalda, :sendfox_list_id)
     token = Application.get_env(:kalda, :sendfox_api_token)
 
     # This is hardcoded to the list 'Waitlist Newsletter'
