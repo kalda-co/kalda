@@ -4,6 +4,7 @@ defmodule Kalda.Waitlist do
   """
 
   import Ecto.Query, warn: false
+  require Logger
   alias Kalda.Repo
 
   alias Kalda.Waitlist.Signup
@@ -28,15 +29,17 @@ defmodule Kalda.Waitlist do
     ** throws exception
   """
   def sendfox_post_request!(email) do
+    list_id = "56109"
     token = Application.get_env(:kalda, :sendfox_api_token)
 
     # This is hardcoded to the list 'Waitlist Newsletter'
     url =
       "https://api.sendfox.com/contacts?" <>
-        URI.encode_query(%{"email" => email, "lists[]" => "56109"})
+        URI.encode_query(%{"email" => email, "lists[]" => list_id})
 
     headers = [Authorization: "Bearer #{token}", Accept: "application/json; charset=utf-8"]
     %{status_code: 200} = HTTPoison.post!(url, "", headers)
+    Logger.info("Successfully registered user with Sendfox list #{list_id}")
     :ok
   end
 
