@@ -23,12 +23,12 @@ defmodule Kalda.Waitlist do
   Makes a post request to the sendfox contact list (Waitlist Newsletter)
   Raises exception if fails
   ## Examples
-    iex> sendfox_post_request(email)
+    iex> regsiter_with_sendfox(email)
     :ok
-    iex> sendfox_post_request("")
+    iex> regsiter_with_sendfox("")
     ** throws exception
   """
-  def sendfox_post_request!(email) do
+  def regsiter_with_sendfox!(email) do
     list_id = Application.get_env(:kalda, :sendfox_list_id)
     token = Application.get_env(:kalda, :sendfox_api_token)
 
@@ -44,18 +44,18 @@ defmodule Kalda.Waitlist do
   end
 
   @doc """
-  Creates a signup.
+  Gets a signup or creates a new one for the email if it does not exist.
   ## Examples
       iex> create_signup(%{field: value})
       {:ok, %Signup{}}
       iex> create_signup(%{field: bad_value})
       {:error, %Ecto.Changeset{}}
   """
-  def create_signup(attrs \\ %{}) do
-    case get_signup_by_email(attrs["email"]) do
+  def get_or_create_signup(email) do
+    case get_signup_by_email(email) do
       nil ->
-        %Signup{}
-        |> Signup.changeset(attrs)
+        %Signup{email: email}
+        |> Signup.changeset(%{})
         |> Repo.insert()
 
       signup ->

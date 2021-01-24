@@ -6,14 +6,14 @@ defmodule Kalda.WaitlistTest do
   describe "signups" do
     alias Kalda.Waitlist.Signup
 
-    @valid_attrs %{email: "some@email.com"}
-    @invalid_attrs %{email: nil}
+    @valid_email "some@email.com"
+    @invalid_email ""
 
     def signup_fixture(attrs \\ %{}) do
       {:ok, signup} =
         attrs
-        |> Enum.into(@valid_attrs)
-        |> Waitlist.create_signup()
+        |> Enum.into(@valid_email)
+        |> Waitlist.get_or_create_signup()
 
       signup
     end
@@ -23,13 +23,13 @@ defmodule Kalda.WaitlistTest do
       assert Waitlist.list_signups() == [signup]
     end
 
-    test "create_signup/1 with valid data creates a signup" do
-      assert {:ok, %Signup{} = signup} = Waitlist.create_signup(@valid_attrs)
+    test "get_or_create_signup/1 with valid data creates a signup" do
+      assert {:ok, %Signup{} = signup} = Waitlist.get_or_create_signup(@valid_email)
       assert signup.email == "some@email.com"
     end
 
-    test "create_signup/1 with invalid data returns error changeset" do
-      assert {:error, %Ecto.Changeset{}} = Waitlist.create_signup(@invalid_attrs)
+    test "get_or_create_signup/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Waitlist.get_or_create_signup(@invalid_email)
     end
 
     test "change_signup/1 returns a signup changeset" do
@@ -37,12 +37,18 @@ defmodule Kalda.WaitlistTest do
       assert %Ecto.Changeset{} = Waitlist.change_signup(signup)
     end
 
+    test "can't duplicate emails" do
+      email = "ASDF@example.com"
+      {:ok, _} = Waitlist.get_or_create_signup(email)
+      {:ok, _} = Waitlist.get_or_create_signup(email)
+      assert length(Waitlist.list_signups()) == 1
+    end
+
     test "can't duplicate case insensitive emails" do
       email = "ASDF@example.com"
-      _signup = Waitlist.create_signup(%{email: email})
-
-      assert {:error, %Ecto.Changeset{errors: [email: {"has already been taken", _}]}} =
-               Waitlist.create_signup(%{email: String.downcase(email)})
+      {:ok, _} = Waitlist.get_or_create_signup(email)
+      {:ok, _} = Waitlist.get_or_create_signup(String.downcase(email))
+      assert length(Waitlist.list_signups()) == 1
     end
   end
 end
