@@ -17,6 +17,8 @@ config :kalda, :basic_auth_password, "capybara"
 # Do not print debug messages in production
 config :logger, level: :info
 
+config :kalda, sendfox_list_id: "56109"
+
 # ## SSL Support
 #
 # To get SSL working, you will need to add the `https` key

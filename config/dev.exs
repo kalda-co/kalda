@@ -76,6 +76,8 @@ config :phoenix, :stacktrace_depth, 20
 # Initialize plugs at runtime for faster development compilation
 config :phoenix, :plug_init_mode, :runtime
 
+config :kalda, sendfox_list_id: "211119"
+
 try do
   import_config "dev_secrets.exs"
 catch
