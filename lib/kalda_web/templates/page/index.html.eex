@@ -123,13 +123,19 @@
 <div class="container landing-slice">
   <h2 class="text-center">Early bird access</h2>
   <p>
-    We have limited spaces for our exclusive early bird group. This group
-    recieves daily reflection questions and weekly group therapy sessions. To
-    get involved, join the Facebook group or sign up for our mailing list.
-    This group works on a pay-what-you-can basis.
+    We have limited spaces for our exclusive early bird pilot group. This group
+    will recieve daily reflection questions and weekly group therapy sessions. To
+    get involved, join the
+    <a href="https://www.facebook.com/groups/kalda" target="_blank"><b>
+    Facebook group</b></a>
+    and make sure you also sign up for our
+    <a href="#signup"><b>mailing list.</b></a>
+    The facebook group is currently free to join and the first 150 people both in the group and on our
+    <a href="#signup"><b>mailing list.</b></a>
+    will get first access to our app pilot, with the first month free.
   </p>
   <div class="join-the-group">
-    <a href="TODO" class="button-wide">Join the group</a>
+    <a href="https://www.facebook.com/groups/kalda" target="_blank" class="button-wide">Join the group</a>
   </div>
 </div>
 
