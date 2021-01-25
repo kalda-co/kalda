@@ -22,7 +22,7 @@ defmodule KaldaWeb.PageController do
   end
 
   def terms(conn, _params) do
-    conn
-    |> render("terms.html")
+    changeset = Waitlist.change_signup(%Signup{})
+    render(conn, "terms.html", signup_changeset: changeset)
   end
 end

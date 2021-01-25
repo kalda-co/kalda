@@ -13,6 +13,9 @@
       <p>
         We will never sell your data and nor will any of the services we work with
       </p>
+      <p>
+        If you have any questions or concerns regarding our GDPR compliance, our use of data, or our privacy policy, please contact our Privacy and Data Officer, Al Dee, at <a href="mailto:support@kalda.co?subject=Privacy">support@kalda.co</a>, with the subject 'Privacy'.
+      </p>
     </h3>
     <p>
       When you sign up to our mailing or waiting list, we use SendFox to store that information. They keep it securely
@@ -229,7 +232,7 @@
     that,
     we don't store identifying information cookies. If you want to read their privacy policy you can do that <a
       href="https://plausible.io/privacy">here.</a>
-    <!-- 
+    <!--
 <%# As further described in our Cookie Policy , we use cookies and similar technologies (e.g., browser identifiers) to
   recognize you. We also allow some others to use cookies as described in our Cookie Policy. You can control cookies
   through your browser settings and other tools. You can also opt-out from our use of cookies by following instructions
