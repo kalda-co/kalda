@@ -2,7 +2,7 @@
 </script>
 
 <nav class="navbar">
-  <img src="logo" alt="Kalda's Logo" class="logo" />
+  <img src="logo.svg" alt="Kalda's Logo" class="logo" />
   <h1>Daily reflection</h1>
   <span class="hamburger">HAM</span>
 </nav>
