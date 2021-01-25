@@ -1,13 +1,13 @@
 /** @type {import("snowpack").SnowpackUserConfig } */
 module.exports = {
   mount: {
-    public: {url: '/', static: true},
-    src: {url: '/dist'},
+    static: { url: "/", static: true },
+    src: { url: "/src" },
   },
   plugins: [
-    '@snowpack/plugin-svelte',
-    '@snowpack/plugin-dotenv',
-    '@snowpack/plugin-typescript',
+    "@snowpack/plugin-svelte",
+    "@snowpack/plugin-dotenv",
+    "@snowpack/plugin-typescript",
   ],
   routes: [
     /* Enable an SPA Fallback in development: */
@@ -15,15 +15,16 @@ module.exports = {
   ],
   optimize: {
     /* Example: Bundle your final build: */
-    // "bundle": true,
+    bundle: true,
+    entrypoints: ["src/index.ts"],
   },
   packageOptions: {
     /* ... */
   },
   devOptions: {
-    /* ... */
+    output: "stream",
   },
   buildOptions: {
-    /* ... */
+    out: "../priv/static/spa/",
   },
 };
