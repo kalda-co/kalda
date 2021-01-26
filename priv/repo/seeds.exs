@@ -40,6 +40,18 @@ _post2 =
     author_id: user.id
   })
 
+_comment =
+  Kalda.Repo.insert!(%Comment{
+    content: "This is your very first Daily Reflection - does it feel powerful?",
+    author_id: user.id
+  })
+
+_comment2 =
+  Kalda.Repo.insert!(%Comment{
+    content: "What have you done today to make you feel proud?",
+    author_id: user.id
+  })
+
 _signup1 =
   Kalda.Repo.insert!(%Signup{
     email: "al666@example.com"
