@@ -9,19 +9,19 @@ defmodule Kalda.Forums do
   alias Kalda.Forums.Post
 
   @doc """
-  Creates a post.
+  Creates a post for a user
 
   ## Examples
 
-      iex> create_post(%{field: value})
+      iex> create_post(%{user, field: value})
       {:ok, %Post{}}
 
-      iex> create_post(%{field: bad_value})
+      iex> create_post(user, %{field: bad_value})
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_post(attrs \\ %{}, author) do
-    %Post{author_id: author.id}
+  def create_post(user, attrs \\ %{}) do
+    %Post{author_id: user.id}
     |> Post.changeset(attrs)
     |> Repo.insert()
   end
