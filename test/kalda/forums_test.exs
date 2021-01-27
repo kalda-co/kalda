@@ -19,15 +19,6 @@ defmodule Kalda.ForumsTest do
   describe "posts" do
     alias Kalda.Forums.Post
 
-    # def post_fixture(attrs \\ %{}) do
-    #   {:ok, post} =
-    #     attrs
-    #     |> Enum.into(@valid_post_attrs)
-    #     |> Forums.create_post()
-
-    #   post
-    # end
-
     test "create_post/1 with valid attrs" do
       user = AccountsFixtures.user_fixture()
       assert {:ok, %Post{} = post} = Forums.create_post(user, @valid_post_attrs)
@@ -128,8 +119,6 @@ defmodule Kalda.ForumsTest do
       assert id_list1 == id_list2
     end
 
-    # TODO decide whether to have the (optional) attrs first or last in create comment and create post - needs to be consistent
-
     test "create_comment!/3 creates the comment for the given user and post" do
       user = AccountsFixtures.user_fixture()
       assert {:ok, %Post{} = post} = Forums.create_post(user, @valid_post_attrs)
@@ -145,7 +134,6 @@ defmodule Kalda.ForumsTest do
                Forums.create_comment(user, post, @invalid_comment_attrs)
     end
 
-    # TODO test with invalid user
     test "create_commennt/3 fails with invalid post" do
       user = AccountsFixtures.user_fixture()
       assert {:ok, %Post{} = post} = Forums.create_post(user, @valid_post_attrs)
@@ -233,7 +221,6 @@ defmodule Kalda.ForumsTest do
                Forums.create_reply(user, comment, @invalid_reply_attrs)
     end
 
-    # TODO test with invalid user
     test "create_reply/3 fails with invalid comment" do
       user = AccountsFixtures.user_fixture()
       assert {:ok, %Post{} = post} = Forums.create_post(user, @valid_post_attrs)
