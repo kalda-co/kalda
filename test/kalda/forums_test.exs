@@ -98,24 +98,30 @@ defmodule Kalda.ForumsTest do
       user3 = AccountsFixtures.user_fixture()
       assert {:ok, %Post{} = post} = Forums.create_post(@valid_post_attrs, user2)
       assert {:ok, %Post{} = post2} = Forums.create_post(@valid_post_attrs, user2)
+      assert {:ok, %Post{} = post3} = Forums.create_post(@valid_post_attrs, user3)
 
       assert {:ok, %Comment{} = comment1} =
-               Forums.create_comment(user2, post, @valid_comment_attrs)
+               Forums.create_comment(user2, post3, @valid_comment_attrs)
 
       assert {:ok, %Comment{} = comment2} =
                Forums.create_comment(user3, post, @valid_comment_attrs)
 
       assert {:ok, %Comment{} = comment3} =
-               Forums.create_comment(user, post, @valid_comment_attrs)
+               Forums.create_comment(user, post3, @valid_comment_attrs)
 
       assert {:ok, %Comment{} = comment4} =
-               Forums.create_comment(user, post, @valid_comment_attrs)
+               Forums.create_comment(user, post3, @valid_comment_attrs)
 
       assert {:ok, %Comment{} = comment5} =
                Forums.create_comment(user, post2, @valid_comment_attrs)
 
-      assert Forums.get_comments_for_post(post) == [comment1, comment2, comment3, comment4]
+      assert Forums.get_comments_for_post(post) == [comment2]
       assert Forums.get_comments_for_post(post2) == [comment5]
+
+      id_list1 = Forums.get_comments_for_post(post3) |> Enum.map(& &1.id) |> Enum.sort()
+      id_list2 = Enum.sort([comment1.id, comment3.id, comment4.id])
+
+      assert id_list1 == id_list2
     end
 
     # TODO decide whether to have the (optional) attrs first or last in create comment and create post - needs to be consistent
