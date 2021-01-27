@@ -13,7 +13,7 @@ defmodule Kalda.Forums do
 
   ## Examples
 
-      iex> create_post(%{user, field: value})
+      iex> create_post(user, %{field: value})
       {:ok, %Post{}}
 
       iex> create_post(user, %{field: bad_value})
