@@ -95,4 +95,10 @@ defmodule KaldaWeb.Router do
     post "/users/confirm", UserConfirmationController, :create
     get "/users/confirm/:token", UserConfirmationController, :confirm
   end
+
+  scope "/api", KaldaWeb.Api, as: :api do
+    pipe_through [:basic_auth_prod, :api]
+
+    get "api/comments/:id", CommentController, :index
+  end
 end
