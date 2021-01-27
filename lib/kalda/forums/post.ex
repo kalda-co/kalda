@@ -5,7 +5,7 @@ defmodule Kalda.Forums.Post do
   schema "posts" do
     field :content, :string
 
-    belongs_to :user, Kalda.Accounts.User,
+    belongs_to :author, Kalda.Accounts.User,
       foreign_key: :author_id,
       references: :id
 
