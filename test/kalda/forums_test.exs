@@ -11,14 +11,18 @@ defmodule Kalda.ForumsTest do
     @update_post_attrs %{content: "some updated content"}
     @invalid_post_attrs %{content: ""}
 
-    def post_fixture(attrs \\ %{}) do
-      {:ok, post} =
-        attrs
-        |> Enum.into(@valid_post_attrs)
-        |> Forums.create_post()
+    @valid_comment_attrs %{content: "some content"}
+    @update_comment_attrs %{content: "some updated content"}
+    @invalid_comment_attrs %{content: ""}
 
-      post
-    end
+    # def post_fixture(attrs \\ %{}) do
+    #   {:ok, post} =
+    #     attrs
+    #     |> Enum.into(@valid_post_attrs)
+    #     |> Forums.create_post()
+
+    #   post
+    # end
 
     test "create_post/1 with valid attrs" do
       user = AccountsFixtures.user_fixture()
@@ -72,6 +76,109 @@ defmodule Kalda.ForumsTest do
 
       assert {:ok, %Post{}} = Forums.delete_post(post)
       assert_raise Ecto.NoResultsError, fn -> Forums.get_post!(post.id) end
+    end
+  end
+
+  describe "comments" do
+    alias Kalda.Forums.Comment
+    alias Kalda.Forums.Post
+    alias Kalda.Forums
+
+    test "get_comment!/1 gets the comment with the given id" do
+      user = AccountsFixtures.user_fixture()
+      assert {:ok, %Post{} = post} = Forums.create_post(@valid_post_attrs, user)
+
+      assert {:ok, %Comment{} = comment} = Forums.create_comment(user, post, @valid_comment_attrs)
+      assert Forums.get_comment!(comment.id) == comment
+    end
+
+    test "get_comments_for_post/1 gets all comments associated with given post" do
+      user = AccountsFixtures.user_fixture()
+      user2 = AccountsFixtures.user_fixture()
+      user3 = AccountsFixtures.user_fixture()
+      assert {:ok, %Post{} = post} = Forums.create_post(@valid_post_attrs, user2)
+      assert {:ok, %Post{} = post2} = Forums.create_post(@valid_post_attrs, user2)
+
+      assert {:ok, %Comment{} = comment1} =
+               Forums.create_comment(user2, post, @valid_comment_attrs)
+
+      assert {:ok, %Comment{} = comment2} =
+               Forums.create_comment(user3, post, @valid_comment_attrs)
+
+      assert {:ok, %Comment{} = comment3} =
+               Forums.create_comment(user, post, @valid_comment_attrs)
+
+      assert {:ok, %Comment{} = comment4} =
+               Forums.create_comment(user, post, @valid_comment_attrs)
+
+      assert {:ok, %Comment{} = comment5} =
+               Forums.create_comment(user, post2, @valid_comment_attrs)
+
+      assert Forums.get_comments_for_post(post) == [comment1, comment2, comment3, comment4]
+      assert Forums.get_comments_for_post(post2) == [comment5]
+    end
+
+    # TODO decide whether to have the (optional) attrs first or last in create comment and create post - needs to be consistent
+
+    test "create_comment!/3 creates the comment for the given user and post" do
+      user = AccountsFixtures.user_fixture()
+      assert {:ok, %Post{} = post} = Forums.create_post(@valid_post_attrs, user)
+
+      assert {:ok, %Comment{}} = Forums.create_comment(user, post, @valid_comment_attrs)
+    end
+
+    test "create_commennt/3 fails with invalid attrs" do
+      user = AccountsFixtures.user_fixture()
+      assert {:ok, %Post{} = post} = Forums.create_post(@valid_post_attrs, user)
+
+      assert {:error, %Ecto.Changeset{}} =
+               Forums.create_comment(user, post, @invalid_comment_attrs)
+    end
+
+    # TODO test with invalid user
+    test "create_commennt/3 fails with invalid post" do
+      user = AccountsFixtures.user_fixture()
+      assert {:ok, %Post{} = post} = Forums.create_post(@valid_post_attrs, user)
+      Forums.delete_post(post)
+
+      assert {:error, %Ecto.Changeset{}} = Forums.create_comment(user, post, @valid_comment_attrs)
+    end
+
+    test "update_comment/2 with valid data updates the comment" do
+      user = AccountsFixtures.user_fixture()
+      assert {:ok, %Post{} = post} = Forums.create_post(@valid_post_attrs, user)
+      assert {:ok, %Comment{} = comment} = Forums.create_comment(user, post, @valid_comment_attrs)
+      assert comment.content == "some content"
+
+      assert {:ok, %Comment{} = u_comment} = Forums.update_comment(comment, @update_comment_attrs)
+      assert u_comment.content == "some updated content"
+    end
+
+    test "update_comment/2 with invalid data returns error changeset" do
+      user = AccountsFixtures.user_fixture()
+      assert {:ok, %Post{} = post} = Forums.create_post(@valid_post_attrs, user)
+      assert {:ok, %Comment{} = comment} = Forums.create_comment(user, post, @valid_comment_attrs)
+      assert comment.content == "some content"
+
+      assert {:error, %Ecto.Changeset{}} = Forums.update_comment(comment, @invalid_comment_attrs)
+      assert comment == Forums.get_comment!(comment.id)
+    end
+
+    test "delete_comment/1 deletes the comment" do
+      user = AccountsFixtures.user_fixture()
+      assert {:ok, %Post{} = post} = Forums.create_post(@valid_post_attrs, user)
+      assert {:ok, %Comment{} = comment} = Forums.create_comment(user, post, @valid_comment_attrs)
+
+      assert {:ok, %Comment{}} = Forums.delete_comment(comment)
+      assert_raise Ecto.NoResultsError, fn -> Forums.get_comment!(comment.id) end
+    end
+
+    test "change_comment/1 returns a changeset" do
+      user = AccountsFixtures.user_fixture()
+      assert {:ok, %Post{} = post} = Forums.create_post(@valid_post_attrs, user)
+      assert {:ok, %Comment{} = comment} = Forums.create_comment(user, post, @valid_comment_attrs)
+
+      assert %Ecto.Changeset{} = Forums.change_comment(comment)
     end
   end
 end
