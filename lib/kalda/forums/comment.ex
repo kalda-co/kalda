@@ -5,7 +5,7 @@ defmodule Kalda.Forums.Comment do
   schema "comments" do
     field :content, :string
     # field :author_id, :id
-    belongs_to :user, Kalda.Accounts.User,
+    belongs_to :author, Kalda.Accounts.User,
       foreign_key: :author_id,
       references: :id
 

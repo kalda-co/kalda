@@ -35,8 +35,9 @@ defmodule Kalda.Forums do
       [%Post{}, ...]
 
   """
-  def get_posts do
-    Repo.all(Post)
+  def get_posts(opts \\ []) do
+    preload = opts[:preload] || []
+    Repo.all(from post in Post, preload: ^preload)
   end
 
   @doc """
