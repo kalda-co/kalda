@@ -9,6 +9,8 @@ defmodule Kalda.Forums.Post do
       foreign_key: :author_id,
       references: :id
 
+    has_many :comments, Kalda.Forums.Comment
+
     timestamps()
   end
 

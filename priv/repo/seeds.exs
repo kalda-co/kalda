@@ -12,6 +12,7 @@
 
 alias Kalda.Accounts.User
 alias Kalda.Forums.Post
+alias Kalda.Forums.Comment
 alias Kalda.Waitlist.Signup
 
 user =
@@ -28,7 +29,7 @@ _user2 =
     hashed_password: Bcrypt.hash_pwd_salt("thisisatestpassword")
   })
 
-_post =
+post =
   Kalda.Repo.insert!(%Post{
     content: "This is your very first Daily Reflection - does it feel powerful?",
     author_id: user.id
@@ -42,14 +43,16 @@ _post2 =
 
 _comment =
   Kalda.Repo.insert!(%Comment{
-    content: "This is your very first Daily Reflection - does it feel powerful?",
-    author_id: user.id
+    content: "I feel quite powerful",
+    author_id: user.id,
+    post_id: post.id
   })
 
 _comment2 =
   Kalda.Repo.insert!(%Comment{
-    content: "What have you done today to make you feel proud?",
-    author_id: user.id
+    content: "I'm proud of my seeds",
+    author_id: user.id,
+    post_id: post.id
   })
 
 _signup1 =
