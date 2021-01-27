@@ -13,6 +13,8 @@ defmodule Kalda.Forums.Comment do
       foreign_key: :post_id,
       references: :id
 
+    has_many :replies, Kalda.Forums.Reply
+
     timestamps()
   end
 

@@ -9,6 +9,10 @@ defmodule Kalda.Accounts.User do
     field :hashed_password, :string
     field :confirmed_at, :naive_datetime
 
+    has_many :posts, Kalda.Forums.Post
+    has_many :comments, Kalda.Forums.Comment
+    has_many :replies, Kalda.Forums.Reply
+
     timestamps()
   end
 

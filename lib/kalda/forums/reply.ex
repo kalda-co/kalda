@@ -1,0 +1,26 @@
+defmodule Kalda.Forums.Reply do
+  use Ecto.Schema
+  import Ecto.Changeset
+
+  schema "replies" do
+    field :content, :string
+    # field :author_id, :id
+    # field :comment_id, :id
+    belongs_to :user, Kalda.Accounts.User,
+      foreign_key: :author_id,
+      references: :id
+
+    belongs_to :comment, Kalda.Forums.Comment,
+      foreign_key: :comment_id,
+      references: :id
+
+    timestamps()
+  end
+
+  @doc false
+  def changeset(reply, attrs) do
+    reply
+    |> cast(attrs, [:content])
+    |> validate_required([:content, :author_id, :comment_id])
+  end
+end

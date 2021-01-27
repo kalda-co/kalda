@@ -13,6 +13,7 @@
 alias Kalda.Accounts.User
 alias Kalda.Forums.Post
 alias Kalda.Forums.Comment
+alias Kalda.Forums.Reply
 alias Kalda.Waitlist.Signup
 
 user =
@@ -41,7 +42,7 @@ _post2 =
     author_id: user.id
   })
 
-_comment =
+comment =
   Kalda.Repo.insert!(%Comment{
     content: "I feel quite powerful",
     author_id: user.id,
@@ -53,6 +54,20 @@ _comment2 =
     content: "I'm proud of my seeds",
     author_id: user.id,
     post_id: post.id
+  })
+
+_reply =
+  Kalda.Repo.insert!(%Reply{
+    content: "I feel quite powerful today too, Fred",
+    author_id: user.id,
+    comment_id: comment.id
+  })
+
+_reply1 =
+  Kalda.Repo.insert!(%Reply{
+    content: "I do not feel powerful I feel a bit B minus",
+    author_id: user.id,
+    comment_id: comment.id
   })
 
 _signup1 =
