@@ -22,5 +22,7 @@ defmodule Kalda.Forums.Reply do
     reply
     |> cast(attrs, [:content])
     |> validate_required([:content, :author_id, :comment_id])
+    |> foreign_key_constraint(:author_id)
+    |> foreign_key_constraint(:comment_id)
   end
 end

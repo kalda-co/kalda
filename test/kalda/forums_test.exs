@@ -4,16 +4,20 @@ defmodule Kalda.ForumsTest do
   alias Kalda.Forums
   alias Kalda.AccountsFixtures
 
+  @valid_post_attrs %{content: "some content"}
+  @update_post_attrs %{content: "some updated content"}
+  @invalid_post_attrs %{content: ""}
+
+  @valid_comment_attrs %{content: "some content"}
+  @update_comment_attrs %{content: "some updated content"}
+  @invalid_comment_attrs %{content: ""}
+
+  @valid_reply_attrs %{content: "some reply"}
+  @update_reply_attrs %{content: "some updated reply"}
+  @invalid_reply_attrs %{content: ""}
+
   describe "posts" do
     alias Kalda.Forums.Post
-
-    @valid_post_attrs %{content: "some content"}
-    @update_post_attrs %{content: "some updated content"}
-    @invalid_post_attrs %{content: ""}
-
-    @valid_comment_attrs %{content: "some content"}
-    @update_comment_attrs %{content: "some updated content"}
-    @invalid_comment_attrs %{content: ""}
 
     # def post_fixture(attrs \\ %{}) do
     #   {:ok, post} =
@@ -185,6 +189,99 @@ defmodule Kalda.ForumsTest do
       assert {:ok, %Comment{} = comment} = Forums.create_comment(user, post, @valid_comment_attrs)
 
       assert %Ecto.Changeset{} = Forums.change_comment(comment)
+    end
+  end
+
+  describe "replies" do
+    alias Kalda.Forums.Comment
+    alias Kalda.Forums.Post
+    alias Kalda.Forums.Reply
+    alias Kalda.Forums
+
+    test "get_replies_for_comment/1 returns list of replies for comment" do
+      user = AccountsFixtures.user_fixture()
+      assert {:ok, %Post{} = post} = Forums.create_post(@valid_post_attrs, user)
+      assert {:ok, %Comment{} = comment} = Forums.create_comment(user, post, @valid_comment_attrs)
+      assert {:ok, %Reply{} = reply} = Forums.create_reply(user, comment, @valid_reply_attrs)
+
+      assert Forums.get_replies_for_comment(comment) == [reply]
+    end
+
+    test "get_reply!/1 gets the reply with the given id" do
+      user = AccountsFixtures.user_fixture()
+      assert {:ok, %Post{} = post} = Forums.create_post(@valid_post_attrs, user)
+      assert {:ok, %Comment{} = comment} = Forums.create_comment(user, post, @valid_comment_attrs)
+
+      assert {:ok, %Reply{} = reply} = Forums.create_reply(user, comment, @valid_reply_attrs)
+      assert Forums.get_reply!(reply.id) == reply
+    end
+
+    test "create_reply!/3 creates the reply for the given user and comment" do
+      user = AccountsFixtures.user_fixture()
+      assert {:ok, %Post{} = post} = Forums.create_post(@valid_post_attrs, user)
+      assert {:ok, %Comment{} = comment} = Forums.create_comment(user, post, @valid_comment_attrs)
+
+      assert {:ok, %Reply{}} = Forums.create_reply(user, comment, @valid_reply_attrs)
+    end
+
+    test "create_commennt/3 fails with invalid attrs" do
+      user = AccountsFixtures.user_fixture()
+      assert {:ok, %Post{} = post} = Forums.create_post(@valid_post_attrs, user)
+      assert {:ok, %Comment{} = comment} = Forums.create_comment(user, post, @valid_comment_attrs)
+
+      assert {:error, %Ecto.Changeset{}} =
+               Forums.create_reply(user, comment, @invalid_reply_attrs)
+    end
+
+    # TODO test with invalid user
+    test "create_reply/3 fails with invalid comment" do
+      user = AccountsFixtures.user_fixture()
+      assert {:ok, %Post{} = post} = Forums.create_post(@valid_post_attrs, user)
+      assert {:ok, %Comment{} = comment} = Forums.create_comment(user, post, @valid_comment_attrs)
+
+      Forums.delete_comment(comment)
+      assert {:error, %Ecto.Changeset{}} = Forums.create_reply(user, comment, @valid_reply_attrs)
+    end
+
+    test "update_reply/2 with valid data updates the reply" do
+      user = AccountsFixtures.user_fixture()
+      assert {:ok, %Post{} = post} = Forums.create_post(@valid_post_attrs, user)
+      assert {:ok, %Comment{} = comment} = Forums.create_comment(user, post, @valid_comment_attrs)
+      assert {:ok, %Reply{} = reply} = Forums.create_reply(user, comment, @valid_reply_attrs)
+      assert reply.content == "some reply"
+
+      assert {:ok, %Reply{} = u_reply} = Forums.update_reply(reply, @update_reply_attrs)
+      assert u_reply.content == "some updated reply"
+    end
+
+    test "update_reply/2 with invalid data returns error changeset" do
+      user = AccountsFixtures.user_fixture()
+      assert {:ok, %Post{} = post} = Forums.create_post(@valid_post_attrs, user)
+      assert {:ok, %Comment{} = comment} = Forums.create_comment(user, post, @valid_comment_attrs)
+      assert {:ok, %Reply{} = reply} = Forums.create_reply(user, comment, @valid_reply_attrs)
+      assert reply.content == "some reply"
+
+      assert {:error, %Ecto.Changeset{}} = Forums.update_reply(reply, @invalid_reply_attrs)
+      assert reply == Forums.get_reply!(reply.id)
+    end
+
+    test "delete_reply/1 deletes the reply" do
+      user = AccountsFixtures.user_fixture()
+      assert {:ok, %Post{} = post} = Forums.create_post(@valid_post_attrs, user)
+      assert {:ok, %Comment{} = comment} = Forums.create_comment(user, post, @valid_comment_attrs)
+      assert {:ok, %Reply{} = reply} = Forums.create_reply(user, comment, @valid_reply_attrs)
+
+      assert {:ok, %Reply{}} = Forums.delete_reply(reply)
+      assert_raise Ecto.NoResultsError, fn -> Forums.get_reply!(reply.id) end
+    end
+
+    test "change_reply/1 returns a changeset" do
+      user = AccountsFixtures.user_fixture()
+      assert {:ok, %Post{} = post} = Forums.create_post(@valid_post_attrs, user)
+      assert {:ok, %Comment{} = comment} = Forums.create_comment(user, post, @valid_comment_attrs)
+      assert {:ok, %Reply{} = reply} = Forums.create_reply(user, comment, @valid_reply_attrs)
+
+      assert %Ecto.Changeset{} = Forums.change_reply(reply)
     end
   end
 end

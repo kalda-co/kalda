@@ -103,19 +103,36 @@ defmodule Kalda.Forums do
   end
 
   ##################
-
+  #
+  #
+  #
+  #
+  #
+  #
+  #
+  #
   # Comments
+  #
+  #
+  #
+  #
+  #
+  #
+  #
+  #
+  #
+  #
 
   ##################
 
   alias Kalda.Forums.Comment
 
   @doc """
-  Returns the get of comments for a post.
+  Returns the list of comments for a post.
 
   ## Examples
 
-      iex> get_commentsi_for_post(post)
+      iex> get_comments_for_post(post)
       [%Comment{}, ...]
 
   """
@@ -206,5 +223,128 @@ defmodule Kalda.Forums do
   """
   def change_comment(%Comment{} = comment, attrs \\ %{}) do
     Comment.changeset(comment, attrs)
+  end
+
+  ##################
+  #
+  #
+  #
+  #
+  #
+  #
+  #
+
+  # Replies
+  #
+  #
+  #
+  #
+  #
+  #
+  #
+  #
+  #
+  #
+
+  ##################
+
+  alias Kalda.Forums.Reply
+
+  @doc """
+  Returns the list of replies for a comment.
+
+  ## Examples
+
+      iex> get_replies_for_comment(comment)
+      [%Comment{}, ...]
+
+  """
+  def get_replies_for_comment(comment) do
+    from(reply in Reply,
+      where: reply.comment_id == ^comment.id
+      # preload: [:comment, :user]
+    )
+    |> Repo.all()
+  end
+
+  @doc """
+  Gets a single reply.
+
+  Raises `Ecto.NoResultsError` if the Comment does not exist.
+
+  ## Examples
+
+      iex> get_reply!(123)
+      [%Reply{}, ...]
+
+      iex> get_reply!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_reply!(id), do: Repo.get!(Reply, id)
+
+  @doc """
+  Creates a reply for a user in a comment
+
+  ## Examples
+
+      iex> create_reply(user, comment, %{field: value})
+      {:ok, %Reply{}}
+
+      iex> create_reply(user, comment, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_reply(user, comment, attrs \\ %{}) do
+    %Reply{author_id: user.id, comment_id: comment.id}
+    |> Reply.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a reply.
+
+  ## Examples
+
+      iex> update_reply(reply, %{field: new_value})
+      {:ok, %Reply{}}
+
+      iex> update_reply(reply, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_reply(%Reply{} = reply, attrs) do
+    reply
+    |> Reply.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a reply.
+
+  ## Examples
+
+      iex> delete_reply(reply)
+      {:ok, %Reply{}}
+
+      iex> delete_reply(reply)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_reply(%Reply{} = reply) do
+    Repo.delete(reply)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking reply changes.
+
+  ## Examples
+
+      iex> change_reply(reply)
+      %Ecto.Changeset{data: %Reply{}}
+
+  """
+  def change_reply(%Reply{} = reply, attrs \\ %{}) do
+    Reply.changeset(reply, attrs)
   end
 end
