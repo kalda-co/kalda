@@ -12,7 +12,7 @@ defmodule Kalda.ForumsFixtures do
     # attrs override defaults
     attrs = Map.merge(defaults, attrs)
 
-    {:ok, post} = Kalda.Forums.create_post(attrs, author)
+    {:ok, post} = Kalda.Forums.create_post(author, attrs)
     post
   end
 

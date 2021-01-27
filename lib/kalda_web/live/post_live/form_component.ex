@@ -41,7 +41,7 @@ defmodule KaldaWeb.PostLive.FormComponent do
   end
 
   defp save_post(socket, :new, post_params) do
-    case Forums.create_post(post_params, socket.assigns.user) do
+    case Forums.create_post(socket.assigns.user, post_params) do
       {:ok, _post} ->
         {:noreply,
          socket
