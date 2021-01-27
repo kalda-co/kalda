@@ -99,6 +99,6 @@ defmodule KaldaWeb.Router do
   scope "/api", KaldaWeb.Api, as: :api do
     pipe_through [:basic_auth_prod, :api]
 
-    get "api/comments/:id", CommentController, :index
+    get "/posts", PostController, :index
   end
 end
