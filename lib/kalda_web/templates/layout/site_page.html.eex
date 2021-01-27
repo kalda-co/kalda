@@ -8,11 +8,11 @@
     <%= live_title_tag(title_text(@conn)) %>
     <meta name="description" content="<%= description_text(@conn) %>"/>
     <meta property="og:title" content="<%= title_text(@conn)%>">
-<meta property="og:description" content="<%= description_text(@conn)%>">
-<meta property="og:image" content="#TODO IMAGE">
-<meta name="twitter:card" content="summary_large_image">
-<meta property="og:site_name" content="Kalda">
-<meta name="twitter:image:alt" content="Kalda logo text in hot pink on purple, with a pink rainbow">
+    <meta property="og:description" content="<%= description_text(@conn)%>">
+    <meta property="og:image" content="/images/og-logo-fb.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta property="og:site_name" content="Kalda">
+    <meta name="twitter:image:alt" content="Kalda logo text in hot pink on purple, with a pink rainbow">
 
     <link phx-track-static rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
     <script defer phx-track-static type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
