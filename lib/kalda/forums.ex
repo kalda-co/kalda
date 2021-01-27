@@ -122,7 +122,6 @@ defmodule Kalda.Forums do
   #
   #
   #
-
   ##################
 
   alias Kalda.Forums.Comment
@@ -136,10 +135,10 @@ defmodule Kalda.Forums do
       [%Comment{}, ...]
 
   """
+  # TODO Preloads as options
   def get_comments_for_post(post) do
     from(comment in Comment,
       where: comment.post_id == ^post.id
-      # preload: [:post, :user]
     )
     |> Repo.all()
   end
@@ -233,7 +232,6 @@ defmodule Kalda.Forums do
   #
   #
   #
-
   # Replies
   #
   #
@@ -245,7 +243,6 @@ defmodule Kalda.Forums do
   #
   #
   #
-
   ##################
 
   alias Kalda.Forums.Reply
@@ -259,10 +256,10 @@ defmodule Kalda.Forums do
       [%Comment{}, ...]
 
   """
+  # TODO Preloads as options
   def get_replies_for_comment(comment) do
     from(reply in Reply,
       where: reply.comment_id == ^comment.id
-      # preload: [:comment, :user]
     )
     |> Repo.all()
   end
@@ -331,6 +328,7 @@ defmodule Kalda.Forums do
       {:error, %Ecto.Changeset{}}
 
   """
+  # TODO Implement 'soft' delete so record preserved
   def delete_reply(%Reply{} = reply) do
     Repo.delete(reply)
   end
