@@ -9,9 +9,9 @@ defmodule Kalda.Accounts.User do
     field :hashed_password, :string
     field :confirmed_at, :naive_datetime
 
-    has_many :posts, Kalda.Forums.Post
-    has_many :comments, Kalda.Forums.Comment
-    has_many :replies, Kalda.Forums.Reply
+    has_many :posts, Kalda.Forums.Post, foreign_key: :author_id, references: :id
+    has_many :comments, Kalda.Forums.Comment, foreign_key: :author_id, references: :id
+    has_many :replies, Kalda.Forums.Reply, foreign_key: :author_id, references: :id
 
     timestamps()
   end
