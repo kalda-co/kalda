@@ -58,7 +58,7 @@ defmodule KaldaWeb.Api.V1.PostControllerTest do
                          %{
                            "id" => reply1.id,
                            "content" => reply1.content,
-                           "inserted_at" => NaiveDateTime.to_iso8601(comment1.inserted_at),
+                           "inserted_at" => NaiveDateTime.to_iso8601(reply1.inserted_at),
                            "author" => %{
                              "id" => author1.id,
                              "name" => "TODO change me to have a name"
