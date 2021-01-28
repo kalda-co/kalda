@@ -41,6 +41,31 @@ defmodule Kalda.Forums do
   end
 
   @doc """
+  Gets a single post.
+
+  Raises `Ecto.NoResultsError` if the Post does not exist.
+
+  ## Examples
+
+      iex> get_post!(123)
+      %Post{}
+
+      iex> get_post!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+
+  def get_post!(id, opts \\ []) do
+    preload = opts[:preload] || []
+
+    from(post in Post,
+      where: post.id == ^id,
+      preload: ^preload
+    )
+    |> Repo.get!(id)
+  end
+
+  @doc """
   Returns an `%Ecto.Changeset{}` for tracking post changes.
 
   ## Examples
@@ -70,22 +95,6 @@ defmodule Kalda.Forums do
     |> Post.changeset(attrs)
     |> Repo.update()
   end
-
-  @doc """
-  Gets a single post.
-
-  Raises `Ecto.NoResultsError` if the Post does not exist.
-
-  ## Examples
-
-      iex> get_post!(123)
-      %Post{}
-
-      iex> get_post!(456)
-      ** (Ecto.NoResultsError)
-
-  """
-  def get_post!(id), do: Repo.get!(Post, id)
 
   @doc """
   Deletes a post.

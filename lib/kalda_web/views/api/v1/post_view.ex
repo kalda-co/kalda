@@ -7,6 +7,12 @@ defmodule KaldaWeb.Api.V1.PostView do
     }
   end
 
+  def render("show.json", params) do
+    %{
+      data: render_post(params.post)
+    }
+  end
+
   defp render_post(post) do
     %{
       id: post.id,

@@ -100,5 +100,7 @@ defmodule KaldaWeb.Router do
     pipe_through [:basic_auth_prod, :api]
 
     get "/posts", PostController, :index
+    get "/posts/:id", PostController, :show
+    post "/posts", PostController, :create
   end
 end
