@@ -3,7 +3,7 @@ defmodule KaldaWeb.UserAuthTest do
 
   alias Kalda.Accounts
   alias KaldaWeb.UserAuth
-  import Kalda.AccountsFixtures
+  alias Kalda.AccountsFixtures
 
   @remember_me_cookie "_kalda_web_user_remember_me"
 
@@ -13,7 +13,7 @@ defmodule KaldaWeb.UserAuthTest do
       |> Map.replace!(:secret_key_base, KaldaWeb.Endpoint.config(:secret_key_base))
       |> init_test_session(%{})
 
-    %{user: user_fixture(), conn: conn}
+    %{user: AccountsFixtures.user(), conn: conn}
   end
 
   describe "log_in_user/3" do

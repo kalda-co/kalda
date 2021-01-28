@@ -3,10 +3,10 @@ defmodule KaldaWeb.UserResetPasswordControllerTest do
 
   alias Kalda.Accounts
   alias Kalda.Repo
-  import Kalda.AccountsFixtures
+  alias Kalda.AccountsFixtures
 
   setup do
-    %{user: user_fixture()}
+    %{user: AccountsFixtures.user()}
   end
 
   describe "GET /users/reset_password" do
@@ -45,7 +45,7 @@ defmodule KaldaWeb.UserResetPasswordControllerTest do
   describe "GET /users/reset_password/:token" do
     setup %{user: user} do
       token =
-        extract_user_token(fn url ->
+        AccountsFixtures.extract_user_token(fn url ->
           Accounts.deliver_user_reset_password_instructions(user, url)
         end)
 
@@ -67,7 +67,7 @@ defmodule KaldaWeb.UserResetPasswordControllerTest do
   describe "PUT /users/reset_password/:token" do
     setup %{user: user} do
       token =
-        extract_user_token(fn url ->
+        AccountsFixtures.extract_user_token(fn url ->
           Accounts.deliver_user_reset_password_instructions(user, url)
         end)
 

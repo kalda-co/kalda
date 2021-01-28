@@ -7,7 +7,7 @@ defmodule Kalda.AccountsFixtures do
   def unique_user_email, do: "user#{System.unique_integer()}@example.com"
   def valid_user_password, do: "hello world!"
 
-  def user_fixture(attrs \\ %{}) do
+  def user(attrs \\ %{}) do
     {:ok, user} =
       attrs
       |> Enum.into(%{

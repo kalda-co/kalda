@@ -2,7 +2,7 @@ defmodule Kalda.AccountsTest do
   use Kalda.DataCase
 
   alias Kalda.Accounts
-  import Kalda.AccountsFixtures
+  alias Kalda.AccountsFixtures
   alias Kalda.Accounts.{User, UserToken}
 
   describe "get_user_by_email/1" do
@@ -11,7 +11,7 @@ defmodule Kalda.AccountsTest do
     end
 
     test "returns the user if the email exists" do
-      %{id: id} = user = user_fixture()
+      %{id: id} = user = AccountsFixtures.user()
       assert %User{id: ^id} = Accounts.get_user_by_email(user.email)
     end
   end
@@ -22,15 +22,18 @@ defmodule Kalda.AccountsTest do
     end
 
     test "does not return the user if the password is not valid" do
-      user = user_fixture()
+      user = AccountsFixtures.user()
       refute Accounts.get_user_by_email_and_password(user.email, "invalid")
     end
 
     test "returns the user if the email and password are valid" do
-      %{id: id} = user = user_fixture()
+      %{id: id} = user = AccountsFixtures.user()
 
       assert %User{id: ^id} =
-               Accounts.get_user_by_email_and_password(user.email, valid_user_password())
+               Accounts.get_user_by_email_and_password(
+                 user.email,
+                 AccountsFixtures.valid_user_password()
+               )
     end
   end
 
@@ -42,7 +45,7 @@ defmodule Kalda.AccountsTest do
     end
 
     test "returns the user with the given id" do
-      %{id: id} = user = user_fixture()
+      %{id: id} = user = AccountsFixtures.user()
       assert %User{id: ^id} = Accounts.get_user!(user.id)
     end
   end
@@ -73,7 +76,7 @@ defmodule Kalda.AccountsTest do
     end
 
     test "validates email uniqueness" do
-      %{email: email} = user_fixture()
+      %{email: email} = AccountsFixtures.user()
       {:error, changeset} = Accounts.register_user(%{email: email})
       assert "has already been taken" in errors_on(changeset).email
 
@@ -83,8 +86,11 @@ defmodule Kalda.AccountsTest do
     end
 
     test "registers users with a hashed password" do
-      email = unique_user_email()
-      {:ok, user} = Accounts.register_user(%{email: email, password: valid_user_password()})
+      email = AccountsFixtures.unique_user_email()
+
+      {:ok, user} =
+        Accounts.register_user(%{email: email, password: AccountsFixtures.valid_user_password()})
+
       assert user.email == email
       assert is_binary(user.hashed_password)
       assert is_nil(user.confirmed_at)
@@ -99,8 +105,8 @@ defmodule Kalda.AccountsTest do
     end
 
     test "allows fields to be set" do
-      email = unique_user_email()
-      password = valid_user_password()
+      email = AccountsFixtures.unique_user_email()
+      password = AccountsFixtures.valid_user_password()
 
       changeset =
         Accounts.change_user_registration(%User{}, %{"email" => email, "password" => password})
@@ -121,17 +127,21 @@ defmodule Kalda.AccountsTest do
 
   describe "apply_user_email/3" do
     setup do
-      %{user: user_fixture()}
+      %{user: AccountsFixtures.user()}
     end
 
     test "requires email to change", %{user: user} do
-      {:error, changeset} = Accounts.apply_user_email(user, valid_user_password(), %{})
+      {:error, changeset} =
+        Accounts.apply_user_email(user, AccountsFixtures.valid_user_password(), %{})
+
       assert %{email: ["did not change"]} = errors_on(changeset)
     end
 
     test "validates email", %{user: user} do
       {:error, changeset} =
-        Accounts.apply_user_email(user, valid_user_password(), %{email: "not valid"})
+        Accounts.apply_user_email(user, AccountsFixtures.valid_user_password(), %{
+          email: "not valid"
+        })
 
       assert %{email: ["must have the @ sign and no spaces"]} = errors_on(changeset)
     end
@@ -140,30 +150,33 @@ defmodule Kalda.AccountsTest do
       too_long = String.duplicate("db", 255)
 
       {:error, changeset} =
-        Accounts.apply_user_email(user, valid_user_password(), %{email: too_long})
+        Accounts.apply_user_email(user, AccountsFixtures.valid_user_password(), %{email: too_long})
 
       assert "should be at most 254 character(s)" in errors_on(changeset).email
     end
 
     test "validates email uniqueness", %{user: user} do
-      %{email: email} = user_fixture()
+      %{email: email} = AccountsFixtures.user()
 
       {:error, changeset} =
-        Accounts.apply_user_email(user, valid_user_password(), %{email: email})
+        Accounts.apply_user_email(user, AccountsFixtures.valid_user_password(), %{email: email})
 
       assert "has already been taken" in errors_on(changeset).email
     end
 
     test "validates current password", %{user: user} do
       {:error, changeset} =
-        Accounts.apply_user_email(user, "invalid", %{email: unique_user_email()})
+        Accounts.apply_user_email(user, "invalid", %{email: AccountsFixtures.unique_user_email()})
 
       assert %{current_password: ["is not valid"]} = errors_on(changeset)
     end
 
     test "applies the email without persisting it", %{user: user} do
-      email = unique_user_email()
-      {:ok, user} = Accounts.apply_user_email(user, valid_user_password(), %{email: email})
+      email = AccountsFixtures.unique_user_email()
+
+      {:ok, user} =
+        Accounts.apply_user_email(user, AccountsFixtures.valid_user_password(), %{email: email})
+
       assert user.email == email
       assert Accounts.get_user!(user.id).email != email
     end
@@ -171,12 +184,12 @@ defmodule Kalda.AccountsTest do
 
   describe "deliver_update_email_instructions/3" do
     setup do
-      %{user: user_fixture()}
+      %{user: AccountsFixtures.user()}
     end
 
     test "sends token through notification", %{user: user} do
       token =
-        extract_user_token(fn url ->
+        AccountsFixtures.extract_user_token(fn url ->
           Accounts.deliver_update_email_instructions(user, "current@example.com", url)
         end)
 
@@ -190,11 +203,11 @@ defmodule Kalda.AccountsTest do
 
   describe "update_user_email/2" do
     setup do
-      user = user_fixture()
-      email = unique_user_email()
+      user = AccountsFixtures.user()
+      email = AccountsFixtures.unique_user_email()
 
       token =
-        extract_user_token(fn url ->
+        AccountsFixtures.extract_user_token(fn url ->
           Accounts.deliver_update_email_instructions(%{user | email: email}, user.email, url)
         end)
 
@@ -251,12 +264,12 @@ defmodule Kalda.AccountsTest do
 
   describe "update_user_password/3" do
     setup do
-      %{user: user_fixture()}
+      %{user: AccountsFixtures.user()}
     end
 
     test "validates password", %{user: user} do
       {:error, changeset} =
-        Accounts.update_user_password(user, valid_user_password(), %{
+        Accounts.update_user_password(user, AccountsFixtures.valid_user_password(), %{
           password: "not valid",
           password_confirmation: "another"
         })
@@ -271,21 +284,23 @@ defmodule Kalda.AccountsTest do
     #   too_long = String.duplicate("db", 130)
 
     #   {:error, changeset} =
-    #     Accounts.update_user_password(user, valid_user_password(), %{password: too_long})
+    #     Accounts.update_user_password(user, AccountsFixtures.valid_user_password(), %{password: too_long})
 
     #   assert "should be at most 80 character(s)" in errors_on(changeset).password
     # end
 
     test "validates current password", %{user: user} do
       {:error, changeset} =
-        Accounts.update_user_password(user, "invalid", %{password: valid_user_password()})
+        Accounts.update_user_password(user, "invalid", %{
+          password: AccountsFixtures.valid_user_password()
+        })
 
       assert %{current_password: ["is not valid"]} = errors_on(changeset)
     end
 
     test "updates the password", %{user: user} do
       {:ok, user} =
-        Accounts.update_user_password(user, valid_user_password(), %{
+        Accounts.update_user_password(user, AccountsFixtures.valid_user_password(), %{
           password: "new valid password"
         })
 
@@ -297,7 +312,7 @@ defmodule Kalda.AccountsTest do
       _ = Accounts.generate_user_session_token(user)
 
       {:ok, _} =
-        Accounts.update_user_password(user, valid_user_password(), %{
+        Accounts.update_user_password(user, AccountsFixtures.valid_user_password(), %{
           password: "new valid password"
         })
 
@@ -307,7 +322,7 @@ defmodule Kalda.AccountsTest do
 
   describe "generate_user_session_token/1" do
     setup do
-      %{user: user_fixture()}
+      %{user: AccountsFixtures.user()}
     end
 
     test "generates a token", %{user: user} do
@@ -319,7 +334,7 @@ defmodule Kalda.AccountsTest do
       assert_raise Ecto.ConstraintError, fn ->
         Repo.insert!(%UserToken{
           token: user_token.token,
-          user_id: user_fixture().id,
+          user_id: AccountsFixtures.user().id,
           context: "session"
         })
       end
@@ -328,7 +343,7 @@ defmodule Kalda.AccountsTest do
 
   describe "get_user_by_session_token/1" do
     setup do
-      user = user_fixture()
+      user = AccountsFixtures.user()
       token = Accounts.generate_user_session_token(user)
       %{user: user, token: token}
     end
@@ -350,7 +365,7 @@ defmodule Kalda.AccountsTest do
 
   describe "delete_session_token/1" do
     test "deletes the token" do
-      user = user_fixture()
+      user = AccountsFixtures.user()
       token = Accounts.generate_user_session_token(user)
       assert Accounts.delete_session_token(token) == :ok
       refute Accounts.get_user_by_session_token(token)
@@ -359,12 +374,12 @@ defmodule Kalda.AccountsTest do
 
   describe "deliver_user_confirmation_instructions/2" do
     setup do
-      %{user: user_fixture()}
+      %{user: AccountsFixtures.user()}
     end
 
     test "sends token through notification", %{user: user} do
       token =
-        extract_user_token(fn url ->
+        AccountsFixtures.extract_user_token(fn url ->
           Accounts.deliver_user_confirmation_instructions(user, url)
         end)
 
@@ -378,10 +393,10 @@ defmodule Kalda.AccountsTest do
 
   describe "confirm_user/2" do
     setup do
-      user = user_fixture()
+      user = AccountsFixtures.user()
 
       token =
-        extract_user_token(fn url ->
+        AccountsFixtures.extract_user_token(fn url ->
           Accounts.deliver_user_confirmation_instructions(user, url)
         end)
 
@@ -412,12 +427,12 @@ defmodule Kalda.AccountsTest do
 
   describe "deliver_user_reset_password_instructions/2" do
     setup do
-      %{user: user_fixture()}
+      %{user: AccountsFixtures.user()}
     end
 
     test "sends token through notification", %{user: user} do
       token =
-        extract_user_token(fn url ->
+        AccountsFixtures.extract_user_token(fn url ->
           Accounts.deliver_user_reset_password_instructions(user, url)
         end)
 
@@ -431,10 +446,10 @@ defmodule Kalda.AccountsTest do
 
   describe "get_user_by_reset_password_token/1" do
     setup do
-      user = user_fixture()
+      user = AccountsFixtures.user()
 
       token =
-        extract_user_token(fn url ->
+        AccountsFixtures.extract_user_token(fn url ->
           Accounts.deliver_user_reset_password_instructions(user, url)
         end)
 
@@ -460,7 +475,7 @@ defmodule Kalda.AccountsTest do
 
   describe "reset_user_password/2" do
     setup do
-      %{user: user_fixture()}
+      %{user: AccountsFixtures.user()}
     end
 
     test "validates password", %{user: user} do

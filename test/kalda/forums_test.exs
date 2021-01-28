@@ -20,30 +20,30 @@ defmodule Kalda.ForumsTest do
     alias Kalda.Forums.Post
 
     test "create_post/1 with valid attrs" do
-      user = AccountsFixtures.user_fixture()
+      user = AccountsFixtures.user()
       assert {:ok, %Post{} = post} = Forums.create_post(user, @valid_post_attrs)
       assert post.content == "some content"
     end
 
     test "create_post/1 with invalid attrs" do
-      user = AccountsFixtures.user_fixture()
+      user = AccountsFixtures.user()
       assert {:error, %Ecto.Changeset{}} = Forums.create_post(user, @invalid_post_attrs)
     end
 
     test "get_posts/0 returns all posts" do
-      user = AccountsFixtures.user_fixture()
+      user = AccountsFixtures.user()
       assert {:ok, %Post{} = post} = Forums.create_post(user, @valid_post_attrs)
       assert Forums.get_posts() == [post]
     end
 
     test "change_post/1 returns a post changeset" do
-      user = AccountsFixtures.user_fixture()
+      user = AccountsFixtures.user()
       assert {:ok, %Post{} = post} = Forums.create_post(user, @valid_post_attrs)
       assert %Ecto.Changeset{} = Forums.change_post(post)
     end
 
     test "update_post/2 with valid data updates the post" do
-      user = AccountsFixtures.user_fixture()
+      user = AccountsFixtures.user()
       assert {:ok, %Post{} = post} = Forums.create_post(user, @valid_post_attrs)
 
       assert {:ok, %Post{} = post} = Forums.update_post(post, @update_post_attrs)
@@ -51,7 +51,7 @@ defmodule Kalda.ForumsTest do
     end
 
     test "update_post/2 with invalid data returns error changeset" do
-      user = AccountsFixtures.user_fixture()
+      user = AccountsFixtures.user()
       assert {:ok, %Post{} = post} = Forums.create_post(user, @valid_post_attrs)
 
       assert {:error, %Ecto.Changeset{}} = Forums.update_post(post, @invalid_post_attrs)
@@ -59,14 +59,14 @@ defmodule Kalda.ForumsTest do
     end
 
     test "get_post!/1 returns the post with given id" do
-      user = AccountsFixtures.user_fixture()
+      user = AccountsFixtures.user()
       assert {:ok, %Post{} = post} = Forums.create_post(user, @valid_post_attrs)
 
       assert Forums.get_post!(post.id) == post
     end
 
     test "delete_post/1 deletes the post" do
-      user = AccountsFixtures.user_fixture()
+      user = AccountsFixtures.user()
       assert {:ok, %Post{} = post} = Forums.create_post(user, @valid_post_attrs)
 
       assert {:ok, %Post{}} = Forums.delete_post(post)
@@ -80,7 +80,7 @@ defmodule Kalda.ForumsTest do
     alias Kalda.Forums
 
     test "get_comment!/1 gets the comment with the given id" do
-      user = AccountsFixtures.user_fixture()
+      user = AccountsFixtures.user()
       assert {:ok, %Post{} = post} = Forums.create_post(user, @valid_post_attrs)
 
       assert {:ok, %Comment{} = comment} = Forums.create_comment(user, post, @valid_comment_attrs)
@@ -88,9 +88,9 @@ defmodule Kalda.ForumsTest do
     end
 
     test "get_comments_for_post/1 gets all comments associated with given post" do
-      user = AccountsFixtures.user_fixture()
-      user2 = AccountsFixtures.user_fixture()
-      user3 = AccountsFixtures.user_fixture()
+      user = AccountsFixtures.user()
+      user2 = AccountsFixtures.user()
+      user3 = AccountsFixtures.user()
       assert {:ok, %Post{} = post} = Forums.create_post(user, @valid_post_attrs)
       assert {:ok, %Post{} = post2} = Forums.create_post(user2, @valid_post_attrs)
       assert {:ok, %Post{} = post3} = Forums.create_post(user3, @valid_post_attrs)
@@ -120,14 +120,14 @@ defmodule Kalda.ForumsTest do
     end
 
     test "create_comment!/3 creates the comment for the given user and post" do
-      user = AccountsFixtures.user_fixture()
+      user = AccountsFixtures.user()
       assert {:ok, %Post{} = post} = Forums.create_post(user, @valid_post_attrs)
 
       assert {:ok, %Comment{}} = Forums.create_comment(user, post, @valid_comment_attrs)
     end
 
     test "create_commennt/3 fails with invalid attrs" do
-      user = AccountsFixtures.user_fixture()
+      user = AccountsFixtures.user()
       assert {:ok, %Post{} = post} = Forums.create_post(user, @valid_post_attrs)
 
       assert {:error, %Ecto.Changeset{}} =
@@ -135,7 +135,7 @@ defmodule Kalda.ForumsTest do
     end
 
     test "create_commennt/3 fails with invalid post" do
-      user = AccountsFixtures.user_fixture()
+      user = AccountsFixtures.user()
       assert {:ok, %Post{} = post} = Forums.create_post(user, @valid_post_attrs)
       Forums.delete_post(post)
 
@@ -143,7 +143,7 @@ defmodule Kalda.ForumsTest do
     end
 
     test "update_comment/2 with valid data updates the comment" do
-      user = AccountsFixtures.user_fixture()
+      user = AccountsFixtures.user()
       assert {:ok, %Post{} = post} = Forums.create_post(user, @valid_post_attrs)
       assert {:ok, %Comment{} = comment} = Forums.create_comment(user, post, @valid_comment_attrs)
       assert comment.content == "some content"
@@ -153,7 +153,7 @@ defmodule Kalda.ForumsTest do
     end
 
     test "update_comment/2 with invalid data returns error changeset" do
-      user = AccountsFixtures.user_fixture()
+      user = AccountsFixtures.user()
       assert {:ok, %Post{} = post} = Forums.create_post(user, @valid_post_attrs)
       assert {:ok, %Comment{} = comment} = Forums.create_comment(user, post, @valid_comment_attrs)
       assert comment.content == "some content"
@@ -163,7 +163,7 @@ defmodule Kalda.ForumsTest do
     end
 
     test "delete_comment/1 deletes the comment" do
-      user = AccountsFixtures.user_fixture()
+      user = AccountsFixtures.user()
       assert {:ok, %Post{} = post} = Forums.create_post(user, @valid_post_attrs)
       assert {:ok, %Comment{} = comment} = Forums.create_comment(user, post, @valid_comment_attrs)
 
@@ -172,7 +172,7 @@ defmodule Kalda.ForumsTest do
     end
 
     test "change_comment/1 returns a changeset" do
-      user = AccountsFixtures.user_fixture()
+      user = AccountsFixtures.user()
       assert {:ok, %Post{} = post} = Forums.create_post(user, @valid_post_attrs)
       assert {:ok, %Comment{} = comment} = Forums.create_comment(user, post, @valid_comment_attrs)
 
@@ -187,7 +187,7 @@ defmodule Kalda.ForumsTest do
     alias Kalda.Forums
 
     test "get_replies_for_comment/1 returns list of replies for comment" do
-      user = AccountsFixtures.user_fixture()
+      user = AccountsFixtures.user()
       assert {:ok, %Post{} = post} = Forums.create_post(user, @valid_post_attrs)
       assert {:ok, %Comment{} = comment} = Forums.create_comment(user, post, @valid_comment_attrs)
       assert {:ok, %Reply{} = reply} = Forums.create_reply(user, comment, @valid_reply_attrs)
@@ -196,7 +196,7 @@ defmodule Kalda.ForumsTest do
     end
 
     test "get_reply!/1 gets the reply with the given id" do
-      user = AccountsFixtures.user_fixture()
+      user = AccountsFixtures.user()
       assert {:ok, %Post{} = post} = Forums.create_post(user, @valid_post_attrs)
       assert {:ok, %Comment{} = comment} = Forums.create_comment(user, post, @valid_comment_attrs)
 
@@ -205,7 +205,7 @@ defmodule Kalda.ForumsTest do
     end
 
     test "create_reply!/3 creates the reply for the given user and comment" do
-      user = AccountsFixtures.user_fixture()
+      user = AccountsFixtures.user()
       assert {:ok, %Post{} = post} = Forums.create_post(user, @valid_post_attrs)
       assert {:ok, %Comment{} = comment} = Forums.create_comment(user, post, @valid_comment_attrs)
 
@@ -213,7 +213,7 @@ defmodule Kalda.ForumsTest do
     end
 
     test "create_commennt/3 fails with invalid attrs" do
-      user = AccountsFixtures.user_fixture()
+      user = AccountsFixtures.user()
       assert {:ok, %Post{} = post} = Forums.create_post(user, @valid_post_attrs)
       assert {:ok, %Comment{} = comment} = Forums.create_comment(user, post, @valid_comment_attrs)
 
@@ -222,7 +222,7 @@ defmodule Kalda.ForumsTest do
     end
 
     test "create_reply/3 fails with invalid comment" do
-      user = AccountsFixtures.user_fixture()
+      user = AccountsFixtures.user()
       assert {:ok, %Post{} = post} = Forums.create_post(user, @valid_post_attrs)
       assert {:ok, %Comment{} = comment} = Forums.create_comment(user, post, @valid_comment_attrs)
 
@@ -231,7 +231,7 @@ defmodule Kalda.ForumsTest do
     end
 
     test "update_reply/2 with valid data updates the reply" do
-      user = AccountsFixtures.user_fixture()
+      user = AccountsFixtures.user()
       assert {:ok, %Post{} = post} = Forums.create_post(user, @valid_post_attrs)
       assert {:ok, %Comment{} = comment} = Forums.create_comment(user, post, @valid_comment_attrs)
       assert {:ok, %Reply{} = reply} = Forums.create_reply(user, comment, @valid_reply_attrs)
@@ -242,7 +242,7 @@ defmodule Kalda.ForumsTest do
     end
 
     test "update_reply/2 with invalid data returns error changeset" do
-      user = AccountsFixtures.user_fixture()
+      user = AccountsFixtures.user()
       assert {:ok, %Post{} = post} = Forums.create_post(user, @valid_post_attrs)
       assert {:ok, %Comment{} = comment} = Forums.create_comment(user, post, @valid_comment_attrs)
       assert {:ok, %Reply{} = reply} = Forums.create_reply(user, comment, @valid_reply_attrs)
@@ -253,7 +253,7 @@ defmodule Kalda.ForumsTest do
     end
 
     test "delete_reply/1 deletes the reply" do
-      user = AccountsFixtures.user_fixture()
+      user = AccountsFixtures.user()
       assert {:ok, %Post{} = post} = Forums.create_post(user, @valid_post_attrs)
       assert {:ok, %Comment{} = comment} = Forums.create_comment(user, post, @valid_comment_attrs)
       assert {:ok, %Reply{} = reply} = Forums.create_reply(user, comment, @valid_reply_attrs)
@@ -263,7 +263,7 @@ defmodule Kalda.ForumsTest do
     end
 
     test "change_reply/1 returns a changeset" do
-      user = AccountsFixtures.user_fixture()
+      user = AccountsFixtures.user()
       assert {:ok, %Post{} = post} = Forums.create_post(user, @valid_post_attrs)
       assert {:ok, %Comment{} = comment} = Forums.create_comment(user, post, @valid_comment_attrs)
       assert {:ok, %Reply{} = reply} = Forums.create_reply(user, comment, @valid_reply_attrs)
