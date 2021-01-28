@@ -22,6 +22,10 @@ defmodule KaldaWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+    plug :fetch_session
+    plug :protect_from_forgery
+    plug :put_secure_browser_headers
+    plug :fetch_current_user
   end
 
   pipeline :basic_auth_prod do
@@ -97,7 +101,7 @@ defmodule KaldaWeb.Router do
   end
 
   scope "/api/v1", KaldaWeb.Api.V1, as: :api_v1 do
-    pipe_through [:basic_auth_prod, :api]
+    pipe_through [:api, :require_authenticated_user]
 
     get "/posts", PostController, :index
   end

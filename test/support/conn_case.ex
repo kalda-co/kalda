@@ -50,7 +50,7 @@ defmodule KaldaWeb.ConnCase do
   test context.
   """
   def register_and_log_in_user(%{conn: conn}) do
-    user = Kalda.AccountsFixtures.user_fixture()
+    user = Kalda.AccountsFixtures.user()
     %{conn: log_in_user(conn, user), user: user}
   end
 

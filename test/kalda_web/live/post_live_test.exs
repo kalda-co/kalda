@@ -15,7 +15,7 @@ defmodule KaldaWeb.PostLiveTest do
     setup [:register_and_log_in_user]
 
     test "lists all posts", %{conn: conn} do
-      user = AccountsFixtures.user_fixture()
+      user = AccountsFixtures.user()
       post = ForumsFixtures.post(user)
 
       {:ok, _index_live, html} = live(conn, Routes.post_index_path(conn, :index))
@@ -47,7 +47,7 @@ defmodule KaldaWeb.PostLiveTest do
     end
 
     test "updates post in listing", %{conn: conn} do
-      user = AccountsFixtures.user_fixture()
+      user = AccountsFixtures.user()
       post = ForumsFixtures.post(user)
 
       {:ok, index_live, _html} = live(conn, Routes.post_index_path(conn, :index))
@@ -72,7 +72,7 @@ defmodule KaldaWeb.PostLiveTest do
     end
 
     test "deletes post in listing", %{conn: conn} do
-      user = AccountsFixtures.user_fixture()
+      user = AccountsFixtures.user()
       post = ForumsFixtures.post(user)
 
       {:ok, index_live, _html} = live(conn, Routes.post_index_path(conn, :index))
@@ -88,7 +88,7 @@ defmodule KaldaWeb.PostLiveTest do
     test "displays post", %{conn: conn} do
       # admin = AccountsFixtures.admin()
       # user0 = AccountsFixtures.user()
-      user = AccountsFixtures.user_fixture()
+      user = AccountsFixtures.user()
       post = ForumsFixtures.post(user)
       # post2 = ForumFixtures.post(admin)
       # comment1 = ForumFixtures.comment(post, user1)
@@ -100,7 +100,7 @@ defmodule KaldaWeb.PostLiveTest do
     end
 
     test "updates post within modal", %{conn: conn} do
-      user = AccountsFixtures.user_fixture()
+      user = AccountsFixtures.user()
       post = ForumsFixtures.post(user)
 
       {:ok, show_live, _html} = live(conn, Routes.post_show_path(conn, :show, post))

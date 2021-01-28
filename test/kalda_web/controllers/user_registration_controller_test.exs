@@ -1,7 +1,7 @@
 defmodule KaldaWeb.UserRegistrationControllerTest do
   use KaldaWeb.ConnCase, async: true
 
-  import Kalda.AccountsFixtures
+  alias Kalda.AccountsFixtures
 
   describe "GET /users/register" do
     test "renders registration page", %{conn: conn} do
@@ -13,7 +13,11 @@ defmodule KaldaWeb.UserRegistrationControllerTest do
     end
 
     test "redirects if already logged in", %{conn: conn} do
-      conn = conn |> log_in_user(user_fixture()) |> get(Routes.user_registration_path(conn, :new))
+      conn =
+        conn
+        |> log_in_user(AccountsFixtures.user())
+        |> get(Routes.user_registration_path(conn, :new))
+
       assert redirected_to(conn) == "/"
     end
   end
@@ -21,11 +25,11 @@ defmodule KaldaWeb.UserRegistrationControllerTest do
   describe "POST /users/register" do
     @tag :capture_log
     test "creates account and logs the user in", %{conn: conn} do
-      email = unique_user_email()
+      email = AccountsFixtures.unique_user_email()
 
       conn =
         post(conn, Routes.user_registration_path(conn, :create), %{
-          "user" => %{"email" => email, "password" => valid_user_password()}
+          "user" => %{"email" => email, "password" => AccountsFixtures.valid_user_password()}
         })
 
       assert get_session(conn, :user_token)

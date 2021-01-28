@@ -1,10 +1,10 @@
 defmodule KaldaWeb.UserSessionControllerTest do
   use KaldaWeb.ConnCase, async: true
 
-  import Kalda.AccountsFixtures
+  alias Kalda.AccountsFixtures
 
   setup do
-    %{user: user_fixture()}
+    %{user: AccountsFixtures.user()}
   end
 
   describe "GET /users/log_in" do
@@ -26,7 +26,7 @@ defmodule KaldaWeb.UserSessionControllerTest do
     test "logs the user in", %{conn: conn, user: user} do
       conn =
         post(conn, Routes.user_session_path(conn, :create), %{
-          "user" => %{"email" => user.email, "password" => valid_user_password()}
+          "user" => %{"email" => user.email, "password" => AccountsFixtures.valid_user_password()}
         })
 
       assert get_session(conn, :user_token)
@@ -45,7 +45,7 @@ defmodule KaldaWeb.UserSessionControllerTest do
         post(conn, Routes.user_session_path(conn, :create), %{
           "user" => %{
             "email" => user.email,
-            "password" => valid_user_password(),
+            "password" => AccountsFixtures.valid_user_password(),
             "remember_me" => "true"
           }
         })
@@ -61,7 +61,7 @@ defmodule KaldaWeb.UserSessionControllerTest do
         |> post(Routes.user_session_path(conn, :create), %{
           "user" => %{
             "email" => user.email,
-            "password" => valid_user_password()
+            "password" => AccountsFixtures.valid_user_password()
           }
         })
 

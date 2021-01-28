@@ -7,10 +7,18 @@ defmodule KaldaWeb.Api.V1.PostControllerTest do
     {:ok, conn: put_req_header(conn, "accept", "application/json")}
   end
 
+  describe "unauthenticated requests" do
+    test "GET index", ctx do
+      assert ctx.conn |> get("/api/v1/posts") |> json_response(401)
+    end
+  end
+
   describe "GET index" do
+    setup [:register_and_log_in_user]
+
     test "lists all posts", %{conn: conn} do
-      author1 = AccountsFixtures.user_fixture()
-      author2 = AccountsFixtures.user_fixture()
+      author1 = AccountsFixtures.user()
+      author2 = AccountsFixtures.user()
       post1 = ForumsFixtures.post(author1)
       post2 = ForumsFixtures.post(author1)
       comment1 = ForumsFixtures.comment(post2, author2)
