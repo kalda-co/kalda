@@ -18,6 +18,8 @@ alias Kalda.Waitlist.Signup
 
 user =
   Kalda.Repo.insert!(%User{
+    is_admin: true,
+    username: "KaldaSquid",
     email: "demo@kalda.co",
     password: "thisisademopassword",
     hashed_password: Bcrypt.hash_pwd_salt("thisisademopassword")
@@ -25,6 +27,7 @@ user =
 
 _user2 =
   Kalda.Repo.insert!(%User{
+    username: "Puppy_queen",
     email: "user@example.com",
     password: "thisisatestpassword",
     hashed_password: Bcrypt.hash_pwd_salt("thisisatestpassword")

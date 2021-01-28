@@ -4,6 +4,8 @@ defmodule Kalda.Accounts.User do
 
   @derive {Inspect, except: [:password]}
   schema "users" do
+    field :is_admin, :boolean, default: false
+    field :username, :string
     field :email, :string
     field :password, :string, virtual: true
     field :hashed_password, :string
@@ -35,9 +37,11 @@ defmodule Kalda.Accounts.User do
   """
   def registration_changeset(user, attrs, opts \\ []) do
     user
-    |> cast(attrs, [:email, :password])
+    |> cast(attrs, [:email, :password, :username])
     |> validate_email()
     |> validate_password(opts)
+    |> validate_username()
+    |> validate_required([:is_admin])
   end
 
   defp validate_email(changeset) do
@@ -57,6 +61,17 @@ defmodule Kalda.Accounts.User do
     # |> validate_format(:password, ~r/[A-Z]/, message: "at least one upper case character")
     # |> validate_format(:password, ~r/[!?@#$%^&*_0-9]/, message: "at least one digit or punctuation character")
     |> maybe_hash_password(opts)
+  end
+
+  defp validate_username(changeset) do
+    changeset
+    |> validate_required([:username])
+    |> validate_format(:username, ~r/[AZaz09-_]+/,
+      message: "can only use letters, numbers, hyphens and underscores"
+    )
+    |> validate_length(:username, min: 1, max: 28)
+    |> unsafe_validate_unique(:username, Kalda.Repo)
+    |> unique_constraint(:username)
   end
 
   defp maybe_hash_password(changeset, opts) do
