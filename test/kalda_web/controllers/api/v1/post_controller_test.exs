@@ -15,7 +15,7 @@ defmodule KaldaWeb.Api.V1.PostControllerTest do
       post2 = ForumsFixtures.post(author1)
       comment1 = ForumsFixtures.comment(post2, author2)
       reply1 = ForumsFixtures.reply(comment1, author1)
-      conn = get(conn, Routes.api_post_path(conn, :index))
+      conn = get(conn, "/api/v1/posts")
 
       assert json_response(conn, 200) == %{
                "data" => [
@@ -50,11 +50,11 @@ defmodule KaldaWeb.Api.V1.PostControllerTest do
                          %{
                            "id" => reply1.id,
                            "content" => reply1.content,
-                           "inserted_at" => NaiveDateTime.to_iso8601(comment1.inserted_at)
+                           "inserted_at" => NaiveDateTime.to_iso8601(comment1.inserted_at),
                            "author" => %{
                              "id" => author1.id,
                              "name" => "TODO change me to have a name"
-                           },
+                           }
                          }
                        ]
                      }
