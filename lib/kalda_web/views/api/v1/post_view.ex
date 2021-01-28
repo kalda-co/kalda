@@ -29,7 +29,17 @@ defmodule KaldaWeb.Api.V1.PostView do
       id: comment.id,
       author: render_author(comment.author),
       content: comment.content,
-      inserted_at: comment.inserted_at
+      inserted_at: comment.inserted_at,
+      replies: Enum.map(comment.replies, &render_reply/1)
+    }
+  end
+
+  defp render_reply(reply) do
+    %{
+      id: reply.id,
+      author: render_author(reply.author),
+      content: reply.content,
+      inserted_at: reply.inserted_at
     }
   end
 end
