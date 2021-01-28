@@ -100,7 +100,7 @@ defmodule KaldaWeb.Router do
     get "/users/confirm/:token", UserConfirmationController, :confirm
   end
 
-  scope "/api/v1", KaldaWeb.Api.V1, as: :api_v1 do
+  scope "/v1", KaldaWeb.Api.V1, as: :api_v1 do
     pipe_through [:api, :require_authenticated_user]
 
     get "/posts", PostController, :index

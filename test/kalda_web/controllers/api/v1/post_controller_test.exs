@@ -9,7 +9,7 @@ defmodule KaldaWeb.Api.V1.PostControllerTest do
 
   describe "unauthenticated requests" do
     test "GET index", ctx do
-      assert ctx.conn |> get("/api/v1/posts") |> json_response(401)
+      assert ctx.conn |> get("/v1/posts") |> json_response(401)
     end
   end
 
@@ -23,7 +23,7 @@ defmodule KaldaWeb.Api.V1.PostControllerTest do
       post2 = ForumsFixtures.post(author1)
       comment1 = ForumsFixtures.comment(post2, author2)
       reply1 = ForumsFixtures.reply(comment1, author1)
-      conn = get(conn, "/api/v1/posts")
+      conn = get(conn, "/v1/posts")
 
       assert json_response(conn, 200) == %{
                "data" => [
