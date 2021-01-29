@@ -41,7 +41,8 @@ defmodule Kalda.Accounts.User do
     |> validate_email()
     |> validate_password(opts)
     |> validate_username()
-    |> validate_required([:is_admin])
+
+    # |> validate_required([:is_admin])
   end
 
   defp validate_email(changeset) do

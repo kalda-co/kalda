@@ -26,10 +26,15 @@ defmodule KaldaWeb.UserRegistrationControllerTest do
     @tag :capture_log
     test "creates account and logs the user in", %{conn: conn} do
       email = AccountsFixtures.unique_user_email()
+      username = AccountsFixtures.unique_username()
 
       conn =
         post(conn, Routes.user_registration_path(conn, :create), %{
-          "user" => %{"email" => email, "password" => AccountsFixtures.valid_user_password()}
+          "user" => %{
+            "email" => email,
+            "username" => username,
+            "password" => AccountsFixtures.valid_user_password()
+          }
         })
 
       assert get_session(conn, :user_token)
