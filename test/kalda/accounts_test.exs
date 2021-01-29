@@ -87,11 +87,17 @@ defmodule Kalda.AccountsTest do
 
     test "registers users with a hashed password" do
       email = AccountsFixtures.unique_user_email()
+      username = AccountsFixtures.unique_username()
 
       {:ok, user} =
-        Accounts.register_user(%{email: email, password: AccountsFixtures.valid_user_password()})
+        Accounts.register_user(%{
+          username: username,
+          email: email,
+          password: AccountsFixtures.valid_user_password()
+        })
 
       assert user.email == email
+      assert user.username == username
       assert is_binary(user.hashed_password)
       assert is_nil(user.confirmed_at)
       assert is_nil(user.password)
@@ -101,19 +107,25 @@ defmodule Kalda.AccountsTest do
   describe "change_user_registration/2" do
     test "returns a changeset" do
       assert %Ecto.Changeset{} = changeset = Accounts.change_user_registration(%User{})
-      assert changeset.required == [:password, :email]
+      assert changeset.required == [:username, :password, :email]
     end
 
     test "allows fields to be set" do
       email = AccountsFixtures.unique_user_email()
       password = AccountsFixtures.valid_user_password()
+      username = AccountsFixtures.unique_username()
 
       changeset =
-        Accounts.change_user_registration(%User{}, %{"email" => email, "password" => password})
+        Accounts.change_user_registration(%User{}, %{
+          "email" => email,
+          "password" => password,
+          "username" => username
+        })
 
       assert changeset.valid?
       assert get_change(changeset, :email) == email
       assert get_change(changeset, :password) == password
+      assert get_change(changeset, :username) == username
       assert is_nil(get_change(changeset, :hashed_password))
     end
   end
