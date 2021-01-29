@@ -128,24 +128,28 @@ defmodule KaldaWeb.UserAuth do
   they use the application at all, here would be a good place.
   """
   def require_authenticated_user(conn, _opts) do
-    cond do
-      conn.assigns[:current_user] ->
-        conn
+    if conn.assigns[:current_user] do
+      conn
+    else
+      conn
+      |> put_flash(:error, "You must log in to access this page.")
+      |> maybe_store_return_to()
+      |> redirect(to: Routes.user_session_path(conn, :new))
+      |> halt()
+    end
+  end
 
-      # If the accept header is for JSON return a JSON error
-      get_req_header(conn, "accept") |> Enum.any?(&(&1 =~ "json")) ->
-        conn
-        |> put_status(401)
-        |> json(%{error: "You must be authenicated to access this resource"})
-        |> halt()
-
-      # Otherwise return a HTML error
-      true ->
-        conn
-        |> put_flash(:error, "You must log in to access this page.")
-        |> maybe_store_return_to()
-        |> redirect(to: Routes.user_session_path(conn, :new))
-        |> halt()
+  @doc """
+  Used for JSON API routes that require the user to be authenticated.
+  """
+  def json_require_authenticated_user(conn, _opts) do
+    if conn.assigns[:current_user] do
+      conn
+    else
+      conn
+      |> put_status(401)
+      |> json(%{error: "You must be authenticated to access this resource"})
+      |> halt()
     end
   end
 

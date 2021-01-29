@@ -100,7 +100,7 @@ defmodule KaldaWeb.Router do
   end
 
   scope "/v1", KaldaWeb.Api.V1, as: :api_v1 do
-    pipe_through [:api, :require_authenticated_user]
+    pipe_through [:api, :json_require_authenticated_user]
 
     get "/posts", PostController, :index
   end
