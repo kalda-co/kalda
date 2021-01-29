@@ -32,7 +32,7 @@
       <div class="site-footer-content container">
         <ul class="site-footer-column">
           <li><ul class="site-footer-social-icons">
-              <li><a target="_blank" href="https://www.instagram.com/kaldahealth/"><img src="/images/instagram-icon.svg" alt="Instagram" class="insta-icon"></a>
+              <li><a target="_blank" href="https://www.instagram.com/teamkalda/"><img src="/images/instagram-icon.svg" alt="Instagram" class="insta-icon"></a>
               <li><a target="_blank" href="https://www.facebook.com/groups/kalda"><img src="/images/facebook-icon.svg" alt="Facebook" class="facebook-icon"></a>
               <li><a href="mailto:hello@kalda.co"><img src="/images/mail-icon.svg" alt="Email" class="mail-icon"></a>
             </ul>
