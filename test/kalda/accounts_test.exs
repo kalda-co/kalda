@@ -51,19 +51,22 @@ defmodule Kalda.AccountsTest do
   end
 
   describe "register_user/1" do
-    test "requires email and password to be set" do
+    test "requires email and password and username to be set" do
       {:error, changeset} = Accounts.register_user(%{})
 
       assert %{
+               username: ["can't be blank"],
                password: ["can't be blank"],
                email: ["can't be blank"]
              } = errors_on(changeset)
     end
 
-    test "validates email and password when given" do
-      {:error, changeset} = Accounts.register_user(%{email: "not valid", password: "not valid"})
+    test "validates username, email and password when given" do
+      {:error, changeset} =
+        Accounts.register_user(%{email: "not valid", password: "not valid", username: "not valid"})
 
       assert %{
+               username: ["can only use letters, numbers, hyphens and underscores"],
                email: ["must have the @ sign and no spaces"],
                password: ["should be at least 12 character(s)"]
              } = errors_on(changeset)
@@ -75,6 +78,12 @@ defmodule Kalda.AccountsTest do
       assert "should be at most 254 character(s)" in errors_on(changeset).email
     end
 
+    test "validates maximum value for username" do
+      username = "A_valid_username_EXCEPT-that-it-Contains-too-many-CHARACTERS-the-max-is_35"
+      {:error, changeset} = Accounts.register_user(%{username: username})
+      assert "should be at most 35 character(s)" in errors_on(changeset).username
+    end
+
     test "validates email uniqueness" do
       %{email: email} = AccountsFixtures.user()
       {:error, changeset} = Accounts.register_user(%{email: email})
@@ -83,6 +92,12 @@ defmodule Kalda.AccountsTest do
       # Now try with the upper cased email too, to check that email case is ignored.
       {:error, changeset} = Accounts.register_user(%{email: String.upcase(email)})
       assert "has already been taken" in errors_on(changeset).email
+    end
+
+    test "validates username uniqueness" do
+      %{username: username} = AccountsFixtures.user()
+      {:error, changeset} = Accounts.register_user(%{username: username})
+      assert "has already been taken" in errors_on(changeset).username
     end
 
     test "registers users with a hashed password" do
@@ -101,6 +116,22 @@ defmodule Kalda.AccountsTest do
       assert is_binary(user.hashed_password)
       assert is_nil(user.confirmed_at)
       assert is_nil(user.password)
+    end
+
+    test "registers all users with is_admin false" do
+      email = AccountsFixtures.unique_user_email()
+      username = AccountsFixtures.unique_username()
+
+      {:ok, user} =
+        Accounts.register_user(%{
+          username: username,
+          email: email,
+          password: AccountsFixtures.valid_user_password()
+        })
+
+      assert user.email == email
+      assert user.username == username
+      assert user.is_admin == false
     end
   end
 

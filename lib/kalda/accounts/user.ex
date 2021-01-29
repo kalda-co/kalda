@@ -67,10 +67,10 @@ defmodule Kalda.Accounts.User do
   defp validate_username(changeset) do
     changeset
     |> validate_required([:username])
-    |> validate_format(:username, ~r/[AZaz09-_]+/,
+    |> validate_format(:username, ~r/^[A-Za-z0-9-_]+[^\s^\W]+$/,
       message: "can only use letters, numbers, hyphens and underscores"
     )
-    |> validate_length(:username, min: 1, max: 28)
+    |> validate_length(:username, min: 1, max: 35)
     |> unsafe_validate_unique(:username, Kalda.Repo)
     |> unique_constraint(:username)
   end
