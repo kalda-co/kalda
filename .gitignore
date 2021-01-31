@@ -44,3 +44,8 @@ al-posts/
 
 # Secrets
 config/dev_secrets.exs
+
+# Frontend stuff
+.snowpack
+build
+node_modules
