@@ -1,0 +1,6 @@
+<%# HACK: We shouldn't need to set this here %>
+<script>window.HMR_WEBSOCKET_PORT = 4452</script>
+
+<noscript>Please enable JavaScript to view this page.</noscript>
+<link rel="stylesheet" href="<%= spa_static_path("/global.css") %>" />
+<script type="module" src="<%= spa_static_path("/src/index.js") %>"></script>

@@ -17,7 +17,9 @@ config :kalda, :basic_auth_password, "capybara"
 # Do not print debug messages in production
 config :logger, level: :info
 
-config :kalda, sendfox_list_id: "56109"
+config :kalda,
+  sendfox_list_id: "56109",
+  spa_static_prefix: ""
 
 # ## SSL Support
 #

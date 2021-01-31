@@ -25,4 +25,12 @@ defmodule KaldaWeb.PageController do
     changeset = Waitlist.change_signup(%Signup{})
     render(conn, "terms.html", signup_changeset: changeset)
   end
+
+  # TODO: move to its own controller that pre-seeds data as required
+  def app(conn, _params) do
+    conn
+    |> put_layout(false)
+    |> put_root_layout(false)
+    |> render("app.html")
+  end
 end

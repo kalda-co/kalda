@@ -90,6 +90,7 @@ defmodule KaldaWeb do
 
       import KaldaWeb.ErrorHelpers
       import KaldaWeb.Gettext
+      import KaldaWeb.StaticHelpers
       alias KaldaWeb.Router.Helpers, as: Routes
     end
   end
