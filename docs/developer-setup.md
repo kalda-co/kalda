@@ -126,7 +126,7 @@ asdf install
 
 ```sh
 mix deps.get
-npm install --prefix assets
+npm install
 ```
 
 ## Setup the Kalda database
@@ -138,7 +138,7 @@ mix ecto.setup
 ## Run the app locally
 
 ```sh
-mix phx.server
+npm start
 ```
 Now you can visit the application running locally by going to
 <http://localhost:4000> in your browser. 
