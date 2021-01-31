@@ -66,8 +66,8 @@ defmodule KaldaWeb.Router do
 
     get "/users/register", UserRegistrationController, :new
     post "/users/register", UserRegistrationController, :create
-    get "/users/log_in", UserSessionController, :new
-    post "/users/log_in", UserSessionController, :create
+    get "/users/log-in", UserSessionController, :new
+    post "/users/log-in", UserSessionController, :create
     get "/users/reset_password", UserResetPasswordController, :new
     post "/users/reset_password", UserResetPasswordController, :create
     get "/users/reset_password/:token", UserResetPasswordController, :edit
@@ -88,12 +88,14 @@ defmodule KaldaWeb.Router do
 
     live "/posts/:id", PostLive.Show, :show
     live "/posts/:id/show/edit", PostLive.Show, :edit
+
+    get "/app", PageController, :app
   end
 
   scope "/", KaldaWeb do
     pipe_through [:basic_auth_prod, :browser]
 
-    delete "/users/log_out", UserSessionController, :delete
+    delete "/users/log-out", UserSessionController, :delete
     get "/users/confirm", UserConfirmationController, :new
     post "/users/confirm", UserConfirmationController, :create
     get "/users/confirm/:token", UserConfirmationController, :confirm

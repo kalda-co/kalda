@@ -23,6 +23,9 @@ module.exports = {
   },
   devOptions: {
     output: "stream",
+    open: "none",
+    port: 4451,
+    hmrPort: 4452,
   },
   buildOptions: {
     out: "priv/static/spa/",

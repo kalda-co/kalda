@@ -18,7 +18,7 @@ let comments = [
   },
   {
     author: "Otter4life",
-    text: "I like turtles",
+    text: "I like turtles!",
   },
   {
     author: "Glitter-Friend",

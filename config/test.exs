@@ -21,5 +21,9 @@ config :kalda, KaldaWeb.Endpoint,
   http: [port: 4002],
   server: false
 
+config :kalda,
+  sendfox_list_id: "0",
+  spa_static_prefix: "http://example.com/assets"
+
 # Print only warnings and errors during test
 config :logger, level: :warn
