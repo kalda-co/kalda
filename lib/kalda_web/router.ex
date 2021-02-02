@@ -81,15 +81,20 @@ defmodule KaldaWeb.Router do
     put "/users/settings", UserSettingsController, :update
     get "/users/settings/confirm_email/:token", UserSettingsController, :confirm_email
 
-    # forums
-    live "/posts", PostLive.Index, :index
-    live "/posts/new", PostLive.Index, :new
-    live "/posts/:id/edit", PostLive.Index, :edit
-
-    live "/posts/:id", PostLive.Show, :show
-    live "/posts/:id/show/edit", PostLive.Show, :edit
-
     get "/app", PageController, :app
+  end
+
+  scope "/admin", KaldaWeb do
+    pipe_through [:browser, :require_admin]
+
+    get "users", AdminController, :user_index
+    get "posts", AdminController, :post_index
+    get "posts/new", AdminController, :post_new
+    post "posts", AdminController, :post_create
+    get "posts/:id", AdminController, :post_show
+    get "posts/:id/edit", AdminController, :post_edit
+    put "posts/:id", AdminController, :post_update
+    delete "posts/:id", AdminController, :post_delete
   end
 
   scope "/", KaldaWeb do
