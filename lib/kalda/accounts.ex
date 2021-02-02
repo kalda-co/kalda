@@ -10,6 +10,23 @@ defmodule Kalda.Accounts do
   ## Database getters
 
   @doc """
+  Gets users
+
+  ## Examples
+
+      iex> get_users()
+      [%User{}, ...]
+
+      iex> get_users()
+      []
+
+  """
+  # TODO add pagination to this request - get 50 at a time perhaps, sort by date
+  def get_users do
+    Repo.all(User)
+  end
+
+  @doc """
   Gets a user by email.
 
   ## Examples

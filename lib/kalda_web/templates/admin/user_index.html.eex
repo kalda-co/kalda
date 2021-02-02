@@ -1,0 +1,22 @@
+<h1>Listing Users</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Username</th>
+      <th>Email</th>
+
+    </tr>
+  </thead>
+  <tbody>
+<%= for user <- @users do %>
+    <tr>
+      <td><%= user.username %></td>
+      <td><%= user.email %></td>
+
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<%# TODO add pagination, here and in controller, and Accounts %>
