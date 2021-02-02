@@ -41,8 +41,6 @@ defmodule Kalda.Accounts.User do
     |> validate_email()
     |> validate_password(opts)
     |> validate_username()
-
-    # |> validate_required([:is_admin])
   end
 
   defp validate_email(changeset) do
@@ -67,7 +65,7 @@ defmodule Kalda.Accounts.User do
   defp validate_username(changeset) do
     changeset
     |> validate_required([:username])
-    |> validate_format(:username, ~r/^[A-Za-z0-9-_]+[^\s^\W]+$/,
+    |> validate_format(:username, ~r/\A[A-Za-z0-9-_]+\z/,
       message: "can only use letters, numbers, hyphens and underscores"
     )
     |> validate_length(:username, min: 1, max: 35)
