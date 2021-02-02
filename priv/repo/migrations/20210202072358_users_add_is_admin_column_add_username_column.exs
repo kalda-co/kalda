@@ -7,3 +7,4 @@ defmodule Kalda.Repo.Migrations.UsersAddIsAdminColumnAddUsernameColumn do
       add :username, :string, null: false
   end
 end
+end
