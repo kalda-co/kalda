@@ -13,7 +13,7 @@ defmodule KaldaWeb.UserAuthTest do
       |> Map.replace!(:secret_key_base, KaldaWeb.Endpoint.config(:secret_key_base))
       |> init_test_session(%{})
 
-    %{user: AccountsFixtures.user(), conn: conn}
+    %{user: AccountsFixtures.user(), conn: conn, admin: AccountsFixtures.admin()}
   end
 
   describe "log_in_user/3" do
@@ -125,6 +125,21 @@ defmodule KaldaWeb.UserAuthTest do
 
     test "does not redirect if user is not authenticated", %{conn: conn} do
       conn = UserAuth.redirect_if_user_is_authenticated(conn, [])
+      refute conn.halted
+      refute conn.status
+    end
+  end
+
+  describe "require_admin/2" do
+    test "redirects if user is not admin", %{conn: conn, user: user} do
+      conn = conn |> assign(:current_user, user) |> fetch_flash() |> UserAuth.require_admin([])
+      assert conn.halted
+      assert redirected_to(conn) == Routes.user_session_path(conn, :new)
+      assert get_flash(conn, :error) == "You are not authorised to access this page."
+    end
+
+    test "does not redirect if user is admin", %{conn: conn, admin: admin} do
+      conn = conn |> assign(:current_user, admin) |> UserAuth.require_admin([])
       refute conn.halted
       refute conn.status
     end

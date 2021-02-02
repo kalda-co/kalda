@@ -140,6 +140,22 @@ defmodule KaldaWeb.UserAuth do
   end
 
   @doc """
+  Used for routes that require the user to be an admin.
+
+  """
+  def require_admin(conn, _opts) do
+    if conn.assigns[:current_user] && conn.assigns[:current_user].is_admin do
+      conn
+    else
+      conn
+      |> put_flash(:error, "You are not authorised to access this page.")
+      |> maybe_store_return_to()
+      |> redirect(to: Routes.user_session_path(conn, :new))
+      |> halt()
+    end
+  end
+
+  @doc """
   Used for JSON API routes that require the user to be authenticated.
   """
   def json_require_authenticated_user(conn, _opts) do

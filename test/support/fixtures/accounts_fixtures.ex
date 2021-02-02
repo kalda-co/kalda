@@ -21,6 +21,23 @@ defmodule Kalda.AccountsFixtures do
     user
   end
 
+  def admin(attrs \\ %{}) do
+    attrs =
+      attrs
+      |> Enum.into(%{
+        username: unique_username(),
+        email: "admin#{System.unique_integer()}@example.com",
+        password: valid_user_password()
+      })
+
+    {:ok, user} =
+      %Kalda.Accounts.User{is_admin: true}
+      |> Kalda.Accounts.User.registration_changeset(attrs)
+      |> Kalda.Repo.insert()
+
+    user
+  end
+
   def extract_user_token(fun) do
     {:ok, captured} = fun.(&"[TOKEN]#{&1}[TOKEN]")
     [_, token, _] = String.split(captured.body, "[TOKEN]")
