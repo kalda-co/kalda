@@ -2,6 +2,7 @@ defmodule KaldaWeb.PostLive.FormComponent do
   use KaldaWeb, :live_component
 
   alias Kalda.Forums
+  alias Kalda.Policy
 
   @impl true
   def update(%{post: post} = assigns, socket) do
