@@ -3,7 +3,6 @@ defmodule KaldaWeb.AdminController do
 
   alias Kalda.Accounts
   alias Kalda.Forums
-  alias KaldaWeb.UserAuth
   alias Kalda.Policy
 
   def user_index(conn, _params) do
@@ -18,8 +17,12 @@ defmodule KaldaWeb.AdminController do
     user = conn.assigns.current_user
     Policy.authorize!(user, :view_admin_pages, Kalda)
     # TODO add pagination, do not get all users
-    posts = Forums.get_posts()
-    render(conn, "post_index.html", posts: posts, error_message: "not authorised")
+    posts = Forums.get_posts(preload: [:author, comments: [:author, replies: [:author]]])
+
+    render(conn, "post_index.html",
+      posts: posts,
+      error_message: "not authorised"
+    )
   end
 
   def post_new(conn, _params) do

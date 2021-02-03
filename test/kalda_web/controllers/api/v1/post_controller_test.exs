@@ -33,7 +33,7 @@ defmodule KaldaWeb.Api.V1.PostControllerTest do
                    "content" => post1.content,
                    "author" => %{
                      "id" => author1.id,
-                     "name" => "TODO change me to have a name"
+                     "username" => author1.username
                    },
                    "comments" => []
                  },
@@ -43,7 +43,7 @@ defmodule KaldaWeb.Api.V1.PostControllerTest do
                    "inserted_at" => NaiveDateTime.to_iso8601(post2.inserted_at),
                    "author" => %{
                      "id" => author1.id,
-                     "name" => "TODO change me to have a name"
+                     "username" => author1.username
                    },
                    "comments" => [
                      %{
@@ -52,7 +52,7 @@ defmodule KaldaWeb.Api.V1.PostControllerTest do
                        "inserted_at" => NaiveDateTime.to_iso8601(comment1.inserted_at),
                        "author" => %{
                          "id" => author2.id,
-                         "name" => "TODO change me to have a name"
+                         "username" => author2.username
                        },
                        "replies" => [
                          %{
@@ -61,7 +61,7 @@ defmodule KaldaWeb.Api.V1.PostControllerTest do
                            "inserted_at" => NaiveDateTime.to_iso8601(reply1.inserted_at),
                            "author" => %{
                              "id" => author1.id,
-                             "name" => "TODO change me to have a name"
+                             "username" => author1.username
                            }
                          }
                        ]

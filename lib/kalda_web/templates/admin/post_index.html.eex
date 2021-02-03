@@ -4,22 +4,63 @@
   <thead>
     <tr>
       <th>Content</th>
-
-      <th></th>
+      <th>Username</th>
+      <th>Comments</th>
+      <%# <th>Replies</th> %>
     </tr>
   </thead>
   <tbody>
-<%= for post <- @posts do %>
+  <%= for post <- @posts do %>
     <tr>
       <td><%= post.content %></td>
+      <td><%= post.author.username %></td>
+      <td>
+      <table>
+        <thead>
+          <tr>
+            <th>content</th>
+            <th>Username</th>
+            <th>replies</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%= for comment <- post.comments do %>
+            <tr>
+              <td><%= comment.content %></td>
+              <td><%= comment.author.username %></td>
+              <td>
+
+                <table>
+                  <thead>
+                    <tr>
+                      <th>content</th>
+                      <th>Username</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <%= for reply <- comment.replies do %>
+                      <tr>
+                        <td><%= reply.content %></td>
+                        <td><%= reply.author.username %></td>
+                      </tr>
+                    <% end %>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      </td>
 
       <td>
         <span><%= link "Show", to: Routes.admin_path(@conn, :post_show, post) %></span>
         <span><%= link "Edit", to: Routes.admin_path(@conn, :post_edit, post) %></span>
         <span><%= link "Delete", to: Routes.admin_path(@conn, :post_delete, post), method: :delete, data: [confirm: "Are you sure?"] %></span>
       </td>
+
     </tr>
-<% end %>
+  <% end %>
   </tbody>
 </table>
 
