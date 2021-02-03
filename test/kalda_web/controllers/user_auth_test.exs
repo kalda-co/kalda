@@ -134,7 +134,7 @@ defmodule KaldaWeb.UserAuthTest do
     test "redirects if user is not admin", %{conn: conn, user: user} do
       conn = conn |> assign(:current_user, user) |> fetch_flash() |> UserAuth.require_admin([])
       assert conn.halted
-      assert redirected_to(conn) == Routes.user_session_path(conn, :new)
+      assert redirected_to(conn) == "/"
       assert get_flash(conn, :error) == "You are not authorised to access this page."
     end
 
