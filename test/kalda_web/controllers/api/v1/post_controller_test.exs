@@ -2,6 +2,7 @@ defmodule KaldaWeb.Api.V1.PostControllerTest do
   use KaldaWeb.ConnCase
   alias Kalda.ForumsFixtures
   alias Kalda.AccountsFixtures
+  alias Kalda.Policy
 
   setup %{conn: conn} do
     {:ok, conn: put_req_header(conn, "accept", "application/json")}
@@ -13,8 +14,16 @@ defmodule KaldaWeb.Api.V1.PostControllerTest do
     end
   end
 
-  describe "GET index" do
+  describe "GET index as user" do
     setup [:register_and_log_in_user]
+
+    test "user is unauthorised error", %{conn: conn} do
+      assert_raise Policy.UnauthorizedError, fn -> get(conn, "/v1/posts") end
+    end
+  end
+
+  describe "GET index as admin" do
+    setup [:register_and_log_in_admin]
 
     test "lists all posts", %{conn: conn} do
       author1 = AccountsFixtures.user()
