@@ -3,11 +3,11 @@ defmodule KaldaWeb.Admin.UserController do
   alias Kalda.Accounts
   alias Kalda.Policy
 
-  def user_index(conn, _params) do
-    user = conn.assigns.current_user
-    Policy.authorize!(user, :view_admin_pages, Kalda)
+  def index(conn, _params) do
+    # The authorize! function knows how to get the user off the conn
+    Policy.authorize!(conn, :view_admin_pages, Kalda)
     # TODO add pagination, do not get all users
     users = Accounts.get_users()
-    render(conn, "user_index.html", users: users, error_message: "not authorised")
+    render(conn, "index.html", users: users, error_message: "not authorised")
   end
 end
