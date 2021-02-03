@@ -24,7 +24,8 @@ defmodule Kalda.Policy do
   def authorize!(_user, action, Kalda)
       when action in [
              :view_admin_pages,
-             :create_post
+             :create_post,
+             :view_api_index
              #  :view_admin_menu,
              # :view_all_users,
              #  :delete_comment,
