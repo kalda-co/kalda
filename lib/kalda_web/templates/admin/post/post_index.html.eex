@@ -54,9 +54,9 @@
       </td>
 
       <td>
-        <span><%= link "Show", to: Routes.admin_path(@conn, :post_show, post) %></span>
-        <span><%= link "Edit", to: Routes.admin_path(@conn, :post_edit, post) %></span>
-        <span><%= link "Delete", to: Routes.admin_path(@conn, :post_delete, post), method: :delete, data: [confirm: "Are you sure?"] %></span>
+        <span><%= link "Show", to: Routes.admin_post_path(@conn, :post_show, post) %></span>
+        <span><%= link "Edit", to: Routes.admin_post_path(@conn, :post_edit, post) %></span>
+        <span><%= link "Delete", to: Routes.admin_post_path(@conn, :post_delete, post), method: :delete, data: [confirm: "Are you sure?"] %></span>
       </td>
 
     </tr>
@@ -64,4 +64,4 @@
   </tbody>
 </table>
 
-<span><%= link "New Post", to: Routes.admin_path(@conn, :post_new) %></span>
+<span><%= link "New Post", to: Routes.admin_post_path(@conn, :post_new) %></span>
