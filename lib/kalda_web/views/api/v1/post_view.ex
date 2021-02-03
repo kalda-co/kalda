@@ -20,7 +20,7 @@ defmodule KaldaWeb.Api.V1.PostView do
   defp render_author(author) do
     %{
       id: author.id,
-      name: "TODO change me to have a name"
+      username: author.username
     }
   end
 
