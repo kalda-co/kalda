@@ -1,17 +1,8 @@
-defmodule KaldaWeb.AdminController do
+defmodule KaldaWeb.Admin.PostController do
   use KaldaWeb, :controller
 
-  alias Kalda.Accounts
   alias Kalda.Forums
   alias Kalda.Policy
-
-  def user_index(conn, _params) do
-    user = conn.assigns.current_user
-    Policy.authorize!(user, :view_admin_pages, Kalda)
-    # TODO add pagination, do not get all users
-    users = Accounts.get_users()
-    render(conn, "user_index.html", users: users, error_message: "not authorised")
-  end
 
   def post_index(conn, _params) do
     user = conn.assigns.current_user
@@ -38,7 +29,7 @@ defmodule KaldaWeb.AdminController do
       {:ok, post} ->
         conn
         |> put_flash(:info, "Post created successfully.")
-        |> redirect(to: Routes.admin_path(conn, :post_show, post))
+        |> redirect(to: Routes.admin_post_path(conn, :post_show, post))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "post_new.html", changeset: changeset)
@@ -63,7 +54,7 @@ defmodule KaldaWeb.AdminController do
       {:ok, post} ->
         conn
         |> put_flash(:info, "Post updated successfully.")
-        |> redirect(to: Routes.admin_path(conn, :post_show, post))
+        |> redirect(to: Routes.admin_post_path(conn, :post_show, post))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "post_edit.html", post: post, changeset: changeset)
@@ -76,6 +67,6 @@ defmodule KaldaWeb.AdminController do
 
     conn
     |> put_flash(:info, "Post deleted successfully.")
-    |> redirect(to: Routes.admin_path(conn, :post_index))
+    |> redirect(to: Routes.admin_post_path(conn, :post_index))
   end
 end
