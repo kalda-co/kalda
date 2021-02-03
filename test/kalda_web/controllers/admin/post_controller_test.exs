@@ -1,8 +1,6 @@
 defmodule KaldaWeb.Admin.PostControllerTest do
   use KaldaWeb.ConnCase
 
-  # alias Kalda.AccountsFixtures
-  # alias Kalda.ForumsFixtures
   @create_post_attrs %{content: "This is a post"}
   @invalid_post_attrs %{content: ""}
 

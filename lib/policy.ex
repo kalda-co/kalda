@@ -23,9 +23,12 @@ defmodule Kalda.Policy do
 
   def authorize!(_user, action, Kalda)
       when action in [
-             :view_admin_pages,
-             :create_post,
-             :view_api_index
+             :view_admin_posts,
+             :create_admin_post,
+             :view_admin_post,
+             :edit_admin_post,
+             :delete_admin_post,
+             :api_view_posts
            ] do
     raise UnauthorizedError
   end
