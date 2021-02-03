@@ -5,14 +5,11 @@ defmodule KaldaWeb.Admin.PostController do
   alias Kalda.Policy
 
   def index(conn, _params) do
-    Policy.authorize!(conn, :view_admin_pages, Kalda)
+    Policy.authorize!(conn, :view_admin_posts, Kalda)
     # TODO add pagination, do not get all users
     posts = Forums.get_posts(preload: [:author, comments: [:author, replies: [:author]]])
 
-    render(conn, "index.html",
-      posts: posts,
-      error_message: "not authorised"
-    )
+    render(conn, "index.html", posts: posts)
   end
 
   def new(conn, _params) do
@@ -22,7 +19,7 @@ defmodule KaldaWeb.Admin.PostController do
 
   def create(conn, %{"post" => params}) do
     user = conn.assigns.current_user
-    Policy.authorize!(conn, :create_post, Kalda)
+    Policy.authorize!(conn, :create_admin_post, Kalda)
 
     case Forums.create_post(user, params) do
       {:ok, post} ->
@@ -36,17 +33,20 @@ defmodule KaldaWeb.Admin.PostController do
   end
 
   def show(conn, %{"id" => id}) do
+    Policy.authorize!(conn, :view_admin_post, Kalda)
     post = Forums.get_post!(id)
     render(conn, "show.html", post: post)
   end
 
   def edit(conn, %{"id" => id}) do
+    Policy.authorize!(conn, :edit_admin_post, Kalda)
     post = Forums.get_post!(id)
     changeset = Forums.change_post(post)
     render(conn, "edit.html", post: post, changeset: changeset)
   end
 
   def update(conn, %{"id" => id, "post" => params}) do
+    Policy.authorize!(conn, :edit_admin_post, Kalda)
     post = Forums.get_post!(id)
 
     case Forums.update_post(post, params) do
@@ -61,6 +61,7 @@ defmodule KaldaWeb.Admin.PostController do
   end
 
   def delete(conn, %{"id" => id}) do
+    Policy.authorize!(conn, :delete_admin_post, Kalda)
     post = Forums.get_post!(id)
     {:ok, _post} = Forums.delete_post(post)
 

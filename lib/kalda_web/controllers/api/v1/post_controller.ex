@@ -4,8 +4,6 @@ defmodule KaldaWeb.Api.V1.PostController do
   alias Kalda.Forums
 
   def index(conn, _params) do
-    user = conn.assigns.current_user
-    Kalda.Policy.authorize!(user, :view_api_index, Kalda)
     posts = Forums.get_posts(preload: [:author, comments: [:author, replies: [:author]]])
 
     conn
