@@ -109,6 +109,6 @@ defmodule KaldaWeb.Router do
   scope "/v1", KaldaWeb.Api.V1, as: :api_v1 do
     pipe_through [:api, :json_require_authenticated_user]
 
-    get "/posts", PostController, :index
+    get "/daily-reflections", DailyReflectionController, :index
   end
 end

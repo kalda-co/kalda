@@ -1,4 +1,4 @@
-defmodule KaldaWeb.Api.V1.PostControllerTest do
+defmodule KaldaWeb.Api.V1.DailyReflectionControllerTest do
   use KaldaWeb.ConnCase
   alias Kalda.ForumsFixtures
   alias Kalda.AccountsFixtures
@@ -9,24 +9,27 @@ defmodule KaldaWeb.Api.V1.PostControllerTest do
 
   describe "unauthenticated requests" do
     test "GET index", ctx do
-      assert ctx.conn |> get("/v1/posts") |> json_response(401)
+      assert ctx.conn |> get("/v1/daily-reflections") |> json_response(401)
     end
   end
 
   describe "GET index" do
     setup [:register_and_log_in_user]
 
-    test "lists all posts", %{conn: conn} do
+    test "lists all posts", %{conn: conn, user: current_user} do
       author1 = AccountsFixtures.user()
       author2 = AccountsFixtures.user()
       post1 = ForumsFixtures.post(author1)
       post2 = ForumsFixtures.post(author1)
       comment1 = ForumsFixtures.comment(post2, author2)
       reply1 = ForumsFixtures.reply(comment1, author1)
-      conn = get(conn, "/v1/posts")
+      conn = get(conn, "/v1/daily-reflections")
 
       assert json_response(conn, 200) == %{
-               "data" => [
+               "current_user" => %{
+                 "name" => current_user.username
+               },
+               "posts" => [
                  %{
                    "id" => post1.id,
                    "inserted_at" => NaiveDateTime.to_iso8601(post1.inserted_at),
