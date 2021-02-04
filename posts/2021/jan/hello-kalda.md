@@ -1,14 +1,16 @@
 %{
-  title: "Hello Kalda!",
-  author: "Al Dee",
-  tags: ["tag-one", "tag-two"],
-  description: "Our first post!",
-  date: "2021-01-11"
+title: "Hello Kalda!",
+author: "Al Dee",
+tags: ["tag-one", "tag-two"],
+description: "Our first post!",
+date: "2021-01-11"
 }
+
 ---
+
 This is the first post. Hello, world!
 
-![Picture of a meditating person](/images/kalda-mobile-app.png)
+![Picture of a kalda app on iphone](/images/kalda-mobile-app.png)
 
 Markdown isn't great at styling images though
 
@@ -17,4 +19,4 @@ Markdown isn't great at styling images though
 Here is another example
 
 ![Picture of a meditating person](/images/kalda-mobile-app.png)
-![another image](/images/og-logo-fb.png)
+![another image](/images/lamp-question-mark.jpg)

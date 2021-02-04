@@ -48,17 +48,26 @@ _This is important for SEO reasons, (as well as searchability, convention, compa
 If your filename is incorrectly formatted, your blog post will not load/be found.
 **_Note the naming convention; no spaces, use hyphens not underscores, no symbols except alphanumeric (a-z, 0-9), all words lower case, use hypens for spaces. (noy underscores)._**
 
-## Writing an article
+# 1. STEP ONE Create File
 
-You will write your articles in Markdown. If you do not already know how to use Markdown there is a handy guide [here](https://www.markdownguide.org/basic-syntax/)
-To preview your copy in VSCode, do `Ctrl+Shift+v` or `Ctrl+V` on a PC/Linux, and `Command+V` on a Mac
+1. First create a file in the correct location, named as explained above. The file extension is `.md` which stands for markdown (like `.txt` stands for a text file.)
 
-1. First create a file in the correct location, named as explained above. The file extension is `.md` which stands for markdown, like `.txt` stands for a text file. For the example used below this would be called: `title-writing-for-beginners.md`.
-2. Paste the following code into the top of your file:
+#### Example
+
+Article title:
+Do I have to be LGBTQIA+ to use Kalda?
+
+Create a file with the name of your article, and the extension `.md` in the folder `kalda/posts/YYYY/mnth`
+example:
+In `kalda/posts/2021/jan` create `do-i-need-to-be-lgbtqia.md`
+
+# 2. STEP TWO Write it
+
+1. Paste this at the top of the file:
 
 ```md
 %{
-title: "Title Writing For Beginners!",
+title: "Title",
 author: "Al Dee",
 tags: ["tag-one", "tag-two", "tag-three"],
 description: "This description will not appear on the page but can contain search terms",
@@ -67,16 +76,43 @@ date: "2021-01-11"
 
 ---
 
-# Title Writing For Beginners!
+# Title
 
-Some content...
+content...
 ```
 
-3. Ensure that you change the areas between the quote marks in your article. It is particularly important to check you have the correct date and title. You can add more tags.
+Then you change the bits in quotation marks, and the title and the content, see the example below:
+
+#### Example:
+
+```md
+%{
+title: "Do I need to be LGBTQIA+ to use Kalda?",
+author: "Al Dee",
+tags: ["LGBTQIA", "Kalda", "inclusion"],
+description: "This article answers the questions: Why do you have to be LGBTQIA+?; Is Kalda for everyone?; Why isn't Kalda for everyone?; Why do you need to be invited to Kalda?; What if I don't have friends who are LGBTQIA+?; What if I am not out?; What if I need Kalda but have no one to invite me?",
+date: "2021-02-04"
+}
+
+---
+
+# Do I Need To Be LGBTQIA+ To Use Kalda?
+
+> Q I don't identify as LGBTQIA+, can I use Kalda?
+
+_A yes, you canbecause a kaldan who identfiy as LGBTQIA+ has reccommednded you..._
+```
+
+# 3. STEP THREE Writing an article
+
+3. Ensure that you change the areas between the quote marks in your article header. It is particularly important to check you have the correct date and title. You can add more tags.
 
 4. Your title goes beneath the three hyphens and then the rest of the article follows.
 
-# Images
+You will write your articles in Markdown. If you do not already know how to use Markdown there is a handy guide [here](https://www.markdownguide.org/basic-syntax/)
+To preview your copy in VSCode, do `Ctrl+Shift+v` or `Ctrl+V` on a PC/Linux, and `Command+V` on a Mac
+
+# 4. STEP FOUR Adding Images
 
 Your images should live in this folder:
 `kalda/assets/static/images/`
@@ -128,7 +164,7 @@ If you can write css you can give the image an id, (make it something that will 
 `kalda/assets/css/blog.css`
 Do not delete any preexisting styles or put any styles on anything other than your image. Because you are putting your styles on an id at the bottom of the css file it will overwrite other styles.
 
-# Saving, uploading and viewing your article.
+# 5. STEP FIVE Saving, uploading and viewing your article.
 
 ### Viewing work locally
 
