@@ -1,15 +1,17 @@
 defmodule KaldaWeb.Api.V1.CommentControllerTest do
   use KaldaWeb.ConnCase
 
-  @valid_comment_content "This is a comment"
+  @valid_comment_content %{
+    content: "This is a comment!"
+  }
 
   setup %{conn: conn} do
     {:ok, conn: put_req_header(conn, "accept", "application/json")}
   end
 
   describe "unauthenticated requests" do
-    test "GET new", ctx do
-      assert ctx.conn |> get("/v1/daily-reflections/1/comment") |> json_response(401)
+    test "POST new", ctx do
+      assert ctx.conn |> post("/v1/posts/1/comments") |> json_response(401)
     end
   end
 
@@ -23,16 +25,19 @@ defmodule KaldaWeb.Api.V1.CommentControllerTest do
       user = Kalda.AccountsFixtures.user()
       post = Kalda.ForumsFixtures.post(user)
 
-      params = %{
-        "comment" => %{
-          "content" => @valid_comment_content
-        }
-      }
+      assert conn = post(conn, "/v1/posts/#{post.id}/comments", comment: @valid_comment_content)
 
-      conn = post(conn, "/v1/daily-reflections/#{post.id}/comment", params)
+      assert [comment] = Kalda.Forums.get_comments()
+      assert comment.content == @valid_comment_content.content
+      assert comment.author_id == current_user.id
+      assert comment.post_id == post.id
+
+      assert json_response(conn, 201) == %{
+               "id" => comment.id,
+               "content" => @valid_comment_content.content,
+               "author" => comment.author_id,
+               "inserted_at" => NaiveDateTime.to_iso8601(comment.inserted_at)
+             }
     end
-  end
-
-  test "redirects to daily reflections with user post", %{conn: conn, user: current_user} do
   end
 end

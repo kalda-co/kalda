@@ -2,20 +2,22 @@ defmodule KaldaWeb.Api.V1.CommentController do
   use KaldaWeb, :controller
 
   alias Kalda.Forums
+  alias Kalda.Forums.Comment
 
   def create(conn, %{"id" => post_id, "comment" => comment_params}) do
     user = conn.assigns.current_user
-    post = Forums.get_post!(post_id, preload: [:author, comments: [:author, replies: [:author]]])
+    post = Forums.get_post!(post_id)
 
-    case Forums.create_comment(user, post, comment_params) do
-      {:ok, _comment} ->
-        conn
-        |> redirect(to: "v1/daily-reflections")
-
-      {:error, changeset} ->
-        conn
-        |> put_status(422)
-        |> render("new.json", changeset: changeset)
+    with {:ok, %Comment{} = comment} <- Forums.create_comment(user, post, comment_params) do
+      conn
+      |> put_status(201)
+      |> render("show.json", comment: comment)
     end
+    |> KaldaWeb.Api.V1.handle_error(conn)
+  end
+
+  def show(conn, %{"id" => id}) do
+    comment = Forums.get_comment!(id)
+    render(conn, "show.json", comment: comment)
   end
 end
