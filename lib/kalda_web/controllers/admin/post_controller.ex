@@ -13,6 +13,7 @@ defmodule KaldaWeb.Admin.PostController do
   end
 
   def new(conn, _params) do
+    Policy.authorize!(conn, :create_admin_post, Kalda)
     changeset = Forums.change_post(%Forums.Post{})
     render(conn, "new.html", changeset: changeset)
   end
