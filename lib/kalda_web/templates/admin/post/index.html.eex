@@ -6,7 +6,6 @@
       <th>Content</th>
       <th>Username</th>
       <th>Comments</th>
-      <%# <th>Replies</th> %>
     </tr>
   </thead>
   <tbody>
