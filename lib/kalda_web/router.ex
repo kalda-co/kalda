@@ -110,7 +110,7 @@ defmodule KaldaWeb.Router do
     pipe_through [:api, :json_require_authenticated_user]
 
     get "/daily-reflections", DailyReflectionController, :index
-    get "/daily-reflections/:id/comment", CommentController, :new
-    post "/daily-reflections/:id/comment", CommentController, :create
+
+    post "/posts/:id/comments", CommentController, :create
   end
 end

@@ -31,7 +31,7 @@ defmodule Kalda.Forums do
 
   ## Examples
 
-      iex> get_posts()
+      iex> get_posts(opts || [])
       [%Post{}, ...]
 
   """
@@ -78,14 +78,22 @@ defmodule Kalda.Forums do
 
   ## Examples
 
-      iex> get_post!(123)
+      iex> get_post!(123, opts || [])
       %Post{}
 
-      iex> get_post!(456)
+      iex> get_post!(456), opts || []
       ** (Ecto.NoResultsError)
 
   """
-  def get_post!(id), do: Repo.get!(Post, id)
+  def get_post!(id, opts \\ []) do
+    preload = opts[:preload] || []
+
+    from(post in Post,
+      where: post.id == ^id,
+      preload: ^preload
+    )
+    |> Repo.get!(id)
+  end
 
   @doc """
   Deletes a post.
@@ -126,6 +134,20 @@ defmodule Kalda.Forums do
   ##################
 
   alias Kalda.Forums.Comment
+
+  @doc """
+  Returns all comments.
+
+  ## Examples
+
+      iex> get_comments(opts || [])
+      [%comment{}, ...]
+
+  """
+  def get_comments(opts \\ []) do
+    preload = opts[:preload] || []
+    Repo.all(from comment in Comment, preload: ^preload)
+  end
 
   @doc """
   Returns the list of comments for a post.
