@@ -10,7 +10,7 @@ date: "2021-01-11"
 
 This is the first post. Hello, world!
 
-![Picture of a kalda app on iphone](/images/kalda-mobile-app.png)
+![Picture of a kalda app on iphone](/images/blog-docs-image-1.jpg)
 
 Markdown isn't great at styling images though
 

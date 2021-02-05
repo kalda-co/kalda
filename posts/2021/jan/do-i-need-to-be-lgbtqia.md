@@ -8,7 +8,10 @@ date: "2021-02-04"
 
 ---
 
-[!A Photo of lamp in the shape of a question mark. Photo by Jon Tyson, on Unsplash](/images/lamp-question-mark.jpg)
+[!A Photo of lamp in the shape of a question mark. Photo by Jon Tyson, on Unsplash](/images/AD-circle.png)
+
+<img align="right" width="100" src="/images/og-logo-fb.png">
+<img align="right" width="100" src="/images/jon-tyson-hhq1Lxtuwd8-unsplash.jpg">
 
 # Do I Need To Be LGBTQIA+ To Use Kalda?
 
