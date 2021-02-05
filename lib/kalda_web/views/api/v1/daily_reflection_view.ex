@@ -1,9 +1,10 @@
-defmodule KaldaWeb.Api.V1.PostView do
+defmodule KaldaWeb.Api.V1.DailyReflectionView do
   use KaldaWeb, :view
 
   def render("index.json", params) do
     %{
-      data: Enum.map(params.posts, &render_post/1)
+      current_user: %{name: params.user.username},
+      posts: Enum.map(params.posts, &render_post/1)
     }
   end
 
