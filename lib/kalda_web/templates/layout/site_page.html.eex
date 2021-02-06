@@ -24,7 +24,11 @@
   </head>
   <body>
     <div class="wrapper">
+    <%= if blog_page?(@conn) do %>
+      <%= render "_blog_header.html", assigns %>
+    <% else %>
       <%= render "_site_page_header.html", assigns %>
+    <% end %>
       <%= @inner_content %>
       <div class="push-down-footer"></div>
     </div>
