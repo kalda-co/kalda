@@ -112,5 +112,6 @@ defmodule KaldaWeb.Router do
     get "/daily-reflections", DailyReflectionController, :index
 
     post "/posts/:id/comments", CommentController, :create
+    post "/comments/:id/replies", ReplyController, :create
   end
 end

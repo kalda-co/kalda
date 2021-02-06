@@ -271,6 +271,17 @@ defmodule Kalda.Forums do
   alias Kalda.Forums.Reply
 
   @doc """
+  Returns all replies.
+  ## Examples
+      iex> get_replies(opts || [])
+      [%reply{}, ...]
+  """
+  def get_replies(opts \\ []) do
+    preload = opts[:preload] || []
+    Repo.all(from reply in Reply, preload: ^preload)
+  end
+
+  @doc """
   Returns the list of replies for a comment.
 
   ## Examples
