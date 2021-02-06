@@ -1,0 +1,20 @@
+.top-image-container {
+  /* max-width: 900px; */
+  height: 400px;
+  background-size: cover;
+  background-position: center;
+  /* min-height: 330px; */
+}
+
+.blog-container {
+  padding-left: var(--gap-xxxl);
+  padding-right: var(--gap-xxxl);
+  padding-top: var(--gap-xxl);
+}
+
+.blog-title {
+  font-size: var(--font-size-xxxl);
+  line-height: var(--line-height-xxl);
+  font-weight: var(--font-weight-large);
+  color: var(--color-purple);
+}

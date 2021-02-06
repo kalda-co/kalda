@@ -2,5 +2,5 @@
 <script>window.HMR_WEBSOCKET_PORT = 4452</script>
 
 <noscript>Please enable JavaScript to view this page.</noscript>
-<link rel="stylesheet" href="<%= spa_static_path("/global.css") %>" />
+<link rel="stylesheet" href="<%= spa_static_path("/spa.css") %>" />
 <script type="module" src="<%= spa_static_path("/src/index.js") %>"></script>
