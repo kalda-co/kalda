@@ -72,6 +72,7 @@ author: "Al Dee",
 tags: ["tag-one", "tag-two", "tag-three"],
 description: "This description will not appear on the page but can contain search terms",
 date: "2021-01-11"
+image: "/images/my-image"
 }
 
 ---
@@ -116,6 +117,8 @@ To preview your copy in VSCode, do `Ctrl+Shift+v` or `Ctrl+V` on a PC/Linux, and
 
 Your images should live in this folder:
 `kalda/assets/static/images/`
+
+The path to your main or head image, should go in the title code of your file.
 
 ### Image compression
 

@@ -1,20 +1,24 @@
-<h1 class="blog-title">
-  <%= @post.title %>
-</h1>
+<div class="top-image-container" style="background-image: url(<%= @post.image %>)"></div>
 
-<div class="blog-date">
-  <%= @post.date %>
+<div class=blog-container>
+  <h1 class="blog-title">
+    <%= @post.title %>
+  </h1>
+
+  <div class="blog-date">
+    <%= @post.date %>
+  </div>
+  <div class="blog-author">
+    <%= @post.author %>
+  </div>
+
+  <ul class="blog-tag-list">
+    <%= for tag <- @post.tags do %>
+      <li class="blog-tag-item"><%= tag %>
+    <% end %>
+  </ul>
+
+  <article class="blog-content">
+    <%= raw @post.body %>
+  </article>
 </div>
-<div class="blog-author">
-  <%= @post.author %>
-</div>
-
-<ul class="blog-tag-list">
-  <%= for tag <- @post.tags do %>
-    <li class="blog-tag-item"><%= tag %>
-  <% end %>
-</ul>
-
-<article class="blog-content">
-  <%= raw @post.body %>
-</article>
