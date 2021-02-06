@@ -1,3 +1,4 @@
+<div class="home-page">
 <section class="landing-hero">
   <div class="container">
     <div class="hero-lhs">
@@ -164,4 +165,5 @@
       </p>
     </li>
   </ul>
+</div>
 </div>

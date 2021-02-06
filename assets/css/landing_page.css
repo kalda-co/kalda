@@ -1,6 +1,4 @@
-/* TODO: smaller font size on mobile */
-
-:root {
+.home-page {
   /* Colours */
   --color-purple: #2d1c62;
   --color-light: #ffffff;
@@ -52,7 +50,6 @@ body {
   text-decoration: none;
   color: #2d1c62;
   font-size: var(--font-size);
-
 }
 
 p {
@@ -361,7 +358,8 @@ Media queries don't accept css variables so they still need to be changes manual
 }
 
 /* Push footer to end of content */
-html, body {
+html,
+body {
   height: 100%;
   margin: 0;
 }

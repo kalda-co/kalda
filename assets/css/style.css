@@ -1,3 +1,60 @@
+:root {
+  /* Colours */
+  --color-purple: #4a00b0;
+  --color-purple-inactive: #7c729c;
+  --color-light: #eeeeee;
+  --color-white: #ffffff;
+  --color-pink: #fe00f7;
+  /* --color-pink-light: #ffb3fc; */
+  --color-blue: #c7ffff;
+  --color-green: #beffbe;
+  --font-color: var(--color-purple);
+  --font-color-dark: #404040;
+
+  /* Timings */
+  /* Sizes */
+  --button-padding: 10px 22px;
+  /* Spacings */
+  --gap: 16px;
+  --gap-s: calc(var(--gap) * 0.5);
+  --gap-l: calc(var(--gap) * 2);
+  --gap-xl: calc(var(--gap) * 3);
+  --gap-xxl: calc(var(--gap) * 5);
+  --gap-xxxl: calc(var(--gap) * 7);
+  /* Paragraphs */
+  /* FONT WEIGHT */
+  --font-weight: 500;
+  /* poppins semibold == weight 600 */
+  --font-weight-large: 600;
+  /* FONT SIZE */
+  --font-size: 16px;
+  /* small = 14 points */
+  --font-size-s: 0.875rem;
+  /* large = 18 points, for l and H2 mobile */
+  --font-size-l: 1.125rem;
+  /* xl = 24 points, for H2 desktop, h1 mobile */
+  --font-size-xl: 1.5rem;
+  /* xxl = 32 points, h1 desktop */
+  --font-size-xxl: 2rem;
+  /* xxxl = 40 points, same as xl-blog-header */
+  --font-size-xxxl: 2.5rem;
+  /* FONT LINE HEIGHT */
+  /* line height 24 (normal) */
+  --line-height: 1.5rem;
+  /* line height 16 (small) */
+  --line-height-s: 1rem;
+  /* line height 32 (large) */
+  --line-height-l: 2rem;
+  /* line height 40 (x-large) */
+  --line-height-xl: 2.5rem;
+  /* line height xxl 48 points , also xl-blog-header*/
+  --line-height-xxl: 3rem;
+
+  /* Screen size for media queries and break points */
+  /* Note that screen sizes for media queries are standardised (see below) HOWEVER */
+  /* Media queries don't accept css variables so they still need to be changes manually */
+  --screen-small: 900px;
+}
 
 html {
   box-sizing: border-box;
@@ -18,8 +75,10 @@ ul {
 }
 
 body {
-  font-family: poppins-semibold, poppins, sans-serif;
+  /* note that imported font weights are 500(default) 600(semibold) and 700 (bold) */
+  font-family: poppins, sans-serif;
   margin: 0;
+  color: var(--color-purple);
 }
 
 header {
