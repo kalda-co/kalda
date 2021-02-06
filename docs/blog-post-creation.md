@@ -172,6 +172,11 @@ If you have followed the local developer setup you can view the work in progress
 Start the server like this:
 
 ```sh
+# You may need to get the dependencies
+mix deps.get
+# You may need to first run npm install
+npm install
+# start server
 npm start
 ```
 
