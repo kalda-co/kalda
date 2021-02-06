@@ -1,0 +1,13 @@
+<header class='site-page-header'>
+  <a href="/"><img  class='site-page-logo' src="/images/kalda-rainbow-logo.svg"></a>
+  <div class="site-page-header-spacer"></div>
+  <nav class="site-page-header-links">
+    <%= if @current_user do %>
+      <%= link "Log out" , to: Routes.user_session_path(@conn, :delete), class: "button" , method: :delete %>
+      <a class="button" href="">Contact Us</a>
+    <% else %>
+      <%#= link "Log in" , to: Routes.user_session_path(@conn, :new), class: "button login-button" %>
+      <a class="button" name = "signup" href="mailto:hello@kalda.co">Contact Us</a>
+    <% end %>
+  </nav>
+</header>

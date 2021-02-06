@@ -4,7 +4,11 @@ defmodule KaldaWeb.LayoutView do
   # For more info on optimising meta tags see
   # https://css-tricks.com/essential-meta-tags-social-media/
 
-  defp title_text(conn) do
+  def blog_page?(conn) do
+    match?(["blog" | _anything], conn.path_info)
+  end
+
+  def title_text(conn) do
     title = conn.assigns[:page_title]
 
     if title do
