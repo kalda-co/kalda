@@ -34,7 +34,7 @@ defmodule KaldaWeb.Api.V1.ReplyControllerTest do
       assert [reply] = Kalda.Forums.get_replies()
       assert reply.content == @valid_reply_content.content
       assert reply.author_id == current_user.id
-      assert reply.post_id == post.id
+      assert reply.comment_id == comment.id
 
       assert json_response(conn, 201) == %{
                "id" => reply.id,
