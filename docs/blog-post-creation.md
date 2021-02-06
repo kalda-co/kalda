@@ -172,7 +172,7 @@ If you have followed the local developer setup you can view the work in progress
 Start the server like this:
 
 ```sh
-mix phx.server
+npm start
 ```
 
 ### Uploading work to Github
