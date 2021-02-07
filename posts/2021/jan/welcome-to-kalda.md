@@ -1,5 +1,6 @@
 %{
 title: "Welcome to Kalda!",
+subtitle: "The very welcoming Kalda Blog post",
 author: "Al Dee (they/them)",
 tags: ["communication", "community", "covid"],
 description: "Welcome to Kalda, a community for LGBTQIA+ and sex positive humans looking for connection, support, therapy, meditation, and cephalopods related content. We are here to help you with your communication and connection woes in these covid times.",
