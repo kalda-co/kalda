@@ -5,6 +5,10 @@ defmodule Kalda.Blog.Post do
   def build(filename, attrs, body) do
     id = filename |> Path.rootname() |> Path.split() |> List.last()
     date = Date.from_iso8601!(attrs.date)
-    struct!(__MODULE__, Map.to_list(attrs) ++ [id: id, date: date, body: body])
+
+    struct!(
+      __MODULE__,
+      Map.to_list(attrs) ++ [id: id, date: date, body: body]
+    )
   end
 end

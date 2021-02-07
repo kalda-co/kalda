@@ -34,6 +34,8 @@ defmodule Kalda.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
+      # Date time library
+      {:timex, "~> 3.6"},
       # Web framework
       {:phoenix, "~> 1.5.7"},
       {:phoenix_live_view, "~> 0.15.0"},
