@@ -5,6 +5,10 @@
     <%= @post.title %>
   </h1>
 
+  <h2 class="blog-subtitle">
+    <%= @post.subtitle %>
+  </h2>
+
   <div class="blog-details-container">
     <div class="blog-details">
       <div class="blog-date">
@@ -13,6 +17,11 @@
       <div class="blog-author">
         <%= @post.author %>
       </div>
+      <div><span></span></div>
+      <div><span></span></div>
+      <div><span></span></div>
+      <div><span></span></div>
+      <div><span></span></div>
     </div>
   </div>
 

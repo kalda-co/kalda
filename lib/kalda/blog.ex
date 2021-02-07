@@ -37,6 +37,7 @@ defmodule Kalda.Blog do
     day_string = Elixir.Timex.day_name(day_num)
     month_string = Elixir.Timex.month_name(date.month)
 
-    "#{day_string}, #{date.day} #{month_string} #{date.year}."
+    # "#{day_string}, #{date.day} #{month_string} #{date.year}."
+    "#{day_string}, #{date.day} #{month_string}"
   end
 end

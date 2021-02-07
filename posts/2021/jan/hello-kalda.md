@@ -1,5 +1,6 @@
 %{
 title: "Hello Kalda!",
+subtitle: "The very first Kalda Blog post",
 author: "Al Dee",
 tags: ["tag-one", "tag-two"],
 description: "Our first post!",

@@ -16,11 +16,11 @@
   --button-padding: 10px 22px;
   /* Spacings */
   --gap: 16px;
-  --gap-s: calc(var(--gap) * 0.5);
-  --gap-l: calc(var(--gap) * 2);
-  --gap-xl: calc(var(--gap) * 3);
-  --gap-xxl: calc(var(--gap) * 5);
-  --gap-xxxl: calc(var(--gap) * 7);
+  --gap-s: calc(var(--gap) * 0.5); /* 8px */
+  --gap-l: calc(var(--gap) * 2); /* 32 px */
+  --gap-xl: calc(var(--gap) * 3); /* 48 px */
+  --gap-xxl: calc(var(--gap) * 4); /* 64 px */
+  --gap-xxxl: calc(var(--gap) * 5); /* 80 px */
   /* Paragraphs */
   /* FONT WEIGHT */
   --font-weight: 500;
