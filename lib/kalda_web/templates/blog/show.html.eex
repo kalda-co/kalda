@@ -1,15 +1,19 @@
 <div class="top-image-container" style="background-image: url(<%= @post.image %>)"></div>
 
-<div class=blog-container>
+<div class="blog-container">
   <h1 class="blog-title">
     <%= @post.title %>
   </h1>
 
-  <div class="blog-date">
-    <%= @post.date %>
-  </div>
-  <div class="blog-author">
-    <%= @post.author %>
+  <div class="blog-details-container">
+    <div class="blog-details">
+      <div class="blog-date">
+        <%= @date_string %>
+      </div>
+      <div class="blog-author">
+        <%= @post.author %>
+      </div>
+    </div>
   </div>
 
   <ul class="blog-tag-list">

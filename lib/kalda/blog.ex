@@ -30,4 +30,13 @@ defmodule Kalda.Blog do
   Get all the tags that have been used in blog posts.
   """
   def all_tags, do: @tags
+
+  def date_string(date) do
+    # date = Date.from_iso8601!(attrs.date)
+    day_num = Date.day_of_week(date)
+    day_string = Elixir.Timex.day_name(day_num)
+    month_string = Elixir.Timex.month_name(date.month)
+
+    "#{day_string}, #{date.day} #{month_string} #{date.year}."
+  end
 end
