@@ -68,18 +68,17 @@ In `kalda/posts/2021/jan` create `do-i-have-to-be-lgbtqia.md`
 ```md
 %{
 title: "Title",
+subtitle: "Here is a bit more info about this title",
 author: "Al Dee",
 tags: ["tag-one", "tag-two", "tag-three"],
 description: "This description will not appear on the page but can contain search terms",
-date: "2021-01-11"
+date: "2021-01-11",
 image: "/images/my-image"
 }
 
 ---
 
-# Title
-
-content...
+content... (ie first line of your post)
 ```
 
 Then you change the bits in quotation marks, and the title and the content, see the example below:
@@ -89,15 +88,17 @@ Then you change the bits in quotation marks, and the title and the content, see 
 ```md
 %{
 title: "Do I have to be LGBTQIA+ to use Kalda?",
+subtitle: "Who Kalda Is For And Why We Are Referral First",
 author: "Al Dee",
 tags: ["LGBTQIA", "Kalda", "inclusion"],
 description: "This article answers the questions: Why do you have to be LGBTQIA+?; Is Kalda for everyone?; Why isn't Kalda for everyone?; Why do you need to be invited to Kalda?; What if I don't have friends who are LGBTQIA+?; What if I am not out?; What if I need Kalda but have no one to invite me?",
-date: "2021-02-04"
+date: "2021-02-04",
+image: "images/questionmark.jpg"
 }
 
 ---
 
-# Do I Have To Be LGBTQIA+ To Use Kalda?
+We get a lot of questions about our referral system, and who can use Kalda, and so we wanted to try to answer them.
 
 > Q I don't identify as LGBTQIA+, can I use Kalda?
 

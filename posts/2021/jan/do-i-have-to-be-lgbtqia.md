@@ -3,18 +3,20 @@ title: "Do I have to be LGBTQIA+ to use Kalda?",
 subtitle: "Who Kalda is for and why we are referral first",
 author: "Al Dee",
 tags: ["LGBTQIA", "Kalda", "inclusion"],
-description: "This article answers the questions: Why do you have to be LGBTQIA+?; Is Kalda for everyone?; Why isn't Kalda for everyone?; Why do you need to be invited to Kalda?; What if I don't have friends who are LGBTQIA+?; What if I am not out?; What if I need Kalda but have no one to invite me?",
+description: "This article answers the questions: Why do you have to be LGBTQIA+?; Is Kalda for everyone?; Why isn't Kalda for everyone?; Why do you need to be invited or referred to Kalda?; What if I don't have friends who are LGBTQIA+?; What if I am not out?; What if I need Kalda but have no one to invite me?",
 date: "2021-02-04",
 image: "/images/jon-tyson-hhq1Lxtuwd8-unsplash.jpg"
 }
 
 ---
 
+We get a lot of questions about our referral system, and who can use Kalda, and so we wanted to try to answer them.
+
 > I don't identify as LGBTQIA+, can I use Kalda?
 
-_A yes, you can, because a Kaldan who identfies as LGBTQIA+ has reccommended you anbd wants you in their community or more specifically in theor support network._
+_Yes, you can, because a Kaldan who identfies as LGBTQIA+ has reccommended you anbd wants you in their community or more specifically in theor support network._
 
-### kelda is for people who identify as LGBTQIA plus, and their communities and support networks.
+### Kalda is for people who identify as LGBTQIA plus, and their communities and support networks.
 
 > Isn't that everyone?
 
@@ -44,7 +46,7 @@ That's OK!!! So Kalda is for the LGBTQIA+ community but if someone in that commu
 
 Our LONG TEMM mission is to improve the mental wellbeing of the WORLD. To create supportive communities and connect people to support networks all over the world. If everyone ends up with a place like Kalda, we will all be connected, supporting each other on our journeys through life. IMAGINE!!! That will mean no more poverty, unwanted children, litter, or rainy days!!! (ok, maybenot that last one). BUT we are few. Kalda is the first step towards that, so if it isn't for you YET please don't despair, support what we are doing anyway and we will get to you I PRTOMISE <3
 
-# But what about LGBTQIA plus people who aren't out, or even don't have any friends. Surely, those are the people that might need counter the most???
+# But what about LGBTQIA plus people who aren't out, or even don't have any friends. Surely, those are the people that might need counter the most?
 
 Absolutely. Great question. Thank you for your indignation there you are SPOT ON!!!
 We are here for those people. We hear those people. If you are those people we ARE here for you.
