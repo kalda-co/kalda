@@ -1,16 +1,15 @@
 <script lang="ts">
   import Navbar from "./Navbar.svelte";
   import DailyReflection from "./forum/DailyReflection.svelte";
-  import type { Comment } from "./forum/data";
+  import type { User, Post } from "./state";
 
-  export let author: string;
-  export let question: string;
-  export let comments: Array<Comment>;
+  export let post: Post;
+  export let currentUser: User;
 </script>
 
 <main>
   <Navbar />
-  <DailyReflection {author} {question} {comments} />
+  <DailyReflection {post} {currentUser} />
 </main>
 
 <style>

@@ -1,36 +1,38 @@
 <script lang="ts">
   import Comment from "./Comment.svelte";
   import NewCommentForm from "./NewCommentForm.svelte";
-  import type { Comment as CommentType } from "./data";
+  import type { Post, User } from "../state";
+  import App from "../App.svelte";
 
-  export let author: string;
-  export let question: string;
-  export let comments: Array<CommentType>;
-
-  let currentUser = "You";
+  export let post: Post;
+  export let currentUser: User;
 
   async function saveComment(content: string) {
     console.log("todo: save data", content);
-    comments = [{ author: currentUser, text: content }, ...comments];
+    const comments = [
+      { id: 0, author: currentUser, content, replies: [] },
+      ...post.comments,
+    ];
+    post = { ...post, comments };
     return true;
   }
 
   function commentsCountText() {
-    switch (comments.length) {
+    switch (post.comments.length) {
       case 0:
         return "No comments";
       case 1:
         return "1 comment";
       default:
-        return `${comments.length} comments`;
+        return `${post.comments.length} comments`;
     }
   }
 </script>
 
 <article>
   <section class="post">
-    <cite>{author}</cite>
-    <p class="question">{question}</p>
+    <cite>{post.author.name}</cite>
+    <p class="question">{post.content}</p>
     <aside class="trivia">
       <span>
         <img src="speech-icon.svg" alt="A speech bubble icon" />
@@ -46,8 +48,8 @@
   <section class="comments">
     <NewCommentForm {saveComment} />
 
-    {#each comments as comment (comment.text)}
-      <Comment author={comment.author} text={comment.text} />
+    {#each post.comments as comment (comment.id)}
+      <Comment author={comment.author.name} text={comment.content} />
     {/each}
   </section>
 </article>
