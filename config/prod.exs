@@ -19,6 +19,7 @@ config :logger, level: :info
 
 config :kalda,
   sendfox_list_id: "56109",
+  load_spa_css: true,
   spa_static_prefix: nil
 
 # ## SSL Support
