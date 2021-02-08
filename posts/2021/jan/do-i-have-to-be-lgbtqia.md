@@ -24,7 +24,7 @@ _It might be one day. It could be_
 
 ### Why, then is Kalda not just for everyone?
 
-If you don't identify as LGBTQIA plus, and you don't have anyone that does in your network, then Canada isn't for you. Although we really hope that soon there will be a version of Canada that is for you. But the reason that Canada isn't for you right now, is because Kalda is about community, connection, support vulnerability and safety. Because Kalda is a place where our users can get group therapy.
+If you don't identify as LGBTQIA plus, and you don't have anyone that does in your network, then Kalda isn't for you. Although we really hope that soon there will be a version of Kalda that is for you. But the reason that Kalda isn't for you right now, is because Kalda is about community, connection, support vulnerability and safety. Because Kalda is a place where our users can get group therapy.
 
 ### What is it about Group Therapy?
 
@@ -39,8 +39,8 @@ And in a way that's also what Kalda is about, because we know that teams groups 
 
 That's OK!!! So Kalda is for the LGBTQIA+ community but if someone in that community wants you in theor support network and in their community then you're in! That's because by inviting you they have vouched for you. They've said that you are important to theor mental health journey and theor community nad theor suppport network. And that means that YOUR mental health is important to them, and so it is important to US. All we ask is that you make SURE that if you ever want to invite someone who does not identify as LGBTQIA+ to the platform that you understand that the purpose of the group is to create a supportive community for people who identify as LGBTQIA+ and htat if they are willing to contribute to that, and they are part of your support network, then they are welcome too. But at the same time it is important to remind everyone that this is a place designed for LGBTQIA+ people. If that isn't you, then theis space is not designed for you. That's ok, if you are an ally you understand that marginalised communities need a space that is designed for them. You get it, you support that, and that is why youre here.
 
-<!-- That's what makes Canada so powerful, and makes Calvin's therapeutic journey, more likely to succeed.  -->
- <!-- that are for different communities. We know that if a member of the community. Once you encounter. They know that you are committed to supporting them in every step of their mental health journey, you're committed to contributing to the safe space that makes kaldur so powerful, and helps them to grow and heal, you're committed to supporting them and being a part of their support network. And that's why the caldon member has invited you. Even if you don't identify as LGBTQIA plus yourself, and that's okay. -->
+<!-- That's what makes Kalda so powerful, and makes Calvin's therapeutic journey, more likely to succeed.  -->
+ <!-- that are for different communities. We know that if a member of the community. Once you encounter. They know that you are committed to supporting them in every step of their mental health journey, you're committed to contributing to the safe space that makes Kalda so powerful, and helps them to grow and heal, you're committed to supporting them and being a part of their support network. And that's why the caldon member has invited you. Even if you don't identify as LGBTQIA plus yourself, and that's okay. -->
 
 ### Ok, I don't think that Kalda is for me, but that doesn't seem fair.
 
@@ -50,7 +50,7 @@ Our LONG TEMM mission is to improve the mental wellbeing of the WORLD. To create
 
 Absolutely. Great question. Thank you for your indignation there you are SPOT ON!!!
 We are here for those people. We hear those people. If you are those people we ARE here for you.
-Just get in touch. Everyone who joined us at the beginning of Canada got a call from our team. And we talked them through joining, and what their goals were and what our process was, and we'd be delighted to do the same for you. And that's how we'll know that you belong and kaldur, even if someone who isn't already in Kalda didn't recommend you. That's how we keep the existing community safe but we also help keep YOU safe by connecting you to them if this is you.
+Just get in touch. Everyone who joined us at the beginning of Kalda got a call from our team. And we talked them through joining, and what their goals were and what our process was, and we'd be delighted to do the same for you. And that's how we'll know that you belong and Kalda, even if someone who isn't already in Kalda didn't recommend you. That's how we keep the existing community safe but we also help keep YOU safe by connecting you to them if this is you.
 
 We do not want to exclude the people in the LGBTQIA plus community who don't have a support network or a community of their own, or just don't know anyone else yet, because if that is you, you will, because you belong. And we want to help you get there.
 
@@ -60,4 +60,4 @@ We also work in partnership with charities like Stonewall and mermaids. And thos
 
 ### How do I join Kalda?
 
-All you need to do is ask a friend to recommend you and onboard you to the kaldur journey. That will take you through our onboarding video, and our chat guide or give you the guide version, and they'll let you know what it's all about and let you decide together. If Caldas is right for you. And if you are committed to contributing and can maintaining the safe space that kaldur is.
+All you need to do is ask a friend to recommend you and onboard you to the Kalda journey. That will take you through our onboarding video, and our chat guide or give you the guide version, and they'll let you know what it's all about and let you decide together. If Kalda is right for you. And if you are committed to contributing and can maintaining the safe space that Kalda is.
