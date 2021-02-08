@@ -28,6 +28,6 @@ module.exports = {
     hmrPort: 4452,
   },
   buildOptions: {
-    out: "priv/static/spa/",
+    out: "priv/static/",
   },
 };
