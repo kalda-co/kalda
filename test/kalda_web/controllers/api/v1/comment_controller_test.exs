@@ -29,7 +29,6 @@ defmodule KaldaWeb.Api.V1.CommentControllerTest do
       post = Kalda.ForumsFixtures.post(user)
 
       assert conn = post(conn, "/v1/posts/#{post.id}/comments", comment: @valid_comment_content)
-
       assert [comment] = Kalda.Forums.get_comments()
       assert comment.content == @valid_comment_content.content
       assert comment.author_id == current_user.id
