@@ -1,6 +1,6 @@
 .home-page {
   /* Colours */
-  --color-purple: #2d1c62;
+  --color-purple: #4a00b0;
   --color-light: #ffffff;
   --color-white: #ffffff;
   --color-pink: #fe00f7;
@@ -48,7 +48,7 @@ body {
   font-weight: var(--font-weight);
   margin: 0;
   text-decoration: none;
-  color: #2d1c62;
+  color: #4a00b0;
   font-size: var(--font-size);
 }
 

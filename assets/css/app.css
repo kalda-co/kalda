@@ -57,7 +57,7 @@
 }
 
 .alert-info {
-  color: #2d1c62;
+  color: #4a00b0;
   font-weight: 500;
   background-color: #c7ffff;
   border-color: #ffffff;
@@ -67,13 +67,13 @@
 /* Alerts and form errors */
 .alert {
   border-radius: 4px;
-  color: #2d1c62;
+  color: #4a00b0;
   font-weight: 500;
   background-color: #c7ffff;
   text-align: center;
 }
 .alert-info {
-  color: #2d1c62;
+  color: #4a00b0;
   font-weight: 500;
   background-color: #c7ffff;
   text-align: center;
