@@ -18,12 +18,33 @@
   --gap-xxl: calc(var(--gap) * 5);
   --gap-xxxl: calc(var(--gap) * 7);
 
-  --font-size: 14px;
-  --font-size-s: 0.8rem;
-  --font-size-l: 1.1rem;
-  --font-size-xl: 1.25rem;
-  --font-size-xxl: 2.6rem;
-
+  /* FONT WEIGHT */
+  --font-weight: 500;
+  /* poppins semibold == weight 600 */
+  --font-weight-large: 600;
+  /* FONT SIZE */
+  --font-size: 16px;
+  /* small = 14 points */
+  --font-size-s: 0.875rem;
+  /* large = 18 points, for l and H2 mobile */
+  --font-size-l: 1.125rem;
+  /* xl = 24 points, for H2 desktop, h1 mobile */
+  --font-size-xl: 1.5rem;
+  /* xxl = 32 points, h1 desktop */
+  --font-size-xxl: 2rem;
+  /* xxxl = 40 points, same as xl-blog-header */
+  --font-size-xxxl: 2.5rem;
+  /* FONT LINE HEIGHT */
+  /* line height 24 (normal) */
+  --line-height: 1.5rem;
+  /* line height 16 (small) */
+  --line-height-s: 1rem;
+  /* line height 32 (large) */
+  --line-height-l: 2rem;
+  /* line height 40 (x-large) */
+  --line-height-xl: 2.5rem;
+  /* line height xxl 48 points , also xl-blog-header*/
+  --line-height-xxl: 3rem;
   --font-weight: 500;
   --font-weight-large: 700;
 
@@ -102,6 +123,13 @@ button {
   text-align: center;
 }
 
+div.hero-lhs h1,
+div.hero-lhs h2,
+div.hero-lhs h3,
+div.hero-lhs p {
+  color: white;
+}
+
 .landing-hero {
   background-color: var(--color-purple);
   padding: var(--gap-l) 0;
@@ -153,9 +181,14 @@ button {
 }
 
 .landing-slice h2 {
-  font-size: var(--font-size-xxl);
+  color: var(--color-purple);
+  font-size: var(--font-size-xl);
   margin: 0 0 var(--gap) 0;
 }
+
+/* .landing-slice p {
+  color: var(--color-purple);
+} */
 
 .landing-slice figure {
   text-align: center;
@@ -164,8 +197,11 @@ button {
 }
 
 .landing-slice blockquote {
+  background-color: var(--color-blue);
   margin: 0;
   font-size: var(--font-size-xl);
+  quotes: none;
+  border-left: none;
 }
 
 .tiles {
@@ -296,6 +332,10 @@ Media queries don't accept css variables so they still need to be changes manual
   background-image: url("/images/teddy-osterblom-owiVf9bFKHM-unsplash 1.png");
 }
 
+.landing-grid-text h2 {
+  color: var(--color-purple);
+}
+
 .landing-grid-text {
   padding: var(--gap-xxl);
   display: flex;
@@ -318,7 +358,7 @@ Media queries don't accept css variables so they still need to be changes manual
 .site-footer-content {
   display: flex;
   flex-direction: row;
-  margin-bottom: calc(var(--gap-l) * -1);
+  /* margin-bottom: calc(var(--gap-l) * -1); */
 }
 
 .site-footer-content > * {
