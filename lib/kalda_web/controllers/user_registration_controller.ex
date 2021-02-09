@@ -20,7 +20,10 @@ defmodule KaldaWeb.UserRegistrationController do
           )
 
         conn
-        |> put_flash(:info, "User created successfully.")
+        |> put_flash(
+          :info,
+          "User created successfully. Please check your email for confirmation instructions"
+        )
         |> UserAuth.log_in_user(user)
 
       {:error, %Ecto.Changeset{} = changeset} ->
