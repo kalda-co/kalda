@@ -1,0 +1,40 @@
+.login-container {
+  margin: auto;
+  display: block;
+  max-width: 536px;
+  letter-spacing: -0.02rem;
+}
+
+.login-container input {
+  margin-right: var(--gap-s);
+  border-radius: 100px;
+  border-width: 2px;
+  border-style: solid;
+  border-color: var(--color-purple);
+  padding: var(--button-padding);
+  flex: 1;
+  width: 100%;
+}
+
+.login-container label {
+  font-weight: var(--font-weight-large);
+  font-size: var(--font-size-l);
+}
+
+a {
+  font-weight: var(--font-weight-large);
+}
+
+.login-container form div.alert.alert-danger {
+  padding: var(--gap);
+}
+
+.login-container form div.alert.alert-danger p {
+  margin: 0px;
+}
+
+span.username {
+  color: var(--font-color);
+  font-style: italic;
+  font-weight: var(--font-weight-large);
+}

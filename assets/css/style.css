@@ -17,6 +17,7 @@
   /* Spacings */
   --gap: 16px;
   --gap-s: calc(var(--gap) * 0.5); /* 8px */
+  --gap-m: calc(var(--gap) * 1.5); /* 24px */
   --gap-l: calc(var(--gap) * 2); /* 32 px */
   --gap-xl: calc(var(--gap) * 3); /* 48 px */
   --gap-xxl: calc(var(--gap) * 4); /* 64 px */
@@ -57,6 +58,7 @@ html {
 *:before,
 *:after {
   box-sizing: inherit;
+  font-family: var(--font-family);
 }
 
 a {
@@ -71,8 +73,11 @@ li {
 body {
   /* note that imported font weights are 500(default) 600(semibold) and 700 (bold) */
   font-family: var(--font-family);
+  font-weight: var(--font-weight);
+  font-size: var(--font-size);
   margin: 0;
   color: var(--color-purple);
+  text-decoration: none;
 }
 
 header {
@@ -84,18 +89,37 @@ input[type="submit"] {
   cursor: pointer;
 }
 
+p {
+  margin: var(--gap) 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-top: 0;
+}
+
+button {
+  cursor: pointer;
+}
+
 .header-logo {
   max-height: 10rem;
   top: -5px;
 }
 
 .button {
-  background-color: var(--color-purple-mid);
+  background-color: var(--color-purple);
   color: var(--color-white);
   border: none;
-  padding: var(--gap-s) var(--gap);
-  font-weight: 500;
+  padding: var(--gap) var(--gap-m);
+  font-weight: 600;
   border-radius: 100px;
+  font-size: var(--font-size-s);
+  text-decoration: none;
 }
 
 textarea {

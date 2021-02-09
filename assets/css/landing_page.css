@@ -17,73 +17,32 @@
   --gap-xl: calc(var(--gap) * 3);
   --gap-xxl: calc(var(--gap) * 5);
   --gap-xxxl: calc(var(--gap) * 7);
-
+  /* Paragraphs */
+  --font-family: poppins, sans-serif;
   /* FONT WEIGHT */
-  --font-weight: 500;
-  /* poppins semibold == weight 600 */
+  --font-weight: 500; /* poppins semibold == weight 600 */
   --font-weight-large: 600;
   /* FONT SIZE */
-  --font-size: 16px;
-  /* small = 14 points */
-  --font-size-s: 0.875rem;
-  /* large = 18 points, for l and H2 mobile */
-  --font-size-l: 1.125rem;
-  /* xl = 24 points, for H2 desktop, h1 mobile */
-  --font-size-xl: 1.5rem;
-  /* xxl = 32 points, h1 desktop */
-  --font-size-xxl: 2rem;
-  /* xxxl = 40 points, same as xl-blog-header */
+  --font-size: 16px; /* small = 14 points */
+  --font-size-s: 0.875rem; /* large = 18 points, for l and H2 mobile */
+  --font-size-l: 1.125rem; /* xl = 24 points, for H2 desktop, h1 mobile */
+  --font-size-xl: 1.5rem; /* xxl = 32 points, h1 desktop */
+  --font-size-xxl: 2rem; /* xxxl = 40 points, same as xl-blog-header */
   --font-size-xxxl: 2.5rem;
   /* FONT LINE HEIGHT */
-  /* line height 24 (normal) */
-  --line-height: 1.5rem;
-  /* line height 16 (small) */
-  --line-height-s: 1rem;
-  /* line height 32 (large) */
-  --line-height-l: 2rem;
-  /* line height 40 (x-large) */
-  --line-height-xl: 2.5rem;
-  /* line height xxl 48 points , also xl-blog-header*/
-  --line-height-xxl: 3rem;
-  --font-weight: 500;
-  --font-weight-large: 700;
+  --line-height: 1.5rem; /* line height 24 (normal) */
+  --line-height-s: 1rem; /* line height 16 (small) */
+  --line-height-l: 2rem; /* line height 32 (large) */
+  --line-height-xl: 2.5rem; /* line height 40 (x-large) */
+  --line-height-xxl: 3rem; /* line height xxl 48 points , also xl-blog-header*/
 
   /* Screen size for media queries and break points */
   /* Note that screen sizes for media queries are standardised (see below) HOWEVER */
   /* Media queries don't accept css variables so they still need to be changes manually */
-  --screen-small: 900px;
-}
-
-html {
-  box-sizing: border-box;
-}
-
-*,
-*:before,
-*:after {
-  box-sizing: inherit;
-  font-family: poppins-semibold, poppins, sans-serif;
-}
-
-body {
-  font-weight: var(--font-weight);
-  margin: 0;
-  text-decoration: none;
-  color: #4a00b0;
-  font-size: var(--font-size);
-}
-
-p {
-  margin: var(--gap) 0;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  margin-top: 0;
+  --screen-small: 375px;
+  --screen-medium: 600px;
+  --screen-large: 900px;
+  --screen-xlarge: 1200px;
 }
 
 .text-center {
@@ -94,22 +53,17 @@ h6 {
   display: none;
 }
 
-.button,
-.button-wide {
+.gradient.button,
+.gradient.button-wide {
   display: inline-block;
   background: linear-gradient(138.94deg, #c7ffff 35.3%, #ffb3fc 84.65%);
   border: none;
   color: var(--font-color);
-  border-radius: 300px;
+  border-radius: 100px;
   font-weight: 500;
   padding: var(--button-padding);
-  text-decoration: none;
   white-space: nowrap;
   font-size: var(--font-size);
-}
-
-button {
-  cursor: pointer;
 }
 
 .button-wide {

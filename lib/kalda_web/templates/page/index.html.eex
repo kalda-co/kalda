@@ -18,7 +18,7 @@
       <% end %>
       <%= form_for @signup_changeset, Routes.signup_path(@conn, :create), [class: "landing-form js-waitlist-form"], fn f -> %>
         <%= email_input f, :email, required: true, placeholder: "me@email.com" %>
-        <%= submit "Sign up", class: "button" %>
+        <%= submit "Sign up", class: "gradient button" %>
       <% end %>
       <p>
         By signing up you agree to be emailed when your spot comes up, and get our

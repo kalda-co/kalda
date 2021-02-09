@@ -1,33 +1,41 @@
-<h1>Create an account</h1>
-<p>Enter your email address</p>
+<div class="login-container">
+  <h1>Create an account</h1>
+  <p>Enter your email address, and we'll send a confirmation email to your account.</p>
 
-<%= form_for @changeset, Routes.user_registration_path(@conn, :create), fn f -> %>
-  <%= if @changeset.action do %>
-    <div class="alert alert-danger">
-      <p>Oops, something went wrong! Please check the errors below.</p>
+  <%= form_for @changeset, Routes.user_registration_path(@conn, :create), fn f -> %>
+    <%= if @changeset.action do %>
+      <div class="alert alert-danger">
+        <p>Oops, something went wrong! Please check the errors below.</p>
+      </div>
+    <% end %>
+
+    <%= label f, :email %>
+    <%= email_input f, :email, required: true %>
+    <%= error_tag f, :email %>
+
+  <p>Create a password. Passwords must contain at least 12 characters.</p>
+
+    <%= label f, :password %>
+    <%= password_input f, :password, required: true %>
+    <%= error_tag f, :password %>
+
+  <p>Everyone in the Kalda community has a unique username which protects our privacy, e.g: <span class="username">Dan_15_capibara</span> or <span class="username">happy-Al-squid</span>.</p>
+
+    <%= label f, :username %>
+    <%= text_input f, :username, required: true, pattern: "^[A-Za-z0-9-_]+$" %>
+    <%= error_tag f, :username %>
+
+ <p>Usernames can be up to 35 characters long and can only contain letters, numbers, hyphens and underscores.</p>
+
+    <div>
+      <%= submit "Submit", class: "button"%>
     </div>
+
+  <p>By clicking the button above your accept Kalda’s
+  <%= link "terms and conditions.", to: "/terms" %></p>
   <% end %>
 
-  <%= label f, :email %>
-  <%= email_input f, :email, required: true %>
-  <%= error_tag f, :email %>
-
-<p>Create a password. Passwords must contain at least 12 characters</p>
-  <%= label f, :password %>
-  <%= password_input f, :password, required: true %>
-  <%= error_tag f, :password %>
-
-<p>Everyone in the Kalda community has a unique username which protects our privacy. For example: Dan_15_capibara or happy-Al-squid. Usernames are max 35 characters long and can only contain letters, numbers, hyphens and underscores</p>
-  <%= label f, :username %>
-  <%= text_input f, :username, required: true, pattern: "^[A-Za-z0-9-_]+$" %>
-  <%= error_tag f, :username %>
-
-<p>We’ll send you a verification link to your email address. If you don’t see the verification email in the next 30 seconds, check your spam or junk folder.</p>
-  <div>
-    <%= submit "Register" %>
-  </div>
-<% end %>
-
-<p>Already have an account?
-  <%= link "Log in", to: Routes.user_session_path(@conn, :new) %>
-</p>
+  <p>Already have an account?
+    <%= link "Log in.", to: Routes.user_session_path(@conn, :new) %>
+  </p>
+</div>
