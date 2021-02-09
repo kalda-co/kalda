@@ -1,21 +1,15 @@
-<section class="container">
-  <nav role="navigation">
-    <ul>
-      <li><a href="TODO">Get Started</a></li>
-      <li><a hfref="/">Privacy Policy</a></li>
-    </ul>
-    <ul>
+<section class="app-header-container">
+
+  <nav role="navigation" class="app-header-nav">
+  <a href="/"><img class="header-logo" src="<%= Routes.static_path(@conn, "/images/kalda-rainbow-purple-logo.svg") %>" alt="Kalda rainbow logo coloured purple"/></a>
     <%= if @current_user do %>
       <li><%= @current_user.email %></li>
       <li><%= link "Settings", to: Routes.user_settings_path(@conn, :edit) %></li>
       <li><%= link "Log out", to: Routes.user_session_path(@conn, :delete), method: :delete %></li>
     <% else %>
-      <li><%= link "Register", to: Routes.user_registration_path(@conn, :new) %></li>
       <li><%= link "Log in", to: Routes.user_session_path(@conn, :new) %></li>
     <% end %>
     </ul>
+  <div class="app-header-spacer"><span></span></div>
   </nav>
-  <a href="/" class="header-logo">
-    <img src="<%= Routes.static_path(@conn, "/images/kalda-logo.svg") %>" alt="Kalda logo coloured neon pink"/>
-  </a>
 </section>
