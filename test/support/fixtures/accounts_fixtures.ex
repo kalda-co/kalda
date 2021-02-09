@@ -9,14 +9,38 @@ defmodule Kalda.AccountsFixtures do
   def unique_username, do: "u_n#{System.unique_integer()}"
 
   def user(attrs \\ %{}) do
-    {:ok, user} =
+    attrs =
       attrs
       |> Enum.into(%{
         username: unique_username(),
-        email: unique_user_email(),
+        email: "admin#{System.unique_integer()}@example.com",
         password: valid_user_password()
       })
-      |> Kalda.Accounts.register_user()
+
+    {:ok, user} =
+      %Kalda.Accounts.User{
+        is_admin: false,
+        confirmed_at: NaiveDateTime.local_now() |> NaiveDateTime.add(-1)
+      }
+      |> Kalda.Accounts.User.registration_changeset(attrs)
+      |> Kalda.Repo.insert()
+
+    user
+  end
+
+  def unconfirmed_user(attrs \\ %{}) do
+    attrs =
+      attrs
+      |> Enum.into(%{
+        username: unique_username(),
+        email: "admin#{System.unique_integer()}@example.com",
+        password: valid_user_password()
+      })
+
+    {:ok, user} =
+      %Kalda.Accounts.User{}
+      |> Kalda.Accounts.User.registration_changeset(attrs)
+      |> Kalda.Repo.insert()
 
     user
   end
@@ -31,7 +55,7 @@ defmodule Kalda.AccountsFixtures do
       })
 
     {:ok, user} =
-      %Kalda.Accounts.User{is_admin: true}
+      %Kalda.Accounts.User{is_admin: true, confirmed_at: NaiveDateTime.local_now()}
       |> Kalda.Accounts.User.registration_changeset(attrs)
       |> Kalda.Repo.insert()
 

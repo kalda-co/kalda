@@ -139,6 +139,18 @@ defmodule KaldaWeb.UserAuth do
     end
   end
 
+  def require_confirmed_email(conn, _opts) do
+    if conn.assigns.current_user.confirmed_at do
+      conn
+    else
+      conn
+      |> put_flash(:error, "You need to confirm you email address.")
+      |> maybe_store_return_to()
+      |> redirect(to: Routes.user_session_path(conn, :new))
+      |> halt()
+    end
+  end
+
   @doc """
   Used for routes that require the user to be an admin.
 
@@ -165,6 +177,17 @@ defmodule KaldaWeb.UserAuth do
       conn
       |> put_status(401)
       |> json(%{error: "You must be authenticated to access this resource"})
+      |> halt()
+    end
+  end
+
+  def json_require_confirmed_email(conn, _opts) do
+    if conn.assigns.current_user.confirmed_at do
+      conn
+    else
+      conn
+      |> put_status(403)
+      |> json(%{error: "You need to confirm your email to access this resource"})
       |> halt()
     end
   end

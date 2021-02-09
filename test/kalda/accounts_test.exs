@@ -417,7 +417,7 @@ defmodule Kalda.AccountsTest do
 
   describe "deliver_user_confirmation_instructions/2" do
     setup do
-      %{user: AccountsFixtures.user()}
+      %{user: AccountsFixtures.unconfirmed_user()}
     end
 
     test "sends token through notification", %{user: user} do
@@ -436,7 +436,7 @@ defmodule Kalda.AccountsTest do
 
   describe "confirm_user/2" do
     setup do
-      user = AccountsFixtures.user()
+      user = AccountsFixtures.unconfirmed_user()
 
       token =
         AccountsFixtures.extract_user_token(fn url ->

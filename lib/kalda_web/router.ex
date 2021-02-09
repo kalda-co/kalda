@@ -75,7 +75,7 @@ defmodule KaldaWeb.Router do
   end
 
   scope "/", KaldaWeb do
-    pipe_through [:browser, :require_authenticated_user]
+    pipe_through [:browser, :require_authenticated_user, :require_confirmed_email]
 
     get "/users/settings", UserSettingsController, :edit
     put "/users/settings", UserSettingsController, :update
@@ -107,7 +107,7 @@ defmodule KaldaWeb.Router do
   end
 
   scope "/v1", KaldaWeb.Api.V1, as: :api_v1 do
-    pipe_through [:api, :json_require_authenticated_user]
+    pipe_through [:api, :json_require_authenticated_user, :json_require_confirmed_email]
 
     get "/daily-reflections", DailyReflectionController, :index
 

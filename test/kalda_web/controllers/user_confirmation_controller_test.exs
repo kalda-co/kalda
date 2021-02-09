@@ -6,7 +6,7 @@ defmodule KaldaWeb.UserConfirmationControllerTest do
   alias Kalda.AccountsFixtures
 
   setup do
-    %{user: AccountsFixtures.user()}
+    %{user: AccountsFixtures.unconfirmed_user()}
   end
 
   describe "GET /users/confirm" do
