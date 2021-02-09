@@ -49,8 +49,8 @@ defmodule KaldaWeb.UserConfirmationControllerTest do
           "user" => %{"email" => "unknown@example.com"}
         })
 
-      assert redirected_to(conn) == "/"
-      assert get_flash(conn, :info) =~ "If your email is in our system"
+      assert redirected_to(conn) == "/users/register"
+      assert get_flash(conn, :info) =~ "This email is not in our system. Please register"
       assert Repo.all(Accounts.UserToken) == []
     end
   end
@@ -63,7 +63,7 @@ defmodule KaldaWeb.UserConfirmationControllerTest do
         end)
 
       conn = get(conn, Routes.user_confirmation_path(conn, :confirm, token))
-      assert redirected_to(conn) == "/"
+      assert redirected_to(conn) == "/users/log-in"
       assert get_flash(conn, :info) =~ "Account confirmed successfully"
       assert Accounts.get_user!(user.id).confirmed_at
       refute get_session(conn, :user_token)
@@ -71,7 +71,7 @@ defmodule KaldaWeb.UserConfirmationControllerTest do
 
       # When not logged in
       conn = get(conn, Routes.user_confirmation_path(conn, :confirm, token))
-      assert redirected_to(conn) == "/"
+      assert redirected_to(conn) == "/users/confirm"
       assert get_flash(conn, :error) =~ "Account confirmation link is invalid or it has expired"
 
       # When logged in
@@ -86,7 +86,7 @@ defmodule KaldaWeb.UserConfirmationControllerTest do
 
     test "does not confirm email with invalid token", %{conn: conn, user: user} do
       conn = get(conn, Routes.user_confirmation_path(conn, :confirm, "oops"))
-      assert redirected_to(conn) == "/"
+      assert redirected_to(conn) == "/users/confirm"
       assert get_flash(conn, :error) =~ "Account confirmation link is invalid or it has expired"
       refute Accounts.get_user!(user.id).confirmed_at
     end

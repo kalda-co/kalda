@@ -13,16 +13,23 @@ defmodule KaldaWeb.UserConfirmationController do
         user,
         &Routes.user_confirmation_url(conn, :confirm, &1)
       )
-    end
 
-    # Regardless of the outcome, show an impartial success/error message.
-    conn
-    |> put_flash(
-      :info,
-      "If your email is in our system and it has not been confirmed yet, " <>
-        "you will receive an email with instructions shortly."
-    )
-    |> redirect(to: "/")
+      conn
+      |> put_flash(
+        :info,
+        "If your email is in our system and it has not been confirmed yet, " <>
+          "you will receive an email with instructions shortly."
+      )
+      |> redirect(to: "/")
+    else
+      conn
+      |> put_flash(
+        :info,
+        "This email is not in our system." <>
+          " Please register for an account."
+      )
+      |> redirect(to: Routes.user_registration_path(conn, :new))
+    end
   end
 
   # Do not log in the user after confirmation to avoid a
@@ -32,7 +39,7 @@ defmodule KaldaWeb.UserConfirmationController do
       {:ok, _} ->
         conn
         |> put_flash(:info, "Account confirmed successfully.")
-        |> redirect(to: "/")
+        |> redirect(to: Routes.user_session_path(conn, :new))
 
       :error ->
         # If there is a current user and the account was already confirmed,
@@ -46,7 +53,7 @@ defmodule KaldaWeb.UserConfirmationController do
           %{} ->
             conn
             |> put_flash(:error, "Account confirmation link is invalid or it has expired.")
-            |> redirect(to: "/")
+            |> redirect(to: Routes.user_confirmation_path(conn, :new))
         end
     end
   end
