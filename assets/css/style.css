@@ -22,38 +22,31 @@
   --gap-xxl: calc(var(--gap) * 4); /* 64 px */
   --gap-xxxl: calc(var(--gap) * 5); /* 80 px */
   /* Paragraphs */
+  --font-family: poppins, sans-serif;
   /* FONT WEIGHT */
-  --font-weight: 500;
-  /* poppins semibold == weight 600 */
+  --font-weight: 500; /* poppins semibold == weight 600 */
   --font-weight-large: 600;
   /* FONT SIZE */
-  --font-size: 16px;
-  /* small = 14 points */
-  --font-size-s: 0.875rem;
-  /* large = 18 points, for l and H2 mobile */
-  --font-size-l: 1.125rem;
-  /* xl = 24 points, for H2 desktop, h1 mobile */
-  --font-size-xl: 1.5rem;
-  /* xxl = 32 points, h1 desktop */
-  --font-size-xxl: 2rem;
-  /* xxxl = 40 points, same as xl-blog-header */
+  --font-size: 16px; /* small = 14 points */
+  --font-size-s: 0.875rem; /* large = 18 points, for l and H2 mobile */
+  --font-size-l: 1.125rem; /* xl = 24 points, for H2 desktop, h1 mobile */
+  --font-size-xl: 1.5rem; /* xxl = 32 points, h1 desktop */
+  --font-size-xxl: 2rem; /* xxxl = 40 points, same as xl-blog-header */
   --font-size-xxxl: 2.5rem;
   /* FONT LINE HEIGHT */
-  /* line height 24 (normal) */
-  --line-height: 1.5rem;
-  /* line height 16 (small) */
-  --line-height-s: 1rem;
-  /* line height 32 (large) */
-  --line-height-l: 2rem;
-  /* line height 40 (x-large) */
-  --line-height-xl: 2.5rem;
-  /* line height xxl 48 points , also xl-blog-header*/
-  --line-height-xxl: 3rem;
+  --line-height: 1.5rem; /* line height 24 (normal) */
+  --line-height-s: 1rem; /* line height 16 (small) */
+  --line-height-l: 2rem; /* line height 32 (large) */
+  --line-height-xl: 2.5rem; /* line height 40 (x-large) */
+  --line-height-xxl: 3rem; /* line height xxl 48 points , also xl-blog-header*/
 
   /* Screen size for media queries and break points */
   /* Note that screen sizes for media queries are standardised (see below) HOWEVER */
   /* Media queries don't accept css variables so they still need to be changes manually */
-  --screen-small: 900px;
+  --screen-small: 375px;
+  --screen-medium: 600px;
+  --screen-large: 900px;
+  --screen-xlarge: 1200px;
 }
 
 html {
@@ -70,20 +63,21 @@ a {
   text-decoration: none;
 }
 
-ul {
+ul,
+li {
   list-style: none;
 }
 
 body {
   /* note that imported font weights are 500(default) 600(semibold) and 700 (bold) */
-  font-family: poppins, sans-serif;
+  font-family: var(--font-family);
   margin: 0;
   color: var(--color-purple);
 }
 
 header {
-  background: #4a00b0;
-  color: white;
+  background: var(--color-white);
+  color: var(--color-purple);
 }
 
 input[type="submit"] {
@@ -92,4 +86,40 @@ input[type="submit"] {
 
 .header-logo {
   max-height: 10rem;
+  top: -5px;
+}
+
+.button {
+  background-color: var(--color-purple-mid);
+  color: var(--color-white);
+  border: none;
+  padding: var(--gap-s) var(--gap);
+  font-weight: 500;
+  border-radius: 100px;
+}
+
+textarea {
+  font-family: var(--font-family);
+}
+
+/* app header styles */
+section.app-header-container {
+  margin: var(--gap-s);
+  display: flex;
+}
+
+nav.app-header-nav {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+nav.app-header-nav > * {
+  margin: var(--gap-s);
+  font-weight: var(--font-weight-large);
+  font-size: var(--font-size-s);
+}
+
+.app-header-spacer {
+  width: 32px;
 }

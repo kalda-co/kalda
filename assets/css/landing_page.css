@@ -241,6 +241,7 @@ div.hero-lhs p {
   align-items: center;
   padding: var(--gap-s);
   flex-wrap: wrap;
+  background-color: var(--color-purple);
 }
 
 .site-page-header > * {
