@@ -13,7 +13,7 @@
 
       <%= if @signup_changeset.action do %>
         <div class="alert alert-danger">
-          Oops, something went wrong! Please try again.
+          Something went wrong, please try again.
         </div>
       <% end %>
       <%= form_for @signup_changeset, Routes.signup_path(@conn, :create), [class: "landing-form js-waitlist-form"], fn f -> %>
@@ -21,12 +21,8 @@
         <%= submit "Sign up", class: "button" %>
       <% end %>
       <p>
-        By signing up you agree to be emailed when your spot comes up, and get our newsletter - you can opt out any time, but we think it's awesome.
-        <%# By giving your details you agree to hear Kalda’s latest news. You can
-        unsubscribe at any time. We will not share your data to third parties. %>
-      </p>
-      <p>
-        We will never sell your data.
+        By signing up you agree to be emailed when your spot comes up, and get our
+        newsletter. You can opt out any time. We will never sell your data.
       </p>
     </div>
     <div>
@@ -40,8 +36,9 @@
       Why Kalda
     </h2>
     <p>
-      Using Kalda improves your mood with daily reflection questions and
-      weekly group therapy in a supportive LGBTQIA+ community.
+      We are an LGBTQIA+, sex positive, safe space for people who care about mental
+      wellbeing. Kalda is a place to find group therapy, and give and receive peer
+      support. For the community, by the community.
     </p>
   </div>
 </div>
@@ -52,11 +49,9 @@
       Our Mission
     </h2>
     <p>
-      We know that having a supportive community is key to mental wellbeing.
-      And we believe that everyone should be able to access unbiased and
-      affordable mental health support. That's why we created Kalda, a place
-      to access daily facilitated peer-to-peer support and weekly group
-      therapy from LGBTQIA+ therapists.
+      Everyone should be able to access affordable mental health support. And having
+      a supportive community is key to mental wellbeing. That’s why we created Kalda,
+      a space to access daily peer support and weekly group therapy. Together, we got this.
     </p>
   </div>
 </div>
@@ -67,10 +62,14 @@
     <div class="landing-grid-text">
       <div>
         <h2>
-          Daily Reflection Questions
+          Daily Peer Support
         </h2>
         <p>
-          Within a supportive community you’ll be answering daily reflection questions.
+          Within a supportive community you’ll be answering daily reflection questions
+          which are curated by an LGBTQIA+ therapist. You'll have access to our platform
+          which is a supportive, safe space to give and get support. We recognise that
+          some people may want to be anonymous, usernames are used on the platform to
+          protect your privacy.
         </p>
       </div>
     </div>
@@ -83,7 +82,9 @@
           Weekly Group Therapy
         </h2>
         <p>
-          Join a live weekly group therapy session with an experienced therapist.
+          Each week an experienced Kalda coach gives a guided meditation to the whole group.
+          Next we break into small groups for sharing circles. The sense of shared identity
+          creates a safe and supportive space.
         </p>
       </div>
     </div>
@@ -98,9 +99,8 @@
           For The Community, By The Community
         </h2>
         <p>
-          We are a queer-led team developing a digital experience for the
-          community. The app has been developed through co-design with the
-          community.
+          We are a queer-led team, Kalda is developed and improved through close collaboration with people in
+          the LGBTQIA+ community.
         </p>
       </div>
     </div>
@@ -160,7 +160,7 @@
     <li>
       <h3>Regular support</h3>
       <p>
-        Daily reflection questions and weekly meditations keeps you on track
+        Daily reflection questions and weekly group therapy keeps you on track
         to improving your mental wellbeing.
       </p>
     </li>

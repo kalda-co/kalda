@@ -219,7 +219,7 @@ div.hero-lhs p {
   padding: var(--gap);
   margin-left: var(--gap);
   margin-bottom: var(--gap);
-  width: 230px;
+  width: 300px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -272,7 +272,7 @@ div.hero-lhs p {
 .container {
   display: block;
   max-width: 100%;
-  width: 750px;
+  width: 1000px;
   margin-left: auto;
   margin-right: auto;
   padding-left: 13px;
