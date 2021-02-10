@@ -4,12 +4,13 @@ export type Loading = {
 
 export type Loaded = {
   type: "loaded";
+  current_user: User;
+  posts: Array<Post>;
 };
 
 export type FailedToLoad = {
-  type: "failedToLoad";
-  currentUser: User;
-  posts: Array<Post>;
+  type: "failed_to_load";
+  error: Error;
 };
 
 export type AppState = Loading | Loaded | FailedToLoad;
