@@ -21,7 +21,7 @@
         <%= submit "Sign up", class: "gradient button" %>
       <% end %>
       <p>
-        By signing up you agree to be emailed when your spot comes up, and get our
+        By signing up you agree to be emailed when your spot comes up, and get our 
         newsletter. You can opt out any time. We will never sell your data.
       </p>
     </div>
@@ -36,8 +36,8 @@
       Why Kalda
     </h2>
     <p>
-      We are an LGBTQIA+, sex positive, safe space for people who care about mental
-      wellbeing. Kalda is a place to find group therapy, and give and receive peer
+      We are an LGBTQIA+, sex positive, safe space for people who care about mental 
+      wellbeing. Kalda is a place to find group therapy, and give and receive peer 
       support. For the community, by the community.
     </p>
   </div>
@@ -49,9 +49,9 @@
       Our Mission
     </h2>
     <p>
-      Everyone should be able to access affordable mental health support. And having
-      a supportive community is key to mental wellbeing. That’s why we created Kalda,
-      a space to access daily peer support and weekly group therapy. Together, we got this.
+      Everyone should be able to access affordable mental health support. And having 
+      a supportive community is key to mental wellbeing. That’s why we created Kalda, 
+      a space to access daily peer support and weekly group therapy. Together, we got his.
     </p>
   </div>
 </div>
@@ -65,11 +65,11 @@
           Daily Peer Support
         </h2>
         <p>
-          Within a supportive community you’ll be answering daily reflection questions
-          which are curated by an LGBTQIA+ therapist. You'll have access to our platform
-          which is a supportive, safe space to give and get support. We recognise that
-          some people may want to be anonymous, usernames are used on the platform to
-          protect your privacy.
+          Within a supportive community you’ll be answering daily reflection questions 
+          which are curated by an LGBTQIA+ therapist. You'll have access to our platform 
+          which is a supportive, safe space to give and get support. We recognise that 
+          some people may want to be anonymous, usernames are used on the platform to 
+          protect your privacy. 
         </p>
       </div>
     </div>
@@ -82,8 +82,8 @@
           Weekly Group Therapy
         </h2>
         <p>
-          Each week an experienced Kalda coach gives a guided meditation to the whole group.
-          Next we break into small groups for sharing circles. The sense of shared identity
+          Each week an experienced Kalda coach gives a guided meditation to the whole group. 
+          Next we break into small groups for sharing circles. The sense of shared identity 
           creates a safe and supportive space.
         </p>
       </div>
@@ -99,8 +99,8 @@
           For The Community, By The Community
         </h2>
         <p>
-          We are a queer-led team, Kalda is developed and improved through close collaboration with people in
-          the LGBTQIA+ community.
+          We are a queer-led team, Kalda is developed and improved through close collaboration with people in 
+          the LGBTQIA+ community. 
         </p>
       </div>
     </div>
