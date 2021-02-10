@@ -2,7 +2,6 @@
   import Comment from "./Comment.svelte";
   import NewCommentForm from "./NewCommentForm.svelte";
   import type { Post, User } from "../state";
-  import App from "../App.svelte";
 
   export let post: Post;
   export let currentUser: User;
@@ -31,7 +30,7 @@
 
 <article>
   <section class="post">
-    <cite>{post.author.name}</cite>
+    <cite>{post.author.username}</cite>
     <p class="question">{post.content}</p>
     <aside class="trivia">
       <span>
@@ -49,7 +48,7 @@
     <NewCommentForm {saveComment} />
 
     {#each post.comments as comment (comment.id)}
-      <Comment author={comment.author.name} text={comment.content} />
+      <Comment author={comment.author.username} text={comment.content} />
     {/each}
   </section>
 </article>

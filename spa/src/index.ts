@@ -6,7 +6,7 @@ let comments = [
     id: 0,
     author: {
       id: 5,
-      name: "Puppy_Queen",
+      username: "Puppy_Queen",
     },
     replies: [],
     content:
@@ -16,7 +16,7 @@ let comments = [
     id: 1,
     author: {
       id: 5,
-      name: "ElJ",
+      username: "ElJ",
     },
     replies: [],
     content:
@@ -26,7 +26,7 @@ let comments = [
     id: 2,
     author: {
       id: 5,
-      name: "Otter4life",
+      username: "Otter4life",
     },
     replies: [],
     content: "I like turtles!",
@@ -35,7 +35,7 @@ let comments = [
     id: 3,
     author: {
       id: 5,
-      name: "Glitter-Friend",
+      username: "Glitter-Friend",
     },
     replies: [],
     content:
@@ -47,7 +47,7 @@ const post: Post = {
   id: 0,
   author: {
     id: 1,
-    name: "Alsquid",
+    username: "Alsquid",
   },
   comments,
   content:
@@ -56,7 +56,7 @@ const post: Post = {
 
 const currentUser = {
   id: 0,
-  name: "You",
+  username: "You",
 };
 
 const app = new App({
