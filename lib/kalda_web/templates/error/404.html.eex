@@ -4,41 +4,26 @@
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <%= csrf_meta_tag() %>
-    <%= live_title_tag(title_text(@conn)) %>
-    <link phx-track-static rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
-    <script defer phx-track-static type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
-    <%# Social media sharing meta tags %>
-    <meta name="description" content="<%= description_text(@conn) %>"/>
-    <meta property="og:title" content="<%= title_text(@conn)%>">
-    <meta property="og:description" content="<%= description_text(@conn)%>">
-    <meta property="og:image" content="<%= KaldaWeb.Endpoint.url() %>/images/og-logo-fb.png">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta property="og:site_name" content="Kalda">
-    <meta name="twitter:image:alt" content="Kalda logo text in hot pink on purple, with a pink rainbow">
-    <%# Favicons %>
-    <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
-    <link rel="manifest" href="/images/favicon/site.webmanifest">
-    <link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
-    <meta name="msapplication-TileColor" content="#da532c">
-    <meta name="theme-color" content="#ffffff">
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="stylesheet" href="/css/app.css" />
     <%# Google fonts %>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
-    <%# Plausible Tracking %>
+    <%# Plausible tracking %>
     <script async defer data-domain="kalda.co" src="https://plausible.io/js/plausible.js"></script>
     <script>window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }</script>
   </head>
   <body>
     <div class="wrapper">
-    <%= if blog_page?(@conn) do %>
-      <%= render "_blog_header.html", assigns %>
-    <% else %>
-      <%= render "_site_page_header.html", assigns %>
-    <% end %>
-      <%= @inner_content %>
+    <header class='site-page-header'>
+      <a href="/"><img  class='site-page-logo' src="/images/kalda-logo.svg"></a>
+      <div class="site-page-header-spacer"></div>
+      <nav class="site-page-header-links">
+        <a class="gradient button" name="contact" href="mailto:hello@kalda.co">Contact Us</a>
+      </nav>
+    </header>
+    <h1>Uh oh! 404. Page not found</h1>
+    <p>I swear it was right here, I just had it a second ago...</p>
       <div class="push-down-footer"></div>
     </div>
     <footer class="site-footer">
@@ -58,4 +43,3 @@
       </div>
     </footer>
   </body>
-</html>
