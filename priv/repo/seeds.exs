@@ -22,7 +22,8 @@ user =
     username: "KaldaSquid",
     email: "demo@kalda.co",
     password: "thisisademopassword",
-    hashed_password: Bcrypt.hash_pwd_salt("thisisademopassword")
+    hashed_password: Bcrypt.hash_pwd_salt("thisisademopassword"),
+    confirmed_at: NaiveDateTime.local_now()
   })
 
 _user2 =

@@ -5,7 +5,7 @@
   import { scale } from "svelte/transition";
 </script>
 
-<div class="comment" transition:scale>
+<div class="comment" transition:scale|local>
   <cite>{author}</cite>
   {text}
 </div>

@@ -1,17 +1,36 @@
 <script lang="ts">
+  import { getInitialAppState } from "./backend";
+
   import Navbar from "./Navbar.svelte";
   import DailyReflection from "./forum/DailyReflection.svelte";
-  import type { User, Post } from "./state";
+  import type { AppState, User, Post } from "./state";
 
-  export let post: Post;
-  export let currentUser: User;
+  let state: AppState = { type: "loading" };
+  (async () => {
+    state = await getInitialAppState();
+  })();
 </script>
 
-<main>
-  <Navbar />
-  <DailyReflection {post} {currentUser} />
-</main>
+<!-- TODO: Loading design -->
+{#if state.type === "loading"}
+  ... Loading
+{/if}
 
+<!-- TODO: Error design -->
+{#if state.type === "failed_to_load"}
+  failed to load :(
+  {state.error}
+{/if}
+
+{#if state.type === "loaded"}
+  <main>
+    <Navbar />
+    <!-- TODO: gracefully handle zero posts -->
+    <DailyReflection post={state.posts[0]} currentUser={state.current_user} />
+  </main>
+{/if}
+
+<!-- TODO: Error design -->
 <style>
   main {
     width: 375px;
