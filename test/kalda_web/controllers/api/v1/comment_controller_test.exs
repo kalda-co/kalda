@@ -21,6 +21,16 @@ defmodule KaldaWeb.Api.V1.CommentControllerTest do
   describe "POST create" do
     setup [:register_and_log_in_user]
 
+    test "renders 422 with errors for invalid attributes", %{conn: conn, user: _current_user} do
+      user = Kalda.AccountsFixtures.user()
+      post = Kalda.ForumsFixtures.post(user)
+      assert conn = post(conn, "/v1/posts/#{post.id}/comments", @invalid_comment_content)
+
+      assert json_response(conn, 422) == %{
+               "errors" => %{"content" => ["can't be blank"]}
+             }
+    end
+
     test "creates comment for user on post in daily reflections", %{
       conn: conn,
       user: current_user
@@ -28,11 +38,16 @@ defmodule KaldaWeb.Api.V1.CommentControllerTest do
       user = Kalda.AccountsFixtures.user()
       post = Kalda.ForumsFixtures.post(user)
 
-      assert conn = post(conn, "/v1/posts/#{post.id}/comments", comment: @valid_comment_content)
+      assert conn = post(conn, "/v1/posts/#{post.id}/comments", @valid_comment_content)
 
-      IO.inspect(conn)
+      # get_comments has no preloads
+      assert [comment_no_preloads] = Kalda.Forums.get_comments()
 
-      assert [comment] = Kalda.Forums.get_comments()
+      assert comment =
+               Kalda.Forums.get_comment!(comment_no_preloads.id,
+                 preload: [:author, replies: [:author]]
+               )
+
       assert comment.content == @valid_comment_content.content
       assert comment.author_id == current_user.id
       assert comment.post_id == post.id
@@ -45,16 +60,6 @@ defmodule KaldaWeb.Api.V1.CommentControllerTest do
                  "username" => comment.author.username
                },
                "inserted_at" => NaiveDateTime.to_iso8601(comment.inserted_at)
-             }
-    end
-
-    test "renders 422 with errors for invalid attributes", %{conn: conn, user: _current_user} do
-      user = Kalda.AccountsFixtures.user()
-      post = Kalda.ForumsFixtures.post(user)
-      assert conn = post(conn, "/v1/posts/#{post.id}/comments", comment: @invalid_comment_content)
-
-      assert json_response(conn, 422) == %{
-               "errors" => %{"content" => ["can't be blank"]}
              }
     end
   end
