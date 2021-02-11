@@ -48,7 +48,7 @@
     <NewCommentForm saveComment={(content) => saveComment(post.id, content)} />
 
     {#each post.comments as comment (comment.id)}
-      <Comment author={comment.author.username} text={comment.content} />
+      <Comment {comment} />
     {/each}
   </section>
 </article>
