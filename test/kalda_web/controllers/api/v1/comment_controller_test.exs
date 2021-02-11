@@ -30,6 +30,8 @@ defmodule KaldaWeb.Api.V1.CommentControllerTest do
 
       assert conn = post(conn, "/v1/posts/#{post.id}/comments", comment: @valid_comment_content)
 
+      IO.inspect(conn)
+
       assert [comment] = Kalda.Forums.get_comments()
       assert comment.content == @valid_comment_content.content
       assert comment.author_id == current_user.id
@@ -38,7 +40,10 @@ defmodule KaldaWeb.Api.V1.CommentControllerTest do
       assert json_response(conn, 201) == %{
                "id" => comment.id,
                "content" => @valid_comment_content.content,
-               "author" => comment.author_id,
+               "author" => %{
+                 "id" => comment.author_id,
+                 "username" => comment.author.username
+               },
                "inserted_at" => NaiveDateTime.to_iso8601(comment.inserted_at)
              }
     end

@@ -7,6 +7,9 @@
   <title>Kalda</title>
 </head>
 <body>
+<script>
+window.csrfToken = "<%= Plug.CSRFProtection.get_csrf_token() %>";
+</script>
   <%# HACK: We shouldn't need to set this here %>
   <script>window.HMR_WEBSOCKET_PORT = 4452</script>
   <link rel="stylesheet" href="<%= spa_static_path("/spa.css") %>" />

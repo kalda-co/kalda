@@ -5,8 +5,11 @@ defmodule KaldaWeb.Api.V1.CommentView do
     %{
       id: comment.id,
       content: comment.content,
-      author: comment.author_id,
-      inserted_at: comment.inserted_at
+      inserted_at: comment.inserted_at,
+      author: %{
+        id: comment.author.id,
+        username: comment.author.username
+      }
     }
   end
 end

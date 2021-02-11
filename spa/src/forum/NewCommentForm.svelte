@@ -1,16 +1,17 @@
 <script lang="ts">
-  export let saveComment: (text: string) => Promise<boolean>;
+  export let saveComment: (text: string) => Promise<any>;
 
   let newCommentText: string = "";
 
   async function submitComment() {
     let content = newCommentText;
-    let promise = saveComment(newCommentText);
-    newCommentText = "";
-    let successfullySaved = await promise;
-    if (!successfullySaved) {
+    try {
+      newCommentText = "";
+      await saveComment(content);
+    } catch (error) {
       // Saving failed, reset the text input so the user can try again
       newCommentText = content;
+      console.error(error);
     }
   }
 
