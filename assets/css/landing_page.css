@@ -64,9 +64,10 @@
   padding: var(--button-padding);
   white-space: nowrap;
   font-size: var(--font-size);
+  margin-top: 0px;
 }
 
-.button-wide {
+.gradient.button-wide {
   --side: 5rem;
   padding-left: var(--side);
   padding-right: var(--side);

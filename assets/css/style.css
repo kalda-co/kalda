@@ -120,7 +120,7 @@ button {
   border-radius: 100px;
   font-size: var(--font-size-s);
   text-decoration: none;
-  /* margin-top: var(--gap); */
+  margin-top: var(--gap);
 }
 
 textarea {
