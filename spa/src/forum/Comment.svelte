@@ -1,21 +1,35 @@
 <script lang="ts">
-  export let author: string;
-  export let text: string;
-
+  import type { Comment } from "../state";
   import { scale } from "svelte/transition";
+
+  export let comment: Comment;
 </script>
 
-<div class="comment" transition:scale|local>
-  <cite>{author}</cite>
-  {text}
-</div>
+<article>
+  <div class="comment" transition:scale|local>
+    <cite>{comment.author.username}</cite>
+    {comment.content}
+  </div>
+
+  {#each comment.replies as reply}
+    <div class="reply">
+      <cite>{reply.author.username}</cite>
+      {reply.content}
+    </div>
+  {/each}
+</article>
 
 <style>
+  .reply,
   .comment {
     background-color: var(--color-grey);
     border-radius: 20px;
     padding: var(--gap);
-    margin-bottom: var(--gap);
+    margin-bottom: var(--gap-s);
+  }
+
+  .reply {
+    margin-left: var(--gap-l);
   }
 
   cite {
