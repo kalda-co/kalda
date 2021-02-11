@@ -1,5 +1,4 @@
 defmodule Kalda.ForumsTest do
-  # TODO test preloads
   use Kalda.DataCase
 
   alias Kalda.Forums

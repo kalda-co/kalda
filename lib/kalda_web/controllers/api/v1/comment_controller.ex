@@ -5,7 +5,6 @@ defmodule KaldaWeb.Api.V1.CommentController do
   alias Kalda.Forums.Comment
 
   def create(conn, %{"id" => post_id} = comment_params) do
-    IO.inspect(comment_params)
     user = conn.assigns.current_user
     post = Forums.get_post!(post_id)
 
