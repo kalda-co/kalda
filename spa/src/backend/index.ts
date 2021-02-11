@@ -37,7 +37,6 @@ export async function createComment(
   let body = JSON.stringify({
     content: content,
   });
-  console.log(body);
   let resp = await fetch(constructPostCommentEndpoint(post_id), {
     headers: {
       "content-type": "application/json",
