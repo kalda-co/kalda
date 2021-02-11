@@ -1,9 +1,16 @@
 import App from "./App.svelte";
-import type { Post } from "./state";
+
+declare global {
+  interface Window {
+    csrfToken: string;
+  }
+}
 
 const app = new App({
   target: document.body,
-  props: {},
+  props: {
+    csrfToken: window.csrfToken,
+  },
 });
 
 export default app;

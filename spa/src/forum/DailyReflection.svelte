@@ -2,16 +2,16 @@
   import Comment from "./Comment.svelte";
   import NewCommentForm from "./NewCommentForm.svelte";
   import type { Post, User } from "../state";
+  import { createComment } from "../backend";
+  import App from "../App.svelte";
+  import { identity } from "svelte/internal";
 
   export let post: Post;
   export let currentUser: User;
 
-  async function saveComment(content: string) {
-    console.log("todo: save data", content);
-    const comments = [
-      { id: 0, author: currentUser, content, replies: [] },
-      ...post.comments,
-    ];
+  async function saveComment(post_id: number, content: string) {
+    let comment = await createComment(post_id, content);
+    const comments = [comment, ...post.comments];
     post = { ...post, comments };
     return true;
   }
@@ -45,7 +45,7 @@
   </section>
 
   <section class="comments">
-    <NewCommentForm {saveComment} />
+    <NewCommentForm saveComment={(content) => saveComment(post.id, content)} />
 
     {#each post.comments as comment (comment.id)}
       <Comment author={comment.author.username} text={comment.content} />

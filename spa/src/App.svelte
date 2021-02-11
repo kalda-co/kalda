@@ -1,9 +1,11 @@
 <script lang="ts">
-  import { getInitialAppState } from "./backend";
-
+  import { setCSRFToken, getInitialAppState } from "./backend";
   import Navbar from "./Navbar.svelte";
   import DailyReflection from "./forum/DailyReflection.svelte";
-  import type { AppState, User, Post } from "./state";
+  import type { AppState } from "./state";
+
+  export let csrfToken: string;
+  setCSRFToken(csrfToken);
 
   let state: AppState = { type: "loading" };
   (async () => {

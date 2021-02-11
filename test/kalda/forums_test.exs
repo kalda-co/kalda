@@ -1,4 +1,5 @@
 defmodule Kalda.ForumsTest do
+  # TODO test preloads
   use Kalda.DataCase
 
   alias Kalda.Forums
@@ -85,6 +86,11 @@ defmodule Kalda.ForumsTest do
 
       assert {:ok, %Comment{} = comment} = Forums.create_comment(user, post, @valid_comment_attrs)
       assert Forums.get_comment!(comment.id) == comment
+      # Test of preloads
+      comment_with_preloads =
+        Forums.get_comment!(comment.id, preload: [:author, replies: [:author]])
+
+      assert comment_with_preloads.author.id == user.id
     end
 
     test "get_comments_for_post/1 gets all comments associated with given post" do

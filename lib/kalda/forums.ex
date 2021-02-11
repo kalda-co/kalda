@@ -173,14 +173,22 @@ defmodule Kalda.Forums do
 
   ## Examples
 
-      iex> get_comment!(123)
+      iex> get_comment!(123, opts || [])
       %Comment{}
 
-      iex> get_comment!(456)
+      iex> get_comment!(456), opts || []
       ** (Ecto.NoResultsError)
 
   """
-  def get_comment!(id), do: Repo.get!(Comment, id)
+  def get_comment!(id, opts \\ []) do
+    preload = opts[:preload] || []
+
+    from(comment in Comment,
+      where: comment.id == ^id,
+      preload: ^preload
+    )
+    |> Repo.get!(id)
+  end
 
   @doc """
   Creates a comment for a user in a post
