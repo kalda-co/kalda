@@ -59,7 +59,8 @@ defmodule KaldaWeb.Api.V1.CommentControllerTest do
                  "id" => comment.author_id,
                  "username" => comment.author.username
                },
-               "inserted_at" => NaiveDateTime.to_iso8601(comment.inserted_at)
+               "inserted_at" => NaiveDateTime.to_iso8601(comment.inserted_at),
+               "replies" => []
              }
     end
   end
