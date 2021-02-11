@@ -1,13 +1,10 @@
 <script lang="ts">
   import Comment from "./Comment.svelte";
   import NewCommentForm from "./NewCommentForm.svelte";
-  import type { Post, User } from "../state";
+  import type { Post } from "../state";
   import { createComment } from "../backend";
-  import App from "../App.svelte";
-  import { identity } from "svelte/internal";
 
   export let post: Post;
-  export let currentUser: User;
 
   async function saveComment(post_id: number, content: string) {
     let comment = await createComment(post_id, content);

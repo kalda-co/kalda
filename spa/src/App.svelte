@@ -28,7 +28,7 @@
   <main>
     <Navbar />
     <!-- TODO: gracefully handle zero posts -->
-    <DailyReflection post={state.posts[0]} currentUser={state.current_user} />
+    <DailyReflection post={state.posts[0]} />
   </main>
 {/if}
 
