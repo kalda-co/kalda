@@ -31,7 +31,7 @@
       <%= submit "Submit", class: "button"%>
     </div>
 
-  <p>By clicking the button above your accept Kalda’s
+  <p>By clicking the button above you accept Kalda’s
   <%= link "terms and conditions.", to: "/terms" %></p>
   <% end %>
 
