@@ -18,5 +18,9 @@ window.csrfToken = "<%= Plug.CSRFProtection.get_csrf_token() %>";
   <% end %>
   <script type="module" src="<%= spa_static_path("/src/index.js") %>"></script>
   <noscript>Please enable JavaScript to view this page.</noscript>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <script async defer data-domain="kalda.co" src="https://plausible.io/js/plausible.js"></script>
+  <script>window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }</script>
 </body>
 </html>
