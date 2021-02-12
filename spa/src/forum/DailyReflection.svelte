@@ -23,6 +23,7 @@
         return `${post.comments.length} comments`;
     }
   }
+  console.log(post.comments);
 </script>
 
 <article>
@@ -40,7 +41,7 @@
   <section class="comments">
     <NewCommentForm saveComment={(content) => saveComment(post.id, content)} />
 
-    {#each post.comments as comment (comment.id)}
+    {#each post.comments.reverse() as comment (comment.id)}
       <Comment {comment} />
     {/each}
   </section>
