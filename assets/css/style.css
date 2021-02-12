@@ -154,6 +154,7 @@ nav.app-header-nav > * {
 .admin-container h3 {
   margin-bottom: 0px;
 }
+
 .admin-container {
   width: 600px;
   max-width: 100%;
@@ -161,19 +162,68 @@ nav.app-header-nav > * {
   background-color: var(--color-white);
 }
 
+.details {
+  display: flex;
+  justify-content: space-between;
+}
+
+.admin-container .name,
+.admin-container .date {
+  font-size: var(--font-size-s);
+  font-style: italic;
+}
+
+.admin-container a {
+  text-decoration: underline;
+}
+
+.admin-container .post a {
+  text-decoration: underline;
+  color: white;
+}
+
+.admin-container .post h3,
+.admin-container .post .content {
+  color: white;
+  font-size: var(--font-size-xl);
+}
+
 .post-all {
   border-style: solid;
   border-color: #4a00b0;
-  border-radius: 100px;
+  border-radius: 20px;
   border-width: 3px;
   padding: 2rem;
 }
 
 .post {
-  background-color: pink;
+  background-color: #4a00b0;
+  border-radius: 20px;
+  color: white;
+  padding: 2.5rem;
 }
 
-.details {
-  display: flex;
-  justify-content: space-between;
+.admin-container .comment a {
+  text-decoration: underline;
+  color: black;
+}
+
+.comment {
+  background-color: var(--color-light);
+  border-radius: 20px;
+  color: var(--font-color-dark);
+  padding: 2.5rem;
+}
+
+.admin-container .reply a {
+  text-decoration: underline;
+  color: black;
+}
+
+.reply {
+  background-color: var(--color-light);
+  border-radius: 20px;
+  color: var(--font-color-dark);
+  padding: 2.5rem;
+  margin-left: 4rem;
 }

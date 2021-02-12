@@ -90,10 +90,9 @@ defmodule KaldaWeb.Router do
     get "/users", UserController, :index
 
     resources "/posts", PostController do
-      resources "/comments", CommentController
-      # do
-      #   resources "/replies", ReplyController
-      # end
+      resources "/comments", CommentController, only: [:delete] do
+        resources "/replies", ReplyController, only: [:delete]
+      end
     end
 
     # get "/posts/new", PostController, :new

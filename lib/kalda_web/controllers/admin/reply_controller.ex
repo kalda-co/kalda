@@ -1,4 +1,4 @@
-defmodule KaldaWeb.Admin.CommentController do
+defmodule KaldaWeb.Admin.ReplyController do
   use KaldaWeb, :controller
 
   alias Kalda.Forums
@@ -62,12 +62,12 @@ defmodule KaldaWeb.Admin.CommentController do
   # end
 
   def delete(conn, %{"id" => id}) do
-    Policy.authorize!(conn, :delete_admin_comment, Kalda)
-    comment = Forums.get_comment!(id)
-    {:ok, comment} = Forums.delete_comment(comment)
+    Policy.authorize!(conn, :delete_admin_reply, Kalda)
+    reply = Forums.get_reply!(id)
+    {:ok, reply} = Forums.delete_reply(reply)
 
     conn
-    |> put_flash(:info, "Comment deleted successfully.")
+    |> put_flash(:info, "Reply deleted successfully.")
     |> redirect(to: Routes.admin_post_path(conn, :index))
   end
 end

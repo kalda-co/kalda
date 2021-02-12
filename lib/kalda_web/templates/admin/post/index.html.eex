@@ -1,12 +1,13 @@
 <div class="admin-container">
-  <h1>Listing Posts</h1>
+  <h1>Daily Reflections</h1>
 
-  <span><%= link "New Post", to: Routes.admin_post_path(@conn, :new) %></span>
+  <h1>
+    <span><%= link "+ New Post", to: Routes.admin_post_path(@conn, :new) %></span>
+  </h1>
   <div class="all-posts">
     <%= for post <- @posts do %>
       <div class="post-all">
         <div class="post">
-          <h3>Daily Reflection</h3>
             <div class="details">
               <div class="name">
                 <%= post.author.username %>
@@ -41,8 +42,7 @@
                       <%= comment.content %>
                     </div>
                     <div class="actions">
-                      <span><%= link "Edit", to: Routes.admin_post_comment_path(@conn, :edit, post) %></span>
-                      <span><%= link "Delete", to: Routes.admin_post_comment_path(@conn, :delete, post), method: :delete, data: [confirm: "Are you sure?"] %></span>
+                      <span><%= link "Delete", to: Routes.admin_post_comment_path(@conn, :delete, post, comment), method: :delete, data: [confirm: "Are you sure?"] %></span>
                     </div>
                 </div>
 
@@ -60,6 +60,9 @@
                           <div class="content">
                             <%= reply.content %>
                           </div>
+                    <div class="actions">
+                      <span><%= link "Delete", to: Routes.admin_post_comment_reply_path(@conn, :delete, post, comment, reply), method: :delete, data: [confirm: "Are you sure?"] %></span>
+                    </div>
                       </div>
                     <% end %>
 
