@@ -88,13 +88,20 @@ defmodule KaldaWeb.Router do
     pipe_through [:browser, :require_admin]
 
     get "/users", UserController, :index
-    get "/posts", PostController, :index
-    get "/posts/new", PostController, :new
-    post "/posts", PostController, :create
-    get "/posts/:id", PostController, :show
-    get "/posts/:id/edit", PostController, :edit
-    put "/posts/:id", PostController, :update
-    delete "/posts/:id", PostController, :delete
+
+    resources "/posts", PostController do
+      resources "/comments", CommentController
+      # do
+      #   resources "/replies", ReplyController
+      # end
+    end
+
+    # get "/posts/new", PostController, :new
+    # post "/posts", PostController, :create
+    # get "/posts/:id", PostController, :show
+    # get "/posts/:id/edit", PostController, :edit
+    # put "/posts/:id", PostController, :update
+    # delete "/posts/:id", PostController, :delete
   end
 
   scope "/", KaldaWeb do
