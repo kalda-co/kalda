@@ -1,10 +1,11 @@
-<script lang="ts">
-</script>
-
 <nav class="navbar">
-  <img src="kalda-rainbow-purple.svg" alt="Kalda's Rainbow Logo" class="logo" />
+  <img
+    src="/images/kalda-rainbow-purple-logo.svg"
+    alt="Kalda's Rainbow Logo"
+    class="logo"
+  />
   <h1>Daily reflection</h1>
-  <img src="burger-menu.svg" alt="hamburger-menu" class="hamburger" />
+  <img src="/images/burger-menu.svg" alt="hamburger-menu" class="hamburger" />
 </nav>
 
 <style>
@@ -29,8 +30,5 @@
     width: var(--size);
     height: var(--size);
     overflow: hidden;
-
-    /* TODO: icons */
-    background-color: var(--color-purple-mid);
   }
 </style>

@@ -31,7 +31,7 @@
     <p class="question">{post.content}</p>
     <aside class="trivia">
       <span>
-        <img src="speech-icon.svg" alt="A speech bubble icon" />
+        <img src="/images/speech-icon.svg" alt="A speech bubble icon" />
         {commentsCountText()}
       </span>
     </aside>
