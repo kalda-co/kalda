@@ -7,6 +7,7 @@ defmodule Kalda.Forums do
   alias Kalda.Repo
 
   alias Kalda.Forums.Post
+  alias Kalda.Forums.Comment
 
   @doc """
   Creates a post for a user
@@ -38,6 +39,24 @@ defmodule Kalda.Forums do
   def get_posts(opts \\ []) do
     preload = opts[:preload] || []
     Repo.all(from post in Post, preload: ^preload)
+  end
+
+  @doc """
+  TODO: Describe me
+  """
+  def get_daily_reflections() do
+    Repo.all(
+      from post in Post,
+        order_by: [desc: post.inserted_at],
+        preload: [
+          :author,
+          comments:
+            ^from(comment in Comment,
+              order_by: [desc: comment.inserted_at],
+              preload: [:author, replies: [:author]]
+            )
+        ]
+    )
   end
 
   @doc """

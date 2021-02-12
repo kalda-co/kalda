@@ -3,6 +3,7 @@ defmodule Kalda.ForumsTest do
 
   alias Kalda.Forums
   alias Kalda.AccountsFixtures
+  alias Kalda.ForumsFixtures
 
   @valid_post_attrs %{content: "some content"}
   @update_post_attrs %{content: "some updated content"}
@@ -34,6 +35,74 @@ defmodule Kalda.ForumsTest do
       user = AccountsFixtures.user()
       assert {:ok, %Post{} = post} = Forums.create_post(user, @valid_post_attrs)
       assert Forums.get_posts() == [post]
+    end
+
+    test "get_daily_reflections" do
+      now = NaiveDateTime.local_now()
+      user1 = AccountsFixtures.user()
+      user2 = AccountsFixtures.user()
+      post1 = ForumsFixtures.post(user1)
+      post2 = ForumsFixtures.post(user1)
+      post3 = ForumsFixtures.post(user2)
+      comment1 = ForumsFixtures.comment(post1, user2)
+      comment2 = ForumsFixtures.comment(post2, user1)
+      comment3 = ForumsFixtures.comment(post2, user1)
+      reply1 = ForumsFixtures.reply(comment1, user2)
+      reply2 = ForumsFixtures.reply(comment1, user2)
+      reply3 = ForumsFixtures.reply(comment2, user2)
+
+      set_inserted_at = fn thing, time ->
+        Repo.update_all(
+          from(r in thing.__struct__, where: r.id == ^thing.id),
+          set: [inserted_at: time]
+        )
+      end
+
+      set_inserted_at.(post1, NaiveDateTime.add(now, -100))
+      set_inserted_at.(post2, NaiveDateTime.add(now, -90))
+      set_inserted_at.(post3, NaiveDateTime.add(now, -80))
+      set_inserted_at.(comment1, NaiveDateTime.add(now, -96))
+      set_inserted_at.(comment2, NaiveDateTime.add(now, -85))
+      set_inserted_at.(comment3, NaiveDateTime.add(now, -75))
+      set_inserted_at.(reply1, NaiveDateTime.add(now, -80))
+      set_inserted_at.(reply2, NaiveDateTime.add(now, -70))
+      set_inserted_at.(reply3, NaiveDateTime.add(now, -60))
+
+      result =
+        Forums.get_daily_reflections()
+        |> Enum.map(fn post ->
+          %{
+            id: post.id,
+            comments:
+              Enum.map(post.comments, fn comment ->
+                replies = Enum.map(comment.replies, fn reply -> %{id: reply.id} end)
+                %{id: comment.id, replies: replies}
+              end)
+          }
+        end)
+
+      assert result == [
+               %{id: post3.id, comments: []},
+               %{
+                 id: post2.id,
+                 comments: [
+                   %{id: comment3.id, replies: []},
+                   %{id: comment2.id, replies: [%{id: reply3.id}]}
+                 ]
+               },
+               %{
+                 id: post1.id,
+                 comments: [
+                   %{
+                     id: comment1.id,
+                     replies: [
+                       %{id: reply1.id},
+                       %{id: reply2.id}
+                     ]
+                   }
+                 ]
+               }
+             ]
     end
 
     test "change_post/1 returns a post changeset" do
