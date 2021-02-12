@@ -5,7 +5,7 @@ defmodule KaldaWeb.Api.V1.DailyReflectionController do
 
   def index(conn, _params) do
     user = conn.assigns.current_user
-    posts = Forums.get_posts(preload: [:author, comments: [:author, replies: [:author]]])
+    posts = Forums.get_daily_reflections()
 
     conn
     |> render("index.json", user: user, posts: posts)
