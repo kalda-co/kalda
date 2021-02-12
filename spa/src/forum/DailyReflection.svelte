@@ -1,8 +1,9 @@
 <script lang="ts">
   import Comment from "./Comment.svelte";
   import NewCommentForm from "./NewCommentForm.svelte";
+  import NewReplyForm from "./NewReplyForm.svelte";
   import type { Post } from "../state";
-  import { createComment } from "../backend";
+  import { createComment, createReply } from "../backend";
 
   export let post: Post;
 
@@ -10,6 +11,16 @@
     let comment = await createComment(post_id, content);
     const comments = [comment, ...post.comments];
     post = { ...post, comments };
+    return true;
+  }
+
+  import type { Comment } from "../state";
+  export let comment: Comment;
+
+  async function saveReply(comment_id: number, content: string) {
+    let reply = await createReply(comment_id, content);
+    const replies = [reply, ...comment.replies];
+    comment = { ...comment, replies };
     return true;
   }
 
@@ -46,6 +57,9 @@
 
     {#each post.comments as comment (comment.id)}
       <Comment {comment} />
+      <section class="reply-form">
+        <NewReplyForm saveReply={(content) => saveReply(comment.id, content)} />
+      </section>
     {/each}
   </section>
 </article>
