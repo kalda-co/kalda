@@ -1,0 +1,44 @@
+<script lang="ts">
+  import type { Comment } from "../state";
+  import { scale } from "svelte/transition";
+
+  export let comment: Comment;
+
+  export let saveReply: (text: string) => Promise<any>;
+
+  let newReplyText: string = "";
+
+  async function submitReply() {
+    let content = newReplyText;
+    try {
+      newReplyText = "";
+      await saveReply(content);
+    } catch (error) {
+      // Saving failed, reset the text input so the user can try again
+      newReplyText = content;
+      console.error(error);
+    }
+  }
+
+  function handleKeypress(event: KeyboardEvent) {
+    if (event.ctrlKey && event.key === "Enter") {
+      submitReply();
+    }
+  }
+</script>
+
+
+    <div>
+      <form action="">
+        <div
+          class="reply-content"
+          contenteditable
+          on:keypress={handleKeypress}
+          bind:textContent={newRepyText}
+        />
+        <input class="reply-input-field" type="submit" value="Reply" />
+        <span class="placeholder"> Post a reply</span>
+      </form>
+    </div>
+
+  </div>
