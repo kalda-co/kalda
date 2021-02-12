@@ -13,6 +13,9 @@
   >
     <cite>{comment.author.username}</cite>
     {comment.content}
+    <div class="reply-link">
+      <a class="reply-link" href="#reply">Reply</a>
+    </div>
   </div>
 
   {#each comment.replies as reply}
@@ -24,6 +27,13 @@
 </article>
 
 <style>
+  .reply-link {
+    text-decoration: underline;
+    font-size: var(--font-size-s);
+    margin-top: var(--gap-s);
+    cursor: pointer;
+  }
+
   .reply,
   .comment {
     background-color: var(--color-grey);
@@ -49,6 +59,7 @@
     left: 0;
     top: 0;
     right: 0;
+    pointer-events: none;
   }
 
   cite {
