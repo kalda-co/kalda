@@ -23,7 +23,6 @@
         return `${post.comments.length} comments`;
     }
   }
-  console.log(post.comments);
 </script>
 
 <article>
