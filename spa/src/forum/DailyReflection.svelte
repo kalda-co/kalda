@@ -34,10 +34,6 @@
         <img src="speech-icon.svg" alt="A speech bubble icon" />
         {commentsCountText()}
       </span>
-      <span>
-        <img src="clock-icon.svg" alt="A clock icon" />
-        Expires tomorrow 9.00am
-      </span>
     </aside>
   </section>
 
@@ -53,8 +49,8 @@
 <style>
   .post {
     padding: var(--gap);
-    background-color: var(--color-purple-light);
-    color: var(--color-purple);
+    background-color: var(--color-purple);
+    color: var(--color-white);
   }
 
   cite {
