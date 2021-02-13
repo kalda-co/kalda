@@ -15,8 +15,11 @@ config :kalda, KaldaWeb.Endpoint, cache_static_manifest: "priv/static/cache_mani
 config :kalda, :basic_auth_password, "capybara"
 
 # Do not print debug messages in production
-config :logger, level: :info
+config :logger,
+  level: :info,
+  backends: [:console, Sentry.LoggerBackend]
 
+# Mailing list endpoint
 config :kalda,
   sendfox_list_id: "56109",
   load_spa_css: true,
@@ -28,6 +31,17 @@ config :kalda, Kalda.Mailer,
   hackney_opts: [
     recv_timeout: :timer.minutes(1)
   ]
+
+# Sentry for exception tracking
+config :sentry,
+  dsn: "https://67cd9caf0b384a50aa46775b36d6517a@o523474.ingest.sentry.io/5635561",
+  environment_name: :prod,
+  enable_source_code_context: true,
+  root_source_code_path: File.cwd!(),
+  tags: %{
+    env: "production"
+  },
+  included_environments: [:prod]
 
 # ## SSL Support
 #

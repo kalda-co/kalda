@@ -53,15 +53,18 @@ defmodule Kalda.MixProject do
       # Internationalisation
       {:gettext, "~> 0.11"},
       # JSON (de)serialization
-      {:jason, "~> 1.0"},
+      {:jason, "~> 1.1"},
       # Web server
-      {:plug_cowboy, "~> 2.0"},
+      {:plug_cowboy, "~> 2.3"},
       # Secure password hashing
       {:bcrypt_elixir, "~> 2.0"},
       # Markdown blog post engine
       {:nimble_publisher, "~> 0.1.0"},
       # Http client
       {:httpoison, "~> 1.8"},
+      # Exception tracking (note also upgraded jason to 1.1 and cowboy to 2.3 for this dep.)
+      {:sentry, "8.0.0"},
+      {:hackney, "~> 1.8"},
       # Automatic page reloading
       {:phoenix_live_reload, "~> 1.2", only: :dev},
       # HTML parsing

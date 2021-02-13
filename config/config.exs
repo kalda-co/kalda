@@ -21,10 +21,17 @@ config :kalda, KaldaWeb.Endpoint,
 # Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",
-  metadata: [:request_id]
+  metadata: [:request_id],
+  backends: [:console, Sentry.LoggerBackend]
 
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
+
+# Sentry for exception tracking in Production
+config :sentry,
+  dsn: "https://67cd9caf0b384a50aa46775b36d6517a@o523474.ingest.sentry.io/5635561",
+  included_environments: [:prod],
+  environment_name: Mix.env()
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
