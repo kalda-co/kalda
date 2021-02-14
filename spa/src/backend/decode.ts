@@ -32,7 +32,7 @@ export function array<Element>(
 ): Decoder<Array<Element>> {
   return (array: unknown) => {
     if (!Array.isArray(array)) {
-      throw new Error(` Expected array, got ${typeof x}`);
+      throw new Error(` Expected array, got ${typeof array}`);
     }
 
     let typeCheckElement = (element: unknown, i: number) => {
