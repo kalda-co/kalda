@@ -62,6 +62,7 @@ defmodule KaldaWeb.Api.V1.DailyReflectionControllerTest do
                          %{
                            "id" => reply1.id,
                            "content" => reply1.content,
+                           "comment_id" => comment1.id,
                            "inserted_at" => NaiveDateTime.to_iso8601(reply1.inserted_at),
                            "author" => %{
                              "id" => author1.id,
