@@ -29,7 +29,7 @@ defmodule KaldaWeb.Api.V1.ReplyControllerTest do
       post = Kalda.ForumsFixtures.post(user)
       comment = Kalda.ForumsFixtures.comment(post, user)
 
-      assert conn = post(conn, "/v1/comments/#{comment.id}/replies", reply: @valid_reply_content)
+      assert conn = post(conn, "/v1/comments/#{comment.id}/replies", @valid_reply_content)
 
       assert [reply] = Kalda.Forums.get_replies()
       assert reply.content == @valid_reply_content.content
@@ -39,7 +39,10 @@ defmodule KaldaWeb.Api.V1.ReplyControllerTest do
       assert json_response(conn, 201) == %{
                "id" => reply.id,
                "content" => @valid_reply_content.content,
-               "author" => reply.author_id,
+               "author" => %{
+                 "id" => current_user.id,
+                 "username" => current_user.username
+               },
                "comment_id" => reply.comment_id,
                "inserted_at" => NaiveDateTime.to_iso8601(reply.inserted_at)
              }
@@ -50,8 +53,7 @@ defmodule KaldaWeb.Api.V1.ReplyControllerTest do
       post = Kalda.ForumsFixtures.post(user)
       comment = Kalda.ForumsFixtures.comment(post, user)
 
-      assert conn =
-               post(conn, "/v1/comments/#{comment.id}/replies", reply: @invalid_reply_content)
+      assert conn = post(conn, "/v1/comments/#{comment.id}/replies", @invalid_reply_content)
 
       assert json_response(conn, 422) == %{
                "errors" => %{"content" => ["can't be blank"]}
