@@ -1,5 +1,5 @@
 export type AppState = {
-  current_user: User;
+  currentUser: User;
   posts: Array<Post>;
 };
 

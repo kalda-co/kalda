@@ -3,7 +3,7 @@ defmodule KaldaWeb.Api.V1.DailyReflectionView do
 
   def render("index.json", params) do
     %{
-      current_user: %{name: params.user.username},
+      current_user: render_author(params.user),
       posts: Enum.map(params.posts, &render_post/1)
     }
   end

@@ -27,7 +27,8 @@ defmodule KaldaWeb.Api.V1.DailyReflectionControllerTest do
 
       assert json_response(conn, 200) == %{
                "current_user" => %{
-                 "name" => current_user.username
+                 "id" => current_user.id,
+                 "username" => current_user.username
                },
                "posts" => [
                  %{

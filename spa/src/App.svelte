@@ -23,7 +23,7 @@
 {:catch error}
   <!-- TODO: Error design -->
   failed to load :(
-  {error}
+  <div>{error}</div>
 {/await}
 
 <!-- TODO: Error design -->
