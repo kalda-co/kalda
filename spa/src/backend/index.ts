@@ -14,20 +14,15 @@ function constructPostCommentEndpoint(post_id: number): string {
 }
 
 export async function getInitialAppState(): Promise<AppState> {
-  try {
-    let resp = await fetch(DailyReflectionEndpoint, {
-      credentials: "include",
-      headers: { accept: "application/json" },
-    });
-    let json = await resp.json();
-    return {
-      type: "loaded",
-      posts: json.posts,
-      current_user: json.current_user,
-    };
-  } catch (error) {
-    return { type: "failed_to_load", error };
-  }
+  let resp = await fetch(DailyReflectionEndpoint, {
+    credentials: "include",
+    headers: { accept: "application/json" },
+  });
+  let json = await resp.json();
+  return {
+    posts: json.posts,
+    current_user: json.current_user,
+  };
 }
 
 export async function createComment(

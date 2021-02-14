@@ -2,35 +2,29 @@
   import { setCSRFToken, getInitialAppState } from "./backend";
   import Navbar from "./Navbar.svelte";
   import DailyReflection from "./forum/DailyReflection.svelte";
-  import type { AppState } from "./state";
 
+  // Load the CSRF token into the backend API client module so we can make HTTP
+  // requests using cookie auth
   export let csrfToken: string;
   setCSRFToken(csrfToken);
 
-  let state: AppState = { type: "loading" };
-  (async () => {
-    state = await getInitialAppState();
-  })();
+  let state = getInitialAppState();
 </script>
 
-<!-- TODO: Loading design -->
-{#if state.type === "loading"}
+{#await state}
+  <!-- TODO: Loading design -->
   ... Loading
-{/if}
-
-<!-- TODO: Error design -->
-{#if state.type === "failed_to_load"}
-  failed to load :(
-  {state.error}
-{/if}
-
-{#if state.type === "loaded"}
+{:then state}
   <main>
     <Navbar />
     <!-- TODO: gracefully handle zero posts -->
     <DailyReflection post={state.posts[0]} />
   </main>
-{/if}
+{:catch error}
+  <!-- TODO: Error design -->
+  failed to load :(
+  {error}
+{/await}
 
 <!-- TODO: Error design -->
 <style>

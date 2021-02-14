@@ -1,19 +1,7 @@
-export type Loading = {
-  type: "loading";
-};
-
-export type Loaded = {
-  type: "loaded";
+export type AppState = {
   current_user: User;
   posts: Array<Post>;
 };
-
-export type FailedToLoad = {
-  type: "failed_to_load";
-  error: Error;
-};
-
-export type AppState = Loading | Loaded | FailedToLoad;
 
 export type Post = {
   id: number;
