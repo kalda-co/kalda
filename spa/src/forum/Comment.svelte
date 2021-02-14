@@ -9,8 +9,7 @@
 
   async function saveReply(content: string) {
     let reply = await createReply(comment.id, content);
-    const replies = [...comment.replies, reply];
-    comment = { ...comment, replies };
+    comment.replies = [...comment.replies, reply];
     replying = false;
   }
 </script>

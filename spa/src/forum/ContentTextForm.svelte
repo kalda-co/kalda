@@ -26,7 +26,6 @@
   function initFocus(element: HTMLElement) {
     if (focus) {
       element.focus();
-      element.scrollIntoView();
     }
   }
 </script>
