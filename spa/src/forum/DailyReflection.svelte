@@ -8,8 +8,7 @@
 
   async function saveComment(content: string) {
     let comment = await createComment(post.id, content);
-    const comments = [comment, ...post.comments];
-    post = { ...post, comments };
+    post.comments = [comment, ...post.comments];
   }
 
   let commentsCountText: string;
