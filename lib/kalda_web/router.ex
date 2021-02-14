@@ -1,7 +1,12 @@
 defmodule KaldaWeb.Router do
   use KaldaWeb, :router
+  use Plug.ErrorHandler
 
   import KaldaWeb.UserAuth
+
+  defp handle_errors(_conn, %{kind: kind, reason: reason, stack: stacktrace}) do
+    Rollbax.report(kind, reason, stacktrace)
+  end
 
   defp basic_auth(conn, _opts) do
     case Application.get_env(:kalda, :basic_auth_password) do
