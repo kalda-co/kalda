@@ -1,26 +1,26 @@
 <script lang="ts">
   import Comment from "./Comment.svelte";
-  import NewCommentForm from "./NewCommentForm.svelte";
+  import ContentTextForm from "./ContentTextForm.svelte";
   import type { Post } from "../state";
   import { createComment } from "../backend";
 
   export let post: Post;
 
-  async function saveComment(post_id: number, content: string) {
-    let comment = await createComment(post_id, content);
+  async function saveComment(content: string) {
+    let comment = await createComment(post.id, content);
     const comments = [comment, ...post.comments];
     post = { ...post, comments };
-    return true;
   }
 
-  function commentsCountText() {
+  let commentsCountText: string;
+  $: {
     switch (post.comments.length) {
       case 0:
-        return "No comments";
+        commentsCountText = "No comments";
       case 1:
-        return "1 comment";
+        commentsCountText = "1 comment";
       default:
-        return `${post.comments.length} comments`;
+        commentsCountText = `${post.comments.length} comments`;
     }
   }
 </script>
@@ -32,14 +32,13 @@
     <aside class="trivia">
       <span>
         <img src="/images/speech-icon.svg" alt="A speech bubble icon" />
-        {commentsCountText()}
+        {commentsCountText}
       </span>
     </aside>
   </section>
 
   <section class="comments">
-    <NewCommentForm saveComment={(content) => saveComment(post.id, content)} />
-
+    <ContentTextForm placeholder="Post a comment" save={saveComment} />
     {#each post.comments as comment (comment.id)}
       <Comment {comment} />
     {/each}
