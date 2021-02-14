@@ -33,6 +33,18 @@ config :sentry,
   included_environments: [:prod],
   environment_name: Mix.env()
 
+config :rollbax,
+  access_token: "madeuptoken12345",
+  # config_callback: {KaldaConfig, :rollback_config},
+  environment: "production",
+  enable_crash_reports: true
+
+# defmodule KaldaConfig do
+#   def rollback_config(config) do
+#     Keyword.put(config, :access_token, System.get_env("ROLLBAR_ACCESS_TOKEN"))
+#   end
+# end
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env()}.exs"

@@ -21,7 +21,7 @@ defmodule Kalda.MixProject do
   def application do
     [
       mod: {Kalda.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :rollbax]
     ]
   end
 
@@ -65,6 +65,8 @@ defmodule Kalda.MixProject do
       # Exception tracking (note also upgraded jason to 1.1 and cowboy to 2.3 for this dep.)
       {:sentry, "8.0.0"},
       {:hackney, "~> 1.8"},
+      # Exception tracking with Rollbar
+      {:rollbax, ">= 0.0.0"},
       # Automatic page reloading
       {:phoenix_live_reload, "~> 1.2", only: :dev},
       # HTML parsing
