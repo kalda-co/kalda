@@ -2,7 +2,6 @@
   --color-purple-light: #cdbdff;
   --color-purple-mid: #574981;
   --color-purple: #4a00b0;
-  --color-purple: #4a00b0;
   --color-black: #333;
   --color-grey: #eee;
   --color-white: #fff;
@@ -34,9 +33,17 @@ body {
   font-size: var(--font-size);
 }
 
+button,
 a {
   color: var(--color-purple);
   text-decoration: none;
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+  display: inline;
 }
 
 .button {

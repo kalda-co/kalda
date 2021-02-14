@@ -1,16 +1,18 @@
 <script lang="ts">
-  export let saveComment: (text: string) => Promise<any>;
+  export let save: (text: string) => Promise<any>;
+  export let placeholder: string;
+  export let focus: boolean = false;
 
-  let newCommentText: string = "";
+  let newContent: string = "";
 
   async function submitComment() {
-    let content = newCommentText;
+    let content = newContent;
     try {
-      newCommentText = "";
-      await saveComment(content);
+      newContent = "";
+      await save(content);
     } catch (error) {
       // Saving failed, reset the text input so the user can try again
-      newCommentText = content;
+      newContent = content;
       console.error(error);
     }
   }
@@ -18,6 +20,13 @@
   function handleKeypress(event: KeyboardEvent) {
     if (event.ctrlKey && event.key === "Enter") {
       submitComment();
+    }
+  }
+
+  function initFocus(element: HTMLElement) {
+    if (focus) {
+      element.focus();
+      element.scrollIntoView();
     }
   }
 </script>
@@ -28,13 +37,14 @@
       class="content"
       contenteditable
       on:keypress={handleKeypress}
-      bind:textContent={newCommentText}
+      bind:textContent={newContent}
+      use:initFocus
     />
-    {#if !newCommentText}
+    {#if !newContent}
       <input class="placeholder-button button" type="submit" value="Send" />
-      <span class="placeholder">Post a comment</span>
+      <span class="placeholder">{placeholder}</span>
     {/if}
-    {#if newCommentText}
+    {#if newContent}
       <input type="submit" class="not-placeholder-button button" value="Send" />
     {/if}
   </form>
@@ -47,7 +57,11 @@
     padding: var(--gap);
     margin-bottom: var(--gap);
     position: relative;
+    background-color: var(--color-white);
   }
+
+  /* TODO: indicate focus somehow */
+  /* form:focus-within {} */
 
   .content {
     border: none;
@@ -55,6 +69,10 @@
     max-width: 100%;
     resize: none;
     background: rgba(0, 0, 0, 0);
+  }
+
+  .content:focus {
+    outline: none;
   }
 
   .placeholder,

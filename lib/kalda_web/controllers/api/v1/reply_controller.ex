@@ -3,11 +3,13 @@ defmodule KaldaWeb.Api.V1.ReplyController do
   alias Kalda.Forums
   alias Kalda.Forums.Reply
 
-  def create(conn, %{"id" => comment_id, "reply" => reply_params}) do
+  def create(conn, %{"id" => comment_id} = reply_params) do
     user = conn.assigns.current_user
     comment = Forums.get_comment!(comment_id)
 
     with {:ok, %Reply{} = reply} <- Forums.create_reply(user, comment, reply_params) do
+      reply = reply |> Map.put(:author, user)
+
       conn
       |> put_status(201)
       |> render("show.json", reply: reply)

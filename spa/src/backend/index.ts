@@ -7,13 +7,6 @@ export function setCSRFToken(token: string) {
   CSRFToken = token;
 }
 
-const DailyReflectionEndpoint = "/v1/daily-reflections";
-
-function constructPostCommentEndpoint(post_id: number): string {
-  // js string interpolation in html safe way
-  return "/v1/posts/" + post_id + "/comments";
-}
-
 type Response = {
   status: number;
   body: unknown;
@@ -55,19 +48,29 @@ async function httpPost(url: string, body: object) {
 }
 
 export async function getInitialAppState(): Promise<AppState> {
-  let resp = await httpGet(DailyReflectionEndpoint);
+  let resp = await httpGet("/v1/daily-reflections");
   assertStatus(resp, 200);
   return appState(resp.body);
 }
 
 export async function createComment(
-  post_id: number,
+  postId: number,
   content: string
 ): Promise<Comment> {
-  let url = constructPostCommentEndpoint(post_id);
+  let url = `/v1/posts/${postId}/comments`;
   let resp = await httpPost(url, { content });
   assertStatus(resp, 201);
   return comment(resp.body);
+}
+
+export async function createReply(
+  commentId: number,
+  content: string
+): Promise<Reply> {
+  let url = `/v1/comments/${commentId}/replies`;
+  let resp = await httpPost(url, { content });
+  assertStatus(resp, 201);
+  return reply(resp.body);
 }
 
 function appState(json: unknown): AppState {
