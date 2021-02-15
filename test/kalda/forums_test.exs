@@ -17,6 +17,8 @@ defmodule Kalda.ForumsTest do
   @update_reply_attrs %{content: "some updated reply"}
   @invalid_reply_attrs %{content: ""}
 
+  @valid_reporter_reason %{reporter_reason: "This is inappropriate"}
+
   describe "posts" do
     alias Kalda.Forums.Post
 
@@ -343,6 +345,24 @@ defmodule Kalda.ForumsTest do
       assert {:ok, %Reply{} = reply} = Forums.create_reply(user, comment, @valid_reply_attrs)
 
       assert %Ecto.Changeset{} = Forums.change_reply(reply)
+    end
+  end
+
+  describe "flags" do
+    alias Kalda.Forums.Flag
+
+    test "create_flag/5 with valid attrs" do
+      user = AccountsFixtures.user()
+      post = ForumsFixtures.post(user)
+
+      reporter = AccountsFixtures.user()
+      content_type = "post"
+
+      assert {:ok, %Flag{} = flag} =
+               Forums.create_flag(reporter, content_type, post, @valid_reporter_reason)
+
+      assert flag.reporter_id == reporter.id
+      assert flag.reporter_reason == "This is inappropriate"
     end
   end
 end
