@@ -406,4 +406,117 @@ defmodule Kalda.Forums do
   def change_reply(%Reply{} = reply, attrs \\ %{}) do
     Reply.changeset(reply, attrs)
   end
+
+  ##################
+  # Flags
+  ##################
+
+  alias Kalda.Forums.Flag
+
+  @doc """
+  Creates a flag for a user(reporter) on a comment, post or reply
+
+  ## Examples
+
+      iex> create_flag(reporter, "post", post, %{field: value})
+      {:ok, %Flag{}}
+
+      iex> create_flag(reporter, "", comment, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_flag(reporter, content_type, post_comment_reply, attrs \\ %{}) do
+    case content_type do
+      "post" ->
+        %Flag{
+          flagged_content: post_comment_reply.content,
+          author_id: post_comment_reply.author_id,
+          post_id: post_comment_reply.id,
+          reporter_id: reporter.id
+        }
+        |> Flag.changeset(attrs)
+        |> Repo.insert()
+
+      "comment" ->
+        %Flag{
+          flagged_content: post_comment_reply.content,
+          author_id: post_comment_reply.author_id,
+          comment_id: post_comment_reply.id,
+          reporter_id: reporter.id
+        }
+        |> Flag.changeset(attrs)
+        |> Repo.insert()
+
+      "reply" ->
+        %Flag{
+          flagged_content: post_comment_reply.content,
+          author_id: post_comment_reply.author_id,
+          reply_id: post_comment_reply.id,
+          reporter_id: reporter.id
+        }
+        |> Flag.changeset(attrs)
+        |> Repo.insert()
+
+      _ ->
+        %{error: "Could not create flag"}
+    end
+  end
+
+  @doc """
+  Returns all flags.
+  ## Examples
+      iex> get_flags(opts || [])
+      [%flag{}, ...]
+  """
+  def get_flags(opts \\ []) do
+    preload = opts[:preload] || []
+    Repo.all(from flag in Flag, preload: ^preload)
+  end
+
+  @doc """
+  Gets a single flag.
+
+  Raises `Ecto.NoResultsError` if the Comment does not exist.
+
+  ## Examples
+
+      iex> get_flag!(123)
+      [%Flag{}, ...]
+
+      iex> get_flag!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_flag!(id), do: Repo.get!(Flag, id)
+
+  @doc """
+  Updates a flag.
+
+  ## Examples
+
+      iex> update_flag(flag, %{field: new_value})
+      {:ok, %Flag{}}
+
+      iex> update_flag(flag, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_flag(%Flag{} = flag, attrs) do
+    flag
+    |> Flag.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking flag changes.
+
+  ## Examples
+
+      iex> change_flag(flag)
+      %Ecto.Changeset{data: %Flag{}}
+
+  """
+  def change_flag(%Flag{} = flag, attrs \\ %{}) do
+    Flag.changeset(flag, attrs)
+  end
 end

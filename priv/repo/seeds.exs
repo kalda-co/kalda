@@ -14,6 +14,7 @@ alias Kalda.Accounts.User
 alias Kalda.Forums.Post
 alias Kalda.Forums.Comment
 alias Kalda.Forums.Reply
+alias Kalda.Forums.Flag
 alias Kalda.Waitlist.Signup
 
 user =
@@ -26,7 +27,7 @@ user =
     confirmed_at: NaiveDateTime.local_now()
   })
 
-_user2 =
+user2 =
   Kalda.Repo.insert!(%User{
     username: "Puppy_queen",
     email: "user@example.com",
@@ -60,7 +61,7 @@ _comment2 =
     post_id: post.id
   })
 
-_reply =
+reply =
   Kalda.Repo.insert!(%Reply{
     content: "I feel quite powerful today too, Fred",
     author_id: user.id,
@@ -72,6 +73,15 @@ _reply1 =
     content: "I do not feel powerful I feel a bit B minus",
     author_id: user.id,
     comment_id: comment.id
+  })
+
+_flag =
+  Kalda.Repo.insert!(%Flag{
+    flagged_content: reply.content,
+    reporter_reason: "My name is not fred anymore",
+    reporter_id: user2.id,
+    author_id: user.id,
+    reply_id: reply.id
   })
 
 _signup1 =
