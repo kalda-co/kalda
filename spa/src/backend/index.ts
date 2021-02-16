@@ -90,10 +90,10 @@ export async function reportComment(
 }
 
 export async function reportReply(
-  commentId: number,
+  replyId: number,
   reporter_reason: string
 ): Promise<void> {
-  let url = `/v1/comments/${commentId}/reports`;
+  let url = `/v1/replies/${replyId}/reports`;
   let resp = await httpPost(url, { reporter_reason });
   assertStatus(resp, 201);
 }
