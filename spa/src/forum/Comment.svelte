@@ -1,13 +1,13 @@
 <script lang="ts">
   import type { Comment } from "../state";
   import { scale } from "svelte/transition";
-  import { createReply } from "../backend";
-  import { createReportComment } from "../backend";
+  import { createReply, createReportComment } from "../backend";
   import ContentTextForm from "./ContentTextForm.svelte";
+  import ContentBubble from "./ContentBubble.svelte";
 
   export let comment: Comment;
   let replying = false;
-  let reportging = false;
+  let reporting = false;
 
   async function saveReply(content: string) {
     let reply = await createReply(comment.id, content);
@@ -17,27 +17,30 @@
 
   async function saveReportComment(reporter_reason: string) {
     await createReportComment(comment.id, reporter_reason);
-    reportging = false;
+    reporting = false;
   }
 </script>
 
 <article>
   <div
     class="comment"
-    class:reply-line={!reportging && (replying || comment.replies.length > 0)}
-    class:reportging
+    class:reply-line={!reporting && (replying || comment.replies.length > 0)}
+    class:reporting
     transition:scale|local
   >
     <cite>{comment.author.username}</cite>
     {comment.content}
     <div class="link-container">
-      <button on:click|preventDefault={() => (replying = true)}>Reply</button>
-      <button on:click|preventDefault={() => (reportging = true)}>Report</button
+      <button on:click|preventDefault={() => (replying = !replying)}
+        >Reply</button
+      >
+      <button on:click|preventDefault={() => (reporting = !reporting)}
+        >Report</button
       >
     </div>
   </div>
 
-  {#if reportging}
+  {#if reporting}
     <ContentTextForm
       focus={true}
       level="warn"
@@ -47,23 +50,22 @@
     />
   {/if}
 
-  {#each comment.replies as reply (reply.id)}
-    <div transition:scale|local class="reply">
-      <cite>{reply.author.username}</cite>
-      {reply.content}
-    </div>
-  {/each}
+  <div class="replies">
+    {#each comment.replies as reply (reply.id)}
+      <ContentBubble item={reply} />
+    {/each}
 
-  {#if replying}
-    <div class="form">
-      <ContentTextForm
-        focus={true}
-        placeholder="Post a reply"
-        buttonText="Reply"
-        save={saveReply}
-      />
-    </div>
-  {/if}
+    {#if replying}
+      <div class="form">
+        <ContentTextForm
+          focus={true}
+          placeholder="Post a reply"
+          buttonText="Reply"
+          save={saveReply}
+        />
+      </div>
+    {/if}
+  </div>
 </article>
 
 <style>
@@ -79,7 +81,6 @@
     cursor: pointer;
   }
 
-  .reply,
   .comment {
     background-color: var(--color-grey);
     border-radius: 20px;
@@ -88,8 +89,7 @@
     position: relative;
   }
 
-  .form,
-  .reply {
+  .replies {
     margin-left: var(--gap-l);
     z-index: 1; /* Bring above curvy line from comment */
   }
@@ -108,7 +108,7 @@
     pointer-events: none;
   }
 
-  .reportging {
+  .reporting {
     background-color: #f8e5e5;
     border: 2px solid #b60000;
     padding: calc(var(--gap) - 2px);
