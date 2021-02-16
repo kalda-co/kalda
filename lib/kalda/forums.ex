@@ -456,9 +456,6 @@ defmodule Kalda.Forums do
         }
         |> Flag.changeset(attrs)
         |> Repo.insert()
-
-      _ ->
-        %{error: "Could not create flag"}
     end
   end
 
@@ -475,6 +472,22 @@ defmodule Kalda.Forums do
   def get_flags(opts \\ []) do
     preload = opts[:preload] || []
     Repo.all(from flag in Flag, preload: ^preload)
+  end
+
+  @doc """
+  Returns all unresolved flags
+  ## Examples
+      iex> get_unresolved_flags(opts || [])
+      [%flag{}, ...]
+  """
+  def get_unresolved_flags(opts \\ []) do
+    preload = opts[:preload] || []
+
+    from(flag in Flag,
+      where: is_nil(flag.resolved_at),
+      preload: ^preload
+    )
+    |> Repo.all()
   end
 
   @doc """
