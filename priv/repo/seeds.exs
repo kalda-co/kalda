@@ -84,6 +84,15 @@ _report =
     reply_id: reply.id
   })
 
+_report22 =
+  Kalda.Repo.insert!(%Report{
+    reported_content: comment.content,
+    reporter_reason: "Powerful is a scary word",
+    reporter_id: user2.id,
+    author_id: user.id,
+    comment_id: comment.id
+  })
+
 _signup1 =
   Kalda.Repo.insert!(%Signup{
     email: "al666@example.com"

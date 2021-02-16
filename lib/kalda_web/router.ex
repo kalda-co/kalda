@@ -121,5 +121,6 @@ defmodule KaldaWeb.Router do
     post "/posts/:id/comments", CommentController, :create
     post "/comments/:id/replies", ReplyController, :create
     post "/comments/:id/reports", ReportController, :report_comment
+    post "/replies/:id/reports", ReportController, :report_reply
   end
 end
