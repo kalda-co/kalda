@@ -3,6 +3,7 @@
   export let placeholder: string;
   export let focus: boolean = false;
   export let buttonText: string;
+  export let level: "normal" | "warn" = "normal";
 
   let newContent: string = "";
 
@@ -32,7 +33,7 @@
 </script>
 
 <div>
-  <form on:submit|preventDefault={submitComment}>
+  <form on:submit|preventDefault={submitComment} class={level}>
     <div
       class="content"
       contenteditable
@@ -63,15 +64,9 @@
     border-radius: 30px;
     border: 2px solid var(--color-purple);
     padding: var(--gap);
-    margin-bottom: var(--gap);
+    margin-bottom: var(--gap-s);
     position: relative;
     background-color: var(--color-white);
-  }
-
-  .flagging div form {
-    background-color: #f8e5e5;
-    margin-left: unset;
-    border: 2px solid #b60000;
   }
 
   /* TODO: indicate focus somehow */
@@ -101,14 +96,20 @@
     right: var(--gap);
   }
 
-  .flagging div form input.not-placeholder-button,
-  .flagging div form input.placeholder-button {
-    background-color: #b60000;
-    border: 2px solid #b60000;
-  }
-
   .not-placeholder-button {
     margin-top: var(--gap-s);
     cursor: pointer;
+  }
+
+  .warn {
+    background-color: #f8e5e5;
+    margin-left: unset;
+    border: 2px solid #b60000;
+  }
+
+  .warn .not-placeholder-button,
+  .warn .placeholder-button {
+    background-color: #b60000;
+    border: 2px solid #b60000;
   }
 </style>
