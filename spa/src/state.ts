@@ -27,3 +27,9 @@ export type User = {
   id: number;
   username: string;
 };
+
+export type FlagComment = {
+  id: number;
+  reporter_reason: string;
+  reporter: User;
+};
