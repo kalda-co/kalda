@@ -377,5 +377,31 @@ defmodule Kalda.ForumsTest do
       assert {:error, %Ecto.Changeset{}} =
                Forums.create_flag(reporter, content_type, post, @invalid_reporter_reason)
     end
+
+    # TODO: test create_flag_comment
+
+    # TODO: test doesn't get resolved flags!
+    test "get_unresolved_flags/1" do
+      user = AccountsFixtures.user()
+      user2 = AccountsFixtures.user()
+      user3 = AccountsFixtures.user()
+      post = ForumsFixtures.post(user)
+      _post2 = ForumsFixtures.post(user2)
+      comment = ForumsFixtures.comment(post, user2)
+
+      reporter = user3
+      reporter2 = user2
+
+      assert {:ok, %Flag{} = flag} =
+               Forums.create_flag_comment(reporter, comment, @valid_reporter_reason)
+
+      assert {:ok, %Flag{} = flag2} =
+               Forums.create_flag(reporter2, "post", post, @valid_reporter_reason)
+
+      id_list1 = Forums.get_unresolved_flags() |> Enum.map(& &1.id) |> Enum.sort()
+      id_list2 = Enum.sort([flag.id, flag2.id])
+
+      assert id_list1 == id_list2
+    end
   end
 end
