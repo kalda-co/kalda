@@ -1,0 +1,24 @@
+<h1>Listing Flags</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Reporter</th>
+      <th>Reporter Reason</th>
+      <th>Flagged Content</th>
+      <th>Flagged Content Author</th>
+
+    </tr>
+  </thead>
+  <tbody>
+<%= for flag <- @flags do %>
+    <tr>
+      <td><%= flag.reporter_id %></td>
+      <td><%= flag.reporter_reason %></td>
+      <td><%= flag.flagged_content %></td>
+      <td><%= flag.author_id %></td>
+
+    </tr>
+<% end %>
+  </tbody>
+</table>
