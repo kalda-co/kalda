@@ -80,14 +80,22 @@ export async function createReply(
   return reply(resp.body);
 }
 
-export async function createReportComment(
+export async function reportComment(
   commentId: number,
   reporter_reason: string
-): Promise<ReportComment> {
+): Promise<void> {
   let url = `/v1/comments/${commentId}/reports`;
   let resp = await httpPost(url, { reporter_reason });
   assertStatus(resp, 201);
-  return report_comment(resp.body);
+}
+
+export async function reportReply(
+  commentId: number,
+  reporter_reason: string
+): Promise<void> {
+  let url = `/v1/comments/${commentId}/reports`;
+  let resp = await httpPost(url, { reporter_reason });
+  assertStatus(resp, 201);
 }
 
 function appState(json: unknown): AppState {
@@ -127,13 +135,5 @@ function user(json: unknown): User {
   return {
     id: field("id", number)(json),
     username: field("username", string)(json),
-  };
-}
-
-function report_comment(json: unknown): ReportComment {
-  return {
-    id: field("id", number)(json),
-    reporter_reason: field("reporter_reason", string)(json),
-    reporter: field("reporter", user)(json),
   };
 }

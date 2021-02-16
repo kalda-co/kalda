@@ -1,28 +1,27 @@
 <script lang="ts">
   import type { Comment } from "../state";
-  import { scale } from "svelte/transition";
-  import { createReply, createReportComment } from "../backend";
+  import { createReply, reportReply, reportComment } from "../backend";
   import ContentTextForm from "./ContentTextForm.svelte";
   import ContentBubble from "./ContentBubble.svelte";
 
   export let comment: Comment;
   let replying = false;
-  let reporting = false;
+
+  function toggleReplying() {
+    replying = !replying;
+  }
 
   async function saveReply(content: string) {
     let reply = await createReply(comment.id, content);
     comment.replies = [...comment.replies, reply];
     replying = false;
   }
-
-  async function saveReportComment(reporter_reason: string) {
-    await createReportComment(comment.id, reporter_reason);
-    reporting = false;
-  }
 </script>
 
 <article>
-  <div
+  <!-- TODO: reply line -->
+
+  <!-- <div
     class="comment"
     class:reply-line={!reporting && (replying || comment.replies.length > 0)}
     class:reporting
@@ -38,21 +37,13 @@
         >Report</button
       >
     </div>
-  </div>
+  </div> -->
 
-  {#if reporting}
-    <ContentTextForm
-      focus={true}
-      level="warn"
-      placeholder="Tell us what's wrong"
-      buttonText="Report"
-      save={saveReportComment}
-    />
-  {/if}
+  <ContentBubble item={comment} report={reportComment} reply={toggleReplying} />
 
   <div class="replies">
     {#each comment.replies as reply (reply.id)}
-      <ContentBubble item={reply} />
+      <ContentBubble item={reply} report={reportReply} reply={toggleReplying} />
     {/each}
 
     {#if replying}
@@ -69,26 +60,6 @@
 </article>
 
 <style>
-  .link-container {
-    display: flex;
-    justify-content: space-between;
-  }
-
-  .link-container > * {
-    text-decoration: underline;
-    font-size: var(--font-size-s);
-    margin-top: var(--gap-s);
-    cursor: pointer;
-  }
-
-  .comment {
-    background-color: var(--color-grey);
-    border-radius: 20px;
-    padding: var(--gap);
-    margin-bottom: var(--gap-s);
-    position: relative;
-  }
-
   .replies {
     margin-left: var(--gap-l);
     z-index: 1; /* Bring above curvy line from comment */
@@ -106,20 +77,5 @@
     top: 0;
     right: 0;
     pointer-events: none;
-  }
-
-  .reporting {
-    background-color: #f8e5e5;
-    border: 2px solid #b60000;
-    padding: calc(var(--gap) - 2px);
-  }
-
-  cite {
-    display: block;
-    color: var(--color-purple);
-    margin-bottom: var(--gap-s);
-    font-style: normal;
-    font-size: var(--font-size-s);
-    font-weight: 500;
   }
 </style>
