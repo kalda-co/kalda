@@ -119,5 +119,6 @@ defmodule KaldaWeb.Router do
 
     post "/posts/:id/comments", CommentController, :create
     post "/comments/:id/replies", ReplyController, :create
+    post "/comments/:id/flags", FlagController, :create_flag_comment
   end
 end
