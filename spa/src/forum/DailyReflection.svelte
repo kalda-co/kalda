@@ -50,6 +50,7 @@
 
 <style>
   .post {
+    margin-top: var(--gap);
     padding: var(--gap);
     background-color: var(--color-purple);
     color: var(--color-white);
