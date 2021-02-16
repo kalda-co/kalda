@@ -462,6 +462,10 @@ defmodule Kalda.Forums do
     end
   end
 
+  def create_flag_comment(reporter, comment, attrs \\ %{}) do
+    create_flag(reporter, "comment", comment, attrs)
+  end
+
   @doc """
   Returns all flags.
   ## Examples
