@@ -14,7 +14,7 @@ alias Kalda.Accounts.User
 alias Kalda.Forums.Post
 alias Kalda.Forums.Comment
 alias Kalda.Forums.Reply
-alias Kalda.Forums.Flag
+alias Kalda.Forums.Report
 alias Kalda.Waitlist.Signup
 
 user =
@@ -75,9 +75,9 @@ _reply1 =
     comment_id: comment.id
   })
 
-_flag =
-  Kalda.Repo.insert!(%Flag{
-    flagged_content: reply.content,
+_report =
+  Kalda.Repo.insert!(%Report{
+    reported_content: reply.content,
     reporter_reason: "My name is not fred anymore",
     reporter_id: user2.id,
     author_id: user.id,

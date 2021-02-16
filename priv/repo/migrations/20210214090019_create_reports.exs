@@ -1,13 +1,13 @@
-defmodule Kalda.Repo.Migrations.CreateFlags do
+defmodule Kalda.Repo.Migrations.CreateReports do
   use Ecto.Migration
 
   def change do
-    create table(:flags) do
+    create table(:reports) do
       add :post_id, references(:posts, on_delete: :nothing), foreign_key: true
       add :comment_id, references(:comments, on_delete: :nothing), foreign_key: true
       add :reply_id, references(:replies, on_delete: :nothing), foreign_key: true
       add :author_id, references(:users, on_delete: :nothing), foreign_key: true, null: false
-      add :flagged_content, :string, null: false
+      add :reported_content, :string, null: false
 
       add :reporter_id, references(:users, on_delete: :nothing), foreign_key: true, null: false
       add :reporter_reason, :string, null: false
@@ -22,11 +22,6 @@ defmodule Kalda.Repo.Migrations.CreateFlags do
       timestamps()
     end
 
-    create index(:flags, [:post_id])
-    create index(:flags, [:comment_id])
-    create index(:flags, [:reply_id])
-    create index(:flags, [:reporter_id])
-    create index(:flags, [:author_id])
-    create index(:flags, [:moderator_id])
+    create index(:reports, [:resolved_at])
   end
 end

@@ -1,0 +1,24 @@
+<h1>Listing Reports</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Reporter</th>
+      <th>Reporter Reason</th>
+      <th>Reported Content</th>
+      <th>Reported Content Author</th>
+
+    </tr>
+  </thead>
+  <tbody>
+<%= for report <- @reports do %>
+    <tr>
+      <td><%= report.reporter_id %></td>
+      <td><%= report.reporter_reason %></td>
+      <td><%= report.reported_content %></td>
+      <td><%= report.author_id %></td>
+
+    </tr>
+<% end %>
+  </tbody>
+</table>

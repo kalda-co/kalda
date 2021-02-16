@@ -1,9 +1,9 @@
-defmodule Kalda.Forums.Flag do
+defmodule Kalda.Forums.Report do
   use Ecto.Schema
   import Ecto.Changeset
 
-  schema "flags" do
-    field :flagged_content, :string
+  schema "reports" do
+    field :reported_content, :string
     field :reporter_reason, :string
     field :moderator_action, :string
     field :moderator_reason, :string
@@ -38,10 +38,10 @@ defmodule Kalda.Forums.Flag do
   end
 
   @doc false
-  def changeset(flag, attrs) do
-    flag
+  def changeset(report, attrs) do
+    report
     |> cast(attrs, [:reporter_reason])
-    |> validate_required([:reporter_id, :reporter_reason, :flagged_content, :author_id])
+    |> validate_required([:reporter_id, :reporter_reason, :reported_content, :author_id])
     |> foreign_key_constraint(:post_id)
     |> foreign_key_constraint(:comment_id)
     |> foreign_key_constraint(:reply_id)

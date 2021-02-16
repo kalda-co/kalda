@@ -2,7 +2,7 @@ import type {
   User,
   Post,
   Reply,
-  FlagComment,
+  ReportComment,
   AppState,
   Comment,
 } from "../state";
@@ -80,14 +80,14 @@ export async function createReply(
   return reply(resp.body);
 }
 
-export async function createFlagComment(
+export async function createReportComment(
   commentId: number,
   reporter_reason: string
-): Promise<FlagComment> {
-  let url = `/v1/comments/${commentId}/flags`;
+): Promise<ReportComment> {
+  let url = `/v1/comments/${commentId}/reports`;
   let resp = await httpPost(url, { reporter_reason });
   assertStatus(resp, 201);
-  return flag_comment(resp.body);
+  return report_comment(resp.body);
 }
 
 function appState(json: unknown): AppState {
@@ -130,7 +130,7 @@ function user(json: unknown): User {
   };
 }
 
-function flag_comment(json: unknown): FlagComment {
+function report_comment(json: unknown): ReportComment {
   return {
     id: field("id", number)(json),
     reporter_reason: field("reporter_reason", string)(json),
