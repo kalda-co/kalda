@@ -1,4 +1,11 @@
-import type { User, Post, Reply, AppState, Comment } from "../state";
+import type {
+  User,
+  Post,
+  Reply,
+  FlagComment,
+  AppState,
+  Comment,
+} from "../state";
 import { field, number, string, array } from "./decode";
 
 let CSRFToken = "";
@@ -73,6 +80,16 @@ export async function createReply(
   return reply(resp.body);
 }
 
+export async function createFlagComment(
+  commentId: number,
+  reporter_reason: string
+): Promise<FlagComment> {
+  let url = `/v1/comments/${commentId}/flags`;
+  let resp = await httpPost(url, { reporter_reason });
+  assertStatus(resp, 201);
+  return flag_comment(resp.body);
+}
+
 function appState(json: unknown): AppState {
   return {
     currentUser: field("current_user", user)(json),
@@ -110,5 +127,13 @@ function user(json: unknown): User {
   return {
     id: field("id", number)(json),
     username: field("username", string)(json),
+  };
+}
+
+function flag_comment(json: unknown): FlagComment {
+  return {
+    id: field("id", number)(json),
+    reporter_reason: field("reporter_reason", string)(json),
+    reporter: field("reporter", user)(json),
   };
 }

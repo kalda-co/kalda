@@ -2,19 +2,26 @@
   import type { Comment } from "../state";
   import { scale } from "svelte/transition";
   import { createReply } from "../backend";
+  import { createFlagComment } from "../backend";
   import ContentTextForm from "./ContentTextForm.svelte";
 
   export let comment: Comment;
   let replying = false;
+  let flagging = false;
 
   async function saveReply(content: string) {
     let reply = await createReply(comment.id, content);
     comment.replies = [...comment.replies, reply];
     replying = false;
   }
+
+  async function saveFlagComment(reporter_reason: string) {
+    await createFlagComment(comment.id, reporter_reason);
+    replying = false;
+  }
 </script>
 
-<article>
+<article class:with-flagging={flagging}>
   <div
     class="comment"
     class:with-replies={replying || comment.replies.length > 0}
@@ -25,7 +32,20 @@
     <div class="reply-link">
       <button on:click|preventDefault={() => (replying = true)}>Reply</button>
     </div>
+    <div class="flag-link">
+      <button on:click|preventDefault={() => (flagging = true)}>Flag</button>
+    </div>
   </div>
+
+  {#if flagging}
+    <div class="flagging form">
+      <ContentTextForm
+        focus={true}
+        placeholder="FLAG THIS POST"
+        save={saveFlagComment}
+      />
+    </div>
+  {/if}
 
   {#each comment.replies as reply (reply.id)}
     <div transition:scale|local class="reply">
@@ -80,6 +100,10 @@
     top: 0;
     right: 0;
     pointer-events: none;
+  }
+
+  .flagging.form {
+    border: 4px solid red;
   }
 
   cite {
