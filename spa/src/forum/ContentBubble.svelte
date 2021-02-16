@@ -6,6 +6,7 @@
   export let item: BubbleContent;
   export let report: (id: number, reason: string) => Promise<any>;
   export let reply: () => any;
+  export let replyLine: boolean = false;
 
   let reporting = false;
 
@@ -19,7 +20,12 @@
   }
 </script>
 
-<div transition:scale|local class="bubble" class:reporting>
+<div
+  transition:scale|local
+  class="bubble"
+  class:reporting
+  class:reply-line={!reporting && replyLine}
+>
   <cite>{item.author.username}</cite>
   {item.content}
 
@@ -46,6 +52,20 @@
     padding: var(--gap);
     margin-bottom: var(--gap-s);
     position: relative;
+  }
+
+  .reply-line::after {
+    --border: 2px solid var(--color-grey);
+    content: "";
+    position: absolute;
+    border-left: var(--border);
+    border-bottom: var(--border);
+    border-radius: 20px;
+    bottom: calc(-1 * var(--gap-l) - var(--gap-s));
+    left: 0;
+    top: 0;
+    right: 0;
+    pointer-events: none;
   }
 
   cite {
