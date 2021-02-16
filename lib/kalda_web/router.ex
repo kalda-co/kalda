@@ -88,6 +88,7 @@ defmodule KaldaWeb.Router do
     pipe_through [:browser, :require_admin]
 
     get "/users", UserController, :index
+    get "/flags", FlagController, :index
 
     resources "/posts", PostController do
       resources "/comments", CommentController, only: [:delete] do
