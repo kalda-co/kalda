@@ -17,31 +17,35 @@
 
   async function saveFlagComment(reporter_reason: string) {
     await createFlagComment(comment.id, reporter_reason);
-    replying = false;
+    flagging = false;
   }
 </script>
 
-<article class:with-flagging={flagging}>
+<article>
   <div
     class="comment"
     class:with-replies={replying || comment.replies.length > 0}
+    class:with-flagging={flagging}
     transition:scale|local
   >
     <cite>{comment.author.username}</cite>
     {comment.content}
-    <div class="reply-link">
-      <button on:click|preventDefault={() => (replying = true)}>Reply</button>
-    </div>
-    <div class="flag-link">
-      <button on:click|preventDefault={() => (flagging = true)}>Flag</button>
+    <div class="link-container">
+      <div class="reply-link">
+        <button on:click|preventDefault={() => (replying = true)}>Reply</button>
+      </div>
+      <div class="flag-link">
+        <button on:click|preventDefault={() => (flagging = true)}>Flag</button>
+      </div>
     </div>
   </div>
 
   {#if flagging}
-    <div class="flagging form">
+    <div class="flagging">
       <ContentTextForm
         focus={true}
-        placeholder="FLAG THIS POST"
+        placeholder="Tell us what's wrong"
+        buttonText="Report"
         save={saveFlagComment}
       />
     </div>
@@ -59,6 +63,7 @@
       <ContentTextForm
         focus={true}
         placeholder="Post a reply"
+        buttonText="Reply"
         save={saveReply}
       />
     </div>
@@ -66,7 +71,19 @@
 </article>
 
 <style>
+  .link-container {
+    display: flex;
+    justify-content: space-between;
+  }
+
   .reply-link {
+    text-decoration: underline;
+    font-size: var(--font-size-s);
+    margin-top: var(--gap-s);
+    cursor: pointer;
+  }
+
+  .flag-link {
     text-decoration: underline;
     font-size: var(--font-size-s);
     margin-top: var(--gap-s);
@@ -101,9 +118,23 @@
     right: 0;
     pointer-events: none;
   }
+  .with-flagging.with-replies::after {
+    --border: 2px solid #f8e5e5;
+    content: "";
+    position: absolute;
+    border-left: var(--border);
+    border-bottom: var(--border);
+    border-radius: 20px;
+    bottom: calc(-1 * var(--gap-l) - var(--gap-s));
+    left: 0;
+    top: 0;
+    right: 0;
+    pointer-events: none;
+  }
 
-  .flagging.form {
-    border: 4px solid red;
+  .with-flagging {
+    background-color: #f8e5e5;
+    border: 2px solid #b60000;
   }
 
   cite {

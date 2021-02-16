@@ -2,6 +2,7 @@
   export let save: (text: string) => Promise<any>;
   export let placeholder: string;
   export let focus: boolean = false;
+  export let buttonText: string;
 
   let newContent: string = "";
 
@@ -40,11 +41,19 @@
       use:initFocus
     />
     {#if !newContent}
-      <input class="placeholder-button button" type="submit" value="Send" />
+      <input
+        class="placeholder-button button"
+        type="submit"
+        value={buttonText}
+      />
       <span class="placeholder">{placeholder}</span>
     {/if}
     {#if newContent}
-      <input type="submit" class="not-placeholder-button button" value="Send" />
+      <input
+        type="submit"
+        class="not-placeholder-button button"
+        value={buttonText}
+      />
     {/if}
   </form>
 </div>
@@ -57,6 +66,12 @@
     margin-bottom: var(--gap);
     position: relative;
     background-color: var(--color-white);
+  }
+
+  .flagging div form {
+    background-color: #f8e5e5;
+    margin-left: unset;
+    border: 2px solid #b60000;
   }
 
   /* TODO: indicate focus somehow */
@@ -84,6 +99,12 @@
   .placeholder-button {
     top: 10px;
     right: var(--gap);
+  }
+
+  .flagging div form input.not-placeholder-button,
+  .flagging div form input.placeholder-button {
+    background-color: #b60000;
+    border: 2px solid #b60000;
   }
 
   .not-placeholder-button {

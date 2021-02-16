@@ -37,7 +37,11 @@
   </section>
 
   <section class="comments">
-    <ContentTextForm placeholder="Post a comment" save={saveComment} />
+    <ContentTextForm
+      placeholder="Post a comment"
+      save={saveComment}
+      buttonText="Send"
+    />
     {#each post.comments as comment (comment.id)}
       <Comment {comment} />
     {/each}
