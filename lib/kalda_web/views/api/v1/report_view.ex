@@ -12,6 +12,8 @@ defmodule KaldaWeb.Api.V1.ReportView do
       reporter_reason: report.reporter_reason,
       reporter: UserView.render_author(report.reporter),
       comment_id: report.comment_id,
+      reply_id: report.reply_id,
+      post_id: report.post_id,
       inserted_at: report.inserted_at
     }
   end

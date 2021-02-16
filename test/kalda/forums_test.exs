@@ -378,7 +378,40 @@ defmodule Kalda.ForumsTest do
                Forums.report(reporter, content_type, post, @invalid_reporter_reason)
     end
 
-    # TODO: test report_comment
+    # TODO: test sad path
+    test "report_comment with valid attrs" do
+      user = AccountsFixtures.user()
+      post = ForumsFixtures.post(user)
+      comment = ForumsFixtures.comment(post, user)
+
+      reporter = AccountsFixtures.user()
+
+      assert {:ok, %Report{} = report} =
+               Forums.report_comment(reporter, comment, @valid_reporter_reason)
+
+      assert report.reporter_id == reporter.id
+      assert report.reporter_reason == "This is inappropriate"
+      assert report.author_id == user.id
+      assert report.comment_id == comment.id
+    end
+
+    # TODO: test sad path
+    test "report_reply with valid attrs" do
+      user = AccountsFixtures.user()
+      post = ForumsFixtures.post(user)
+      comment = ForumsFixtures.comment(post, user)
+      reply = ForumsFixtures.reply(comment, user)
+
+      reporter = AccountsFixtures.user()
+
+      assert {:ok, %Report{} = report} =
+               Forums.report_reply(reporter, reply, @valid_reporter_reason)
+
+      assert report.reporter_id == reporter.id
+      assert report.reporter_reason == "This is inappropriate"
+      assert report.author_id == user.id
+      assert report.reply_id == reply.id
+    end
 
     # TODO: test doesn't get resolved reports!
     test "get_unresolved_reports/1" do

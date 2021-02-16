@@ -463,6 +463,10 @@ defmodule Kalda.Forums do
     report(reporter, "comment", comment, attrs)
   end
 
+  def report_reply(reporter, reply, attrs \\ %{}) do
+  report(reporter, "reply", reply, attrs)
+  end
+
   @doc """
   Returns all reports.
   ## Examples

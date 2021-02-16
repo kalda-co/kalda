@@ -16,4 +16,18 @@ defmodule KaldaWeb.Api.V1.ReportController do
     end
     |> KaldaWeb.Api.V1.handle_error(conn)
   end
+
+  def report_reply(conn, %{"id" => reply_id} = report_params) do
+    user = conn.assigns.current_user
+    reply = Forums.get_reply!(reply_id)
+
+    with {:ok, %Report{} = report} <- Forums.report_reply(user, reply, report_params) do
+      report = report |> Map.put(:reporter, user)
+
+      conn
+      |> put_status(201)
+      |> render("show.json", report: report)
+    end
+    |> KaldaWeb.Api.V1.handle_error(conn)
+  end
 end
