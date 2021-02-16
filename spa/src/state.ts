@@ -28,7 +28,7 @@ export type User = {
   username: string;
 };
 
-export type FlagComment = {
+export type ReportComment = {
   id: number;
   reporter_reason: string;
   reporter: User;

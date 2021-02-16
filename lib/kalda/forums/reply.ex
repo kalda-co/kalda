@@ -14,10 +14,6 @@ defmodule Kalda.Forums.Reply do
       foreign_key: :comment_id,
       references: :id
 
-    has_many :flags, Kalda.Forums.Flag
-
-    field :deleted_at, :naive_datetime
-
     timestamps()
   end
 

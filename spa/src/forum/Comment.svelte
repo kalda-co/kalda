@@ -2,12 +2,12 @@
   import type { Comment } from "../state";
   import { scale } from "svelte/transition";
   import { createReply } from "../backend";
-  import { createFlagComment } from "../backend";
+  import { createReportComment } from "../backend";
   import ContentTextForm from "./ContentTextForm.svelte";
 
   export let comment: Comment;
   let replying = false;
-  let flagging = false;
+  let reportging = false;
 
   async function saveReply(content: string) {
     let reply = await createReply(comment.id, content);
@@ -15,34 +15,35 @@
     replying = false;
   }
 
-  async function saveFlagComment(reporter_reason: string) {
-    await createFlagComment(comment.id, reporter_reason);
-    flagging = false;
+  async function saveReportComment(reporter_reason: string) {
+    await createReportComment(comment.id, reporter_reason);
+    reportging = false;
   }
 </script>
 
 <article>
   <div
     class="comment"
-    class:reply-line={!flagging && (replying || comment.replies.length > 0)}
-    class:flagging
+    class:reply-line={!reportging && (replying || comment.replies.length > 0)}
+    class:reportging
     transition:scale|local
   >
     <cite>{comment.author.username}</cite>
     {comment.content}
     <div class="link-container">
       <button on:click|preventDefault={() => (replying = true)}>Reply</button>
-      <button on:click|preventDefault={() => (flagging = true)}>Flag</button>
+      <button on:click|preventDefault={() => (reportging = true)}>Report</button
+      >
     </div>
   </div>
 
-  {#if flagging}
+  {#if reportging}
     <ContentTextForm
       focus={true}
       level="warn"
       placeholder="Tell us what's wrong"
       buttonText="Report"
-      save={saveFlagComment}
+      save={saveReportComment}
     />
   {/if}
 
@@ -107,7 +108,7 @@
     pointer-events: none;
   }
 
-  .flagging {
+  .reportging {
     background-color: #f8e5e5;
     border: 2px solid #b60000;
     padding: calc(var(--gap) - 2px);

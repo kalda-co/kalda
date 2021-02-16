@@ -349,25 +349,25 @@ defmodule Kalda.ForumsTest do
     end
   end
 
-  describe "flags" do
-    alias Kalda.Forums.Flag
+  describe "reports" do
+    alias Kalda.Forums.Report
 
-    test "create_flag/4 with valid attrs" do
+    test "report/4 with valid attrs" do
       user = AccountsFixtures.user()
       post = ForumsFixtures.post(user)
 
       reporter = AccountsFixtures.user()
       content_type = "post"
 
-      assert {:ok, %Flag{} = flag} =
-               Forums.create_flag(reporter, content_type, post, @valid_reporter_reason)
+      assert {:ok, %Report{} = report} =
+               Forums.report(reporter, content_type, post, @valid_reporter_reason)
 
-      assert flag.reporter_id == reporter.id
-      assert flag.reporter_reason == "This is inappropriate"
-      assert flag.author_id == user.id
+      assert report.reporter_id == reporter.id
+      assert report.reporter_reason == "This is inappropriate"
+      assert report.author_id == user.id
     end
 
-    test "create_flag/4 does not create flag of no reason given(invalid attrs)" do
+    test "report/4 does not create report of no reason given(invalid attrs)" do
       user = AccountsFixtures.user()
       post = ForumsFixtures.post(user)
 
@@ -375,13 +375,13 @@ defmodule Kalda.ForumsTest do
       content_type = "post"
 
       assert {:error, %Ecto.Changeset{}} =
-               Forums.create_flag(reporter, content_type, post, @invalid_reporter_reason)
+               Forums.report(reporter, content_type, post, @invalid_reporter_reason)
     end
 
-    # TODO: test create_flag_comment
+    # TODO: test report_comment
 
-    # TODO: test doesn't get resolved flags!
-    test "get_unresolved_flags/1" do
+    # TODO: test doesn't get resolved reports!
+    test "get_unresolved_reports/1" do
       user = AccountsFixtures.user()
       user2 = AccountsFixtures.user()
       user3 = AccountsFixtures.user()
@@ -392,14 +392,14 @@ defmodule Kalda.ForumsTest do
       reporter = user3
       reporter2 = user2
 
-      assert {:ok, %Flag{} = flag} =
-               Forums.create_flag_comment(reporter, comment, @valid_reporter_reason)
+      assert {:ok, %Report{} = report} =
+               Forums.report_comment(reporter, comment, @valid_reporter_reason)
 
-      assert {:ok, %Flag{} = flag2} =
-               Forums.create_flag(reporter2, "post", post, @valid_reporter_reason)
+      assert {:ok, %Report{} = report2} =
+               Forums.report(reporter2, "post", post, @valid_reporter_reason)
 
-      id_list1 = Forums.get_unresolved_flags() |> Enum.map(& &1.id) |> Enum.sort()
-      id_list2 = Enum.sort([flag.id, flag2.id])
+      id_list1 = Forums.get_unresolved_reports() |> Enum.map(& &1.id) |> Enum.sort()
+      id_list2 = Enum.sort([report.id, report2.id])
 
       assert id_list1 == id_list2
     end

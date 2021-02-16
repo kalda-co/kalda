@@ -11,10 +11,6 @@ defmodule Kalda.Forums.Post do
 
     has_many :comments, Kalda.Forums.Comment
 
-    has_many :flags, Kalda.Forums.Flag
-
-    field :deleted_at, :naive_datetime
-
     timestamps()
   end
 
