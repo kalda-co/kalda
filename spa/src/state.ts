@@ -33,3 +33,9 @@ export type ReportComment = {
   reporter_reason: string;
   reporter: User;
 };
+
+export interface BubbleContent {
+  id: number;
+  author: User;
+  content: string;
+}
