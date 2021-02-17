@@ -37,10 +37,8 @@ config :kalda, KaldaWeb.Endpoint,
     # ]
   ]
 
-# Bamboo email sending.
-# To enable sandbox mode (e.g. in development or staging environments):
-# config :my_app, Kalda.Mailer, sandbox: true
-config :my_app, Kalda.Mailer, adapter: Bamboo.LocalAdapter
+# Bamboo email sending. In dev we keep the emails in memory
+config :kalda, Kalda.Mailer, adapter: Bamboo.LocalAdapter
 
 # ## SSL Support
 #
