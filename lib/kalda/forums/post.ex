@@ -1,5 +1,5 @@
 defmodule Kalda.Forums.Post do
-  use Ecto.Schema
+  use Kalda.Schema
   import Ecto.Changeset
 
   schema "posts" do

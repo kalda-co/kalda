@@ -1,5 +1,5 @@
 defmodule Kalda.Forums.Reply do
-  use Ecto.Schema
+  use Kalda.Schema
   import Ecto.Changeset
 
   schema "replies" do

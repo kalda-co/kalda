@@ -1,5 +1,5 @@
 defmodule Kalda.Forums.Comment do
-  use Ecto.Schema
+  use Kalda.Schema
   import Ecto.Changeset
 
   schema "comments" do
