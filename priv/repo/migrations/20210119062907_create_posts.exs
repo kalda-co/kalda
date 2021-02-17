@@ -1,12 +1,11 @@
 defmodule Kalda.Repo.Migrations.CreatePosts do
   use Ecto.Migration
 
-    def change do
-      create table(:posts) do
-        add :content, :string
+  def change do
+    create table(:posts) do
+      add :content, :string
 
-        timestamps()
+      timestamps()
     end
-
   end
 end

@@ -30,7 +30,8 @@ defmodule KaldaWeb.Api.V1.ReportControllerTest do
       post = Kalda.ForumsFixtures.post(user)
       comment = Kalda.ForumsFixtures.comment(post, user)
 
-      assert conn = post(conn, "/v1/comments/#{comment.id}/reports", @valid_reporter_reason_content)
+      assert conn =
+               post(conn, "/v1/comments/#{comment.id}/reports", @valid_reporter_reason_content)
 
       assert [report] = Kalda.Forums.get_reports()
       assert report.reporter_reason == @valid_reporter_reason_content.reporter_reason
