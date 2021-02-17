@@ -27,3 +27,6 @@ config :kalda,
 
 # Print only warnings and errors during test
 config :logger, level: :warn
+
+# Bamboo email sending
+config :my_app, Kalda.Mailer, adapter: Bamboo.TestAdapter
