@@ -464,7 +464,7 @@ defmodule Kalda.Forums do
   end
 
   def report_reply(reporter, reply, attrs \\ %{}) do
-  report(reporter, "reply", reply, attrs)
+    report(reporter, "reply", reply, attrs)
   end
 
   @doc """
