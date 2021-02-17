@@ -37,6 +37,11 @@ config :kalda, KaldaWeb.Endpoint,
     # ]
   ]
 
+# Bamboo email sending.
+# To enable sandbox mode (e.g. in development or staging environments):
+# config :my_app, Kalda.Mailer, sandbox: true
+config :my_app, Kalda.Mailer, adapter: Bamboo.LocalAdapter
+
 # ## SSL Support
 #
 # In order to use HTTPS in development, a self-signed

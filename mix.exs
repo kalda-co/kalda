@@ -34,6 +34,8 @@ defmodule Kalda.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
+      # SMTP email sending
+      {:bamboo, "~> 1.7.0"},
       # Date time library
       {:timex, "~> 3.6"},
       # Web framework
