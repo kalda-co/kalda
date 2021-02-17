@@ -36,3 +36,16 @@ sendfox_token =
     """
 
 config :kalda, :sendfox_api_token, sendfox_token
+
+sendgrid_key =
+  System.get_env("SENDGRID_API_KEY") ||
+    raise """
+    environment variable SENDGRID_API_KEY is missing
+    """
+
+config :kalda, Kalda.Mailer,
+  adapter: Bamboo.SendGridAdapter,
+  api_key: sendgrid_key,
+  hackney_opts: [
+    recv_timeout: :timer.minutes(1)
+  ]

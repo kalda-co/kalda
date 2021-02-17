@@ -29,4 +29,4 @@ config :kalda,
 config :logger, level: :warn
 
 # Bamboo email sending
-config :my_app, Kalda.Mailer, adapter: Bamboo.TestAdapter
+config :kalda, Kalda.Mailer, adapter: Bamboo.TestAdapter

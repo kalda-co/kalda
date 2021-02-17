@@ -1,5 +1,11 @@
 defmodule Kalda.Accounts.UserNotifier do
   import Bamboo.Email
+
+  defp base_email() do
+    new_email()
+    |> from("hello@kalda.co")
+  end
+
   # For simplicity, this module simply logs messages to the terminal.
   # You should replace it by a proper email or notification tool, such as:
   #
@@ -16,10 +22,7 @@ defmodule Kalda.Accounts.UserNotifier do
   Deliver instructions to confirm account.
   """
   def deliver_confirmation_instructions(user, url) do
-    deliver(user.email, """
-
-    ==============================
-
+    body = """
     Hi #{user.email},
 
     You can confirm your account by visiting the URL below:
@@ -28,8 +31,15 @@ defmodule Kalda.Accounts.UserNotifier do
 
     If you didn't create an account with us, please ignore this.
 
-    ==============================
-    """)
+    Thanks,
+    Team Kalda
+    """
+
+    base_email()
+    |> subject("Confirm your Kalda account")
+    |> to(user.email)
+    |> text_body(body)
+    |> Kalda.Mailer.deliver_now()
   end
 
   @doc """
