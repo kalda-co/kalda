@@ -5,10 +5,9 @@ defmodule Kalda.Repo.Migrations.CreateInvites do
     create table(:invites) do
       add :invitee_email, :citext, null: false
       add :token, :binary, null: false
-
-      timestamps()
+      timestamps(updated_at: false)
     end
-    create unique_index(:invites, [:token, :invitee_email])
+    create unique_index(:invites, [:token])
 
   end
 end

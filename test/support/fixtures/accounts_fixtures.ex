@@ -68,12 +68,14 @@ defmodule Kalda.AccountsFixtures do
     token
   end
 
-  def invite(attrs \\ %{}) do
-    attrs =
-      attrs
-      |> Enum.into(%{
-        email: "admin#{System.unique_integer()}@example.com",
-        token: :crypto.strong_rand_bytes(32)
-      })
+  def invite(email) do
+    {token, invite} = Kalda.Accounts.Invite.build_invite(email)
+
+    {:ok, invite} =
+      invite
+      |> Kalda.Accounts.Invite.changeset(%{})
+      |> Kalda.Repo.insert()
+
+    {token, invite}
   end
 end
