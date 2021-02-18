@@ -1,0 +1,40 @@
+<div class="login-container">
+  <h1>Hi, <%= @invite.invitee_email %> Welcome to Kalda. Now you just need to create an account</h1>
+
+  <%= form_for @changeset, Routes.invite_path(@conn, :create), [as: :user], fn f -> %>
+    <%= if @changeset.action do %>
+      <div class="alert alert-danger">
+        <p>Oops, something went wrong! Please check the errors below.</p>
+      </div>
+    <% end %>
+
+    <%= label f, :username %>
+    <%= text_input f, :username, required: true, pattern: "^[A-Za-z0-9-_]+$" %>
+    <%= error_tag f, :username %>
+
+    <%= hidden_input f, :token %>
+
+
+    <%# <p>Create a password. Passwords must contain at least 12 characters.</p> %>
+
+    <%= label f, :password %>
+    <%= password_input f, :password, required: true %>
+    <%= error_tag f, :password %>
+
+  <%# <p>Everyone in the Kalda community has a unique username which protects our privacy, e.g: <span class="username">Dan_15_capibara</span> or <span class="username">happy-Al-squid</span>.</p> %>
+
+
+ <p>Usernames can be up to 35 characters long and can only contain letters, numbers, hyphens and underscores.</p>
+
+    <div>
+      <%= submit "Submit", class: "button"%>
+    </div>
+
+  <p>By clicking the button above you accept Kalda’s
+  <%= link "terms and conditions.", to: "/terms" %></p>
+  <% end %>
+
+  <p>Already have an account?
+    <%= link "Log in.", to: Routes.user_session_path(@conn, :new) %>
+  </p>
+</div>

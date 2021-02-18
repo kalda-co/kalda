@@ -77,6 +77,7 @@ defmodule KaldaWeb.Router do
     get "/users/reset-password/:token", UserResetPasswordController, :edit
     put "/users/reset-password/:token", UserResetPasswordController, :update
     get "/invites/:token", InviteController, :show
+    post "/invites", InviteController, :create
   end
 
   scope "/", KaldaWeb do
