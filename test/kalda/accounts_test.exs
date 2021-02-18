@@ -3,7 +3,7 @@ defmodule Kalda.AccountsTest do
 
   alias Kalda.Accounts
   alias Kalda.AccountsFixtures
-  alias Kalda.Accounts.{User, UserToken}
+  alias Kalda.Accounts.{User, UserToken, Invite}
 
   describe "get_user_by_email/1" do
     test "does not return the user if the email does not exist" do
@@ -556,6 +556,68 @@ defmodule Kalda.AccountsTest do
   describe "inspect/2" do
     test "does not include password" do
       refute inspect(%User{password: "123456"}) =~ "password: \"123456\""
+    end
+  end
+
+  describe "get_invite_for_token" do
+    test "gets invite if token is valid" do
+      email = "example@email.com"
+      {token, _invite} = AccountsFixtures.invite(email)
+
+      assert %Invite{} = invite = Accounts.get_invite_for_token(token)
+      assert invite.invitee_email == email
+    end
+
+    test "fails if token invalid" do
+      email = "email@example.com"
+      {_token, invite_fixture} = AccountsFixtures.invite(email)
+
+      assert invite_fixture.invitee_email == email
+
+      refute Accounts.get_invite_for_token("gfhjsagfjlguy7658435785432")
+    end
+  end
+
+  describe "create_user_from_invite" do
+    test "creates invite if token and valid attrs" do
+      username = AccountsFixtures.unique_username()
+      password = AccountsFixtures.valid_user_password()
+      attrs = %{username: username, password: password}
+      email = "email@example.com"
+      {token, _invite} = AccountsFixtures.invite(email)
+
+      assert {:ok, %User{}} = Accounts.create_user_from_invite(token, attrs)
+    end
+
+    test "does not create invite if valid token but invalid username" do
+      username = "!!!!NOPE!!!*&(^*&"
+      password = AccountsFixtures.valid_user_password()
+      attrs = %{username: username, password: password}
+      email = "email@example.com"
+      {token, _invite} = AccountsFixtures.invite(email)
+
+      assert {:error, %Ecto.Changeset{}} = Accounts.create_user_from_invite(token, attrs)
+    end
+
+    test "does not create invite if valid token but invalid password" do
+      username = AccountsFixtures.unique_username()
+      password = "password"
+      attrs = %{username: username, password: password}
+      email = "email@example.com"
+      {token, _invite} = AccountsFixtures.invite(email)
+
+      assert {:error, %Ecto.Changeset{}} = Accounts.create_user_from_invite(token, attrs)
+    end
+
+    test "does not create invite if invalid token" do
+      username = AccountsFixtures.unique_username()
+      password = AccountsFixtures.valid_user_password()
+      attrs = %{username: username, password: password}
+      email = "ex@example.com"
+      _invite = AccountsFixtures.invite(email)
+      token = "72854722password"
+
+      assert :not_found = Accounts.create_user_from_invite(token, attrs)
     end
   end
 end

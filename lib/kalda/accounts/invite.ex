@@ -1,10 +1,9 @@
 defmodule Kalda.Accounts.Invite do
   use Ecto.Schema
   import Ecto.Changeset
-  import Ecto.Query
 
   @rand_size 32
-  @token_validity_in_days 5
+  @hash_algorithm :sha256
 
   schema "invites" do
     field :invitee_email, :string
@@ -21,23 +20,27 @@ defmodule Kalda.Accounts.Invite do
   end
 
   @doc """
-  Generates a token
-  tokens in future could be hashed.
+  build_invite(email)
+    {url-encoded token, Invite}
   """
-  # TODO: hash token sent in email
-  def build_token(invitee_email) do
+  def build_invite(email) do
     token = :crypto.strong_rand_bytes(@rand_size)
-    {token, %Kalda.Accounts.Invite{token: token, invitee_email: invitee_email}}
+    hashed_token = :crypto.hash(@hash_algorithm, token)
+
+    {Base.url_encode64(token, padding: false),
+     %__MODULE__{
+       token: hashed_token,
+       invitee_email: email
+     }}
   end
 
-  def verify_token_for_email(token, email) do
-    query =
-      from i in Kalda.Accounts.Invite,
-        where: i.token == ^token,
-        where: i.invitee_email == ^email,
-        where: i.inserted_at > ago(@token_validity_in_days, "day"),
-        select: i
+  def hash_token(token) do
+    case Base.url_decode64(token, padding: false) do
+      {:ok, decoded_token} ->
+        {:ok, :crypto.hash(@hash_algorithm, decoded_token)}
 
-    {:ok, query}
+      :error ->
+        :error
+    end
   end
 end

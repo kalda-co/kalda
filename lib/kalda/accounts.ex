@@ -368,20 +368,32 @@ defmodule Kalda.Accounts do
   # Invites
   ##############
 
-  def get_invite_by_token_and_supplied_email(token, email) do
-    {:ok, query} = Invite.verify_token_for_email(token, email)
-    Repo.one(query)
+  @token_validity_in_days 30
+
+  def get_invite_for_token(token) do
+    case Kalda.Accounts.Invite.hash_token(token) do
+      {:ok, hashed_token} ->
+        Repo.one(
+          from i in Kalda.Accounts.Invite,
+            where: i.token == ^hashed_token,
+            where: i.inserted_at > ago(@token_validity_in_days, "day"),
+            select: i
+        )
+
+      :error ->
+        :error
+    end
   end
 
-  def create_user_from_invite(token, email, attrs) do
-    case get_invite_by_token_and_supplied_email(token, email) do
-      %Invite{} ->
-        %User{}
+  def create_user_from_invite(token, attrs) do
+    case get_invite_for_token(token) do
+      %Invite{invitee_email: email} ->
+        %User{email: email}
         |> User.registration_changeset(attrs)
         |> Repo.insert()
 
       _ ->
-        {:error, %Ecto.Changeset{}}
+        :not_found
     end
   end
 end
