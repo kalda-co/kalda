@@ -388,7 +388,9 @@ defmodule Kalda.Accounts do
   def create_user_from_invite(token, attrs) do
     case get_invite_for_token(token) do
       %Invite{invitee_email: email} ->
-        %User{email: email}
+        now = NaiveDateTime.utc_now() |> NaiveDateTime.truncate(:second)
+
+        %User{email: email, confirmed_at: now}
         |> User.registration_changeset(attrs)
         |> Repo.insert()
 
