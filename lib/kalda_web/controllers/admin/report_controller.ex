@@ -8,6 +8,6 @@ defmodule KaldaWeb.Admin.ReportController do
     Policy.authorize!(conn, :view_admin_pages, Kalda)
     # TODO add pagination, do not get all users
     reports = Forums.get_unresolved_reports()
-    render(conn, "index.html", reports: reports, error_message: "not authorised")
+    render(conn, "index.html", reports: reports)
   end
 end
