@@ -67,4 +67,13 @@ defmodule Kalda.AccountsFixtures do
     [_, token, _] = String.split(captured.body, "[TOKEN]")
     token
   end
+
+  def invite(attrs \\ %{}) do
+    attrs =
+      attrs
+      |> Enum.into(%{
+        email: "admin#{System.unique_integer()}@example.com",
+        token: :crypto.strong_rand_bytes(32)
+      })
+  end
 end
