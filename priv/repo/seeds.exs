@@ -11,6 +11,7 @@
 # and so on) as they will fail if something goes wrong.
 
 alias Kalda.Accounts.User
+alias Kalda.Accounts.Invite
 alias Kalda.Forums.Post
 alias Kalda.Forums.Comment
 alias Kalda.Forums.Reply
@@ -150,6 +151,14 @@ _report22 =
     comment_id: comment.id
   })
 
+{token, invite} = Invite.build_invite("invite@example.com")
+
+_invite =
+  Kalda.Repo.insert!(%Invite{
+    invitee_email: invite.invitee_email,
+    token: invite.token
+  })
+
 _signup1 =
   Kalda.Repo.insert!(%Signup{
     email: "al666@example.com"
@@ -164,4 +173,6 @@ IO.puts("""
 You can now log in with these credentials:
 email:    demo@kalda.co
 password: thisisademopassword
+You can test the invite route with:
+/invites/#{token}
 """)
