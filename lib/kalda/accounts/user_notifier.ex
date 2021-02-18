@@ -81,4 +81,28 @@ defmodule Kalda.Accounts.UserNotifier do
     |> text_body(body)
     |> Kalda.Mailer.deliver_now()
   end
+
+  def deliver_invite(email, token) do
+    url = KaldaWeb.Router.Helpers.invite_url(KaldaWeb.Endpoint, :show, token)
+
+    body = """
+    ==============================
+
+    Congratulations! You can join the Kalda revolution:
+
+    Create your account by clicking on the link below:
+
+    #{url}
+
+    If you didn't request this, please ignore.
+
+    ==============================
+    """
+
+    base_email()
+    |> subject("Welcome to Kalda! Here is your personal invite link")
+    |> to(user.email)
+    |> text_body(body)
+    |> Kalda.Mailer.deliver_now()
+  end
 end

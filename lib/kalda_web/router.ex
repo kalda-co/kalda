@@ -76,6 +76,7 @@ defmodule KaldaWeb.Router do
     post "/users/reset-password", UserResetPasswordController, :create
     get "/users/reset-password/:token", UserResetPasswordController, :edit
     put "/users/reset-password/:token", UserResetPasswordController, :update
+    get "/invites/:token", InviteController, :show
   end
 
   scope "/", KaldaWeb do
@@ -102,6 +103,8 @@ defmodule KaldaWeb.Router do
     end
 
     live_dashboard "/dashboard", metrics: KaldaWeb.Telemetry
+    get "/invites", InviteController, :new
+    post "/invites", InviteController, :create
   end
 
   scope "/", KaldaWeb do

@@ -396,4 +396,13 @@ defmodule Kalda.Accounts do
         :not_found
     end
   end
+
+  def create_invite(email) do
+    {token, invite} = Invite.build_invite(email)
+
+    case invite |> Invite.changeset(%{}) |> Repo.insert() do
+      {:ok, invite} -> {:ok, {token, invite}}
+      error -> error
+    end
+  end
 end
