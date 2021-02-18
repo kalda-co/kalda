@@ -5,7 +5,7 @@ defmodule Kalda.Accounts do
 
   import Ecto.Query, warn: false
   alias Kalda.Repo
-  alias Kalda.Accounts.{User, UserToken, UserNotifier}
+  alias Kalda.Accounts.{User, UserToken, UserNotifier, Invite}
 
   ## Database getters
 
@@ -361,6 +361,27 @@ defmodule Kalda.Accounts do
     |> case do
       {:ok, %{user: user}} -> {:ok, user}
       {:error, :user, changeset, _} -> {:error, changeset}
+    end
+  end
+
+  ##############
+  # Invites
+  ##############
+
+  def get_invite_by_token_and_supplied_email(token, email) do
+    {:ok, query} = Invite.verify_token_for_email(token, email)
+    Repo.one(query)
+  end
+
+  def create_user_from_invite(token, email, attrs) do
+    case get_invite_by_token_and_supplied_email(token, email) do
+      %Invite{} ->
+        %User{}
+        |> User.registration_changeset(attrs)
+        |> Repo.insert()
+
+      _ ->
+        {:error, %Ecto.Changeset{}}
     end
   end
 end
