@@ -12,11 +12,11 @@ defmodule Kalda.Accounts.UserNotifier do
   #   * Swoosh - https://hexdocs.pm/swoosh
   #   * Bamboo - https://hexdocs.pm/bamboo
   #
-  defp deliver(to, body) do
-    require Logger
-    Logger.debug(body)
-    {:ok, %{to: to, body: body}}
-  end
+  # defp deliver(to, body) do
+  #   require Logger
+  #   Logger.debug(body)
+  #   {:ok, %{to: to, body: body}}
+  # end
 
   @doc """
   Deliver instructions to confirm account.
@@ -46,7 +46,7 @@ defmodule Kalda.Accounts.UserNotifier do
   Deliver instructions to reset a user password.
   """
   def deliver_reset_password_instructions(user, url) do
-    deliver(user.email, """
+    body = """
 
     ==============================
 
@@ -59,14 +59,20 @@ defmodule Kalda.Accounts.UserNotifier do
     If you didn't request this change, please ignore this.
 
     ==============================
-    """)
+    """
+
+    base_email()
+    |> subject("Password reset instructions")
+    |> to(user.email)
+    |> text_body(body)
+    |> Kalda.Mailer.deliver_now()
   end
 
   @doc """
   Deliver instructions to update a user email.
   """
   def deliver_update_email_instructions(user, url) do
-    deliver(user.email, """
+    body = """
 
     ==============================
 
@@ -79,6 +85,12 @@ defmodule Kalda.Accounts.UserNotifier do
     If you didn't request this change, please ignore this.
 
     ==============================
-    """)
+    """
+
+    base_email()
+    |> subject("Change your email instructions")
+    |> to(user.email)
+    |> text_body(body)
+    |> Kalda.Mailer.deliver_now()
   end
 end
