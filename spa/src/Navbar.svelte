@@ -1,12 +1,33 @@
-<nav class="navbar">
-  <img
-    src="/images/kalda-rainbow-purple-logo.svg"
-    alt="Kalda's Rainbow Logo"
-    class="logo"
-  />
-  <h1>Daily reflection</h1>
-  <img src="/images/burger-menu.svg" alt="hamburger-menu" class="hamburger" />
-</nav>
+<script>
+  let menu = false;
+
+  function toggleMenu() {
+    menu = !menu;
+  }
+  import { fly } from "svelte/transition";
+</script>
+
+<div transition:fly|local class:menu>
+  {#if menu}
+    <section transition:fly={{ y: 200, duration: 1000 }}>stuff</section>
+  {/if}
+
+  <nav class="navbar">
+    <img
+      src="/images/kalda-rainbow-purple-logo.svg"
+      alt="Kalda's Rainbow Logo"
+      class="logo"
+    />
+</div>
+    <h1>Daily reflection</h1>
+    <button on:click|preventDefault={toggleMenu}>
+      <img
+        src="/images/burger-menu.svg"
+        alt="hamburger-menu"
+        class="hamburger"
+      />
+    </button>
+  </nav>
 
 <style>
   .navbar {
@@ -30,5 +51,11 @@
     width: var(--size);
     height: var(--size);
     overflow: hidden;
+  }
+
+  section {
+    height: 90px;
+    width: 100%;
+    background-color: var(--color-purple);
   }
 </style>
