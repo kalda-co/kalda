@@ -1,3 +1,3 @@
 defmodule Kalda.EmailView do
-  use Kalda.Web, :view
+  use KaldaWeb, :view
 end
