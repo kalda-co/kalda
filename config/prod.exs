@@ -24,7 +24,7 @@ config :kalda,
 
 config :kalda, Kalda.Mailer,
   adapter: Bamboo.SendGridAdapter,
-  api_key: System.get_env("SENDGRID_API_KEY")
+  api_key: System.get_env("SENDGRID_API_KEY"),
   hackney_opts: [
     recv_timeout: :timer.minutes(1)
   ]
@@ -37,6 +37,7 @@ config :my_app, MyApp.Mailer, sandbox: true
 defmodule MyApp.Mailer do
   use Bamboo.Mailer, otp_app: :my_app
 end
+
 # ## SSL Support
 #
 # To get SSL working, you will need to add the `https` key

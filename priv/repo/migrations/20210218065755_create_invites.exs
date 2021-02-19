@@ -7,7 +7,7 @@ defmodule Kalda.Repo.Migrations.CreateInvites do
       add :token, :binary, null: false
       timestamps(updated_at: false)
     end
-    create unique_index(:invites, [:token])
 
+    create unique_index(:invites, [:token])
   end
 end
