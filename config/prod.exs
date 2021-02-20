@@ -29,15 +29,6 @@ config :kalda, Kalda.Mailer,
     recv_timeout: :timer.minutes(1)
   ]
 
-# To enable sandbox mode (e.g. in development or staging environments),
-# in config/dev.exs or config/prod.exs etc
-config :my_app, MyApp.Mailer, sandbox: true
-
-# Define a Mailer. Maybe in lib/my_app/mailer.ex
-defmodule MyApp.Mailer do
-  use Bamboo.Mailer, otp_app: :my_app
-end
-
 # ## SSL Support
 #
 # To get SSL working, you will need to add the `https` key
