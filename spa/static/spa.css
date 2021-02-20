@@ -11,6 +11,7 @@
   --gap-s: 8px;
   --gap: calc(var(--gap-s) * 2);
   --gap-l: calc(var(--gap-s) * 4);
+  --gap-xl: calc(var(--gap-s) * 6);
 
   --font-size: 14px;
   --font-size-s: 12px;
@@ -58,4 +59,11 @@ a {
 
 textarea {
   font-family: var(--font-family);
+}
+
+h1 {
+  font-size: 24px;
+}
+h2 {
+  font-size: 18px;
 }

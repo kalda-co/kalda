@@ -71,7 +71,8 @@
     margin-top: calc(0px - var(--gap));
     border-left: var(--border);
     border-bottom: var(--border);
-    border-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
     margin-bottom: var(--gap-s);
   }
 </style>
