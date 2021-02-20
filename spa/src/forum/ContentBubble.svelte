@@ -29,9 +29,9 @@
   import { fly } from "svelte/transition";
 </script>
 
-<div class="sidebar">
-  <div transition:fly|local class:thanks>
-    {#if thanks}
+{#if thanks}
+  <div class="sidebar">
+    <div transition:fly|local class:thanks>
       <section transition:fly={{ y: 200, duration: 1000 }}>
         <button on:click|preventDefault={toggleThanks}>
           <img
@@ -62,9 +62,9 @@
           </button>
         </div>
       </section>
-    {/if}
+    </div>
   </div>
-</div>
+{/if}
 
 <div
   transition:scale|local
@@ -148,9 +148,11 @@
     width: var(--sidebar-width);
     position: fixed;
     top: 0;
-    z-index: 3;
-    width: 375px;
+    bottom: 0;
+    left: 0;
+    right: 0;
     pointer-events: none;
+    z-index: 1000;
   }
 
   p {
