@@ -68,7 +68,7 @@
   }
 
   .background-pink {
-    background-image: url("/images/pink-jellyfish.png");
+    background-image: url("./images/pink-jellyfish.png");
     background-repeat: no-repeat;
   }
 
