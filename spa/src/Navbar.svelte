@@ -33,7 +33,7 @@
 </div>
 
 {#if menu}
-  <section class="sidebar" transition:fly={{ y: 200, duration: 1000 }}>
+  <section class="sidebar" transition:fly={{ y: 200, duration: 400 }}>
     <button on:click|preventDefault={toggleMenu} class="close">
       <img src="/images/cross.svg" alt="close menu cross" />
     </button>

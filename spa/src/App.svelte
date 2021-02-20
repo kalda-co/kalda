@@ -26,7 +26,11 @@
     {:else if state.currentPage === "guidelines"}
       <Guidelines />
     {:else}
-      <Dashboard user={state.currentUser} post={state.posts[0]} />
+      <Dashboard
+        user={state.currentUser}
+        navigateTo={(page) => (state.currentPage = page)}
+        post={state.posts[0]}
+      />
     {/if}
   </main>
 {:catch error}
