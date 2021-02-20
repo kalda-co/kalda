@@ -3,6 +3,7 @@
   import Navbar from "./Navbar.svelte";
   import DailyReflection from "./forum/DailyReflection.svelte";
   import Guidelines from "./Guidelines.svelte";
+  import Dashboard from "./Dashboard.svelte";
 
   // Load the CSRF token into the backend API client module so we can make HTTP
   // requests using cookie auth
@@ -21,6 +22,7 @@
     <!-- TODO: gracefully handle zero posts -->
     <DailyReflection post={state.posts[0]} />
     <Guidelines />
+    <Dashboard user={state.currentUser} post={state.posts[0]} />
   </main>
 {:catch error}
   <!-- TODO: Error design -->
