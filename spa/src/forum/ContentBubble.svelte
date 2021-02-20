@@ -19,6 +19,7 @@
 
   function toggleReporting() {
     reporting = !reporting;
+    // toggleThanks();
   }
 
   function toggleThanks() {
@@ -154,6 +155,7 @@
 
   p {
     color: var(--font-color-dark);
+    padding: var(--gap-s);
   }
 
   h1 {
@@ -180,10 +182,10 @@
   }
 
   .content {
-    margin-top: 33vh;
-    margin-bottom: 33vh;
+    margin-top: 0vh;
+    margin-bottom: 50vh;
     width: 375px;
-    height: 34vh;
+    height: 50vh;
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
