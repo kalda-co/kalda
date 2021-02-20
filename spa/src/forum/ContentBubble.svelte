@@ -32,7 +32,7 @@
 {#if thanks}
   <div class="sidebar">
     <div transition:fly|local class:thanks>
-      <section transition:fly={{ y: 200, duration: 1000 }}>
+      <section transition:fly={{ y: 200, duration: 400 }}>
         <button on:click|preventDefault={toggleThanks}>
           <img
             src="/images/cross-purple.svg"

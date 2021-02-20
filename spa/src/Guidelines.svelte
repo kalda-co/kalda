@@ -2,7 +2,7 @@
   <section class="guideline">
     <p>
       We have 3 guidelines that we ask members to accept. Anyone who doesn’t
-      respect will be removed from the platform.
+      respect these will be removed from the platform.
     </p>
     <div class="guideline-card">
       <div class="card-image">

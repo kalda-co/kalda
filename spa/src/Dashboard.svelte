@@ -1,8 +1,15 @@
 <script lang="ts">
-  import type { User } from "./state";
-  import type { Post } from "./state";
+  import type { Page, User, Post } from "./state";
+
   export let user: User;
   export let post: Post;
+  export let navigateTo: (page: Page) => any;
+
+  function go(page: Page) {
+    return () => {
+      navigateTo(page);
+    };
+  }
 </script>
 
 <article>
@@ -14,9 +21,9 @@
     <h2>Today's reflection question.</h2>
     <div class="card">
       <p class="question">{post.content}</p>
-      <a href="/app">
-        <button>Post a reflection</button>
-      </a>
+      <button on:click|preventDefault={go("daily-reflection")}
+        >Post a reflection</button
+      >
     </div>
   </div>
   <section>
