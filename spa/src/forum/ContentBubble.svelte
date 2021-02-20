@@ -9,16 +9,61 @@
   export let replyLine: boolean = false;
 
   let reporting = false;
+  let thanks = false;
 
   async function saveReport(reporter_reason: string) {
     await report(item.id, reporter_reason);
     reporting = false;
+    toggleThanks();
   }
 
   function toggleReporting() {
     reporting = !reporting;
   }
+
+  function toggleThanks() {
+    thanks = !thanks;
+  }
+
+  import { fly } from "svelte/transition";
 </script>
+
+<div class="sidebar">
+  <div transition:fly|local class:thanks>
+    {#if thanks}
+      <section transition:fly={{ y: 200, duration: 1000 }}>
+        <button on:click|preventDefault={toggleThanks}>
+          <img
+            src="/images/cross-purple.svg"
+            alt="close menu cross"
+            class="cross-top"
+          />
+        </button>
+        <div class="container">
+          <div class="content">
+            <h1>Thank you for your report</h1>
+            <p>
+              This content has been flagged for the attention of a moderator.
+            </p>
+            <p>
+              Thank you for keeping the community a safe and respectful space.
+            </p>
+            <a href="/app">
+              <button class="button">Back to community</button>
+            </a>
+          </div>
+          <button on:click|preventDefault={toggleThanks}>
+            <img
+              src="/images/cross-purple.svg"
+              alt="close menu cross"
+              class="cross"
+            />
+          </button>
+        </div>
+      </section>
+    {/if}
+  </div>
+</div>
 
 <div
   transition:scale|local
@@ -94,5 +139,75 @@
     font-size: var(--font-size-s);
     margin-top: var(--gap-s);
     cursor: pointer;
+  }
+
+  .sidebar {
+    color: var(--color-white);
+    display: inline-block;
+    width: var(--sidebar-width);
+    position: fixed;
+    top: 0;
+    z-index: 3;
+    width: 375px;
+    pointer-events: none;
+  }
+
+  p {
+    color: var(--font-color-dark);
+  }
+
+  h1 {
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 32px;
+    color: var(--color-purple);
+  }
+
+  section {
+    width: 100%;
+    background-color: var(--color-white);
+    display: inline-block;
+  }
+
+  .thanks {
+    pointer-events: all;
+    height: 100vh;
+  }
+
+  .container {
+    display: flex;
+    justify-content: center;
+  }
+
+  .content {
+    margin-top: 33vh;
+    margin-bottom: 33vh;
+    width: 375px;
+    height: 34vh;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+  }
+
+  .button {
+    color: var(--color-white);
+    background-color: var(--color-purple);
+    margin: var(--gap);
+    text-align: center;
+    white-space: nowrap;
+    padding: var(--gap);
+  }
+
+  .cross {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin: var(--gap-s);
+  }
+  .cross-top {
+    top: 0;
+    right: 0;
+    margin: var(--gap-s);
+    position: absolute;
   }
 </style>
