@@ -1,9 +1,20 @@
 <script>
+  import type { Page } from "./state";
+
+  export let navigateTo: (page: Page) => any;
   let menu = false;
 
   function toggleMenu() {
     menu = !menu;
   }
+
+  function go(page: Page) {
+    return () => {
+      menu = false;
+      navigateTo(page);
+    };
+  }
+
   import { fly } from "svelte/transition";
 </script>
 
@@ -41,21 +52,18 @@
           </button>
           <div class="button-container">
             <div class="button-grid">
-              <a href="/app">
-                <button class="button"> Home </button>
-              </a>
-              <a href="/app">
-                <button class="button"> Group Therapy </button>
-              </a>
-              <a href="/app">
-                <button class="button"> Community </button>
-              </a>
-              <a href="/app">
-                <button class="button"> Urgent Support </button>
-              </a>
-              <a href="/app">
-                <button class="button"> Log Out </button>
-              </a>
+              <!-- <button class="button"> Urgent Support </button>
+              <button class="button"> Log Out </button> -->
+              <button on:click|preventDefault={go("dashboard")} class="button">
+                Home
+              </button>
+              <button on:click|preventDefault={go("guidelines")} class="button"
+                >Guidelines</button
+              >
+              <button
+                on:click|preventDefault={go("daily-reflection")}
+                class="button">Daily Reflection</button
+              >
             </div>
           </div>
           <button on:click|preventDefault={toggleMenu}>
@@ -88,7 +96,6 @@
     --size: 29px;
     width: var(--size);
     height: var(--size);
-    overflow: hidden;
   }
   .nav-container {
     display: flex;
@@ -109,9 +116,8 @@
     width: var(--sidebar-width);
     position: fixed;
     top: 0;
-    z-index: 3;
+    z-index: 1000;
     width: 375px;
-    pointer-events: none;
   }
 
   section {
@@ -120,21 +126,15 @@
     display: inline-block;
   }
 
-  .menu {
-    pointer-events: all;
-    height: 100vh;
-  }
-
   .button-container {
     display: flex;
     justify-content: center;
+    flex-direction: column;
+    height: 100vh;
   }
 
   .button-grid {
-    margin-top: 33vh;
-    margin-bottom: 33vh;
     width: 375px;
-    height: 34vh;
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
@@ -146,6 +146,7 @@
     margin: var(--gap);
     text-align: center;
     white-space: nowrap;
+    padding: var(--gap) var(--gap-l);
   }
 
   .cross {
