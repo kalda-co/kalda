@@ -102,6 +102,7 @@ function appState(json: unknown): AppState {
   return {
     currentUser: field("current_user", user)(json),
     posts: field("posts", array(post))(json),
+    currentPage: "dashboard",
   };
 }
 

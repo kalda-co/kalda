@@ -25,6 +25,11 @@ body {
   height: 100%;
   background-color: var(--color-grey);
   color: var(--color-black);
+  
+}
+
+html {
+  overflow-y: scroll;
 }
 
 body {

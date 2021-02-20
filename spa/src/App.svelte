@@ -18,11 +18,16 @@
   ... Loading
 {:then state}
   <main>
-    <Navbar />
-    <!-- TODO: gracefully handle zero posts -->
-    <DailyReflection post={state.posts[0]} />
-    <Guidelines />
-    <Dashboard user={state.currentUser} post={state.posts[0]} />
+    <Navbar navigateTo={(page) => (state.currentPage = page)} />
+
+    {#if state.currentPage === "daily-reflection"}
+      <!-- TODO: gracefully handle zero posts -->
+      <DailyReflection post={state.posts[0]} />
+    {:else if state.currentPage === "guidelines"}
+      <Guidelines />
+    {:else}
+      <Dashboard user={state.currentUser} post={state.posts[0]} />
+    {/if}
   </main>
 {:catch error}
   <!-- TODO: Error design -->

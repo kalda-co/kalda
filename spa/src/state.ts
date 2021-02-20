@@ -1,6 +1,9 @@
+export type Page = "dashboard" | "guidelines" | "daily-reflection";
+
 export type AppState = {
   currentUser: User;
   posts: Array<Post>;
+  currentPage: Page;
 };
 
 export type Post = {
