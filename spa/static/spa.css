@@ -47,7 +47,7 @@ a {
 }
 
 .button {
-  background-color: var(--color-purple-mid);
+  background-color: var(--color-purple);
   color: var(--color-white);
   border: none;
   padding: var(--gap-s) var(--gap);

@@ -10,11 +10,13 @@
 <nav class="nav-container">
   <div class="navtop">
     <div class="navbar">
-      <img
-        src="/images/kalda-rainbow-purple-logo.svg"
-        alt="Kalda's Rainbow Logo"
-        class="logo"
-      />
+      <a href="/app">
+        <img
+          src="/images/kalda-rainbow-purple-logo.svg"
+          alt="Kalda's Rainbow Logo"
+          class="logo"
+        />
+      </a>
       <h1>Daily reflection</h1>
       <button on:click|preventDefault={toggleMenu}>
         <img
@@ -40,27 +42,19 @@
           <div class="button-container">
             <div class="button-grid">
               <a href="/app">
-                <button on:click|preventDefault class="button"> Home </button>
+                <button class="button"> Home </button>
               </a>
               <a href="/app">
-                <button on:click|preventDefault class="button">
-                  Group Therapy
-                </button>
+                <button class="button"> Group Therapy </button>
               </a>
               <a href="/app">
-                <button on:click|preventDefault class="button">
-                  Community
-                </button>
+                <button class="button"> Community </button>
               </a>
               <a href="/app">
-                <button on:click|preventDefault class="button">
-                  Urgent Support
-                </button>
+                <button class="button"> Urgent Support </button>
               </a>
               <a href="/app">
-                <button on:click|preventDefault class="button">
-                  Log Out
-                </button>
+                <button class="button"> Log Out </button>
               </a>
             </div>
           </div>

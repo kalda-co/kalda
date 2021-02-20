@@ -15,11 +15,11 @@
   $: {
     switch (post.comments.length) {
       case 0:
-        commentsCountText = "No comments";
+        commentsCountText = "No reflections";
       case 1:
-        commentsCountText = "1 comment";
+        commentsCountText = "1 reflection";
       default:
-        commentsCountText = `${post.comments.length} comments`;
+        commentsCountText = `${post.comments.length} reflections`;
     }
   }
 </script>
@@ -38,7 +38,7 @@
 
   <section class="comments">
     <ContentTextForm
-      placeholder="Post a comment"
+      placeholder="Post your reflection"
       save={saveComment}
       buttonText="Send"
     />
