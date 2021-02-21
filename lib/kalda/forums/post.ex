@@ -5,6 +5,10 @@ defmodule Kalda.Forums.Post do
   schema "posts" do
     field :content, :string
 
+    field :forum, Ecto.Enum,
+      values: [:daily_reflection, :will_pool, :community, :co_working],
+      default: :daily_reflection
+
     belongs_to :author, Kalda.Accounts.User,
       foreign_key: :author_id,
       references: :id

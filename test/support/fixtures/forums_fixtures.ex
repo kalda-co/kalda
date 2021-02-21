@@ -7,7 +7,8 @@ defmodule Kalda.ForumsFixtures do
 
   def post(author = %User{}, attrs \\ %{}) do
     defaults = %{
-      content: unique_content()
+      content: unique_content(),
+      forum: :daily_reflection
     }
 
     # attrs override defaults
