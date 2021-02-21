@@ -101,7 +101,7 @@ defmodule Kalda.Accounts.UserNotifier do
 
     base_email()
     |> subject("Welcome to Kalda! Here is your personal invite link")
-    |> to(user.email)
+    |> to(email)
     |> text_body(body)
     |> Kalda.Mailer.deliver_now()
   end
