@@ -16,11 +16,14 @@ defmodule KaldaWeb.Api.V1.DailyReflectionControllerTest do
   describe "GET index" do
     setup [:register_and_log_in_user]
 
-    test "lists all posts", %{conn: conn, user: current_user} do
+    test "lists all posts that are daily reflections", %{conn: conn, user: current_user} do
       author1 = AccountsFixtures.user()
       author2 = AccountsFixtures.user()
       post1 = ForumsFixtures.post(author1)
       post2 = ForumsFixtures.post(author1)
+      _post3 = ForumsFixtures.post(author1, %{}, :will_pool)
+      _post4 = ForumsFixtures.post(author1, %{}, :community)
+      _post5 = ForumsFixtures.post(author1, %{}, :co_working)
       comment1 = ForumsFixtures.comment(post2, author2)
       reply1 = ForumsFixtures.reply(comment1, author1)
       conn = get(conn, "/v1/daily-reflections")

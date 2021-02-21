@@ -21,8 +21,8 @@ defmodule Kalda.Forums do
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_post(user, attrs \\ %{}) do
-    %Post{author_id: user.id}
+  def create_post(user, attrs \\ %{}, forum \\ :daily_reflection) do
+    %Post{author_id: user.id, forum: forum}
     |> Post.changeset(attrs)
     |> Repo.insert()
   end
@@ -47,6 +47,7 @@ defmodule Kalda.Forums do
   def get_daily_reflections() do
     Repo.all(
       from post in Post,
+        where: post.forum == :daily_reflection,
         order_by: [desc: post.inserted_at],
         preload: [
           :author,
