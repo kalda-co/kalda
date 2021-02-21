@@ -5,7 +5,7 @@ defmodule Kalda.ForumsFixtures do
 
   def unique_content, do: "Some content #{System.unique_integer()} here"
 
-  def post(author = %User{}, attrs \\ %{}) do
+  def post(author = %User{}, attrs \\ %{}, forum \\ :daily_reflection) do
     defaults = %{
       content: unique_content(),
       forum: :daily_reflection
@@ -14,7 +14,7 @@ defmodule Kalda.ForumsFixtures do
     # attrs override defaults
     attrs = Map.merge(defaults, attrs)
 
-    {:ok, post} = Kalda.Forums.create_post(author, attrs)
+    {:ok, post} = Kalda.Forums.create_post(author, attrs, forum)
     post
   end
 

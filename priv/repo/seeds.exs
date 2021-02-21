@@ -35,6 +35,14 @@ user2 =
     hashed_password: Bcrypt.hash_pwd_salt("thisisatestpassword")
   })
 
+user3 =
+  Kalda.Repo.insert!(%User{
+    username: "Billy_Idol",
+    email: "idol@example.com",
+    password: "thisisatestpassword",
+    hashed_password: Bcrypt.hash_pwd_salt("thisisatestpassword")
+  })
+
 post =
   Kalda.Repo.insert!(%Post{
     content: "This is your very first Daily Reflection - does it feel powerful?",
@@ -47,11 +55,53 @@ _post2 =
     author_id: user.id
   })
 
+post3 =
+  Kalda.Repo.insert!(%Post{
+    forum: :will_pool,
+    content: "Will Pool! What do you need to get done today?",
+    author_id: user.id
+  })
+
+post4 =
+  Kalda.Repo.insert!(%Post{
+    forum: :community,
+    content: "I'm starting an exercising thread, post your workouts below.",
+    author_id: user2.id
+  })
+
+post5 =
+  Kalda.Repo.insert!(%Post{
+    forum: :co_working,
+    content: "WFH co-working session here today from 1pm",
+    author_id: user2.id
+  })
+
 comment =
   Kalda.Repo.insert!(%Comment{
     content: "I feel quite powerful",
     author_id: user.id,
     post_id: post.id
+  })
+
+_comment =
+  Kalda.Repo.insert!(%Comment{
+    content: "I really need to go to the Post Office",
+    author_id: user.id,
+    post_id: post3.id
+  })
+
+_comment =
+  Kalda.Repo.insert!(%Comment{
+    content: "I danced around my room to The Clash, London Calling for 40 minutes today",
+    author_id: user3.id,
+    post_id: post4.id
+  })
+
+_comment =
+  Kalda.Repo.insert!(%Comment{
+    content: "I'm going to join co-working but not until 2pm",
+    author_id: user3.id,
+    post_id: post5.id
   })
 
 _comment2 =
