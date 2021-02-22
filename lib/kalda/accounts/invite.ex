@@ -32,10 +32,6 @@ defmodule Kalda.Accounts.Invite do
     %__MODULE__{} |> cast(%{}, [])
   end
 
-  @doc """
-  build_invite(email)
-    {url-encoded token, Invite}
-  """
   defp build_token() do
     token = :crypto.strong_rand_bytes(@rand_size)
     hashed_token = :crypto.hash(@hash_algorithm, token)
