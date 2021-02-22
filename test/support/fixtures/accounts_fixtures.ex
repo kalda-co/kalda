@@ -70,13 +70,7 @@ defmodule Kalda.AccountsFixtures do
   end
 
   def invite(email) do
-    {token, invite} = Kalda.Accounts.Invite.build_invite(email)
-
-    {:ok, invite} =
-      invite
-      |> Kalda.Accounts.Invite.changeset(%{})
-      |> Kalda.Repo.insert()
-
-    {token, invite}
+    {:ok, {a, b}} = Kalda.Accounts.create_invite(email)
+    {a, b}
   end
 end

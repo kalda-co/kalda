@@ -10,7 +10,7 @@ defmodule KaldaWeb.InviteController do
         render(conn, "expired.html")
 
       invite ->
-        changeset = Invite.changeset(%Invite{token: token}, %{})
+        changeset = Invite.empty_changeset()
         render(conn, "show.html", invite: invite, changeset: changeset)
     end
   end
