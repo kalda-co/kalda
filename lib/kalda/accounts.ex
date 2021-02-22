@@ -404,7 +404,7 @@ defmodule Kalda.Accounts do
 
     case invite |> Invite.changeset(%{}) |> Repo.insert() do
       {:ok, invite} -> {:ok, {token, invite}}
-      error -> error
+      {:error, :invite, changeset, _} -> {:error, changeset}
     end
   end
 end
