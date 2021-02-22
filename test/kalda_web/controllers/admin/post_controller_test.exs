@@ -19,7 +19,7 @@ defmodule KaldaWeb.Admin.PostControllerTest do
 
     test "lists all posts if admin", %{conn: conn} do
       conn = get(conn, Routes.admin_post_path(conn, :index))
-      assert html_response(conn, 200) =~ "Daily Reflections"
+      assert html_response(conn, 200) =~ "All Forums Posts"
     end
   end
 

@@ -2,7 +2,7 @@
   <h1>Daily Reflections</h1>
 
   <h1>
-    <span><%= link "+ New Post", to: Routes.admin_post_path(@conn, :new) %></span>
+    <span><%= link "+ New Daily Reflection", to: Routes.admin_forum_path(@conn, :daily_reflection_new) %></span>
   </h1>
   <div class="all-posts">
     <%= for post <- @posts do %>
