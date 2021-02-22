@@ -17,6 +17,10 @@ defmodule Kalda.Accounts.Invite do
     invite
     |> cast(attrs, [:invitee_email])
     |> validate_required([:invitee_email, :token])
+    |> validate_format(:invitee_email, ~r/^[^\s]+@[^\s]+$/,
+      message: "must have the @ sign and no spaces"
+    )
+    |> validate_length(:invitee_email, max: 254)
   end
 
   @doc """

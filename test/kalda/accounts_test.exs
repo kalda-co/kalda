@@ -620,4 +620,11 @@ defmodule Kalda.AccountsTest do
       assert :not_found = Accounts.create_user_from_invite(token, attrs)
     end
   end
+
+  describe "create_invite" do
+    test "does not create invite if email is invalid" do
+      email = "invalidemail"
+      refute Accounts.create_invite(email)
+    end
+  end
 end
