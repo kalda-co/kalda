@@ -40,14 +40,13 @@ defmodule KaldaWeb.Admin.InviteControllerTest do
     test "redirects to show when data is valid and user is admin", %{conn: conn} do
       conn = post(conn, Routes.admin_invite_path(conn, :create), invite: @create_invite_attrs)
 
-      assert html_response(conn, 200) =~ "New Invite"
+      assert html_response(conn, 302) =~ "redirected"
       assert get_flash(conn, :info) == "Invite created and email sent"
     end
 
     test "renders errors when data is invalid", %{conn: conn} do
       conn = post(conn, Routes.admin_invite_path(conn, :create), invite: @invalid_invite_attrs)
-      response = html_response(conn, 403)
-      assert response =~ "Please check the errors below"
+      assert html_response(conn, 422) =~ "Please check the errors below"
     end
   end
 end

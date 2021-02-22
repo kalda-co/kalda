@@ -400,11 +400,14 @@ defmodule Kalda.Accounts do
   end
 
   def create_invite(email) do
-    {token, invite} = Invite.build_invite(email)
+    %{token: token, changeset: changeset} = Invite.build_invite(email)
 
-    case invite |> Invite.changeset(%{}) |> Repo.insert() do
-      {:ok, invite} -> {:ok, {token, invite}}
-      {:error, :invite, changeset, _} -> {:error, changeset}
+    case Repo.insert(changeset) do
+      {:ok, invite} ->
+        {:ok, {token, invite}}
+
+      {:error, changeset} ->
+        {:error, changeset}
     end
   end
 end

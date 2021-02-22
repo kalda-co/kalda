@@ -624,7 +624,7 @@ defmodule Kalda.AccountsTest do
   describe "create_invite" do
     test "does not create invite if email is invalid" do
       email = "invalidemail"
-      refute Accounts.create_invite(email)
+      assert {:error, _changeset} = Accounts.create_invite(email)
     end
   end
 end
