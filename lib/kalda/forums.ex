@@ -28,6 +28,24 @@ defmodule Kalda.Forums do
   end
 
   @doc """
+  Creates a daily_reflection for a user
+
+  ## Examples
+
+      iex> create_daily_reflection(user, %{field: value})
+      {:ok, %Post{}}
+
+      iex> create_daily_reflection(user, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_daily_reflection(user, attrs \\ %{}) do
+    %Post{author_id: user.id, forum: :daily_reflection}
+    |> Post.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
   Returns all posts.
 
   ## Examples
@@ -71,6 +89,19 @@ defmodule Kalda.Forums do
   """
   def change_post(%Post{} = post, attrs \\ %{}) do
     Post.changeset(post, attrs)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking daily_reflection changes.
+
+  ## Examples
+
+      iex> change_daily_reflection(daily_reflection)
+      %Ecto.Changeset{data: %Post{}}
+
+  """
+  def change_daily_reflection(%Post{forum: :daily_reflection} = daily_reflection, attrs \\ %{}) do
+    Post.changeset(daily_reflection, attrs)
   end
 
   @doc """

@@ -117,6 +117,22 @@ defmodule Kalda.ForumsTest do
       assert %Ecto.Changeset{} = Forums.change_post(post)
     end
 
+    test "change_post/1 returns a post changeset for the given forum" do
+      user = AccountsFixtures.user()
+      assert {:ok, %Post{} = post} = Forums.create_post(user, @valid_post_attrs, :will_pool)
+      assert %Ecto.Changeset{} = Forums.change_post(post)
+      assert post.forum == :will_pool
+    end
+
+    test "change_daily_reflection/1 returns a daily_reflection changeset" do
+      user = AccountsFixtures.user()
+
+      assert {:ok, %Post{forum: :daily_reflection} = post} =
+               Forums.create_daily_reflection(user, @valid_post_attrs)
+
+      assert %Ecto.Changeset{} = Forums.change_daily_reflection(post)
+    end
+
     test "update_post/2 with valid data updates the post" do
       user = AccountsFixtures.user()
       assert {:ok, %Post{} = post} = Forums.create_post(user, @valid_post_attrs)

@@ -1,8 +1,8 @@
 <div class="admin-container">
-  <h1>Daily Reflections</h1>
+  <h1>All Forums Posts</h1>
 
   <h1>
-    <span><%= link "+ New Post", to: Routes.admin_post_path(@conn, :new) %></span>
+    <span><%= link "+ New Daily Reflection", to: Routes.admin_post_path(@conn, :new) %></span>
   </h1>
   <div class="all-posts">
     <%= for post <- @posts do %>
