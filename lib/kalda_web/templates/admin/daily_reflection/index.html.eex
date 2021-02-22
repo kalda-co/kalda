@@ -42,7 +42,7 @@
                       <%= comment.content %>
                     </div>
                     <div class="actions">
-                      <span><%= link "Delete", to: Routes.admin_post_comment_path(@conn, :delete, daily_reflection, comment), method: :delete, data: [confirm: "Are you sure?"] %></span>
+                      <span><%= link "Delete", to: Routes.admin_daily_reflection_comment_path(@conn, :delete, daily_reflection, comment), method: :delete, data: [confirm: "Are you sure?"] %></span>
                     </div>
                 </div>
 
@@ -61,7 +61,7 @@
                             <%= reply.content %>
                           </div>
                     <div class="actions">
-                      <span><%= link "Delete", to: Routes.admin_post_comment_reply_path(@conn, :delete, daily_reflection, comment, reply), method: :delete, data: [confirm: "Are you sure?"] %></span>
+                      <span><%= link "Delete", to: Routes.admin_daily_reflection_comment_reply_path(@conn, :delete, daily_reflection, comment, reply), method: :delete, data: [confirm: "Are you sure?"] %></span>
                     </div>
                       </div>
                     <% end %>
