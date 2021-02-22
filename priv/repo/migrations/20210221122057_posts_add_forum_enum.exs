@@ -10,12 +10,12 @@ defmodule Kalda.Repo.Migrations.PostsAddForumEnum do
       'co_working'
     )
     """
+
     drop_query = "DROP TYPE forum_type"
     execute(create_query, drop_query)
 
     alter table(:posts) do
       add :forum, :forum_type, default: "daily_reflection", null: false
     end
-
   end
 end

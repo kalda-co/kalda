@@ -11,6 +11,6 @@ defmodule KaldaWeb.Admin.ReplyController do
 
     conn
     |> put_flash(:info, "Reply deleted successfully.")
-    |> redirect(to: Routes.admin_post_path(conn, :index))
+    |> redirect(to: Routes.admin_daily_reflection_path(conn, :index))
   end
 end
