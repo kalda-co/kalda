@@ -98,6 +98,8 @@ defmodule KaldaWeb.Router do
     import Phoenix.LiveDashboard.Router
     pipe_through [:browser, :require_admin]
 
+    get "/", AdminController, :index
+
     get "/users", UserController, :index
     get "/reports", ReportController, :index
 

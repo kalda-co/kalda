@@ -114,6 +114,23 @@ defmodule Kalda.Forums do
     )
   end
 
+  def get_forums_posts_limit(forum, limit) do
+    Repo.all(
+      from post in Post,
+        where: post.forum == ^forum,
+        order_by: [desc: post.inserted_at],
+        limit: ^limit,
+        preload: [
+          :author,
+          comments:
+            ^from(comment in Comment,
+              order_by: [desc: comment.inserted_at],
+              preload: [:author, replies: [:author]]
+            )
+        ]
+    )
+  end
+
   @doc """
   Returns an `%Ecto.Changeset{}` for tracking post changes.
 
