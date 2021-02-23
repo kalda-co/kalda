@@ -17,5 +17,7 @@ defmodule Kalda.Repo.Migrations.PostsAddForumEnum do
     alter table(:posts) do
       add :forum, :forum_type, default: "daily_reflection", null: false
     end
+
+    create index(:posts, [:forum, :inserted_at])
   end
 end

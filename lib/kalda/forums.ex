@@ -40,9 +40,7 @@ defmodule Kalda.Forums do
 
   """
   def create_daily_reflection(user, attrs \\ %{}) do
-    %Post{author_id: user.id, forum: :daily_reflection}
-    |> Post.changeset(attrs)
-    |> Repo.insert()
+    create_post(user, attrs, :daily_reflection)
   end
 
   @doc """
