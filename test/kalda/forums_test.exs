@@ -213,7 +213,7 @@ defmodule Kalda.ForumsTest do
       post1 = ForumsFixtures.post(user1)
       post2 = ForumsFixtures.post(user2, %{}, :will_pool)
       post3 = ForumsFixtures.post(user2, %{}, :community)
-      post4 = ForumsFixtures.post(user, %{}, :co_working)
+      _post4 = ForumsFixtures.post(user, %{}, :co_working)
       comment1 = ForumsFixtures.comment(post1, user2)
       comment2 = ForumsFixtures.comment(post3, user1)
       reply1 = ForumsFixtures.reply(comment1, user2)
