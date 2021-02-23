@@ -11,13 +11,12 @@ defmodule KaldaWeb.InviteController do
 
       invite ->
         changeset = Invite.empty_changeset()
-        render(conn, "show.html", invite: invite, changeset: changeset)
+        render(conn, "show.html", invite: invite, changeset: changeset, token: token)
     end
   end
 
   def create(conn, %{"user" => params}) do
     token = params["token"]
-    # IO.inspect(conn)
 
     case Accounts.create_user_from_invite(token, params) do
       {:ok, %User{} = user} ->
@@ -27,7 +26,11 @@ defmodule KaldaWeb.InviteController do
 
       {:error, %Ecto.Changeset{} = changeset} ->
         invite = Accounts.get_invite_for_token(token)
-        render(conn, "show.html", changeset: changeset, invite: invite)
+        render(conn, "show.html", changeset: changeset, invite: invite, token: token)
+
+      :not_found ->
+        conn
+        |> render("expired.html")
     end
   end
 end

@@ -375,6 +375,9 @@ defmodule Kalda.Accounts do
       {:ok, hashed_token} ->
         Repo.one(
           from i in Kalda.Accounts.Invite,
+            left_join: u in User,
+            on: i.invitee_email == u.email,
+            where: is_nil(u),
             where: i.token == ^hashed_token,
             where: i.inserted_at > ago(@token_validity_in_days, "day"),
             select: i
