@@ -170,9 +170,10 @@ _signup2 =
   })
 
 IO.puts("""
-You can now log in with these credentials:
+You can test the invite route with:
+localhost:4000/invites/#{token}
+
+You can now log in as admin with these credentials:
 email:    demo@kalda.co
 password: thisisademopassword
-You can test the invite route with:
-/invites/#{token}
 """)
