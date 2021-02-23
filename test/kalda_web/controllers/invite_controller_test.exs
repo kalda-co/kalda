@@ -17,22 +17,27 @@ defmodule KaldaWeb.InviteControllerTest do
 
       assert html_response(conn, 200) =~ "your token may have expired"
     end
+
+    test "invite already used"
   end
 
   describe "POST invites" do
     test "post invites creates a user for invitee_email", %{conn: conn} do
-      {token, invite} = Kalda.AccountsFixtures.invite()
-
-      IO.inspect(invite)
+      {token, _invite} = Kalda.AccountsFixtures.invite()
 
       conn =
         post(conn, Routes.invite_path(conn, :create),
-          user: @create_user_attrs,
-          token: token
+          user: Map.put(@create_user_attrs, :token, token)
         )
 
+      # TODO: test the user has been created
+
       assert get_flash(conn, :info) == "Account created successfully"
-      assert html_response(conn, 302) =~ "Log out"
+      assert redirected_to(conn, 302) =~ "/"
     end
+
+    test "invalid attrs"
+
+    test "invite already used"
   end
 end

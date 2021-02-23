@@ -12,26 +12,19 @@
     <%= text_input f, :username, required: true, pattern: "^[A-Za-z0-9-_]+$" %>
     <%= error_tag f, :username %>
 
-    <%= hidden_input f, :token %>
-
-
-    <%# <p>Create a password. Passwords must contain at least 12 characters.</p> %>
-
     <%= label f, :password %>
     <%= password_input f, :password, required: true %>
     <%= error_tag f, :password %>
 
-  <%# <p>Everyone in the Kalda community has a unique username which protects our privacy, e.g: <span class="username">Dan_15_capibara</span> or <span class="username">happy-Al-squid</span>.</p> %>
+    <p>Usernames can be up to 35 characters long and can only contain letters, numbers, hyphens and underscores.</p>
 
-
- <p>Usernames can be up to 35 characters long and can only contain letters, numbers, hyphens and underscores.</p>
-
+    <%= hidden_input f, :token, value: @token %>
     <div>
       <%= submit "Submit", class: "button"%>
     </div>
 
-  <p>By clicking the button above you accept Kalda’s
-  <%= link "terms and conditions.", to: "/terms" %></p>
+    <p>By clicking the button above you accept Kalda’s
+    <%= link "terms and conditions.", to: "/terms" %></p>
   <% end %>
 
   <p>Already have an account?
