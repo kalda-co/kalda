@@ -151,13 +151,9 @@ _report22 =
     comment_id: comment.id
   })
 
-{token, invite} = Invite.build_invite("invite@example.com")
+%{token: token, changeset: invite_changeset} = Invite.build_invite("invite@example.com")
 
-_invite =
-  Kalda.Repo.insert!(%Invite{
-    invitee_email: invite.invitee_email,
-    token: invite.token
-  })
+_invite = Kalda.Repo.insert!(invite_changeset)
 
 _signup1 =
   Kalda.Repo.insert!(%Signup{
