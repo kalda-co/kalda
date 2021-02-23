@@ -23,7 +23,7 @@ defmodule Kalda.Forums.Post do
   @doc false
   def changeset(post, attrs) do
     post
-    |> cast(attrs, [:content])
+    |> cast(attrs, [:content, :published_at])
     |> validate_required([:content, :author_id])
     |> foreign_key_constraint(:author_id)
   end
