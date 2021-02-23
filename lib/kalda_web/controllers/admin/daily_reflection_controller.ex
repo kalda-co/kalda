@@ -5,7 +5,7 @@ defmodule KaldaWeb.Admin.DailyReflectionController do
   alias Kalda.Policy
 
   def index(conn, _params) do
-    Policy.authorize!(conn, :view_daily_reflection_daily_reflections, Kalda)
+    Policy.authorize!(conn, :view_admin_daily_reflections, Kalda)
     # TODO add pagination, do not get all users
     daily_reflections = Forums.get_daily_reflections()
 
