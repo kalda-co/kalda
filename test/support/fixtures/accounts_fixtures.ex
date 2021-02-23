@@ -69,8 +69,17 @@ defmodule Kalda.AccountsFixtures do
     token
   end
 
-  def invite(email) do
+  def invite(email \\ "example@example.com") do
     {:ok, {a, b}} = Kalda.Accounts.create_invite(email)
     {a, b}
+  end
+
+  def expired_invite(email \\ "example@example.com") do
+    {:ok, {token, inv}} = Kalda.Accounts.create_invite(email)
+
+    {1, nil} =
+      Kalda.Repo.update_all(Kalda.Accounts.Invite, set: [inserted_at: ~N[2020-01-01 00:00:00]])
+
+    {token, inv}
   end
 end

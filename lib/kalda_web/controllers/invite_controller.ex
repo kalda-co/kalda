@@ -17,6 +17,7 @@ defmodule KaldaWeb.InviteController do
 
   def create(conn, %{"user" => params}) do
     token = params["token"]
+    # IO.inspect(conn)
 
     case Accounts.create_user_from_invite(token, params) do
       {:ok, %User{} = user} ->
