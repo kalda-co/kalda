@@ -204,6 +204,123 @@ defmodule Kalda.ForumsTest do
              ]
     end
 
+    test "get_forums_posts_limit/2 returns all posts" do
+      now = NaiveDateTime.local_now()
+      user = AccountsFixtures.user()
+      user1 = AccountsFixtures.user()
+      user2 = AccountsFixtures.user()
+      post = ForumsFixtures.post(user1)
+      post1 = ForumsFixtures.post(user1)
+      post2 = ForumsFixtures.post(user2, %{}, :will_pool)
+      post3 = ForumsFixtures.post(user2, %{}, :community)
+      post4 = ForumsFixtures.post(user, %{}, :co_working)
+      comment1 = ForumsFixtures.comment(post1, user2)
+      comment2 = ForumsFixtures.comment(post3, user1)
+      reply1 = ForumsFixtures.reply(comment1, user2)
+      reply2 = ForumsFixtures.reply(comment2, user2)
+
+      set_inserted_at = fn thing, time ->
+        Repo.update_all(
+          from(r in thing.__struct__, where: r.id == ^thing.id),
+          set: [inserted_at: time]
+        )
+      end
+
+      set_inserted_at.(post, NaiveDateTime.add(now, -100))
+      set_inserted_at.(post1, NaiveDateTime.add(now, -90))
+
+      # get 10 most recent daily-reflections
+      result =
+        Forums.get_forums_posts_limit(:daily_reflection, 10)
+        |> Enum.map(fn post ->
+          %{
+            id: post.id,
+            comments:
+              Enum.map(post.comments, fn comment ->
+                replies = Enum.map(comment.replies, fn reply -> %{id: reply.id} end)
+                %{id: comment.id, replies: replies}
+              end)
+          }
+        end)
+
+      assert result == [
+               %{
+                 id: post1.id,
+                 comments: [
+                   %{id: comment1.id, replies: [%{id: reply1.id}]}
+                 ]
+               },
+               %{id: post.id, comments: []}
+             ]
+
+      # get 1 most recent daily reflection
+      result1 =
+        Forums.get_forums_posts_limit(:daily_reflection, 1)
+        |> Enum.map(fn post ->
+          %{
+            id: post.id,
+            comments:
+              Enum.map(post.comments, fn comment ->
+                replies = Enum.map(comment.replies, fn reply -> %{id: reply.id} end)
+                %{id: comment.id, replies: replies}
+              end)
+          }
+        end)
+
+      assert result1 == [
+               %{
+                 id: post1.id,
+                 comments: [
+                   %{id: comment1.id, replies: [%{id: reply1.id}]}
+                 ]
+               }
+             ]
+
+      # get 1 most recent community post
+      result2 =
+        Forums.get_forums_posts_limit(:community, 1)
+        |> Enum.map(fn post ->
+          %{
+            id: post.id,
+            comments:
+              Enum.map(post.comments, fn comment ->
+                replies = Enum.map(comment.replies, fn reply -> %{id: reply.id} end)
+                %{id: comment.id, replies: replies}
+              end)
+          }
+        end)
+
+      assert result2 == [
+               %{
+                 id: post3.id,
+                 comments: [
+                   %{id: comment2.id, replies: [%{id: reply2.id}]}
+                 ]
+               }
+             ]
+
+      # get 1 most recent will pool post
+      result3 =
+        Forums.get_forums_posts_limit(:will_pool, 1)
+        |> Enum.map(fn post ->
+          %{
+            id: post.id,
+            comments:
+              Enum.map(post.comments, fn comment ->
+                replies = Enum.map(comment.replies, fn reply -> %{id: reply.id} end)
+                %{id: comment.id, replies: replies}
+              end)
+          }
+        end)
+
+      assert result3 == [
+               %{
+                 id: post2.id,
+                 comments: []
+               }
+             ]
+    end
+
     test "change_post/1 returns a post changeset" do
       user = AccountsFixtures.user()
       assert {:ok, %Post{} = post} = Forums.create_post(user, @valid_post_attrs)
