@@ -19,8 +19,23 @@ defmodule KaldaWeb.Api.V1.DailyReflectionControllerTest do
     test "lists all posts that are daily reflections", %{conn: conn, user: current_user} do
       author1 = AccountsFixtures.user()
       author2 = AccountsFixtures.user()
-      post1 = ForumsFixtures.post(author1)
-      post2 = ForumsFixtures.post(author1)
+
+      # Future post - should not be returned
+      _post =
+        ForumsFixtures.post(author1, %{
+          published_at: NaiveDateTime.new!(~D[2030-01-01], ~T[00:00:00])
+        })
+
+      post1 =
+        ForumsFixtures.post(author1, %{
+          published_at: NaiveDateTime.new!(~D[2020-01-01], ~T[00:00:00])
+        })
+
+      post2 =
+        ForumsFixtures.post(author1, %{
+          published_at: NaiveDateTime.new!(~D[2018-01-01], ~T[00:00:00])
+        })
+
       _post3 = ForumsFixtures.post(author1, %{}, :will_pool)
       _post4 = ForumsFixtures.post(author1, %{}, :community)
       _post5 = ForumsFixtures.post(author1, %{}, :co_working)
@@ -35,6 +50,7 @@ defmodule KaldaWeb.Api.V1.DailyReflectionControllerTest do
                },
                "posts" => [
                  %{
+                   "forum" => "daily_reflection",
                    "id" => post1.id,
                    "inserted_at" => NaiveDateTime.to_iso8601(post1.inserted_at),
                    "content" => post1.content,
@@ -45,6 +61,7 @@ defmodule KaldaWeb.Api.V1.DailyReflectionControllerTest do
                    "comments" => []
                  },
                  %{
+                   "forum" => "daily_reflection",
                    "id" => post2.id,
                    "content" => post2.content,
                    "inserted_at" => NaiveDateTime.to_iso8601(post2.inserted_at),
