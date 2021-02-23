@@ -15,6 +15,8 @@ defmodule Kalda.Forums.Post do
 
     has_many :comments, Kalda.Forums.Comment
 
+    field :published_at, :naive_datetime, default: NaiveDateTime.local_now(), null: false
+
     timestamps()
   end
 

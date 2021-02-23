@@ -76,6 +76,13 @@ post5 =
     author_id: user2.id
   })
 
+_post6 =
+  Kalda.Repo.insert!(%Post{
+    content: "Future scheduled daily reflection",
+    author_id: user2.id,
+    published_at: NaiveDateTime.new!(~D[2030-01-13], ~T[23:00:07])
+  })
+
 comment =
   Kalda.Repo.insert!(%Comment{
     content: "I feel quite powerful",
