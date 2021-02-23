@@ -61,10 +61,13 @@ defmodule Kalda.Forums do
   TODO: Describe me
   """
   def get_daily_reflections() do
+    now = NaiveDateTime.local_now()
+
     Repo.all(
       from post in Post,
         where: post.forum == :daily_reflection,
-        order_by: [desc: post.inserted_at],
+        where: post.published_at <= ^now,
+        order_by: [desc: post.published_at],
         preload: [
           :author,
           comments:

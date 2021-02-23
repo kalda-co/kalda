@@ -50,12 +50,26 @@ defmodule Kalda.ForumsTest do
       _post4 = ForumsFixtures.post(user2, %{}, :will_pool)
       _post5 = ForumsFixtures.post(user2, %{}, :community)
       _post6 = ForumsFixtures.post(user2, %{}, :co_working)
+
+      post666 = ForumsFixtures.post(user2)
       comment1 = ForumsFixtures.comment(post1, user2)
       comment2 = ForumsFixtures.comment(post2, user1)
       comment3 = ForumsFixtures.comment(post2, user1)
       reply1 = ForumsFixtures.reply(comment1, user2)
       reply2 = ForumsFixtures.reply(comment1, user2)
       reply3 = ForumsFixtures.reply(comment2, user2)
+
+      set_published_at = fn thing, time ->
+        Repo.update_all(
+          from(r in thing.__struct__, where: r.id == ^thing.id),
+          set: [published_at: time]
+        )
+      end
+
+      set_published_at.(post1, NaiveDateTime.add(now, -100))
+      set_published_at.(post2, NaiveDateTime.add(now, -90))
+      set_published_at.(post3, NaiveDateTime.add(now, -80))
+      set_published_at.(post666, NaiveDateTime.new!(~D[2030-01-13], ~T[23:00:07]))
 
       set_inserted_at = fn thing, time ->
         Repo.update_all(
@@ -64,9 +78,6 @@ defmodule Kalda.ForumsTest do
         )
       end
 
-      set_inserted_at.(post1, NaiveDateTime.add(now, -100))
-      set_inserted_at.(post2, NaiveDateTime.add(now, -90))
-      set_inserted_at.(post3, NaiveDateTime.add(now, -80))
       set_inserted_at.(comment1, NaiveDateTime.add(now, -96))
       set_inserted_at.(comment2, NaiveDateTime.add(now, -85))
       set_inserted_at.(comment3, NaiveDateTime.add(now, -75))
