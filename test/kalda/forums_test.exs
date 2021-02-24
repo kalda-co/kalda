@@ -230,7 +230,7 @@ defmodule Kalda.ForumsTest do
         )
       end
 
-      set_published_at.(post1, NaiveDateTime.add(now, +1))
+      set_published_at.(post1, NaiveDateTime.add(now, +5))
       set_published_at.(post2, NaiveDateTime.add(now, -90))
       set_published_at.(post3, NaiveDateTime.add(now, -80))
       set_published_at.(post666, NaiveDateTime.new!(~D[2030-01-13], ~T[23:00:07]))
@@ -272,6 +272,7 @@ defmodule Kalda.ForumsTest do
       user = AccountsFixtures.user()
       user1 = AccountsFixtures.user()
       user2 = AccountsFixtures.user()
+      post666 = ForumsFixtures.post(user1)
       post = ForumsFixtures.post(user1)
       post1 = ForumsFixtures.post(user1)
       post2 = ForumsFixtures.post(user2, %{}, :will_pool)
@@ -282,15 +283,16 @@ defmodule Kalda.ForumsTest do
       reply1 = ForumsFixtures.reply(comment1, user2)
       reply2 = ForumsFixtures.reply(comment2, user2)
 
-      set_inserted_at = fn thing, time ->
+      set_published_at = fn thing, time ->
         Repo.update_all(
           from(r in thing.__struct__, where: r.id == ^thing.id),
-          set: [inserted_at: time]
+          set: [published_at: time]
         )
       end
 
-      set_inserted_at.(post, NaiveDateTime.add(now, -100))
-      set_inserted_at.(post1, NaiveDateTime.add(now, -90))
+      set_published_at.(post666, NaiveDateTime.new!(~D[2030-01-01], ~T[00:00:00]))
+      set_published_at.(post, NaiveDateTime.add(now, -100))
+      set_published_at.(post1, NaiveDateTime.add(now, -90))
 
       # get 10 most recent daily-reflections
       result =

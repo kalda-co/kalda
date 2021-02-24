@@ -1,5 +1,8 @@
+<div class="admin-container">
+
 <h1>New Daily Reflection</h1>
 
 <%= render "form.html", Map.put(assigns, :action, Routes.admin_daily_reflection_path(@conn, :create)) %>
 
 <span><%= link "Back", to: Routes.admin_daily_reflection_path(@conn, :index) %></span>
+</div>
