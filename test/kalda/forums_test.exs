@@ -204,6 +204,84 @@ defmodule Kalda.ForumsTest do
              ]
     end
 
+    test "get_daily_reflections_scheduled" do
+      now = NaiveDateTime.local_now()
+      user1 = AccountsFixtures.user()
+      user2 = AccountsFixtures.user()
+      post1 = ForumsFixtures.post(user1)
+      post2 = ForumsFixtures.post(user1)
+      post3 = ForumsFixtures.post(user2)
+      _post4 = ForumsFixtures.post(user2, %{}, :will_pool)
+      _post5 = ForumsFixtures.post(user2, %{}, :community)
+      _post6 = ForumsFixtures.post(user2, %{}, :co_working)
+
+      post666 = ForumsFixtures.post(user2)
+      comment1 = ForumsFixtures.comment(post1, user2)
+      comment2 = ForumsFixtures.comment(post2, user1)
+      comment3 = ForumsFixtures.comment(post2, user1)
+      reply1 = ForumsFixtures.reply(comment1, user2)
+      reply2 = ForumsFixtures.reply(comment1, user2)
+      reply3 = ForumsFixtures.reply(comment2, user2)
+
+      set_published_at = fn thing, time ->
+        Repo.update_all(
+          from(r in thing.__struct__, where: r.id == ^thing.id),
+          set: [published_at: time]
+        )
+      end
+
+      set_published_at.(post1, NaiveDateTime.add(now, +1))
+      set_published_at.(post2, NaiveDateTime.add(now, -90))
+      set_published_at.(post3, NaiveDateTime.add(now, -80))
+      set_published_at.(post666, NaiveDateTime.new!(~D[2030-01-13], ~T[23:00:07]))
+
+      set_inserted_at = fn thing, time ->
+        Repo.update_all(
+          from(r in thing.__struct__, where: r.id == ^thing.id),
+          set: [inserted_at: time]
+        )
+      end
+
+      set_inserted_at.(comment1, NaiveDateTime.add(now, -96))
+      set_inserted_at.(comment2, NaiveDateTime.add(now, -85))
+      set_inserted_at.(comment3, NaiveDateTime.add(now, -75))
+      set_inserted_at.(reply1, NaiveDateTime.add(now, -80))
+      set_inserted_at.(reply2, NaiveDateTime.add(now, -70))
+      set_inserted_at.(reply3, NaiveDateTime.add(now, -60))
+
+      result =
+        Forums.get_daily_reflections_scheduled()
+        |> Enum.map(fn post ->
+          %{
+            id: post.id
+            # comments:
+            #   Enum.map(post.comments, fn comment ->
+            #     replies = Enum.map(comment.replies, fn reply -> %{id: reply.id} end)
+            #     %{id: comment.id, replies: replies}
+            #   end)
+          }
+        end)
+
+      assert result == [
+               %{
+                 id: post1.id
+                 #  comments: [
+                 #    %{
+                 #      id: comment1.id,
+                 #      replies: [
+                 #        %{id: reply1.id},
+                 #        %{id: reply2.id}
+                 #      ]
+                 #    }
+                 #  ]
+               },
+               %{
+                 id: post666.id
+                 #  comments: []
+               }
+             ]
+    end
+
     test "get_forums_posts_limit/2 returns all posts" do
       now = NaiveDateTime.local_now()
       user = AccountsFixtures.user()

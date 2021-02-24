@@ -103,6 +103,12 @@ defmodule KaldaWeb.Router do
     get "/users", UserController, :index
     get "/reports", ReportController, :index
 
+    resources "/will-pool", WillPoolController do
+      resources "/comments", CommentController, only: [:delete] do
+        resources "/replies", ReplyController, only: [:delete]
+      end
+    end
+
     resources "/daily-reflections", DailyReflectionController do
       resources "/comments", CommentController, only: [:delete] do
         resources "/replies", ReplyController, only: [:delete]

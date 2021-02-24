@@ -4,6 +4,32 @@
   <h1>
     <span><%= link "+ New Daily Reflection", to: Routes.admin_daily_reflection_path(@conn, :new) %></span>
   </h1>
+
+  <h1>Scheduled Daily Reflections</h1>
+  <div class="scheduled-posts">
+    <%= for scheduled_reflection <- @scheduled do %>
+      <div class="post-all">
+        <div class="post">
+            <div class="details">
+              <div class="name">
+                <%= scheduled_reflection.author.username %>
+              </div>
+              <div class="date">
+                <%= scheduled_reflection.inserted_at %>
+              </div>
+            </div>
+            <div class="content">
+              <%= scheduled_reflection.content %>
+            </div>
+            <div class="actions">
+              <span><%= link "Edit", to: Routes.admin_daily_reflection_path(@conn, :edit, scheduled_reflection) %></span>
+              <span><%= link "Delete", to: Routes.admin_daily_reflection_path(@conn, :delete, scheduled_reflection), method: :delete, data: [confirm: "Are you sure?"] %></span>
+            </div>
+        </div>
+      </div>
+    <% end %>
+
+  <h1>Daily Reflections</h1>
   <div class="all-posts">
     <%= for daily_reflection <- @daily_reflections do %>
       <div class="post-all">

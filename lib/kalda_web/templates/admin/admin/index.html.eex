@@ -2,6 +2,7 @@
 
 <h1>Admin Dashboard</h1>
 
+<h1>REPORTS</h1>
 <h1>New Daily Reflection</h1>
 
 <%= render KaldaWeb.Admin.DailyReflectionView, "form.html", Map.put(assigns, :action, Routes.admin_daily_reflection_path(@conn, :create)) %>
