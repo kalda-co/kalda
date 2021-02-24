@@ -370,6 +370,7 @@ defmodule Kalda.Accounts do
 
   @token_validity_in_days 30
 
+  # This checks if the token exists AND has not already been used to creat a user
   def get_invite_for_token(token) do
     case Kalda.Accounts.Invite.hash_token(token) do
       {:ok, hashed_token} ->
@@ -389,6 +390,7 @@ defmodule Kalda.Accounts do
   end
 
   def create_user_from_invite(token, attrs) do
+    # This also checks if there is already a user
     case get_invite_for_token(token) do
       %Invite{invitee_email: email} ->
         now = NaiveDateTime.utc_now() |> NaiveDateTime.truncate(:second)
