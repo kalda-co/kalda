@@ -1,24 +1,35 @@
+<div class="admin-container">
 <h1>Listing Reports</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Reporter</th>
-      <th>Reporter Reason</th>
-      <th>Reported Content</th>
-      <th>Reported Content Author</th>
-
-    </tr>
-  </thead>
-  <tbody>
 <%= for report <- @reports do %>
-    <tr>
-      <td><%= report.reporter_id %></td>
-      <td><%= report.reporter_reason %></td>
-      <td><%= report.reported_content %></td>
-      <td><%= report.author_id %></td>
 
-    </tr>
+      <div class="reports">
+        <div class="report">
+            <div class="details">
+              <div class="name">
+              <h4> Reporter </h4>
+                <%= report.reporter.username %>
+              </div>
+              <div class="date">
+                <%= report.inserted_at %>
+              </div>
+            </div>
+            <div class="content">
+              <h4> Reported Content </h4>
+                <%= report.reported_content %>
+            </div>
+            <div class="content">
+              <h4> Reason </h4>
+                <%= report.reporter_reason %>
+            </div>
+            <div class="content">
+              <h4> Original Author </h4>
+                <%= report.author.username %>
+            </div>
+            <div class="actions">
+            </div>
+        </div>
+      </div>
+      <span><%= link "Moderate", to: Routes.admin_report_path(@conn, :edit, report) %></span>
 <% end %>
-  </tbody>
-</table>
+</div>
