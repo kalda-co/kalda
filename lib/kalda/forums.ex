@@ -130,15 +130,10 @@ defmodule Kalda.Forums do
       from post in Post,
         where: post.forum == :daily_reflection,
         where: post.published_at > ^now,
-        order_by: [asc: post.published_at]
-      # preload: [
-      #   :author,
-      #   comments:
-      #     ^from(comment in Comment,
-      #       order_by: [desc: comment.inserted_at],
-      #       preload: [:author, replies: [:author]]
-      #     )
-      # ]
+        order_by: [asc: post.published_at],
+        preload: [
+          :author
+        ]
     )
   end
 

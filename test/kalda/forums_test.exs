@@ -254,30 +254,15 @@ defmodule Kalda.ForumsTest do
         |> Enum.map(fn post ->
           %{
             id: post.id
-            # comments:
-            #   Enum.map(post.comments, fn comment ->
-            #     replies = Enum.map(comment.replies, fn reply -> %{id: reply.id} end)
-            #     %{id: comment.id, replies: replies}
-            #   end)
           }
         end)
 
       assert result == [
                %{
                  id: post1.id
-                 #  comments: [
-                 #    %{
-                 #      id: comment1.id,
-                 #      replies: [
-                 #        %{id: reply1.id},
-                 #        %{id: reply2.id}
-                 #      ]
-                 #    }
-                 #  ]
                },
                %{
                  id: post666.id
-                 #  comments: []
                }
              ]
     end
