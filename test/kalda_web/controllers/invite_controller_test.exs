@@ -52,29 +52,27 @@ defmodule KaldaWeb.InviteControllerTest do
       assert user.email == invite.invitee_email
 
       assert get_flash(conn, :info) == "Account created successfully"
-      assert redirected_to(conn, 302) =~ "/"
+      assert redirected_to(conn, 302) =~ "/app"
     end
 
     test "invalid attrs", %{conn: conn} do
       {token, invite} = Kalda.AccountsFixtures.invite()
 
-      conn =
-        post(conn, Routes.invite_path(conn, :create),
-          user: Map.put(@invalid_user_attrs, :token, token)
-        )
+      post(conn, Routes.invite_path(conn, :create),
+        user: Map.put(@invalid_user_attrs, :token, token)
+      )
 
       refute Accounts.get_user_by_email(invite.invitee_email)
     end
 
     # TODO: decide if we really want this feature
     test "Username already exists", %{conn: conn} do
-      user = Kalda.AccountsFixtures.user(%{username: "myusername"})
+      _user = Kalda.AccountsFixtures.user(%{username: "myusername"})
       {token, invite} = Kalda.AccountsFixtures.invite()
 
-      conn =
-        post(conn, Routes.invite_path(conn, :create),
-          user: Map.put(@create_user_attrs, :token, token)
-        )
+      post(conn, Routes.invite_path(conn, :create),
+        user: Map.put(@create_user_attrs, :token, token)
+      )
 
       refute Accounts.get_user_by_email(invite.invitee_email)
       # TODO: If keeping this feature ensure changeset returned to user
@@ -92,17 +90,16 @@ defmodule KaldaWeb.InviteControllerTest do
       assert %User{} = user = Accounts.get_user_by_email(invite.invitee_email)
       assert user.email == invite.invitee_email
 
-      # Same token used to attempt to create user
-      conn2 =
-        post(conn, Routes.invite_path(conn, :create),
-          user: Map.put(@create_user_attrs, :token, token)
-        )
+      # Same token url tried, user still logged in
+      conn = get(conn, Routes.invite_path(conn, :show, token))
 
-      assert html_response(conn2, 302) =~ "redirected"
+      # User stays logged in, just redirected to app
+      assert redirected_to(conn, 302) =~ "/app"
     end
 
     test "invite already used, on submitting params user sees 'token expired'", %{conn: conn} do
-      {token, invite} = Kalda.AccountsFixtures.invite()
+      {token, invite} = Kalda.AccountsFixtures.invite("al@example.com")
+      IO.inspect(invite)
 
       conn =
         post(conn, Routes.invite_path(conn, :create),
@@ -113,17 +110,14 @@ defmodule KaldaWeb.InviteControllerTest do
       assert %User{} = user = Accounts.get_user_by_email(invite.invitee_email)
       assert user.email == invite.invitee_email
 
-      refute conn.assigns.current_user
+      assert redirected_to(conn, 302) =~ "/app"
 
-      # Same token used to attempt to create user
-      conn2 =
-        post(conn, Routes.invite_path(conn, :create),
-          user: Map.put(@create_user_attrs, :token, token)
-        )
+      KaldaWeb.UserAuth.log_out_user(conn)
 
-      IO.inspect(conn2)
+      # Same token url, created user is logged out
+      conn = get(conn, Routes.invite_path(conn, :show, token))
 
-      assert html_response(conn2, 302) =~ "expired"
+      assert html_response(conn, 200) =~ "expired"
     end
   end
 end
