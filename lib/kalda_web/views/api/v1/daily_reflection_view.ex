@@ -16,7 +16,7 @@ defmodule KaldaWeb.Api.V1.DailyReflectionView do
       author: UserView.render_author(post.author),
       content: post.content,
       comments: Enum.map(post.comments, &render_comment/1),
-      inserted_at: post.inserted_at,
+      published_at: post.published_at,
       forum: post.forum
     }
   end

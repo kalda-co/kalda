@@ -52,7 +52,7 @@ defmodule KaldaWeb.Api.V1.DailyReflectionControllerTest do
                  %{
                    "forum" => "daily_reflection",
                    "id" => post1.id,
-                   "inserted_at" => NaiveDateTime.to_iso8601(post1.inserted_at),
+                   "published_at" => NaiveDateTime.to_iso8601(post1.published_at),
                    "content" => post1.content,
                    "author" => %{
                      "id" => author1.id,
@@ -64,7 +64,7 @@ defmodule KaldaWeb.Api.V1.DailyReflectionControllerTest do
                    "forum" => "daily_reflection",
                    "id" => post2.id,
                    "content" => post2.content,
-                   "inserted_at" => NaiveDateTime.to_iso8601(post2.inserted_at),
+                   "published_at" => NaiveDateTime.to_iso8601(post2.published_at),
                    "author" => %{
                      "id" => author1.id,
                      "username" => author1.username
