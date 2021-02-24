@@ -1,6 +1,7 @@
 <script>
   import type { Page } from "./state";
   import { fly } from "svelte/transition";
+  import { getCSRFToken } from "./backend";
 
   export let navigateTo: (page: Page) => any;
 
@@ -39,8 +40,7 @@
     </button>
 
     <div class="button-grid">
-      <!-- <button class="button"> Urgent Support </button>
-              <button class="button"> Log Out </button> -->
+      <!-- <button class="button"> Urgent Support </button> -->
       <button on:click|preventDefault={go("dashboard")} class="button">
         Home
       </button>
@@ -50,6 +50,11 @@
       <button on:click|preventDefault={go("daily-reflection")} class="button">
         Daily Reflection
       </button>
+      <form method="POST" action="/users/log-out">
+        <input type="hidden" name="_csrf_token" value={getCSRFToken()} />
+        <input type="hidden" name="_method" value="delete" />
+        <button type="submit" class="button">Log Out</button>
+      </form>
     </div>
 
     <button on:click|preventDefault={toggleMenu} class="close">

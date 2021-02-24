@@ -14,6 +14,10 @@ export function setCSRFToken(token: string) {
   CSRFToken = token;
 }
 
+export function getCSRFToken() {
+  return CSRFToken;
+}
+
 type Response = {
   status: number;
   body: unknown;
