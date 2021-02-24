@@ -1,29 +1,50 @@
 <div class="admin-container">
 
-<h1>Admin Dashboard</h1>
+  <h1>Admin Dashboard</h1>
 
-<h1>REPORTS</h1>
-<h1>New Daily Reflection</h1>
+  <h1>REPORTS For DAILY REFLECTIONS</h1>
 
-<%= render KaldaWeb.Admin.DailyReflectionView, "form.html", Map.put(assigns, :action, Routes.admin_daily_reflection_path(@conn, :create)) %>
-
-<h1>Latest Daily Reflection</h1>
-<div class="post">
-    <div class="details">
-      <div class="name">
-        <%= @daily_reflection.author.username %>
+  <div class="report">
+    <%= for report <- @reports do %>
+      <div class="details">
+        <div class="name">
+          <%= report.reporter.username %>
+        </div>
+        <div class="date">
+          <%= report.inserted_at %>
+        </div>
       </div>
-      <div class="date">
-        <%= @daily_reflection.published_at %>
+      <div class="content">
+        <%= report.reported_content %>
       </div>
-    </div>
-    <div class="content">
-      <%= @daily_reflection.content %>
-    </div>
-    <div class="actions">
-      <span><%= link "Edit", to: Routes.admin_daily_reflection_path(@conn, :edit, @daily_reflection) %></span>
-      <span><%= link "Delete", to: Routes.admin_daily_reflection_path(@conn, :delete, @daily_reflection), method: :delete, data: [confirm: "Are you sure?"] %></span>
-    </div>
-</div>
+      <div class="content">
+        <%= report.reporter_reason %>
+      </div>
+
+    <%end%>
+  </div>
+
+  <h1>New Daily Reflection</h1>
+
+  <%= render KaldaWeb.Admin.DailyReflectionView, "form.html", Map.put(assigns, :action, Routes.admin_daily_reflection_path(@conn, :create)) %>
+
+  <h1>Latest Daily Reflection</h1>
+  <div class="post">
+      <div class="details">
+        <div class="name">
+          <%= @daily_reflection.author.username %>
+        </div>
+        <div class="date">
+          <%= @daily_reflection.published_at %>
+        </div>
+      </div>
+      <div class="content">
+        <%= @daily_reflection.content %>
+      </div>
+      <div class="actions">
+        <span><%= link "Edit", to: Routes.admin_daily_reflection_path(@conn, :edit, @daily_reflection) %></span>
+        <span><%= link "Delete", to: Routes.admin_daily_reflection_path(@conn, :delete, @daily_reflection), method: :delete, data: [confirm: "Are you sure?"] %></span>
+      </div>
+  </div>
 
 </div>

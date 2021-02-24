@@ -1,0 +1,5 @@
+<h1>Modertate this content</h1>
+
+<%= render "form.html", Map.put(assigns, :action, Routes.admin_report_path(@conn, :update, @report)) %>
+
+<span><%= link "Back", to: Routes.admin_report_path(@conn, :index) %></span>

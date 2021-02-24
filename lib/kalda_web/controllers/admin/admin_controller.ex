@@ -10,6 +10,20 @@ defmodule KaldaWeb.Admin.AdminController do
     [latest_daily_reflection] = Forums.get_forums_posts_limit(:daily_reflection, 1)
     changeset = Forums.change_daily_reflection(%Forums.Post{})
 
-    render(conn, "index.html", daily_reflection: latest_daily_reflection, changeset: changeset)
+    reports =
+      Forums.get_unresolved_reports(
+        preload: [
+          :author,
+          :reporter,
+          reply: [:author],
+          comment: [:author, :replies]
+        ]
+      )
+
+    render(conn, "index.html",
+      daily_reflection: latest_daily_reflection,
+      changeset: changeset,
+      reports: reports
+    )
   end
 end

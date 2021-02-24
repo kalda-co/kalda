@@ -444,7 +444,7 @@ defmodule Kalda.Forums do
   ## Examples
 
       iex> get_reply!(123)
-      [%Reply{}, ...]
+      %Reply{}
 
       iex> get_reply!(456)
       ** (Ecto.NoResultsError)
@@ -619,7 +619,15 @@ defmodule Kalda.Forums do
       ** (Ecto.NoResultsError)
 
   """
-  def get_report!(id), do: Repo.get!(Report, id)
+  def get_report!(id, opts \\ []) do
+    preload = opts[:preload] || []
+
+    Repo.one!(
+      from r in Report,
+        where: r.id == ^id,
+        preload: ^preload
+    )
+  end
 
   @doc """
   Updates a report.
