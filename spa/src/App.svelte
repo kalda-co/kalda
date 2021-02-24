@@ -22,7 +22,9 @@
 
     {#if state.currentPage === "daily-reflection"}
       <!-- TODO: gracefully handle zero posts -->
-      <DailyReflection post={state.posts[0]} />
+      {#each state.posts as post (post.id)}
+        <DailyReflection {post} />
+      {/each}
     {:else if state.currentPage === "guidelines"}
       <Guidelines />
     {:else}
