@@ -110,11 +110,12 @@ defmodule KaldaWeb.InviteControllerTest do
       assert %User{} = user = Accounts.get_user_by_email(invite.invitee_email)
       assert user.email == invite.invitee_email
 
+      # Log out user
       conn = delete(conn, Routes.user_session_path(conn, :delete))
-      # Same token url tried, user still logged in
+      # Same token url tried, user has logged out
       conn = get(conn, Routes.invite_path(conn, :show, token))
 
-      # User stays logged in, just redirected to app
+      # User sees 'token expired' html
       assert html_response(conn, 200) =~ "expired"
       refute user == conn.assigns.current_user
     end
