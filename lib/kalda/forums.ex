@@ -58,13 +58,13 @@ defmodule Kalda.Forums do
   end
 
   @doc """
-  Return all posts that belong to the daily_reflection forum, along wth their associated comments and replies. Returns most recent post first
+  Returns all daily reflections except scheduled future ones
+  Orders as most recently publised first
 
   ## Examples
 
-    iex> get_daily_reflections()
-    [%Post{}, ...]
-
+      iex> get_daily_reflections(opts || [])
+      [%Post{}, ...]
   """
   def get_daily_reflections() do
     now = NaiveDateTime.local_now()
@@ -111,6 +111,34 @@ defmodule Kalda.Forums do
               preload: [:author, replies: [:author]]
             )
         ]
+    )
+  end
+
+  @doc """
+  Returns all daily reflections scheduled for the future
+  Orders as soonest to be published first
+
+  ## Examples
+
+      iex> get_daily_reflections_scheduled(opts || [])
+      [%Post{}, ...]
+  """
+  def get_daily_reflections_scheduled() do
+    now = NaiveDateTime.local_now()
+
+    Repo.all(
+      from post in Post,
+        where: post.forum == :daily_reflection,
+        where: post.published_at > ^now,
+        order_by: [asc: post.published_at]
+      # preload: [
+      #   :author,
+      #   comments:
+      #     ^from(comment in Comment,
+      #       order_by: [desc: comment.inserted_at],
+      #       preload: [:author, replies: [:author]]
+      #     )
+      # ]
     )
   end
 
