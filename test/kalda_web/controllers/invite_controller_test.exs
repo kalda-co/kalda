@@ -95,11 +95,11 @@ defmodule KaldaWeb.InviteControllerTest do
 
       # User stays logged in, just redirected to app
       assert redirected_to(conn, 302) =~ "/app"
+      assert user == conn.assigns.current_user
     end
 
     test "invite already used, on submitting params user sees 'token expired'", %{conn: conn} do
-      {token, invite} = Kalda.AccountsFixtures.invite("al@example.com")
-      IO.inspect(invite)
+      {token, invite} = Kalda.AccountsFixtures.invite()
 
       conn =
         post(conn, Routes.invite_path(conn, :create),
@@ -110,14 +110,13 @@ defmodule KaldaWeb.InviteControllerTest do
       assert %User{} = user = Accounts.get_user_by_email(invite.invitee_email)
       assert user.email == invite.invitee_email
 
-      assert redirected_to(conn, 302) =~ "/app"
-
-      KaldaWeb.UserAuth.log_out_user(conn)
-
-      # Same token url, created user is logged out
+      conn = delete(conn, Routes.user_session_path(conn, :delete))
+      # Same token url tried, user still logged in
       conn = get(conn, Routes.invite_path(conn, :show, token))
 
+      # User stays logged in, just redirected to app
       assert html_response(conn, 200) =~ "expired"
+      refute user == conn.assigns.current_user
     end
   end
 end
