@@ -138,9 +138,12 @@ defmodule Kalda.Forums do
   end
 
   def get_forums_posts_limit(forum, limit) do
+    now = NaiveDateTime.local_now()
+
     Repo.all(
       from post in Post,
         where: post.forum == ^forum,
+        where: post.published_at <= ^now,
         order_by: [desc: post.inserted_at],
         limit: ^limit,
         preload: [

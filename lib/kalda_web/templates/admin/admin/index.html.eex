@@ -14,7 +14,7 @@
         <%= @daily_reflection.author.username %>
       </div>
       <div class="date">
-        <%= @daily_reflection.inserted_at %>
+        <%= @daily_reflection.published_at %>
       </div>
     </div>
     <div class="content">
