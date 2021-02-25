@@ -1,9 +1,11 @@
 <script>
   import type { Page } from "./state";
+  import type { Title } from "./state";
   import { fly } from "svelte/transition";
   import { getCSRFToken } from "./backend";
 
   export let navigateTo: (page: Page) => any;
+  export let pageTitle: Title;
 
   let menu = false;
 
@@ -27,7 +29,7 @@
       class="logo"
     />
   </a>
-  <h1>Daily reflection</h1>
+  <h1>{pageTitle}</h1>
   <button on:click|preventDefault={toggleMenu}>
     <img src="/images/burger-menu.svg" alt="hamburger-menu" class="hamburger" />
   </button>

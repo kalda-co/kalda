@@ -4,12 +4,15 @@ export type Page =
   | "daily-reflection"
   | "will-pool";
 
+export type Title = "Kalda" | "Guidelines" | "Daily Reflection" | "Will Pool";
+
 export type AppState = {
   currentUser: User;
   // posts: Array<Post>;
   reflections: Array<Post>;
   pools: Array<Post>;
   currentPage: Page;
+  currentPageTitle: Title;
 };
 
 export type Post = {
