@@ -108,7 +108,6 @@ function appState(json: unknown): AppState {
     reflections: field("reflections", array(post))(json),
     pools: field("pools", array(post))(json),
     currentPage: "dashboard",
-    currentPageTitle: "Kalda",
   };
 }
 
