@@ -16,7 +16,7 @@ defmodule KaldaWeb.Api.V1.DailyReflectionControllerTest do
   describe "GET index" do
     setup [:register_and_log_in_user]
 
-    test "lists all posts that are daily reflections", %{conn: conn, user: current_user} do
+    test "lists all posts", %{conn: conn, user: current_user} do
       author1 = AccountsFixtures.user()
       author2 = AccountsFixtures.user()
 
@@ -36,7 +36,7 @@ defmodule KaldaWeb.Api.V1.DailyReflectionControllerTest do
           published_at: NaiveDateTime.new!(~D[2018-01-01], ~T[00:00:00])
         })
 
-      _post3 = ForumsFixtures.post(author1, %{}, :will_pool)
+      post3 = ForumsFixtures.post(author1, %{}, :will_pool)
       _post4 = ForumsFixtures.post(author1, %{}, :community)
       _post5 = ForumsFixtures.post(author1, %{}, :co_working)
       comment1 = ForumsFixtures.comment(post2, author2)
@@ -48,7 +48,7 @@ defmodule KaldaWeb.Api.V1.DailyReflectionControllerTest do
                  "id" => current_user.id,
                  "username" => current_user.username
                },
-               "posts" => [
+               "reflections" => [
                  %{
                    "forum" => "daily_reflection",
                    "id" => post1.id,
@@ -92,6 +92,19 @@ defmodule KaldaWeb.Api.V1.DailyReflectionControllerTest do
                        ]
                      }
                    ]
+                 }
+               ],
+               "pools" => [
+                 %{
+                   "forum" => "will_pool",
+                   "id" => post3.id,
+                   "published_at" => NaiveDateTime.to_iso8601(post3.published_at),
+                   "content" => post3.content,
+                   "author" => %{
+                     "id" => author1.id,
+                     "username" => author1.username
+                   },
+                   "comments" => []
                  }
                ]
              }

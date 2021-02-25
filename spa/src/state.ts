@@ -1,8 +1,14 @@
-export type Page = "dashboard" | "guidelines" | "daily-reflection";
+export type Page =
+  | "dashboard"
+  | "guidelines"
+  | "daily-reflection"
+  | "will-pool";
 
 export type AppState = {
   currentUser: User;
-  posts: Array<Post>;
+  // posts: Array<Post>;
+  reflections: Array<Post>;
+  pools: Array<Post>;
   currentPage: Page;
 };
 
