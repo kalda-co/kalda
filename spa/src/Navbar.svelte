@@ -50,6 +50,9 @@
       <button on:click|preventDefault={go("daily-reflection")} class="button">
         Daily Reflection
       </button>
+      <button on:click|preventDefault={go("will-pool")} class="button">
+        Will Pool
+      </button>
       <form method="POST" action="/users/log-out">
         <input type="hidden" name="_csrf_token" value={getCSRFToken()} />
         <input type="hidden" name="_method" value="delete" />
