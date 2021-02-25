@@ -6,7 +6,6 @@ defmodule KaldaWeb.Api.V1.DailyReflectionView do
   def render("index.json", params) do
     %{
       current_user: UserView.render_author(params.user),
-      # posts: Enum.map(params.posts, &render_post/1)
       reflections: Enum.map(params.reflections, &render_post/1),
       pools: Enum.map(params.pools, &render_post/1)
     }
@@ -22,14 +21,4 @@ defmodule KaldaWeb.Api.V1.DailyReflectionView do
       forum: post.forum
     }
   end
-
-  # defp render_comment(comment) do
-  #   %{
-  #     id: comment.id,
-  #     author: UserView.render_author(comment.author),
-  #     content: comment.content,
-  #     inserted_at: comment.inserted_at,
-  #     replies: Enum.map(comment.replies, &ReplyView.render_reply/1)
-  #   }
-  # end
 end
