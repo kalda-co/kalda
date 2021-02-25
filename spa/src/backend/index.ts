@@ -105,10 +105,10 @@ export async function reportReply(
 function appState(json: unknown): AppState {
   return {
     currentUser: field("current_user", user)(json),
-    // posts: field("posts", array(post))(json),
     reflections: field("reflections", array(post))(json),
     pools: field("pools", array(post))(json),
     currentPage: "dashboard",
+    currentPageTitle: "Kalda",
   };
 }
 

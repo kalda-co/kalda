@@ -5,6 +5,8 @@
   import { createComment } from "../backend";
 
   export let post: Post;
+  export let placeholder: string;
+  export let commentName: string;
 
   async function saveComment(content: string) {
     let comment = await createComment(post.id, content);
@@ -15,11 +17,13 @@
   $: {
     switch (post.comments.length) {
       case 0:
-        commentsCountText = "No reflections";
+        commentsCountText = `No ${commentName}s yet`;
+        break;
       case 1:
-        commentsCountText = "1 reflection";
+        commentsCountText = `1 ${commentName}`;
+        break;
       default:
-        commentsCountText = `${post.comments.length} reflections`;
+        commentsCountText = `${post.comments.length} ${commentName}s`;
     }
   }
 </script>
@@ -37,11 +41,7 @@
   </section>
 
   <section class="comments">
-    <ContentTextForm
-      placeholder="Post your reflection"
-      save={saveComment}
-      buttonText="Send"
-    />
+    <ContentTextForm {placeholder} save={saveComment} buttonText="Send" />
     {#each post.comments as comment (comment.id)}
       <Comment {comment} />
     {/each}

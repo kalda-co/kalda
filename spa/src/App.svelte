@@ -2,7 +2,6 @@
   import { setCSRFToken, getInitialAppState } from "./backend";
   import Navbar from "./Navbar.svelte";
   import DailyReflection from "./forum/DailyReflection.svelte";
-  import WillPool from "./forum/WillPool.svelte";
   import Guidelines from "./Guidelines.svelte";
   import Dashboard from "./Dashboard.svelte";
 
@@ -19,19 +18,30 @@
   ... Loading
 {:then state}
   <main>
-    <Navbar navigateTo={(page) => (state.currentPage = page)} />
+    <Navbar
+      navigateTo={(page) => (state.currentPage = page)}
+      pageTitle={state.currentPageTitle}
+    />
 
     {#if state.currentPage === "daily-reflection"}
       <!-- TODO: gracefully handle zero posts -->
       <!-- {#each state.posts as post (post.id)} -->
       {#each state.reflections as post (post.id)}
-        <DailyReflection {post} />
+        <DailyReflection
+          placeholder="Your reflection here"
+          commentName="reflection"
+          {post}
+        />
       {/each}
     {:else if state.currentPage === "will-pool"}
       <!-- TODO: gracefully handle zero posts -->
       <!-- {#each state.posts as post (post.id)} -->
       {#each state.pools as post (post.id)}
-        <WillPool {post} />
+        <DailyReflection
+          placeholder="Your commitment here"
+          commentName="commitment"
+          {post}
+        />
       {/each}
     {:else if state.currentPage === "guidelines"}
       <Guidelines />
