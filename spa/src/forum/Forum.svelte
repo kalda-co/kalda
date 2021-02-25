@@ -13,18 +13,19 @@
     post.comments = [comment, ...post.comments];
   }
 
-  let commentsCountText: string;
-  $: {
+  function makeCommentsCountText() {
     switch (post.comments.length) {
       case 0:
-        commentsCountText = `No ${commentName}s yet`;
-        break;
+        return `No ${commentName}s yet`;
       case 1:
-        commentsCountText = `1 ${commentName}`;
-        break;
+        return `1 ${commentName}`;
       default:
-        commentsCountText = `${post.comments.length} ${commentName}s`;
+        return `${post.comments.length} ${commentName}s`;
     }
+  }
+  let commentsCountText: string;
+  $: {
+    commentsCountText = makeCommentsCountText();
   }
 </script>
 

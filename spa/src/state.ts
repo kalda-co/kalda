@@ -12,7 +12,6 @@ export type AppState = {
   reflections: Array<Post>;
   pools: Array<Post>;
   currentPage: Page;
-  currentPageTitle: Title;
 };
 
 export type Post = {
