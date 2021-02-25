@@ -1,7 +1,7 @@
 <script lang="ts">
   import { setCSRFToken, getInitialAppState } from "./backend";
   import Navbar from "./Navbar.svelte";
-  import DailyReflection from "./forum/DailyReflection.svelte";
+  import Forum from "./forum/Forum.svelte";
   import Guidelines from "./Guidelines.svelte";
   import Dashboard from "./Dashboard.svelte";
 
@@ -27,7 +27,7 @@
       <!-- TODO: gracefully handle zero posts -->
       <!-- {#each state.posts as post (post.id)} -->
       {#each state.reflections as post (post.id)}
-        <DailyReflection
+        <Forum
           placeholder="Your reflection here"
           commentName="reflection"
           {post}
@@ -37,7 +37,7 @@
       <!-- TODO: gracefully handle zero posts -->
       <!-- {#each state.posts as post (post.id)} -->
       {#each state.pools as post (post.id)}
-        <DailyReflection
+        <Forum
           placeholder="Your commitment here"
           commentName="commitment"
           {post}
