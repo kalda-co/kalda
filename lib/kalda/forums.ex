@@ -58,7 +58,14 @@ defmodule Kalda.Forums do
   end
 
   @doc """
-  TODO: Describe me
+  Return all posts that belong to the daily_reflection forum, along wth their
+  associated comments and replies. Returns most recent post first
+
+  ## Examples
+
+    iex> get_daily_reflections() do
+      [%Post{}[%Comment{}, ...[%Reply, ...]], ...]
+
   """
   def get_daily_reflections() do
     now = NaiveDateTime.local_now()
@@ -66,6 +73,34 @@ defmodule Kalda.Forums do
     Repo.all(
       from post in Post,
         where: post.forum == :daily_reflection,
+        where: post.published_at <= ^now,
+        order_by: [desc: post.published_at],
+        preload: [
+          :author,
+          comments:
+            ^from(comment in Comment,
+              order_by: [desc: comment.inserted_at],
+              preload: [:author, replies: [:author]]
+            )
+        ]
+    )
+  end
+
+  @doc """
+  Return all posts that belong to the will_pool forum, along wth their
+  associated comments and replies. Returns most recent post first
+
+  ## Examples
+
+    iex> get_will_pools() do
+      [%Post{}[%Comment{}, ...[%Reply, ...]], ...]
+  """
+  def get_will_pools() do
+    now = NaiveDateTime.local_now()
+
+    Repo.all(
+      from post in Post,
+        where: post.forum == :will_pool,
         where: post.published_at <= ^now,
         order_by: [desc: post.published_at],
         preload: [
