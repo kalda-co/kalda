@@ -46,13 +46,13 @@
 
                       <%= radio_button f, :selection, "selection1" %>
                       <label for= "selection1" %>
-                      delete the reply
+                      delete the reply. This will send the following message to the original poster.
                       </label>
                       <br />
 
                       <%= radio_button f, :selection, "selection2" %>
                       <label for= "selection2" %>
-                      leave the comment but notify the author about why this might not be suitable in future
+                      leave the comment but notify the author about why this might not be suitable in future. This will send your moderator reason to
                       </label>
                       <br />
 
@@ -64,7 +64,7 @@
 
                       <%= radio_button f, :selection, "selection4" %>
                       <label for= "selection4" %>
-                      Do nothing
+                      Do nothing - please explain why
                       </label>
                     </div>
   <% end %>
