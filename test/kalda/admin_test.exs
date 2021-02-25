@@ -60,4 +60,22 @@ defmodule Kalda.AdminTest do
              "inserted_at" => NaiveDateTime.to_iso8601(reply.inserted_at)
            }
   end
+
+  test "deleting a post deletes associated comments and replies" do
+    user = AccountsFixtures.user()
+    post = ForumsFixtures.post(user)
+    comment = ForumsFixtures.comment(post, user)
+    _reply = ForumsFixtures.reply(comment, user)
+    Forums.delete_post(post)
+    assert [_archived, _archived_comment, _archived_reply] = Admin.list_archived()
+  end
+
+  test "deleting a comment deletes associated replies" do
+    user = AccountsFixtures.user()
+    post = ForumsFixtures.post(user)
+    comment = ForumsFixtures.comment(post, user)
+    _reply = ForumsFixtures.reply(comment, user)
+    Forums.delete_comment(comment)
+    assert [_archived_comment, _archived_reply] = Admin.list_archived()
+  end
 end
