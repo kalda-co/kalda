@@ -120,7 +120,7 @@ defmodule KaldaWeb.Router do
   scope "/v1", KaldaWeb.Api.V1, as: :api_v1 do
     pipe_through [:api, :json_require_authenticated_user, :json_require_confirmed_email]
 
-    get "/daily-reflections", DailyReflectionController, :index
+    get "/dashboard", DailyReflectionController, :index
 
     post "/posts/:id/comments", CommentController, :create
     post "/comments/:id/replies", ReplyController, :create

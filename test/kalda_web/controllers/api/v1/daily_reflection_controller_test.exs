@@ -9,7 +9,7 @@ defmodule KaldaWeb.Api.V1.DailyReflectionControllerTest do
 
   describe "unauthenticated requests" do
     test "GET index", ctx do
-      assert ctx.conn |> get("/v1/daily-reflections") |> json_response(401)
+      assert ctx.conn |> get("/v1/dashboard") |> json_response(401)
     end
   end
 
@@ -41,7 +41,7 @@ defmodule KaldaWeb.Api.V1.DailyReflectionControllerTest do
       _post5 = ForumsFixtures.post(author1, %{}, :co_working)
       comment1 = ForumsFixtures.comment(post2, author2)
       reply1 = ForumsFixtures.reply(comment1, author1)
-      conn = get(conn, "/v1/daily-reflections")
+      conn = get(conn, "/v1/dashboard")
 
       assert json_response(conn, 200) == %{
                "current_user" => %{

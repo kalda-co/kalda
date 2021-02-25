@@ -59,7 +59,7 @@ async function httpPost(url: string, body: object) {
 }
 
 export async function getInitialAppState(): Promise<AppState> {
-  let resp = await httpGet("/v1/daily-reflections");
+  let resp = await httpGet("/v1/dashboard");
   assertStatus(resp, 200);
   return appState(resp.body);
 }
