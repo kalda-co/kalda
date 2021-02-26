@@ -65,6 +65,7 @@
     border-radius: 40px;
     font-weight: 600;
   }
+
   .card-wide {
     background-color: var(--color-purple);
     color: var(--color-white);

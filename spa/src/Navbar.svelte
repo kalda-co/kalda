@@ -21,13 +21,13 @@
 </script>
 
 <div class="navbar">
-  <a href="/app">
+  <button class="button-link" on:click|preventDefault={go("dashboard")}>
     <img
       src="/images/kalda-rainbow-purple-logo.svg"
       alt="Kalda's Rainbow Logo"
       class="logo"
     />
-  </a>
+  </button>
   <h1>{title}</h1>
   <button on:click|preventDefault={toggleMenu}>
     <img src="/images/burger-menu.svg" alt="hamburger-menu" class="hamburger" />
@@ -68,6 +68,12 @@
 {/if}
 
 <style>
+  .button-link {
+    border: unset;
+    padding: unset;
+    font-weight: unset;
+  }
+
   .navbar {
     padding: var(--gap);
     display: flex;
