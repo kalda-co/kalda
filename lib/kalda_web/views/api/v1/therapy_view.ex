@@ -3,9 +3,9 @@ defmodule KaldaWeb.Api.V1.TherapyView do
   alias Kalda.Events.TherapySession
 
   # TODO test json null
-  # def render_therapy_session(nil) do
-  #   nil
-  # end
+  def render_therapy_session(nil) do
+    nil
+  end
 
   def render_therapy_session(therapy_session = %TherapySession{}) do
     %{

@@ -3,7 +3,7 @@
 
   export let user: User;
   export let post: Post;
-  export let therapy: Therapy;
+  export let therapy: Therapy | undefined;
   export let navigateTo: (page: Page) => any;
 
   function go(page: Page) {
@@ -55,22 +55,25 @@
       >
     </div>
   </div>
-  <section>
-    <h2>Activities</h2>
-    <div class="card background-pink">
-      <a target="_blank" href={therapy.link}>
-        <img src="images/calendar-icon-white.svg" alt="calendar icon" />
-        <p>{formatted_datetime(therapy.event_datetime)}</p>
-      </a>
-      <h1>Group therapy</h1>
-      <button
-        class="button-link"
-        on:click|preventDefault={go("group-therapy-info")}
-      >
-        <p>Learn more about weekly group therapy</p>
-      </button>
-    </div>
-  </section>
+
+  {#if therapy}
+    <section>
+      <h2>Activities</h2>
+      <div class="card background-pink">
+        <a target="_blank" href={therapy.link}>
+          <img src="images/calendar-icon-white.svg" alt="calendar icon" />
+          <p>{formatted_datetime(therapy.event_datetime)}</p>
+        </a>
+        <h1>Group therapy</h1>
+        <button
+          class="button-link"
+          on:click|preventDefault={go("group-therapy-info")}
+        >
+          <p>Learn more about weekly group therapy</p>
+        </button>
+      </div>
+    </section>
+  {/if}
 </article>
 
 <style>
