@@ -44,6 +44,7 @@
     <Dashboard
       user={state.currentUser}
       post={state.reflections[0]}
+      therapy={state.therapy}
       {navigateTo}
     />
   {/if}
