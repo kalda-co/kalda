@@ -1,6 +1,6 @@
 <script lang="ts">
   import Navbar from "./Navbar.svelte";
-  import Forum from "./forum/Forum.svelte";
+  import Thread from "./forum/Thread.svelte";
   import Guidelines from "./Guidelines.svelte";
   import Dashboard from "./Dashboard.svelte";
   import type { Page, AppState } from "./state";
@@ -19,7 +19,7 @@
     <!-- TODO: gracefully handle zero posts -->
     <!-- {#each state.posts as post (post.id)} -->
     {#each state.reflections as post (post.id)}
-      <Forum
+      <Thread
         placeholder="Your reflection here"
         commentName="reflection"
         {post}
@@ -30,7 +30,7 @@
     <!-- TODO: gracefully handle zero posts -->
     <!-- {#each state.posts as post (post.id)} -->
     {#each state.pools as post (post.id)}
-      <Forum
+      <Thread
         placeholder="Your commitment here"
         commentName="commitment"
         {post}
