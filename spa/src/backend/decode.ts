@@ -18,6 +18,13 @@ export function boolean(x: unknown): boolean {
   throw new Error(` Expected boolean, got ${typeof x}`);
 }
 
+export function date(x: unknown): Date {
+  let dateString = string(x);
+  let date = new Date(dateString);
+  if (!Number.isNaN(date)) return date;
+  throw new Error(` Expected datetime string, got ${dateString}`);
+}
+
 export function optional<Element>(
   decoder: Decoder<Element>
 ): Decoder<Element | undefined> {

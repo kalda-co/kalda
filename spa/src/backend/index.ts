@@ -7,7 +7,7 @@ import type {
   Comment,
   Therapy,
 } from "../state";
-import { field, number, string, array } from "./decode";
+import { field, number, string, array, date } from "./decode";
 
 let CSRFToken = "";
 
@@ -117,7 +117,7 @@ function therapy(json: unknown): Therapy {
   return {
     id: field("id", number)(json),
     link: field("link", string)(json),
-    event_datetime: field("event_datetime", Date)(json),
+    event_datetime: field("event_datetime", date)(json),
   };
 }
 

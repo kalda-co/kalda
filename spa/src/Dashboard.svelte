@@ -1,8 +1,9 @@
 <script lang="ts">
-  import type { Page, User, Post } from "./state";
+  import type { Page, User, Post, Therapy } from "./state";
 
   export let user: User;
   export let post: Post;
+  export let therapy: Therapy;
   export let navigateTo: (page: Page) => any;
 
   function go(page: Page) {
@@ -31,7 +32,7 @@
     <div class="card background-pink">
       <a href="/app">
         <img src="images/calendar-icon-white.svg" alt="calendar icon" />
-        <p>Date and Time</p>
+        <p>{therapy.event_datetime}</p>
       </a>
       <h1>Group therapy</h1>
       <p>Learn more about weekly group therapy</p>
@@ -85,7 +86,7 @@
 
   .card.background-pink a {
     display: flex;
-    padding-top: var(--gap-xl);
+    padding-top: var(--gap-l);
     color: var(--color-white);
   }
 
