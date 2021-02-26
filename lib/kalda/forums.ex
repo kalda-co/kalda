@@ -58,13 +58,12 @@ defmodule Kalda.Forums do
   end
 
   @doc """
-  Return all posts that belong to the daily_reflection forum, along wth their
-  associated comments and replies. Returns most recent post first
+  Return all posts that belong to the daily_reflection forum, along wth their associated comments and replies. Returns most recent post first
 
   ## Examples
 
-    iex> get_daily_reflections() do
-      [%Post{}[%Comment{}, ...[%Reply, ...]], ...]
+    iex> get_daily_reflections()
+    [%Post{}, [%Comment{}, [%Reply{}, ...], ...], ...]
 
   """
   def get_daily_reflections() do
@@ -92,8 +91,9 @@ defmodule Kalda.Forums do
 
   ## Examples
 
-    iex> get_will_pools() do
-      [%Post{}[%Comment{}, ...[%Reply, ...]], ...]
+    iex> get_will_pools()
+    [%Post{}, [%Comment{}, [%Reply{}, ...], ...], ...]
+
   """
   def get_will_pools() do
     now = NaiveDateTime.local_now()
