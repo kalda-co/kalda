@@ -1,10 +1,16 @@
 export type Page =
   | "dashboard"
+  | "group-therapy-info"
   | "guidelines"
   | "daily-reflection"
   | "will-pool";
 
-export type Title = "Kalda" | "Guidelines" | "Daily Reflection" | "Will Pool";
+export type Title =
+  | "Kalda"
+  | "Group Therapy"
+  | "Guidelines"
+  | "Daily Reflection"
+  | "Will Pool";
 
 export type AppState = {
   currentUser: User;
