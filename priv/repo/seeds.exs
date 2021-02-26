@@ -155,13 +155,13 @@ _report22 =
 _therapy_session_past =
   Kalda.Repo.insert!(%TherapySession{
     event_datetime: NaiveDateTime.new!(~D[2020-01-01], ~T[18:30:00]),
-    link: "https://us02web.zoom.us/j/9367762569?pwd=cjFZc0MxczcxR3hkdTZPekRlbFkzQT09"
+    link: "https://us02web.zoom.us/j/9367762569"
   })
 
 _therapy_session_future =
   Kalda.Repo.insert!(%TherapySession{
     event_datetime: NaiveDateTime.new!(~D[2030-01-01], ~T[18:30:00]),
-    link: "https://us02web.zoom.us/j/9367762569?pwd=cjFZc0MxczcxR3hkdTZPekRlbFkzQT09"
+    link: "https://us02web.zoom.us/j/9367762569"
   })
 
 %{token: token, changeset: invite_changeset} = Invite.build_invite("invite@example.com")
