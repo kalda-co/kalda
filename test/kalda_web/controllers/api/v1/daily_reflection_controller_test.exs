@@ -1,7 +1,8 @@
-defmodule KaldaWeb.Api.V1.DailyReflectionControllerTest do
+defmodule KaldaWeb.Api.V1.DashboardControllerTest do
   use KaldaWeb.ConnCase
   alias Kalda.ForumsFixtures
   alias Kalda.AccountsFixtures
+  alias Kalda.EventsFixtures
 
   setup %{conn: conn} do
     {:ok, conn: put_req_header(conn, "accept", "application/json")}
@@ -16,9 +17,10 @@ defmodule KaldaWeb.Api.V1.DailyReflectionControllerTest do
   describe "GET index" do
     setup [:register_and_log_in_user]
 
-    test "lists all posts", %{conn: conn, user: current_user} do
+    test "lists dashboard", %{conn: conn, user: current_user} do
       author1 = AccountsFixtures.user()
       author2 = AccountsFixtures.user()
+      therapy_session = EventsFixtures.future_therapy_session()
 
       # Future post - should not be returned
       _post =
@@ -47,6 +49,11 @@ defmodule KaldaWeb.Api.V1.DailyReflectionControllerTest do
                "current_user" => %{
                  "id" => current_user.id,
                  "username" => current_user.username
+               },
+               "therapy" => %{
+                 "link" => therapy_session.link,
+                 "id" => therapy_session.id,
+                 "event_datetime" => NaiveDateTime.to_iso8601(therapy_session.event_datetime)
                },
                "reflections" => [
                  %{
