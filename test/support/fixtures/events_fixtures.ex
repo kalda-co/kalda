@@ -1,6 +1,4 @@
 defmodule Kalda.EventsFixtures do
-  alias Kalda.Events.TherapySession
-
   def future_datetime() do
     now = NaiveDateTime.local_now()
     NaiveDateTime.add(now, 36000)
