@@ -5,6 +5,7 @@ import type {
   ReportComment,
   AppState,
   Comment,
+  Therapy,
 } from "../state";
 import { field, number, string, array } from "./decode";
 
@@ -108,6 +109,15 @@ function appState(json: unknown): AppState {
     reflections: field("reflections", array(post))(json),
     pools: field("pools", array(post))(json),
     currentPage: "dashboard",
+    therapy: field("therapy", therapy)(json),
+  };
+}
+
+function therapy(json: unknown): Therapy {
+  return {
+    id: field("id", number)(json),
+    link: field("link", string)(json),
+    event_datetime: field("event_datetime", Date)(json),
   };
 }
 

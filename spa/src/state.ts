@@ -11,6 +11,7 @@ export type AppState = {
   reflections: Array<Post>;
   pools: Array<Post>;
   currentPage: Page;
+  therapy: Therapy;
 };
 
 export type Post = {
@@ -42,6 +43,12 @@ export type ReportComment = {
   id: number;
   reporter_reason: string;
   reporter: User;
+};
+
+export type Therapy = {
+  id: number;
+  link: string;
+  event_datetime: Date;
 };
 
 export interface BubbleContent {
