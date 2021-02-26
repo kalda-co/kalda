@@ -56,7 +56,8 @@ export function field<Element>(
 ): Decoder<Element> {
   return (object: unknown) => {
     if (typeof object !== "object" || object === null) {
-      throw new Error(` Expected object, got ${typeof object}`);
+      let found = object === null ? "null" : typeof object;
+      throw new Error(` Expected object, got ${found}`);
     }
 
     return indexInto(object, fieldName, decoder);
