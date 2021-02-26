@@ -2,6 +2,7 @@
   import Navbar from "./Navbar.svelte";
   import Thread from "./forum/Thread.svelte";
   import Guidelines from "./Guidelines.svelte";
+  import GroupTherapy from "./GroupTherapy.svelte";
   import Dashboard from "./Dashboard.svelte";
   import type { Page, AppState } from "./state";
 
@@ -39,6 +40,9 @@
   {:else if state.currentPage === "guidelines"}
     <Navbar {navigateTo} title="Guidelines" />
     <Guidelines />
+  {:else if state.currentPage === "group-therapy-info"}
+    <Navbar {navigateTo} title="Group Therapy" />
+    <GroupTherapy />
   {:else}
     <Navbar {navigateTo} title="Kalda" />
     <Dashboard

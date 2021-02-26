@@ -11,6 +11,34 @@
       navigateTo(page);
     };
   }
+
+  function formatted_datetime(datetime: Date) {
+    const dd = datetime.getDate();
+    const mm = datetime.getMonth();
+    const months = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
+    const mon = months[mm];
+    const day = ["Mon", "Tue", "Wed", "Thur", "Fri", "Sat", "Sun"][
+      datetime.getDay()
+    ];
+    const year = datetime.getFullYear();
+    const tz = datetime.getTimezoneOffset();
+    const hh = datetime.getHours();
+    const mi = datetime.getMinutes();
+    return `${day} ${mon} ${dd}, ${year} at ${hh}:${mi} GMT+${tz}`;
+  }
 </script>
 
 <article>
@@ -30,12 +58,17 @@
   <section>
     <h2>Activities</h2>
     <div class="card background-pink">
-      <a href="/app">
+      <a target="_blank" href={therapy.link}>
         <img src="images/calendar-icon-white.svg" alt="calendar icon" />
-        <p>{therapy.event_datetime}</p>
+        <p>{formatted_datetime(therapy.event_datetime)}</p>
       </a>
       <h1>Group therapy</h1>
-      <p>Learn more about weekly group therapy</p>
+      <button
+        class="button-link"
+        on:click|preventDefault={go("group-therapy-info")}
+      >
+        <p>Learn more about weekly group therapy</p>
+      </button>
     </div>
   </section>
 </article>
@@ -86,7 +119,7 @@
 
   .card.background-pink a {
     display: flex;
-    padding-top: var(--gap-l);
+    padding-top: var(--gap-xl);
     color: var(--color-white);
   }
 
@@ -96,5 +129,12 @@
 
   .card h1 {
     margin: 0px;
+  }
+
+  .button-link {
+    border: none;
+    color: unset;
+    font-weight: unset;
+    padding: unset;
   }
 </style>
