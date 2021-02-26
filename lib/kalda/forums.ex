@@ -63,7 +63,7 @@ defmodule Kalda.Forums do
   ## Examples
 
     iex> get_daily_reflections()
-    [%Post{}, [%Comment{}, [%Reply{}, ...], ...], ...]
+    [%Post{}, ...]
 
   """
   def get_daily_reflections() do
@@ -92,7 +92,7 @@ defmodule Kalda.Forums do
   ## Examples
 
     iex> get_will_pools()
-    [%Post{}, [%Comment{}, [%Reply{}, ...], ...], ...]
+    [%Post{}, ...]
 
   """
   def get_will_pools() do

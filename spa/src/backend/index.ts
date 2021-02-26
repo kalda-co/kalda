@@ -103,6 +103,7 @@ export async function reportReply(
   assertStatus(resp, 201);
 }
 
+// TODO: therapy can be null, and this handled in html
 function appState(json: unknown): AppState {
   return {
     currentUser: field("current_user", user)(json),

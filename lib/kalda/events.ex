@@ -44,15 +44,12 @@ defmodule Kalda.Events do
   def get_next_therapy_session!() do
     now = NaiveDateTime.local_now()
 
-    [next_sesh] =
-      Repo.all(
-        from sesh in TherapySession,
-          where: sesh.event_datetime >= ^now,
-          order_by: [asc: sesh.event_datetime],
-          limit: 1
-      )
-
-    next_sesh
+    Repo.one(
+      from sesh in TherapySession,
+        where: sesh.event_datetime >= ^now,
+        order_by: [asc: sesh.event_datetime],
+        limit: 1
+    )
   end
 
   @doc """

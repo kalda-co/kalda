@@ -7,8 +7,8 @@ defmodule Kalda.EventsTest do
   describe "therapy_sessions" do
     alias Kalda.Events.TherapySession
 
-    @valid_attrs %{event_datetime: ~N[2010-04-17 14:00:00], link: "some link"}
-    @update_attrs %{event_datetime: ~N[2011-05-18 15:01:01], link: "some updated link"}
+    @valid_attrs %{event_datetime: ~N[2010-04-17 14:00:00], link: "https://zoom.us"}
+    @update_attrs %{event_datetime: ~N[2011-05-18 15:01:01], link: "https://different-zoom.us"}
     @invalid_attrs %{event_datetime: nil, link: nil}
 
     test "get_therapy_sessions/0 returns all future therapy_sessions" do
@@ -45,7 +45,7 @@ defmodule Kalda.EventsTest do
                Events.create_therapy_session(@valid_attrs)
 
       assert therapy_session.event_datetime == ~N[2010-04-17 14:00:00]
-      assert therapy_session.link == "some link"
+      assert therapy_session.link == "https://zoom.us"
     end
 
     test "create_therapy_session/1 with invalid data returns error changeset" do
@@ -59,7 +59,7 @@ defmodule Kalda.EventsTest do
                Events.update_therapy_session(therapy_session, @update_attrs)
 
       assert therapy_session.event_datetime == ~N[2011-05-18 15:01:01]
-      assert therapy_session.link == "some updated link"
+      assert therapy_session.link == "https://different-zoom.us"
     end
 
     test "update_therapy_session/2 with invalid data returns error changeset" do
