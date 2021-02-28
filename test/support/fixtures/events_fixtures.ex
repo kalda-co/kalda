@@ -11,7 +11,7 @@ defmodule Kalda.EventsFixtures do
 
   def future_therapy_session(attrs \\ %{}) do
     defaults = %{
-      link: "https://somerandomlink",
+      link: "https://somerandomlink.co",
       event_datetime: future_datetime()
     }
 
@@ -23,7 +23,7 @@ defmodule Kalda.EventsFixtures do
 
   def past_therapy_session(attrs \\ %{}) do
     defaults = %{
-      link: "https://somerandomlink",
+      link: "https://somerandomlink.co",
       event_datetime: past_datetime()
     }
 

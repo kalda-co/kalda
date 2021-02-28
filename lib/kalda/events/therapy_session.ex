@@ -19,23 +19,14 @@ defmodule Kalda.Events.TherapySession do
 
   def validate_url(changeset, field, opts \\ []) do
     validate_change(changeset, field, fn _, value ->
-      case URI.parse(value) do
-        %URI{scheme: nil} ->
-          "is missing a scheme (e.g. https)"
+      uri = URI.parse(value)
 
-        %URI{host: nil} ->
-          "is missing a host"
-
-        %URI{host: host} ->
-          case :inet.gethostbyname(Kernel.to_charlist(host)) do
-            {:ok, _} -> nil
-            {:error, _} -> "invalid host"
-          end
-      end
-      |> case do
-        error when is_binary(error) -> [{field, Keyword.get(opts, :message, error)}]
-        _ -> []
-      end
+      [
+        if(uri.scheme == nil, do: "is missing a scheme (e.g. https)"),
+        if(uri.host == nil, do: "is missing a host (e.g. example.com)")
+      ]
+      |> Enum.filter(fn error -> error != nil end)
+      |> Enum.map(fn error -> {field, Keyword.get(opts, :message, error)} end)
     end)
   end
 end

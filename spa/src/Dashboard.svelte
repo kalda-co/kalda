@@ -1,6 +1,8 @@
 <script lang="ts">
   import type { Page, User, Post, Therapy } from "./state";
 
+  import { formattedDatetime } from "./date";
+
   export let user: User;
   export let post: Post;
   export let therapy: Therapy | undefined;
@@ -10,34 +12,6 @@
     return () => {
       navigateTo(page);
     };
-  }
-
-  function formatted_datetime(datetime: Date) {
-    const dd = datetime.getDate();
-    const mm = datetime.getMonth();
-    const months = [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec",
-    ];
-    const mon = months[mm];
-    const day = ["Mon", "Tue", "Wed", "Thur", "Fri", "Sat", "Sun"][
-      datetime.getDay()
-    ];
-    const year = datetime.getFullYear();
-    const tz = datetime.getTimezoneOffset();
-    const hh = datetime.getHours();
-    const mi = datetime.getMinutes();
-    return `${day} ${mon} ${dd}, ${year} at ${hh}:${mi} GMT+${tz}`;
   }
 </script>
 
@@ -60,9 +34,9 @@
     <section>
       <h2>Activities</h2>
       <div class="card background-pink">
-        <a target="_blank" href={therapy.link}>
+        <a target="_blank" rel="noopener" href={therapy.link}>
           <img src="images/calendar-icon-white.svg" alt="calendar icon" />
-          <p>{formatted_datetime(therapy.event_datetime)}</p>
+          <p>{formattedDatetime(therapy.event_datetime)}</p>
         </a>
         <h1>Group therapy</h1>
         <button
