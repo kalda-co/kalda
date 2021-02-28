@@ -6,7 +6,7 @@
       <%= link "Log out" , to: Routes.user_session_path(@conn, :delete), class: "gradient button" , method: :delete %>
       <a class="gradient button" href="">Contact Us</a>
     <% else %>
-      <%#= link "Log in" , to: Routes.user_session_path(@conn, :new), class: "button login-button" %>
+      <%= link "Log in" , to: Routes.user_session_path(@conn, :new), class: "gradient button" %>
       <a class="gradient button" name="contact" href="mailto:hello@kalda.co">Contact Us</a>
     <% end %>
   </nav>

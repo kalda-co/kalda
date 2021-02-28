@@ -70,6 +70,10 @@ defmodule KaldaWeb.Router do
 
     get "/users/register", UserRegistrationController, :new
     post "/users/register", UserRegistrationController, :create
+  end
+
+  scope "/", KaldaWeb do
+    pipe_through [:browser, :redirect_if_user_is_authenticated]
     get "/users/log-in", UserSessionController, :new
     post "/users/log-in", UserSessionController, :create
     get "/users/reset-password", UserResetPasswordController, :new
