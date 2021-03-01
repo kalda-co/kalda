@@ -27,7 +27,10 @@
                 <%= report.author.username %>
             </div>
             <div class="actions">
+
+                <%= report.comment %>
             </div>
+
         </div>
       </div>
       <span><%= link "Moderate", to: Routes.admin_report_path(@conn, :edit, report) %></span>
