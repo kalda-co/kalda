@@ -19,30 +19,39 @@ defmodule KaldaWeb.Admin.ReportController do
 
     report = Forums.get_report!(id, preload: preloads())
 
-    changeset = Forums.Report.changeset(report, %{})
+    changeset = Forums.Report.moderation_changeset(report, %{})
 
     render(conn, "edit.html", report: report, changeset: changeset)
   end
 
   def update(conn, %{
         "id" => id,
-        "report" => %{"moderator_reason" => moderator_reason, "selection" => selection}
+        "report" => params
       }) do
+    moderator_reason = params["moderator_reason"]
+    moderator_action = params["moderator_action"]
+
     Policy.authorize!(conn, :view_admin_pages, Kalda)
     current_user = conn.assigns.current_user
 
     report = Forums.get_report!(id, preload: preloads())
 
-    Forums.moderate_report(
-      report,
-      selection,
-      current_user.id,
-      moderator_reason
-    )
+    case Forums.moderate_report(
+           report,
+           moderator_action,
+           current_user.id,
+           moderator_reason
+         ) do
+      {:ok, _report} ->
+        conn
+        |> put_flash(:info, "This report has been resolved")
+        |> redirect(to: Routes.admin_report_path(conn, :index))
 
-    conn
-    |> put_flash(:info, "This report has been resolved")
-    |> redirect(to: Routes.admin_report_path(conn, :index))
+      {:error, %Ecto.Changeset{} = changeset} ->
+        conn
+        |> put_status(422)
+        |> render("edit.html", report: report, changeset: changeset)
+    end
   end
 
   defp preloads() do

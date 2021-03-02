@@ -721,8 +721,8 @@ defmodule Kalda.Forums do
             moderator_reason: mod_reason
           })
 
-        with {:ok, report} <- Repo.update(changeset) do
-          if selection == :delete do
+        with {:ok, report} <- Repo.update!(changeset) do
+          if selection == :remove do
             delete_reported_content!(report)
           end
 

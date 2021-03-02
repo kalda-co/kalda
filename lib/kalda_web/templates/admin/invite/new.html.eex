@@ -1,5 +1,7 @@
-<h1>New Invite</h1>
+<div class="admin-container">
+  <h1>New Invite</h1>
 
-<%= render "form.html", Map.put(assigns, :action, Routes.admin_invite_path(@conn, :create)) %>
+  <%= render "form.html", Map.put(assigns, :action, Routes.admin_invite_path(@conn, :create)) %>
 
-<span><%= link "Back", to: Routes.admin_invite_path(@conn, :new) %></span>
+  <span><%= link "Back", to: Routes.admin_invite_path(@conn, :new) %></span>
+</div>
