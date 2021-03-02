@@ -606,6 +606,22 @@ defmodule Kalda.Forums do
   end
 
   @doc """
+  Returns all resolved reports
+  ## Examples
+      iex> get_resolved_reports(opts || [])
+      [%report{}, ...]
+  """
+  def get_resolved_reports(opts \\ []) do
+    preload = opts[:preload] || []
+
+    from(report in Report,
+      where: not is_nil(report.resolved_at),
+      preload: ^preload
+    )
+    |> Repo.all()
+  end
+
+  @doc """
   Gets a single report.
 
   Raises `Ecto.NoResultsError` if the Comment does not exist.
@@ -645,6 +661,115 @@ defmodule Kalda.Forums do
     report
     |> Report.changeset(attrs)
     |> Repo.update()
+  end
+
+  @doc """
+  Moderates a comment by updating a report. Attrs should contain the moderator id (current user) and the moderator reason.
+
+  ## Examples
+
+      iex> moderate_report_comment(report, comment, selection, mod_id, mod_reason)
+      {:ok, %Report{}}
+
+      iex> moderate_report_comment(report, comment, selection, mod_id, mod_reason)
+      {:error, %Ecto.Changeset{}}
+
+  """
+
+  #   post = MyRepo.get!(Post, 42)
+  # post = Ecto.Changeset.change post, title: "New title"
+  # case MyRepo.update post do
+  #   {:ok, struct}       -> # Updated with success
+  #   {:error, changeset} -> # Something went wrong
+  # end
+
+  def moderate_report_comment(report, comment, selection, mod_id, mod_reason) do
+    case selection do
+      "selection1" ->
+        Repo.transaction(fn ->
+          report =
+            Ecto.Changeset.change(report, %{
+              moderator_action: "Selection 1, delete the comment or reply.",
+              resolved_at: NaiveDateTime.local_now(),
+              comment_id: nil,
+              moderator_id: mod_id,
+              moderator_reason: mod_reason
+            })
+
+          with {:ok, report} <- Repo.update(report) do
+            delete_comment(comment)
+            report
+          end
+        end)
+
+      "selection2" ->
+        report =
+          Ecto.Changeset.change(report, %{
+            moderator_action: "Selection 2, do nothing.",
+            resolved_at: NaiveDateTime.local_now(),
+            comment_id: nil,
+            moderator_id: mod_id,
+            moderator_reason: mod_reason
+          })
+          |> Repo.update()
+
+        report
+    end
+  end
+
+  @doc """
+  Moderates a reply by updating a report. Attrs should contain the moderator id (current user) and the moderator reason.
+
+  ## Examples
+
+      iex> moderate_report_reply(report, reply, selection, mod_id, mod_reason)
+      {:ok, %Report{}}
+
+      iex> moderate_report_reply(report, reply, selection, mod_id, mod_reason)
+      {:error, %Ecto.Changeset{}}
+
+  """
+
+  #   post = MyRepo.get!(Post, 42)
+  # post = Ecto.Changeset.change post, title: "New title"
+  # case MyRepo.update post do
+  #   {:ok, struct}       -> # Updated with success
+  #   {:error, changeset} -> # Something went wrong
+  # end
+
+  def moderate_report_reply(report, reply, selection, mod_id, mod_reason) do
+    case selection do
+      "selection1" ->
+        Repo.transaction(fn ->
+          report =
+            Ecto.Changeset.change(report, %{
+              moderator_action: "Selection 1, delete the comment or reply.",
+              resolved_at: NaiveDateTime.local_now(),
+              # TODO: Check this needs to be set to nil for foreign key constraint reasons
+              reply_id: nil,
+              moderator_id: mod_id,
+              moderator_reason: mod_reason
+            })
+
+          with {:ok, report} <- Repo.update(report) do
+            delete_reply(reply)
+            report
+          end
+        end)
+
+      "selection2" ->
+        report =
+          Ecto.Changeset.change(report, %{
+            moderator_action: "Selection 2, do nothing.",
+            resolved_at: NaiveDateTime.local_now(),
+            reply_id: nil,
+            moderator_id: mod_id,
+            moderator_reason: mod_reason
+          })
+          |> Repo.update()
+
+        report
+    end
   end
 
   @doc """

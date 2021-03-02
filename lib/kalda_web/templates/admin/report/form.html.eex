@@ -22,10 +22,18 @@
                       <%= @report.comment.content %>
                     </div>
                     <div class="actions">
-                    selection: delete the comment (this will delete any associated replies)
-                    selection: leave the comment but notify the author about why this might not be suitable in future
-                    selection: leave the comment and notify the person who reported it that you have reviewed it but do not think action is appropriate and why
-                    selection: Do nothing
+
+                      <%= radio_button f, :selection, "selection1" %>
+                      <label for= "selection1" %>
+                      delete the reply. This cannot be undone
+                      </label>
+                      <br />
+
+                      <%= radio_button f, :selection, "selection2" %>
+                      <label for= "selection2" %>
+                      Leave the reply
+                      </label>
+                      <br />
                     </div>
   <% end %>
   <%= if @report.reply do %>
@@ -46,37 +54,23 @@
 
                       <%= radio_button f, :selection, "selection1" %>
                       <label for= "selection1" %>
-                      delete the reply. This will send the following message to the original poster.
+                      delete the reply. This cannot be undone
                       </label>
                       <br />
 
                       <%= radio_button f, :selection, "selection2" %>
                       <label for= "selection2" %>
-                      leave the comment but notify the author about why this might not be suitable in future. This will send your moderator reason to
+                      Leave the reply
                       </label>
                       <br />
 
-                      <%= radio_button f, :selection, "selection3" %>
-                      <label for= "selection3" %>
-                      leave the comment and notify the person who reported it that you have reviewed it but do not think action is appropriate and why
-                      </label>
-                      <br />
-
-                      <%= radio_button f, :selection, "selection4" %>
-                      <label for= "selection4" %>
-                      Do nothing - please explain why
-                      </label>
                     </div>
   <% end %>
 
-  <h1>Please follow these instructions carefully</h1>
-  <%= label f, :moderator_action %>
-  <%= text_input f, :moderator_action %>
-  <%= error_tag f, :moderator_action %>
 
   <h1>Please explain why you took this action</h1>
   <%= label f, :moderator_reason %>
-  <%= text_input f, :moderator_reason %>
+  <%= textarea f, :moderator_reason %>
   <%= error_tag f, :moderator_reason %>
 
   <div>
