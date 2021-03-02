@@ -37,4 +37,14 @@ defmodule Kalda.ForumsFixtures do
     {:ok, reply} = Kalda.Forums.create_reply(author, comment, attrs)
     reply
   end
+
+  def unmoderated_report(reporter = %User{}, content_type, p_c_r, attrs \\ %{}) do
+    defaults = %{
+      reporter_reason: "A good reason"
+    }
+
+    attrs = Map.merge(defaults, attrs)
+    {:ok, report} = Kalda.Forums.report(reporter, content_type, p_c_r, attrs)
+    report
+  end
 end

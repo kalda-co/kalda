@@ -144,7 +144,7 @@ defmodule Kalda.Forums do
       from post in Post,
         where: post.forum == ^forum,
         where: post.published_at <= ^now,
-        order_by: [desc: post.inserted_at],
+        order_by: [desc: post.published_at],
         limit: ^limit,
         preload: [
           :author,
@@ -651,6 +651,7 @@ defmodule Kalda.Forums do
 
     from(report in Report,
       where: not is_nil(report.resolved_at),
+      limit: 20,
       preload: ^preload
     )
     |> Repo.all()
@@ -722,7 +723,7 @@ defmodule Kalda.Forums do
           })
 
         with {:ok, report} <- Repo.update(changeset) do
-          if moderator_action == :delete do
+          if report.moderator_action == :delete do
             delete_reported_content!(report)
           end
 

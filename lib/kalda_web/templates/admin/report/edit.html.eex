@@ -1,4 +1,4 @@
-<h1>Modertate this content</h1>
+<h1>Moderate this content</h1>
 
 <%= render "form.html", Map.put(assigns, :action, Routes.admin_report_path(@conn, :update, @report)) %>
 
