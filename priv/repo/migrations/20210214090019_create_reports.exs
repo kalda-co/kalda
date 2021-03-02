@@ -18,7 +18,6 @@ defmodule Kalda.Repo.Migrations.CreateReports do
 
       add :resolved_at, :naive_datetime
 
-      # add :user_id, references(:users, on_delete: :delete_all), null: false
       timestamps()
     end
 

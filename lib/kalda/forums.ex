@@ -373,6 +373,24 @@ defmodule Kalda.Forums do
   end
 
   @doc """
+  Deletes a comment.
+  Raises `Ecto.NoResultsError` if the Comment does not exist.
+
+  ## Examples
+
+      iex> delete_comment(comment)
+      {:ok, %Comment{}}
+
+      iex> delete_comment(comment)
+      ** (Ecto.NoResultsError)
+
+  """
+  def delete_comment!(id) do
+    comment = get_comment!(id)
+    Repo.delete!(comment)
+  end
+
+  @doc """
   Returns an `%Ecto.Changeset{}` for tracking comment changes.
 
   ## Examples
@@ -500,9 +518,26 @@ defmodule Kalda.Forums do
       {:error, %Ecto.Changeset{}}
 
   """
-  # TODO Implement 'soft' delete so record preserved
   def delete_reply(%Reply{} = reply) do
     Repo.delete(reply)
+  end
+
+  @doc """
+  Deletes a reply.
+  Raises `Ecto.NoResultsError` if the Reply does not exist.
+
+  ## Examples
+
+      iex> delete_reply(reply)
+      {:ok, %Comment{}}
+
+      iex> delete_reply(reply)
+      ** (Ecto.NoResultsError)
+
+  """
+  def delete_reply!(id) do
+    reply = get_reply!(id)
+    Repo.delete!(reply)
   end
 
   @doc """
@@ -664,111 +699,45 @@ defmodule Kalda.Forums do
   end
 
   @doc """
-  Moderates a comment by updating a report. Attrs should contain the moderator id (current user) and the moderator reason.
+  Moderates user-reported-content by updating a report. Attrs should contain the moderator id (current user) and the moderator reason.
 
   ## Examples
 
-      iex> moderate_report_comment(report, comment, selection, mod_id, mod_reason)
+      iex> moderate_report(report, selection, mod_id, mod_reason)
       {:ok, %Report{}}
 
-      iex> moderate_report_comment(report, comment, selection, mod_id, mod_reason)
+      iex> moderate_report(report, selection, mod_id, mod_reason)
       {:error, %Ecto.Changeset{}}
 
   """
-
-  #   post = MyRepo.get!(Post, 42)
-  # post = Ecto.Changeset.change post, title: "New title"
-  # case MyRepo.update post do
-  #   {:ok, struct}       -> # Updated with success
-  #   {:error, changeset} -> # Something went wrong
-  # end
-
-  def moderate_report_comment(report, comment, selection, mod_id, mod_reason) do
-    case selection do
-      "selection1" ->
-        Repo.transaction(fn ->
-          report =
-            Ecto.Changeset.change(report, %{
-              moderator_action: "Selection 1, delete the comment or reply.",
-              resolved_at: NaiveDateTime.local_now(),
-              comment_id: nil,
-              moderator_id: mod_id,
-              moderator_reason: mod_reason
-            })
-
-          with {:ok, report} <- Repo.update(report) do
-            delete_comment(comment)
-            report
-          end
-        end)
-
-      "selection2" ->
-        report =
-          Ecto.Changeset.change(report, %{
-            moderator_action: "Selection 2, do nothing.",
+  def moderate_report(report, selection, mod_id, mod_reason) do
+    {:ok, value} =
+      Repo.transaction(fn ->
+        changeset =
+          Report.moderation_changeset(report, %{
+            moderator_action: selection,
             resolved_at: NaiveDateTime.local_now(),
-            comment_id: nil,
             moderator_id: mod_id,
             moderator_reason: mod_reason
           })
-          |> Repo.update()
 
-        report
-    end
+        with {:ok, report} <- Repo.update(changeset) do
+          if selection == :delete do
+            delete_reported_content!(report)
+          end
+
+          {:ok, report}
+        end
+      end)
+
+    value
   end
 
-  @doc """
-  Moderates a reply by updating a report. Attrs should contain the moderator id (current user) and the moderator reason.
-
-  ## Examples
-
-      iex> moderate_report_reply(report, reply, selection, mod_id, mod_reason)
-      {:ok, %Report{}}
-
-      iex> moderate_report_reply(report, reply, selection, mod_id, mod_reason)
-      {:error, %Ecto.Changeset{}}
-
-  """
-
-  #   post = MyRepo.get!(Post, 42)
-  # post = Ecto.Changeset.change post, title: "New title"
-  # case MyRepo.update post do
-  #   {:ok, struct}       -> # Updated with success
-  #   {:error, changeset} -> # Something went wrong
-  # end
-
-  def moderate_report_reply(report, reply, selection, mod_id, mod_reason) do
-    case selection do
-      "selection1" ->
-        Repo.transaction(fn ->
-          report =
-            Ecto.Changeset.change(report, %{
-              moderator_action: "Selection 1, delete the comment or reply.",
-              resolved_at: NaiveDateTime.local_now(),
-              # TODO: Check this needs to be set to nil for foreign key constraint reasons
-              reply_id: nil,
-              moderator_id: mod_id,
-              moderator_reason: mod_reason
-            })
-
-          with {:ok, report} <- Repo.update(report) do
-            delete_reply(reply)
-            report
-          end
-        end)
-
-      "selection2" ->
-        report =
-          Ecto.Changeset.change(report, %{
-            moderator_action: "Selection 2, do nothing.",
-            resolved_at: NaiveDateTime.local_now(),
-            reply_id: nil,
-            moderator_id: mod_id,
-            moderator_reason: mod_reason
-          })
-          |> Repo.update()
-
-        report
+  defp delete_reported_content!(report) do
+    cond do
+      report.comment_id -> delete_comment!(report.comment_id)
+      report.post_id -> delete_post!(report.post_id)
+      report.reply_id -> delete_reply!(report.reply_id)
     end
   end
 
@@ -783,5 +752,23 @@ defmodule Kalda.Forums do
   """
   def change_report(%Report{} = report, attrs \\ %{}) do
     Report.changeset(report, attrs)
+  end
+
+  @doc """
+  Deletes a post.
+  Raises `Ecto.NoResultsError` if the Post does not exist.
+
+  ## Examples
+
+      iex> delete_post(post)
+      {:ok, %Comment{}}
+
+      iex> delete_post(post)
+      ** (Ecto.NoResultsError)
+
+  """
+  def delete_post!(id) do
+    post = get_post!(id)
+    Repo.delete!(post)
   end
 end

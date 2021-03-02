@@ -731,7 +731,7 @@ defmodule Kalda.ForumsTest do
       assert id_list1 == id_list2
     end
 
-    test "moderate_report_comment/4 selection 1 deletes comment" do
+    test "moderate_report comment selection 1 deletes comment" do
       moderator = AccountsFixtures.admin()
       user2 = AccountsFixtures.user()
       reporter = AccountsFixtures.user()
@@ -741,14 +741,13 @@ defmodule Kalda.ForumsTest do
       assert {:ok, %Report{} = report} =
                Forums.report_comment(reporter, comment, @valid_reporter_reason)
 
-      selection = "selection1"
+      selection = :delete
       mod_id = moderator.id
       mod_reason = "Yes, this is inappropriate"
 
       assert {:ok, %Report{} = moderated_report} =
-               Kalda.Forums.moderate_report_comment(
+               Kalda.Forums.moderate_report(
                  report,
-                 comment,
                  selection,
                  mod_id,
                  mod_reason
@@ -761,7 +760,7 @@ defmodule Kalda.ForumsTest do
       refute Kalda.Admin.list_archived() == []
     end
 
-    test "moderate_report_comment/4 selection 2 keeps comment, updates report" do
+    test "moderate_report comment selection 2 keeps comment, updates report" do
       moderator = AccountsFixtures.admin()
       user2 = AccountsFixtures.user()
       reporter = AccountsFixtures.user()
@@ -771,14 +770,13 @@ defmodule Kalda.ForumsTest do
       assert {:ok, %Report{} = report} =
                Forums.report_comment(reporter, comment, @valid_reporter_reason)
 
-      selection = "selection2"
+      selection = :do_nothing
       mod_id = moderator.id
       mod_reason = "This is not inappropriate"
 
       assert {:ok, %Report{} = moderated_report} =
-               Kalda.Forums.moderate_report_comment(
+               Kalda.Forums.moderate_report(
                  report,
-                 comment,
                  selection,
                  mod_id,
                  mod_reason
@@ -791,7 +789,7 @@ defmodule Kalda.ForumsTest do
       assert Kalda.Admin.list_archived() == []
     end
 
-    test "moderate_report_reply/4 selection 1 deletes reply" do
+    test "moderate_report  selection 1 deletes reply" do
       moderator = AccountsFixtures.admin()
       user2 = AccountsFixtures.user()
       reporter = AccountsFixtures.user()
@@ -802,14 +800,13 @@ defmodule Kalda.ForumsTest do
       assert {:ok, %Report{} = report} =
                Forums.report_reply(reporter, reply, @valid_reporter_reason)
 
-      selection = "selection1"
+      selection = :delete
       mod_id = moderator.id
       mod_reason = "Yes, this is inappropriate"
 
       assert {:ok, %Report{} = moderated_report} =
-               Kalda.Forums.moderate_report_reply(
+               Kalda.Forums.moderate_report(
                  report,
-                 reply,
                  selection,
                  mod_id,
                  mod_reason
@@ -822,7 +819,7 @@ defmodule Kalda.ForumsTest do
       refute Kalda.Admin.list_archived() == []
     end
 
-    test "moderate_report_reply/4 selection 2 keeps reply, updates report" do
+    test "moderate_report selection 2 keeps reply, updates report" do
       moderator = AccountsFixtures.admin()
       user2 = AccountsFixtures.user()
       reporter = AccountsFixtures.user()
@@ -833,14 +830,13 @@ defmodule Kalda.ForumsTest do
       assert {:ok, %Report{} = report} =
                Forums.report_reply(reporter, reply, @valid_reporter_reason)
 
-      selection = "selection2"
+      selection = :do_nothing
       mod_id = moderator.id
       mod_reason = "This is not inappropriate"
 
       assert {:ok, %Report{} = moderated_report} =
-               Kalda.Forums.moderate_report_reply(
+               Kalda.Forums.moderate_report(
                  report,
-                 reply,
                  selection,
                  mod_id,
                  mod_reason

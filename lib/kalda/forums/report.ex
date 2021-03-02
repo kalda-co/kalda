@@ -5,7 +5,7 @@ defmodule Kalda.Forums.Report do
   schema "reports" do
     field :reported_content, :string
     field :reporter_reason, :string
-    field :moderator_action, :string
+    field :moderator_action, Ecto.Enum, values: [:delete, :do_nothing]
     field :moderator_reason, :string
 
     belongs_to :author, Kalda.Accounts.User,
@@ -41,12 +41,23 @@ defmodule Kalda.Forums.Report do
   def changeset(report, attrs) do
     report
     |> cast(attrs, [:reporter_reason])
+    |> validate()
+  end
+
+  def validate(changeset) do
+    changeset
     |> validate_required([:reporter_id, :reporter_reason, :reported_content, :author_id])
-    |> foreign_key_constraint(:post_id)
-    |> foreign_key_constraint(:comment_id)
-    |> foreign_key_constraint(:reply_id)
     |> foreign_key_constraint(:author_id)
     |> foreign_key_constraint(:reporter_id)
     |> foreign_key_constraint(:moderator_id)
+  end
+
+  def moderation_changeset(report, attrs) do
+    fields = [:moderator_action, :resolved_at, :moderator_id, :moderator_reason]
+
+    report
+    |> cast(attrs, fields)
+    |> validate_required(fields)
+    |> validate()
   end
 end
