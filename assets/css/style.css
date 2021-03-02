@@ -10,6 +10,8 @@
   --color-green: #beffbe;
   --font-color: var(--color-purple);
   --font-color-dark: #404040;
+  --color-warn-light: #f8e5e5;
+  --color-warn: #b60000;
 
   /* Timings */
   /* Sizes */
@@ -222,6 +224,14 @@ nav.app-header-nav > * {
 
 .reply {
   background-color: var(--color-light);
+  border-radius: 20px;
+  color: var(--font-color-dark);
+  padding: 2.5rem;
+  margin-left: 4rem;
+}
+
+.report {
+  border: solid 2px var(--color-warn-light);
   border-radius: 20px;
   color: var(--font-color-dark);
   padding: 2.5rem;

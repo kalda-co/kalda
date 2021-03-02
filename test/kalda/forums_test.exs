@@ -730,5 +730,127 @@ defmodule Kalda.ForumsTest do
 
       assert id_list1 == id_list2
     end
+
+    test "moderate_report_comment/4 selection 1 deletes comment" do
+      moderator = AccountsFixtures.admin()
+      user2 = AccountsFixtures.user()
+      reporter = AccountsFixtures.user()
+      post = ForumsFixtures.post(user2)
+      comment = ForumsFixtures.comment(post, user2)
+
+      assert {:ok, %Report{} = report} =
+               Forums.report_comment(reporter, comment, @valid_reporter_reason)
+
+      selection = "selection1"
+      mod_id = moderator.id
+      mod_reason = "Yes, this is inappropriate"
+
+      assert {:ok, %Report{} = moderated_report} =
+               Kalda.Forums.moderate_report_comment(
+                 report,
+                 comment,
+                 selection,
+                 mod_id,
+                 mod_reason
+               )
+
+      refute is_nil(moderated_report.resolved_at)
+      assert report.reported_content == moderated_report.reported_content
+      assert moderated_report.moderator_reason == "Yes, this is inappropriate"
+      assert moderated_report.moderator_id == moderator.id
+      refute Kalda.Admin.list_archived() == []
+    end
+
+    test "moderate_report_comment/4 selection 2 keeps comment, updates report" do
+      moderator = AccountsFixtures.admin()
+      user2 = AccountsFixtures.user()
+      reporter = AccountsFixtures.user()
+      post = ForumsFixtures.post(user2)
+      comment = ForumsFixtures.comment(post, user2)
+
+      assert {:ok, %Report{} = report} =
+               Forums.report_comment(reporter, comment, @valid_reporter_reason)
+
+      selection = "selection2"
+      mod_id = moderator.id
+      mod_reason = "This is not inappropriate"
+
+      assert {:ok, %Report{} = moderated_report} =
+               Kalda.Forums.moderate_report_comment(
+                 report,
+                 comment,
+                 selection,
+                 mod_id,
+                 mod_reason
+               )
+
+      refute is_nil(moderated_report.resolved_at)
+      assert report.reported_content == moderated_report.reported_content
+      assert moderated_report.moderator_reason == "This is not inappropriate"
+      assert moderated_report.moderator_id == moderator.id
+      assert Kalda.Admin.list_archived() == []
+    end
+
+    test "moderate_report_reply/4 selection 1 deletes reply" do
+      moderator = AccountsFixtures.admin()
+      user2 = AccountsFixtures.user()
+      reporter = AccountsFixtures.user()
+      post = ForumsFixtures.post(user2)
+      comment = ForumsFixtures.comment(post, user2)
+      reply = ForumsFixtures.reply(comment, user2)
+
+      assert {:ok, %Report{} = report} =
+               Forums.report_reply(reporter, reply, @valid_reporter_reason)
+
+      selection = "selection1"
+      mod_id = moderator.id
+      mod_reason = "Yes, this is inappropriate"
+
+      assert {:ok, %Report{} = moderated_report} =
+               Kalda.Forums.moderate_report_reply(
+                 report,
+                 reply,
+                 selection,
+                 mod_id,
+                 mod_reason
+               )
+
+      refute is_nil(moderated_report.resolved_at)
+      assert report.reported_content == moderated_report.reported_content
+      assert moderated_report.moderator_reason == "Yes, this is inappropriate"
+      assert moderated_report.moderator_id == moderator.id
+      refute Kalda.Admin.list_archived() == []
+    end
+
+    test "moderate_report_reply/4 selection 2 keeps reply, updates report" do
+      moderator = AccountsFixtures.admin()
+      user2 = AccountsFixtures.user()
+      reporter = AccountsFixtures.user()
+      post = ForumsFixtures.post(user2)
+      comment = ForumsFixtures.comment(post, user2)
+      reply = ForumsFixtures.reply(comment, user2)
+
+      assert {:ok, %Report{} = report} =
+               Forums.report_reply(reporter, reply, @valid_reporter_reason)
+
+      selection = "selection2"
+      mod_id = moderator.id
+      mod_reason = "This is not inappropriate"
+
+      assert {:ok, %Report{} = moderated_report} =
+               Kalda.Forums.moderate_report_reply(
+                 report,
+                 reply,
+                 selection,
+                 mod_id,
+                 mod_reason
+               )
+
+      refute is_nil(moderated_report.resolved_at)
+      assert report.reported_content == moderated_report.reported_content
+      assert moderated_report.moderator_reason == "This is not inappropriate"
+      assert moderated_report.moderator_id == moderator.id
+      assert Kalda.Admin.list_archived() == []
+    end
   end
 end
