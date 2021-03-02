@@ -238,6 +238,11 @@ nav.app-header-nav > * {
   margin-left: 4rem;
 }
 
+.report-text {
+  font-style: italic;
+  color: var(--color-warn);
+}
+
 textarea {
   width: 100%;
   height: 8rem;
