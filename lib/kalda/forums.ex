@@ -710,19 +710,19 @@ defmodule Kalda.Forums do
       {:error, %Ecto.Changeset{}}
 
   """
-  def moderate_report(report, selection, mod_id, mod_reason) do
+  def moderate_report(report, moderator_action, mod_id, mod_reason) do
     {:ok, value} =
       Repo.transaction(fn ->
         changeset =
           Report.moderation_changeset(report, %{
-            moderator_action: selection,
+            moderator_action: moderator_action,
             resolved_at: NaiveDateTime.local_now(),
             moderator_id: mod_id,
             moderator_reason: mod_reason
           })
 
-        with {:ok, report} <- Repo.update!(changeset) do
-          if selection == :remove do
+        with {:ok, report} <- Repo.update(changeset) do
+          if moderator_action == :delete do
             delete_reported_content!(report)
           end
 
