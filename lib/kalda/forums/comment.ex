@@ -14,7 +14,6 @@ defmodule Kalda.Forums.Comment do
       references: :id
 
     has_many :replies, Kalda.Forums.Reply
-    has_many :reports, Kalda.Forums.Report
 
     timestamps()
   end
