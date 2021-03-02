@@ -21,14 +21,15 @@
                     <div class="content">
                       <%= @report.comment.content %>
                     </div>
+                    <br />
                     <div class="actions">
 
                       <%= radio_button f, :selection, "selection1" %>
                       <label for= "selection1" %>
-                      delete the reply. This cannot be undone
+                      delete the reply. This cannot be undone, and for a comment, all replies will also be deleted.
                       </label>
-                      <br />
 
+                      <br />
                       <%= radio_button f, :selection, "selection2" %>
                       <label for= "selection2" %>
                       Leave the reply
@@ -50,6 +51,7 @@
                     <div class="content">
                       <%= @report.reply.content %>
                     </div>
+                    <br />
                     <div class="actions">
 
                       <%= radio_button f, :selection, "selection1" %>
@@ -66,15 +68,15 @@
 
                     </div>
   <% end %>
+<br />
 
-
-  <h1>Please explain why you took this action</h1>
-  <%= label f, :moderator_reason %>
+  <h1>Please explain why you are taking this action</h1>
+  <%= label f, :moderator_reason %><br />
   <%= textarea f, :moderator_reason %>
   <%= error_tag f, :moderator_reason %>
 
   <div>
-    <%= submit "Save" %>
+    <%= submit "Save", class: "button"%>
   </div>
 <% end %>
 </div>
