@@ -27,17 +27,21 @@
                     <br />
                     <div class="actions">
 
-                      <%= radio_button f, :selection, "selection1" %>
-                      <label for= "selection1" %>
-                      delete the comment. This cannot be undone and all replies will also be deleted.
+                      <%= label f, :moderator_action %>
+                      <br />
+                      <%= radio_button f, :moderator_action, "delete" %>
+                      <label for= "delete" %>
+                      Delete the comment. This cannot be undone and all replies will also be deleted.
                       </label>
 
                       <br />
-                      <%= radio_button f, :selection, "selection2" %>
-                      <label for= "selection2" %>
+                      <%= radio_button f, :moderator_action, "do_nothing" %>
+                      <label for= "do_nothing" %>
                       Leave the reply
                       </label>
+                      <%=error_tag f, :moderator_action %>
                       <br />
+
                     </div>
   <% end %>
   <%= if @report.reply do %>
@@ -60,16 +64,19 @@
                     <br />
                     <div class="actions">
 
-                      <%= radio_button f, :selection, "selection1" %>
-                      <label for= "selection1" %>
-                      delete the reply. This cannot be undone
-                      </label>
+                      <%= label f, :moderator_action %>
                       <br />
+                      <%= radio_button f, :moderator_action, "delete" %>
+                      <label for= "delete" %>
+                      Delete the reply. This cannot be undone.
+                      </label>
 
-                      <%= radio_button f, :selection, "selection2" %>
-                      <label for= "selection2" %>
+                      <br />
+                      <%= radio_button f, :moderator_action, "do_nothing" %>
+                      <label for= "do_nothing" %>
                       Leave the reply
                       </label>
+                      <%=error_tag f, :moderator_action %>
                       <br />
 
                     </div>
