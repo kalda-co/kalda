@@ -21,12 +21,15 @@
                     <div class="content">
                       <%= @report.comment.content %>
                     </div>
+                    <div class="content report-text">
+                      <%= @report.reporter_reason %>
+                    </div>
                     <br />
                     <div class="actions">
 
                       <%= radio_button f, :selection, "selection1" %>
                       <label for= "selection1" %>
-                      delete the reply. This cannot be undone, and for a comment, all replies will also be deleted.
+                      delete the comment. This cannot be undone and all replies will also be deleted.
                       </label>
 
                       <br />
@@ -39,7 +42,7 @@
   <% end %>
   <%= if @report.reply do %>
                 <div class="reply">
-                  <h3>Comment</h3>
+                  <h3>Reply</h3>
                     <div class="details">
                       <div class="name">
                         <%= @report.reply.author.username %>
@@ -50,6 +53,9 @@
                     </div>
                     <div class="content">
                       <%= @report.reply.content %>
+                    </div>
+                    <div class="content report-text">
+                      <%= @report.reporter_reason %>
                     </div>
                     <br />
                     <div class="actions">

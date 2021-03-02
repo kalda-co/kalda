@@ -10,7 +10,7 @@
   <%= error_tag f, :content %>
 
 
-  <p>Defaults to now</p>
+  <p>Defaults to time below!!!!</p>
   <%= label f, :published_at %>
   <%= datetime_local_input f, :published_at %>
   <%= error_tag f, :published_at %>
