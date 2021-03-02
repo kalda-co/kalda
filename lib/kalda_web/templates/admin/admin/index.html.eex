@@ -20,6 +20,8 @@
       <div class="content report-text">
         <%= report.reporter_reason %>
       </div>
+      <span><%= link "Moderate", to: Routes.admin_report_path(@conn, :edit, report) %></span>
+
 
     <%end%>
   </div>
@@ -30,4 +32,5 @@
   <%= render KaldaWeb.Admin.DailyReflectionView, "form.html", Map.put(assigns, :action, Routes.admin_daily_reflection_path(@conn, :create)) %>
 
   <br />
+  <h1><%= link "All Daily Reflections (including scheduled)", to: Routes.admin_daily_reflection_path(@conn, :index) %></h1>
 </div>
