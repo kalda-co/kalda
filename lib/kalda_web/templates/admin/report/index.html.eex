@@ -125,5 +125,7 @@
                 <%= resolved.moderator_action %>
               </div>
               <br />
+          </div>
+        </div>
   <% end %>
 </div>
