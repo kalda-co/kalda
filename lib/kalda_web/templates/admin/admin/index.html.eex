@@ -11,12 +11,15 @@
   <h1><%= link "All Daily Reflections (including scheduled)", to: Routes.admin_post_path(@conn, :index, :daily_reflection) %></h1>
 
   <br>
-  <h1>New Will Pool</h1>
+  <h1><%= link "New Will Pool", to: Routes.admin_post_path(@conn, :new, :will_pool) %></h1>
 
-  <%= render KaldaWeb.Admin.PostView, "form.html", Map.put(assigns, :action, Routes.admin_post_path(@conn, :create)) %>
 
   <br>
   <h1><%= link "All Will Pools (including scheduled)", to: Routes.admin_post_path(@conn, :index, :will_pool) %></h1>
+
+  <br>
+  <h1><%= link "Invite Users", to: Routes.admin_invite_path(@conn, :new) %></h1>
+
 
   <h1>Reports for Daily Reflections</h1>
 
