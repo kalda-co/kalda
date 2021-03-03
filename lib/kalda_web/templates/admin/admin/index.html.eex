@@ -1,8 +1,24 @@
 <div class="admin-container">
-
   <h1>Admin Dashboard</h1>
 
-  <h1>REPORTS For DAILY REFLECTIONS</h1>
+
+  <br>
+  <h1>New Daily Reflection</h1>
+
+  <%= render KaldaWeb.Admin.PostView, "form.html", Map.put(assigns, :action, Routes.admin_post_path(@conn, :create)) %>
+
+  <br>
+  <h1><%= link "All Daily Reflections (including scheduled)", to: Routes.admin_post_path(@conn, :index, :daily_reflection) %></h1>
+
+  <br>
+  <h1>New Will Pool</h1>
+
+  <%= render KaldaWeb.Admin.PostView, "form.html", Map.put(assigns, :action, Routes.admin_post_path(@conn, :create)) %>
+
+  <br>
+  <h1><%= link "All Will Pools (including scheduled)", to: Routes.admin_post_path(@conn, :index, :will_pool) %></h1>
+
+  <h1>Reports for Daily Reflections</h1>
 
   <div class="report">
     <%= for report <- @reports do %>
@@ -23,14 +39,6 @@
       <span><%= link "Moderate", to: Routes.admin_report_path(@conn, :edit, report) %></span>
 
 
-    <%end%>
+    <% end %>
   </div>
-
-  <br />
-  <h1>New Daily Reflection</h1>
-
-  <%= render KaldaWeb.Admin.DailyReflectionView, "form.html", Map.put(assigns, :action, Routes.admin_daily_reflection_path(@conn, :create)) %>
-
-  <br />
-  <h1><%= link "All Daily Reflections (including scheduled)", to: Routes.admin_daily_reflection_path(@conn, :index) %></h1>
 </div>

@@ -205,8 +205,10 @@ defmodule Kalda.Forums do
       %Ecto.Changeset{data: %Post{}}
 
   """
-  def change_daily_reflection(%Post{forum: :daily_reflection} = daily_reflection, attrs \\ %{}) do
-    Post.changeset(daily_reflection, attrs)
+  def change_daily_reflection(%Post{} = daily_reflection, attrs \\ %{}) do
+    daily_reflection
+    |> Map.put(:forum, :daily_reflection)
+    |> Post.changeset(attrs)
   end
 
   @doc """
