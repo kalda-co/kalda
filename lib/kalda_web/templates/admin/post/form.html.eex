@@ -5,7 +5,7 @@
     </div>
   <% end %>
 
-  <%= hidden_input f, :forum, value: @forum %>
+  <%= hidden_input f, :forum %>
   <%= label f, :content %>
   <%= textarea f, :content %>
   <%= error_tag f, :content %>
