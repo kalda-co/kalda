@@ -1,5 +1,7 @@
-<h1>Moderate this content</h1>
+<div class="admin-container">
+  <h1>Moderate this content</h1>
 
-<%= render "form.html", Map.put(assigns, :action, Routes.admin_report_path(@conn, :update, @report)) %>
+  <%= render "form.html", Map.put(assigns, :action, Routes.admin_report_path(@conn, :update, @report)) %>
 
-<span><%= link "Back", to: Routes.admin_report_path(@conn, :index) %></span>
+  <span><%= link "Back", to: Routes.admin_report_path(@conn, :index) %></span>
+</div>

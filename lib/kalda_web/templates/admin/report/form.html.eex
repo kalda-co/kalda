@@ -8,80 +8,82 @@
 
   <h1> Reported Content </h1>
   <%= if @report.comment do %>
-                <div class="comment">
-                  <h3>Comment</h3>
-                    <div class="details">
-                      <div class="name">
-                        <%= @report.comment.author.username %>
-                      </div>
-                      <div class="date">
-                        <%= @report.comment.inserted_at %>
-                      </div>
-                    </div>
-                    <div class="content">
-                      <%= @report.comment.content %>
-                    </div>
-                    <div class="content report-text">
-                      <%= @report.reporter_reason %>
-                    </div>
-                    <br />
-                    <div class="actions">
+    <div class="comment">
+      <h3>Comment</h3>
+      <div class="details">
+        <div class="name">
+          <%= @report.comment.author.username %>
+        </div>
+        <div class="date">
+          <%= @report.comment.inserted_at %>
+        </div>
+      </div>
+      <div class="content">
+        <%= @report.comment.content %>
+      </div>
+      <div class="content report-text">
+        <%= @report.reporter_reason %>
+      </div>
+      <br />
+      <div class="actions">
 
-                      <%= label f, :moderator_action %>
-                      <br />
-                      <%= radio_button f, :moderator_action, "delete" %>
-                      <label for= "delete" %>
-                      Delete the comment. This cannot be undone and all replies will also be deleted.
-                      </label>
+        <%= label f, :moderator_action %>
+        <br />
+        <%= radio_button f, :moderator_action, "delete" %>
+        <label for= "delete" %>
+        Delete the comment. This cannot be undone and all replies will also be deleted.
+        </label>
 
-                      <br />
-                      <%= radio_button f, :moderator_action, "do_nothing" %>
-                      <label for= "do_nothing" %>
-                      Leave the reply
-                      </label>
-                      <%=error_tag f, :moderator_action %>
-                      <br />
+        <br />
+        <%= radio_button f, :moderator_action, "do_nothing" %>
+        <label for= "do_nothing" %>
+        Leave the reply
+        </label>
+        <%=error_tag f, :moderator_action %>
+        <br />
 
-                    </div>
+      </div>
+    </div>
   <% end %>
   <%= if @report.reply do %>
-                <div class="reply">
-                  <h3>Reply</h3>
-                    <div class="details">
-                      <div class="name">
-                        <%= @report.reply.author.username %>
-                      </div>
-                      <div class="date">
-                        <%= @report.reply.inserted_at %>
-                      </div>
-                    </div>
-                    <div class="content">
-                      <%= @report.reply.content %>
-                    </div>
-                    <div class="content report-text">
-                      <%= @report.reporter_reason %>
-                    </div>
-                    <br />
-                    <div class="actions">
+    <div class="reply">
+      <h3>Reply</h3>
+      <div class="details">
+        <div class="name">
+          <%= @report.reply.author.username %>
+        </div>
+        <div class="date">
+          <%= @report.reply.inserted_at %>
+        </div>
+      </div>
+      <div class="content">
+        <%= @report.reply.content %>
+      </div>
+      <div class="content report-text">
+        <%= @report.reporter_reason %>
+      </div>
+      <br />
+      <div class="actions">
 
-                      <%= label f, :moderator_action %>
-                      <br />
-                      <%= radio_button f, :moderator_action, "delete" %>
-                      <label for= "delete" %>
-                      Delete the reply. This cannot be undone.
-                      </label>
+        <%= label f, :moderator_action %>
+        <br />
+        <%= radio_button f, :moderator_action, "delete" %>
+        <label for= "delete" %>
+        Delete the reply. This cannot be undone.
+        </label>
 
-                      <br />
-                      <%= radio_button f, :moderator_action, "do_nothing" %>
-                      <label for= "do_nothing" %>
-                      Leave the reply
-                      </label>
-                      <%=error_tag f, :moderator_action %>
-                      <br />
+        <br />
+        <%= radio_button f, :moderator_action, "do_nothing" %>
+        <label for= "do_nothing" %>
+        Leave the reply
+        </label>
+        <%=error_tag f, :moderator_action %>
+        <br />
 
-                    </div>
+      </div>
+    </div>
   <% end %>
-<br />
+  <br />
 
   <h1>Please explain why you are taking this action</h1>
   <%= label f, :moderator_reason %><br />
