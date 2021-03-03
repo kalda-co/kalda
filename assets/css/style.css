@@ -227,7 +227,7 @@ nav.app-header-nav > * {
   border-radius: 20px;
   color: var(--font-color-dark);
   padding: 2.5rem;
-  margin-left: 4rem;
+  /* margin-left: 4rem; */
 }
 
 .report {
@@ -235,7 +235,7 @@ nav.app-header-nav > * {
   border-radius: 20px;
   color: var(--font-color-dark);
   padding: 2.5rem;
-  margin-left: 4rem;
+  /* margin-left: 4rem; */
 }
 
 .report-text {
