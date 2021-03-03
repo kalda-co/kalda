@@ -4,11 +4,10 @@ defmodule KaldaWeb.Api.V1.DashboardController do
   alias Kalda.Forums
   alias Kalda.Events
 
-  # TODO: App will crash if no future therapies scheduled
   def index(conn, _params) do
     user = conn.assigns.current_user
-    reflections = Forums.get_daily_reflections()
-    pools = Forums.get_will_pools()
+    reflections = Forums.get_posts(:daily_reflection)
+    pools = Forums.get_posts(:will_pool)
     therapy = Events.get_next_therapy_session!()
 
     conn

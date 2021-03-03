@@ -121,9 +121,13 @@ defmodule KaldaWeb.Api.V1.DashboardControllerTest do
       author1 = AccountsFixtures.user()
 
       post1 =
-        ForumsFixtures.post(author1, %{
-          published_at: NaiveDateTime.new!(~D[2020-01-01], ~T[00:00:00])
-        })
+        ForumsFixtures.post(
+          author1,
+          %{
+            published_at: NaiveDateTime.new!(~D[2020-01-01], ~T[00:00:00])
+          },
+          :daily_reflection
+        )
 
       post3 = ForumsFixtures.post(author1, %{}, :will_pool)
       comment1 = ForumsFixtures.comment(post1, author1)

@@ -107,7 +107,9 @@ defmodule KaldaWeb.Router do
       resources "/replies", ReplyController, only: [:delete]
     end
 
-    resources "/daily-reflections", DailyReflectionController do
+    resources "/forums/:forum/posts", PostController, only: [:new, :index]
+
+    resources "/posts", PostController, except: [:new, :index] do
       resources "/comments", CommentController, only: [:delete] do
         resources "/replies", ReplyController, only: [:delete]
       end

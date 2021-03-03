@@ -5,9 +5,7 @@ defmodule Kalda.Forums.Post do
   schema "posts" do
     field :content, :string
 
-    field :forum, Ecto.Enum,
-      values: [:daily_reflection, :will_pool, :community, :co_working],
-      default: :daily_reflection
+    field :forum, Ecto.Enum, values: [:daily_reflection, :will_pool, :community, :co_working]
 
     belongs_to :author, Kalda.Accounts.User,
       foreign_key: :author_id,
@@ -23,8 +21,8 @@ defmodule Kalda.Forums.Post do
   @doc false
   def changeset(post, attrs) do
     post
-    |> cast(attrs, [:content, :published_at])
-    |> validate_required([:content, :author_id])
+    |> cast(attrs, [:content, :published_at, :forum])
+    |> validate_required([:content, :author_id, :forum])
     |> foreign_key_constraint(:author_id)
   end
 end
