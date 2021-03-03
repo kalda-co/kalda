@@ -10,6 +10,32 @@ defmodule Kalda.Forums do
   alias Kalda.Forums.Comment
 
   @doc """
+  Parses the forum from the route
+  """
+  def parse_forum!(params) do
+    String.split(params, "-")
+    |> Enum.join("_")
+    |> String.downcase()
+    |> String.to_existing_atom()
+  end
+
+  @doc """
+  Turns a forum (atom enumtype) into a string for html
+
+  ## Examples
+
+      iex> name_string(:daily_reflection)
+      "Daily Reflection"
+
+  """
+  def name_string(forum) do
+    Atom.to_string(forum)
+    |> String.split("_")
+    |> Enum.map(&String.capitalize(&1))
+    |> Enum.join(" ")
+  end
+
+  @doc """
   Creates a post for a user
 
   ## Examples
@@ -52,26 +78,26 @@ defmodule Kalda.Forums do
       [%Post{}, ...]
 
   """
-  def get_posts(opts \\ []) do
+  def get_posts_opts(opts \\ []) do
     preload = opts[:preload] || []
     Repo.all(from post in Post, preload: ^preload)
   end
 
   @doc """
-  Returns all daily reflections except scheduled future ones
+  Returns all posts for forum, except scheduled future ones
   Orders as most recently publised first
 
   ## Examples
 
-      iex> get_daily_reflections(opts || [])
+      iex> get_posts(forum)
       [%Post{}, ...]
   """
-  def get_daily_reflections() do
+  def get_posts(forum) do
     now = NaiveDateTime.local_now()
 
     Repo.all(
       from post in Post,
-        where: post.forum == :daily_reflection,
+        where: post.forum == ^forum,
         where: post.published_at <= ^now,
         order_by: [desc: post.published_at],
         preload: [
@@ -120,15 +146,15 @@ defmodule Kalda.Forums do
 
   ## Examples
 
-      iex> get_daily_reflections_scheduled(opts || [])
+      iex> get_scheduled_posts(opts || [])
       [%Post{}, ...]
   """
-  def get_daily_reflections_scheduled() do
+  def get_scheduled_posts(forum) do
     now = NaiveDateTime.local_now()
 
     Repo.all(
       from post in Post,
-        where: post.forum == :daily_reflection,
+        where: post.forum == ^forum,
         where: post.published_at > ^now,
         order_by: [asc: post.published_at],
         preload: [

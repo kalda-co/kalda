@@ -20,6 +20,28 @@ defmodule Kalda.ForumsTest do
   @valid_reporter_reason %{reporter_reason: "This is inappropriate"}
   @invalid_reporter_reason %{reporter_reason: ""}
 
+  describe "parse_forum!" do
+    test "returns atom of forum_type" do
+      param = "daily-reflection"
+      assert Forums.parse_forum!(param) == :daily_reflection
+      assert Forums.parse_forum!("will-pool") == :will_pool
+      assert Forums.parse_forum!("community") == :community
+      assert Forums.parse_forum!("Community") == :community
+      assert Forums.parse_forum!("co-working") == :co_working
+      assert Forums.parse_forum!("co_working") == :co_working
+      assert Forums.parse_forum!("daily_reflection") == :daily_reflection
+    end
+  end
+
+  describe "name_string" do
+    test "name_string" do
+      forum = :daily_reflection
+      assert Forums.name_string(forum) == "Daily Reflection"
+      assert Forums.name_string(:will_pool) == "Will Pool"
+      assert Forums.name_string(:community) == "Community"
+    end
+  end
+
   describe "posts" do
     alias Kalda.Forums.Post
 
@@ -34,13 +56,13 @@ defmodule Kalda.ForumsTest do
       assert {:error, %Ecto.Changeset{}} = Forums.create_post(user, @invalid_post_attrs)
     end
 
-    test "get_posts/0 returns all posts" do
-      user = AccountsFixtures.user()
-      assert {:ok, %Post{} = post} = Forums.create_post(user, @valid_post_attrs)
-      assert Forums.get_posts() == [post]
-    end
+    # test "get_posts/1 returns all posts" do
+    #   user = AccountsFixtures.user()
+    #   assert {:ok, %Post{} = post} = Forums.create_post(user, @valid_post_attrs)
+    #   assert Forums.get_posts() == [post]
+    # end
 
-    test "get_daily_reflections" do
+    test "get_posts with forum daily_reflection" do
       now = NaiveDateTime.local_now()
       user1 = AccountsFixtures.user()
       user2 = AccountsFixtures.user()
@@ -86,7 +108,7 @@ defmodule Kalda.ForumsTest do
       set_inserted_at.(reply3, NaiveDateTime.add(now, -60))
 
       result =
-        Forums.get_daily_reflections()
+        Forums.get_posts(:daily_reflection)
         |> Enum.map(fn post ->
           %{
             id: post.id,
@@ -204,7 +226,7 @@ defmodule Kalda.ForumsTest do
              ]
     end
 
-    test "get_daily_reflections_scheduled" do
+    test "get_scheduled_posts as daily reflections" do
       now = NaiveDateTime.local_now()
       user1 = AccountsFixtures.user()
       user2 = AccountsFixtures.user()
@@ -250,7 +272,7 @@ defmodule Kalda.ForumsTest do
       set_inserted_at.(reply3, NaiveDateTime.add(now, -60))
 
       result =
-        Forums.get_daily_reflections_scheduled()
+        Forums.get_scheduled_posts(:daily_reflection)
         |> Enum.map(fn post ->
           %{
             id: post.id

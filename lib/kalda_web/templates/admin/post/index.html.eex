@@ -1,57 +1,57 @@
 <div class="admin-container">
-  <h1>Daily Reflections</h1>
+  <h1><%= @name_string %>s</h1>
 
   <h1>
-    <span><%= link "+ New Daily Reflection", to: Routes.admin_daily_reflection_path(@conn, :new) %></span>
+    <span><%= link "+ New #{@name_string}", to: Routes.admin_post_path(@conn, :new, @forum) %></span>
   </h1>
 
-  <h1>Scheduled Daily Reflections</h1>
+  <h1>Scheduled <%= @name_string%></h1>
   <div class="scheduled-posts">
-    <%= for scheduled_reflection <- @scheduled do %>
+    <%= for scheduled_post <- @scheduled do %>
       <div class="post-all">
         <div class="post">
             <div class="details">
               <div class="name">
-                <%= scheduled_reflection.author.username %>
+                <%= scheduled_post.author.username %>
               </div>
               <div class="date">
-                <%= scheduled_reflection.published_at %>
+                <%= scheduled_post.published_at %>
               </div>
             </div>
             <div class="content">
-              <%= scheduled_reflection.content %>
+              <%= scheduled_post.content %>
             </div>
             <div class="actions">
-              <span><%= link "Edit", to: Routes.admin_daily_reflection_path(@conn, :edit, scheduled_reflection) %></span>
-              <span><%= link "Delete", to: Routes.admin_daily_reflection_path(@conn, :delete, scheduled_reflection), method: :delete, data: [confirm: "Are you sure?"] %></span>
+              <span><%= link "Edit", to: Routes.admin_post_path(@conn, :edit, scheduled_post) %></span>
+              <span><%= link "Delete", to: Routes.admin_post_path(@conn, :delete, scheduled_post), method: :delete, data: [confirm: "Are you sure?"] %></span>
             </div>
         </div>
       </div>
     <% end %>
 
-  <h1>Previous Daily Reflections</h1>
+  <h1>Previous <%= @name_string %>s</h1>
   <div class="all-posts">
-    <%= for daily_reflection <- @daily_reflections do %>
+    <%= for post <- @posts do %>
       <div class="post-all">
         <div class="post">
             <div class="details">
               <div class="name">
-                <%= daily_reflection.author.username %>
+                <%= post.author.username %>
               </div>
               <div class="date">
-                <%= daily_reflection.published_at %>
+                <%= post.published_at %>
               </div>
             </div>
             <div class="content">
-              <%= daily_reflection.content %>
+              <%= post.content %>
             </div>
             <div class="actions">
-              <span><%= link "Edit", to: Routes.admin_daily_reflection_path(@conn, :edit, daily_reflection) %></span>
-              <span><%= link "Delete", to: Routes.admin_daily_reflection_path(@conn, :delete, daily_reflection), method: :delete, data: [confirm: "Are you sure?"] %></span>
+              <span><%= link "Edit", to: Routes.admin_post_path(@conn, :edit, post) %></span>
+              <span><%= link "Delete", to: Routes.admin_post_path(@conn, :delete, post), method: :delete, data: [confirm: "Are you sure?"] %></span>
             </div>
         </div>
 
-            <%= for comment <- daily_reflection.comments do %>
+            <%= for comment <- post.comments do %>
               <div class="comment-all">
 
                 <div class="comment">
@@ -68,7 +68,7 @@
                       <%= comment.content %>
                     </div>
                     <div class="actions">
-                      <span><%= link "Delete", to: Routes.admin_daily_reflection_comment_path(@conn, :delete, daily_reflection, comment), method: :delete, data: [confirm: "Are you sure?"] %></span>
+                      <span><%= link "Delete", to: Routes.admin_post_comment_path(@conn, :delete, post, comment), method: :delete, data: [confirm: "Are you sure?"] %></span>
                     </div>
                 </div>
 
@@ -87,7 +87,7 @@
                             <%= reply.content %>
                           </div>
                     <div class="actions">
-                      <span><%= link "Delete", to: Routes.admin_daily_reflection_comment_reply_path(@conn, :delete, daily_reflection, comment, reply), method: :delete, data: [confirm: "Are you sure?"] %></span>
+                      <span><%= link "Delete", to: Routes.admin_post_comment_reply_path(@conn, :delete, post, comment, reply), method: :delete, data: [confirm: "Are you sure?"] %></span>
                     </div>
                       </div>
                     <% end %>
