@@ -23,7 +23,7 @@ defmodule KaldaWeb.Admin.TherapySessionController do
       {:ok, _session} ->
         conn
         |> put_flash(:info, "Session created")
-        |> redirect(to: Routes.admin_admin_path(conn, :index))
+        |> redirect(to: Routes.admin_therapy_session_path(conn, :index))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         conn
