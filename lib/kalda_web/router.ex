@@ -125,6 +125,8 @@ defmodule KaldaWeb.Router do
     get "/users/confirm", UserConfirmationController, :new
     post "/users/confirm", UserConfirmationController, :create
     get "/users/confirm/:token", UserConfirmationController, :confirm
+
+    get "/crash", CrashController, :index
   end
 
   scope "/v1", KaldaWeb.Api.V1, as: :api_v1 do
