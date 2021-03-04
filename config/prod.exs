@@ -44,6 +44,7 @@ config :sentry,
   included_environments: [:prod]
 
 config :rollbax,
+  enabled: true,
   access_token: "3096585f75844cdaa1b70815ea70d849",
   environment: "production",
   enable_crash_reports: true
