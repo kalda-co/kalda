@@ -49,15 +49,3 @@ config :kalda, Kalda.Mailer,
   hackney_opts: [
     recv_timeout: :timer.minutes(1)
   ]
-
-# Rollbar for exception tracking
-rollbax_token =
-  System.get_env("ROLLBAR_ACCESS_TOKEN") ||
-    raise """
-    environment variable ROLLBAR_ACCESS_TOKEN is missing
-    """
-
-config :rollbax,
-  access_token: rollbax_token,
-  environment: "production",
-  enable_crash_reports: true

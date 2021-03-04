@@ -43,6 +43,11 @@ config :sentry,
   },
   included_environments: [:prod]
 
+config :rollbax,
+  access_token: "3096585f75844cdaa1b70815ea70d849",
+  environment: "production",
+  enable_crash_reports: true
+
 # ## SSL Support
 #
 # To get SSL working, you will need to add the `https` key

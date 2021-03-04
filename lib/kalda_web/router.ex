@@ -4,8 +4,8 @@ defmodule KaldaWeb.Router do
 
   import KaldaWeb.UserAuth
 
-  defp handle_errors(_conn, %{kind: kind, reason: reason, stack: stacktrace}) do
-    Rollbax.report(kind, reason, stacktrace)
+  defp handle_errors(conn, data) do
+    KaldaWeb.Errors.handle_errors(conn, data)
   end
 
   defp basic_auth(conn, _opts) do
