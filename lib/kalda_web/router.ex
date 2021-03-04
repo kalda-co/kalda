@@ -118,6 +118,10 @@ defmodule KaldaWeb.Router do
     live_dashboard "/dashboard", metrics: KaldaWeb.Telemetry
     get "/invites", InviteController, :new
     post "/invites", InviteController, :create
+
+    get "/therapy-sessions/new", TherapySessionController, :new
+    get "/therapy-sessions", TherapySessionController, :index
+    post "/therapy-sessions", TherapySessionController, :create
   end
 
   scope "/", KaldaWeb do

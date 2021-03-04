@@ -485,18 +485,26 @@ defmodule Kalda.Forums do
   @doc """
   Gets a single reply.
 
-  Raises `Ecto.NoResultsError` if the Comment does not exist.
+  Raises `Ecto.NoResultsError` if the Reply does not exist.
 
   ## Examples
 
-      iex> get_reply!(123)
+      iex> get_reply!(123, opts || [])
       %Reply{}
 
-      iex> get_reply!(456)
+      iex> get_reply!(456), opts || []
       ** (Ecto.NoResultsError)
 
   """
-  def get_reply!(id), do: Repo.get!(Reply, id)
+  def get_reply!(id, opts \\ []) do
+    preload = opts[:preload] || []
+
+    from(reply in Reply,
+      where: reply.id == ^id,
+      preload: ^preload
+    )
+    |> Repo.get!(id)
+  end
 
   @doc """
   Creates a reply for a user in a comment

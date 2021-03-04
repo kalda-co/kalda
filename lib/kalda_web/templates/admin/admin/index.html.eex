@@ -20,6 +20,12 @@
   <br>
   <h1><%= link "Invite Users", to: Routes.admin_invite_path(@conn, :new) %></h1>
 
+  <br>
+  <h1><%= link "New Therapy Session", to: Routes.admin_therapy_session_path(@conn, :new) %></h1>
+
+  <br>
+  <h1><%= link "All Therapy Sessions (including scheduled)", to: Routes.admin_therapy_session_path(@conn, :index) %></h1>
+
 
   <h1>Reports for Daily Reflections</h1>
 
