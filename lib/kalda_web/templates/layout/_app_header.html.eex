@@ -4,9 +4,13 @@
   <a href="/"><img class="header-logo" src="<%= Routes.static_path(@conn, "/images/kalda-rainbow-purple-logo.svg") %>" alt="Kalda rainbow logo coloured purple"/></a>
     <%= if @current_user do %>
       <li><%= @current_user.email %></li>
-      <li><%= link "Log out", to: Routes.user_session_path(@conn, :delete), method: :delete %></li>
+      <li><%= link "Log out", to: Routes.user_session_path(@conn, :delete), method: :delete %>
+      </li>
         <%= if @current_user.is_admin do %>
           <li><%= link "Dashboard", to: Routes.admin_admin_path(@conn, :index) %></li>
+          <li>
+            <a href="/app">App</a>
+          </li>
         <% end %>
     <% else %>
       <li><%= link "Log in", to: Routes.user_session_path(@conn, :new) %></li>
