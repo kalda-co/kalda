@@ -33,10 +33,7 @@ config :sentry,
   included_environments: [:prod],
   environment_name: Mix.env()
 
-config :rollbax,
-  access_token: "3096585f75844cdaa1b70815ea70d849",
-  environment: "production",
-  enable_crash_reports: true
+config :rollbax, enabled: false
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
