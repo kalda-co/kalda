@@ -21,7 +21,9 @@ export function formattedDatetime(datetime: Date) {
   ];
   const year = datetime.getFullYear();
   const tz = datetime.getTimezoneOffset();
-  const hh = datetime.getHours();
-  const mi = datetime.getMinutes();
+  let ht = datetime.getHours();
+  const hh = ht < 10 ? `0${ht}` : `${ht}`;
+  let hm = datetime.getMinutes();
+  const mi = hm < 10 ? `0${hm}` : `${hm}`;
   return `${day} ${mon} ${dd}, ${year} at ${hh}:${mi} GMT+${tz}`;
 }
