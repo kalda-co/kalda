@@ -34,10 +34,12 @@
     <section>
       <h2>Activities</h2>
       <div class="card background-pink">
-        <a target="_blank" rel="noopener" href={therapy.link}>
+        <!-- <a target="_blank" rel="noopener" href={therapy.link}> -->
+        <div class="date-container">
           <img src="images/calendar-icon-white.svg" alt="calendar icon" />
           <p>{formattedDatetime(therapy.event_datetime)}</p>
-        </a>
+        </div>
+        <!-- </a> -->
         <h1>Group therapy</h1>
         <button
           class="button-link"
@@ -95,7 +97,7 @@
     color: var(--color-white);
   }
 
-  .card.background-pink a {
+  .card.background-pink .date-container {
     display: flex;
     padding-top: var(--gap-xl);
     color: var(--color-white);
