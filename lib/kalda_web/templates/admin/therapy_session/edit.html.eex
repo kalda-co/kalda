@@ -1,0 +1,7 @@
+<div class="admin-container">
+  <h1>Edit therapy session</h1>
+
+  <%= render "form.html", Map.put(assigns, :action, Routes.admin_therapy_session_path(@conn, :update, @therapy_session)) %>
+
+  <span><%= link "Back", to: Routes.admin_therapy_session_path(@conn, :index) %></span>
+</div>

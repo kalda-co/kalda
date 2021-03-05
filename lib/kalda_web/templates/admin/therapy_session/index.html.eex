@@ -4,7 +4,7 @@
   <h1>
     <span><%= link "+ New Therapy Session", to: Routes.admin_therapy_session_path(@conn, :new) %></span>
   </h1>
-<%= for session <- @therapy_sessions do %>
+<%= for therapy_session <- @therapy_sessions do %>
 <br>
 <%= session.starts_at %>
 <%= session.link %>
@@ -13,6 +13,8 @@
 <%= session.therapist %>
 <%= session.credentials %>
 <br>
+<span><%= link "Edit", to: Routes.admin_therapy_session_path(@conn, :edit, therapy_session) %></span>
+<span><%= link "Delete", to: Routes.admin_therapy_session_path(@conn, :delete, therapy_session), method: :delete, data: [confirm: "Are you sure?"] %></span>
 <% end %>
 
 </div>
