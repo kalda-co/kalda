@@ -123,6 +123,9 @@ defmodule KaldaWeb.Router do
     get "/therapy-sessions/new", TherapySessionController, :new
     get "/therapy-sessions", TherapySessionController, :index
     post "/therapy-sessions", TherapySessionController, :create
+    get "/therapy-sessions/:id", TherapySessionController, :edit
+    put "/therapy-sessions/:id", TherapySessionController, :update
+    delete "/therapy-sessions/:id", TherapySessionController, :delete
   end
 
   scope "/", KaldaWeb do
