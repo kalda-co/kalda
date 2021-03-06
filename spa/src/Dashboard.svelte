@@ -34,19 +34,24 @@
     <section>
       <h2>Activities</h2>
       <div class="card background-pink">
-        <!-- <a target="_blank" rel="noopener" href={therapy.link}> -->
-        <div class="date-container">
-          <img src="images/calendar-icon-white.svg" alt="calendar icon" />
-          <p>{formattedDatetime(therapy.event_datetime)}</p>
-        </div>
-        <!-- </a> -->
-        <h1>Group therapy</h1>
+        <button
+          class="button-link"
+          on:click|preventDefault={go("therapy-sessions")}
+        >
+          <div class="date-container">
+            <img src="images/calendar-icon-white.svg" alt="calendar icon" />
+            <p>{formattedDatetime(therapy.starts_at)}</p>
+          </div>
+          <h1 class="align-left">Group therapy</h1>
+        </button>
         <button
           class="button-link"
           on:click|preventDefault={go("group-therapy-info")}
         >
-          <p>Learn more about weekly group therapy</p>
-        </button>
+          <p>
+            <span class="underline">Learn more</span> about weekly group therapy.
+          </p></button
+        >
       </div>
     </section>
   {/if}
@@ -66,6 +71,10 @@
     padding: 16px 24px;
     border-radius: 40px;
     font-weight: 600;
+  }
+
+  .align-left {
+    text-align: left;
   }
 
   .card-wide {
@@ -116,5 +125,9 @@
     color: unset;
     font-weight: unset;
     padding: unset;
+  }
+
+  .underline {
+    text-decoration: underline;
   }
 </style>

@@ -6,8 +6,12 @@
   </h1>
 <%= for session <- @therapy_sessions do %>
 <br>
-<%= session.event_datetime %>
+<%= session.starts_at %>
 <%= session.link %>
+<%= session.title %>
+<%= session.description %>
+<%= session.therapist %>
+<%= session.credentials %>
 <br>
 <% end %>
 
