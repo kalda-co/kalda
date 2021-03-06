@@ -4,6 +4,7 @@
   import Guidelines from "./Guidelines.svelte";
   import GroupTherapy from "./GroupTherapy.svelte";
   import Dashboard from "./Dashboard.svelte";
+  import TherapyIndex from "./Dashboard.svelte";
   import type { Page, AppState } from "./state";
 
   export let state: AppState;
@@ -43,6 +44,9 @@
   {:else if state.currentPage === "group-therapy-info"}
     <Navbar {navigateTo} title="Group Therapy" />
     <GroupTherapy />
+  {:else if state.currentPage === "therapy-sessions"}
+    <Navbar {navigateTo} title="Therapy Sessions" />
+    <TherapyIndex therapy={state.therapy} />
   {:else}
     <Navbar {navigateTo} title="Kalda" />
     <Dashboard
