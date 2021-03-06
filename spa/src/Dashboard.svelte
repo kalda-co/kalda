@@ -5,6 +5,7 @@
 
   export let user: User;
   export let post: Post;
+  export let pool: Post;
   export let therapy: Therapy | undefined;
   export let navigateTo: (page: Page) => any;
 
@@ -55,6 +56,20 @@
       </div>
     </section>
   {/if}
+
+  {#if pool}
+    <section class="pool">
+      <div class="card background-purple">
+        <button class="button-link" on:click|preventDefault={go("will-pool")}>
+          <h1 class="align-left">Will Pool</h1>
+          <p class="align-left">
+            <span class="underline">Make a commitment</span> to do something that
+            you need to get done
+          </p>
+        </button>
+      </div>
+    </section>
+  {/if}
 </article>
 
 <style>
@@ -64,6 +79,7 @@
 
   section {
     padding: var(--gap);
+    padding-bottom: 0px;
   }
 
   button {
@@ -73,6 +89,9 @@
     font-weight: 600;
   }
 
+  .pool {
+    padding-top: 0px;
+  }
   .align-left {
     text-align: left;
   }
@@ -95,6 +114,11 @@
     background-repeat: no-repeat;
   }
 
+  .background-purple {
+    background-image: url("./images/purple-jellyfish.png");
+    background-repeat: no-repeat;
+  }
+
   .card {
     padding: var(--gap);
     background-color: var(--color-white);
@@ -103,6 +127,10 @@
   }
 
   .card.background-pink {
+    color: var(--color-white);
+  }
+
+  .card.background-purple {
     color: var(--color-white);
   }
 
@@ -118,6 +146,10 @@
 
   .card h1 {
     margin: 0px;
+  }
+
+  .background-purple h1 {
+    padding-top: 80px;
   }
 
   .button-link {

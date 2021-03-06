@@ -50,6 +50,7 @@
       user={state.currentUser}
       post={state.reflections[0]}
       therapy={state.therapy}
+      pool={state.pools[0]}
       {navigateTo}
     />
   {/if}
