@@ -53,7 +53,11 @@ defmodule KaldaWeb.Api.V1.DashboardControllerTest do
                "therapy" => %{
                  "link" => therapy_session.link,
                  "id" => therapy_session.id,
-                 "event_datetime" => NaiveDateTime.to_iso8601(therapy_session.event_datetime)
+                 "starts_at" => NaiveDateTime.to_iso8601(therapy_session.starts_at),
+                 "title" => therapy_session.title,
+                 "therapist" => therapy_session.therapist,
+                 "credentials" => therapy_session.credentials,
+                 "description" => therapy_session.description
                },
                "reflections" => [
                  %{

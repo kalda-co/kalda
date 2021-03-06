@@ -22,8 +22,8 @@ defmodule Kalda.Events do
 
     Repo.all(
       from sesh in TherapySession,
-        where: sesh.event_datetime >= ^now,
-        order_by: [asc: sesh.event_datetime]
+        where: sesh.starts_at >= ^now,
+        order_by: [asc: sesh.starts_at]
     )
   end
 
@@ -46,8 +46,8 @@ defmodule Kalda.Events do
 
     Repo.one(
       from sesh in TherapySession,
-        where: sesh.event_datetime >= ^now,
-        order_by: [asc: sesh.event_datetime],
+        where: sesh.starts_at >= ^now,
+        order_by: [asc: sesh.starts_at],
         limit: 1
     )
   end
