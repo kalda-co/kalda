@@ -3,6 +3,7 @@ export type Page =
   | "group-therapy-info"
   | "guidelines"
   | "daily-reflection"
+  | "therapy-sessions"
   | "will-pool";
 
 export type Title =
@@ -10,6 +11,7 @@ export type Title =
   | "Group Therapy"
   | "Guidelines"
   | "Daily Reflection"
+  | "Therapy Sessions"
   | "Will Pool";
 
 export type AppState = {
@@ -55,6 +57,10 @@ export type Therapy = {
   id: number;
   link: string;
   event_datetime: Date;
+  title?: string;
+  description?: string;
+  therapist?: string;
+  credentials?: string;
 };
 
 export interface BubbleContent {

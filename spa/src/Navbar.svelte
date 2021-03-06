@@ -51,6 +51,12 @@
       <button on:click|preventDefault={go("daily-reflection")} class="button">
         Daily Reflection
       </button>
+      <button on:click|preventDefault={go("group-therapy-info")} class="button">
+        Group Therapy
+      </button>
+      <button on:click|preventDefault={go("therapy-sessions")} class="button">
+        Therapy Sessions
+      </button>
       <button on:click|preventDefault={go("will-pool")} class="button">
         Will Pool
       </button>
