@@ -71,9 +71,6 @@
     color: var(--font-color-dark);
   }
 
-  .guideline-card {
-  }
-
   .guideline-card h1,
   .guideline-card h2,
   .guideline-card p {
