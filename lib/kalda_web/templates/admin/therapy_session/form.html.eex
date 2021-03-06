@@ -6,14 +6,31 @@
   <% end %>
 
   <p>Defaults to time below!!!!</p>
-  <%= label f, :event_datetime %>
-  <%= datetime_local_input f, :event_datetime %>
-  <%= error_tag f, :event_datetime %>
+  <%= label f, :starts_at %>
+  <%= datetime_local_input f, :starts_at %>
+  <%= error_tag f, :starts_at %>
   <br>
 
   <%= label f, :link %>
   <%= textarea f, :link %>
   <%= error_tag f, :link %>
+
+  <%= label f, :title %>
+  <%= textarea f, :title %>
+  <%= error_tag f, :title %>
+
+  <%= label f, :description %>
+  <%= textarea f, :description %>
+  <%= error_tag f, :description %>
+
+  <%= label f, :therapist %>
+  <%= textarea f, :therapist %>
+  <%= error_tag f, :therapist %>
+
+  <%= label f, :credentials %>
+  <%= textarea f, :credentials %>
+  <%= error_tag f, :credentials %>
+
 
   <div>
     <%= submit "Save" %>

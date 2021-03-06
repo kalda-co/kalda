@@ -56,7 +56,7 @@ export type ReportComment = {
 export type Therapy = {
   id: number;
   link: string;
-  event_datetime: Date;
+  starts_at: Date;
   title?: string;
   description?: string;
   therapist?: string;
