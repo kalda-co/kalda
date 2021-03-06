@@ -4,6 +4,7 @@ export type Page =
   | "guidelines"
   | "daily-reflection"
   | "therapy-sessions"
+  | "urgent-support"
   | "will-pool";
 
 export type Title =
@@ -12,6 +13,7 @@ export type Title =
   | "Guidelines"
   | "Daily Reflection"
   | "Therapy Sessions"
+  | "Urgent Support"
   | "Will Pool";
 
 export type AppState = {

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { Therapy } from "./state";
+  import type { Therapy, Page } from "./state";
   import { formattedDatetime } from "./date";
 
   export let therapy: Therapy | undefined;
@@ -20,36 +20,39 @@
     </p>
   </div>
   <h1>This Week</h1>
-  <div class="guideline-card">
-    <div class="card-image">
-      <img
-        src="/images/therapy_swirls.png"
-        alt="Photograph of water, oil and paint swirls, blue and pink"
-      />
-    </div>
-    <div class="card-text">
-      <div class="date-container">
-        <img src="images/calendar-dark.svg" alt="calendar icon" />
-        <p>{formattedDatetime(therapy.starts_at)}</p>
-      </div>
-      <h1>{therapy.title}</h1>
-      <h2>Led by {therapy.therapist}, {therapy.credentials}</h2>
-      <p class="end-line">{therapy.description}</p>
 
-      <a
-        class="button zoom-button"
-        target="_blank"
-        rel="noopener"
-        href={therapy.link}><button class="button">Zoom link</button></a
-      >
-      <button
-        on:click|preventDefault={go("group-therapy-info")}
-        class="button-link"
-      >
-        Learn more.
-      </button>
+  {#if therapy}
+    <div class="guideline-card">
+      <div class="card-image">
+        <img
+          src="/images/therapy_swirls.png"
+          alt="Photograph of water, oil and paint swirls, blue and pink"
+        />
+      </div>
+      <div class="card-text">
+        <div class="date-container">
+          <img src="images/calendar-dark.svg" alt="calendar icon" />
+          <p>{formattedDatetime(therapy.starts_at)}</p>
+        </div>
+        <h1>{therapy.title}</h1>
+        <h2>Led by {therapy.therapist}, {therapy.credentials}</h2>
+        <p class="end-line">{therapy.description}</p>
+
+        <a
+          class="button zoom-button"
+          target="_blank"
+          rel="noopener"
+          href={therapy.link}><button class="button">Zoom link</button></a
+        >
+        <button
+          on:click|preventDefault={go("group-therapy-info")}
+          class="button-link"
+        >
+          Learn more.
+        </button>
+      </div>
     </div>
-  </div>
+  {/if}
 </article>
 
 <style>
