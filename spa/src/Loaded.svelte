@@ -4,7 +4,7 @@
   import Guidelines from "./Guidelines.svelte";
   import GroupTherapy from "./GroupTherapy.svelte";
   import Dashboard from "./Dashboard.svelte";
-  import TherapyIndex from "./Dashboard.svelte";
+  import TherapySessions from "./TherapySessions.svelte";
   import type { Page, AppState } from "./state";
 
   export let state: AppState;
@@ -19,7 +19,6 @@
     <Navbar {navigateTo} title="Daily Reflection" />
 
     <!-- TODO: gracefully handle zero posts -->
-    <!-- {#each state.posts as post (post.id)} -->
     {#each state.reflections as post (post.id)}
       <Thread
         placeholder="Your reflection here"
@@ -29,8 +28,6 @@
     {/each}
   {:else if state.currentPage === "will-pool"}
     <Navbar {navigateTo} title="Will Pool" />
-    <!-- TODO: gracefully handle zero posts -->
-    <!-- {#each state.posts as post (post.id)} -->
     {#each state.pools as post (post.id)}
       <Thread
         placeholder="Your commitment here"
@@ -46,7 +43,7 @@
     <GroupTherapy />
   {:else if state.currentPage === "therapy-sessions"}
     <Navbar {navigateTo} title="Therapy Sessions" />
-    <TherapyIndex therapy={state.therapy} />
+    <TherapySessions therapy={state.therapy} {navigateTo} />
   {:else}
     <Navbar {navigateTo} title="Kalda" />
     <Dashboard
