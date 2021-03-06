@@ -57,6 +57,9 @@
       <button on:click|preventDefault={go("therapy-sessions")} class="button">
         Therapy Sessions
       </button>
+      <button on:click|preventDefault={go("urgent-support")} class="button">
+        Urgent Support
+      </button>
       <button on:click|preventDefault={go("will-pool")} class="button">
         Will Pool
       </button>
