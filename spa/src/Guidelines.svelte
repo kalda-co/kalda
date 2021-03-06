@@ -6,12 +6,10 @@
     </p>
     <div class="guideline-card">
       <div class="card-image">
-        <div class="card-image">
-          <img
-            src="/images/waves.png"
-            alt="Photograph of waves on a beach, from above"
-          />
-        </div>
+        <img
+          src="/images/waves.png"
+          alt="Photograph of waves on a beach, from above"
+        />
       </div>
       <div class="card-text">
         <h1>No hateful language</h1>
