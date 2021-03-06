@@ -69,10 +69,6 @@
         <button type="submit" class="button">Log Out</button>
       </form>
     </div>
-
-    <button on:click|preventDefault={toggleMenu} class="close">
-      <img src="/images/cross.svg" alt="close menu cross" />
-    </button>
   </section>
 {/if}
 
