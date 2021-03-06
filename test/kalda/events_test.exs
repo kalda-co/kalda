@@ -7,9 +7,9 @@ defmodule Kalda.EventsTest do
   describe "therapy_sessions" do
     alias Kalda.Events.TherapySession
 
-    @valid_attrs %{event_datetime: ~N[2010-04-17 14:00:00], link: "https://zoom.us"}
-    @update_attrs %{event_datetime: ~N[2011-05-18 15:01:01], link: "https://different-zoom.us"}
-    @invalid_attrs %{event_datetime: nil, link: nil}
+    @valid_attrs %{starts_at: ~N[2010-04-17 14:00:00], link: "https://zoom.us"}
+    @update_attrs %{starts_at: ~N[2011-05-18 15:01:01], link: "https://different-zoom.us"}
+    @invalid_attrs %{starts_at: nil, link: nil}
 
     test "get_therapy_sessions/0 returns all future therapy_sessions" do
       therapy_session = EventsFixtures.future_therapy_session()
@@ -29,7 +29,7 @@ defmodule Kalda.EventsTest do
 
       _future_therapy_session =
         EventsFixtures.future_therapy_session(%{
-          event_datetime: NaiveDateTime.new!(~D[2030-01-01], ~T[00:00:00])
+          starts_at: NaiveDateTime.new!(~D[2030-01-01], ~T[00:00:00])
         })
 
       assert Events.get_next_therapy_session!() == next_therapy_session
@@ -44,7 +44,7 @@ defmodule Kalda.EventsTest do
       assert {:ok, %TherapySession{} = therapy_session} =
                Events.create_therapy_session(@valid_attrs)
 
-      assert therapy_session.event_datetime == ~N[2010-04-17 14:00:00]
+      assert therapy_session.starts_at == ~N[2010-04-17 14:00:00]
       assert therapy_session.link == "https://zoom.us"
     end
 
@@ -58,7 +58,7 @@ defmodule Kalda.EventsTest do
       assert {:ok, %TherapySession{} = therapy_session} =
                Events.update_therapy_session(therapy_session, @update_attrs)
 
-      assert therapy_session.event_datetime == ~N[2011-05-18 15:01:01]
+      assert therapy_session.starts_at == ~N[2011-05-18 15:01:01]
       assert therapy_session.link == "https://different-zoom.us"
     end
 
