@@ -158,7 +158,7 @@ _therapy_session_past =
     description: "How to get still and present and reduce anxiety",
     therapist: "Al Dee",
     credentials: "FreeMind hypnotherapist and mindfulness coach",
-    event_datetime: NaiveDateTime.new!(~D[2020-01-01], ~T[18:30:00]),
+    starts_at: NaiveDateTime.new!(~D[2020-01-01], ~T[18:30:00]),
     link: "https://us02web.zoom.us/j/9367762569"
   })
 
@@ -168,7 +168,7 @@ _therapy_session_future =
     description: "How to get still and present and reduce anxiety",
     therapist: "Al Dee",
     credentials: "FreeMind hypnotherapist and mindfulness coach",
-    event_datetime: NaiveDateTime.new!(~D[2030-01-01], ~T[18:30:00]),
+    starts_at: NaiveDateTime.new!(~D[2030-01-01], ~T[18:30:00]),
     link: "https://us02web.zoom.us/j/9367762569"
   })
 
