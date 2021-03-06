@@ -13,7 +13,7 @@
 </script>
 
 <article>
-  <div class="card-wide">
+  <div class="card">
     <p>
       All events happen on Zoom. When the event is live you can connect here or
       via a link in your email inbox.
@@ -22,24 +22,25 @@
   <h1>This Week</h1>
   <div class="guideline-card">
     <div class="card-image">
-      <div class="card-image">
-        <img
-          src="/images/therapy_swirls.png"
-          alt="Photograph of water, oil and paint swirls, blue and pink"
-        />
-      </div>
+      <img
+        src="/images/therapy_swirls.png"
+        alt="Photograph of water, oil and paint swirls, blue and pink"
+      />
     </div>
     <div class="card-text">
       <div class="date-container">
-        <img src="images/calendar-icon-white.svg" alt="calendar icon" />
+        <img src="images/calendar-dark.svg" alt="calendar icon" />
         <p>{formattedDatetime(therapy.starts_at)}</p>
       </div>
       <h1>{therapy.title}</h1>
-      <h2>Led by{therapy.therapist}, {therapy.credentials}.</h2>
-      <p>{therapy.description}</p>
+      <h2>Led by{therapy.therapist}, {therapy.credentials}</h2>
+      <p class="end-line">{therapy.description}</p>
 
-      <a class="button" target="_blank" rel="noopener" href={therapy.link}
-        >Zoom link</a
+      <a
+        class="button zoom-button"
+        target="_blank"
+        rel="noopener"
+        href={therapy.link}><button class="button">Zoom link</button></a
       >
       <button
         on:click|preventDefault={go("group-therapy-info")}
@@ -52,54 +53,50 @@
 </article>
 
 <style>
-  button {
-    border: solid 1px var(--color-purple);
-    padding: 16px 24px;
-    border-radius: 40px;
-    font-weight: 600;
-  }
-
-  .card-wide {
-    background-color: var(--color-purple);
-    color: var(--color-white);
-    border-bottom-left-radius: 30px;
-    border-bottom-right-radius: 30px;
+  article {
     padding: var(--gap);
   }
 
-  .question {
-    font-size: 24px;
-    font-weight: 600;
-  }
-
-  .background-pink {
-    background-image: url("./images/pink-jellyfish.png");
-    background-repeat: no-repeat;
-  }
-
-  .card {
-    padding: var(--gap);
-    background-color: var(--color-white);
-    border-radius: 20px;
-    color: var(--color-purple);
-  }
-
-  .card.background-pink {
-    color: var(--color-white);
-  }
-
-  .card.background-pink .date-container {
+  .date-container {
     display: flex;
-    padding-top: var(--gap-xl);
-    color: var(--color-white);
   }
 
-  .card img {
+  .date-container img {
     padding-right: var(--gap-s);
   }
+  .card {
+    padding: var(--gap);
+    background-color: var(--color-grey);
+    border-radius: 20px;
+    color: var(--font-color-dark);
+  }
 
-  .card h1 {
-    margin: 0px;
+  .guideline-card {
+  }
+
+  .guideline-card h1,
+  .guideline-card h2,
+  .guideline-card p {
+    margin-top: var(--gap-s);
+    margin-bottom: var(--gap-s);
+    color: var(--font-color-dark);
+  }
+
+  .card-text {
+    --border: 2px solid var(--color-grey);
+    background-color: var(--color-grey);
+    padding: var(--gap);
+    margin-top: calc(0px - var(--gap));
+    border-left: var(--border);
+    border-bottom: var(--border);
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    margin-bottom: var(--gap-s);
+  }
+
+  .card-image img {
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
   }
 
   .button-link {
@@ -107,5 +104,19 @@
     color: unset;
     font-weight: unset;
     padding: unset;
+    padding-left: 16px;
+    color: var(--color-purple);
+    text-decoration: underline;
+  }
+
+  .end-line {
+    padding-bottom: 24px;
+  }
+  .zoom-button {
+    border: solid 1px var(--color-purple);
+    padding: 16px 24px;
+    border-radius: 40px;
+    font-weight: 600;
+    padding: var(--gap);
   }
 </style>
