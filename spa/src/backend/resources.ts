@@ -15,7 +15,7 @@ export function therapy(json: unknown): Therapy {
   return {
     id: field("id", number)(json),
     link: field("link", string)(json),
-    starts_at: field("starts_at", date)(json),
+    startsAt: field("starts_at", date)(json),
     title: field("title", string)(json),
     description: field("description", string)(json),
     therapist: field("therapist", string)(json),
