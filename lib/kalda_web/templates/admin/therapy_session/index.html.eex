@@ -6,12 +6,12 @@
   </h1>
 <%= for therapy_session <- @therapy_sessions do %>
 <br>
-<%= session.starts_at %>
-<%= session.link %>
-<%= session.title %>
-<%= session.description %>
-<%= session.therapist %>
-<%= session.credentials %>
+<%= therapy_session.starts_at %>
+<%= therapy_session.link %>
+<%= therapy_session.title %>
+<%= therapy_session.description %>
+<%= therapy_session.therapist %>
+<%= therapy_session.credentials %>
 <br>
 <span><%= link "Edit", to: Routes.admin_therapy_session_path(@conn, :edit, therapy_session) %></span>
 <span><%= link "Delete", to: Routes.admin_therapy_session_path(@conn, :delete, therapy_session), method: :delete, data: [confirm: "Are you sure?"] %></span>
