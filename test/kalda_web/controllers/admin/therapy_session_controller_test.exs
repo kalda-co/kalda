@@ -2,15 +2,15 @@ defmodule KaldaWeb.Admin.TherapySessionControllerTest do
   use KaldaWeb.ConnCase
 
   @create_therapy_session_attrs %{
-    event_datetime: "2030-01-23T23:50:07",
+    starts_at: "2030-01-23T23:50:07",
     link: "https://zoom.us"
   }
   @update_therapy_session_attrs %{
-    event_datetime: "2030-01-23T23:50:07",
+    starts_at: "2030-01-23T23:50:07",
     link: "https://zoom/updated.us"
   }
   @invalid_therapy_session_attrs %{
-    event_datetime: "2030-01-23T23:50:07",
+    starts_at: "2030-01-23T23:50:07",
     link: ""
   }
 
