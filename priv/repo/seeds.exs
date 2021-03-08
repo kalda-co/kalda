@@ -172,6 +172,12 @@ _therapy_session_future =
     link: "https://us02web.zoom.us/j/9367762569"
   })
 
+_therapy_session_future =
+  Kalda.Repo.insert!(%TherapySession{
+    starts_at: NaiveDateTime.new!(~D[2022-02-01], ~T[18:30:00]),
+    link: "https://us02web.zoom.us/j/9367762569"
+  })
+
 %{token: token, changeset: invite_changeset} = Invite.build_invite("invite@example.com")
 
 _invite = Kalda.Repo.insert!(invite_changeset)
