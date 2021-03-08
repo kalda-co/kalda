@@ -92,3 +92,37 @@ p {
   letter-spacing: -0.02em;
   color: #404040;
 }
+
+/* Index */
+.blog-all {
+  width: 85%;
+  margin: auto;
+}
+
+.featured-blog {
+  display: flex;
+  margin-top: var(--gap);
+  margin-bottom: var(--gap);
+}
+
+.featured-blog-image {
+  /* max-width: 900px; */
+  width: 50%;
+  height: 240px;
+
+  background-size: cover;
+  background-position: center;
+  /* min-height: 330px; */
+}
+
+.blog-hero {
+  height: 25%;
+  background-color: var(--color-purple);
+}
+
+.blog-hero img {
+  margin: auto;
+  display: block;
+  padding-bottom: var(--gap-xxxl);
+  padding-top: var(--gap-xl);
+}
