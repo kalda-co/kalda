@@ -14,4 +14,12 @@ defmodule KaldaWeb.BlogController do
     |> assign(:date_string, date_string)
     |> render("show.html", post: post)
   end
+
+  def index(conn, _params) do
+    p_all = Kalda.Blog.all_posts()
+    {featured, posts} = List.pop_at(p_all, 0)
+
+    conn
+    |> render("index.html", posts: posts, featured: featured)
+  end
 end
