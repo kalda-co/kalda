@@ -32,7 +32,7 @@
       <div class="card-text">
         <div class="date-container">
           <img src="images/calendar-dark.svg" alt="calendar icon" />
-          <p>{formattedDatetime(therapy.starts_at)}</p>
+          <p>{formattedDatetime(therapy.startsAt)}</p>
         </div>
         <h1>{therapy.title}</h1>
         <h2>Led by {therapy.therapist}, {therapy.credentials}</h2>

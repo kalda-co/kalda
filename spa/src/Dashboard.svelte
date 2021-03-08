@@ -41,7 +41,7 @@
         >
           <div class="date-container">
             <img src="images/calendar-icon-white.svg" alt="calendar icon" />
-            <p>{formattedDatetime(therapy.starts_at)}</p>
+            <p>{formattedDatetime(therapy.startsAt)}</p>
           </div>
           <h1 class="align-left">Group therapy</h1>
         </button>
