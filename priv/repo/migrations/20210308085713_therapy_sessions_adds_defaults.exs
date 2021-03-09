@@ -8,6 +8,5 @@ defmodule Kalda.Repo.Migrations.TherapySessionsAddsDefaults do
       modify :therapist, :string, default: "TBC"
       modify :credentials, :string, default: "Kalda guided meditation coach"
     end
-
   end
 end
