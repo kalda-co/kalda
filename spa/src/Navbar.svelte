@@ -72,12 +72,6 @@
 {/if}
 
 <style>
-  .button-link {
-    border: unset;
-    padding: unset;
-    font-weight: unset;
-  }
-
   .navbar {
     padding: var(--gap);
     display: flex;
