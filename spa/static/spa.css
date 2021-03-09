@@ -16,6 +16,12 @@
   --font-size: 14px;
   --font-size-s: 12px;
   --font-family: poppins-semibold, poppins, sans-serif;
+
+  --full-width: 642px;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 html,
@@ -23,9 +29,7 @@ body {
   position: relative;
   width: 100%;
   height: 100%;
-  background-color: var(--color-grey);
   color: var(--color-black);
-  
 }
 
 html {
@@ -71,4 +75,23 @@ h1 {
 }
 h2 {
   font-size: 18px;
+}
+
+.content {
+  width: 100%;
+  max-width: var(--full-width);
+  padding-left: var(--gap);
+  padding-right: var(--gap);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.button-link {
+  border: unset;
+  padding: unset;
+  font-weight: unset;
+}
+
+.pointer {
+  cursor: pointer;
 }

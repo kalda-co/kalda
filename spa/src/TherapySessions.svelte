@@ -100,16 +100,6 @@
     border-top-right-radius: 20px;
   }
 
-  .button-link {
-    border: none;
-    color: unset;
-    font-weight: unset;
-    padding: unset;
-    padding-left: 16px;
-    color: var(--color-purple);
-    text-decoration: underline;
-  }
-
   .end-line {
     padding-bottom: 24px;
   }
