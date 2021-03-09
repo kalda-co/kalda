@@ -36,15 +36,17 @@
   {#if therapy}
     <section class="content">
       <h2>Activities</h2>
-      <div
-        class="card background-pink pointer"
-        on:click|preventDefault={go("therapy-sessions")}
-      >
+      <div class="card background-pink">
         <div class="date-container">
           <img src="images/calendar-icon-white.svg" alt="calendar icon" />
           <p>{formattedDatetime(therapy.startsAt)}</p>
         </div>
-        <h1>Group therapy</h1>
+        <button
+          class="button-link"
+          on:click|preventDefault={go("therapy-sessions")}
+        >
+          <h1 class="align-left">Group therapy</h1>
+        </button>
         <button
           class="button-link"
           on:click|preventDefault={go("group-therapy-info")}

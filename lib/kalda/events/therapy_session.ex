@@ -5,10 +5,10 @@ defmodule Kalda.Events.TherapySession do
   schema "therapy_sessions" do
     field :starts_at, :naive_datetime
     field :link, :string
-    field :title, :string
-    field :description, :string
-    field :therapist, :string
-    field :credentials, :string
+    field :title, :string, default: "Group Therapy"
+    field :description, :string, default: "Description TBC"
+    field :therapist, :string, default: "TBC"
+    field :credentials, :string, default: "Kalda guided meditation coach"
 
     timestamps()
   end

@@ -44,7 +44,7 @@
     <GroupTherapy />
   {:else if state.currentPage === "therapy-sessions"}
     <Navbar {navigateTo} title="Therapy Sessions" />
-    <TherapySessions therapy={state.therapy} {navigateTo} />
+    <TherapySessions therapies={state.therapies} {navigateTo} />
   {:else if state.currentPage === "urgent-support"}
     <Navbar {navigateTo} title="Urgent Support" />
     <UrgentSupport />
@@ -53,7 +53,7 @@
     <Dashboard
       user={state.currentUser}
       post={state.reflections[0]}
-      therapy={state.therapy}
+      therapy={state.next_therapy}
       pool={state.pools[0]}
       {navigateTo}
     />

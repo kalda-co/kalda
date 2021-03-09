@@ -2,13 +2,23 @@
   import type { Therapy, Page } from "./state";
   import { formattedDatetime } from "./date";
 
-  export let therapy: Therapy | undefined;
+  export let therapies: Therapy[];
 
   export let navigateTo: (page: Page) => any;
   function go(page: Page) {
     return () => {
       navigateTo(page);
     };
+  }
+
+  function therapyImage(index: number) {
+    let images = [
+      "/images/therapy_swirls.png",
+      "/images/sea-cloud.png",
+      "/images/purple-jellyfish2.png",
+      "/images/sea.png",
+    ];
+    return images[index % images.length];
   }
 </script>
 
@@ -19,15 +29,15 @@
       via a link in your email inbox.
     </p>
   </div>
-  <h1>This Week</h1>
+  <h1>Coming Up</h1>
 
-  {#if therapy}
-    <div class="card">
-      <div class="card-image swirls" />
-      <!-- <img
-          src="/images/therapy_swirls.png"
+  {#each therapies as therapy, i (therapy.id)}
+    <div class="guideline-card">
+      <div class="card-image">
+        <img
+          src={therapyImage(i)}
           alt="Photograph of water, oil and paint swirls, blue and pink"
-        /> -->
+        />
       <div class="card-text">
         <div class="date-container">
           <img src="images/calendar-dark.svg" alt="calendar icon" />
@@ -52,7 +62,7 @@
         </button>
       </div>
     </div>
-  {/if}
+  {/each}
 </article>
 
 <style>

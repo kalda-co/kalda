@@ -21,7 +21,8 @@ export type AppState = {
   reflections: Array<Post>;
   pools: Array<Post>;
   currentPage: Page;
-  therapy?: Therapy;
+  next_therapy?: Therapy;
+  therapies: Array<Therapy>;
 };
 
 export type Post = {

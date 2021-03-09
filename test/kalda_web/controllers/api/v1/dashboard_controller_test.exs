@@ -21,8 +21,8 @@ defmodule KaldaWeb.Api.V1.DashboardControllerTest do
       author1 = AccountsFixtures.user()
       author2 = AccountsFixtures.user()
       therapy_session = EventsFixtures.future_therapy_session()
-
       # Future post - should not be returned
+
       _post =
         ForumsFixtures.post(author1, %{
           published_at: NaiveDateTime.new!(~D[2030-01-01], ~T[00:00:00])
@@ -50,7 +50,7 @@ defmodule KaldaWeb.Api.V1.DashboardControllerTest do
                  "id" => current_user.id,
                  "username" => current_user.username
                },
-               "therapy" => %{
+               "next_therapy" => %{
                  "link" => therapy_session.link,
                  "id" => therapy_session.id,
                  "starts_at" => NaiveDateTime.to_iso8601(therapy_session.starts_at),
@@ -59,6 +59,17 @@ defmodule KaldaWeb.Api.V1.DashboardControllerTest do
                  "credentials" => therapy_session.credentials,
                  "description" => therapy_session.description
                },
+               "therapies" => [
+                 %{
+                   "link" => therapy_session.link,
+                   "id" => therapy_session.id,
+                   "starts_at" => NaiveDateTime.to_iso8601(therapy_session.starts_at),
+                   "title" => therapy_session.title,
+                   "therapist" => therapy_session.therapist,
+                   "credentials" => therapy_session.credentials,
+                   "description" => therapy_session.description
+                 }
+               ],
                "reflections" => [
                  %{
                    "forum" => "daily_reflection",
@@ -144,7 +155,8 @@ defmodule KaldaWeb.Api.V1.DashboardControllerTest do
                  "id" => current_user.id,
                  "username" => current_user.username
                },
-               "therapy" => nil,
+               "next_therapy" => nil,
+               "therapies" => [],
                "reflections" => [
                  %{
                    "forum" => "daily_reflection",
@@ -194,6 +206,30 @@ defmodule KaldaWeb.Api.V1.DashboardControllerTest do
                  }
                ]
              }
+    end
+
+    test "limits posts to 10 or less", %{conn: conn, user: _current_user} do
+      user = AccountsFixtures.user()
+      _post = ForumsFixtures.post(user)
+      _post1 = ForumsFixtures.post(user)
+      _post2 = ForumsFixtures.post(user)
+      _post3 = ForumsFixtures.post(user)
+      _post4 = ForumsFixtures.post(user)
+      _post5 = ForumsFixtures.post(user)
+      _post6 = ForumsFixtures.post(user)
+      _post7 = ForumsFixtures.post(user)
+      _post8 = ForumsFixtures.post(user)
+      _post9 = ForumsFixtures.post(user)
+      _post10 = ForumsFixtures.post(user)
+      _post11 = ForumsFixtures.post(user)
+      _post12 = ForumsFixtures.post(user)
+
+      conn = get(conn, "/v1/dashboard")
+
+      assert response = json_response(conn, 200)
+      posts = response["reflections"]
+
+      assert length(posts) == 10
     end
   end
 end

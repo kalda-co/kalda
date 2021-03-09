@@ -9,7 +9,8 @@ defmodule KaldaWeb.Api.V1.DashboardView do
       current_user: UserView.render_author(params.user),
       reflections: Enum.map(params.reflections, &render_post/1),
       pools: Enum.map(params.pools, &render_post/1),
-      therapy: TherapyView.render_therapy_session(params.therapy)
+      next_therapy: TherapyView.render_therapy_session(params.next_therapy),
+      therapies: Enum.map(params.therapies, &TherapyView.render_therapy_session/1)
     }
   end
 
