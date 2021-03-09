@@ -45,6 +45,7 @@ defmodule KaldaWeb.Router do
     get "/terms", PageController, :terms
 
     post "/signups/new", SignupController, :create
+    delete "/users/log-out", UserSessionController, :delete
   end
 
   # Enables LiveDashboard only for development
@@ -122,12 +123,14 @@ defmodule KaldaWeb.Router do
     get "/therapy-sessions/new", TherapySessionController, :new
     get "/therapy-sessions", TherapySessionController, :index
     post "/therapy-sessions", TherapySessionController, :create
+    get "/therapy-sessions/:id", TherapySessionController, :edit
+    put "/therapy-sessions/:id", TherapySessionController, :update
+    delete "/therapy-sessions/:id", TherapySessionController, :delete
   end
 
   scope "/", KaldaWeb do
     pipe_through [:basic_auth_prod, :browser]
 
-    delete "/users/log-out", UserSessionController, :delete
     get "/users/confirm", UserConfirmationController, :new
     post "/users/confirm", UserConfirmationController, :create
     get "/users/confirm/:token", UserConfirmationController, :confirm

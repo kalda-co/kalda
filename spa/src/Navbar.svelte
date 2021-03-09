@@ -51,6 +51,15 @@
       <button on:click|preventDefault={go("daily-reflection")} class="button">
         Daily Reflection
       </button>
+      <button on:click|preventDefault={go("group-therapy-info")} class="button">
+        Group Therapy
+      </button>
+      <button on:click|preventDefault={go("therapy-sessions")} class="button">
+        Therapy Sessions
+      </button>
+      <button on:click|preventDefault={go("urgent-support")} class="button">
+        Urgent Support
+      </button>
       <button on:click|preventDefault={go("will-pool")} class="button">
         Will Pool
       </button>
@@ -60,10 +69,6 @@
         <button type="submit" class="button">Log Out</button>
       </form>
     </div>
-
-    <button on:click|preventDefault={toggleMenu} class="close">
-      <img src="/images/cross.svg" alt="close menu cross" />
-    </button>
   </section>
 {/if}
 

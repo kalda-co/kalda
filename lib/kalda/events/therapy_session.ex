@@ -3,8 +3,12 @@ defmodule Kalda.Events.TherapySession do
   import Ecto.Changeset
 
   schema "therapy_sessions" do
-    field :event_datetime, :naive_datetime
+    field :starts_at, :naive_datetime
     field :link, :string
+    field :title, :string
+    field :description, :string
+    field :therapist, :string
+    field :credentials, :string
 
     timestamps()
   end
@@ -12,8 +16,10 @@ defmodule Kalda.Events.TherapySession do
   @doc false
   def changeset(therapy_session, attrs) do
     therapy_session
-    |> cast(attrs, [:event_datetime, :link])
-    |> validate_required([:event_datetime, :link])
+    |> cast(attrs, [:starts_at, :link, :title, :description, :therapist, :credentials])
+    |> validate_length(:credentials, max: 5000)
+    |> validate_length(:description, max: 5000)
+    |> validate_required([:starts_at, :link])
     |> validate_url(:link)
   end
 

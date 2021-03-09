@@ -11,8 +11,12 @@ defmodule Kalda.EventsFixtures do
 
   def future_therapy_session(attrs \\ %{}) do
     defaults = %{
+      title: "Mindfulness",
+      description: "How to get still and present and reduce anxiety",
+      therapist: "Al Dee",
+      credentials: "FreeMind hypnotherapist and mindfulness coach",
       link: "https://somerandomlink.co",
-      event_datetime: future_datetime()
+      starts_at: future_datetime()
     }
 
     attrs = Map.merge(defaults, attrs)
@@ -23,8 +27,12 @@ defmodule Kalda.EventsFixtures do
 
   def past_therapy_session(attrs \\ %{}) do
     defaults = %{
+      title: "Mindfulness",
+      description: "How to get still and present and reduce anxiety",
+      therapist: "Al Dee",
+      credentials: "FreeMind hypnotherapist and mindfulness coach",
       link: "https://somerandomlink.co",
-      event_datetime: past_datetime()
+      starts_at: past_datetime()
     }
 
     attrs = Map.merge(defaults, attrs)

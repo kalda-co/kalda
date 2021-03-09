@@ -11,7 +11,11 @@ defmodule KaldaWeb.Api.V1.TherapyView do
     %{
       id: therapy_session.id,
       link: therapy_session.link,
-      event_datetime: therapy_session.event_datetime
+      starts_at: therapy_session.starts_at,
+      title: therapy_session.title,
+      therapist: therapy_session.therapist,
+      credentials: therapy_session.credentials,
+      description: therapy_session.description
     }
   end
 end

@@ -5,6 +5,7 @@
 
   export let user: User;
   export let post: Post;
+  export let pool: Post;
   export let therapy: Therapy | undefined;
   export let navigateTo: (page: Page) => any;
 
@@ -34,16 +35,37 @@
     <section>
       <h2>Activities</h2>
       <div class="card background-pink">
-        <a target="_blank" rel="noopener" href={therapy.link}>
-          <img src="images/calendar-icon-white.svg" alt="calendar icon" />
-          <p>{formattedDatetime(therapy.event_datetime)}</p>
-        </a>
-        <h1>Group therapy</h1>
+        <button
+          class="button-link"
+          on:click|preventDefault={go("therapy-sessions")}
+        >
+          <div class="date-container">
+            <img src="images/calendar-icon-white.svg" alt="calendar icon" />
+            <p>{formattedDatetime(therapy.startsAt)}</p>
+          </div>
+          <h1 class="align-left">Group therapy</h1>
+        </button>
         <button
           class="button-link"
           on:click|preventDefault={go("group-therapy-info")}
         >
-          <p>Learn more about weekly group therapy</p>
+          <p>
+            <span class="underline">Learn more</span> about weekly group therapy.
+          </p></button
+        >
+      </div>
+    </section>
+  {/if}
+
+  {#if pool}
+    <section class="pool">
+      <div class="card background-purple">
+        <button class="button-link" on:click|preventDefault={go("will-pool")}>
+          <h1 class="align-left">Will Pool</h1>
+          <p class="align-left">
+            <span class="underline">Make a commitment</span> to do something that
+            you need to get done
+          </p>
         </button>
       </div>
     </section>
@@ -57,6 +79,7 @@
 
   section {
     padding: var(--gap);
+    padding-bottom: 0px;
   }
 
   button {
@@ -64,6 +87,13 @@
     padding: 16px 24px;
     border-radius: 40px;
     font-weight: 600;
+  }
+
+  .pool {
+    padding-top: 0px;
+  }
+  .align-left {
+    text-align: left;
   }
 
   .card-wide {
@@ -84,6 +114,11 @@
     background-repeat: no-repeat;
   }
 
+  .background-purple {
+    background-image: url("./images/purple-jellyfish.png");
+    background-repeat: no-repeat;
+  }
+
   .card {
     padding: var(--gap);
     background-color: var(--color-white);
@@ -95,7 +130,11 @@
     color: var(--color-white);
   }
 
-  .card.background-pink a {
+  .card.background-purple {
+    color: var(--color-white);
+  }
+
+  .card.background-pink .date-container {
     display: flex;
     padding-top: var(--gap-xl);
     color: var(--color-white);
@@ -109,10 +148,18 @@
     margin: 0px;
   }
 
+  .background-purple h1 {
+    padding-top: 80px;
+  }
+
   .button-link {
     border: none;
     color: unset;
     font-weight: unset;
     padding: unset;
+  }
+
+  .underline {
+    text-decoration: underline;
   }
 </style>

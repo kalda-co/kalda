@@ -23,6 +23,7 @@ defmodule Kalda.Forums.Post do
     post
     |> cast(attrs, [:content, :published_at, :forum])
     |> validate_required([:content, :author_id, :forum])
+    |> validate_length(:content, max: 5000)
     |> foreign_key_constraint(:author_id)
   end
 end

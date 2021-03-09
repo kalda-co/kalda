@@ -47,6 +47,8 @@ defmodule Kalda.Forums.Report do
   def validate(changeset) do
     changeset
     |> validate_required([:reporter_id, :reporter_reason, :reported_content, :author_id])
+    |> validate_length(:reporter_reason, max: 5000)
+    |> validate_length(:moderator_reason, max: 5000)
     |> foreign_key_constraint(:author_id)
     |> foreign_key_constraint(:reporter_id)
     |> foreign_key_constraint(:moderator_id)
