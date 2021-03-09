@@ -20,7 +20,7 @@ export function formattedDatetime(datetime: Date) {
     datetime.getDay()
   ];
   const year = datetime.getFullYear();
-  const tz = datetime.getTimezoneOffset();
+  const tz = datetime.getTimezoneOffset() / 60;
   let ht = datetime.getHours();
   const hh = ht < 10 ? `0${ht}` : `${ht}`;
   let hm = datetime.getMinutes();
