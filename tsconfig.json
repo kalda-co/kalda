@@ -1,4 +1,5 @@
 {
+  "extends": "@tsconfig/svelte/tsconfig.json",
   "include": ["spa/src", "spa/types"],
   "compilerOptions": {
     "module": "esnext",
