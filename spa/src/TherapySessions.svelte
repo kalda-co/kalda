@@ -35,7 +35,8 @@
           <p>{formattedDatetime(therapy.startsAt)}</p>
         </div>
         <h1>{therapy.title}</h1>
-        <h2>Led by {therapy.therapist}, {therapy.credentials}</h2>
+        <h2>Led by {therapy.therapist}</h2>
+        <h4>{therapy.credentials}</h4>
         <p class="end-line">{therapy.description}</p>
 
         <a
