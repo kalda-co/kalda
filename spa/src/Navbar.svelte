@@ -41,7 +41,6 @@
     </button>
 
     <div class="button-grid">
-      <!-- <button class="button"> Urgent Support </button> -->
       <button on:click|preventDefault={go("dashboard")} class="button">
         Home
       </button>
