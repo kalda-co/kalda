@@ -95,3 +95,7 @@ h2 {
 .pointer {
   cursor: pointer;
 }
+
+p {
+  margin: var(--gap) 0;
+}
