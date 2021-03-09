@@ -7,10 +7,11 @@ defmodule KaldaWeb.Admin.CommentController do
   def delete(conn, %{"id" => id}) do
     Policy.authorize!(conn, :delete_admin_comment, Kalda)
     comment = Forums.get_comment!(id, preload: [:post])
+    forum = comment.post.forum
     {:ok, _comment} = Forums.delete_comment(comment)
 
     conn
     |> put_flash(:info, "Comment deleted successfully.")
-    |> redirect(to: Routes.admin_post_path(conn, :index, comment.post.forum))
+    |> redirect(to: Routes.admin_post_path(conn, :index, forum))
   end
 end

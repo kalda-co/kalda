@@ -78,4 +78,14 @@ defmodule Kalda.AdminTest do
     Forums.delete_comment(comment)
     assert [_archived_comment, _archived_reply] = Admin.list_archived()
   end
+
+  test "deleting a reply" do
+    user = AccountsFixtures.user()
+    post = ForumsFixtures.post(user)
+    comment = ForumsFixtures.comment(post, user)
+    reply = ForumsFixtures.reply(comment, user)
+    Forums.delete_reply(reply)
+    refute [] == Admin.list_archived()
+    assert [_archived_reply] = Admin.list_archived()
+  end
 end
