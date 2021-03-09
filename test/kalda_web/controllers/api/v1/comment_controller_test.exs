@@ -8,7 +8,7 @@ defmodule KaldaWeb.Api.V1.CommentControllerTest do
     content:
       "This is a comment that is really long. It definitely has well over 255 chars in it. It will probably go in the ginees book of records as the longest most pointless comment in the universe. Its favorite singer is probably Prince or maybe ray charles or maybe whitney housten or possibly otis redding with special shoutouts to Bill withers. Purple rain by prince is definitely its fave song, although that might be bc of that psychadelic experieence it had that time in the 70s."
   }
-  too_long = String.duplicate("h", 750)
+  too_long = String.duplicate("h", 5050)
 
   @invalid_long_comment_content %{
     content: too_long
@@ -115,7 +115,7 @@ defmodule KaldaWeb.Api.V1.CommentControllerTest do
       assert conn = post(conn, "/v1/posts/#{post.id}/comments", @invalid_long_comment_content)
 
       assert json_response(conn, 422) == %{
-               "errors" => %{"content" => ["should be at most 700 character(s)"]}
+               "errors" => %{"content" => ["should be at most 5000 character(s)"]}
              }
     end
   end
