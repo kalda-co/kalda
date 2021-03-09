@@ -64,7 +64,7 @@
     border-radius: 30px;
     border: 2px solid var(--color-purple);
     padding: var(--gap);
-    margin-bottom: var(--gap-s);
+    margin-bottom: var(--gap);
     position: relative;
     background-color: var(--color-white);
   }

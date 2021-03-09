@@ -31,17 +31,19 @@
 
 <article>
   <section class="post">
-    <cite>{post.author.username}</cite>
-    <p class="question">{post.content}</p>
-    <aside class="trivia">
-      <span>
-        <img src="/images/speech-icon.svg" alt="A speech bubble icon" />
-        {commentsCountText}
-      </span>
-    </aside>
+    <div class="content">
+      <cite>{post.author.username}</cite>
+      <p class="question">{post.content}</p>
+      <aside class="trivia">
+        <span>
+          <img src="/images/speech-icon.svg" alt="A speech bubble icon" />
+          {commentsCountText}
+        </span>
+      </aside>
+    </div>
   </section>
 
-  <section class="comments">
+  <section class="comments content">
     <ContentTextForm {placeholder} save={saveComment} buttonText="Send" />
     {#each post.comments as comment (comment.id)}
       <Comment {comment} />
@@ -51,8 +53,7 @@
 
 <style>
   .post {
-    margin-top: var(--gap);
-    padding: var(--gap);
+    padding: var(--gap) 0;
     background-color: var(--color-purple);
     color: var(--color-white);
   }
