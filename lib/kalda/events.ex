@@ -9,20 +9,25 @@ defmodule Kalda.Events do
   alias Kalda.Events.TherapySession
 
   @doc """
-  Returns all upcoming (future) therapy_sessions.
+  Returns all upcoming (future) therapy_sessions, with optional limit in [].
 
   ## Examples
 
       iex> get_therapy_sessions()
       [%TherapySession{}, ...]
 
+      iex> get_therapy_sessions(limit: 2)
+      [%TherapySession{}, %TherapySession{}]
+
   """
-  def get_therapy_sessions do
+  def get_therapy_sessions(opts \\ []) do
     now = NaiveDateTime.local_now()
+    limit = opts[:limit] || 100
 
     Repo.all(
       from sesh in TherapySession,
         where: sesh.starts_at >= ^now,
+        limit: ^limit,
         order_by: [asc: sesh.starts_at]
     )
   end

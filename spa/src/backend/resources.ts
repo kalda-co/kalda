@@ -7,7 +7,8 @@ export function appState(json: unknown): AppState {
     reflections: field("reflections", array(post))(json),
     pools: field("pools", array(post))(json),
     currentPage: "dashboard",
-    therapy: field("therapy", optional(therapy))(json),
+    next_therapy: field("next_therapy", optional(therapy))(json),
+    therapies: field("therapies", array(therapy))(json),
   };
 }
 

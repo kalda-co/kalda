@@ -16,6 +16,15 @@ defmodule Kalda.EventsTest do
       assert Events.get_therapy_sessions() == [therapy_session]
     end
 
+    test "get_therapy_sessions/1 returns limited future therapy_sessions" do
+      therapy_session = EventsFixtures.future_therapy_session()
+
+      therapy_session2 =
+        EventsFixtures.future_therapy_session(%{starts_at: ~N[2230-05-18 09:00:00]})
+
+      assert Events.get_therapy_sessions() == [therapy_session, therapy_session2]
+    end
+
     test "get_therapy_sessions/0 returns no past therapy_sessions" do
       _past_therapy_session = EventsFixtures.past_therapy_session()
       _past_therapy_session = EventsFixtures.past_therapy_session()

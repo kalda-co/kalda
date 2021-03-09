@@ -85,20 +85,25 @@ defmodule Kalda.Forums do
 
   @doc """
   Returns all posts for forum, except scheduled future ones
-  Orders as most recently publised first
+  Orders as most recently publised first. Limit can be provided as an optional argument.
 
   ## Examples
 
       iex> get_posts(forum)
       [%Post{}, ...]
+
+      iex> get_posts(forum, [limit: 2])
+      [%Post{}, %Post{}]
   """
-  def get_posts(forum) do
+  def get_posts(forum, opts \\ []) do
     now = NaiveDateTime.local_now()
+    limit = opts[:limit] || 100
 
     Repo.all(
       from post in Post,
         where: post.forum == ^forum,
         where: post.published_at <= ^now,
+        limit: ^limit,
         order_by: [desc: post.published_at],
         preload: [
           :author,
@@ -146,7 +151,7 @@ defmodule Kalda.Forums do
 
   ## Examples
 
-      iex> get_scheduled_posts(opts || [])
+      iex> get_scheduled_posts(forum)
       [%Post{}, ...]
   """
   def get_scheduled_posts(forum) do
