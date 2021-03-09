@@ -17,8 +17,8 @@ defmodule Kalda.Events.TherapySession do
   def changeset(therapy_session, attrs) do
     therapy_session
     |> cast(attrs, [:starts_at, :link, :title, :description, :therapist, :credentials])
-    |> validate_length(:credentials, max: 700)
-    |> validate_length(:description, max: 700)
+    |> validate_length(:credentials, max: 5000)
+    |> validate_length(:description, max: 5000)
     |> validate_required([:starts_at, :link])
     |> validate_url(:link)
   end
