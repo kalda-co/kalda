@@ -1,4 +1,4 @@
-<article>
+<article class="content">
   <h2>
     If you’re at risk of suicide, or you need someone to talk to right now, use
     the contacts below.
