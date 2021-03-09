@@ -40,7 +40,7 @@
       <img src="/images/cross.svg" alt="close menu cross" />
     </button>
 
-    <div class="button-grid">
+    <div class="content button-grid">
       <button on:click|preventDefault={go("dashboard")} class="button">
         Home
       </button>
@@ -96,7 +96,7 @@
 
   .sidebar {
     color: var(--color-white);
-    width: var(--sidebar-width);
+    width: 100%;
     position: fixed;
     top: 0;
     height: 100vh;
@@ -109,10 +109,10 @@
   }
 
   .button-grid {
-    width: 375px;
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
+    width: 500px;
   }
 
   .button {
