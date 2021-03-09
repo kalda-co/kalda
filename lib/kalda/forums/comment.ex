@@ -23,6 +23,7 @@ defmodule Kalda.Forums.Comment do
     comment
     |> cast(attrs, [:content])
     |> validate_required([:content, :author_id, :post_id])
+    |> validate_length(:content, max: 700)
     |> foreign_key_constraint(:author_id)
     |> foreign_key_constraint(:post_id)
   end

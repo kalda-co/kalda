@@ -24,11 +24,11 @@
   <%= error_tag f, :description %>
 
   <%= label f, :therapist %>
-  <%= textarea f, :therapist %>
+  <%= textarea f, :therapist, placeholder: "e.g. Al Dee, they/them" %>
   <%= error_tag f, :therapist %>
 
   <%= label f, :credentials %>
-  <%= textarea f, :credentials %>
+  <%= textarea f, :credentials, placeholder: "e.g. Al is a guided meditation coach and hypnotherapist with 2 years of experience leading groups." %>
   <%= error_tag f, :credentials %>
 
 
