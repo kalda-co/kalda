@@ -40,3 +40,13 @@
     <%= link "Forgot your password?", to: Routes.user_reset_password_path(@conn, :new) %>
   </p>
 </div>
+
+<%# If the user is already logged in (i.e. if they logged in and then pressed
+back) redirect away from this page. %>
+<script>
+fetch("/v1/ping").then(response => {
+  if !(response.status >= 300 && response.status < 500)  {
+    window.location.href = "/app"
+  }
+})
+</script>

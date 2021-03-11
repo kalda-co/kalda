@@ -142,6 +142,7 @@ defmodule KaldaWeb.Router do
     pipe_through [:api, :json_require_authenticated_user, :json_require_confirmed_email]
 
     get "/dashboard", DashboardController, :index
+    get "/ping", PingController, :show
 
     post "/posts/:id/comments", CommentController, :create
     post "/comments/:id/replies", ReplyController, :create
