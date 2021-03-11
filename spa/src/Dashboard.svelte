@@ -14,6 +14,21 @@
       navigateTo(page);
     };
   }
+  let dailyref = false;
+  let willpool = false;
+  let guidelines = false;
+
+  function toggle(page: Page) {
+    return () => {
+      if ((page = "daily-reflection")) {
+        dailyref = !dailyref;
+      } else if ((page = "will-pool")) {
+        willpool = !willpool;
+      } else if ((page = "guidelines")) {
+        guidelines = !guidelines;
+      }
+    };
+  }
 </script>
 
 <article>
@@ -71,6 +86,36 @@
       </div>
     </section>
   {/if}
+
+  <section>
+    <h1>Community Forums</h1>
+    <div class="button-menu">
+      <button
+        on:click|preventDefault={toggle("daily-reflection")}
+        class:dailyref
+      >
+        Daily Reflection
+      </button>
+      <button on:click|preventDefault={toggle("will-pool")} class:willpool>
+        Will Pool
+      </button>
+      <button on:click|preventDefault={toggle("guidelines")} class:guidelines
+        >Community</button
+      >
+    </div>
+
+    {#if dailyref}
+      <p>dailyref</p>
+    {/if}
+
+    {#if willpool}
+      <p>willpool</p>
+    {/if}
+
+    {#if guidelines}
+      <p>Community</p>
+    {/if}
+  </section>
 </article>
 
 <style>
@@ -85,7 +130,21 @@
     font-weight: 600;
   }
 
-  .todays-reflection {
+  .dailyref,
+  .willpool,
+  .guidelines {
+    background-color: var(--color-purple);
+    color: var(--color-white);
+  }
+
+  .pool {
+    padding-top: 0px;
+  }
+  .align-left {
+    text-align: left;
+  }
+
+  .card-wide {
     background-color: var(--color-purple);
     color: var(--color-white);
   }
