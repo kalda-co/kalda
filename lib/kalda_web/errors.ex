@@ -1,6 +1,8 @@
 defmodule KaldaWeb.Errors do
   @filtered_params ["password", "password_confirmation"]
 
+  def handle_errors(_conn, %{reason: %Phoenix.Router.NoRouteError{}}), do: :ok
+
   def handle_errors(conn, %{kind: kind, reason: reason, stack: stacktrace}) do
     occurrence_data = %{
       "request" => %{
