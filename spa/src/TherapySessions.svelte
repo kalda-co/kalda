@@ -12,8 +12,8 @@
   }
 </script>
 
-<article>
-  <div class="card">
+<article class="content">
+  <div class="card-text-only">
     <p>
       All events happen on Zoom. When the event is live you can connect here or
       via a link in your email inbox.
@@ -22,13 +22,12 @@
   <h1>This Week</h1>
 
   {#if therapy}
-    <div class="guideline-card">
-      <div class="card-image">
-        <img
+    <div class="card">
+      <div class="card-image swirls" />
+      <!-- <img
           src="/images/therapy_swirls.png"
           alt="Photograph of water, oil and paint swirls, blue and pink"
-        />
-      </div>
+        /> -->
       <div class="card-text">
         <div class="date-container">
           <img src="images/calendar-dark.svg" alt="calendar icon" />
@@ -57,10 +56,6 @@
 </article>
 
 <style>
-  article {
-    padding: var(--gap);
-  }
-
   .date-container {
     display: flex;
   }
@@ -68,41 +63,46 @@
   .date-container img {
     padding-right: var(--gap-s);
   }
+
   .card {
-    padding: var(--gap);
-    background-color: var(--color-grey);
-    border-radius: 20px;
-    color: var(--font-color-dark);
+    margin-bottom: var(--gap);
   }
 
-  .guideline-card h1,
-  .guideline-card h2,
-  .guideline-card p {
+  .card h1,
+  .card h2,
+  .card p {
     margin-top: var(--gap-s);
     margin-bottom: var(--gap-s);
     color: var(--font-color-dark);
   }
 
   .card-text {
-    --border: 2px solid var(--color-grey);
     background-color: var(--color-grey);
     padding: var(--gap);
-    margin-top: calc(0px - var(--gap));
-    border-left: var(--border);
-    border-bottom: var(--border);
-    border-bottom-left-radius: 20px;
-    border-bottom-right-radius: 20px;
-    margin-bottom: var(--gap-s);
+    border-radius: 0 0 20px 20px;
   }
 
-  .card-image img {
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
+  .card-image {
+    height: 250px;
+    border-radius: 20px 20px 0 0;
+    background-position: center;
+    background-size: cover;
+  }
+
+  .card-text-only {
+    border-radius: 20px;
+    background-color: var(--color-grey);
+    padding: var(--gap);
+  }
+
+  .swirls {
+    background-image: url("/images/therapy_swirls.png");
   }
 
   .end-line {
     padding-bottom: 24px;
   }
+
   .zoom-button {
     border: solid 1px var(--color-purple);
     padding: 16px 24px;
