@@ -1,4 +1,4 @@
-<article>
+<article class="content">
   <div class="text-card">
     <h1>What is group therapy?</h1>
     <p>

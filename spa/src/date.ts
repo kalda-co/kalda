@@ -41,8 +41,9 @@ export function datetimeToURI(therapy: Therapy) {
   const hm = starts.getMinutes();
   const mi = hm < 10 ? `0${hm}` : `${hm}`;
   const ht = starts.getHours();
-  const hh = ht < 10 ? `0${ht}` : `${ht}`;
-  const endsAtHT = ht + 1;
+  const httz = ht + starts.getTimezoneOffset() / 60;
+  const hh = httz < 10 ? `0${httz}` : `${httz}`;
+  const endsAtHT = httz + 1;
   const endsAtHH = endsAtHT < 10 ? `0${endsAtHT}` : `${endsAtHT}`;
   const datetimeString = `${YYYY}${MM}${DD}T${hh}${mi}00Z%2F${YYYY}${MM}${DD}T${endsAtHH}${mi}00Z`;
   const desc = encodeURI(therapy.description);
