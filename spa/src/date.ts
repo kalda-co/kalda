@@ -1,3 +1,5 @@
+import type { Therapy } from "./state";
+
 export function formattedDatetime(datetime: Date) {
   const dd = datetime.getDate();
   const mm = datetime.getMonth();
