@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { Therapy, Page } from "./state";
-  import { formattedDatetime } from "./date";
+  import { datetimeToURI, formattedDatetime } from "./date";
 
   export let therapies: Therapy[];
 
@@ -41,6 +41,10 @@
         <div class="date-container">
           <img src="images/calendar-dark.svg" alt="calendar icon" />
           <p>{formattedDatetime(therapy.startsAt)}</p>
+
+          <a href={datetimeToURI(therapy)} target="_blank" rel="nofollow">
+            <p class="link">Add</p>
+          </a>
         </div>
         <h1>{therapy.title}</h1>
         <h2>Led by {therapy.therapist}</h2>
@@ -113,5 +117,11 @@
     border-radius: 40px;
     font-weight: 600;
     padding: var(--gap);
+  }
+
+  .link {
+    padding-left: var(--gap-s);
+    color: var(--color-white);
+    text-decoration: underline;
   }
 </style>

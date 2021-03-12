@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { Page, User, Post, Therapy } from "./state";
 
-  import { formattedDatetime } from "./date";
+  import { datetimeToURI, formattedDatetime } from "./date";
 
   export let user: User;
   export let post: Post;
@@ -40,13 +40,13 @@
         <div class="date-container">
           <img src="images/calendar-icon-white.svg" alt="calendar icon" />
           <p>{formattedDatetime(therapy.startsAt)}</p>
+          <a href={datetimeToURI(therapy)} target="_blank" rel="nofollow">
+            <p class="link">Add</p>
+          </a>
         </div>
-        <button
-          class="button-link"
-          on:click|preventDefault={go("therapy-sessions")}
-        >
-          <h1 class="align-left">Group therapy</h1>
-        </button>
+        <h1 class="pointer" on:click|preventDefault={go("therapy-sessions")}>
+          Group therapy
+        </h1>
         <button
           class="button-link"
           on:click|preventDefault={go("group-therapy-info")}
@@ -149,6 +149,12 @@
   }
 
   .underline {
+    text-decoration: underline;
+  }
+
+  .link {
+    padding-left: var(--gap-s);
+    color: var(--color-white);
     text-decoration: underline;
   }
 
