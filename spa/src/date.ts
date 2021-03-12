@@ -33,7 +33,8 @@ export function datetimeToURI(therapy: Therapy) {
   const YYYY = starts.getFullYear();
   const dd = starts.getDate();
   const DD = dd < 10 ? `0${dd}` : `${dd}`;
-  const mm = starts.getMonth();
+  const ma = starts.getMonth();
+  const mm = ma + 1;
   const MM = mm < 10 ? `0${mm}` : `${mm}`;
   const hm = starts.getMinutes();
   const mi = hm < 10 ? `0${hm}` : `${hm}`;
