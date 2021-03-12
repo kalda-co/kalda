@@ -32,12 +32,11 @@
   <h1>Coming Up</h1>
 
   {#each therapies as therapy, i (therapy.id)}
-    <div class="guideline-card">
-      <div class="card-image">
-        <img
-          src={therapyImage(i)}
-          alt="Photograph of water, oil and paint swirls, blue and pink"
-        />
+    <div class="card">
+      <div
+        class="card-image"
+        style="background-image: url({therapyImage(i)})"
+      />
       <div class="card-text">
         <div class="date-container">
           <img src="images/calendar-dark.svg" alt="calendar icon" />
@@ -47,7 +46,6 @@
         <h2>Led by {therapy.therapist}</h2>
         <h4>{therapy.credentials}</h4>
         <p class="end-line">{therapy.description}</p>
-
         <a
           class="button zoom-button"
           target="_blank"
@@ -92,21 +90,17 @@
     border-radius: 0 0 20px 20px;
   }
 
-  .card-image {
-    height: 250px;
-    border-radius: 20px 20px 0 0;
-    background-position: center;
-    background-size: cover;
-  }
-
   .card-text-only {
     border-radius: 20px;
     background-color: var(--color-grey);
     padding: var(--gap);
   }
 
-  .swirls {
-    background-image: url("/images/therapy_swirls.png");
+  .card-image {
+    height: 250px;
+    border-radius: 20px 20px 0 0;
+    background-position: center;
+    background-size: cover;
   }
 
   .end-line {
