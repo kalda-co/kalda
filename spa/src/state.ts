@@ -60,10 +60,10 @@ export type Therapy = {
   id: number;
   link: string;
   startsAt: Date;
-  title?: string;
-  description?: string;
-  therapist?: string;
-  credentials?: string;
+  title: string;
+  description: string;
+  therapist: string;
+  credentials: string;
 };
 
 export interface BubbleContent {
