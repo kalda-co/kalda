@@ -1,7 +1,17 @@
 defmodule KaldaWeb.Errors do
   @filtered_params ["password", "password_confirmation"]
+  @ignored_exceptions [
+    Phoenix.Router.NoRouteError,
+    Plug.Parsers.RequestTooLarge,
+    Plug.Parsers.BadEncodingError,
+    Plug.Parsers.ParseError,
+    Plug.Parsers.UnsupportedMediaTypeError,
+    Kalda.Blog.NotFoundError
+  ]
 
-  def handle_errors(_conn, %{reason: %Phoenix.Router.NoRouteError{}}), do: :ok
+  def handle_errors(_conn, %{reason: %kind{}}) when kind in @ignored_exceptions do
+    :ok
+  end
 
   def handle_errors(conn, %{kind: kind, reason: reason, stack: stacktrace}) do
     occurrence_data = %{

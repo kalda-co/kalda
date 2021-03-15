@@ -87,7 +87,7 @@
     </section>
   {/if}
 
-  <section>
+  <section class="content">
     <h1>Community Forums</h1>
     <div class="button-menu">
       <button
@@ -130,26 +130,13 @@
     font-weight: 600;
   }
 
-  .dailyref,
-  .willpool,
-  .guidelines {
-    background-color: var(--color-purple);
-    color: var(--color-white);
-  }
-
-  .pool {
-    padding-top: 0px;
-  }
-  .align-left {
-    text-align: left;
-  }
-
-  .card-wide {
+  .todays-reflection {
     background-color: var(--color-purple);
     color: var(--color-white);
   }
 
   .todays-reflection .content {
+    background-color: var(--color-purple);
     padding: var(--gap);
   }
 
@@ -219,5 +206,12 @@
 
   section {
     margin-bottom: var(--gap);
+  }
+
+  .dailyref,
+  .willpool,
+  .guidelines {
+    background-color: var(--color-purple);
+    color: var(--color-white);
   }
 </style>
