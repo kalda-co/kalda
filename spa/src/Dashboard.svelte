@@ -31,7 +31,7 @@
   }
 </script>
 
-<article>
+<article class="content">
   <div class="todays-reflection">
     <div class="content">
       <h1>
@@ -49,7 +49,7 @@
   </div>
 
   {#if therapy}
-    <section class="content">
+    <section>
       <h2>Activities</h2>
       <div class="card background-pink">
         <div class="date-container">
