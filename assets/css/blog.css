@@ -99,9 +99,28 @@ p {
   margin: auto;
 }
 
+.unfeatured-blog-all {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
 .featured-blog {
   display: flex;
-  margin-top: var(--gap);
+  margin-top: var(--gap-l);
+  margin-bottom: var(--gap);
+}
+.featured-blog-name {
+  font-size: 24px;
+  line-height: 32px;
+  padding-left: var(--gap);
+  display: flex;
+  align-items: center;
+}
+.unfeatured-blog {
+  display: flex;
+  flex-direction: row;
+  margin-top: var(--gap-l);
   margin-bottom: var(--gap);
 }
 
@@ -115,6 +134,14 @@ p {
   /* min-height: 330px; */
 }
 
+.unfeatured-blog-image {
+  max-height: 184px;
+  max-width: 264px;
+
+  background-size: cover;
+  background-position: center;
+  /* min-height: 330px; */
+}
 .blog-hero {
   height: 25%;
   background-color: var(--color-purple);

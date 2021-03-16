@@ -2,20 +2,27 @@
   <img src="images/kalda-neon-white.svg" alt="Kalda lettering in neon white" />
 </div>
 <div class="blog-all">
+
   <div class="featured-blog">
     <div class="featured-blog-image" style="background-image: url(<%= @featured.image %>)">
     </div>
-    <div class="name">
-      <%= link "#{@featured.title}", to: Routes.blog_path(@conn, :show, @featured) %>
+    <div class="featured-blog-name">
+      <div>
+        <h1><%= link "#{@featured.title}", to: Routes.blog_path(@conn, :show, @featured) %></h1>
+        <h3><%= @featured.subtitle %></h3>
+      </div>
     </div>
   </div>
-  <%= for post <- @posts do %>
-    <div class="featured-blog">
-      <div class="featured-blog-image" style="background-image: url(<%= post.image %>)">
-      </div>
-      <div class="name">
+  <div class="unfeatured-blog-all">
+    <%= for post <- @posts do %>
+    <div class="unfeatured-blog">
+      <img class="unfeatured-blog-image" src="<%=post.image%>"> </img>
+          <%# <div class="unfeatured-blog-image" style="background-image: url(<%= post.image %>
+      <div class="unfeatured-blog-name">
         <%= link "#{post.title}", to: Routes.blog_path(@conn, :show, post) %>
       </div>
     </div>
-  <% end %>
+    <% end %>
+  </div>
+
 </div>
