@@ -10,6 +10,7 @@ defmodule Kalda.Accounts.User do
     field :password, :string, virtual: true
     field :hashed_password, :string
     field :confirmed_at, :naive_datetime
+    field :mobile, :string
 
     has_many :posts, Kalda.Forums.Post, foreign_key: :author_id, references: :id
     has_many :comments, Kalda.Forums.Comment, foreign_key: :author_id, references: :id
@@ -37,7 +38,7 @@ defmodule Kalda.Accounts.User do
   """
   def registration_changeset(user, attrs, opts \\ []) do
     user
-    |> cast(attrs, [:email, :password, :username])
+    |> cast(attrs, [:email, :password, :username, :mobile])
     |> validate_email()
     |> validate_password(opts)
     |> validate_username()

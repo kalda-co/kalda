@@ -12,13 +12,30 @@
     <%= text_input f, :username, required: true, pattern: "^[A-Za-z0-9-_]+$" %>
     <%= error_tag f, :username %>
 
+    <p>Usernames can be up to 35 characters long and can only contain letters, numbers, hyphens and underscores.</p>
+
     <%= label f, :password %>
     <%= password_input f, :password, required: true %>
     <%= error_tag f, :password %>
 
-    <p>Usernames can be up to 35 characters long and can only contain letters, numbers, hyphens and underscores.</p>
+    <br>
+    <br>
+
+    <%= label f, :mobile, required: false %>
+    <%= text_input f, :mobile %>
+    <%= error_tag f, :mobile %>
+
+    <p>Optional. <a href="/privacy-policy/#mobile" target="_blank">Read here</a> why we ask for this.</p>
+
+    <div class="checkbox">
+      <%= checkbox f, :is_18, required: true, id: "box"%>
+      <label class="box-label" for= true %>
+      I am over 18
+      </label>
+    </div>
 
     <%= hidden_input f, :token, value: @token %>
+
     <div>
       <%= submit "Submit", class: "button"%>
     </div>
