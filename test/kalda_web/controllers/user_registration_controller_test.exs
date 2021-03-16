@@ -26,13 +26,15 @@ defmodule KaldaWeb.UserRegistrationControllerTest do
     test "creates account and logs the user in", %{conn: conn} do
       email = AccountsFixtures.unique_user_email()
       username = AccountsFixtures.unique_username()
+      mobile = "07277 123 456"
 
       conn =
         post(conn, Routes.user_registration_path(conn, :create), %{
           "user" => %{
             "email" => email,
             "username" => username,
-            "password" => AccountsFixtures.valid_user_password()
+            "password" => AccountsFixtures.valid_user_password(),
+            "mobile" => mobile
           }
         })
 
@@ -45,6 +47,8 @@ defmodule KaldaWeb.UserRegistrationControllerTest do
       # assert response =~ "user email"
       # assert response =~ "Settings</a>"
       assert response =~ "App</a>"
+      user = Kalda.Accounts.get_user_by_email(email)
+      assert user.mobile == mobile
     end
 
     test "render errors for invalid data", %{conn: conn} do
