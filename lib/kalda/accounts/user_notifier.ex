@@ -100,7 +100,7 @@ defmodule Kalda.Accounts.UserNotifier do
     Step 2: Read these community guidelines
 
     No hateful language
-    We will not tolerate any racist, sexist, homophobic, transphobic or other hate-speech or prejudiced or offensive language or behaviour within this group. If you see any hateful language press ‘flag’, a moderator will remove it. If you say something that someone else deems offensive take that on board.
+    We will not tolerate any racist, sexist, homophobic, transphobic or other hate-speech or prejudiced or offensive language or behaviour within this group. If you see any hateful language press ‘report’, a moderator will remove it. If you say something that someone else deems offensive take that on board.
 
     Confidentiality
     Keep what is shared and discussed within the group confidential, don’t share it outside of the group. Keep the identities of members of the group private.
