@@ -112,7 +112,7 @@
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
-    width: 500px;
+    max-width: 500px;
   }
 
   .button {
