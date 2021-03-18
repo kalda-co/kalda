@@ -18,7 +18,7 @@ export function formattedDatetime(datetime: Date) {
     "Dec",
   ];
   const mon = months[mm];
-  const day = ["Mon", "Tue", "Wed", "Thur", "Fri", "Sat", "Sun"][
+  const day = ["Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat"][
     datetime.getDay()
   ];
   const year = datetime.getFullYear();
