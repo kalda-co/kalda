@@ -1,0 +1,20 @@
+<div class="admin-container">
+<h1>All Referrals <h1>
+
+  <h1>
+    <span><%= link "+ New Referral", to: Routes.admin_referral_path(@conn, :new) %></span>
+  </h1>
+<%= for referral <- @referrals do %>
+<br>
+<p>Referrer email</p>
+<%= referral.referrer.email %>
+<p>Referrer link name</p>
+<%= referral.name %>
+<p>Referrer slots remaining</p>
+<%= referral.referring_slots %>
+<p>Referral link expires at:</p>
+<%= referral.expires_at %>
+<hr>
+<% end %>
+
+</div>

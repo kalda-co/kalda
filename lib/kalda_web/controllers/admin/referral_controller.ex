@@ -5,6 +5,12 @@ defmodule KaldaWeb.Admin.ReferralController do
   alias Kalda.Accounts
   alias Kalda.Policy
 
+  def index(conn, _params) do
+    Policy.authorize!(conn, :view_referrals, Kalda)
+    referrals = Accounts.get_referrals(preload: [:referrer])
+    render(conn, "index.html", referrals: referrals)
+  end
+
   def new(conn, _params) do
     Policy.authorize!(conn, :view_admin_pages, Kalda)
     changeset = Referral.empty_changeset()

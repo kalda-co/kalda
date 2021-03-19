@@ -123,7 +123,8 @@ defmodule KaldaWeb.Router do
     get "/invites", InviteController, :new
     post "/invites", InviteController, :create
 
-    get "/referrals", ReferralController, :new
+    get "/referrals", ReferralController, :index
+    get "/referrals/new", ReferralController, :new
     post "/referrals", ReferralController, :create
 
     get "/therapy-sessions/new", TherapySessionController, :new
