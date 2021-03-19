@@ -1,0 +1,36 @@
+<%= form_for @changeset, @action, fn f -> %>
+  <%= if @changeset.action do %>
+    <div class="alert alert-danger">
+      <p>Oops, something went wrong! Please check the errors below.</p>
+    </div>
+  <% end %>
+
+  <p>Email of user who will recieve the referral link </p>
+
+  <%= label f, :email %>
+  <%= text_input f, :email %>
+  <%= error_tag f, :email %>
+
+  <p>Name of the referral link. It will appear in the form 'kalda.co/name' for example kalda.co/laurie-pennie</p>
+  <p>The name must only contain letters, numbers, hyphens and underscores</p>
+
+  <%= label f, :name %>
+  <%= text_input f, :name %>
+  <%= error_tag f, :name %>
+
+  <p>Expiry. Note this should NEVER be more than 2 months in the future</p>
+
+  <%= label f, :expires_at %>
+  <%= datetime_local_input f, :expires_at %>
+  <%= error_tag f, :expires_at %>
+
+  <p>Referral slots - note that if this user is getting credits for every person they refer, you shouldn't give them more than 6 slots at a time</p>
+
+  <%= label f, :referring_slots %>
+  <%= number_input f, :referring_slots %>
+  <%= error_tag f, :referring_slots %>
+
+  <div>
+    <%= submit "Save" %>
+  </div>
+<% end %>

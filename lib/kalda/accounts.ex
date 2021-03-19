@@ -434,10 +434,10 @@ defmodule Kalda.Accounts do
     |> Repo.insert()
   end
 
-  def create_user_from_referral(referral_name, attrs) do
+  def create_user_from_referral(name, attrs) do
     # TODO check this creates unconfirmed user and sends email confirmation instructions
-    # Transaction that also deprecates referral_slots and checks expirey? Or do that part in controller? (probably do in both)
-    case get_referral_by_name(referral_name) do
+    # Transaction that also deprecates referral_slots and checks expirey? Or do that part in controller? (purobably do in both)
+    case get_referral_by_name(name) do
       %Referral{} = referral ->
         referral_transaction(referral, attrs)
 
@@ -454,7 +454,8 @@ defmodule Kalda.Accounts do
   end
 
   defp referral_transaction(referral, attrs) do
-    case referral.expires_at > NaiveDateTime.local_now() && referral.referring_slots > 0 do
+    case Timex.after?(referral.expires_at, NaiveDateTime.local_now()) &&
+           referral.referring_slots > 0 do
       true ->
         slots = referral.referring_slots
         new_slots = slots - 1
@@ -480,6 +481,7 @@ defmodule Kalda.Accounts do
 
     Repo.one(
       from r in Kalda.Accounts.Referral,
+        where: r.name == ^referral_name,
         where: r.expires_at > ^now,
         where: r.referring_slots > 0,
         select: r

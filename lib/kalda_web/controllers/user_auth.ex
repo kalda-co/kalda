@@ -146,6 +146,7 @@ defmodule KaldaWeb.UserAuth do
       conn
       |> put_flash(:error, "You need to confirm you email address.")
       |> maybe_store_return_to()
+      # TODO redirect to resend confirmation email plz
       |> redirect(to: Routes.user_session_path(conn, :new))
       |> halt()
     end
