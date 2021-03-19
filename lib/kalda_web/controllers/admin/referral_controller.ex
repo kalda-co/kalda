@@ -61,7 +61,7 @@ defmodule KaldaWeb.Admin.ReferralController do
 
         conn
         |> put_status(422)
-        |> put_flash(:warning, "No user exists that matches this email")
+        |> put_flash(:error, "No user exists that matches this email")
         |> render("new.html", changeset: changeset)
     end
   end
