@@ -1,0 +1,7 @@
+<div class="login-container">
+  <h1>Oh dear, your token may have expired.</h1>
+  <p>
+    Please contact <a href="mailto:support@kalda.co">support@kalda.co</a>
+    for help.
+  </p>
+</div>

@@ -1,0 +1,57 @@
+<div class="login-container">
+  <h1>Create an account</h1>
+  <p>Enter your email address, and we'll send a confirmation email to your account.</p>
+
+  <%= form_for @changeset, Routes.referral_path(@conn, :create), [as: :user], fn f -> %>
+    <%= if @changeset.action do %>
+      <div class="alert alert-danger">
+        <p>Oops, something went wrong! Please check the errors below.</p>
+      </div>
+    <% end %>
+
+    <%= label f, :email %>
+    <%= email_input f, :email, required: true %>
+    <%= error_tag f, :email %>
+
+  <p>Create a password. Passwords must contain at least 12 characters.</p>
+
+    <%= label f, :password %>
+    <%= password_input f, :password, required: true %>
+    <%= error_tag f, :password %>
+
+  <p>Everyone in the Kalda community has a unique username which protects our privacy, e.g: <span class="username">Dan_15_capibara</span> or <span class="username">happy-Al-squid</span>.</p>
+
+    <%= label f, :username %>
+    <%= text_input f, :username, required: true, pattern: "^[A-Za-z0-9-_]+$" %>
+    <%= error_tag f, :username %>
+
+ <p>Usernames can be up to 35 characters long and can only contain letters, numbers, hyphens and underscores.</p>
+
+
+    <%= label f, :mobile, required: false %>
+    <%= text_input f, :mobile %>
+    <%= error_tag f, :mobile %>
+
+    <p>Optional. <a href="/privacy-policy/#mobile" target="_blank">Read here</a> why we ask for this.</p>
+
+    <div class="checkbox">
+      <%= checkbox f, :is_18, required: true, id: "box"%>
+      <label class="box-label" for= true %>
+      I am over 18
+      </label>
+    </div>
+
+    <%= hidden_input f, :name, value: @name %>
+
+    <div>
+      <%= submit "Submit", class: "button"%>
+    </div>
+
+  <p>By clicking the button above you accept Kalda’s
+  <%= link "terms and conditions.", to: "/terms" %></p>
+  <% end %>
+
+  <p>Already have an account?
+    <%= link "Log in.", to: Routes.user_session_path(@conn, :new) %>
+  </p>
+</div>

@@ -443,6 +443,8 @@ defmodule Kalda.Accounts do
 
       _ ->
         # referral not found
+        # TODO even when there is no referral this isn't called, why? It fails at
+        # the referral_transaction to give :expired.
         :not_found
     end
 
@@ -474,6 +476,15 @@ defmodule Kalda.Accounts do
 
   # TODO: do we need to add `when is_binary(name)`
   def get_referral_by_name(referral_name) do
-    Repo.get_by(Referral, name: referral_name)
+    now = NaiveDateTime.local_now()
+
+    Repo.one(
+      from r in Kalda.Accounts.Referral,
+        where: r.expires_at > ^now,
+        where: r.referring_slots > 0,
+        select: r
+    )
+
+    # Repo.get_by(Referral, name: referral_name)
   end
 end
