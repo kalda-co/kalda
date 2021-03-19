@@ -12,9 +12,15 @@ defmodule Kalda.Accounts.User do
     field :confirmed_at, :naive_datetime
     field :mobile, :string
 
+    belongs_to :referral, Kalda.Accounts.Referral,
+      foreign_key: :referred_by,
+      references: :id
+
     has_many :posts, Kalda.Forums.Post, foreign_key: :author_id, references: :id
     has_many :comments, Kalda.Forums.Comment, foreign_key: :author_id, references: :id
     has_many :replies, Kalda.Forums.Reply, foreign_key: :author_id, references: :id
+
+    has_many :referrals, Kalda.Accounts.Referral, foreign_key: :referrer_id, references: :id
 
     timestamps()
   end
@@ -38,7 +44,7 @@ defmodule Kalda.Accounts.User do
   """
   def registration_changeset(user, attrs, opts \\ []) do
     user
-    |> cast(attrs, [:email, :password, :username, :mobile])
+    |> cast(attrs, [:email, :password, :username, :mobile, :referred_by])
     |> validate_email()
     |> validate_password(opts)
     |> validate_username()
