@@ -135,4 +135,30 @@ defmodule Kalda.Accounts.UserNotifier do
     |> text_body(body)
     |> Kalda.Mailer.deliver_now()
   end
+
+  def deliver_referral_link(email, name, expires_at, referring_slots) do
+    url = KaldaWeb.Router.Helpers.referral_url(KaldaWeb.Endpoint, :show, name)
+
+    body = """
+    ==============================
+
+    Hello!
+    Thank you for being a Kalda SuperSquid and sharing the Kalda love.
+
+    You can now share Kalda with up to #{referring_slots} of your friends or followers! They can create a Kalda account by clicking on the link below:
+
+    #{url}
+
+    For the safety of the whole community, this link will expire on #{expires_at}.
+
+    If you need more referral links just email support@kalda.co.
+    ==============================
+    """
+
+    base_email()
+    |> subject("Here is your Kalda referral link")
+    |> to(email)
+    |> text_body(body)
+    |> Kalda.Mailer.deliver_now()
+  end
 end

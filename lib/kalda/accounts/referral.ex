@@ -24,8 +24,8 @@ defmodule Kalda.Accounts.Referral do
 
   def changeset(referral, attrs) do
     referral
-    |> cast(attrs, [:token, :referrer, :expires_at, :referring_slots])
-    |> validate_required([:referrer, :token])
+    |> cast(attrs, [:name, :referrer_id, :expires_at, :referring_slots])
+    |> validate_required([:referrer_id, :name])
     |> foreign_key_constraint(:referrer_id)
     |> validate_format(:name, ~r/\A[A-Za-z0-9-_]+\z/,
       message: "can only use letters, numbers, hyphens and underscores"
