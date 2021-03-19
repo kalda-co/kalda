@@ -34,6 +34,10 @@ defmodule Kalda.Accounts.Referral do
     |> unique_constraint(:name)
   end
 
+  def empty_changeset() do
+    %__MODULE__{} |> cast(%{}, [])
+  end
+
   # when called
   # def build_referral(referrer, attrs \\ %{}) do
   #   %{token: token, hashed_token: hashed_token} = build_token()
