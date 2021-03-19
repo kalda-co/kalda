@@ -22,8 +22,9 @@ defmodule Kalda.Accounts do
 
   """
   # TODO add pagination to this request - get 50 at a time perhaps, sort by date
-  def get_users do
-    Repo.all(User)
+  def get_users(opts \\ []) do
+    preload = opts[:preload] || []
+    Repo.all(from user in User, preload: ^preload)
   end
 
   @doc """
@@ -488,5 +489,10 @@ defmodule Kalda.Accounts do
     )
 
     # Repo.get_by(Referral, name: referral_name)
+  end
+
+  def get_referrals(opts \\ []) do
+    preload = opts[:preload] || []
+    Repo.all(from referral in Referral, preload: ^preload)
   end
 end
