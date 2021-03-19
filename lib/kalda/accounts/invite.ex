@@ -9,11 +9,16 @@ defmodule Kalda.Accounts.Invite do
     field :invitee_email, :string
     field :token, :binary
 
+    # belongs_to :referral, Kalda.Accounts.Referral,
+    #   foreign_key: :referral_id,
+    #   references: :id
+
     timestamps(updated_at: false)
   end
 
   def build_invite(email) do
     %{token: token, hashed_token: hashed_token} = build_token()
+
     attrs = %{invitee_email: email, token: hashed_token}
 
     changeset =

@@ -5,7 +5,7 @@ defmodule Kalda.Accounts do
 
   import Ecto.Query, warn: false
   alias Kalda.Repo
-  alias Kalda.Accounts.{User, UserToken, UserNotifier, Invite}
+  alias Kalda.Accounts.{User, UserToken, UserNotifier, Invite, Referral}
 
   ## Database getters
 
@@ -414,5 +414,66 @@ defmodule Kalda.Accounts do
       {:error, changeset} ->
         {:error, changeset}
     end
+  end
+
+  # TODO @Doc
+  # TODO test it can contain referring_slots and expires_at attrs
+  def create_referral(user, attrs \\ %{}) do
+    # %{token: token, changeset: changeset} = Referral.build_referral(referrer, attrs)
+
+    # case Repo.insert(changeset) do
+    #   {:ok, referral} ->
+    #     {:ok, {token, referral}}
+
+    #   {:error, changeset} ->
+    #     {:error, changeset}
+    # end
+
+    %Referral{referrer_id: user.id}
+    |> Referral.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  def create_user_from_referral(referral_name, attrs) do
+    # TODO check this creates unconfirmed user and sends email confirmation instructions
+    # Transaction that also deprecates referral_slots and checks expirey? Or do that part in controller? (probably do in both)
+    case get_referral_by_name(referral_name) do
+      %Referral{} = referral ->
+        referral_transaction(referral, attrs)
+
+      _ ->
+        # referral not found
+        :not_found
+    end
+
+    # %User{}
+    # |> User.registration_changeset(attrs)
+    # |> Repo.insert()
+  end
+
+  defp referral_transaction(referral, attrs) do
+    case referral.expires_at > NaiveDateTime.local_now() && referral.referring_slots > 0 do
+      true ->
+        slots = referral.referring_slots
+        new_slots = slots - 1
+        changeset = referral |> Referral.changeset(%{referring_slots: new_slots})
+
+        Ecto.Multi.new()
+        |> Ecto.Multi.insert(:user, User.registration_changeset(%User{}, attrs))
+        |> Ecto.Multi.update(:referral, changeset)
+        |> Repo.transaction()
+        |> case do
+          {:ok, %{user: user}} -> {:ok, user}
+          {:error, :user, changeset, _} -> {:error, changeset}
+        end
+
+      _ ->
+        :expired
+    end
+  end
+
+  # TODO: do we need to add `when is_binary(name)`
+  def get_referral_by_name(referral_name) do
+    Repo.get_by(Referral, name: referral_name)
   end
 end
