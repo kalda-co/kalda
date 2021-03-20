@@ -84,7 +84,7 @@ defmodule KaldaWeb.Router do
     get "/invites/:token", InviteController, :show
     post "/invites", InviteController, :create
 
-    get "/referral-links/:name", ReferralLinkController, :show
+    # get "/referral-links/:name", ReferralLinkController, :show
     get "/get/:name", ReferralLinkController, :show
     post "/referral-links", ReferralLinkController, :create
   end

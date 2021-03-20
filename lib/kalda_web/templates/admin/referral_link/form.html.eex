@@ -5,14 +5,14 @@
     </div>
   <% end %>
 
-  <p>Email of user who will recieve the referral_link link </p>
+  <p>Email of user who will recieve the referral link </p>
 
   <%= label f, :email %>
   <%= text_input f, :email, required: true %>
   <%= error_tag f, :email %>
 
-  <p>Name of the referral_link link. It will appear in the form 'kalda.co/referral_link/name' for example kalda.co/referral_link/laurie-pennie</p>
-  <p>The name must only contain letters, numbers, hyphens and underscores</p>
+  <p>Name of the link. It will appear in the form "kalda.co/get/name" for example "buffy" would create the link: "kalda.co/get/buffy"</p>
+  <p>The name must only contain lowercase letters, numbers, and hyphens</p>
 
   <%= label f, :name %>
   <%= text_input f, :name, required: true %>
