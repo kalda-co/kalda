@@ -730,8 +730,8 @@ defmodule Kalda.AccountsTest do
 
   describe "create user from referral_link" do
     test "user created is NOT confirmed" do
-      referrer = AccountsFixtures.user()
-      referral_link = AccountsFixtures.referral_link(referrer)
+      owner = AccountsFixtures.user()
+      referral_link = AccountsFixtures.referral_link(owner)
 
       assert {:ok, %User{} = user} =
                Accounts.create_user_from_referral(referral_link.name, @user_attrs)
@@ -745,8 +745,8 @@ defmodule Kalda.AccountsTest do
     end
 
     test "does not create user if email or username already taken" do
-      referrer = AccountsFixtures.user()
-      referral_link = AccountsFixtures.referral_link(referrer)
+      owner = AccountsFixtures.user()
+      referral_link = AccountsFixtures.referral_link(owner)
 
       assert {:ok, %User{} = user} =
                Accounts.create_user_from_referral(referral_link.name, @user_attrs)
@@ -762,8 +762,8 @@ defmodule Kalda.AccountsTest do
     end
 
     test "creating user from referral_link decrements the referring_slots on the referral_link" do
-      referrer = AccountsFixtures.user()
-      referral_link = AccountsFixtures.referral_link(referrer, %{referring_slots: 1})
+      owner = AccountsFixtures.user()
+      referral_link = AccountsFixtures.referral_link(owner, %{referring_slots: 1})
       assert referral_link.referring_slots == 1
 
       assert {:ok, %User{} = user} =
@@ -780,8 +780,8 @@ defmodule Kalda.AccountsTest do
     end
 
     test "you can get the email/user_id of the user who referred the user created from this referral_link" do
-      referrer = AccountsFixtures.user(%{email: "ref@email.com"})
-      referral_link = AccountsFixtures.referral_link(referrer, %{referring_slots: 1})
+      owner = AccountsFixtures.user(%{email: "ref@email.com"})
+      referral_link = AccountsFixtures.referral_link(owner, %{referring_slots: 1})
       assert referral_link.referring_slots == 1
 
       assert {:ok, %User{} = user} =
@@ -798,8 +798,8 @@ defmodule Kalda.AccountsTest do
 
   describe "get_referral_link_by_name" do
     test "only gets referral_links that have not expired" do
-      referrer = AccountsFixtures.user()
-      _referral = AccountsFixtures.referral_link(referrer, %{name: "name"})
+      owner = AccountsFixtures.user()
+      _referral = AccountsFixtures.referral_link(owner, %{name: "name"})
 
       assert referral_link = Accounts.get_referral_link_by_name("name")
       assert referral_link.name == "name"
@@ -813,8 +813,8 @@ defmodule Kalda.AccountsTest do
     end
 
     test "only gets referral_links with referring_slots" do
-      referrer = AccountsFixtures.user()
-      _referral = AccountsFixtures.referral_link(referrer, %{name: "name", referring_slots: 0})
+      owner = AccountsFixtures.user()
+      _referral = AccountsFixtures.referral_link(owner, %{name: "name", referring_slots: 0})
 
       refute Accounts.get_referral_link_by_name("name")
     end
