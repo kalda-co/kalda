@@ -3,5 +3,5 @@
 
   <%= render "form.html", Map.put(assigns, :action, Routes.admin_referral_path(@conn, :create)) %>
 
-  <span><%= link "Back", to: Routes.admin_referral_path(@conn, :new) %></span>
+  <span><%= link "Back", to: Routes.admin_referral_path(@conn, :index) %></span>
 </div>

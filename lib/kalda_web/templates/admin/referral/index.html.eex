@@ -14,6 +14,10 @@
 <%= referral.referring_slots %>
 <p>Referral link expires at:</p>
 <%= referral.expires_at %>
+<% days_away = Float.round((NaiveDateTime.diff(referral.expires_at, NaiveDateTime.local_now()) / (24 * 60 * 60)), 1)%>
+<p> Which is in
+  <%= days_away %>
+  days </p>
 <hr>
 <% end %>
 
