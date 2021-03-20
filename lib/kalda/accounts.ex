@@ -447,15 +447,9 @@ defmodule Kalda.Accounts do
         referral_transaction(referral, attrs)
 
       _ ->
-        # referral not found
-        # TODO even when there is no referral this isn't called, why? It fails at
-        # the referral_transaction to give :expired.
+        # Get referral by name won't get expired or zero-slots so this will be returned
         :not_found
     end
-
-    # %User{}
-    # |> User.registration_changeset(attrs)
-    # |> Repo.insert()
   end
 
   defp referral_transaction(referral, attrs) do
@@ -484,7 +478,6 @@ defmodule Kalda.Accounts do
   end
 
   # TODO: do we need to add `when is_binary(name)`
-  # TODO TEST
   def get_referral_by_name(referral_name) do
     now = NaiveDateTime.local_now()
 
@@ -495,13 +488,40 @@ defmodule Kalda.Accounts do
         where: r.referring_slots > 0,
         select: r
     )
-
-    # Repo.get_by(Referral, name: referral_name)
   end
 
   # TODO test and order by expired/valid. Have a way to edit the referrals so that expired ones can be renamed? so name can be reused?
   def get_referrals(opts \\ []) do
     preload = opts[:preload] || []
-    Repo.all(from referral in Referral, preload: ^preload)
+
+    Repo.all(
+      from referral in Referral,
+        order_by: [desc: referral.expires_at],
+        preload: ^preload
+    )
+  end
+
+  @doc """
+  Gets a single referral.
+
+  Raises `Ecto.NoResultsError` if the Referral does not exist.
+
+  ## Examples
+
+      iex> get_referral!(123, opts || [])
+      %Referral{}
+
+      iex> get_referral!(456), opts || []
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_referral!(id, opts \\ []) do
+    preload = opts[:preload] || []
+
+    from(referral in Referral,
+      where: referral.id == ^id,
+      preload: ^preload
+    )
+    |> Repo.get!(id)
   end
 end
