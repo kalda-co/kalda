@@ -484,6 +484,7 @@ defmodule Kalda.Accounts do
   end
 
   # TODO: do we need to add `when is_binary(name)`
+  # TODO TEST
   def get_referral_by_name(referral_name) do
     now = NaiveDateTime.local_now()
 
@@ -498,6 +499,7 @@ defmodule Kalda.Accounts do
     # Repo.get_by(Referral, name: referral_name)
   end
 
+  # TODO test and order by expired/valid. Have a way to edit the referrals so that expired ones can be renamed? so name can be reused?
   def get_referrals(opts \\ []) do
     preload = opts[:preload] || []
     Repo.all(from referral in Referral, preload: ^preload)
