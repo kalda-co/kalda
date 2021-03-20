@@ -1,3 +1,3 @@
-defmodule KaldaWeb.Admin.ReferralView do
+defmodule KaldaWeb.Admin.ReferralLinkView do
   use KaldaWeb, :view
 end

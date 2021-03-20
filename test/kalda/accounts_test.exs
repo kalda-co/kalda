@@ -643,7 +643,7 @@ defmodule Kalda.AccountsTest do
   end
 
   describe "create_referral" do
-    test "create referral with valid attrs" do
+    test "create referral_link with valid attrs" do
       user = AccountsFixtures.user()
       name = "laurie"
       referring_slots = 20
@@ -651,32 +651,32 @@ defmodule Kalda.AccountsTest do
 
       attrs = %{name: name, expires_at: expires_at, referring_slots: referring_slots}
 
-      assert {:ok, referral} = Accounts.create_referral(user, attrs)
+      assert {:ok, referral_link} = Accounts.create_referral(user, attrs)
 
-      assert referral.expires_at == NaiveDateTime.from_iso8601!(expires_at)
-      assert referral.referring_slots == 20
+      assert referral_link.expires_at == NaiveDateTime.from_iso8601!(expires_at)
+      assert referral_link.referring_slots == 20
     end
 
-    test "create referral with default attrs" do
+    test "create referral_link with default attrs" do
       user = AccountsFixtures.user()
       name = "laurie"
 
       attrs = %{name: name}
 
-      assert {:ok, referral} = Accounts.create_referral(user, attrs)
+      assert {:ok, referral_link} = Accounts.create_referral(user, attrs)
 
       # 15 days from now
       days_15 = NaiveDateTime.add(NaiveDateTime.local_now(), 15 * 24 * 60 * 60)
       days_13 = NaiveDateTime.add(NaiveDateTime.local_now(), 13 * 24 * 60 * 60)
 
       # Default expiry is in 14 days
-      assert Timex.after?(referral.expires_at, days_13)
-      assert Timex.before?(referral.expires_at, days_15)
+      assert Timex.after?(referral_link.expires_at, days_13)
+      assert Timex.before?(referral_link.expires_at, days_15)
       # Default slots are 6
-      assert referral.referring_slots == 6
+      assert referral_link.referring_slots == 6
     end
 
-    test "does not create referral if name is not unique" do
+    test "does not create referral_link if name is not unique" do
       user = AccountsFixtures.user()
       user2 = AccountsFixtures.user()
       name = "laurie"
@@ -688,7 +688,7 @@ defmodule Kalda.AccountsTest do
       assert {:error, %Ecto.Changeset{}} = Accounts.create_referral(user2, attrs)
     end
 
-    test "user can have many referrals" do
+    test "user can have many referral_links" do
       user = AccountsFixtures.user()
       name = "laurie"
       name2 = "kalda"
@@ -700,7 +700,7 @@ defmodule Kalda.AccountsTest do
       assert {:ok, _referral} = Accounts.create_referral(user, attrs2)
     end
 
-    test "does not create referral if name is not given" do
+    test "does not create referral_link if name is not given" do
       user = AccountsFixtures.user()
       name = ""
 
@@ -709,7 +709,7 @@ defmodule Kalda.AccountsTest do
       assert {:error, %Ecto.Changeset{}} = Accounts.create_referral(user, attrs)
     end
 
-    test "does not create referral if name is not valid" do
+    test "does not create referral_link if name is not valid" do
       user = AccountsFixtures.user()
       name = "under_score"
 
@@ -718,7 +718,7 @@ defmodule Kalda.AccountsTest do
       assert {:error, %Ecto.Changeset{}} = Accounts.create_referral(user, attrs)
     end
 
-    test "does not create referral if name has capitals" do
+    test "does not create referral_link if name has capitals" do
       user = AccountsFixtures.user()
       name = "CAPital"
 
@@ -728,95 +728,95 @@ defmodule Kalda.AccountsTest do
     end
   end
 
-  describe "create user from referral" do
+  describe "create user from referral_link" do
     test "user created is NOT confirmed" do
       referrer = AccountsFixtures.user()
-      referral = AccountsFixtures.referral(referrer)
+      referral_link = AccountsFixtures.referral_link(referrer)
 
       assert {:ok, %User{} = user} =
-               Accounts.create_user_from_referral(referral.name, @user_attrs)
+               Accounts.create_user_from_referral(referral_link.name, @user_attrs)
 
       assert user.confirmed_at == nil
-      assert user.referred_by == referral.id
+      assert user.referred_by == referral_link.id
     end
 
-    test "does not create user if name(referral) does not exist" do
+    test "does not create user if name(referral_link) does not exist" do
       assert :not_found = Accounts.create_user_from_referral("name", @user_attrs)
     end
 
     test "does not create user if email or username already taken" do
       referrer = AccountsFixtures.user()
-      referral = AccountsFixtures.referral(referrer)
+      referral_link = AccountsFixtures.referral_link(referrer)
 
       assert {:ok, %User{} = user} =
-               Accounts.create_user_from_referral(referral.name, @user_attrs)
+               Accounts.create_user_from_referral(referral_link.name, @user_attrs)
 
       assert user.confirmed_at == nil
-      assert user.referred_by == referral.id
+      assert user.referred_by == referral_link.id
 
       assert {:error, %Ecto.Changeset{} = changeset} =
-               Accounts.create_user_from_referral(referral.name, @user_attrs)
+               Accounts.create_user_from_referral(referral_link.name, @user_attrs)
 
       assert "has already been taken" in errors_on(changeset).email
       assert "has already been taken" in errors_on(changeset).username
     end
 
-    test "creating user from referral decrements the referring_slots on the referral" do
+    test "creating user from referral_link decrements the referring_slots on the referral_link" do
       referrer = AccountsFixtures.user()
-      referral = AccountsFixtures.referral(referrer, %{referring_slots: 1})
-      assert referral.referring_slots == 1
+      referral_link = AccountsFixtures.referral_link(referrer, %{referring_slots: 1})
+      assert referral_link.referring_slots == 1
 
       assert {:ok, %User{} = user} =
-               Accounts.create_user_from_referral(referral.name, @user_attrs)
+               Accounts.create_user_from_referral(referral_link.name, @user_attrs)
 
       assert user.confirmed_at == nil
-      assert user.referred_by == referral.id
+      assert user.referred_by == referral_link.id
 
-      assert :not_found = Accounts.create_user_from_referral(referral.name, @second_user_attrs)
+      assert :not_found = Accounts.create_user_from_referral(referral_link.name, @second_user_attrs)
 
-      assert updated_referral = Accounts.get_referral!(referral.id)
+      assert updated_referral = Accounts.get_referral!(referral_link.id)
 
       assert updated_referral.referring_slots == 0
     end
 
-    test "you can get the email/user_id of the user who referred the user created from this referral" do
+    test "you can get the email/user_id of the user who referred the user created from this referral_link" do
       referrer = AccountsFixtures.user(%{email: "ref@email.com"})
-      referral = AccountsFixtures.referral(referrer, %{referring_slots: 1})
-      assert referral.referring_slots == 1
+      referral_link = AccountsFixtures.referral_link(referrer, %{referring_slots: 1})
+      assert referral_link.referring_slots == 1
 
       assert {:ok, %User{} = user} =
-               Accounts.create_user_from_referral(referral.name, @user_attrs)
+               Accounts.create_user_from_referral(referral_link.name, @user_attrs)
 
       assert user.confirmed_at == nil
-      assert user.referred_by == referral.id
+      assert user.referred_by == referral_link.id
 
       ref = Accounts.get_referral!(user.referred_by)
-      ref_user = Accounts.get_user!(ref.referrer_id)
+      ref_user = Accounts.get_user!(ref.owner_id)
       assert ref_user.email == "ref@email.com"
     end
   end
 
-  describe "get_referral_by_name" do
-    test "only gets referrals that have not expired" do
+  describe "get_referral_link_by_name" do
+    test "only gets referral_links that have not expired" do
       referrer = AccountsFixtures.user()
-      _referral = AccountsFixtures.referral(referrer, %{name: "name"})
+      _referral = AccountsFixtures.referral_link(referrer, %{name: "name"})
 
-      assert referral = Accounts.get_referral_by_name("name")
-      assert referral.name == "name"
+      assert referral_link = Accounts.get_referral_link_by_name("name")
+      assert referral_link.name == "name"
 
       assert {1, nil} =
-               Kalda.Repo.update_all(Kalda.Accounts.Referral,
+               Kalda.Repo.update_all(Kalda.Accounts.ReferralLink,
                  set: [expires_at: ~N[2020-01-01 00:00:00]]
                )
 
-      refute Accounts.get_referral_by_name("name")
+      refute Accounts.get_referral_link_by_name("name")
     end
 
-    test "only gets referrals with referring_slots" do
+    test "only gets referral_links with referring_slots" do
       referrer = AccountsFixtures.user()
-      _referral = AccountsFixtures.referral(referrer, %{name: "name", referring_slots: 0})
+      _referral = AccountsFixtures.referral_link(referrer, %{name: "name", referring_slots: 0})
 
-      refute Accounts.get_referral_by_name("name")
+      refute Accounts.get_referral_link_by_name("name")
     end
   end
 

@@ -1,6 +1,6 @@
 %{
 title: "Do I have to be LGBTQIA+ to use Kalda?",
-subtitle: "Who Kalda is for and why we are referral first",
+subtitle: "Who Kalda is for and why we are referral_link first",
 author: "Al Dee",
 tags: ["LGBTQIA", "Kalda", "inclusion"],
 description: "This article answers the questions: Why do you have to be LGBTQIA+?; Is Kalda for everyone?; Why isn't Kalda for everyone?; Why do you need to be invited or referred to Kalda?; What if I don't have friends who are LGBTQIA+?; What if I am not out?; What if I need Kalda but have no one to invite me?",
@@ -10,7 +10,7 @@ image: "/images/jon-tyson-hhq1Lxtuwd8-unsplash.jpg"
 
 ---
 
-We get a lot of questions about our referral system, and who can use Kalda, and so we wanted to try to answer them.
+We get a lot of questions about our referral_link system, and who can use Kalda, and so we wanted to try to answer them.
 
 > I don't identify as LGBTQIA+, can I use Kalda?
 

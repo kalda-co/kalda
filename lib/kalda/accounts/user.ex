@@ -12,7 +12,7 @@ defmodule Kalda.Accounts.User do
     field :confirmed_at, :naive_datetime
     field :mobile, :string
 
-    belongs_to :referral, Kalda.Accounts.Referral,
+    belongs_to :referral_link, Kalda.Accounts.ReferralLink,
       foreign_key: :referred_by,
       references: :id
 
@@ -20,7 +20,7 @@ defmodule Kalda.Accounts.User do
     has_many :comments, Kalda.Forums.Comment, foreign_key: :author_id, references: :id
     has_many :replies, Kalda.Forums.Reply, foreign_key: :author_id, references: :id
 
-    has_many :referrals, Kalda.Accounts.Referral, foreign_key: :referrer_id, references: :id
+    has_many :referral_links, Kalda.Accounts.ReferralLink, foreign_key: :owner_id, references: :id
 
     timestamps()
   end

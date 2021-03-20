@@ -5,7 +5,7 @@ defmodule Kalda.Accounts do
 
   import Ecto.Query, warn: false
   alias Kalda.Repo
-  alias Kalda.Accounts.{User, UserToken, UserNotifier, Invite, Referral}
+  alias Kalda.Accounts.{User, UserToken, UserNotifier, Invite, ReferralLink}
 
   ## Database getters
 
@@ -418,54 +418,54 @@ defmodule Kalda.Accounts do
   end
 
   ##############
-  # Referrals
+  # ReferralLinks
   ##############
 
   @doc """
-  Creates a referral for a user
+  Creates a referral_link for a user
 
   ## Examples
 
       iex> create_referral(user, %{field: value})
-      {:ok, %Referral{}}
+      {:ok, %ReferralLink{}}
 
       iex> create_referral(user, %{field: bad_value})
       {:error, %Ecto.Changeset{}}
 
   """
   def create_referral(user, attrs \\ %{}) do
-    %Referral{referrer_id: user.id}
-    |> Referral.changeset(attrs)
+    %ReferralLink{owner_id: user.id}
+    |> ReferralLink.changeset(attrs)
     |> Repo.insert()
   end
 
   def create_user_from_referral(name, attrs) do
     # TODO check this creates unconfirmed user and sends email confirmation instructions
-    # Transaction that also deprecates referral_slots and checks expirey? Or do that part in controller? (purobably do in both)
-    case get_referral_by_name(name) do
-      %Referral{} = referral ->
-        referral_transaction(referral, attrs)
+    # Transaction that also deprecates referral_link_slots and checks expirey? Or do that part in controller? (purobably do in both)
+    case get_referral_link_by_name(name) do
+      %ReferralLink{} = referral_link ->
+        referral_link_transaction(referral_link, attrs)
 
       _ ->
-        # Get referral by name won't get expired or zero-slots so this will be returned
+        # Get referral_link by name won't get expired or zero-slots so this will be returned
         :not_found
     end
   end
 
-  defp referral_transaction(referral, attrs) do
-    case Timex.after?(referral.expires_at, NaiveDateTime.local_now()) &&
-           referral.referring_slots > 0 do
+  defp referral_link_transaction(referral_link, attrs) do
+    case Timex.after?(referral_link.expires_at, NaiveDateTime.local_now()) &&
+           referral_link.referring_slots > 0 do
       true ->
-        slots = referral.referring_slots
+        slots = referral_link.referring_slots
         new_slots = slots - 1
-        changeset = referral |> Referral.changeset(%{referring_slots: new_slots})
+        changeset = referral_link |> ReferralLink.changeset(%{referring_slots: new_slots})
 
         Ecto.Multi.new()
         |> Ecto.Multi.insert(
           :user,
-          User.registration_changeset(%User{referred_by: referral.id}, attrs)
+          User.registration_changeset(%User{referred_by: referral_link.id}, attrs)
         )
-        |> Ecto.Multi.update(:referral, changeset)
+        |> Ecto.Multi.update(:referral_link, changeset)
         |> Repo.transaction()
         |> case do
           {:ok, %{user: user}} -> {:ok, user}
@@ -478,38 +478,38 @@ defmodule Kalda.Accounts do
   end
 
   # TODO: do we need to add `when is_binary(name)`
-  def get_referral_by_name(referral_name) do
+  def get_referral_link_by_name(referral_link_name) do
     now = NaiveDateTime.local_now()
 
     Repo.one(
-      from r in Kalda.Accounts.Referral,
-        where: r.name == ^referral_name,
+      from r in Kalda.Accounts.ReferralLink,
+        where: r.name == ^referral_link_name,
         where: r.expires_at > ^now,
         where: r.referring_slots > 0,
         select: r
     )
   end
 
-  # TODO test and order by expired/valid. Have a way to edit the referrals so that expired ones can be renamed? so name can be reused?
+  # TODO test and order by expired/valid. Have a way to edit the referral_links so that expired ones can be renamed? so name can be reused?
   def get_referrals(opts \\ []) do
     preload = opts[:preload] || []
 
     Repo.all(
-      from referral in Referral,
-        order_by: [desc: referral.expires_at],
+      from referral_link in ReferralLink,
+        order_by: [desc: referral_link.expires_at],
         preload: ^preload
     )
   end
 
   @doc """
-  Gets a single referral.
+  Gets a single referral_link.
 
-  Raises `Ecto.NoResultsError` if the Referral does not exist.
+  Raises `Ecto.NoResultsError` if the ReferralLink does not exist.
 
   ## Examples
 
       iex> get_referral!(123, opts || [])
-      %Referral{}
+      %ReferralLink{}
 
       iex> get_referral!(456), opts || []
       ** (Ecto.NoResultsError)
@@ -518,8 +518,8 @@ defmodule Kalda.Accounts do
   def get_referral!(id, opts \\ []) do
     preload = opts[:preload] || []
 
-    from(referral in Referral,
-      where: referral.id == ^id,
+    from(referral_link in ReferralLink,
+      where: referral_link.id == ^id,
       preload: ^preload
     )
     |> Repo.get!(id)

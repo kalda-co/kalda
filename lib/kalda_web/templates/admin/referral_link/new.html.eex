@@ -1,0 +1,7 @@
+<div class="admin-container">
+  <h1>New ReferralLink</h1>
+
+  <%= render "form.html", Map.put(assigns, :action, Routes.admin_referral_link_path(@conn, :create)) %>
+
+  <span><%= link "Back", to: Routes.admin_referral_link_path(@conn, :index) %></span>
+</div>

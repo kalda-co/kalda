@@ -1,11 +1,11 @@
-defmodule Kalda.Accounts.Referral do
+defmodule Kalda.Accounts.ReferralLink do
   use Ecto.Schema
   import Ecto.Changeset
 
   # @rand_size 32
   # @hash_algorithm :sha256
 
-  schema "referrals" do
+  schema "referral_links" do
     # field :token, :binary
     field :name, :string
 
@@ -16,17 +16,17 @@ defmodule Kalda.Accounts.Referral do
     field :referring_slots, :integer, null: false, default: 6
 
     belongs_to :referrer, Kalda.Accounts.User,
-      foreign_key: :referrer_id,
+      foreign_key: :owner_id,
       references: :id
 
     timestamps()
   end
 
-  def changeset(referral, attrs) do
-    referral
-    |> cast(attrs, [:name, :referrer_id, :expires_at, :referring_slots])
-    |> validate_required([:referrer_id, :name])
-    |> foreign_key_constraint(:referrer_id)
+  def changeset(referral_link, attrs) do
+    referral_link
+    |> cast(attrs, [:name, :owner_id, :expires_at, :referring_slots])
+    |> validate_required([:owner_id, :name])
+    |> foreign_key_constraint(:owner_id)
     |> validate_format(:name, ~r/\A[a-z0-9-]+\z/,
       message: "can only use lowercase letters, numbers and hyphens"
     )
@@ -45,7 +45,7 @@ defmodule Kalda.Accounts.Referral do
   #   attrs =
   #     attrs
   #     |> Enum.into(%{
-  #       referrer_id: referrer.id,
+  #       owner_id: referrer.id,
   #       token: hashed_token
   #     })
 

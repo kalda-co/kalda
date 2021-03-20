@@ -1,17 +1,17 @@
-defmodule KaldaWeb.ReferralController do
+defmodule KaldaWeb.ReferralLinkController do
   use KaldaWeb, :controller
   alias Kalda.Accounts
   alias Kalda.Accounts.User
-  alias Kalda.Accounts.Referral
+  alias Kalda.Accounts.ReferralLink
 
   def show(conn, %{"name" => name}) do
-    case Accounts.get_referral_by_name(name) do
+    case Accounts.get_referral_link_by_name(name) do
       nil ->
         render(conn, "expired.html")
 
-      referral ->
-        changeset = Referral.empty_changeset()
-        render(conn, "show.html", referral: referral, changeset: changeset, name: name)
+      referral_link ->
+        changeset = ReferralLink.empty_changeset()
+        render(conn, "show.html", referral_link: referral_link, changeset: changeset, name: name)
     end
   end
 
@@ -34,8 +34,8 @@ defmodule KaldaWeb.ReferralController do
         |> redirect(to: Routes.user_confirmation_path(conn, :new))
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        referral = Accounts.get_referral_by_name(name)
-        render(conn, "show.html", changeset: changeset, referral: referral, name: name)
+        referral_link = Accounts.get_referral_link_by_name(name)
+        render(conn, "show.html", changeset: changeset, referral_link: referral_link, name: name)
 
       :expired ->
         conn
