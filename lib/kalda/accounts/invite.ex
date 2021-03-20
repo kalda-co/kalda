@@ -9,8 +9,8 @@ defmodule Kalda.Accounts.Invite do
     field :invitee_email, :string
     field :token, :binary
 
-    # belongs_to :referral, Kalda.Accounts.Referral,
-    #   foreign_key: :referral_id,
+    # belongs_to :referral_link, Kalda.Accounts.ReferralLink,
+    #   foreign_key: :referral_link_id,
     #   references: :id
 
     timestamps(updated_at: false)

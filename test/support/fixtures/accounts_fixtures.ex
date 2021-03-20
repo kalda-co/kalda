@@ -84,14 +84,14 @@ defmodule Kalda.AccountsFixtures do
     {token, inv}
   end
 
-  def referral(referrer = %Kalda.Accounts.User{}, attrs \\ %{}) do
+  def referral_link(referrer = %Kalda.Accounts.User{}, attrs \\ %{}) do
     defaults = %{
       name: unique_name()
     }
 
     attrs = Map.merge(defaults, attrs)
-    {:ok, referral} = Kalda.Accounts.create_referral(referrer, attrs)
-    referral
+    {:ok, referral_link} = Kalda.Accounts.create_referral(referrer, attrs)
+    referral_link
   end
 
   def expired_referral(
@@ -103,8 +103,8 @@ defmodule Kalda.AccountsFixtures do
     }
 
     attrs = Map.merge(defaults, attrs)
-    {:ok, referral} = Kalda.Accounts.create_referral(referrer, attrs)
-    # Kalda.Repo.update_all(Kalda.Accounts.Referral, set: [expires_at: ~N[2020-01-01 00:00:00]])
-    referral
+    {:ok, referral_link} = Kalda.Accounts.create_referral(referrer, attrs)
+    # Kalda.Repo.update_all(Kalda.Accounts.ReferralLink, set: [expires_at: ~N[2020-01-01 00:00:00]])
+    referral_link
   end
 end

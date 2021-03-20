@@ -1,14 +1,14 @@
 <div class="admin-container">
-<h1>All Referrals <h1>
+<h1>All ReferralLinks <h1>
 
   <h1>
-    <span><%= link "+ New Referral", to: Routes.admin_referral_path(@conn, :new) %></span>
+    <span><%= link "+ New ReferralLink", to: Routes.admin_referral_link_path(@conn, :new) %></span>
   </h1>
-<%= for referral <- @referrals do %>
+<%= for referral_link <- @referral_links do %>
 <br>
 <p>Referrer email: &nbsp
 <span style="color: var(--color-purple)">
-<%= referral.referrer.email %>
+<%= referral_link.referrer.email %>
 </span>
 </p>
 <span style="color: var(--color-purple)">
@@ -16,22 +16,22 @@
 </p>
 <p>Referrer link name: &nbsp
 <span style="color: var(--color-purple)">
-<%= referral.name %>
+<%= referral_link.name %>
 </span>
 </p>
 <p>Referrer slots remaining: &nbsp
 <span style="color: var(--color-purple)">
-<%= referral.referring_slots %>
+<%= referral_link.referring_slots %>
 </span>
 </p>
-<p>Referral link expires at: &nbsp
+<p>ReferralLink link expires at: &nbsp
 <span style="color: var(--color-purple)">
-<%= referral.expires_at %>
+<%= referral_link.expires_at %>
 </span>
 </p>
 <p> Which is in: &nbsp
 <span style="color: var(--color-purple)">
-<% days_away = Float.round((NaiveDateTime.diff(referral.expires_at, NaiveDateTime.local_now()) / (24 * 60 * 60)), 1)%>
+<% days_away = Float.round((NaiveDateTime.diff(referral_link.expires_at, NaiveDateTime.local_now()) / (24 * 60 * 60)), 1)%>
   <%= days_away %>
   days
 </span>

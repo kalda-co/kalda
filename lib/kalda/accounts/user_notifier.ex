@@ -137,7 +137,7 @@ defmodule Kalda.Accounts.UserNotifier do
   end
 
   def deliver_referral_link(email, name, expires_at, referring_slots) do
-    url = KaldaWeb.Router.Helpers.referral_url(KaldaWeb.Endpoint, :show, name)
+    url = KaldaWeb.Router.Helpers.referral_link_url(KaldaWeb.Endpoint, :show, name)
 
     body = """
     ==============================
@@ -149,14 +149,14 @@ defmodule Kalda.Accounts.UserNotifier do
 
     #{url}
 
-    For the safety of the whole community, this link will expire on #{expires_at}.
+    For the security reasons, this link will expire on #{expires_at}.
 
-    If you need more referral links just email support@kalda.co.
+    If you need more referral_link links just email support@kalda.co.
     ==============================
     """
 
     base_email()
-    |> subject("Here is your Kalda referral link")
+    |> subject("Here is your Kalda referral_link link")
     |> to(email)
     |> text_body(body)
     |> Kalda.Mailer.deliver_now()

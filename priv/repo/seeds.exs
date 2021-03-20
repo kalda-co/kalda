@@ -12,7 +12,7 @@
 
 alias Kalda.Accounts.User
 alias Kalda.Accounts.Invite
-alias Kalda.Accounts.Referral
+alias Kalda.Accounts.ReferralLink
 alias Kalda.Forums.Post
 alias Kalda.Forums.Comment
 alias Kalda.Forums.Reply
@@ -183,19 +183,19 @@ _therapy_session_future =
 
 _invite = Kalda.Repo.insert!(invite_changeset)
 
-# %{token: referral_token, changeset: referral_changeset} = Referral.build_referral(user)
+# %{token: referral_link_token, changeset: referral_link_changeset} = ReferralLink.build_referral(user)
 
-# referral = Kalda.Repo.insert!(referral_changeset)
+# referral_link = Kalda.Repo.insert!(referral_link_changeset)
 
 # %{token: _token, changeset: invite_changeset2} =
-#   Invite.build_invite("invite2@example.com", referral)
+#   Invite.build_invite("invite2@example.com", referral_link)
 
 # _invite2 = Kalda.Repo.insert!(invite_changeset2)
 
-referral =
-  Kalda.Repo.insert!(%Referral{
+referral_link =
+  Kalda.Repo.insert!(%ReferralLink{
     name: "laurie-penny",
-    referrer_id: user.id
+    owner_id: user.id
   })
 
 _user4 =
@@ -204,7 +204,7 @@ _user4 =
     email: "wuthering@example.com",
     password: "thisisatestpassword",
     hashed_password: Bcrypt.hash_pwd_salt("thisisatestpassword"),
-    referred_by: referral.id
+    referred_by: referral_link.id
   })
 
 _signup1 =
@@ -221,8 +221,8 @@ IO.puts("""
 You can test the invite route with:
 localhost:4000/invites/#{token}
 
-You can test the referral route with:
-localhost:4000/referrals/#{referral.name}
+You can test the referral_link route with:
+localhost:4000/referral_links/#{referral_link.name}
 
 You can now log in as admin with these credentials:
 email:    demo@kalda.co
