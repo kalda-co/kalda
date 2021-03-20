@@ -15,7 +15,7 @@ defmodule Kalda.Accounts.ReferralLink do
 
     field :referring_slots, :integer, null: false, default: 6
 
-    belongs_to :referrer, Kalda.Accounts.User,
+    belongs_to :owner, Kalda.Accounts.User,
       foreign_key: :owner_id,
       references: :id
 
@@ -39,20 +39,20 @@ defmodule Kalda.Accounts.ReferralLink do
   end
 
   # when called
-  # def build_referral(referrer, attrs \\ %{}) do
+  # def build_referral(owner, attrs \\ %{}) do
   #   %{token: token, hashed_token: hashed_token} = build_token()
 
   #   attrs =
   #     attrs
   #     |> Enum.into(%{
-  #       owner_id: referrer.id,
+  #       owner_id: owner.id,
   #       token: hashed_token
   #     })
 
   #   changeset =
   #     %__MODULE__{}
-  #     |> cast(attrs, [:token, :referrer, :expires_at, :referring_slots])
-  #     |> validate_required([:referrer, :token])
+  #     |> cast(attrs, [:token, :owner, :expires_at, :referring_slots])
+  #     |> validate_required([:owner, :token])
 
   #   %{token: token, changeset: changeset}
   # end

@@ -69,7 +69,7 @@ defmodule KaldaWeb.Admin.ReferralLinkControllerTest do
       assert html_response(conn, 422) =~ "Please check the errors below"
     end
 
-    test "renders error flash when referrer user doesn't exist", %{conn: conn} do
+    test "renders error flash when owner user doesn't exist", %{conn: conn} do
       conn =
         post(conn, Routes.admin_referral_link_path(conn, :create), referral_link: @create_referral_link_attrs)
 

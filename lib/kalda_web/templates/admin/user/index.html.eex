@@ -12,7 +12,7 @@
 </p>
 <%= if user.referred_by do %>
   <p>Referrerd by: &nbsp
-<span style="color: var(--color-purple)"><%= user.referral_link.referrer.email %></span>
+<span style="color: var(--color-purple)"><%= user.referral_link.owner.email %></span>
 <% end %>
 </p>
 <hr/>

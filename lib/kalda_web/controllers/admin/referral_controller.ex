@@ -7,7 +7,7 @@ defmodule KaldaWeb.Admin.ReferralLinkController do
 
   def index(conn, _params) do
     Policy.authorize!(conn, :view_referrals, Kalda)
-    referral_links = Accounts.get_referrals(preload: [:referrer])
+    referral_links = Accounts.get_referrals(preload: [:owner])
     render(conn, "index.html", referral_links: referral_links)
   end
 
