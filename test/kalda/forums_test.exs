@@ -25,6 +25,7 @@ defmodule Kalda.ForumsTest do
       param = "daily-reflection"
       assert Forums.parse_forum!(param) == :daily_reflection
       assert Forums.parse_forum!("will-pool") == :will_pool
+      assert Forums.parse_forum!("will_pool") == :will_pool
       assert Forums.parse_forum!("community") == :community
       assert Forums.parse_forum!("Community") == :community
       assert Forums.parse_forum!("co-working") == :co_working
