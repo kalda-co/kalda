@@ -7,6 +7,7 @@ defmodule Kalda.AccountsFixtures do
   def unique_user_email, do: "user#{System.unique_integer()}@example.com"
   def valid_user_password, do: "hello world!"
   def unique_username, do: "u_n#{System.unique_integer()}"
+  def unique_name, do: "name#{System.unique_integer()}"
 
   def user(attrs \\ %{}) do
     attrs =
@@ -81,5 +82,29 @@ defmodule Kalda.AccountsFixtures do
       Kalda.Repo.update_all(Kalda.Accounts.Invite, set: [inserted_at: ~N[2020-01-01 00:00:00]])
 
     {token, inv}
+  end
+
+  def referral(referrer = %Kalda.Accounts.User{}, attrs \\ %{}) do
+    defaults = %{
+      name: unique_name()
+    }
+
+    attrs = Map.merge(defaults, attrs)
+    {:ok, referral} = Kalda.Accounts.create_referral(referrer, attrs)
+    referral
+  end
+
+  def expired_referral(
+        referrer = %Kalda.Accounts.User{},
+        attrs \\ %{expires_at: ~N[2020-01-01 00:00:00]}
+      ) do
+    defaults = %{
+      name: unique_name()
+    }
+
+    attrs = Map.merge(defaults, attrs)
+    {:ok, referral} = Kalda.Accounts.create_referral(referrer, attrs)
+    # Kalda.Repo.update_all(Kalda.Accounts.Referral, set: [expires_at: ~N[2020-01-01 00:00:00]])
+    referral
   end
 end

@@ -30,7 +30,8 @@ defmodule KaldaWeb.ReferralController do
           :info,
           "User created successfully. Please check your email for confirmation instructions"
         )
-        |> KaldaWeb.UserAuth.log_in_user(user)
+        # |> KaldaWeb.UserAuth.log_in_user(user)
+        |> redirect(to: Routes.user_confirmation_path(conn, :new))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         referral = Accounts.get_referral_by_name(name)

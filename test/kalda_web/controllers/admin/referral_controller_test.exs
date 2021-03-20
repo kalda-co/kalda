@@ -74,7 +74,6 @@ defmodule KaldaWeb.Admin.ReferralControllerTest do
         post(conn, Routes.admin_referral_path(conn, :create), referral: @create_referral_attrs)
 
       assert get_flash(conn, :error) =~ "No user exists that matches this email"
-      # assert(html_response(conn, 422) =~ "Please check the errors below")
     end
 
     test "redirects to show when data uses defaults and user is admin", %{conn: conn} do
