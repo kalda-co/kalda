@@ -417,19 +417,23 @@ defmodule Kalda.Accounts do
     end
   end
 
-  # TODO @Doc
-  # TODO test it can contain referring_slots and expires_at attrs
+  ##############
+  # Referrals
+  ##############
+
+  @doc """
+  Creates a referral for a user
+
+  ## Examples
+
+      iex> create_referral(user, %{field: value})
+      {:ok, %Referral{}}
+
+      iex> create_referral(user, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
   def create_referral(user, attrs \\ %{}) do
-    # %{token: token, changeset: changeset} = Referral.build_referral(referrer, attrs)
-
-    # case Repo.insert(changeset) do
-    #   {:ok, referral} ->
-    #     {:ok, {token, referral}}
-
-    #   {:error, changeset} ->
-    #     {:error, changeset}
-    # end
-
     %Referral{referrer_id: user.id}
     |> Referral.changeset(attrs)
     |> Repo.insert()

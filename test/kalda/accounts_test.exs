@@ -5,6 +5,13 @@ defmodule Kalda.AccountsTest do
   alias Kalda.AccountsFixtures
   alias Kalda.Accounts.{User, UserToken, Invite}
 
+  @user_attrs %{
+    username: "KaldaSquid",
+    email: "demo@kalda.co",
+    password: "thisisademopassword",
+    mobile: "07444666666"
+  }
+
   describe "get_user_by_email/1" do
     test "does not return the user if the email does not exist" do
       refute Accounts.get_user_by_email("unknown@example.com")
@@ -625,6 +632,108 @@ defmodule Kalda.AccountsTest do
     test "does not create invite if email is invalid" do
       email = "invalidemail"
       assert {:error, _changeset} = Accounts.create_invite(email)
+    end
+  end
+
+  describe "create_referral" do
+    test "create referral with valid attrs" do
+      user = AccountsFixtures.user()
+      name = "laurie"
+      referring_slots = 20
+      expires_at = "2030-01-23T23:50:07"
+
+      attrs = %{name: name, expires_at: expires_at, referring_slots: referring_slots}
+
+      assert {:ok, referral} = Accounts.create_referral(user, attrs)
+
+      assert referral.expires_at == NaiveDateTime.from_iso8601!(expires_at)
+      assert referral.referring_slots == 20
+    end
+
+    test "create referral with default attrs" do
+      user = AccountsFixtures.user()
+      name = "laurie"
+
+      attrs = %{name: name}
+
+      assert {:ok, referral} = Accounts.create_referral(user, attrs)
+
+      # 15 days from now
+      days_15 = NaiveDateTime.add(NaiveDateTime.local_now(), 15 * 24 * 60 * 60)
+      days_13 = NaiveDateTime.add(NaiveDateTime.local_now(), 13 * 24 * 60 * 60)
+
+      # Default expiry is in 14 days
+      assert Timex.after?(referral.expires_at, days_13)
+      assert Timex.before?(referral.expires_at, days_15)
+      # Default slots are 6
+      assert referral.referring_slots == 6
+    end
+
+    test "does not create referral if name is not unique" do
+      user = AccountsFixtures.user()
+      user2 = AccountsFixtures.user()
+      name = "laurie"
+
+      attrs = %{name: name}
+
+      assert {:ok, _referral} = Accounts.create_referral(user, attrs)
+
+      assert {:error, %Ecto.Changeset{}} = Accounts.create_referral(user2, attrs)
+    end
+
+    test "user can have many referrals" do
+      user = AccountsFixtures.user()
+      name = "laurie"
+      name2 = "kalda"
+
+      attrs = %{name: name}
+      attrs2 = %{name: name2}
+
+      assert {:ok, _referral} = Accounts.create_referral(user, attrs)
+      assert {:ok, _referral} = Accounts.create_referral(user, attrs2)
+    end
+
+    test "does not create referral if name is not valid" do
+      user = AccountsFixtures.user()
+      name = ""
+
+      attrs = %{name: name}
+
+      assert {:error, %Ecto.Changeset{}} = Accounts.create_referral(user, attrs)
+    end
+  end
+
+  describe "create user from referral" do
+    test "user created is NOT confirmed" do
+      referrer = AccountsFixtures.user()
+      referral = AccountsFixtures.referral(referrer)
+
+      assert {:ok, %User{} = user} =
+               Accounts.create_user_from_referral(referral.name, @user_attrs)
+
+      assert user.confirmed_at == nil
+      assert user.referred_by == referral.id
+    end
+
+    test "does not create user if name(referral) does not exist" do
+      assert :not_found = Accounts.create_user_from_referral("name", @user_attrs)
+    end
+
+    test "does not create user if email or username already taken" do
+      referrer = AccountsFixtures.user()
+      referral = AccountsFixtures.referral(referrer)
+
+      assert {:ok, %User{} = user} =
+               Accounts.create_user_from_referral(referral.name, @user_attrs)
+
+      assert user.confirmed_at == nil
+      assert user.referred_by == referral.id
+
+      assert {:error, %Ecto.Changeset{} = changeset} =
+               Accounts.create_user_from_referral(referral.name, @user_attrs)
+
+      assert "has already been taken" in errors_on(changeset).email
+      assert "has already been taken" in errors_on(changeset).username
     end
   end
 end
