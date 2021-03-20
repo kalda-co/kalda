@@ -12,6 +12,13 @@ defmodule Kalda.AccountsTest do
     mobile: "07444666666"
   }
 
+  @second_user_attrs %{
+    username: "KaldaSquid2",
+    email: "demo2@kalda.co",
+    password: "thisisademopassword",
+    mobile: "07444666666"
+  }
+
   describe "get_user_by_email/1" do
     test "does not return the user if the email does not exist" do
       refute Accounts.get_user_by_email("unknown@example.com")
@@ -735,5 +742,65 @@ defmodule Kalda.AccountsTest do
       assert "has already been taken" in errors_on(changeset).email
       assert "has already been taken" in errors_on(changeset).username
     end
+
+    test "creating user from referral decrements the referring_slots on the referral" do
+      referrer = AccountsFixtures.user()
+      referral = AccountsFixtures.referral(referrer, %{referring_slots: 1})
+      assert referral.referring_slots == 1
+
+      assert {:ok, %User{} = user} =
+               Accounts.create_user_from_referral(referral.name, @user_attrs)
+
+      assert user.confirmed_at == nil
+      assert user.referred_by == referral.id
+
+      assert :not_found = Accounts.create_user_from_referral(referral.name, @second_user_attrs)
+
+      assert updated_referral = Accounts.get_referral!(referral.id)
+
+      assert updated_referral.referring_slots == 0
+    end
+
+    test "you can get the email/user_id of the user who referred the user created from this referral" do
+      referrer = AccountsFixtures.user(%{email: "ref@email.com"})
+      referral = AccountsFixtures.referral(referrer, %{referring_slots: 1})
+      assert referral.referring_slots == 1
+
+      assert {:ok, %User{} = user} =
+               Accounts.create_user_from_referral(referral.name, @user_attrs)
+
+      assert user.confirmed_at == nil
+      assert user.referred_by == referral.id
+
+      ref = Accounts.get_referral!(user.referred_by)
+      ref_user = Accounts.get_user!(ref.referrer_id)
+      assert ref_user.email == "ref@email.com"
+    end
   end
+
+  describe "get_referral_by_name" do
+    test "only gets referrals that have not expired" do
+      referrer = AccountsFixtures.user()
+      _referral = AccountsFixtures.referral(referrer, %{name: "name"})
+
+      assert referral = Accounts.get_referral_by_name("name")
+      assert referral.name == "name"
+
+      assert {1, nil} =
+               Kalda.Repo.update_all(Kalda.Accounts.Referral,
+                 set: [expires_at: ~N[2020-01-01 00:00:00]]
+               )
+
+      refute Accounts.get_referral_by_name("name")
+    end
+
+    test "only gets referrals with referring_slots" do
+      referrer = AccountsFixtures.user()
+      _referral = AccountsFixtures.referral(referrer, %{name: "name", referring_slots: 0})
+
+      refute Accounts.get_referral_by_name("name")
+    end
+  end
+
+  # TODO add guidelines to signup flow
 end
