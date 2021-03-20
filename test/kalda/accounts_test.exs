@@ -700,9 +700,27 @@ defmodule Kalda.AccountsTest do
       assert {:ok, _referral} = Accounts.create_referral(user, attrs2)
     end
 
-    test "does not create referral if name is not valid" do
+    test "does not create referral if name is not given" do
       user = AccountsFixtures.user()
       name = ""
+
+      attrs = %{name: name}
+
+      assert {:error, %Ecto.Changeset{}} = Accounts.create_referral(user, attrs)
+    end
+
+    test "does not create referral if name is not valid" do
+      user = AccountsFixtures.user()
+      name = "under_score"
+
+      attrs = %{name: name}
+
+      assert {:error, %Ecto.Changeset{}} = Accounts.create_referral(user, attrs)
+    end
+
+    test "does not create referral if name has capitals" do
+      user = AccountsFixtures.user()
+      name = "CAPital"
 
       attrs = %{name: name}
 
