@@ -21,29 +21,35 @@ defmodule KaldaWeb.Admin.ReferralController do
   # Form inputs are the email address of the peson you create the referral for and then the name for the link and expires at and referring slots
   # TODO: possible date conversion required
   def create(conn, %{
-        "referral" => %{
-          "email" => email,
-          "name" => name,
-          "expires_at" => expires_at,
-          "referring_slots" => referring_slots
-        }
+        # "referral" => %{
+        #   "email" => email,
+        #   "name" => name,
+        #   "expires_at" => expires_at,
+        #   "referring_slots" => referring_slots
+        # }
+        "referral" => referral_params
       }) do
     Policy.authorize!(conn, :view_admin_pages, Kalda)
 
-    referral_params = %{name: name, expires_at: expires_at, referring_slots: referring_slots}
+    # referral_params => %{name: name, expires_at: expires_at, referring_slots: referring_slots}
     # case get user by email, ok user -> create referral with name
-    case Accounts.get_user_by_email(email) do
+    case Accounts.get_user_by_email(referral_params["email"]) do
       %User{} = user ->
         case Accounts.create_referral(user, referral_params) do
           {:ok, _referral} ->
             Kalda.Accounts.UserNotifier.deliver_referral_link(
-              email,
-              name,
-              expires_at,
-              referring_slots
+              referral_params["email"],
+              referral_params["name"],
+              referral_params["expires_at"],
+              referral_params["referring_slots"]
             )
 
-            referral_link = KaldaWeb.Router.Helpers.referral_url(KaldaWeb.Endpoint, :show, name)
+            referral_link =
+              KaldaWeb.Router.Helpers.referral_url(
+                KaldaWeb.Endpoint,
+                :show,
+                referral_params["name"]
+              )
 
             conn
             |> put_flash(:info, "Referral created #{referral_link}, and email sent")
@@ -52,7 +58,7 @@ defmodule KaldaWeb.Admin.ReferralController do
           {:error, %Ecto.Changeset{} = changeset} ->
             conn
             |> put_status(422)
-            |> put_flash(:warning, "Are you sure this email belongs to a user?")
+            |> put_flash(:error, "Please check the errors below")
             |> render("new.html", changeset: changeset)
         end
 
