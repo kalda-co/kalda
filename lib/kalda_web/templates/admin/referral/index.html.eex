@@ -6,18 +6,36 @@
   </h1>
 <%= for referral <- @referrals do %>
 <br>
-<p>Referrer email</p>
+<p>Referrer email: &nbsp
+<span style="color: var(--color-purple)">
 <%= referral.referrer.email %>
-<p>Referrer link name</p>
+</span>
+</p>
+<span style="color: var(--color-purple)">
+</span>
+</p>
+<p>Referrer link name: &nbsp
+<span style="color: var(--color-purple)">
 <%= referral.name %>
-<p>Referrer slots remaining</p>
+</span>
+</p>
+<p>Referrer slots remaining: &nbsp
+<span style="color: var(--color-purple)">
 <%= referral.referring_slots %>
-<p>Referral link expires at:</p>
+</span>
+</p>
+<p>Referral link expires at: &nbsp
+<span style="color: var(--color-purple)">
 <%= referral.expires_at %>
+</span>
+</p>
+<p> Which is in: &nbsp
+<span style="color: var(--color-purple)">
 <% days_away = Float.round((NaiveDateTime.diff(referral.expires_at, NaiveDateTime.local_now()) / (24 * 60 * 60)), 1)%>
-<p> Which is in
   <%= days_away %>
-  days </p>
+  days
+</span>
+</p>
 <hr>
 <% end %>
 
