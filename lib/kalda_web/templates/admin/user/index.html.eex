@@ -4,14 +4,17 @@
 <br />
 
 <%= for user <- @users do %>
-<p>Username</p>
-<%= user.username %>
-<p>Email</p>
-<%= user.email %>
+<p>Username: &nbsp
+<span style="color: var(--color-purple)"><%= user.username %></span>
+</p>
+<p>Email: &nbsp
+<span style="color: var(--color-purple)"><%= user.email %></span>
+</p>
 <%= if user.referred_by do %>
-  <p>Referrerd by </p>
-  <%= user.referral.referrer.email %>
+  <p>Referrerd by: &nbsp
+<span style="color: var(--color-purple)"><%= user.referral.referrer.email %></span>
 <% end %>
+</p>
 <hr/>
 <% end %>
 
