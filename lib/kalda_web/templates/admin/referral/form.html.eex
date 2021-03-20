@@ -8,14 +8,14 @@
   <p>Email of user who will recieve the referral link </p>
 
   <%= label f, :email %>
-  <%= text_input f, :email %>
+  <%= text_input f, :email, required: true %>
   <%= error_tag f, :email %>
 
   <p>Name of the referral link. It will appear in the form 'kalda.co/referral/name' for example kalda.co/referral/laurie-pennie</p>
   <p>The name must only contain letters, numbers, hyphens and underscores</p>
 
   <%= label f, :name %>
-  <%= text_input f, :name %>
+  <%= text_input f, :name, required: true %>
   <%= error_tag f, :name %>
 
   <p>Expiry. Note this should NEVER be more than 2 months in the future</p>
