@@ -463,7 +463,10 @@ defmodule Kalda.Accounts do
         changeset = referral |> Referral.changeset(%{referring_slots: new_slots})
 
         Ecto.Multi.new()
-        |> Ecto.Multi.insert(:user, User.registration_changeset(%User{}, attrs))
+        |> Ecto.Multi.insert(
+          :user,
+          User.registration_changeset(%User{referred_by: referral.id}, attrs)
+        )
         |> Ecto.Multi.update(:referral, changeset)
         |> Repo.transaction()
         |> case do
