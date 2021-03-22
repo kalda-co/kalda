@@ -4,22 +4,17 @@ defmodule Kalda.Repo.Migrations.CreateReferralLinks do
   def change do
 
     create table(:referral_links) do
-      # add :token, :binary, null: false
       add :name, :string, null: false
       add :expires_at, :naive_datetime, null: false
       add :referring_slots, :integer, null: false
-      add :owner_id, references(:users, on_delete: :nothing), null: false
+      add :owner_id, references(:users, on_delete: :delete_all), null: false
 
       timestamps()
     end
 
     alter table(:users) do
-      add :referred_by, references(:referral_links)
+      add :referred_by, references(:referral_links, on_delete: :nilify_all)
     end
-
-    # alter table(:invites) do
-    #   add :referral_link_id, references(:referral_links)
-    # end
 
   end
 end
