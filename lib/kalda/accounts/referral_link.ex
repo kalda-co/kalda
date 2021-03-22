@@ -9,6 +9,7 @@ defmodule Kalda.Accounts.ReferralLink do
     # field :token, :binary
     field :name, :string
 
+    # This is a default of 14 days == 1209600 seconds
     field :expires_at, :naive_datetime,
       default: NaiveDateTime.add(NaiveDateTime.local_now(), 1_209_600),
       null: false
