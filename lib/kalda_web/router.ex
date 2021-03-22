@@ -46,6 +46,9 @@ defmodule KaldaWeb.Router do
 
     post "/signups/new", SignupController, :create
     delete "/users/log-out", UserSessionController, :delete
+    get "/users/confirm", UserConfirmationController, :new
+    post "/users/confirm", UserConfirmationController, :create
+    get "/users/confirm/:token", UserConfirmationController, :confirm
   end
 
   # Enables LiveDashboard only for development
@@ -68,9 +71,6 @@ defmodule KaldaWeb.Router do
 
   scope "/", KaldaWeb do
     pipe_through [:basic_auth_prod, :browser, :redirect_if_user_is_authenticated]
-
-    get "/users/register", UserRegistrationController, :new
-    post "/users/register", UserRegistrationController, :create
   end
 
   scope "/", KaldaWeb do
@@ -87,6 +87,8 @@ defmodule KaldaWeb.Router do
     # get "/referral-links/:name", ReferralLinkController, :show
     get "/get/:name", ReferralLinkController, :show
     post "/referral-links", ReferralLinkController, :create
+    get "/users/register", UserRegistrationController, :new
+    post "/users/register", UserRegistrationController, :create
   end
 
   scope "/", KaldaWeb do
@@ -138,10 +140,6 @@ defmodule KaldaWeb.Router do
 
   scope "/", KaldaWeb do
     pipe_through [:basic_auth_prod, :browser]
-
-    get "/users/confirm", UserConfirmationController, :new
-    post "/users/confirm", UserConfirmationController, :create
-    get "/users/confirm/:token", UserConfirmationController, :confirm
 
     get "/crash", CrashController, :index
   end
