@@ -36,12 +36,12 @@ defmodule KaldaWeb.Admin.ReferralLinkController do
     case Accounts.get_user_by_email(referral_link_params["email"]) do
       %User{} = user ->
         case Accounts.create_referral(user, referral_link_params) do
-          {:ok, _referral} ->
+          {:ok, referral} ->
             Kalda.Accounts.UserNotifier.deliver_referral_link(
-              referral_link_params["email"],
-              referral_link_params["name"],
-              referral_link_params["expires_at"],
-              referral_link_params["referring_slots"]
+              user.email,
+              referral.name,
+              referral.expires_at,
+              referral.referring_slots
             )
 
             referral_link =
