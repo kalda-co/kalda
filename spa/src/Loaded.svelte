@@ -2,7 +2,7 @@
   import Navbar from "./Navbar.svelte";
   import Thread from "./forum/Thread.svelte";
   import Guidelines from "./Guidelines.svelte";
-  import GroupTherapy from "./GroupTherapy.svelte";
+  import GroupSessions from "./GroupSessions.svelte";
   import Dashboard from "./Dashboard.svelte";
   import TherapySessions from "./TherapySessions.svelte";
   import UrgentSupport from "./UrgentSupport.svelte";
@@ -41,7 +41,7 @@
     <Guidelines />
   {:else if state.currentPage === "group-therapy-info"}
     <Navbar {navigateTo} title="Group Sessions" />
-    <GroupTherapy />
+    <GroupSessions />
   {:else if state.currentPage === "therapy-sessions"}
     <Navbar {navigateTo} title="Therapy Sessions" />
     <TherapySessions therapies={state.therapies} {navigateTo} />
