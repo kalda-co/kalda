@@ -51,7 +51,7 @@
         Daily Reflection
       </button>
       <button on:click|preventDefault={go("therapy-sessions")} class="button">
-        Therapy
+        Group Sessions
       </button>
       <button on:click|preventDefault={go("urgent-support")} class="button">
         Urgent Support

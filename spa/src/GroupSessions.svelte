@@ -50,35 +50,23 @@
       encourage you to have your camera on for the safety of the group.
     </p>
   </div>
-  <div class="image-card">
-    <div class="card-image">
-      <img
-        src="/images/uz3-profile.jpg"
-        alt="A photograph of guided meditation teacher, Uz Afzal"
-      />
-    </div>
-    <div class="image-card-text">
-      <h1>Meet the therapist</h1>
-      <p>
-        Uz Afzal (she/her) has been a practicing mindfulness teacher since 2014.
-        They are a published author on the subject of mindfulness. Uz also runs
-        Rainbow Mind's LGBT+ radical self care course.
-      </p>
-    </div>
-    <div class="card-image">
-      <img
-        src="/images/aldee-profile.jpg"
-        alt="A photograph of hypnotherapist Al Dee"
-      />
-    </div>
-    <div class="image-card-text">
-      <h1>Meet the therapist</h1>
-      <p>
-        Al (they/them) is a Freemind hypnotherapist and has been a practising
-        guided meditation coach since 2019, supporting people individually and
-        in groups. They are continually training and evolving their practice.
-      </p>
-    </div>
+  <div class="text-card">
+    <div class="card-image-uz" />
+    <h1>Meet the therapist</h1>
+    <p>
+      Uz Afzal (she/her) has been a practicing mindfulness teacher since 2014.
+      They are a published author on the subject of mindfulness. Uz also runs
+      Rainbow Mind's LGBT+ radical self care course.
+    </p>
+  </div>
+  <div class="text-card">
+    <div class="card-image-al" />
+    <h1>Meet the therapist</h1>
+    <p>
+      Al (they/them) is a Freemind hypnotherapist and has been a practising
+      guided meditation coach since 2019, supporting people individually and in
+      groups. They are continually training and evolving their practice.
+    </p>
   </div>
 </article>
 
@@ -91,25 +79,23 @@
     margin: var(--gap-s) var(--gap);
   }
 
-  .image-card {
-    padding: var(--gap);
-    padding-top: 0px;
+  .card-image-al,
+  .card-image-uz {
+    display: block;
+    width: 220px;
+    height: 220px;
+    background: #e6e7ed;
+    -moz-border-radius: 220px;
+    -webkit-border-radius: 220px;
+    border-radius: 220px;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    align-items: center;
+    background-image: url(/images/uz2-profile-220.jpg);
+    margin: auto;
   }
 
-  .image-card-text {
-    --border: 2px solid var(--color-grey);
-    background-color: var(--color-grey);
-    padding: var(--gap);
-    margin-top: calc(0px - var(--gap));
-    border-left: var(--border);
-    border-bottom: var(--border);
-    border-bottom-left-radius: 20px;
-    border-bottom-right-radius: 20px;
-    margin-bottom: var(--gap-s);
-  }
-
-  img {
-    left: 16px;
-    width: 344px;
+  .card-image-al {
+    background-image: url(/images/aldee-profile-220.jpg);
   }
 </style>
