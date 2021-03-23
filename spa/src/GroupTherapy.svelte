@@ -1,8 +1,8 @@
 <article class="content">
   <div class="text-card">
-    <h1>What is group therapy?</h1>
+    <h1>About the sessions</h1>
     <p>
-      Kalda group therapy takes place every week over Zoom. The Kalda coach
+      Kalda group sessions takes place every week over Zoom. The Kalda coach
       gives a guided meditation to the group. Then, we break out into small
       groups to do sharing circles. There may be up to 100 participants at a
       Kalda group therapy session.
@@ -29,29 +29,42 @@
   <div class="text-card">
     <h1>What is the science behind it?</h1>
     <p>
-      Many studies have shown that group therapy is as effective, if not more
-      effective than individual therapy. The act of sharing and listening to
-      others experiences is cathartic. Kalda groups are for the LGBTQIA+
-      community, this sense of shared identity creates a safe and supportive
-      space.
+      The Kalda sessions teach you mindfulness and meditation techniques that
+      you can use in your daily life. The sessions will cover: mindfulness,
+      gratitude, movement, self care. Kalda live mindfulness sessions are for
+      the LGBTQIA+ community, this sense of shared identity creates a safe and
+      supportive space.
     </p>
   </div>
   <div class="text-card">
     <h1>Session Agenda</h1>
     <p>
-      5 minute introduction You will be introduced to your Kalda coach. We’ll
-      encourage you to get comfy and relax. We will explain the plan for the
-      session.
+      You will be welcomed to the session and to the meditation. The Kalda coach
+      will lead the group in a short guided meditation. There will be an
+      opportunity to share reflection on the meditation, for those who feel
+      comfortable doing so. We will end on intention setting for the week.
     </p>
     <p>
-      20 minute guided meditation Together we will go into a guided meditation
-      session.
-    </p>
-    <p>
-      30 minute activity In small groups you’ll do a short sharing activity.
+      All activities are invitational, you are free to share as much as you feel
+      comfortable and participate to the level that you feel comfortable. We
+      encourage you to have your camera on for the safety of the group.
     </p>
   </div>
   <div class="image-card">
+    <div class="card-image">
+      <img
+        src="/images/uz3-profile.jpg"
+        alt="A photograph of guided meditation teacher, Uz Afzal"
+      />
+    </div>
+    <div class="image-card-text">
+      <h1>Meet the therapist</h1>
+      <p>
+        Uz Afzal (she/her) has been a practicing mindfulness teacher since 2014.
+        They are a published author on the subject of mindfulness. Uz also runs
+        Rainbow Mind's LGBT+ radical self care course.
+      </p>
+    </div>
     <div class="card-image">
       <img
         src="/images/aldee-profile.jpg"
@@ -61,12 +74,9 @@
     <div class="image-card-text">
       <h1>Meet the therapist</h1>
       <p>
-        All of our therapists are trained to a high standard and vetted by
-        Kalda. For our next session you’ll meet Al, who’s pronouns are
-        they/them. Al has been a practising guided meditation coach since 2019,
-        supporting people individually and in groups. They hold a FreeMind
-        Hypnotherapy Diploma Course and they are continually training and
-        evolving their practice.
+        Al (they/them) is a Freemind hypnotherapist and has been a practising
+        guided meditation coach since 2019, supporting people individually and
+        in groups. They are continually training and evolving their practice.
       </p>
     </div>
   </div>

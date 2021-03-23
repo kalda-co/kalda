@@ -40,7 +40,7 @@
     <Navbar {navigateTo} title="Guidelines" />
     <Guidelines />
   {:else if state.currentPage === "group-therapy-info"}
-    <Navbar {navigateTo} title="Group Therapy" />
+    <Navbar {navigateTo} title="Group Sessions" />
     <GroupTherapy />
   {:else if state.currentPage === "therapy-sessions"}
     <Navbar {navigateTo} title="Therapy Sessions" />
