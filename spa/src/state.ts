@@ -9,7 +9,7 @@ export type Page =
 
 export type Title =
   | "Kalda"
-  | "Group Therapy"
+  | "Group Sessions"
   | "Guidelines"
   | "Daily Reflection"
   | "Therapy Sessions"
