@@ -1,6 +1,6 @@
 export type Page =
   | "dashboard"
-  | "group-therapy-info"
+  | "group-info"
   | "guidelines"
   | "daily-reflection"
   | "therapy-sessions"
@@ -9,10 +9,10 @@ export type Page =
 
 export type Title =
   | "Kalda"
-  | "Group Sessions"
+  | "Session Info"
   | "Guidelines"
   | "Daily Reflection"
-  | "Therapy Sessions"
+  | "Group Sessions"
   | "Urgent Support"
   | "Will Pool";
 

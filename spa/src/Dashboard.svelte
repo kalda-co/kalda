@@ -45,13 +45,10 @@
           </a>
         </div>
         <h1 class="pointer" on:click|preventDefault={go("therapy-sessions")}>
-          Group therapy
+          Group Mindfulness Sessions
         </h1>
-        <button
-          class="button-link"
-          on:click|preventDefault={go("group-therapy-info")}
-        >
-          <span class="underline">Learn more</span> about weekly group therapy.
+        <button class="button-link" on:click|preventDefault={go("group-info")}>
+          <span class="underline">Learn more</span> about weekly group sessions.
         </button>
       </div>
     </section>
