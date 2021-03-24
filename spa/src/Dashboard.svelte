@@ -23,7 +23,7 @@
         Hi,
         <cite>{user.username}</cite> !
       </h1>
-      <h2>Today's reflection question.</h2>
+      <h2>Today's cheeky prawn</h2>
       <div class="card">
         <p class="question">{post.content}</p>
         <button on:click|preventDefault={go("daily-reflection")}
