@@ -49,7 +49,7 @@
             <p>
               Thank you for keeping the community a safe and respectful space.
             </p>
-            <a href="/app">
+            <a href="/dashboard">
               <button class="button">Back to community</button>
             </a>
           </div>

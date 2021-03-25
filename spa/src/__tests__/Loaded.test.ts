@@ -5,7 +5,6 @@ import type { AppState } from "../state";
 test("should render", () => {
   let state: AppState = {
     currentUser: { id: 1, username: "user" },
-    currentPage: "dashboard",
     pools: [],
     therapies: [],
     reflections: [],

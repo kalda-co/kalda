@@ -6,7 +6,6 @@ export function appState(json: unknown): AppState {
     currentUser: field("current_user", user)(json),
     reflections: field("reflections", array(post))(json),
     pools: field("pools", array(post))(json),
-    currentPage: "dashboard",
     next_therapy: field("next_therapy", optional(therapy))(json),
     therapies: field("therapies", array(therapy))(json),
   };

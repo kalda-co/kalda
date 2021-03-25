@@ -1,19 +1,12 @@
 <script lang="ts">
-  import type { Page, User, Post, Therapy } from "./state";
-
+  import type { User, Post, Therapy } from "./state";
   import { datetimeToURI, formattedDatetime } from "./date";
+  import { Link } from "svelte-routing";
 
   export let user: User;
   export let post: Post | undefined;
   export let pool: Post | undefined;
   export let therapy: Therapy | undefined;
-  export let navigateTo: (page: Page) => any;
-
-  function go(page: Page) {
-    return () => {
-      navigateTo(page);
-    };
-  }
 </script>
 
 <article>
@@ -26,9 +19,7 @@
         <h2>Today's reflection question.</h2>
         <div class="card">
           <p class="question">{post.content}</p>
-          <button on:click|preventDefault={go("daily-reflection")}
-            >Post a reflection</button
-          >
+          <Link to="/daily-reflection">Post a reflection</Link>
         </div>
       </div>
     </div>
@@ -49,28 +40,25 @@
             <p class="link">Add to calendar</p>
           </a>
         </div>
-        <h1 class="pointer" on:click|preventDefault={go("therapy-sessions")}>
-          Group Mindfulness Sessions
-        </h1>
-        <button class="button-link" on:click|preventDefault={go("group-info")}>
+        <Link to="/therapy-sessions">
+          <h1>Group Mindfulness Sessions</h1>
+        </Link>
+        <Link class="button-link" to="/group-info">
           <span class="underline">Learn more</span> about weekly group sessions.
-        </button>
+        </Link>
       </div>
     </section>
   {/if}
 
   {#if pool}
     <section class="content">
-      <div
-        class="card background-purple pointer"
-        on:click|preventDefault={go("will-pool")}
-      >
+      <Link class="card background-purple pointer" to="/will-pool">
         <h1>Will Pool</h1>
         <p>
           <span class="underline">Make a commitment</span> to do something that you
           need to get done
         </p>
-      </div>
+      </Link>
     </section>
   {/if}
 </article>

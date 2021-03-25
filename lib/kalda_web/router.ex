@@ -85,16 +85,6 @@ defmodule KaldaWeb.Router do
     post "/users/register", UserRegistrationController, :create
   end
 
-  scope "/", KaldaWeb do
-    pipe_through [:browser, :require_authenticated_user, :require_confirmed_email]
-
-    get "/users/settings", UserSettingsController, :edit
-    put "/users/settings", UserSettingsController, :update
-    get "/users/settings/confirm-email/:token", UserSettingsController, :confirm_email
-
-    get "/app", PageController, :app
-  end
-
   scope "/admin", KaldaWeb.Admin, as: :admin do
     import Phoenix.LiveDashboard.Router
     pipe_through [:browser, :require_admin]
@@ -130,6 +120,7 @@ defmodule KaldaWeb.Router do
     get "/therapy-sessions/:id", TherapySessionController, :edit
     put "/therapy-sessions/:id", TherapySessionController, :update
     delete "/therapy-sessions/:id", TherapySessionController, :delete
+    get "/*anything", NotFoundController, :not_found
   end
 
   scope "/v1", KaldaWeb.Api.V1, as: :api_v1 do
@@ -142,5 +133,17 @@ defmodule KaldaWeb.Router do
     post "/comments/:id/replies", ReplyController, :create
     post "/comments/:id/reports", ReportController, :report_comment
     post "/replies/:id/reports", ReportController, :report_reply
+    get "/*anything", NotFoundController, :not_found
+  end
+
+  scope "/", KaldaWeb do
+    pipe_through [:browser, :require_authenticated_user, :require_confirmed_email]
+
+    get "/users/settings", UserSettingsController, :edit
+    put "/users/settings", UserSettingsController, :update
+    get "/users/settings/confirm-email/:token", UserSettingsController, :confirm_email
+
+    # All other get requests go to the SPA
+    get "/*path", PageController, :app
   end
 end

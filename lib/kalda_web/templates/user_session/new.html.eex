@@ -46,7 +46,7 @@ back) redirect away from this page. %>
 <script>
 fetch("/v1/ping").then(response => {
   if !(response.status >= 300 && response.status < 500)  {
-    window.location.href = "/app"
+    window.location.href = "/dashboard"
   }
 })
 </script>
