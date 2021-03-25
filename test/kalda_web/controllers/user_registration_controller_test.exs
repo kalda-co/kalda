@@ -17,7 +17,7 @@ defmodule KaldaWeb.UserRegistrationControllerTest do
         |> log_in_user(AccountsFixtures.user())
         |> get(Routes.user_registration_path(conn, :new))
 
-      assert redirected_to(conn) == "/app"
+      assert redirected_to(conn) == "/dashboard"
     end
   end
 

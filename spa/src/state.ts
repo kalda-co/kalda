@@ -1,18 +1,9 @@
-export type Page =
-  | "dashboard"
-  | "group-info"
-  | "guidelines"
-  | "daily-reflection"
-  | "therapy-sessions"
-  | "urgent-support"
-  | "will-pool";
-
 export type Title =
   | "Kalda"
   | "Session Info"
   | "Guidelines"
   | "Daily Reflection"
-  | "Group Sessions"
+  | "Therapy Sessions"
   | "Urgent Support"
   | "Will Pool";
 
@@ -20,7 +11,6 @@ export type AppState = {
   currentUser: User;
   reflections: Array<Post>;
   pools: Array<Post>;
-  currentPage: Page;
   next_therapy?: Therapy;
   therapies: Array<Therapy>;
 };

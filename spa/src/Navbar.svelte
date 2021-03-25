@@ -1,9 +1,9 @@
 <script>
-  import type { Page, Title } from "./state";
+  import type { Title } from "./state";
   import { fly } from "svelte/transition";
   import { getCSRFToken } from "./backend";
+  import { links, link } from "svelte-routing";
 
-  export let navigateTo: (page: Page) => any;
   export let title: Title;
 
   let menu = false;
@@ -12,22 +12,19 @@
     menu = !menu;
   }
 
-  function go(page: Page) {
-    return () => {
-      menu = false;
-      navigateTo(page);
-    };
+  function closeMenu() {
+    menu = false;
   }
 </script>
 
 <div class="navbar">
-  <button class="button-link" on:click|preventDefault={go("dashboard")}>
+  <a href="/dashboard" class="button-link" use:link on:click={closeMenu}>
     <img
       src="/images/kalda-rainbow-purple-logo.svg"
       alt="Kalda's Rainbow Logo"
       class="logo"
     />
-  </button>
+  </a>
   <h1>{title}</h1>
   <button on:click|preventDefault={toggleMenu}>
     <img src="/images/burger-menu.svg" alt="hamburger-menu" class="hamburger" />
@@ -40,25 +37,19 @@
       <img src="/images/cross.svg" alt="close menu cross" />
     </button>
 
-    <div class="content button-grid">
-      <button on:click|preventDefault={go("dashboard")} class="button">
-        Home
-      </button>
-      <button on:click|preventDefault={go("guidelines")} class="button">
-        Guidelines
-      </button>
-      <button on:click|preventDefault={go("daily-reflection")} class="button">
+    <div use:links class="content button-grid">
+      <a href="/dashboard" on:click={closeMenu} class="button"> Home </a>
+      <a href="/guidelines" on:click={closeMenu} class="button"> Guidelines </a>
+      <a href="/daily-reflection" on:click={closeMenu} class="button">
         Daily Reflection
-      </button>
-      <button on:click|preventDefault={go("therapy-sessions")} class="button">
+      </a>
+      <a href="/therapy-sessions" on:click={closeMenu} class="button">
         Group Sessions
-      </button>
-      <button on:click|preventDefault={go("urgent-support")} class="button">
+      </a>
+      <a href="/urgent-support" on:click={closeMenu} class="button">
         Urgent Support
-      </button>
-      <button on:click|preventDefault={go("will-pool")} class="button">
-        Will Pool
-      </button>
+      </a>
+      <a href="/will-pool" on:click={closeMenu} class="button"> Will Pool </a>
       <form method="POST" action="/users/log-out">
         <input type="hidden" name="_csrf_token" value={getCSRFToken()} />
         <input type="hidden" name="_method" value="delete" />

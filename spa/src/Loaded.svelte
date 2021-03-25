@@ -6,58 +6,70 @@
   import Dashboard from "./Dashboard.svelte";
   import TherapySessions from "./GroupSessions.svelte";
   import UrgentSupport from "./UrgentSupport.svelte";
-  import type { Page, AppState } from "./state";
+  import { Router, Route } from "svelte-routing";
+  import type { AppState } from "./state";
 
   export let state: AppState;
-
-  function navigateTo(page: Page) {
-    state.currentPage = page;
-  }
 </script>
 
 <main>
-  {#if state.currentPage === "daily-reflection"}
-    <Navbar {navigateTo} title="Daily Reflection" />
+  <Router>
+    <Route path="daily-reflection">
+      <Navbar title="Daily Reflection" />
+      <!-- TODO: gracefully handle zero posts -->
+      {#each state.reflections as post (post.id)}
+        <Thread
+          placeholder="Your reflection here"
+          commentName="reflection"
+          {post}
+        />
+      {/each}
+    </Route>
 
-    <!-- TODO: gracefully handle zero posts -->
-    {#each state.reflections as post (post.id)}
-      <Thread
-        placeholder="Your reflection here"
-        commentName="reflection"
-        {post}
+    <Route path="will-pool">
+      <Navbar title="Will Pool" />
+      {#each state.pools as post (post.id)}
+        <Thread
+          placeholder="Your commitment here"
+          commentName="commitment"
+          {post}
+        />
+      {/each}
+    </Route>
+
+    <Route path="guidelines">
+      <Navbar title="Guidelines" />
+      <Guidelines />
+    </Route>
+
+    <Route path="group-info">
+      <Navbar title="Session Info" />
+      <GroupSessions />
+    </Route>
+
+    <Route path="therapy-sessions">
+      <Navbar title="Therapy Sessions" />
+      <TherapySessions therapies={state.therapies} />
+    </Route>
+
+    <Route path="urgent-support">
+      <Navbar title="Urgent Support" />
+      <UrgentSupport />
+    </Route>
+
+    <!-- Default catch all route -->
+    <Route>
+      <Navbar title="Kalda" />
+      <Dashboard
+        user={state.currentUser}
+        post={state.reflections[0]}
+        therapy={state.next_therapy}
+        pool={state.pools[0]}
       />
-    {/each}
-  {:else if state.currentPage === "will-pool"}
-    <Navbar {navigateTo} title="Will Pool" />
-    {#each state.pools as post (post.id)}
-      <Thread
-        placeholder="Your commitment here"
-        commentName="commitment"
-        {post}
-      />
-    {/each}
-  {:else if state.currentPage === "guidelines"}
-    <Navbar {navigateTo} title="Guidelines" />
-    <Guidelines />
-  {:else if state.currentPage === "group-info"}
-    <Navbar {navigateTo} title="Session Info" />
-    <GroupSessions />
-  {:else if state.currentPage === "therapy-sessions"}
-    <Navbar {navigateTo} title="Group Sessions" />
-    <TherapySessions therapies={state.therapies} {navigateTo} />
-  {:else if state.currentPage === "urgent-support"}
-    <Navbar {navigateTo} title="Urgent Support" />
-    <UrgentSupport />
-  {:else}
-    <Navbar {navigateTo} title="Kalda" />
-    <Dashboard
-      user={state.currentUser}
-      post={state.reflections[0]}
-      therapy={state.next_therapy}
-      pool={state.pools[0]}
-      {navigateTo}
-    />
-  {/if}
+    </Route>
+
+    <!-- TODO: route not found page -->
+  </Router>
 </main>
 
 <!-- TODO: Error design -->

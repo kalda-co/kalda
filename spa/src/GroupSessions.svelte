@@ -1,15 +1,9 @@
 <script lang="ts">
-  import type { Therapy, Page } from "./state";
+  import type { Therapy } from "./state";
+  import { Link } from "svelte-routing";
   import { datetimeToURI, formattedDatetime } from "./date";
 
   export let therapies: Therapy[];
-
-  export let navigateTo: (page: Page) => any;
-  function go(page: Page) {
-    return () => {
-      navigateTo(page);
-    };
-  }
 
   function therapyImage(index: number) {
     let images = [
@@ -56,9 +50,7 @@
           rel="noopener"
           href={therapy.link}><button class="button">Zoom link</button></a
         >
-        <button on:click|preventDefault={go("group-info")} class="button-link">
-          Learn more.
-        </button>
+        <Link to="/group-info" class="button-link">Learn more.</Link>
       </div>
     </div>
   {/each}
