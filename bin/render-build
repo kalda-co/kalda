@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 set -euf -o pipefail
+export MIX_ENV=prod
 
 # Initial setup
 mix deps.get --only prod
-MIX_ENV=prod mix compile
+mix compile
 
 # Compile assets
 npm install
@@ -12,7 +13,7 @@ mix phx.digest
 
 # Remove the existing release directory and build the release
 rm -rf "_build"
-MIX_ENV=prod mix release
+mix release
 
 # Run migrations
 _build/prod/rel/kalda/bin/kalda eval "Kalda.Release.migrate"
