@@ -8,6 +8,7 @@ defmodule KaldaWeb.Router do
     KaldaWeb.Errors.handle_errors(conn, data)
   end
 
+  # Require HTTP basic auth if the application is set with `basic_auth_password`
   defp basic_auth(conn, _opts) do
     case Application.get_env(:kalda, :basic_auth_password) do
       nil -> conn
@@ -17,6 +18,7 @@ defmodule KaldaWeb.Router do
 
   pipeline :browser do
     plug :accepts, ["html"]
+    plug :basic_auth
     plug :fetch_session
     plug :fetch_live_flash
     plug :put_root_layout, {KaldaWeb.LayoutView, :root}
@@ -30,10 +32,6 @@ defmodule KaldaWeb.Router do
     plug :fetch_session
     plug :protect_from_forgery
     plug :fetch_current_user
-  end
-
-  pipeline :basic_auth_prod do
-    plug :basic_auth
   end
 
   scope "/", KaldaWeb do
@@ -68,10 +66,6 @@ defmodule KaldaWeb.Router do
   end
 
   ## Authentication routes
-
-  scope "/", KaldaWeb do
-    pipe_through [:basic_auth_prod, :browser, :redirect_if_user_is_authenticated]
-  end
 
   scope "/", KaldaWeb do
     pipe_through [:browser, :redirect_if_user_is_authenticated]
@@ -136,12 +130,6 @@ defmodule KaldaWeb.Router do
     get "/therapy-sessions/:id", TherapySessionController, :edit
     put "/therapy-sessions/:id", TherapySessionController, :update
     delete "/therapy-sessions/:id", TherapySessionController, :delete
-  end
-
-  scope "/", KaldaWeb do
-    pipe_through [:basic_auth_prod, :browser]
-
-    get "/crash", CrashController, :index
   end
 
   scope "/v1", KaldaWeb.Api.V1, as: :api_v1 do
