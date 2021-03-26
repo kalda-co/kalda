@@ -27,3 +27,9 @@ npm start
 ## Useful links
 
 - [Local developer setup](docs/developer-setup.md) documentation.
+
+## Deployment
+
+Production is automatically deployed from the main branch.
+
+To deploy to staging run `bin/deploy-to-staging`.
