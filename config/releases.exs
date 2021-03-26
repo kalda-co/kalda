@@ -41,3 +41,6 @@ config :rollbax,
   access_token: "3096585f75844cdaa1b70815ea70d849",
   environment: read_env.("ROLLBAR_ENV"),
   enable_crash_reports: true
+
+# Optionally require basic browser auth
+config :kalda, :basic_auth_password, read_env.("BASIC_AUTH_PASSWORD")
