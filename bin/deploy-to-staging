@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+
+set -e
+set -u
+set -o pipefail
+
+function fail() {
+  echo 1>&2
+  echo "error: " $1 1>&2
+  echo 1>&2
+  exit 1
+}
+
+function ensure_no_uncommitted_changes() {
+  git add --all
+  git diff-index --quiet HEAD -- || {
+    fail "There are un-committed changes. Commit or stash them and try again."
+  }
+}
+
+function ensure_up_to_date_with_main() {
+  git fetch origin
+  reslog=$(git log HEAD..origin/main --oneline)
+  if [[ "${reslog}" != "" ]] ; then
+    fail "This branch is not up-to-date with main. Rebase your branch and try again."
+  fi
+}
+
+function push_to_staging() {
+  git push origin HEAD:staging --force
+}
+
+ensure_no_uncommitted_changes
+ensure_up_to_date_with_main
+push_to_staging
