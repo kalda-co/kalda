@@ -1,9 +1,10 @@
 {
   "private": true,
   "scripts": {
-    "start": "concurrently npm:spa-serve npm:spa-check npm:webpack npm:backend",
-    "spa-serve": "snowpack dev",
-    "spa-check": "svelte-check --watch spa",
+    "start": "concurrently npm:serve npm:check npm:webpack npm:backend",
+    "serve": "snowpack dev",
+    "check": "svelte-check --watch spa",
+    "check-once": "svelte-check spa",
     "webpack": "webpack --mode development --watch",
     "deploy": "svelte-check && snowpack build && webpack --mode production",
     "backend": "mix phx.server",
