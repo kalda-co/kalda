@@ -4,8 +4,8 @@
   import { datetimeToURI, formattedDatetime } from "./date";
 
   export let user: User;
-  export let post: Post;
-  export let pool: Post;
+  export let post: Post | undefined;
+  export let pool: Post | undefined;
   export let therapy: Therapy | undefined;
   export let navigateTo: (page: Page) => any;
 
@@ -17,21 +17,23 @@
 </script>
 
 <article>
-  <div class="todays-reflection">
-    <div class="content">
-      <h1>
-        Hi,
-        <cite>{user.username}</cite> !
-      </h1>
-      <h2>Today's reflection question.</h2>
-      <div class="card">
-        <p class="question">{post.content}</p>
-        <button on:click|preventDefault={go("daily-reflection")}
-          >Post a reflection</button
-        >
+  {#if post}
+    <div class="todays-reflection">
+      <div class="content">
+        <h1>
+          Hi,
+          <cite>{user.username}</cite> !
+        </h1>
+        <h2>Today's reflection question.</h2>
+        <div class="card">
+          <p class="question">{post.content}</p>
+          <button on:click|preventDefault={go("daily-reflection")}
+            >Post a reflection</button
+          >
+        </div>
       </div>
     </div>
-  </div>
+  {/if}
 
   {#if therapy}
     <section class="content">
