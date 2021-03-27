@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  test:
+  test-backend:
     runs-on: ubuntu-latest
 
     services:
@@ -20,11 +20,8 @@ jobs:
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
-
     env:
-      CI: true
       MIX_ENV: test
-
     steps:
       - uses: actions/checkout@v2
       - uses: erlef/setup-elixir@v1
@@ -35,3 +32,21 @@ jobs:
       - run: mix deps.compile
       - run: mix compile
       - run: mix test
+
+  test-frontend:
+    runs-on: ubuntu-latest
+    env:
+      MIX_ENV: test
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+      - uses: erlef/setup-elixir@v1
+        with:
+          otp-version: '23.2.1'
+          elixir-version: '1.11.2'
+      - run: mix deps.get # The Phoenix JS is pulled from hex for now
+      - run: npm ci
+      - run: npm run check-once
+      - run: npm run test-once
