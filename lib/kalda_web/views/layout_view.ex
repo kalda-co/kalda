@@ -24,7 +24,7 @@ defmodule KaldaWeb.LayoutView do
     if description do
       description
     else
-      "Daily reflection, weekly connection. Helping the LGBTQIA plus and sex positive community to build support networks, access group therapy and get better, together"
+      "Daily reflection, weekly connection. Helping the LGBTQIA+ and sex positive community to build support networks, access group therapy and get better, together"
     end
   end
 end
