@@ -46,7 +46,7 @@
           />
           <p>{formattedDatetime(therapy.startsAt)}</p>
           <a href={datetimeToURI(therapy)} target="_blank" rel="nofollow">
-            <p class="link">Add</p>
+            <p class="link">Add to calendar</p>
           </a>
         </div>
         <h1 class="pointer" on:click|preventDefault={go("therapy-sessions")}>
