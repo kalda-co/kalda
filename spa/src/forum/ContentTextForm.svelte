@@ -35,7 +35,7 @@
 <div>
   <form on:submit|preventDefault={submitComment} class={level}>
     <div
-      class="content"
+      class="content-input"
       contenteditable
       on:keypress={handleKeypress}
       bind:textContent={newContent}
@@ -72,7 +72,7 @@
   /* TODO: indicate focus somehow */
   /* form:focus-within {} */
 
-  .content {
+  .content-input {
     border: none;
     width: 100%;
     max-width: 100%;
@@ -80,7 +80,7 @@
     background: rgba(0, 0, 0, 0);
   }
 
-  .content:focus {
+  .content-input:focus {
     outline: none;
   }
 
