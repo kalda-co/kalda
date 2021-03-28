@@ -20,9 +20,8 @@
   {#if post}
     <div class="todays-reflection">
       <div class="content">
-        <h1>
-          Hi,
-          <cite>{user.username}</cite> !
+        <h1 class="hi">
+          Hi, {user.username}!
         </h1>
         <h2>Today's reflection question.</h2>
         <div class="card">
@@ -40,7 +39,11 @@
       <h2>Activities</h2>
       <div class="card background-pink">
         <div class="date-container">
-          <img src="images/calendar-icon-white.svg" alt="calendar icon" />
+          <img
+            class="inline-icon"
+            src="images/calendar-icon-white.svg"
+            alt="calendar icon"
+          />
           <p>{formattedDatetime(therapy.startsAt)}</p>
           <a href={datetimeToURI(therapy)} target="_blank" rel="nofollow">
             <p class="link">Add</p>
@@ -73,7 +76,7 @@
 </article>
 
 <style>
-  cite {
+  .hi {
     word-break: break-all;
   }
 
@@ -159,5 +162,9 @@
 
   section {
     margin-bottom: var(--gap);
+  }
+
+  .inline-icon {
+    margin-right: var(--gap-s);
   }
 </style>
