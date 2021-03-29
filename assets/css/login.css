@@ -3,6 +3,7 @@
   display: block;
   max-width: 536px;
   letter-spacing: -0.02rem;
+  padding: var(--gap);
 }
 
 .login-container input {

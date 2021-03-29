@@ -1,53 +1,52 @@
 <div class="admin-container">
   <h1>Admin Dashboard</h1>
 
+  <nav class="admin-section">
+    <h2>Contents</h2>
+    <ul>
+      <li><%= link "All Daily Reflections (including scheduled)", to: Routes.admin_post_path(@conn, :index, :daily_reflection) %></h1>
 
-  <br>
-  <h1>New Daily Reflection</h1>
-
-  <%= render KaldaWeb.Admin.PostView, "form.html", Map.put(assigns, :action, Routes.admin_post_path(@conn, :create)) %>
-
-  <br>
-  <h1><%= link "All Daily Reflections (including scheduled)", to: Routes.admin_post_path(@conn, :index, :daily_reflection) %></h1>
-
-  <br>
-  <h1><%= link "New Will Pool", to: Routes.admin_post_path(@conn, :new, :will_pool) %></h1>
+      <li><%= link "New Will Pool", to: Routes.admin_post_path(@conn, :new, :will_pool) %>
 
 
-  <br>
-  <h1><%= link "All Will Pools (including scheduled)", to: Routes.admin_post_path(@conn, :index, :will_pool) %></h1>
+      <li><%= link "All Will Pools (including scheduled)", to: Routes.admin_post_path(@conn, :index, :will_pool) %>
 
-  <br>
-  <h1><%= link "Invite Users", to: Routes.admin_invite_path(@conn, :new) %></h1>
+      <li><%= link "Invite Users", to: Routes.admin_invite_path(@conn, :new) %>
 
-  <br>
-  <h1><%= link "New Therapy Session", to: Routes.admin_therapy_session_path(@conn, :new) %></h1>
+      <li><%= link "New Therapy Session", to: Routes.admin_therapy_session_path(@conn, :new) %>
 
-  <br>
-  <h1><%= link "All Therapy Sessions (including scheduled)", to: Routes.admin_therapy_session_path(@conn, :index) %></h1>
+      <li><%= link "All Therapy Sessions (including scheduled)", to: Routes.admin_therapy_session_path(@conn, :index) %>
 
+      <li><%= link "Referral links", to: Routes.admin_referral_link_path(@conn, :index) %>
+    </ul>
+  </nav>
 
+  <section class="admin-section">
+    <h1>New Daily Reflection</h1>
+
+    <%= render KaldaWeb.Admin.PostView, "form.html", Map.put(assigns, :action, Routes.admin_post_path(@conn, :create)) %>
+  </section>
+
+  <section class="admin-section">
   <h1>Reports for Daily Reflections</h1>
-
-  <div class="report">
-    <%= for report <- @reports do %>
-      <div class="details">
-        <div class="name">
-          <%= report.reporter.username %>
+    <div class="report">
+      <%= for report <- @reports do %>
+        <div class="details">
+          <div class="name">
+            <%= report.reporter.username %>
+          </div>
+          <div class="date">
+            <%= report.inserted_at %>
+          </div>
         </div>
-        <div class="date">
-          <%= report.inserted_at %>
+        <div class="content">
+          <%= report.reported_content %>
         </div>
-      </div>
-      <div class="content">
-        <%= report.reported_content %>
-      </div>
-      <div class="content report-text">
-        <%= report.reporter_reason %>
-      </div>
-      <span><%= link "Moderate", to: Routes.admin_report_path(@conn, :edit, report) %></span>
-
-
-    <% end %>
-  </div>
+        <div class="content report-text">
+          <%= report.reporter_reason %>
+        </div>
+        <span><%= link "Moderate", to: Routes.admin_report_path(@conn, :edit, report) %></span>
+      <% end %>
+    </div>
+  </section>
 </div>
