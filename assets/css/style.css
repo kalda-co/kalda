@@ -164,6 +164,10 @@ nav.app-header-nav > * {
   background-color: var(--color-white);
 }
 
+.admin-section {
+  margin-bottom: var(--gap-l);
+}
+
 .details {
   display: flex;
   justify-content: space-between;

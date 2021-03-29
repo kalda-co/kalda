@@ -43,4 +43,4 @@ config :rollbax,
   enable_crash_reports: true
 
 # Optionally require basic browser auth
-config :kalda, :basic_auth_password, read_env.("BASIC_AUTH_PASSWORD")
+config :kalda, :basic_auth_password, read_env_or.("BASIC_AUTH_PASSWORD", nil)
