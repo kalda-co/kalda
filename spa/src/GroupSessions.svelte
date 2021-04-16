@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { Therapy } from "./state";
-  import { Link } from "svelte-routing";
+  import { link } from "svelte-routing";
   import { datetimeToURI, formattedDatetime } from "./date";
 
   export let therapies: Therapy[];
@@ -50,7 +50,7 @@
           rel="noopener"
           href={therapy.link}><button class="button">Zoom link</button></a
         >
-        <Link to="/group-info" class="button-link">Learn more.</Link>
+        <a use:link href="/group-info" class="button-link">Learn more.</a>
       </div>
     </div>
   {/each}
@@ -106,6 +106,7 @@
     border-radius: 40px;
     font-weight: 600;
     padding: var(--gap);
+    margin-right: var(--gap);
   }
 
   .link {
