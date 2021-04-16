@@ -10,9 +10,7 @@ defmodule Kalda.Accounts.ReferralLink do
     field :name, :string
 
     # This is a default of 14 days == 1209600 seconds
-    field :expires_at, :naive_datetime,
-      default: NaiveDateTime.add(NaiveDateTime.local_now(), 1_209_600),
-      null: false
+    field :expires_at, :naive_datetime, null: false
 
     field :referring_slots, :integer, null: false, default: 6
 
@@ -26,7 +24,7 @@ defmodule Kalda.Accounts.ReferralLink do
   def changeset(referral_link, attrs) do
     referral_link
     |> cast(attrs, [:name, :owner_id, :expires_at, :referring_slots])
-    |> validate_required([:owner_id, :name])
+    |> validate_required([:owner_id, :name, :expires_at])
     |> foreign_key_constraint(:owner_id)
     |> validate_format(:name, ~r/\A[a-z0-9-]+\z/,
       message: "can only use lowercase letters, numbers and hyphens"

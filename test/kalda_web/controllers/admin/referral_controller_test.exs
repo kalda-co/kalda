@@ -7,10 +7,6 @@ defmodule KaldaWeb.Admin.ReferralLinkControllerTest do
     referring_slots: 6,
     expires_at: "2030-01-23T23:50:07"
   }
-  @create_referral_link_attrs_with_defaults %{
-    email: "test@example.com",
-    name: "link-get-kalda"
-  }
   @invalid_referral_link_attrs %{
     name: "",
     email: "test@example.com"
@@ -40,7 +36,9 @@ defmodule KaldaWeb.Admin.ReferralLinkControllerTest do
 
     test "redirects when user is not admin", %{conn: conn} do
       conn =
-        post(conn, Routes.admin_referral_link_path(conn, :create), referral_link: @create_referral_link_attrs)
+        post(conn, Routes.admin_referral_link_path(conn, :create),
+          referral_link: @create_referral_link_attrs
+        )
 
       assert html_response(conn, 302) =~ "redirected"
       assert get_flash(conn, :error) == "You are not authorised to access this page."
@@ -54,7 +52,9 @@ defmodule KaldaWeb.Admin.ReferralLinkControllerTest do
       _user = Kalda.AccountsFixtures.user(%{email: "test@example.com"})
 
       conn =
-        post(conn, Routes.admin_referral_link_path(conn, :create), referral_link: @create_referral_link_attrs)
+        post(conn, Routes.admin_referral_link_path(conn, :create),
+          referral_link: @create_referral_link_attrs
+        )
 
       assert html_response(conn, 302) =~ "redirected"
       assert get_flash(conn, :info) =~ "ReferralLink created"
@@ -64,28 +64,20 @@ defmodule KaldaWeb.Admin.ReferralLinkControllerTest do
       _user = Kalda.AccountsFixtures.user(%{email: "test@example.com"})
 
       conn =
-        post(conn, Routes.admin_referral_link_path(conn, :create), referral_link: @invalid_referral_link_attrs)
+        post(conn, Routes.admin_referral_link_path(conn, :create),
+          referral_link: @invalid_referral_link_attrs
+        )
 
       assert html_response(conn, 422) =~ "Please check the errors below"
     end
 
     test "renders error flash when owner user doesn't exist", %{conn: conn} do
       conn =
-        post(conn, Routes.admin_referral_link_path(conn, :create), referral_link: @create_referral_link_attrs)
-
-      assert get_flash(conn, :error) =~ "No user exists that matches this email"
-    end
-
-    test "redirects to show when data uses defaults and user is admin", %{conn: conn} do
-      _user = Kalda.AccountsFixtures.user(%{email: "test@example.com"})
-
-      conn =
         post(conn, Routes.admin_referral_link_path(conn, :create),
-          referral_link: @create_referral_link_attrs_with_defaults
+          referral_link: @create_referral_link_attrs
         )
 
-      assert html_response(conn, 302) =~ "redirected"
-      assert get_flash(conn, :info) =~ "ReferralLink created"
+      assert get_flash(conn, :error) =~ "No user exists that matches this email"
     end
   end
 end
