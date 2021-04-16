@@ -3,7 +3,7 @@ defmodule Kalda.AccountsTest do
 
   alias Kalda.Accounts
   alias Kalda.AccountsFixtures
-  alias Kalda.Accounts.{User, UserToken, Invite}
+  alias Kalda.Accounts.{User, UserToken, Invite, ReferralLink}
 
   @user_attrs %{
     username: "KaldaSquid",
@@ -645,7 +645,7 @@ defmodule Kalda.AccountsTest do
   describe "create_referral" do
     test "create referral_link with valid attrs" do
       user = AccountsFixtures.user()
-      name = "laurie"
+      name = "louis"
       referring_slots = 20
       expires_at = "2030-01-23T23:50:07"
 
@@ -657,31 +657,12 @@ defmodule Kalda.AccountsTest do
       assert referral_link.referring_slots == 20
     end
 
-    test "create referral_link with default attrs" do
-      user = AccountsFixtures.user()
-      name = "laurie"
-
-      attrs = %{name: name}
-
-      assert {:ok, referral_link} = Accounts.create_referral(user, attrs)
-
-      # 15 days from now
-      days_15 = NaiveDateTime.add(NaiveDateTime.local_now(), 15 * 24 * 60 * 60)
-      days_13 = NaiveDateTime.add(NaiveDateTime.local_now(), 13 * 24 * 60 * 60)
-
-      # Default expiry is in 14 days
-      assert Timex.after?(referral_link.expires_at, days_13)
-      assert Timex.before?(referral_link.expires_at, days_15)
-      # Default slots are 6
-      assert referral_link.referring_slots == 6
-    end
-
     test "does not create referral_link if name is not unique" do
       user = AccountsFixtures.user()
       user2 = AccountsFixtures.user()
-      name = "laurie"
+      name = "louis"
 
-      attrs = %{name: name}
+      attrs = %{name: name, expires_at: NaiveDateTime.local_now()}
 
       assert {:ok, _referral} = Accounts.create_referral(user, attrs)
 
@@ -690,11 +671,11 @@ defmodule Kalda.AccountsTest do
 
     test "user can have many referral_links" do
       user = AccountsFixtures.user()
-      name = "laurie"
+      name = "louis"
       name2 = "kalda"
 
-      attrs = %{name: name}
-      attrs2 = %{name: name2}
+      attrs = %{name: name, expires_at: NaiveDateTime.local_now()}
+      attrs2 = %{name: name2, expires_at: NaiveDateTime.local_now()}
 
       assert {:ok, _referral} = Accounts.create_referral(user, attrs)
       assert {:ok, _referral} = Accounts.create_referral(user, attrs2)
@@ -704,7 +685,7 @@ defmodule Kalda.AccountsTest do
       user = AccountsFixtures.user()
       name = ""
 
-      attrs = %{name: name}
+      attrs = %{name: name, expires_at: NaiveDateTime.local_now()}
 
       assert {:error, %Ecto.Changeset{}} = Accounts.create_referral(user, attrs)
     end
@@ -713,7 +694,7 @@ defmodule Kalda.AccountsTest do
       user = AccountsFixtures.user()
       name = "under_score"
 
-      attrs = %{name: name}
+      attrs = %{name: name, expires_at: NaiveDateTime.local_now()}
 
       assert {:error, %Ecto.Changeset{}} = Accounts.create_referral(user, attrs)
     end
@@ -722,7 +703,7 @@ defmodule Kalda.AccountsTest do
       user = AccountsFixtures.user()
       name = "CAPital"
 
-      attrs = %{name: name}
+      attrs = %{name: name, expires_at: NaiveDateTime.local_now()}
 
       assert {:error, %Ecto.Changeset{}} = Accounts.create_referral(user, attrs)
     end
@@ -772,7 +753,8 @@ defmodule Kalda.AccountsTest do
       assert user.confirmed_at == nil
       assert user.referred_by == referral_link.id
 
-      assert :not_found = Accounts.create_user_from_referral(referral_link.name, @second_user_attrs)
+      assert :not_found =
+               Accounts.create_user_from_referral(referral_link.name, @second_user_attrs)
 
       assert updated_referral = Accounts.get_referral!(referral_link.id)
 
@@ -799,9 +781,10 @@ defmodule Kalda.AccountsTest do
   describe "get_referral_link_by_name" do
     test "only gets referral_links that have not expired" do
       owner = AccountsFixtures.user()
-      _referral = AccountsFixtures.referral_link(owner, %{name: "name"})
 
-      assert referral_link = Accounts.get_referral_link_by_name("name")
+      assert %ReferralLink{} = AccountsFixtures.referral_link(owner, %{name: "name"})
+
+      assert referral_link = %ReferralLink{} = Accounts.get_referral_link_by_name("name")
       assert referral_link.name == "name"
 
       assert {1, nil} =
