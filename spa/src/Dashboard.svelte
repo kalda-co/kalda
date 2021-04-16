@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { User, Post, Therapy } from "./state";
   import { datetimeToURI, formattedDatetime } from "./date";
-  import { Link } from "svelte-routing";
+  import { link } from "svelte-routing";
 
   export let user: User;
   export let post: Post | undefined;
@@ -19,7 +19,9 @@
         <h2>Today's reflection question.</h2>
         <div class="card">
           <p class="question">{post.content}</p>
-          <Link to="/daily-reflection">Post a reflection</Link>
+          <a use:link href="/daily-reflection">
+            <div class="post-button">Post a reflection</div>
+          </a>
         </div>
       </div>
     </div>
@@ -40,25 +42,29 @@
             <p class="link">Add to calendar</p>
           </a>
         </div>
-        <Link to="/therapy-sessions">
-          <h1>Group Mindfulness Sessions</h1>
-        </Link>
-        <Link class="button-link" to="/group-info">
-          <span class="underline">Learn more</span> about weekly group sessions.
-        </Link>
+        <div class="therapy-session">
+          <a use:link href="/therapy-sessions">
+            <h1>Group Mindfulness Sessions</h1>
+          </a>
+          <a use:link href="/group-info">
+            <span class="underline">Learn more</span> about weekly group sessions.
+          </a>
+        </div>
       </div>
     </section>
   {/if}
 
   {#if pool}
     <section class="content">
-      <Link class="card background-purple pointer" to="/will-pool">
-        <h1>Will Pool</h1>
-        <p>
-          <span class="underline">Make a commitment</span> to do something that you
-          need to get done
-        </p>
-      </Link>
+      <a use:link href="/will-pool">
+        <div class="card background-purple pointer">
+          <h1>Will Pool</h1>
+          <p>
+            <span class="underline">Make a commitment</span> to do something that
+            you need to get done
+          </p>
+        </div>
+      </a>
     </section>
   {/if}
 </article>
@@ -68,11 +74,12 @@
     word-break: break-all;
   }
 
-  button {
+  .post-button {
     border: solid 1px var(--color-purple);
     padding: 16px 24px;
     border-radius: 40px;
     font-weight: 600;
+    display: inline-block;
   }
 
   .todays-reflection {
@@ -114,6 +121,7 @@
   }
 
   .card.background-purple,
+  .card.background-pink a,
   .card.background-pink {
     color: var(--color-white);
   }
@@ -129,13 +137,6 @@
 
   .background-purple h1 {
     padding-top: 80px;
-  }
-
-  .button-link {
-    border: none;
-    color: unset;
-    font-weight: unset;
-    padding: unset;
   }
 
   .underline {
