@@ -183,19 +183,11 @@ _therapy_session_future =
 
 _invite = Kalda.Repo.insert!(invite_changeset)
 
-# %{token: referral_link_token, changeset: referral_link_changeset} = ReferralLink.build_referral(user)
-
-# referral_link = Kalda.Repo.insert!(referral_link_changeset)
-
-# %{token: _token, changeset: invite_changeset2} =
-#   Invite.build_invite("invite2@example.com", referral_link)
-
-# _invite2 = Kalda.Repo.insert!(invite_changeset2)
-
 referral_link =
   Kalda.Repo.insert!(%ReferralLink{
-    name: "laurie-penny",
-    owner_id: user.id
+    name: "squids123",
+    owner_id: user.id,
+    expires_at: ~N[2100-01-01 00:00:00]
   })
 
 _user4 =
@@ -222,7 +214,8 @@ You can test the invite route with:
 localhost:4000/invites/#{token}
 
 You can test the referral_link route with:
-localhost:4000/referral_links/#{referral_link.name}
+localhost:4000/get/#{referral_link.name}
+
 
 You can now log in as admin with these credentials:
 email:    demo@kalda.co

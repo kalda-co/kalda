@@ -2,14 +2,10 @@ defmodule Kalda.Accounts.ReferralLink do
   use Ecto.Schema
   import Ecto.Changeset
 
-  # @rand_size 32
-  # @hash_algorithm :sha256
-
   schema "referral_links" do
     # field :token, :binary
     field :name, :string
 
-    # This is a default of 14 days == 1209600 seconds
     field :expires_at, :naive_datetime, null: false
 
     field :referring_slots, :integer, null: false, default: 6
