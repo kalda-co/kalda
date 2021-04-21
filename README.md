@@ -32,4 +32,4 @@ npm start
 
 Production is automatically deployed from the main branch.
 
-To deploy to staging run `bin/deploy-to-staging`.
+To deploy to [staging](https://staging.kalda.co) run `bin/deploy-to-staging` and then wait for the build to complete. View progress [here](https://dashboard.render.com/web/srv-c1evsabjbvm0e3g1gvj0).
