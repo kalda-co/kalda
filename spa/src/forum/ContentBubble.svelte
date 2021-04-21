@@ -27,8 +27,6 @@
   }
 
   import { fly } from "svelte/transition";
-
-  console.log("item content:", item.content);
 </script>
 
 {#if thanks}
@@ -75,8 +73,12 @@
   class:reply-line={!reporting && replyLine}
 >
   <cite>{item.author.username}</cite>
-  <!-- This `item.content` is where the newlines need to be preserved -->
-  {item.content}
+  <div class="bubble-content">
+    {#each item.content.split(/\n/) as line}
+      <p>{line}</p>
+    {/each}
+  </div>
+  <!-- {item.content} -->
 
   <div class="link-container">
     <button on:click|preventDefault={toggleReporting}>Report</button>
@@ -158,12 +160,23 @@
     z-index: 1000;
   }
 
-  p {
+  .thanks p {
     color: var(--font-color-dark);
     padding: var(--gap-s);
   }
 
-  h1 {
+  .bubble-content p {
+    word-wrap: break-word;
+  }
+
+  .bubble-content p:first-child {
+    margin-top: 0px;
+  }
+  .bubble-content p:last-child {
+    margin-bottom: 0px;
+  }
+
+  .thanks h1 {
     font-weight: 600;
     font-size: 24px;
     line-height: 32px;
