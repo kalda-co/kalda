@@ -88,6 +88,7 @@
   }
 
   .todays-reflection .content {
+    background-color: var(--color-purple);
     padding: var(--gap);
   }
 
