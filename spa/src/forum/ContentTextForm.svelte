@@ -9,9 +9,11 @@
 
   async function submitComment() {
     let content = newContent;
+    let sanitisedContent = stripHtml(content);
+    console.log(sanitisedContent);
     try {
       newContent = "";
-      await save(content);
+      await save(sanitisedContent);
     } catch (error) {
       // Saving failed, reset the text input so the user can try again
       newContent = content;
@@ -19,11 +21,44 @@
     }
   }
 
+  function stripHtml(html: string) {
+    return (
+      html
+        // Swap opening divs for newlines
+        .replaceAll("<div>", "\n")
+        // Remove other HTML tags
+        .replaceAll(/<[^>]+>/g, "")
+        // Convert common HTML entities
+        .replaceAll("&#x27;", "'")
+        .replaceAll("&#x60;", "`")
+        .replaceAll("&amp;", "&")
+        .replaceAll("&gt;", ">")
+        .replaceAll("&lt;", "<")
+        .replaceAll("&quot;", '"')
+        // Collapse repeat newlines
+        .replaceAll(/\n+/g, "\n")
+    );
+  }
+
+  function handlePaste(event: ClipboardEvent) {
+    let clip = event.clipboardData;
+    let content =
+      clip?.getData("text/html") || clip?.getData("text/plain") || "";
+
+    // Insert the filtered content
+    document.execCommand("insertHTML", false, stripHtml(content));
+
+    // Prevent the standard paste behavior
+    event.preventDefault();
+  }
+
   function handleKeypress(event: KeyboardEvent) {
-    if (event.ctrlKey && event.key === "Enter") {
+    if (event.ctrlKey && event.code === "Enter") {
       submitComment();
     }
   }
+
+  // substitute textContent for innerText and split on nl and wrap in <p>
 
   function initFocus(element: HTMLElement) {
     if (focus) {
@@ -37,8 +72,9 @@
     <div
       class="content-input"
       contenteditable
+      on:paste={handlePaste}
       on:keypress={handleKeypress}
-      bind:textContent={newContent}
+      bind:innerHTML={newContent}
       use:initFocus
     />
     {#if !newContent}
