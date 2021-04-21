@@ -27,6 +27,8 @@
   }
 
   import { fly } from "svelte/transition";
+
+  console.log("item content:", item.content);
 </script>
 
 {#if thanks}
@@ -73,6 +75,7 @@
   class:reply-line={!reporting && replyLine}
 >
   <cite>{item.author.username}</cite>
+  <!-- This `item.content` is where the newlines need to be preserved -->
   {item.content}
 
   <div class="link-container">
