@@ -10,7 +10,7 @@
   async function submitComment() {
     let content = newContent;
     let sanitisedContent = stripHtml(content);
-    console.log(sanitisedContent);
+    console.log("santisedContent:", sanitisedContent);
     try {
       newContent = "";
       await save(sanitisedContent);
@@ -21,11 +21,21 @@
     }
   }
 
+  // Bug, if you leave a space before a newline it prints &nbsp;
+  // But if you replace all &nbsp; with ' ' it removes newline entirely!
+  // This is because IF a newline input is preceeded by a space the innerhtml is
+  // NOT
+  // <div>"some text "</div>
+  //<div>"then more"</div>
+  // but:
+  //<div>"some text&nbsp;"<br>"then more"</div>
   function stripHtml(html: string) {
     return (
       html
         // Swap opening divs for newlines
         .replaceAll("<div>", "\n")
+        // Swap breaks for newlines
+        .replaceAll("<br>", "\n")
         // Remove other HTML tags
         .replaceAll(/<[^>]+>/g, "")
         // Convert common HTML entities
@@ -35,6 +45,7 @@
         .replaceAll("&gt;", ">")
         .replaceAll("&lt;", "<")
         .replaceAll("&quot;", '"')
+        .replaceAll("&nbsp;", " ")
         // Collapse repeat newlines
         .replaceAll(/\n+/g, "\n")
     );
