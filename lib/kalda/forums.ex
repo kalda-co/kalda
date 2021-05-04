@@ -8,6 +8,7 @@ defmodule Kalda.Forums do
 
   alias Kalda.Forums.Post
   alias Kalda.Forums.Comment
+  alias Kalda.Forums.Reply
 
   @doc """
   Parses the forum from the route
@@ -110,7 +111,14 @@ defmodule Kalda.Forums do
           comments:
             ^from(comment in Comment,
               order_by: [desc: comment.inserted_at],
-              preload: [:author, replies: [:author]]
+              preload: [
+                :author,
+                replies:
+                  ^from(reply in Reply,
+                    order_by: [asc: reply.inserted_at],
+                    preload: [:author]
+                  )
+              ]
             )
         ]
     )
