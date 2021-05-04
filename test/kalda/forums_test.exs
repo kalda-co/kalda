@@ -104,9 +104,10 @@ defmodule Kalda.ForumsTest do
       set_inserted_at.(comment1, NaiveDateTime.add(now, -96))
       set_inserted_at.(comment2, NaiveDateTime.add(now, -85))
       set_inserted_at.(comment3, NaiveDateTime.add(now, -75))
-      set_inserted_at.(reply1, NaiveDateTime.add(now, -80))
-      set_inserted_at.(reply2, NaiveDateTime.add(now, -70))
-      set_inserted_at.(reply3, NaiveDateTime.add(now, -60))
+      # oldest (first) at top of list, newest at bottom
+      set_inserted_at.(reply1, NaiveDateTime.add(now, -800))
+      set_inserted_at.(reply2, NaiveDateTime.add(now, -500))
+      set_inserted_at.(reply3, NaiveDateTime.add(now, -80))
 
       result =
         Forums.get_posts(:daily_reflection)
