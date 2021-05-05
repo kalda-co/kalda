@@ -821,4 +821,107 @@ defmodule Kalda.Forums do
     post = get_post!(id)
     Repo.delete!(post)
   end
+
+  alias Kalda.Forums.CommentReaction
+
+  @doc """
+  Returns the list of comment_reactions for comment.
+
+  ## Examples
+
+      iex> get_comment_reactions(comment)
+      [%CommentReaction{}, ...]
+
+  """
+
+  def get_comment_reactions(comment, opts \\ []) do
+    preload = opts[:preload] || []
+
+    Repo.all(
+      from comment_reaction in CommentReaction,
+        where: comment_reaction.comment_id == ^comment.id,
+        preload: ^preload
+    )
+  end
+
+  @doc """
+  Gets a single comment_reaction.
+
+  Raises `Ecto.NoResultsError` if the CommentReaction does not exist.
+
+  ## Examples
+
+      iex> get_comment_reaction!(123)
+      %CommentReaction{}
+
+      iex> get_comment_reaction!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_comment_reaction!(id), do: Repo.get!(CommentReaction, id)
+
+  @doc """
+  Creates a comment_reaction.
+
+  ## Examples
+
+      iex> create_comment_reaction(user, comment, %{field: value})
+      {:ok, %CommentReaction{}}
+
+      iex> create_comment_reaction(user, comment %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_comment_reaction(user, comment, attrs \\ %{}) do
+    %CommentReaction{author_id: user.id, comment_id: comment.id}
+    |> CommentReaction.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a comment_reaction.
+
+  ## Examples
+
+      iex> update_comment_reaction(comment_reaction, %{field: new_value})
+      {:ok, %CommentReaction{}}
+
+      iex> update_comment_reaction(comment_reaction, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  # def update_comment_reaction(%CommentReaction{} = comment_reaction, attrs) do
+  #   comment_reaction
+  #   |> CommentReaction.changeset(attrs)
+  #   |> Repo.update()
+  # end
+
+  # @doc """
+  # Deletes a comment_reaction.
+
+  # ## Examples
+
+  #     iex> delete_comment_reaction(comment_reaction)
+  #     {:ok, %CommentReaction{}}
+
+  #     iex> delete_comment_reaction(comment_reaction)
+  #     {:error, %Ecto.Changeset{}}
+
+  # """
+  # def delete_comment_reaction(%CommentReaction{} = comment_reaction) do
+  #   Repo.delete(comment_reaction)
+  # end
+
+  # @doc """
+  # Returns an `%Ecto.Changeset{}` for tracking comment_reaction changes.
+
+  # ## Examples
+
+  #     iex> change_comment_reaction(comment_reaction)
+  #     %Ecto.Changeset{data: %CommentReaction{}}
+
+  # """
+  # def change_comment_reaction(%CommentReaction{} = comment_reaction, attrs \\ %{}) do
+  #   CommentReaction.changeset(comment_reaction, attrs)
+  # end
 end
