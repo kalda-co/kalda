@@ -946,27 +946,18 @@ defmodule Kalda.ForumsTest do
       assert comment_reaction.send_love == true
     end
 
-    #   test "update_comment_reaction/2 with invalid data returns error changeset" do
-    #     comment_reaction = comment_reaction_fixture()
+    test "update_comment_reaction/2 with invalid data returns error changeset" do
+      user = AccountsFixtures.user()
+      post = ForumsFixtures.post(user)
+      comment = ForumsFixtures.comment(post, user)
 
-    #     assert {:error, %Ecto.Changeset{}} =
-    #              Forums.update_comment_reaction(comment_reaction, @invalid_attrs)
+      assert {:ok, %CommentReaction{} = comment_reaction} =
+               Forums.insert_or_update_comment_reaction(user.id, comment.id, @valid_cr_attrs)
 
-    #     assert comment_reaction == Forums.get_comment_reaction!(comment_reaction.id)
-    #   end
+      assert {:error, %Ecto.Changeset{}} =
+               Forums.update_comment_reaction(comment_reaction, @invalid_cr_attrs)
 
-    #   test "delete_comment_reaction/1 deletes the comment_reaction" do
-    #     comment_reaction = comment_reaction_fixture()
-    #     assert {:ok, %CommentReaction{}} = Forums.delete_comment_reaction(comment_reaction)
-
-    #     assert_raise Ecto.NoResultsError, fn ->
-    #       Forums.get_comment_reaction!(comment_reaction.id)
-    #     end
-    #   end
-
-    #   test "change_comment_reaction/1 returns a comment_reaction changeset" do
-    #     comment_reaction = comment_reaction_fixture()
-    #     assert %Ecto.Changeset{} = Forums.change_comment_reaction(comment_reaction)
-    #   end
+      assert comment_reaction == Forums.get_comment_reaction!(user.id, comment.id)
+    end
   end
 end
