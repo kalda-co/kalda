@@ -96,6 +96,7 @@ defmodule KaldaWeb.Api.V1.DashboardControllerTest do
                        "id" => comment1.id,
                        "content" => comment1.content,
                        "inserted_at" => NaiveDateTime.to_iso8601(comment1.inserted_at),
+                       "comment_reactions" => [],
                        "author" => %{
                          "id" => author2.id,
                          "username" => author2.username
@@ -172,6 +173,7 @@ defmodule KaldaWeb.Api.V1.DashboardControllerTest do
                        "id" => comment1.id,
                        "content" => comment1.content,
                        "inserted_at" => NaiveDateTime.to_iso8601(comment1.inserted_at),
+                       "comment_reactions" => [],
                        "author" => %{
                          "id" => author1.id,
                          "username" => author1.username

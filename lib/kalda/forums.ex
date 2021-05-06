@@ -113,6 +113,9 @@ defmodule Kalda.Forums do
               order_by: [desc: comment.inserted_at],
               preload: [
                 :author,
+                comment_reactions: [
+                  :author
+                ],
                 replies:
                   ^from(reply in Reply,
                     order_by: [asc: reply.inserted_at],
@@ -890,11 +893,11 @@ defmodule Kalda.Forums do
       {:error, %Ecto.Changeset{}}
 
   """
-  # def update_comment_reaction(%CommentReaction{} = comment_reaction, attrs) do
-  #   comment_reaction
-  #   |> CommentReaction.changeset(attrs)
-  #   |> Repo.update()
-  # end
+  def update_comment_reaction(%CommentReaction{} = comment_reaction, attrs) do
+    comment_reaction
+    |> CommentReaction.changeset(attrs)
+    |> Repo.update()
+  end
 
   # @doc """
   # Deletes a comment_reaction.

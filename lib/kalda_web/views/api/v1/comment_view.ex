@@ -2,6 +2,7 @@ defmodule KaldaWeb.Api.V1.CommentView do
   use KaldaWeb, :view
   alias KaldaWeb.Api.V1.UserView
   alias KaldaWeb.Api.V1.ReplyView
+  alias KaldaWeb.Api.V1.CommentReactionView
 
   def render("show.json", %{comment: comment}) do
     render_comment(comment)
@@ -13,7 +14,9 @@ defmodule KaldaWeb.Api.V1.CommentView do
       content: comment.content,
       inserted_at: comment.inserted_at,
       author: UserView.render_author(comment.author),
-      replies: Enum.map(comment.replies, &ReplyView.render_reply/1)
+      replies: Enum.map(comment.replies, &ReplyView.render_reply/1),
+      comment_reactions:
+        Enum.map(comment.comment_reactions, &CommentReactionView.render_comment_reaction/1)
     }
   end
 end

@@ -913,24 +913,20 @@ defmodule Kalda.ForumsTest do
       assert Forums.get_comment_reactions(comment) == [comment_reaction]
     end
 
-    #   test "get_comment_reaction!/1 returns the comment_reaction with given id" do
-    #     comment_reaction = comment_reaction_fixture()
-    #     assert Forums.get_comment_reaction!(comment_reaction.id) == comment_reaction
-    #   end
+    test "update_comment_reaction/2 with valid data updates the comment_reaction" do
+      user = AccountsFixtures.user()
+      post = ForumsFixtures.post(user)
+      comment = ForumsFixtures.comment(post, user)
 
-    #   test "create_comment_reaction/1 with invalid data returns error changeset" do
-    #     assert {:error, %Ecto.Changeset{}} = Forums.create_comment_reaction(@invalid_attrs)
-    #   end
+      assert {:ok, %CommentReaction{} = comment_reaction} =
+               Forums.create_comment_reaction(user, comment, @valid_cr_attrs)
 
-    #   test "update_comment_reaction/2 with valid data updates the comment_reaction" do
-    #     comment_reaction = comment_reaction_fixture()
+      assert {:ok, %CommentReaction{} = comment_reaction} =
+               Forums.update_comment_reaction(comment_reaction, @update_cr_attrs)
 
-    #     assert {:ok, %CommentReaction{} = comment_reaction} =
-    #              Forums.update_comment_reaction(comment_reaction, @update_attrs)
-
-    #     assert comment_reaction.relate == false
-    #     assert comment_reaction.send_love == false
-    #   end
+      assert comment_reaction.relate == false
+      assert comment_reaction.send_love == false
+    end
 
     #   test "update_comment_reaction/2 with invalid data returns error changeset" do
     #     comment_reaction = comment_reaction_fixture()

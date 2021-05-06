@@ -9,7 +9,11 @@ defmodule KaldaWeb.Api.V1.CommentController do
     post = Forums.get_post!(post_id)
 
     with {:ok, %Comment{} = comment} <- Forums.create_comment(user, post, comment_params) do
-      comment = comment |> Map.put(:author, user) |> Map.put(:replies, [])
+      comment =
+        comment
+        |> Map.put(:author, user)
+        |> Map.put(:replies, [])
+        |> Map.put(:comment_reactions, [])
 
       conn
       |> put_status(201)
@@ -19,7 +23,9 @@ defmodule KaldaWeb.Api.V1.CommentController do
   end
 
   def show(conn, %{"id" => id}) do
-    comment = Forums.get_comment!(id, preload: [:author, replies: [:author]])
+    comment =
+      Forums.get_comment!(id, preload: [:author, replies: [:author], comment_reactions: [:author]])
+
     # render(conn, "show.json", comment: comment, author: comment.author)
     render(conn, "show.json", comment: comment)
   end
