@@ -42,8 +42,8 @@ run mix release
 from alpine:${ALPINE_VERSION}
 label maintainer="Kalda <dev@kalda.co>"
 
-expose 3000
-env PORT=3000 \
+expose 4000
+env PORT=4000 \
   MIX_ENV=prod \
   SHELL=/bin/bash \
   LANG=en_US.UTF-8 \
