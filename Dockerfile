@@ -62,4 +62,4 @@ USER www-kalda
 
 # Run the app as the container starts
 entrypoint ["/app/bin/kalda"]
-cmd ["foreground"]
+cmd ["start"]
