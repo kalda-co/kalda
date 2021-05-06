@@ -15,6 +15,7 @@ alias Kalda.Accounts.Invite
 alias Kalda.Accounts.ReferralLink
 alias Kalda.Forums.Post
 alias Kalda.Forums.Comment
+alias Kalda.Forums.CommentReaction
 alias Kalda.Forums.Reply
 alias Kalda.Forums.Report
 alias Kalda.Events.TherapySession
@@ -91,6 +92,13 @@ comment =
     content: "I feel quite powerful",
     author_id: user.id,
     post_id: post.id
+  })
+
+_comment_reaction =
+  Kalda.Repo.insert!(%CommentReaction{
+    comment_id: comment.id,
+    author_id: user.id,
+    relate: true
   })
 
 _comment =

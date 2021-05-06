@@ -5,8 +5,12 @@ defmodule Kalda.Forums.CommentReaction do
   schema "comment_reactions" do
     field :relate, :boolean, default: false
     field :send_love, :boolean, default: false
-    field :author_id, :id
+    # field :author_id, :id
     field :comment_id, :id
+
+    belongs_to :author, Kalda.Accounts.User,
+      foreign_key: :author_id,
+      references: :id
 
     timestamps()
   end
