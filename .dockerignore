@@ -1,0 +1,14 @@
+.cache
+.elixir_ls
+/.vscode
+/_build
+/bin
+/node_modules
+/priv/static
+/xal-posts
+/xal-posts
+Dockerfile
+docs
+erl_crash.dump
+npm-debug.log
+test

@@ -12,7 +12,7 @@ read_env_or = fn name, default ->
 end
 
 config :kalda, Kalda.Repo,
-  # ssl: true,
+  ssl: true,
   url: read_env.("DATABASE_URL"),
   pool_size: String.to_integer(read_env_or.("POOL_SIZE", "10"))
 
