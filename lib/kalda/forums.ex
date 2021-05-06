@@ -924,32 +924,5 @@ defmodule Kalda.Forums do
     |> Repo.update()
   end
 
-  # @doc """
-  # Deletes a comment_reaction.
-
-  # ## Examples
-
-  #     iex> delete_comment_reaction(comment_reaction)
-  #     {:ok, %CommentReaction{}}
-
-  #     iex> delete_comment_reaction(comment_reaction)
-  #     {:error, %Ecto.Changeset{}}
-
-  # """
-  # def delete_comment_reaction(%CommentReaction{} = comment_reaction) do
-  #   Repo.delete(comment_reaction)
-  # end
-
-  # @doc """
-  # Returns an `%Ecto.Changeset{}` for tracking comment_reaction changes.
-
-  # ## Examples
-
-  #     iex> change_comment_reaction(comment_reaction)
-  #     %Ecto.Changeset{data: %CommentReaction{}}
-
-  # """
-  # def change_comment_reaction(%CommentReaction{} = comment_reaction, attrs \\ %{}) do
-  #   CommentReaction.changeset(comment_reaction, attrs)
-  # end
+  # TODO Background job that deletes all rows for comment_reactions that have relate and send_love as both false. Perhaps 1x per day?
 end

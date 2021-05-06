@@ -11,7 +11,5 @@ defmodule Kalda.Repo.Migrations.CreateReactions do
       timestamps()
     end
 
-    # create unique_index(:comment_reactions, [:comment_id, :author_id], name: :comment_reactions_pkey)
-    # create index(:comment_reactions, [:comment_id, :author_id])
   end
 end
