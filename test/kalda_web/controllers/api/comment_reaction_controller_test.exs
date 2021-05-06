@@ -4,8 +4,15 @@ defmodule KaldaWeb.Api.V1.CommentReactionControllerTest do
   @valid_comment_reaction_content %{
     relate: true
   }
+  @valid_comment_reaction_love_content %{
+    send_love: true
+  }
   @invalid_comment_reaction_content %{
     relate: nil
+  }
+  @valid_comment_reaction_update %{
+    relate: false,
+    send_love: false
   }
 
   setup %{conn: conn} do
@@ -13,15 +20,15 @@ defmodule KaldaWeb.Api.V1.CommentReactionControllerTest do
   end
 
   describe "unauthenticated requests" do
-    test "POST create", ctx do
-      assert ctx.conn |> post("/v1/comments/1/comment_reactions") |> json_response(401)
+    test "PATCH update", ctx do
+      assert ctx.conn |> patch("/v1/comments/1/comment_reactions") |> json_response(401)
     end
   end
 
   describe "POST create" do
     setup [:register_and_log_in_user]
 
-    test "creates comment_reaction for user on comment in daily reflections", %{
+    test "creates comment_reaction relate for user on comment in daily reflections", %{
       conn: conn,
       user: current_user
     } do
@@ -30,7 +37,7 @@ defmodule KaldaWeb.Api.V1.CommentReactionControllerTest do
       comment = Kalda.ForumsFixtures.comment(post, user)
 
       assert conn =
-               post(
+               patch(
                  conn,
                  "/v1/comments/#{comment.id}/comment_reactions",
                  @valid_comment_reaction_content
@@ -42,7 +49,6 @@ defmodule KaldaWeb.Api.V1.CommentReactionControllerTest do
       assert comment_reaction.comment_id == comment.id
 
       assert json_response(conn, 201) == %{
-               "id" => comment_reaction.id,
                "relate" => @valid_comment_reaction_content.relate,
                "send_love" => false,
                "author" => %{
@@ -54,13 +60,99 @@ defmodule KaldaWeb.Api.V1.CommentReactionControllerTest do
              }
     end
 
+    test "creates comment_reaction send_love for user on comment", %{
+      conn: conn,
+      user: current_user
+    } do
+      user = Kalda.AccountsFixtures.user()
+      post = Kalda.ForumsFixtures.post(user)
+      comment = Kalda.ForumsFixtures.comment(post, user)
+
+      assert conn =
+               patch(
+                 conn,
+                 "/v1/comments/#{comment.id}/comment_reactions",
+                 @valid_comment_reaction_love_content
+               )
+
+      assert [comment_reaction] = Kalda.Forums.get_comment_reactions(comment)
+      assert comment_reaction.send_love == @valid_comment_reaction_love_content.send_love
+      assert comment_reaction.author_id == current_user.id
+      assert comment_reaction.comment_id == comment.id
+
+      assert json_response(conn, 201) == %{
+               "send_love" => @valid_comment_reaction_love_content.send_love,
+               "relate" => false,
+               "author" => %{
+                 "id" => current_user.id,
+                 "username" => current_user.username
+               },
+               "comment_id" => comment_reaction.comment_id,
+               "inserted_at" => NaiveDateTime.to_iso8601(comment_reaction.inserted_at)
+             }
+    end
+
+    test "updates comment_reaction for user on comment", %{
+      conn: conn,
+      user: current_user
+    } do
+      user = Kalda.AccountsFixtures.user()
+      post = Kalda.ForumsFixtures.post(user)
+      comment = Kalda.ForumsFixtures.comment(post, user)
+
+      assert conn =
+               patch(
+                 conn,
+                 "/v1/comments/#{comment.id}/comment_reactions",
+                 @valid_comment_reaction_love_content
+               )
+
+      assert [comment_reaction] = Kalda.Forums.get_comment_reactions(comment)
+      assert comment_reaction.send_love == @valid_comment_reaction_love_content.send_love
+      assert comment_reaction.author_id == current_user.id
+      assert comment_reaction.comment_id == comment.id
+
+      assert json_response(conn, 201) == %{
+               "send_love" => true,
+               "relate" => false,
+               "author" => %{
+                 "id" => current_user.id,
+                 "username" => current_user.username
+               },
+               "comment_id" => comment_reaction.comment_id,
+               "inserted_at" => NaiveDateTime.to_iso8601(comment_reaction.inserted_at)
+             }
+
+      assert conn =
+               patch(
+                 conn,
+                 "/v1/comments/#{comment.id}/comment_reactions",
+                 @valid_comment_reaction_update
+               )
+
+      assert json_response(conn, 201) == %{
+               "send_love" => false,
+               "relate" => false,
+               "author" => %{
+                 "id" => current_user.id,
+                 "username" => current_user.username
+               },
+               "comment_id" => comment_reaction.comment_id,
+               "inserted_at" => NaiveDateTime.to_iso8601(comment_reaction.inserted_at)
+             }
+
+      assert [comment_reaction] = Kalda.Forums.get_comment_reactions(comment)
+      assert comment_reaction.send_love == false
+      assert comment_reaction.relate == false
+    end
+
     test "renders 422 with errors for invalid attributes", %{conn: conn, user: _current_user} do
       user = Kalda.AccountsFixtures.user()
       post = Kalda.ForumsFixtures.post(user)
       comment = Kalda.ForumsFixtures.comment(post, user)
 
       assert conn =
-               post(
+               patch(
                  conn,
                  "/v1/comments/#{comment.id}/comment_reactions",
                  @invalid_comment_reaction_content

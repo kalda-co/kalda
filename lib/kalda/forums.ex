@@ -854,20 +854,20 @@ defmodule Kalda.Forums do
 
   ## Examples
 
-      iex> get_comment_reaction!(123)
+      iex> get_comment_reaction!(author_id, comment_id)
       %CommentReaction{}
 
-      iex> get_comment_reaction!(456)
+      iex> get_comment_reaction!(123, 123)
       ** (Ecto.NoResultsError)
 
   """
-  def get_comment_reaction!(id), do: Repo.get!(CommentReaction, id)
+  def get_comment_reaction!(author_id, comment_id),
+    do: Repo.get_by!(CommentReaction, author_id: author_id, comment_id: comment_id)
 
   @doc """
   Creates a comment_reaction.
 
   ## Examples
-
       iex> create_comment_reaction(user, comment, %{field: value})
       {:ok, %CommentReaction{}}
 
@@ -875,10 +875,35 @@ defmodule Kalda.Forums do
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_comment_reaction(user, comment, attrs \\ %{}) do
-    %CommentReaction{author_id: user.id, comment_id: comment.id}
+  def create_comment_reaction(user_id, comment_id, attrs \\ %{}) do
+    %CommentReaction{author_id: user_id, comment_id: comment_id}
     |> CommentReaction.changeset(attrs)
     |> Repo.insert()
+  end
+
+  @doc """
+  Creates or updates a comment_reaction.
+
+  ## Examples
+
+      iex> insert_or_update_comment_reaction(user, comment, %{field: value})
+      {:ok, %CommentReaction{}}
+
+      iex> insert_or_update_comment_reaction(user, comment %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def insert_or_update_comment_reaction(author_id, comment_id, attrs \\ %{}) do
+    # %CommentReaction{author_id: user.id, comment_id: comment.id}
+    # |> CommentReaction.changeset(attrs)
+    # |> Repo.insert_or_update()
+    # |> Repo.insert(conflict_target: [:send_love, :relate])
+    reaction = Repo.get_by(CommentReaction, author_id: author_id, comment_id: comment_id)
+
+    case reaction do
+      nil -> create_comment_reaction(author_id, comment_id, attrs)
+      reaction -> update_comment_reaction(reaction, attrs)
+    end
   end
 
   @doc """
