@@ -12,7 +12,7 @@ npm run deploy
 mix phx.digest
 
 # Remove the existing release directory and build the release
-rm -rf "_build"
+rm -rf "_build/prod/rel"
 mix release
 
 # Run migrations
