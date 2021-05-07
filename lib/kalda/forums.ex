@@ -894,10 +894,6 @@ defmodule Kalda.Forums do
 
   """
   def insert_or_update_comment_reaction(author_id, comment_id, attrs \\ %{}) do
-    # %CommentReaction{author_id: user.id, comment_id: comment.id}
-    # |> CommentReaction.changeset(attrs)
-    # |> Repo.insert_or_update()
-    # |> Repo.insert(conflict_target: [:send_love, :relate])
     reaction = Repo.get_by(CommentReaction, author_id: author_id, comment_id: comment_id)
 
     case reaction do
