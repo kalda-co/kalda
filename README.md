@@ -10,15 +10,11 @@ It is deployed to <https://kalda.co> using <https://render.com>.
 
 ```shell
 # Install deps
-npm install
-mix deps.get
-
-# Prepare the database
-mix ecto.setup
+npm run setup
 
 # Run the test watchers
-npm test
-mix test.watch
+cd frontend && npm test
+cd backend && mix test.watch
 
 # Start all components locally
 npm start

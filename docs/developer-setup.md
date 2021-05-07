@@ -24,49 +24,21 @@ developers may want to use `brew`, Ubuntu Linux developers may want to use
 sudo apt install postgresql
 # Apple OSX
 brew install postgres
+brew services start postgresql
 ```
-
-```sh
-# On Mac check installation and set postgres to run at startup
-pg_ctl -D /usr/local/var/postgres start && brew services start postgresql
-# check it works
-postgres -V
-# Connect to database with your username 'whoami'
-# This is because on Mac the default user is you.
-psql -U 'whoami' postgres
-# If this fails
-cd /usr/local/var/postgres
-initdb postgres
-# now repeat
-psql -U 'whoami' postgres
-# view users
-\du
-```
-
-### Ensuring there is a `postgres` user
 
 Ensure there is a Postgresql user called `postgres` with the password
 `postgres`.
 
-#### ON MAC
-
 ```sh
-createuser -s --replication postgres -P
+createuser -U $USER -s postgres -P
+# Now type in the password `postgres`
 ```
 
-This will run the command to create the postgres user.
-
--s means it will be created as a super user.
---replication means it will be given the replication privilege.
--P prompts for the password. Then you only need to enter postgres for the password.
-Instructions in the documentation [here.](https://www.postgresql.org/docs/13/app-createuser.html
-
-OR (if that didnt work for you) more instructions [here](https://www.codementor.io/@engineerapart/getting-started-with-postgresql-on-mac-osx-are8jcopb#a1-create-role-with-psql)
-
-#### ON LINUX
+If the postgres user already exists but does not have the right password it can
+be set like so:
 
 ```sh
-# On Ubuntu Linux
 sudo -u postgres psql
 \password postgres
 # Now type in the password `postgres`
@@ -92,7 +64,7 @@ in the repo because they are secret or sensitive. Ask a member of the dev team
 for a copy and then place this file at `config/dev_secrets.exs` in the cloned
 folder.
 
-## Set up Elixir, Erlang, and NodeJS (and verion management generally with ASDF)
+## Set up Elixir, Erlang, and NodeJS (and verion management generally with asdf)
 
 We use [asdf](https://github.com/asdf-vm/asdf) to install and manage
 programming languages versions.
@@ -106,7 +78,7 @@ sudo apt install curl git
 brew install coreutils curl git
 ```
 
-## Install asdf.
+## Install asdf
 
 ```sh
 git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.8.0
@@ -149,17 +121,10 @@ this is a good time for a tea break ☕
 asdf install
 ```
 
-## Install application deps
+## Install application deps and prepare the database
 
 ```sh
-mix deps.get
-npm install
-```
-
-## Setup the Kalda database
-
-```sh
-mix ecto.setup
+npm run setup
 ```
 
 ## Run the app locally
