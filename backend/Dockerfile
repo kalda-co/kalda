@@ -21,8 +21,8 @@ RUN mix do \
   deps.compile
 
 # Download npm deps
-COPY package.json package-lock.json ./ 
-RUN npm ci
+COPY assets/package.json assets/package-lock.json ./assets/
+RUN cd assets && npm ci
 
 # Compile backend app
 COPY lib ./lib
@@ -31,7 +31,10 @@ RUN mix compile
 
 # Compile frontend app
 COPY . .
-RUN npm run deploy && mix phx.digest
+RUN cd assets \
+ && npm run deploy \
+ && cd .. \
+ && mix phx.digest
 
 # Compile the release
 RUN mix release
