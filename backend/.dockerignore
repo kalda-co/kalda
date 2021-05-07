@@ -6,7 +6,6 @@
 /node_modules
 /priv/static
 /xal-posts
-/xal-posts
 Dockerfile
 docs
 erl_crash.dump

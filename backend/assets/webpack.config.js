@@ -17,11 +17,11 @@ module.exports = (env, options) => {
       ],
     },
     entry: {
-      app: "./assets/js/app.js",
+      app: "./js/app.js",
     },
     output: {
       filename: "[name].js",
-      path: path.resolve(__dirname, "priv/static/js"),
+      path: path.resolve(__dirname, "../priv/static/js"),
       publicPath: "/js/",
     },
     stats: "minimal",
@@ -42,8 +42,8 @@ module.exports = (env, options) => {
       ],
     },
     plugins: [
-      new MiniCssExtractPlugin({ filename: "../css/app.css" }),
-      new CopyWebpackPlugin([{ from: "assets/static/", to: "../" }]),
+      new MiniCssExtractPlugin({ filename: "../css/[name].css" }),
+      new CopyWebpackPlugin([{ from: "static/", to: "../" }]),
     ].concat(devMode ? [new HardSourceWebpackPlugin()] : []),
   };
 };
