@@ -1,7 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "serve": "snowpack dev",
+    "start": "snowpack dev",
     "check": "svelte-check --watch spa",
     "check-once": "svelte-check spa",
     "deploy": "svelte-check && snowpack build",
