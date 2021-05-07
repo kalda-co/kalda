@@ -1,8 +1,8 @@
 /** @type {import("snowpack").SnowpackUserConfig } */
 module.exports = {
   mount: {
-    "spa/static": { url: "/", static: true },
-    "spa/src": { url: "/src" },
+    static: { url: "/", static: true },
+    src: { url: "/src" },
   },
   plugins: [
     "@snowpack/plugin-svelte",
@@ -16,7 +16,7 @@ module.exports = {
   optimize: {
     /* Example: Bundle your final build: */
     bundle: true,
-    entrypoints: ["spa/src/index.ts"],
+    entrypoints: ["src/index.ts"],
   },
   packageOptions: {
     /* ... */
@@ -28,6 +28,6 @@ module.exports = {
     hmrPort: 4452,
   },
   buildOptions: {
-    out: "priv/static/",
+    out: "dist",
   },
 };

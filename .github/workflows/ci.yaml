@@ -8,7 +8,6 @@ on:
 jobs:
   test-backend:
     runs-on: ubuntu-latest
-
     services:
       db:
         image: postgres:11
@@ -22,11 +21,14 @@ jobs:
           --health-retries 5
     env:
       MIX_ENV: test
+    defaults:
+      run:
+        working-directory: backend
     steps:
       - uses: actions/checkout@v2
       - uses: erlef/setup-elixir@v1
         with:
-          otp-version: '23.2.1'
+          otp-version: '23.3.2'
           elixir-version: '1.11.2'
       - run: mix deps.get
       - run: mix deps.compile
