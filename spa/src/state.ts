@@ -27,6 +27,14 @@ export type Comment = {
   content: string;
   author: User;
   replies: Array<Reply>;
+  commentReactions: Array<CommentReaction>;
+};
+
+export type CommentReaction = {
+  comment: Comment;
+  author: User;
+  relate: boolean;
+  send_love: boolean;
 };
 
 export type Reply = {
