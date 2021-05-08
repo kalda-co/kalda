@@ -54,7 +54,10 @@ export function comment(json: unknown): Comment {
     content: field("content", string)(json),
     author: field("author", user)(json),
     replies: field("replies", array(reply))(json),
-    commentReactions: field("comment_reactions", array(comment_reaction))(json),
+    comment_reactions: field(
+      "comment_reactions",
+      array(comment_reaction)
+    )(json),
   };
 }
 
@@ -76,7 +79,6 @@ export function user(json: unknown): User {
 export function comment_reaction(json: unknown): CommentReaction {
   return {
     author: field("author", user)(json),
-    comment: field("comment", comment)(json),
     relate: field("relate", boolean)(json),
     send_love: field("relate", boolean)(json),
   };

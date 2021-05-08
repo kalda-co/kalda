@@ -42,7 +42,7 @@ export async function createCommentReaction(
   relate: boolean,
   send_love: boolean
 ): Promise<CommentReaction> {
-  let url = `/v1/comments/${commentId}/${authorId}/comment_reactions`;
+  let url = `/v1/comments/${commentId}/reactions`;
   let resp = await httpPost(url, { relate, send_love });
   assertStatus(resp, 201);
   return comment_reaction(resp.body);

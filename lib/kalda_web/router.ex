@@ -133,7 +133,7 @@ defmodule KaldaWeb.Router do
     post "/comments/:id/replies", ReplyController, :create
     post "/comments/:id/reports", ReportController, :report_comment
     post "/replies/:id/reports", ReportController, :report_reply
-    patch "/comments/:id/comment_reactions", CommentReactionController, :update
+    patch "/comments/:id/reactions", CommentReactionController, :update
     get "/*anything", NotFoundController, :not_found
   end
 
