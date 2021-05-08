@@ -14,7 +14,7 @@ import type {
   AppState,
   Comment,
   Therapy,
-  CommentReaction,
+  Reaction,
 } from "../state";
 
 export function appState(json: unknown): AppState {
@@ -54,10 +54,7 @@ export function comment(json: unknown): Comment {
     content: field("content", string)(json),
     author: field("author", user)(json),
     replies: field("replies", array(reply))(json),
-    comment_reactions: field(
-      "comment_reactions",
-      array(comment_reaction)
-    )(json),
+    reactions: field("reactions", array(reaction))(json),
   };
 }
 
@@ -66,6 +63,7 @@ export function reply(json: unknown): Reply {
     id: field("id", number)(json),
     content: field("content", string)(json),
     author: field("author", user)(json),
+    reactions: field("reactions", array(reaction))(json),
   };
 }
 
@@ -76,10 +74,10 @@ export function user(json: unknown): User {
   };
 }
 
-export function comment_reaction(json: unknown): CommentReaction {
+export function reaction(json: unknown): Reaction {
   return {
     author: field("author", user)(json),
     relate: field("relate", boolean)(json),
-    send_love: field("relate", boolean)(json),
+    sendLove: field("send_love", boolean)(json),
   };
 }

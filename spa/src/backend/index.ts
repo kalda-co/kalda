@@ -1,5 +1,5 @@
-import type { Reply, AppState, Comment, CommentReaction } from "../state";
-import { appState, reply, comment, comment_reaction } from "./resources";
+import type { Reply, AppState, Comment, Reaction } from "../state";
+import { appState, reply, comment, reaction } from "./resources";
 import {
   assertStatus,
   httpGet,
@@ -36,16 +36,15 @@ export async function createReply(
   return reply(resp.body);
 }
 
-export async function createCommentReaction(
+export async function createReaction(
   commentId: number,
-  authorId: string,
   relate: boolean,
   send_love: boolean
-): Promise<CommentReaction> {
+): Promise<Reaction> {
   let url = `/v1/comments/${commentId}/reactions`;
   let resp = await httpPost(url, { relate, send_love });
   assertStatus(resp, 201);
-  return comment_reaction(resp.body);
+  return reaction(resp.body);
 }
 
 export async function reportComment(

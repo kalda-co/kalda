@@ -12,7 +12,8 @@ defmodule KaldaWeb.Api.V1.ReplyView do
       content: reply.content,
       author: UserView.render_author(reply.author),
       comment_id: reply.comment_id,
-      inserted_at: reply.inserted_at
+      inserted_at: reply.inserted_at,
+      reactions: []
     }
   end
 end

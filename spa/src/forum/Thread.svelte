@@ -1,12 +1,13 @@
 <script lang="ts">
   import Comment from "./Comment.svelte";
   import ContentTextForm from "./ContentTextForm.svelte";
-  import type { Post } from "../state";
+  import type { Post, User } from "../state";
   import { createComment } from "../backend";
 
   export let post: Post;
   export let placeholder: string;
   export let commentName: string;
+  export let currentUser: User;
 
   async function saveComment(content: string) {
     let comment = await createComment(post.id, content);
@@ -46,7 +47,7 @@
   <section class="comments content">
     <ContentTextForm {placeholder} save={saveComment} buttonText="Send" />
     {#each post.comments as comment (comment.id)}
-      <Comment {comment} />
+      <Comment {comment} {currentUser} />
     {/each}
   </section>
 </article>
