@@ -1,10 +1,16 @@
 <script lang="ts">
-  import type { Comment } from "../state";
-  import { createReply, reportReply, reportComment } from "../backend";
+  import type { Comment, User } from "../state";
+  import {
+    createReply,
+    reportReply,
+    reportComment,
+    createReaction,
+  } from "../backend";
   import ContentTextForm from "./ContentTextForm.svelte";
   import ContentBubble from "./ContentBubble.svelte";
 
   export let comment: Comment;
+  export let currentUser: User;
   let replying = false;
 
   function toggleReplying() {
@@ -28,12 +34,20 @@
     item={comment}
     report={reportComment}
     reply={toggleReplying}
+    reaction={createReaction}
+    {currentUser}
     {replyLine}
   />
 
   <div class="replies">
     {#each comment.replies as reply (reply.id)}
-      <ContentBubble item={reply} report={reportReply} reply={toggleReplying} />
+      <ContentBubble
+        item={reply}
+        report={reportReply}
+        reply={toggleReplying}
+        reaction={createReaction}
+        {currentUser}
+      />
     {/each}
 
     {#if replying}

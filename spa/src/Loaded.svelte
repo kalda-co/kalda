@@ -21,6 +21,7 @@
         <Thread
           placeholder="Your reflection here"
           commentName="reflection"
+          currentUser={state.currentUser}
           {post}
         />
       {/each}
@@ -32,6 +33,7 @@
         <Thread
           placeholder="Your commitment here"
           commentName="commitment"
+          currentUser={state.currentUser}
           {post}
         />
       {/each}

@@ -27,19 +27,20 @@ export type Comment = {
   content: string;
   author: User;
   replies: Array<Reply>;
-  comment_reactions: Array<CommentReaction>;
+  reactions: Array<Reaction>;
 };
 
-export type CommentReaction = {
+export type Reaction = {
   author: User;
   relate: boolean;
-  send_love: boolean;
+  sendLove: boolean;
 };
 
 export type Reply = {
   id: number;
   content: string;
   author: User;
+  reactions: Array<Reaction>;
 };
 
 export type User = {
@@ -67,4 +68,5 @@ export interface BubbleContent {
   id: number;
   author: User;
   content: string;
+  reactions: Array<Reaction>;
 }

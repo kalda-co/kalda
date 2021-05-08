@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { BubbleContent } from "../state";
+  import type { BubbleContent, Reaction, User } from "../state";
   import ContentTextForm from "./ContentTextForm.svelte";
   import { scale } from "svelte/transition";
 
@@ -7,6 +7,20 @@
   export let report: (id: number, reason: string) => Promise<any>;
   export let reply: () => any;
   export let replyLine: boolean = false;
+  export let currentUser: User;
+  // change name to react or saveReact
+  export let reaction: (
+    id: number,
+    relate: boolean,
+    sendLove: boolean
+  ) => Promise<Reaction>;
+
+  let currentUserReactions = item.reactions.find(
+    (reaction) => reaction.author.id === currentUser.id
+  );
+
+  let isRelated = currentUserReactions?.relate;
+  let isLoved = currentUserReactions?.sendLove;
 
   let reporting = false;
   let thanks = false;
@@ -15,6 +29,11 @@
     await report(item.id, reporter_reason);
     reporting = false;
     toggleThanks();
+  }
+
+  async function saveRelate() {
+    await reaction(item.id, true, item.reactions[0].sendLove);
+    // await reaction(item.id, item.reactions[0].relate, true);
   }
 
   function toggleReporting() {
@@ -26,7 +45,28 @@
     thanks = !thanks;
   }
 
+  function toggleReacting() {
+    // reacting = !reacting;
+    // saveRelate();
+    // TODO: async function to send/save/submit the http patch with if true = false and vice versa
+  }
+
   import { fly } from "svelte/transition";
+
+  function makeReactionsCountText() {
+    if (item.reactions.length > 0) {
+      console.log(item.reactions);
+      return ` ${item.reactions.length}`;
+    } else {
+      return "";
+    }
+    // TODO: add names of first 3, use switch to generate and X others
+    // TODO: which reaction is it for image?
+  }
+  let reactionsCountText: string;
+  $: {
+    reactionsCountText = makeReactionsCountText();
+  }
 </script>
 
 {#if thanks}
@@ -72,7 +112,10 @@
   class:reporting
   class:reply-line={!reporting && replyLine}
 >
-  <cite>{item.author.username}</cite>
+  <div class="link-container">
+    <button on:click|preventDefault={toggleReporting}>Report</button>
+    <cite>{item.author.username}</cite>
+  </div>
   <div class="bubble-content">
     {#each item.content.split(/\n/) as line}
       <p>{line}</p>
@@ -81,9 +124,26 @@
   <!-- {item.content} -->
 
   <div class="link-container">
-    <button on:click|preventDefault={toggleReporting}>Report</button>
+    <div class="button-container">
+      <button
+        class:reacting={isRelated}
+        on:click|preventDefault={toggleReacting}>Relate</button
+      >
+      <button class:reacting={isLoved} on:click|preventDefault={toggleReacting}
+        >Send Love</button
+      >
+    </div>
     <button on:click|preventDefault={reply}>Reply</button>
   </div>
+  {#if item.reactions.length > 0}
+    <span>
+      <img
+        src="/images/react-count.svg"
+        alt="A send love icon and a relate icon"
+      />
+      {reactionsCountText}
+    </span>
+  {/if}
 </div>
 
 {#if reporting}
@@ -119,15 +179,6 @@
     pointer-events: none;
   }
 
-  cite {
-    display: block;
-    color: var(--color-purple);
-    margin-bottom: var(--gap-s);
-    font-style: normal;
-    font-size: var(--font-size-s);
-    font-weight: 500;
-  }
-
   .reporting {
     background-color: #f8e5e5;
     border: 2px solid #b60000;
@@ -140,11 +191,20 @@
     flex-direction: row-reverse;
   }
 
-  .link-container > * {
+  .link-container > button {
     text-decoration: underline;
     font-size: var(--font-size-s);
     margin-top: var(--gap-s);
     cursor: pointer;
+  }
+
+  .link-container > cite {
+    display: block;
+    color: var(--color-purple);
+    margin-bottom: var(--gap-s);
+    font-style: normal;
+    font-size: var(--font-size-s);
+    font-weight: 500;
   }
 
   .sidebar {
@@ -229,5 +289,19 @@
     right: 0;
     margin: var(--gap-s);
     position: absolute;
+  }
+
+  .button-container > button {
+    border: 1px solid #4a00b0;
+    box-sizing: border-box;
+    border-radius: 20px;
+    padding: 4px 8px;
+    font-size: 0.8em;
+  }
+  .button-container > button.reacting {
+    background-color: rgb(94, 78, 94);
+  }
+  .button-container > button.relating {
+    background-color: rgb(94, 78, 94);
   }
 </style>
