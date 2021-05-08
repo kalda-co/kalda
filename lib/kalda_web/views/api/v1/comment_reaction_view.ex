@@ -10,9 +10,7 @@ defmodule KaldaWeb.Api.V1.CommentReactionView do
     %{
       relate: comment_reaction.relate,
       send_love: comment_reaction.send_love,
-      author: UserView.render_author(comment_reaction.author),
-      comment_id: comment_reaction.comment_id,
-      inserted_at: comment_reaction.inserted_at
+      author: UserView.render_author(comment_reaction.author)
     }
   end
 end

@@ -27,11 +27,10 @@ export type Comment = {
   content: string;
   author: User;
   replies: Array<Reply>;
-  commentReactions: Array<CommentReaction>;
+  comment_reactions: Array<CommentReaction>;
 };
 
 export type CommentReaction = {
-  comment: Comment;
   author: User;
   relate: boolean;
   send_love: boolean;
