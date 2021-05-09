@@ -8,7 +8,7 @@
   export let reply: () => any;
   export let replyLine: boolean = false;
   export let currentUser: User;
-  // change name to react or saveReact
+  // TODO: change name to react or saveReact
   export let reaction: (
     id: number,
     relate: boolean,
@@ -31,28 +31,42 @@
     toggleThanks();
   }
 
-  async function saveRelate(bool: boolean) {
-    // This is required as we state that EITHER may not exist
-    if (currentUserReactions?.sendLove) {
-      await reaction(item.id, bool, currentUserReactions.sendLove);
-      isRelated = bool;
-      // reactionsCountText = makeReactionsCountText();
+  function insertOrUpdateReaction(
+    reaction: Reaction,
+    reactions: Array<Reaction>
+  ) {
+    let includedOwnReaction = false;
+    let updatedReactions = reactions.map((existing) => {
+      if (existing.author.id === reaction.author.id) {
+        includedOwnReaction = true;
+        return reaction;
+      } else {
+        return existing;
+      }
+    });
+    if (includedOwnReaction) {
+      return updatedReactions;
     } else {
-      await reaction(item.id, bool, false);
-      isRelated = bool;
-      // reactionsCountText = makeReactionsCountText();
+      return [reaction, ...updatedReactions];
     }
-    // reactionsCountText = makeReactionsCountText();
-    // reactionsCountText = reactionsCountText;
+  }
+
+  async function saveRelate(bool: boolean) {
+    let hasLoved = currentUserReactions?.sendLove || false;
+    isRelated = bool;
+    let ownReaction = await reaction(item.id, bool, hasLoved);
+    console.log("relating");
+    item.reactions = insertOrUpdateReaction(ownReaction, item.reactions);
+    reactionsCountText = makeReactionsCountText();
   }
 
   async function saveLove(bool: boolean) {
     if (currentUserReactions?.relate) {
+      isLoved = bool;
       await reaction(item.id, currentUserReactions.relate, bool);
-      isLoved = bool;
     } else {
-      await reaction(item.id, false, bool);
       isLoved = bool;
+      await reaction(item.id, false, bool);
     }
   }
 
@@ -75,28 +89,25 @@
   }
 
   function toggleLoving() {
-    if (isLoved) {
-      saveLove(false);
-    } else {
-      saveLove(true);
-    }
+    saveLove(!isLoved);
+    // if (isLoved) {
+    //   saveLove(false);
+    // } else {
+    //   saveLove(true);
+    // }
   }
 
   import { fly } from "svelte/transition";
 
   function makeReactionsCountText() {
-    if (item.reactions.length > 0) {
-      let loveCount = item.reactions.filter(
-        (reaction) => reaction.sendLove === true
-      );
-      let relateCount = item.reactions.filter(
-        (reaction) => reaction.relate === true
-      );
-      let total = loveCount.length + relateCount.length;
-      return total;
-    } else {
-      return 0;
-    }
+    let loveCount = item.reactions.filter(
+      (reaction) => reaction.sendLove === true
+    );
+    let relateCount = item.reactions.filter(
+      (reaction) => reaction.relate === true
+    );
+    let total = loveCount.length + relateCount.length;
+    return total;
     // TODO: add names of first 3, use switch to generate and X others
     // TODO: which reaction is it for image?
   }
