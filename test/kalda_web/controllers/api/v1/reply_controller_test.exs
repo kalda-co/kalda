@@ -44,6 +44,7 @@ defmodule KaldaWeb.Api.V1.ReplyControllerTest do
                  "username" => current_user.username
                },
                "comment_id" => reply.comment_id,
+               "reactions" => [],
                "inserted_at" => NaiveDateTime.to_iso8601(reply.inserted_at)
              }
     end

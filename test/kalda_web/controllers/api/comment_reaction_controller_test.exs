@@ -54,9 +54,7 @@ defmodule KaldaWeb.Api.V1.CommentReactionControllerTest do
                "author" => %{
                  "id" => current_user.id,
                  "username" => current_user.username
-               },
-               "comment_id" => comment_reaction.comment_id,
-               "inserted_at" => NaiveDateTime.to_iso8601(comment_reaction.inserted_at)
+               }
              }
     end
 
@@ -86,9 +84,7 @@ defmodule KaldaWeb.Api.V1.CommentReactionControllerTest do
                "author" => %{
                  "id" => current_user.id,
                  "username" => current_user.username
-               },
-               "comment_id" => comment_reaction.comment_id,
-               "inserted_at" => NaiveDateTime.to_iso8601(comment_reaction.inserted_at)
+               }
              }
     end
 
@@ -118,9 +114,7 @@ defmodule KaldaWeb.Api.V1.CommentReactionControllerTest do
                "author" => %{
                  "id" => current_user.id,
                  "username" => current_user.username
-               },
-               "comment_id" => comment_reaction.comment_id,
-               "inserted_at" => NaiveDateTime.to_iso8601(comment_reaction.inserted_at)
+               }
              }
 
       assert conn =
@@ -136,9 +130,7 @@ defmodule KaldaWeb.Api.V1.CommentReactionControllerTest do
                "author" => %{
                  "id" => current_user.id,
                  "username" => current_user.username
-               },
-               "comment_id" => comment_reaction.comment_id,
-               "inserted_at" => NaiveDateTime.to_iso8601(comment_reaction.inserted_at)
+               }
              }
 
       assert [comment_reaction] = Kalda.Forums.get_comment_reactions(comment)
