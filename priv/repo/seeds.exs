@@ -1,13 +1,26 @@
-  alias Kalda.Accounts.User
-  alias Kalda.Accounts.Invite
-  alias Kalda.Accounts.ReferralLink
-  alias Kalda.Forums.Post
-  alias Kalda.Forums.Comment
-  alias Kalda.Forums.CommentReaction
-  alias Kalda.Forums.Reply
-  alias Kalda.Forums.Report
-  alias Kalda.Events.TherapySession
-  alias Kalda.Waitlist.Signup
+# Script for populating the database. You can run it as:
+#
+#     mix run priv/repo/seeds.exs
+#
+# Inside the script, you can read and write to any of your
+# repositories directly:
+#
+#     Kalda.Repo.insert!(%Kalda.SomeSchema{})
+#
+# We recommend using the bang functions (`insert!`, `update!`
+# and so on) as they will fail if something goes wrong.
+
+alias Kalda.Accounts.User
+alias Kalda.Accounts.Invite
+alias Kalda.Accounts.ReferralLink
+alias Kalda.Forums.Post
+alias Kalda.Forums.Comment
+alias Kalda.Forums.CommentReaction
+alias Kalda.Forums.ReplyReaction
+alias Kalda.Forums.Reply
+alias Kalda.Forums.Report
+alias Kalda.Events.TherapySession
+alias Kalda.Waitlist.Signup
 
 user =
   Kalda.Repo.insert!(%User{
@@ -136,6 +149,20 @@ _reply1 =
     content: "I do not feel powerful I feel a bit B minus",
     author_id: user.id,
     comment_id: comment.id
+  })
+
+_reply_reaction =
+  Kalda.Repo.insert!(%ReplyReaction{
+    reply_id: reply.id,
+    author_id: user2.id,
+    relate: true
+  })
+
+_reply_reaction =
+  Kalda.Repo.insert!(%ReplyReaction{
+    reply_id: reply.id,
+    author_id: user3.id,
+    send_love: true
   })
 
 _report =

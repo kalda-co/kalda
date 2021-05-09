@@ -1,6 +1,7 @@
 defmodule KaldaWeb.Api.V1.ReplyView do
   use KaldaWeb, :view
   alias KaldaWeb.Api.V1.UserView
+  alias KaldaWeb.Api.V1.ReplyReactionView
 
   def render("show.json", %{reply: reply}) do
     render_reply(reply)
@@ -13,7 +14,7 @@ defmodule KaldaWeb.Api.V1.ReplyView do
       author: UserView.render_author(reply.author),
       comment_id: reply.comment_id,
       inserted_at: reply.inserted_at,
-      reactions: []
+      reactions: Enum.map(reply.reply_reactions, &ReplyReactionView.render_reply_reaction/1)
     }
   end
 end
