@@ -59,7 +59,7 @@
     let ownReaction = await reaction(item.id, bool, hasLoved);
     isRelated = bool;
     item.reactions = insertOrUpdateReaction(ownReaction, item.reactions);
-    reactionsCountText = makeReactionsCountText();
+    reactionsCountText = makeReactionsCount();
   }
 
   async function saveLove(bool: boolean) {
@@ -70,7 +70,7 @@
     let ownReaction = await reaction(item.id, hasRelated, bool);
     isLoved = bool;
     item.reactions = insertOrUpdateReaction(ownReaction, item.reactions);
-    reactionsCountText = makeReactionsCountText();
+    reactionsCountText = makeReactionsCount();
   }
 
   function toggleReporting() {
@@ -91,7 +91,7 @@
 
   import { fly } from "svelte/transition";
 
-  function makeReactionsCountText() {
+  function makeReactionsCount() {
     let loveCount = item.reactions.filter(
       (reaction) => reaction.sendLove === true
     );
@@ -105,7 +105,7 @@
   }
   let reactionsCountText: number;
   $: {
-    reactionsCountText = makeReactionsCountText();
+    reactionsCountText = makeReactionsCount();
   }
 </script>
 
