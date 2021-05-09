@@ -21,7 +21,7 @@ defmodule KaldaWeb.Api.V1.CommentReactionControllerTest do
 
   describe "unauthenticated requests" do
     test "PATCH update", ctx do
-      assert ctx.conn |> patch("/v1/comments/1/comment_reactions") |> json_response(401)
+      assert ctx.conn |> patch("/v1/comments/1/reactions") |> json_response(401)
     end
   end
 
@@ -39,7 +39,7 @@ defmodule KaldaWeb.Api.V1.CommentReactionControllerTest do
       assert conn =
                patch(
                  conn,
-                 "/v1/comments/#{comment.id}/comment_reactions",
+                 "/v1/comments/#{comment.id}/reactions",
                  @valid_comment_reaction_content
                )
 
@@ -71,7 +71,7 @@ defmodule KaldaWeb.Api.V1.CommentReactionControllerTest do
       assert conn =
                patch(
                  conn,
-                 "/v1/comments/#{comment.id}/comment_reactions",
+                 "/v1/comments/#{comment.id}/reactions",
                  @valid_comment_reaction_love_content
                )
 
@@ -103,7 +103,7 @@ defmodule KaldaWeb.Api.V1.CommentReactionControllerTest do
       assert conn =
                patch(
                  conn,
-                 "/v1/comments/#{comment.id}/comment_reactions",
+                 "/v1/comments/#{comment.id}/reactions",
                  @valid_comment_reaction_love_content
                )
 
@@ -126,7 +126,7 @@ defmodule KaldaWeb.Api.V1.CommentReactionControllerTest do
       assert conn =
                patch(
                  conn,
-                 "/v1/comments/#{comment.id}/comment_reactions",
+                 "/v1/comments/#{comment.id}/reactions",
                  @valid_comment_reaction_update
                )
 
@@ -154,7 +154,7 @@ defmodule KaldaWeb.Api.V1.CommentReactionControllerTest do
       assert conn =
                patch(
                  conn,
-                 "/v1/comments/#{comment.id}/comment_reactions",
+                 "/v1/comments/#{comment.id}/reactions",
                  @invalid_comment_reaction_content
                )
 
