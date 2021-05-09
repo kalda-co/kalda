@@ -85,8 +85,15 @@ comment =
 _comment_reaction =
   Kalda.Repo.insert!(%CommentReaction{
     comment_id: comment.id,
-    author_id: user.id,
+    author_id: user2.id,
     relate: true
+  })
+
+_comment_reaction =
+  Kalda.Repo.insert!(%CommentReaction{
+    comment_id: comment.id,
+    author_id: user3.id,
+    send_love: true
   })
 
 _comment =

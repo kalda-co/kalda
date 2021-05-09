@@ -36,16 +36,22 @@
   }
 
   async function saveRelate(bool: boolean) {
+    // This is required as we state that EITHER may not exist
     if (currentUserReactions?.sendLove) {
       await reaction(item.id, bool, currentUserReactions.sendLove);
+      isRelated = bool;
+      // reactionsCountText = makeReactionsCountText();
     } else {
       await reaction(item.id, bool, false);
+      isRelated = bool;
+      // reactionsCountText = makeReactionsCountText();
     }
+    // reactionsCountText = makeReactionsCountText();
+    // reactionsCountText = reactionsCountText;
   }
 
   function toggleReporting() {
     reporting = !reporting;
-    // toggleThanks();
   }
 
   function toggleThanks() {
@@ -58,22 +64,27 @@
     } else {
       saveRelate(true);
     }
-    // TODO: async function to send/save/submit the http patch with if true = false and vice versa
   }
 
   import { fly } from "svelte/transition";
 
   function makeReactionsCountText() {
     if (item.reactions.length > 0) {
-      console.log(item.reactions);
-      return ` ${item.reactions.length}`;
+      let loveCount = item.reactions.filter(
+        (reaction) => reaction.sendLove === true
+      );
+      let relateCount = item.reactions.filter(
+        (reaction) => reaction.relate === true
+      );
+      let total = loveCount.length + relateCount.length;
+      return total;
     } else {
-      return "";
+      return 0;
     }
     // TODO: add names of first 3, use switch to generate and X others
     // TODO: which reaction is it for image?
   }
-  let reactionsCountText: string;
+  let reactionsCountText: number;
   $: {
     reactionsCountText = makeReactionsCountText();
   }
@@ -145,7 +156,7 @@
     </div>
     <button on:click|preventDefault={reply}>Reply</button>
   </div>
-  {#if item.reactions.length > 0}
+  {#if reactionsCountText > 0}
     <span>
       <img
         src="/images/react-count.svg"
