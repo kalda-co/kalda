@@ -19,10 +19,6 @@
     (reaction) => reaction.author.id === currentUser.id
   );
 
-  // let isRelated: boolean | undefined;
-  // $: {
-  //   currentUserReactions?.relate;
-  // }
   let isRelated = currentUserReactions?.relate;
   let isLoved = currentUserReactions?.sendLove;
 
@@ -50,6 +46,16 @@
     // reactionsCountText = reactionsCountText;
   }
 
+  async function saveLove(bool: boolean) {
+    if (currentUserReactions?.relate) {
+      await reaction(item.id, currentUserReactions.relate, bool);
+      isLoved = bool;
+    } else {
+      await reaction(item.id, false, bool);
+      isLoved = bool;
+    }
+  }
+
   function toggleReporting() {
     reporting = !reporting;
   }
@@ -63,6 +69,16 @@
       saveRelate(false);
     } else {
       saveRelate(true);
+    }
+    // reactionsCountText = makeReactionsCountText();
+    // reactionsCountText = reactionsCountText;
+  }
+
+  function toggleLoving() {
+    if (isLoved) {
+      saveLove(false);
+    } else {
+      saveLove(true);
     }
   }
 
@@ -150,7 +166,7 @@
         class:reacting={isRelated}
         on:click|preventDefault={toggleRelating}>Relate</button
       >
-      <button class:reacting={isLoved} on:click|preventDefault={toggleRelating}
+      <button class:reacting={isLoved} on:click|preventDefault={toggleLoving}
         >Send Love</button
       >
     </div>
