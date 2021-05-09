@@ -45,6 +45,7 @@
       }
     });
     if (includedOwnReaction) {
+      //BUG? these return the same
       return updatedReactions;
     } else {
       return [reaction, ...updatedReactions];
@@ -52,23 +53,38 @@
   }
 
   async function saveRelate(bool: boolean) {
+    // seems to send love as false even when it is true (unless it starts as true on load)
+    console.log("current user reactions", currentUserReactions);
     let hasLoved = currentUserReactions?.sendLove || false;
-    isRelated = bool;
+    // isRelated = bool;
     let ownReaction = await reaction(item.id, bool, hasLoved);
-    console.log("relating");
+    isRelated = bool;
+    console.log("saving relate", bool, "(sending love " + hasLoved + ")");
     item.reactions = insertOrUpdateReaction(ownReaction, item.reactions);
     reactionsCountText = makeReactionsCountText();
+    console.log(
+      "new reactions",
+      item.reactions.find((reaction) => reaction.author.id === currentUser.id)
+    );
   }
 
   async function saveLove(bool: boolean) {
-    if (currentUserReactions?.relate) {
-      isLoved = bool;
-      await reaction(item.id, currentUserReactions.relate, bool);
-    } else {
-      isLoved = bool;
-      await reaction(item.id, false, bool);
-    }
+    // TODO: BUG: when I send love it is sending the wrong value for relate
+    // sendLove ALWAYS sends relate as false even if it is meant to be true.
+    console.log("current user reactions", currentUserReactions);
+    let hasRelated = currentUserReactions?.relate || false;
+    let ownReaction = await reaction(item.id, hasRelated, bool);
+    isLoved = bool;
+    console.log("saving love", bool, "(sending relate " + hasRelated + ")");
+    item.reactions = insertOrUpdateReaction(ownReaction, item.reactions);
+    reactionsCountText = makeReactionsCountText();
+    console.log(
+      "new reactions",
+      item.reactions.find((reaction) => reaction.author.id === currentUser.id)
+    );
   }
+
+  // TODO: BUG: You can only add one new react at a time!
 
   function toggleReporting() {
     reporting = !reporting;
@@ -84,17 +100,15 @@
     } else {
       saveRelate(true);
     }
-    // reactionsCountText = makeReactionsCountText();
-    // reactionsCountText = reactionsCountText;
   }
 
   function toggleLoving() {
-    saveLove(!isLoved);
-    // if (isLoved) {
-    //   saveLove(false);
-    // } else {
-    //   saveLove(true);
-    // }
+    // saveLove(!isLoved);
+    if (isLoved) {
+      saveLove(false);
+    } else {
+      saveLove(true);
+    }
   }
 
   import { fly } from "svelte/transition";
@@ -347,9 +361,6 @@
     font-size: 0.8em;
   }
   .button-container > button.reacting {
-    background-color: rgb(94, 78, 94);
-  }
-  .button-container > button.relating {
     background-color: rgb(94, 78, 94);
   }
 </style>
