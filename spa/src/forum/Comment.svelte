@@ -4,7 +4,7 @@
     createReply,
     reportReply,
     reportComment,
-    createReaction,
+    createCommentReaction,
   } from "../backend";
   import ContentTextForm from "./ContentTextForm.svelte";
   import ContentBubble from "./ContentBubble.svelte";
@@ -34,7 +34,7 @@
     item={comment}
     report={reportComment}
     reply={toggleReplying}
-    reaction={createReaction}
+    reaction={createCommentReaction}
     {currentUser}
     {replyLine}
   />
@@ -45,7 +45,7 @@
         item={reply}
         report={reportReply}
         reply={toggleReplying}
-        reaction={createReaction}
+        reaction={createCommentReaction}
         {currentUser}
       />
     {/each}
