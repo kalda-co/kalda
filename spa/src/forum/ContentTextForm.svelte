@@ -10,7 +10,6 @@
   async function submitComment() {
     let content = newContent;
     let sanitisedContent = stripHtml(content);
-    console.log("santisedContent:", sanitisedContent);
     try {
       newContent = "";
       await save(sanitisedContent);
