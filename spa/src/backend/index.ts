@@ -48,6 +48,17 @@ export async function createCommentReaction(
   return reaction(resp.body);
 }
 
+export async function createReplyReaction(
+  replyId: number,
+  relate: boolean,
+  send_love: boolean
+): Promise<Reaction> {
+  let url = `/v1/replies/${replyId}/reactions`;
+  let resp = await httpPatch(url, { relate, send_love });
+  assertStatus(resp, 201);
+  return reaction(resp.body);
+}
+
 export async function reportComment(
   commentId: number,
   reporter_reason: string
