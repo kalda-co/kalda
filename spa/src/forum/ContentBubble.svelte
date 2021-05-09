@@ -55,9 +55,8 @@
       (reaction) => reaction.author.id === currentUser.id
     );
     let hasLoved = newReactions?.sendLove || false;
-    // isRelated = bool;
-    let ownReaction = await reaction(item.id, bool, hasLoved);
     isRelated = bool;
+    let ownReaction = await reaction(item.id, bool, hasLoved);
     item.reactions = insertOrUpdateReaction(ownReaction, item.reactions);
     reactionsCountText = makeReactionsCount();
   }
@@ -67,8 +66,8 @@
       (reaction) => reaction.author.id === currentUser.id
     );
     let hasRelated = newReactions?.relate || false;
-    let ownReaction = await reaction(item.id, hasRelated, bool);
     isLoved = bool;
+    let ownReaction = await reaction(item.id, hasRelated, bool);
     item.reactions = insertOrUpdateReaction(ownReaction, item.reactions);
     reactionsCountText = makeReactionsCount();
   }
