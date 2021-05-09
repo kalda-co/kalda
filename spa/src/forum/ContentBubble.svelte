@@ -8,7 +8,6 @@
   export let reply: () => any;
   export let replyLine: boolean = false;
   export let currentUser: User;
-  // TODO: change name to react or saveReact
   export let reaction: (
     id: number,
     relate: boolean,
@@ -56,17 +55,11 @@
       (reaction) => reaction.author.id === currentUser.id
     );
     let hasLoved = newReactions?.sendLove || false;
-    console.log("pre-send reactions", newReactions);
     // isRelated = bool;
     let ownReaction = await reaction(item.id, bool, hasLoved);
     isRelated = bool;
-    console.log("saving relate", bool, "(sending love " + hasLoved + ")");
     item.reactions = insertOrUpdateReaction(ownReaction, item.reactions);
     reactionsCountText = makeReactionsCountText();
-    console.log(
-      "new reactions",
-      item.reactions.find((reaction) => reaction.author.id === currentUser.id)
-    );
   }
 
   async function saveLove(bool: boolean) {
@@ -74,16 +67,10 @@
       (reaction) => reaction.author.id === currentUser.id
     );
     let hasRelated = newReactions?.relate || false;
-    console.log("pre-send reactions", newReactions);
     let ownReaction = await reaction(item.id, hasRelated, bool);
     isLoved = bool;
-    console.log("saving love", bool, "(sending relate " + hasRelated + ")");
     item.reactions = insertOrUpdateReaction(ownReaction, item.reactions);
     reactionsCountText = makeReactionsCountText();
-    console.log(
-      "new reactions",
-      item.reactions.find((reaction) => reaction.author.id === currentUser.id)
-    );
   }
 
   function toggleReporting() {
