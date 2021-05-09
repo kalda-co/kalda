@@ -4,6 +4,7 @@ import {
   assertStatus,
   httpGet,
   httpPost,
+  httpPatch,
   getCSRFToken,
   setCSRFToken,
 } from "./http";
@@ -42,7 +43,7 @@ export async function createReaction(
   send_love: boolean
 ): Promise<Reaction> {
   let url = `/v1/comments/${commentId}/reactions`;
-  let resp = await httpPost(url, { relate, send_love });
+  let resp = await httpPatch(url, { relate, send_love });
   assertStatus(resp, 201);
   return reaction(resp.body);
 }

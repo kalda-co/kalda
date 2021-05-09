@@ -19,6 +19,10 @@
     (reaction) => reaction.author.id === currentUser.id
   );
 
+  // let isRelated: boolean | undefined;
+  // $: {
+  //   currentUserReactions?.relate;
+  // }
   let isRelated = currentUserReactions?.relate;
   let isLoved = currentUserReactions?.sendLove;
 
@@ -31,9 +35,12 @@
     toggleThanks();
   }
 
-  async function saveRelate() {
-    await reaction(item.id, true, item.reactions[0].sendLove);
-    // await reaction(item.id, item.reactions[0].relate, true);
+  async function saveRelate(bool: boolean) {
+    if (currentUserReactions?.sendLove) {
+      await reaction(item.id, bool, currentUserReactions.sendLove);
+    } else {
+      await reaction(item.id, bool, false);
+    }
   }
 
   function toggleReporting() {
@@ -45,9 +52,12 @@
     thanks = !thanks;
   }
 
-  function toggleReacting() {
-    // reacting = !reacting;
-    // saveRelate();
+  function toggleRelating() {
+    if (isRelated) {
+      saveRelate(false);
+    } else {
+      saveRelate(true);
+    }
     // TODO: async function to send/save/submit the http patch with if true = false and vice versa
   }
 
@@ -127,9 +137,9 @@
     <div class="button-container">
       <button
         class:reacting={isRelated}
-        on:click|preventDefault={toggleReacting}>Relate</button
+        on:click|preventDefault={toggleRelating}>Relate</button
       >
-      <button class:reacting={isLoved} on:click|preventDefault={toggleReacting}
+      <button class:reacting={isLoved} on:click|preventDefault={toggleRelating}
         >Send Love</button
       >
     </div>

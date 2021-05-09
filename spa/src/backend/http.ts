@@ -47,3 +47,7 @@ export async function httpGet(url: string) {
 export async function httpPost(url: string, body: object) {
   return httpRequest("POST", url, body);
 }
+
+export async function httpPatch(url: string, body: object) {
+  return httpRequest("PATCH", url, body);
+}
