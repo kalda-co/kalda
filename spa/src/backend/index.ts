@@ -37,7 +37,7 @@ export async function createReply(
   return reply(resp.body);
 }
 
-export async function createReaction(
+export async function createCommentReaction(
   commentId: number,
   relate: boolean,
   send_love: boolean
