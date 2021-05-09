@@ -187,7 +187,9 @@
         </div>
       </button>
     </div>
-    <button on:click|preventDefault={reply}>Reply</button>
+    <button on:click|preventDefault={reply}
+      ><div id="reply-text">Reply</div></button
+    >
   </div>
   {#if reactionsCountText > 0}
     <span>
@@ -250,7 +252,7 @@
   .link-container > button {
     text-decoration: underline;
     font-size: var(--font-size-s);
-    margin-top: var(--gap-s);
+    margin-bottom: var(--gap-s);
     cursor: pointer;
   }
 
@@ -259,8 +261,8 @@
     color: var(--color-purple);
     margin-bottom: var(--gap-s);
     font-style: normal;
-    font-size: var(--font-size-s);
-    font-weight: 500;
+    font-size: var(--font-size);
+    font-weight: 600;
   }
 
   .sidebar {
@@ -370,9 +372,14 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    padding-top: 4px;
   }
   .count-text {
     font-size: 1em;
     padding-left: 2px;
+  }
+  #reply-text {
+    font-size: 1.2em;
+    font-weight: 600;
   }
 </style>
