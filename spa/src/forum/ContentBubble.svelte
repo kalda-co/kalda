@@ -167,21 +167,38 @@
     <div class="button-container">
       <button
         class:reacting={isRelated}
-        on:click|preventDefault={toggleRelating}>Relate</button
+        on:click|preventDefault={toggleRelating}
       >
-      <button class:reacting={isLoved} on:click|preventDefault={toggleLoving}
-        >Send Love</button
-      >
+        <div class="inner-button-container">
+          <img
+            src="/images/relate.svg"
+            alt="A relate icon shaped like a jellyfish or squid"
+          />
+          <div>&nbsp; Relate</div>
+        </div>
+      </button>
+      <button class:reacting={isLoved} on:click|preventDefault={toggleLoving}>
+        <div class="inner-button-container">
+          <img
+            class="send-love-image"
+            src="/images/send-love.svg"
+            alt="A send love icon shaped like a hand throwing a heart"
+          />
+          <div>&nbsp; Send Love</div>
+        </div>
+      </button>
     </div>
     <button on:click|preventDefault={reply}>Reply</button>
   </div>
   {#if reactionsCountText > 0}
     <span>
-      <img
-        src="/images/react-count.svg"
-        alt="A send love icon and a relate icon"
-      />
-      {reactionsCountText}
+      <div class="reacts-container">
+        <img
+          src="/images/react-count.svg"
+          alt="A send love icon and a relate icon"
+        />
+        <div class="count-text">&nbsp;{reactionsCountText}</div>
+      </div>
     </span>
   {/if}
 </div>
@@ -339,6 +356,24 @@
     font-size: 0.8em;
   }
   .button-container > button.reacting {
-    background-color: rgb(94, 78, 94);
+    background-color: #cdbdff;
+  }
+  .inner-button-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  .send-love-image {
+    padding-top: 4px;
+    padding-bottom: 4px;
+  }
+  .reacts-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  .count-text {
+    font-size: 1em;
+    padding-left: 2px;
   }
 </style>
