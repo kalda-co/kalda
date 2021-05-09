@@ -45,7 +45,6 @@
       }
     });
     if (includedOwnReaction) {
-      //BUG? these return the same
       return updatedReactions;
     } else {
       return [reaction, ...updatedReactions];
@@ -53,9 +52,11 @@
   }
 
   async function saveRelate(bool: boolean) {
-    // seems to send love as false even when it is true (unless it starts as true on load)
-    console.log("current user reactions", currentUserReactions);
-    let hasLoved = currentUserReactions?.sendLove || false;
+    let newReactions = item.reactions.find(
+      (reaction) => reaction.author.id === currentUser.id
+    );
+    let hasLoved = newReactions?.sendLove || false;
+    console.log("pre-send reactions", newReactions);
     // isRelated = bool;
     let ownReaction = await reaction(item.id, bool, hasLoved);
     isRelated = bool;
@@ -69,10 +70,11 @@
   }
 
   async function saveLove(bool: boolean) {
-    // TODO: BUG: when I send love it is sending the wrong value for relate
-    // sendLove ALWAYS sends relate as false even if it is meant to be true.
-    console.log("current user reactions", currentUserReactions);
-    let hasRelated = currentUserReactions?.relate || false;
+    let newReactions = item.reactions.find(
+      (reaction) => reaction.author.id === currentUser.id
+    );
+    let hasRelated = newReactions?.relate || false;
+    console.log("pre-send reactions", newReactions);
     let ownReaction = await reaction(item.id, hasRelated, bool);
     isLoved = bool;
     console.log("saving love", bool, "(sending relate " + hasRelated + ")");
@@ -84,8 +86,6 @@
     );
   }
 
-  // TODO: BUG: You can only add one new react at a time!
-
   function toggleReporting() {
     reporting = !reporting;
   }
@@ -95,20 +95,11 @@
   }
 
   function toggleRelating() {
-    if (isRelated) {
-      saveRelate(false);
-    } else {
-      saveRelate(true);
-    }
+    saveRelate(!isRelated);
   }
 
   function toggleLoving() {
-    // saveLove(!isLoved);
-    if (isLoved) {
-      saveLove(false);
-    } else {
-      saveLove(true);
-    }
+    saveLove(!isLoved);
   }
 
   import { fly } from "svelte/transition";
