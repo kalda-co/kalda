@@ -134,6 +134,7 @@ defmodule KaldaWeb.Router do
     post "/comments/:id/reports", ReportController, :report_comment
     post "/replies/:id/reports", ReportController, :report_reply
     patch "/comments/:id/reactions", CommentReactionController, :update
+    patch "/replies/:id/reactions", ReplyReactionController, :update
     get "/*anything", NotFoundController, :not_found
   end
 

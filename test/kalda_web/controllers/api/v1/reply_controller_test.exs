@@ -21,7 +21,7 @@ defmodule KaldaWeb.Api.V1.ReplyControllerTest do
   describe "POST create" do
     setup [:register_and_log_in_user]
 
-    test "creates reply for user on post in daily reflections", %{
+    test "creates reply for user on comment in daily reflections", %{
       conn: conn,
       user: current_user
     } do

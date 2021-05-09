@@ -14,6 +14,8 @@ defmodule Kalda.Forums.Reply do
       foreign_key: :comment_id,
       references: :id
 
+    has_many :reply_reactions, Kalda.Forums.ReplyReaction
+
     timestamps()
   end
 

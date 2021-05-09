@@ -119,7 +119,12 @@ defmodule Kalda.Forums do
                 replies:
                   ^from(reply in Reply,
                     order_by: [asc: reply.inserted_at],
-                    preload: [:author]
+                    preload: [
+                      :author,
+                      reply_reactions: [
+                        :author
+                      ]
+                    ]
                   )
               ]
             )
@@ -920,5 +925,100 @@ defmodule Kalda.Forums do
     |> Repo.update()
   end
 
-  # TODO Background job that deletes all rows for comment_reactions that have relate and send_love as both false. Perhaps 1x per day?
+  alias Kalda.Forums.ReplyReaction
+
+  @doc """
+  Returns the list of reply_reactions for reply.
+
+  ## Examples
+
+      iex> get_reply_reactions(reply)
+      [%ReplyReaction{}, ...]
+
+  """
+
+  def get_reply_reactions(reply, opts \\ []) do
+    preload = opts[:preload] || []
+
+    Repo.all(
+      from reply_reaction in ReplyReaction,
+        where: reply_reaction.reply_id == ^reply.id,
+        preload: ^preload
+    )
+  end
+
+  @doc """
+  Gets a single reply_reaction.
+
+  Raises `Ecto.NoResultsError` if the ReplyReaction does not exist.
+
+  ## Examples
+
+      iex> get_reply_reaction!(author_id, reply_id)
+      %ReplyReaction{}
+
+      iex> get_reply_reaction!(123, 123)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_reply_reaction!(author_id, reply_id),
+    do: Repo.get_by!(ReplyReaction, author_id: author_id, reply_id: reply_id)
+
+  @doc """
+  Creates a reply_reaction.
+
+  ## Examples
+      iex> create_reply_reaction(user, reply, %{field: value})
+      {:ok, %ReplyReaction{}}
+
+      iex> create_reply_reaction(user, reply %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_reply_reaction(user_id, reply_id, attrs \\ %{}) do
+    %ReplyReaction{author_id: user_id, reply_id: reply_id}
+    |> ReplyReaction.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Creates or updates a reply_reaction.
+
+  ## Examples
+
+      iex> insert_or_update_reply_reaction(user, reply, %{field: value})
+      {:ok, %ReplyReaction{}}
+
+      iex> insert_or_update_reply_reaction(user, reply %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def insert_or_update_reply_reaction(author_id, reply_id, attrs \\ %{}) do
+    reaction = Repo.get_by(ReplyReaction, author_id: author_id, reply_id: reply_id)
+
+    case reaction do
+      nil -> create_reply_reaction(author_id, reply_id, attrs)
+      reaction -> update_reply_reaction(reaction, attrs)
+    end
+  end
+
+  @doc """
+  Updates a reply_reaction.
+
+  ## Examples
+
+      iex> update_reply_reaction(reply_reaction, %{field: new_value})
+      {:ok, %ReplyReaction{}}
+
+      iex> update_reply_reaction(reply_reaction, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_reply_reaction(%ReplyReaction{} = reply_reaction, attrs) do
+    reply_reaction
+    |> ReplyReaction.changeset(attrs)
+    |> Repo.update()
+  end
+
+  # TODO Background job that deletes all rows for reply_reactions that have relate and send_love as both false. Perhaps 1x per day?
 end
