@@ -10,19 +10,24 @@ defmodule Kalda.MixProject do
       elixirc_options: [warnings_as_errors: !!System.get_env("CI")],
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
+      default_release: :kalda,
+      releases: releases(),
       aliases: aliases(),
       deps: deps()
     ]
   end
 
   # Configuration for the OTP application.
-  #
-  # Type `mix help compile.app` for more information.
   def application do
     [
       mod: {Kalda.Application, []},
-      extra_applications: [:logger, :runtime_tools, :rollbax]
+      extra_applications: [:logger, :runtime_tools, :rollbax, :ssl]
     ]
+  end
+
+  # Configuration for the OTP release.
+  def releases do
+    [kalda: [include_executables_for: [:unix]]]
   end
 
   # Specifies which paths to compile per environment.
@@ -30,8 +35,6 @@ defmodule Kalda.MixProject do
   defp elixirc_paths(_), do: ["lib"]
 
   # Specifies your project dependencies.
-  #
-  # Type `mix help deps` for examples and options.
   defp deps do
     [
       # SMTP email sending
