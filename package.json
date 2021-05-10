@@ -5,7 +5,7 @@
     "frontend": "cd frontend && npm start",
     "frontend-checker": "cd frontend && npm run check",
     "backend": "cd backend && mix phx.server",
-    "setup": "npm run setup-frontend && npm run setup-backend",
+    "setup": "npm install && npm run setup-frontend && npm run setup-backend",
     "setup-backend": "cd backend && mix deps.get && cd assets && npm install && cd .. && mix ecto.setup",
     "setup-frontend": "cd frontend && npm install"
   },
