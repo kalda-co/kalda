@@ -55,11 +55,10 @@ WORKDIR $HOME
 COPY --from=release-builder /app/_build/prod/rel/kalda ./
 
 # Install OS deps and create unprivileged user to run app as
-RUN apk add --no-cache openssl-dev bash libgcc \
+RUN apk add --no-cache openssl-dev bash libgcc curl \
   && adduser -S www-kalda \
   && chown --recursive www-kalda $HOME
 USER www-kalda
 
 # Run the app as the container starts
-ENTRYPOINT ["/app/bin/kalda"]
-CMD ["start"]
+CMD ["/app/bin/kalda", "start"]
