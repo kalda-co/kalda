@@ -1,25 +1,13 @@
-# Script for populating the database. You can run it as:
-#
-#     mix run priv/repo/seeds.exs
-#
-# Inside the script, you can read and write to any of your
-# repositories directly:
-#
-#     Kalda.Repo.insert!(%Kalda.SomeSchema{})
-#
-# We recommend using the bang functions (`insert!`, `update!`
-# and so on) as they will fail if something goes wrong.
-
-alias Kalda.Accounts.User
-alias Kalda.Accounts.Invite
-alias Kalda.Accounts.ReferralLink
-alias Kalda.Forums.Post
-alias Kalda.Forums.Comment
-alias Kalda.Forums.CommentReaction
-alias Kalda.Forums.Reply
-alias Kalda.Forums.Report
-alias Kalda.Events.TherapySession
-alias Kalda.Waitlist.Signup
+  alias Kalda.Accounts.User
+  alias Kalda.Accounts.Invite
+  alias Kalda.Accounts.ReferralLink
+  alias Kalda.Forums.Post
+  alias Kalda.Forums.Comment
+  alias Kalda.Forums.CommentReaction
+  alias Kalda.Forums.Reply
+  alias Kalda.Forums.Report
+  alias Kalda.Events.TherapySession
+  alias Kalda.Waitlist.Signup
 
 user =
   Kalda.Repo.insert!(%User{

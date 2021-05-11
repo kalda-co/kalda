@@ -4,5 +4,8 @@
     "review": {
       "addons": ["heroku-postgresql:hobby-dev"]
     }
+  },
+  "scripts": {
+    "postdeploy": "POOL_SIZE=2 /app/bin/kalda eval Kalda.ReleaseTask.seed"
   }
 }
