@@ -6,7 +6,7 @@ defmodule KaldaWeb.SignupController do
   def create(conn, %{"signup" => %{"email" => email}}) do
     case Waitlist.get_or_create_signup(email) do
       {:ok, signup} ->
-        Waitlist.regsiter_with_sendfox!(signup.email)
+        Waitlist.register_with_sendfox!(signup.email)
 
         conn
         |> put_flash(:info, "Signup created successfully.")
