@@ -115,7 +115,6 @@
     let reactAuthors = [
       ...new Set([...loveCountAuthors, ...relateCountAuthors]),
     ];
-    // console.log(reactAuthors);
     let total = loveCount.length + relateCount.length;
     if (reactAuthors.length > 4) {
       let string =
@@ -129,7 +128,6 @@
         " & " +
         (total - 3) +
         " others";
-      console.log("string 4", string);
       return string;
     } else if (reactAuthors.length > 3) {
       let string =
@@ -143,7 +141,6 @@
         " & " +
         (total - 3) +
         " other";
-      console.log("string 3", string);
       return string;
     } else if (reactAuthors.length > 2) {
       let string =
@@ -154,18 +151,16 @@
         reactAuthors[1] +
         ", " +
         reactAuthors[2];
-      console.log("string 2", string);
       return string;
     } else if (reactAuthors.length > 1) {
       let string = total + " : " + reactAuthors[0] + ", " + reactAuthors[1];
-      console.log("string 1", string);
       return string;
     } else {
       let string = total + " :  " + reactAuthors[0];
-      console.log("string 0 ", string);
       return string;
     }
     // TODO: which reaction is it for react-count image?
+    // TODO: randomise
   }
   let reactionsCount: number;
   $: {
