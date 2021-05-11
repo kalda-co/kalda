@@ -60,4 +60,4 @@ We also work in partnership with charities like Stonewall and mermaids. And thos
 
 ### How do I join Kalda?
 
-All you need to do is ask a friend to recommend you and onboard you to the Kalda journey. That will take you through our onboarding video, and our chat guide or give you the guide version, and they'll let you know what it's all about and let you decide together. If Kalda is right for you. And if you are committed to contributing and can maintaining the safe space that Kalda is.
+if you are committed to maintaining the safe space that is our Kalda community, all you need to do is sign up below, and we will call you or send you a guidelines form to onboard you to the Kalda App journey. Alternatively, join our [Facebook group](https://www.facebook.com/groups/kalda) for an idea of what to expect from the Kalda community and to find out if Kalda is right for you!

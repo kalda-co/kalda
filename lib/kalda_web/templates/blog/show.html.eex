@@ -34,4 +34,23 @@
   <article class="blog-content">
     <%= raw @post.body %>
   </article>
+
+  <br/>
+  <h3 class="text-center"> Get Kalda the app, and our newsletter here! <h3>
+  <h2 class="text-center"> Get well, get happy, get it, together.  </h2>
+      <p>
+        We are so excited to have you join us. It's going to be great. If you aren't on our waiting list you can sign up here. By signing up you agree to be notified by email when the next set of app spaces becomes available. You also agree to get our newsletter, although you can opt out of that at any time, but we think it's awesome.
+      </p>
+        <%= if @signup_changeset.action do %>
+          <div class="alert alert-danger">
+            Oops, something went wrong! Please try again.
+          </div>
+        <% end %>
+        <%= form_for @signup_changeset, Routes.signup_path(@conn, :create), [class: "landing-form js-waitlist-form"], fn f -> %>
+          <%= email_input f, :email, required: true, placeholder: "me@email.com" %>
+          <%= submit "Sign up", class: "gradient button" %>
+        <% end %>
+      <p>
+        We will never sell your data. Ever.
+      </p>
 </div>

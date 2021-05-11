@@ -23,12 +23,12 @@ defmodule Kalda.Waitlist do
   Makes a post request to the sendfox contact list (Waitlist Newsletter)
   Raises exception if fails
   ## Examples
-    iex> regsiter_with_sendfox(email)
+    iex> register_with_sendfox(email)
     :ok
-    iex> regsiter_with_sendfox("")
+    iex> register_with_sendfox("")
     ** throws exception
   """
-  def regsiter_with_sendfox!(email) do
+  def register_with_sendfox!(email) do
     list_id = Application.get_env(:kalda, :sendfox_list_id)
     token = Application.get_env(:kalda, :sendfox_api_token)
 

@@ -16,7 +16,8 @@
   <div class="unfeatured-blog-all">
     <%= for post <- @posts do %>
     <div class="unfeatured-blog">
-      <img class="unfeatured-blog-image" src="<%=post.image%>"> </img>
+      <img class="unfeatured-blog-image" src="<%=post.image%>"/>
+
           <%# <div class="unfeatured-blog-image" style="background-image: url(<%= post.image %>
       <div class="unfeatured-blog-name">
         <%= link "#{post.title}", to: Routes.blog_path(@conn, :show, post) %>
@@ -24,5 +25,6 @@
     </div>
     <% end %>
   </div>
+
 
 </div>
