@@ -247,19 +247,19 @@
     display: flex;
     justify-content: space-between;
     flex-direction: row-reverse;
+    align-items: center;
+    margin-bottom: var(--gap-s);
   }
 
   .link-container > button {
     text-decoration: underline;
     font-size: var(--font-size-s);
-    margin-bottom: var(--gap-s);
     cursor: pointer;
   }
 
   .link-container > cite {
     display: block;
     color: var(--color-purple);
-    margin-bottom: var(--gap-s);
     font-style: normal;
     font-size: var(--font-size);
     font-weight: 600;
@@ -350,14 +350,17 @@
   }
 
   .button-container > button {
-    border: 1px solid #4a00b0;
+    border: 1px solid #c300be;
     box-sizing: border-box;
     border-radius: 20px;
     padding: 4px 8px;
     font-size: 0.8em;
+    color: #c300be;
+    font-weight: 600;
   }
   .button-container > button.reacting {
-    background-color: #cdbdff;
+    background-color: #ffb0fd;
+    font-weight: 600;
   }
   .inner-button-container {
     display: flex;
@@ -372,13 +375,12 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding-top: 4px;
   }
   .count-text {
     font-size: 1em;
     padding-left: 2px;
   }
-  #reply-text {
+  button #reply-text {
     font-size: 1.2em;
     font-weight: 600;
   }
