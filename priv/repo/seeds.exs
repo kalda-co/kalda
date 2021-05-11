@@ -48,6 +48,22 @@ user3 =
     hashed_password: Bcrypt.hash_pwd_salt("thisisatestpassword")
   })
 
+user4 =
+  Kalda.Repo.insert!(%User{
+    username: "Janelle_M",
+    email: "janem@example.com",
+    password: "thisisatestpassword",
+    hashed_password: Bcrypt.hash_pwd_salt("thisisatestpassword")
+  })
+
+user5 =
+  Kalda.Repo.insert!(%User{
+    username: "Elliot_P",
+    email: "page@example.com",
+    password: "thisisatestpassword",
+    hashed_password: Bcrypt.hash_pwd_salt("thisisatestpassword")
+  })
+
 post =
   Kalda.Repo.insert!(%Post{
     content: "This is your very first Daily Reflection - does it feel powerful?",
@@ -154,6 +170,13 @@ _reply1 =
 _reply_reaction =
   Kalda.Repo.insert!(%ReplyReaction{
     reply_id: reply.id,
+    author_id: user.id,
+    send_love: true
+  })
+
+_reply_reaction =
+  Kalda.Repo.insert!(%ReplyReaction{
+    reply_id: reply.id,
     author_id: user2.id,
     relate: true
   })
@@ -162,6 +185,20 @@ _reply_reaction =
   Kalda.Repo.insert!(%ReplyReaction{
     reply_id: reply.id,
     author_id: user3.id,
+    send_love: true
+  })
+
+_reply_reaction =
+  Kalda.Repo.insert!(%ReplyReaction{
+    reply_id: reply.id,
+    author_id: user4.id,
+    relate: true
+  })
+
+_reply_reaction =
+  Kalda.Repo.insert!(%ReplyReaction{
+    reply_id: reply.id,
+    author_id: user5.id,
     send_love: true
   })
 
