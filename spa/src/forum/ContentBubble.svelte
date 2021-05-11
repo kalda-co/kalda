@@ -58,7 +58,8 @@
     isRelated = bool;
     let ownReaction = await reaction(item.id, bool, hasLoved);
     item.reactions = insertOrUpdateReaction(ownReaction, item.reactions);
-    reactionsCountText = makeReactionsCount();
+    reactionsCount = makeReactionsCount();
+    reactionsCountText = makeReactionsCountText();
   }
 
   async function saveLove(bool: boolean) {
@@ -69,7 +70,8 @@
     isLoved = bool;
     let ownReaction = await reaction(item.id, hasRelated, bool);
     item.reactions = insertOrUpdateReaction(ownReaction, item.reactions);
-    reactionsCountText = makeReactionsCount();
+    reactionsCount = makeReactionsCount();
+    reactionsCountText = makeReactionsCountText();
   }
 
   function toggleReporting() {
@@ -99,12 +101,79 @@
     );
     let total = loveCount.length + relateCount.length;
     return total;
-    // TODO: add names of first 3, use switch to generate and X others
-    // TODO: which reaction is it for image?
   }
-  let reactionsCountText: number;
+
+  function makeReactionsCountText() {
+    let loveCount = item.reactions.filter(
+      (reaction) => reaction.sendLove === true
+    );
+    let loveCountAuthors = loveCount.map((item) => item.author.username);
+    let relateCount = item.reactions.filter(
+      (reaction) => reaction.relate === true
+    );
+    let relateCountAuthors = relateCount.map((item) => item.author.username);
+    let reactAuthors = [
+      ...new Set([...loveCountAuthors, ...relateCountAuthors]),
+    ];
+    // console.log(reactAuthors);
+    let total = loveCount.length + relateCount.length;
+    if (reactAuthors.length > 4) {
+      let string =
+        total +
+        " :  " +
+        reactAuthors[0] +
+        ", " +
+        reactAuthors[1] +
+        ", " +
+        reactAuthors[2] +
+        " & " +
+        (total - 3) +
+        " others";
+      console.log("string 4", string);
+      return string;
+    } else if (reactAuthors.length > 3) {
+      let string =
+        total +
+        " :  " +
+        reactAuthors[0] +
+        ", " +
+        reactAuthors[1] +
+        ", " +
+        reactAuthors[2] +
+        " & " +
+        (total - 3) +
+        " other";
+      console.log("string 3", string);
+      return string;
+    } else if (reactAuthors.length > 2) {
+      let string =
+        total +
+        " :  " +
+        reactAuthors[0] +
+        ", " +
+        reactAuthors[1] +
+        ", " +
+        reactAuthors[2];
+      console.log("string 2", string);
+      return string;
+    } else if (reactAuthors.length > 1) {
+      let string = total + " : " + reactAuthors[0] + ", " + reactAuthors[1];
+      console.log("string 1", string);
+      return string;
+    } else {
+      let string = total + " :  " + reactAuthors[0];
+      console.log("string 0 ", string);
+      return string;
+    }
+    // TODO: which reaction is it for react-count image?
+  }
+  let reactionsCount: number;
   $: {
-    reactionsCountText = makeReactionsCount();
+    reactionsCount = makeReactionsCount();
+  }
+  let reactionsCountText: string;
+  $: {
+    reactionsCountText = makeReactionsCountText();
   }
 </script>
 
@@ -191,14 +260,17 @@
       ><div id="reply-text">Reply</div></button
     >
   </div>
-  {#if reactionsCountText > 0}
+  {#if reactionsCount > 0}
     <span>
       <div class="reacts-container">
         <img
           src="/images/react-count.svg"
           alt="A send love icon and a relate icon"
         />
-        <div class="count-text">&nbsp;{reactionsCountText}</div>
+        <div class="names-container">
+          <!-- <div class="count-text">{reactionsCount}</div> -->
+          <div class="count-names">{reactionsCountText}</div>
+        </div>
       </div>
     </span>
   {/if}
@@ -284,7 +356,9 @@
   }
 
   .bubble-content p {
+    padding-bottom: var(--gap);
     word-wrap: break-word;
+    font-weight: 500;
   }
 
   .bubble-content p:first-child {
@@ -376,9 +450,19 @@
     flex-direction: row;
     align-items: center;
   }
-  .count-text {
+  .names-container {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+  }
+  /* .count-text {
+    font-size: 1.1em;
+    padding-left: var(--gap-s);
+    font-weight: 600;
+  } */
+  .count-names {
+    padding-left: var(--gap-s);
     font-size: 1em;
-    padding-left: 2px;
   }
   button #reply-text {
     font-size: 1.2em;
