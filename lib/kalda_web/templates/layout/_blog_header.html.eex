@@ -2,12 +2,20 @@
   <a href="/"><img  class='site-page-logo' src="/images/kalda-rainbow-logo.svg"></a>
   <div class="site-page-header-spacer"></div>
   <nav class="site-page-header-links">
-    <%= if @current_user do %>
-      <%= link "Log out" , to: Routes.user_session_path(@conn, :delete), class: "gradient button" , method: :delete %>
-      <a class="gradient button" href="mailto:hello@kalda.co">Contact Us</a>
+    <%= if Routes.blog_path(@conn, :index) == @conn.request_path do %>
+      <%= if @current_user do %>
+        <%= link "Log out" , to: Routes.user_session_path(@conn, :delete), class: "gradient button" , method: :delete %>
+      <% else %>
+        <%= link "Log in" , to: Routes.user_session_path(@conn, :new), class: "gradient button" %>
+      <% end %>
     <% else %>
-      <%#= link "Log in" , to: Routes.user_session_path(@conn, :new), class: "button login-button" %>
-      <a class="gradient button" name = "signup" href="mailto:hello@kalda.co">Contact Us</a>
+      <%= if @current_user do %>
+        <a class="gradient button" href="<%= Routes.blog_path(@conn, :index) %>">Blog</a>
+        <%= link "Log out" , to: Routes.user_session_path(@conn, :delete), class: "gradient button" , method: :delete %>
+      <% else %>
+        <a class="gradient button" href="<%= Routes.blog_path(@conn, :index) %>">Blog</a>
+        <%= link "Log in" , to: Routes.user_session_path(@conn, :new), class: "gradient button" %>
+      <% end %>
     <% end %>
   </nav>
 </header>

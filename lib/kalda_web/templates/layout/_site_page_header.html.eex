@@ -3,8 +3,15 @@
   <div class="site-page-header-spacer"></div>
   <nav class="site-page-header-links">
     <a class="gradient button" href="/dashboard">App</a>
-    <%= if @current_user && @current_user.is_admin do %>
-      <a class="gradient button" href="/admin">Admin</a>
+    <%= if @current_user do %>
+      <a class="gradient button" href="<%= Routes.blog_path(@conn, :index) %>">Blog</a>
+      <%= link "Log out" , to: Routes.user_session_path(@conn, :delete), class: "gradient button" , method: :delete %>
+      <%= if @current_user.is_admin do %>
+        <a class="admin-button" href="/admin">Admin</a>
+      <% end %>
+    <% else %>
+      <%= link "Log in" , to: Routes.user_session_path(@conn, :new), class: "gradient button" %>
+      <a class="gradient button" href="<%= Routes.blog_path(@conn, :index) %>">Blog</a>
     <% end %>
     <a class="gradient button" name="contact" href="mailto:hello@kalda.co">Contact Us</a>
   </nav>
