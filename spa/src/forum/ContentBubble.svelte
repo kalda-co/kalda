@@ -119,7 +119,8 @@
     if (reactAuthors.length > 4) {
       let string =
         total +
-        " :  " +
+        " " +
+        "\xa0 " +
         reactAuthors[0] +
         ", " +
         reactAuthors[1] +
@@ -132,7 +133,8 @@
     } else if (reactAuthors.length > 3) {
       let string =
         total +
-        " :  " +
+        " " +
+        "\xa0 " +
         reactAuthors[0] +
         ", " +
         reactAuthors[1] +
@@ -145,7 +147,8 @@
     } else if (reactAuthors.length > 2) {
       let string =
         total +
-        " :  " +
+        " " +
+        "\xa0 " +
         reactAuthors[0] +
         ", " +
         reactAuthors[1] +
@@ -153,10 +156,11 @@
         reactAuthors[2];
       return string;
     } else if (reactAuthors.length > 1) {
-      let string = total + " : " + reactAuthors[0] + ", " + reactAuthors[1];
+      let string =
+        total + " " + "\xa0 " + reactAuthors[0] + ", " + reactAuthors[1];
       return string;
     } else {
-      let string = total + " :  " + reactAuthors[0];
+      let string = total + " " + "\xa0 " + reactAuthors[0];
       return string;
     }
     // TODO: which reaction is it for react-count image?
@@ -423,13 +427,13 @@
     box-sizing: border-box;
     border-radius: 20px;
     padding: 4px 8px;
-    font-size: 0.8em;
+    font-size: var(--font-size-s);
     color: #c300be;
-    font-weight: 600;
+    font-weight: 400;
   }
   .button-container > button.reacting {
     background-color: #ffb0fd;
-    font-weight: 600;
+    font-weight: 400;
   }
   .inner-button-container {
     display: flex;
@@ -457,10 +461,11 @@
   } */
   .count-names {
     padding-left: var(--gap-s);
-    font-size: 1em;
+    font-size: var(--font-size-s);
   }
   button #reply-text {
-    font-size: 1.2em;
+    /* font-size: 1.2em; */
+    font-size: var(--font-size-s);
     font-weight: 600;
   }
 </style>
