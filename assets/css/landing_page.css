@@ -224,6 +224,16 @@ div.hero-lhs p {
   margin-left: var(--gap-s);
 }
 
+.site-page-header-links :first-child {
+  margin-left: 0px;
+}
+
+.admin-button {
+  color: white;
+  text-decoration: underline;
+  padding-top: 8px;
+}
+
 .container {
   display: block;
   max-width: 100%;
@@ -309,6 +319,10 @@ Media queries don't accept css variables so they still need to be changes manual
   font-size: var(--font-size-l);
   background-color: var(--color-purple);
   padding: var(--gap-xxl) 0;
+}
+
+.site-footer-column:last-child {
+  text-align: right;
 }
 
 .site-footer-content {

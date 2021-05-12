@@ -17,11 +17,6 @@
       <div class="blog-author">
         <%= @post.author %>
       </div>
-      <div><span></span></div>
-      <div><span></span></div>
-      <div><span></span></div>
-      <div><span></span></div>
-      <div><span></span></div>
     </div>
   </div>
 

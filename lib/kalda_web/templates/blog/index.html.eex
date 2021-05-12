@@ -1,30 +1,27 @@
 <div class="blog-hero">
-  <img src="images/kalda-neon-white.svg" alt="Kalda lettering in neon white" />
+  <a target="_blank" href="/">
+    <img src="images/kalda-neon-white.svg" alt="Kalda lettering in neon white" />
+  </a>
 </div>
-<div class="blog-all">
+<div class="blog-container">
 
-  <div class="featured-blog">
-    <div class="featured-blog-image" style="background-image: url(<%= @featured.image %>)">
-    </div>
-    <div class="featured-blog-name">
-      <div>
-        <h1><%= link "#{@featured.title}", to: Routes.blog_path(@conn, :show, @featured) %></h1>
-        <h3><%= @featured.subtitle %></h3>
+  <div class="featured-blog-container">
+    <a href="<%= Routes.blog_path(@conn, :show, @featured) %>">
+      <div class="featured-blog-image" style="background-image: url(<%= @featured.image %>)"> </div>
+      <div class="featured-blog-name">
+          <h1><%= @featured.title %></h1>
+          <h3><%= @featured.subtitle %></h3>
       </div>
-    </div>
+    </a>
   </div>
-  <div class="unfeatured-blog-all">
+  <div class="unfeatured-blog-container">
     <%= for post <- @posts do %>
-    <div class="unfeatured-blog">
-      <img class="unfeatured-blog-image" src="<%=post.image%>"/>
-
-          <%# <div class="unfeatured-blog-image" style="background-image: url(<%= post.image %>
-      <div class="unfeatured-blog-name">
-        <%= link "#{post.title}", to: Routes.blog_path(@conn, :show, post) %>
-      </div>
-    </div>
+      <%= link to: Routes.blog_path(@conn, :show, post) do %>
+        <div class="unfeatured-blog">
+          <img class="unfeatured-blog-image" src="<%=post.image%>"/>
+          <div class="unfeatured-blog-name"><%= post.title %></div>
+        </div>
+      <% end %>
     <% end %>
   </div>
-
-
 </div>
