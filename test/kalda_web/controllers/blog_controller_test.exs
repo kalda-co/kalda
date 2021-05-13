@@ -8,4 +8,9 @@ defmodule KaldaWeb.BlogControllerTest do
       assert html_response(conn, 200) =~ "kalda"
     end
   end
+
+  test "GET index", %{conn: conn} do
+    conn = get(conn, "/blog")
+    assert html_response(conn, 200) =~ "blog"
+  end
 end

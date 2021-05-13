@@ -22,8 +22,7 @@ defmodule KaldaWeb.BlogController do
   end
 
   def index(conn, _params) do
-    p_all = Kalda.Blog.all_posts()
-    {featured, posts} = List.pop_at(p_all, 0)
+    [featured | posts] = Kalda.Blog.all_posts()
 
     conn
     |> render("index.html", posts: posts, featured: featured)
