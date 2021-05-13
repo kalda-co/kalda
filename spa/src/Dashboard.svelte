@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { User, Post, Therapy } from "./state";
-  import { datetimeToURI, formattedDatetime } from "./date";
+  import { datetimeToURI, fixDate } from "./date";
   import { link } from "svelte-routing";
 
   export let user: User;
@@ -32,12 +32,8 @@
       <h2>Activities</h2>
       <div class="card background-pink">
         <div class="date-container">
-          <img
-            class="inline-icon"
-            src="images/calendar-icon-white.svg"
-            alt="calendar icon"
-          />
-          <p>{formattedDatetime(therapy.startsAt)}</p>
+          <img class="inline-icon" src="images/cal.svg" alt="calendar icon" />
+          <p>{fixDate(therapy.startsAt)}</p>
           <a href={datetimeToURI(therapy)} target="_blank" rel="nofollow">
             <p class="link">Add to calendar</p>
           </a>
@@ -127,9 +123,15 @@
     color: var(--color-white);
   }
 
+  .card.background-pink {
+    height: 220px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
   .card.background-pink .date-container {
     display: flex;
-    padding-top: var(--gap-xl);
   }
 
   .card h1 {
@@ -145,7 +147,7 @@
   }
 
   .link {
-    padding-left: var(--gap-s);
+    padding-left: var(--gap-l);
     color: var(--color-white);
     text-decoration: underline;
   }
@@ -156,5 +158,6 @@
 
   .inline-icon {
     margin-right: var(--gap-s);
+    width: 34px;
   }
 </style>
