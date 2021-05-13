@@ -50,3 +50,10 @@ export function datetimeToURI(therapy: Therapy) {
   const title = encodeURI(therapy.title);
   return `https://www.google.com/calendar/render?action=TEMPLATE&text=${title}&details=${desc}&location=${therapy.link}&dates=${datetimeString}`;
 }
+
+export function fixDate(datetime: Date) {
+  const d = new Date(datetime);
+  console.log(d);
+  const local = d.toLocaleString();
+  return `${d}`;
+}

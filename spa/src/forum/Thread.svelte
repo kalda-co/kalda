@@ -1,17 +1,33 @@
 <script lang="ts">
-  import Comment from "./Comment.svelte";
+  import CommentComponent from "./CommentComponent.svelte";
   import ContentTextForm from "./ContentTextForm.svelte";
-  import type { Post, User } from "../state";
+  import type { Post, User, Comment } from "../state";
+  // import type { Comment as Alias } from "../state";
   import { createComment } from "../backend";
 
   export let post: Post;
   export let placeholder: string;
   export let commentName: string;
   export let currentUser: User;
+  // export let comments: Array<Comment>;
+
+  // let comment: Comment;
 
   async function saveComment(content: string) {
     let comment = await createComment(post.id, content);
     post.comments = [comment, ...post.comments];
+  }
+
+  function countReplies(postComments: Array<Comment>) {
+    // let replies = post.comments[0].replies;
+    // let replyAcc = 0;
+    let replyNum = postComments.reduce(
+      (count, comment) => count + comment.replies.length,
+      0
+    );
+    // replies.forEach(reply);
+    console.log("repliesCount", replyNum);
+    return replyNum;
   }
 
   function makeCommentsCountText() {
@@ -19,9 +35,12 @@
       case 0:
         return `No ${commentName}s yet`;
       case 1:
-        return `1 ${commentName}`;
+        let replyCount = post.comments[0].replies.length;
+        let replyCommentCount = replyCount + 1;
+        return `${replyCommentCount} ${commentName}(s)`;
       default:
-        return `${post.comments.length} ${commentName}s`;
+        let rcc2 = post.comments.length + countReplies(post.comments);
+        return `${rcc2} ${commentName}s`;
     }
   }
   let commentsCountText: string;
@@ -47,7 +66,7 @@
   <section class="comments content">
     <ContentTextForm {placeholder} save={saveComment} buttonText="Send" />
     {#each post.comments as comment (comment.id)}
-      <Comment {comment} {currentUser} />
+      <CommentComponent {comment} {currentUser} />
     {/each}
   </section>
 </article>
