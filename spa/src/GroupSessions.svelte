@@ -33,24 +33,29 @@
       />
       <div class="card-text">
         <div class="date-container">
-          <img src="images/calendar-dark.svg" alt="calendar icon" />
+          <img src="images/cal-dark.svg" alt="calendar icon" />
           <p>{fixDate(therapy.startsAt)}</p>
-
-          <a href={datetimeToURI(therapy)} target="_blank" rel="nofollow">
-            <p class="link">Add to calendar</p>
-          </a>
         </div>
         <h1>{therapy.title}</h1>
         <h2>Led by {therapy.therapist}</h2>
         <h4>{therapy.credentials}</h4>
-        <p class="end-line">{therapy.description}</p>
-        <a
-          class="button zoom-button"
-          target="_blank"
-          rel="noopener"
-          href={therapy.link}><button class="button">Zoom link</button></a
-        >
-        <a use:link href="/group-info" class="button-link">Learn more.</a>
+        <p>{therapy.description}</p>
+        <a use:link href="/group-info" id="learn-more">Learn more.</a>
+        <div class="button-container">
+          <a
+            class="zoom-button"
+            target="_blank"
+            rel="noopener"
+            href={therapy.link}><button>Zoom link</button></a
+          >
+          <a
+            class="light-button"
+            target="_blank"
+            rel="nofollow"
+            href={datetimeToURI(therapy)}
+            ><button>Add to calendar</button>
+          </a>
+        </div>
       </div>
     </div>
   {/each}
@@ -61,8 +66,12 @@
     display: flex;
   }
 
+  .date-container p {
+    font-size: 16px;
+  }
   .date-container img {
     padding-right: var(--gap-s);
+    width: 38px;
   }
 
   .card {
@@ -96,22 +105,42 @@
     background-size: cover;
   }
 
-  .end-line {
+  .button-container {
+    margin-top: 34px;
     padding-bottom: 24px;
   }
 
   .zoom-button {
-    border: solid 1px var(--color-purple);
+    border: solid 2px var(--color-purple);
+    padding: 16px 24px;
+    border-radius: 40px;
+    font-weight: 600;
+    padding-top: var(--gap);
+    padding-bottom: var(--gap);
+    padding-right: var(--gap);
+    margin-right: var(--gap);
+    background-color: #4a00b0;
+    color: #ededed;
+  }
+  a.zoom-button button {
+    color: #ededed;
+  }
+
+  .light-button {
+    border: solid 2px var(--color-purple);
     padding: 16px 24px;
     border-radius: 40px;
     font-weight: 600;
     padding: var(--gap);
     margin-right: var(--gap);
+    background-color: #eeeeee;
   }
 
-  .link {
-    padding-left: var(--gap-s);
-    color: var(--color-white);
+  #learn-more {
+    margin-top: 16px;
+    margin-bottom: 8px;
+    padding-bottom: 24px !important;
+    padding-top: 24px !important;
     text-decoration: underline;
   }
 </style>
