@@ -1,6 +1,7 @@
 defmodule KaldaWeb.Errors do
   @filtered_params ["password", "password_confirmation"]
   @ignored_exceptions [
+    Phoenix.NotAcceptableError,
     Phoenix.Router.NoRouteError,
     Plug.Parsers.RequestTooLarge,
     Plug.Parsers.BadEncodingError,
