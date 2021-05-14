@@ -106,6 +106,7 @@
   }
 
   .button-container {
+    display: flex;
     margin-top: 34px;
     padding-bottom: 24px;
   }
