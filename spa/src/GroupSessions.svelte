@@ -39,7 +39,7 @@
         <h1>{therapy.title}</h1>
         <h2>Led by {therapy.therapist}</h2>
         <h4>{therapy.credentials}</h4>
-        <p>{therapy.description}</p>
+        <p id="move">{therapy.description}</p>
         <a use:link href="/group-info" id="learn-more">Learn more.</a>
         <div class="button-container">
           <a
@@ -117,8 +117,9 @@
     font-weight: 600;
     padding-top: var(--gap);
     padding-bottom: var(--gap);
-    padding-right: var(--gap);
-    margin-right: var(--gap);
+    padding-right: 18px;
+    padding-left: 18px;
+    margin-right: 8px;
     background-color: #4a00b0;
     color: #ededed;
   }
@@ -132,8 +133,11 @@
     border-radius: 40px;
     font-weight: 600;
     padding: var(--gap);
-    margin-right: var(--gap);
     background-color: #eeeeee;
+  }
+
+  #move {
+    margin-bottom: 20px;
   }
 
   #learn-more {
