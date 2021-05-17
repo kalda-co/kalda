@@ -5,7 +5,8 @@ author: "Charlotte Fountaine",
 tags: ["group therapy", "mental health"],
 description: "Our thoughts, and some science, on why group therapy can help with all kinds of mental health, from depression, through anxiety and grief, even FOMO",
 date: "2021-04-11",
-image: "/images/hudson-group.jpg"
+image: "/images/hudson-group.jpg",
+alt: "A group of 5 people, in silhouette, standing on the horizon under a stormy sky that has a rainbow"
 }
 
 ---

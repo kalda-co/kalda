@@ -73,7 +73,8 @@ author: "Al Dee",
 tags: ["tag-one", "tag-two", "tag-three"],
 description: "This description will not appear on the page but can contain search terms",
 date: "2021-01-11",
-image: "/images/my-image"
+image: "/images/my-image",
+alt: "Image description"
 }
 
 ---
@@ -94,6 +95,7 @@ tags: ["LGBTQIA", "Kalda", "inclusion"],
 description: "This article answers the questions: Why do you have to be LGBTQIA+?; Is Kalda for everyone?; Why isn't Kalda for everyone?; Why do you need to be invited to Kalda?; What if I don't have friends who are LGBTQIA+?; What if I am not out?; What if I need Kalda but have no one to invite me?",
 date: "2021-02-04",
 image: "images/questionmark.jpg"
+alt: "A photograph of a sign in the style of a circus sign, shaped like a questionmark outline, lit with incandescent lightbulbs inside the shape"
 }
 
 ---

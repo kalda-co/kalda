@@ -6,7 +6,8 @@ author: "Charlotte Fountain & Al Dee",
 tags: ["Meditation", "mental health"],
 description: "Our thoughts, and some science, on why meditation can help with all kinds of mental health, from depression, through anxiety and grief, even FOMO",
 date: "2021-05-11",
-image: "/images/motoki-meditation-daisies.jpg"
+image: "/images/motoki-meditation-daisies.jpg",
+alt: "A person with short dark hair, lying in a field of daisies with closed eyes, looking peaceful"
 }
 
 ---

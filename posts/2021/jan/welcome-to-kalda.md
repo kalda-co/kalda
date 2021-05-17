@@ -5,7 +5,8 @@ author: "Al Dee (they/them)",
 tags: ["communication", "community", "covid"],
 description: "Welcome to Kalda, a community for LGBTQIA+ and sex positive humans looking for connection, support, therapy, meditation, and cephalopods related content. We are here to help you with your communication and connection woes in these covid times.",
 date: "2021-01-11",
-image: "/images/jiro-rainbow-welcome.jpg"
+image: "/images/jiro-rainbow-welcome.jpg",
+alt: "A neon sign made up of seven hearts each inside one another, in the different colours of the rainbow"
 }
 
 ---
