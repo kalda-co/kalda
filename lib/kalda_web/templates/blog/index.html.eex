@@ -6,11 +6,10 @@
 <div class="blog-container">
 
   <div class="featured-blog-container">
-    <a href="<%= Routes.blog_path(@conn, :show, @featured) %>">
+    <a href="<%= Routes.blog_path(@conn, :show, @featured) %>" alt="<%= @featured.alt %>" >
       <div class="featured-blog-image" style="background-image: url(<%= @featured.image %>)"> </div>
       <div class="featured-blog-name">
           <h1><%= @featured.title %></h1>
-          <h3><%= @featured.subtitle %></h3>
       </div>
     </a>
   </div>
@@ -18,7 +17,7 @@
     <%= for post <- @posts do %>
       <%= link to: Routes.blog_path(@conn, :show, post) do %>
         <div class="unfeatured-blog">
-          <img class="unfeatured-blog-image" src="<%=post.image%>"/>
+          <img class="unfeatured-blog-image" src="<%=post.image%>" alt="<%= post.alt %>" />
           <div class="unfeatured-blog-name"><%= post.title %></div>
         </div>
       <% end %>

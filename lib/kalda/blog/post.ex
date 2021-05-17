@@ -1,6 +1,6 @@
 defmodule Kalda.Blog.Post do
-  @enforce_keys [:id, :author, :title, :subtitle, :body, :description, :tags, :date, :image]
-  defstruct [:id, :author, :title, :subtitle, :body, :description, :tags, :date, :image]
+  @enforce_keys [:id, :author, :title, :subtitle, :body, :description, :tags, :date, :image, :alt]
+  defstruct [:id, :author, :title, :subtitle, :body, :description, :tags, :date, :image, :alt]
 
   def build(filename, attrs, body) do
     id = filename |> Path.rootname() |> Path.split() |> List.last()
