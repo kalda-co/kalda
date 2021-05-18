@@ -9,7 +9,8 @@ declare global {
 const app = new App({
   target: document.body,
   props: {
-    csrfToken: window.csrfToken,
+    // csrfToken: window.csrfToken,
+    csrfToken: undefined,
   },
 });
 
