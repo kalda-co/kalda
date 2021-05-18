@@ -1,18 +1,18 @@
-import type { Reply, AppState, Comment, Reaction } from "../state";
-import { appState, reply, comment, reaction } from "./resources";
+import type { Reply, AppState, Comment, Reaction, LoginResult } from "../state";
+import { loginSuccess, appState, reply, comment, reaction } from "./resources";
 import { assertStatus, HttpClient } from "./http";
-
-type LoginSuccess = { type: "ok"; csrfToken: string };
-type LoginError = { type: "error"; errorMessage: string };
-type LoginResult = LoginSuccess | LoginError;
 
 export async function login(
   email: string,
   password: string
 ): Promise<LoginResult> {
-  // TODO: Real implementation
-  console.log("email is", email, "password is", password);
-  return { type: "ok", csrfToken: "some-token" };
+  let http = new HttpClient(undefined);
+  let resp = await http.post("/v1/users/session", { email, password });
+  if (resp.status === 201) {
+    return loginSuccess(resp.body);
+  } else {
+    return { type: "error", errorMessage: "Unrecognised email or password" };
+  }
 }
 
 // An interface for the API client.
@@ -20,8 +20,6 @@ export async function login(
 // AuthenticatedApiClient class so that we can provide an inert mock
 // client in tests.
 export interface ApiClient {
-  getCsrfToken(): string;
-
   getInitialAppState(): Promise<AppState>;
 
   createComment(postId: number, content: string): Promise<Comment>;
@@ -50,29 +48,25 @@ export interface ApiClient {
 export class AuthenticatedApiClient implements ApiClient {
   httpClient: HttpClient;
 
-  constructor(csrfToken: string) {
-    this.httpClient = new HttpClient(csrfToken);
-  }
-
-  getCsrfToken(): string {
-    return this.httpClient.csrfToken;
+  constructor(apiToken: string | undefined) {
+    this.httpClient = new HttpClient(apiToken);
   }
 
   async getInitialAppState(): Promise<AppState> {
-    let resp = await this.httpClient.get("/v1/dashboard");
+    let resp = await this.httpClient.get("/v1/token/dashboard");
     assertStatus(resp, 200);
     return appState(resp.body);
   }
 
   async createComment(postId: number, content: string): Promise<Comment> {
-    let url = `/v1/posts/${postId}/comments`;
+    let url = `/v1/token/posts/${postId}/comments`;
     let resp = await this.httpClient.post(url, { content });
     assertStatus(resp, 201);
     return comment(resp.body);
   }
 
   async createReply(commentId: number, content: string): Promise<Reply> {
-    let url = `/v1/comments/${commentId}/replies`;
+    let url = `/v1/token/comments/${commentId}/replies`;
     let resp = await this.httpClient.post(url, { content });
     assertStatus(resp, 201);
     return reply(resp.body);
@@ -83,7 +77,7 @@ export class AuthenticatedApiClient implements ApiClient {
     relate: boolean,
     sendLove: boolean
   ): Promise<Reaction> {
-    let url = `/v1/comments/${commentId}/reactions`;
+    let url = `/v1/token/comments/${commentId}/reactions`;
     let resp = await this.httpClient.patch(url, {
       relate,
       send_love: sendLove,
@@ -97,7 +91,7 @@ export class AuthenticatedApiClient implements ApiClient {
     relate: boolean,
     sendLove: boolean
   ): Promise<Reaction> {
-    let url = `/v1/replies/${replyId}/reactions`;
+    let url = `/v1/token/replies/${replyId}/reactions`;
     let resp = await this.httpClient.patch(url, {
       relate,
       send_love: sendLove,
@@ -110,13 +104,13 @@ export class AuthenticatedApiClient implements ApiClient {
     commentId: number,
     reporter_reason: string
   ): Promise<void> {
-    let url = `/v1/comments/${commentId}/reports`;
+    let url = `/v1/token/comments/${commentId}/reports`;
     let resp = await this.httpClient.post(url, { reporter_reason });
     assertStatus(resp, 201);
   }
 
   async reportReply(replyId: number, reporter_reason: string): Promise<void> {
-    let url = `/v1/replies/${replyId}/reports`;
+    let url = `/v1/token/replies/${replyId}/reports`;
     let resp = await this.httpClient.post(url, { reporter_reason });
     assertStatus(resp, 201);
   }

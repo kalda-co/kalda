@@ -27,11 +27,6 @@ defmodule KaldaWeb.Router do
     plug :fetch_current_user
   end
 
-  pipeline :unauthenticated_api do
-    plug :accepts, ["json"]
-    # TODO: add session
-  end
-
   pipeline :api do
     plug :accepts, ["json"]
     plug :fetch_session
@@ -39,19 +34,9 @@ defmodule KaldaWeb.Router do
     plug :fetch_current_user
   end
 
-  scope "/", KaldaWeb do
-    pipe_through :browser
-    get "/", PageController, :index
-    get "/blog/:id", BlogController, :show
-    get "/thanks", PageController, :thanks
-    get "/privacy-policy", PageController, :privacy_policy
-    get "/terms", PageController, :terms
-
-    post "/signups/new", SignupController, :create
-    delete "/users/log-out", UserSessionController, :delete
-    get "/users/confirm", UserConfirmationController, :new
-    post "/users/confirm", UserConfirmationController, :create
-    get "/users/confirm/:token", UserConfirmationController, :confirm
+  pipeline :token_api do
+    plug :accepts, ["json"]
+    plug :fetch_current_user_from_api_auth_token
   end
 
   # Enables LiveDashboard only for development
@@ -129,11 +114,15 @@ defmodule KaldaWeb.Router do
   end
 
   scope "/v1", KaldaWeb.Api.V1, as: :api_v1 do
-    pipe_through [:api, :json_require_authenticated_user, :json_require_confirmed_email]
+    pipe_through [:token_api]
 
+    post "/users/session", SessionController, :create
+  end
+
+  scope "/v1/token", KaldaWeb.Api.V1, as: :api_v1_token do
+    pipe_through [:token_api, :json_require_authenticated_user, :json_require_confirmed_email]
     get "/dashboard", DashboardController, :index
     get "/ping", PingController, :show
-
     post "/posts/:id/comments", CommentController, :create
     post "/comments/:id/replies", ReplyController, :create
     post "/comments/:id/reports", ReportController, :report_comment
@@ -144,9 +133,16 @@ defmodule KaldaWeb.Router do
   end
 
   scope "/v1", KaldaWeb.Api.V1, as: :api_v1 do
-    pipe_through [:api]
-
-    post "/users/session", SessionController, :create
+    pipe_through [:api, :json_require_authenticated_user, :json_require_confirmed_email]
+    get "/dashboard", DashboardController, :index
+    get "/ping", PingController, :show
+    post "/posts/:id/comments", CommentController, :create
+    post "/comments/:id/replies", ReplyController, :create
+    post "/comments/:id/reports", ReportController, :report_comment
+    post "/replies/:id/reports", ReportController, :report_reply
+    patch "/comments/:id/reactions", CommentReactionController, :update
+    patch "/replies/:id/reactions", ReplyReactionController, :update
+    get "/*anything", NotFoundController, :not_found
   end
 
   scope "/", KaldaWeb do
@@ -155,6 +151,21 @@ defmodule KaldaWeb.Router do
     get "/users/settings", UserSettingsController, :edit
     put "/users/settings", UserSettingsController, :update
     get "/users/settings/confirm-email/:token", UserSettingsController, :confirm_email
+  end
+
+  scope "/", KaldaWeb do
+    pipe_through :browser
+    get "/", PageController, :index
+    get "/blog/:id", BlogController, :show
+    get "/thanks", PageController, :thanks
+    get "/privacy-policy", PageController, :privacy_policy
+    get "/terms", PageController, :terms
+
+    post "/signups/new", SignupController, :create
+    delete "/users/log-out", UserSessionController, :delete
+    get "/users/confirm", UserConfirmationController, :new
+    post "/users/confirm", UserConfirmationController, :create
+    get "/users/confirm/:token", UserConfirmationController, :confirm
 
     # All other get requests go to the SPA
     get "/*path", PageController, :app

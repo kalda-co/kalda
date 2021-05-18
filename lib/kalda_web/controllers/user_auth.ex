@@ -94,6 +94,22 @@ defmodule KaldaWeb.UserAuth do
     assign(conn, :current_user, user)
   end
 
+  @doc """
+  Authenticates the user by looking at the token in the authorization header.
+  """
+  def fetch_current_user_from_api_auth_token(conn, _opts) do
+    token = get_authorization_bearer_token(conn)
+    user = token && Accounts.get_user_by_api_auth_token(token)
+    assign(conn, :current_user, user)
+  end
+
+  defp get_authorization_bearer_token(conn) do
+    case Plug.Conn.get_req_header(conn, "authorization") do
+      ["Bearer " <> token] -> token
+      _ -> nil
+    end
+  end
+
   defp ensure_user_token(conn) do
     if user_token = get_session(conn, :user_token) do
       {user_token, conn}

@@ -2,13 +2,15 @@
   import Authenticated from "./Authenticated.svelte";
   import { AuthenticatedApiClient, login } from "./backend";
 
-  export let csrfToken: string | undefined;
+  // TODO: loac token from storage
+  let apiToken: string | undefined;
 
   let email = "";
   let password = "";
   let error = "";
   let submitting = false;
 
+  // TODO: preserve token in storage
   async function submit() {
     if (submitting) return;
     submitting = true;
@@ -16,7 +18,7 @@
     let result = await login(email, password);
     submitting = false;
     if (result.type === "ok") {
-      csrfToken = result.csrfToken;
+      apiToken = result.apiToken;
     } else {
       error = result.errorMessage;
     }
@@ -24,8 +26,8 @@
 </script>
 
 <!-- If we have a csrfToken we must be logged in -->
-{#if csrfToken}
-  <Authenticated api={new AuthenticatedApiClient(csrfToken)} />
+{#if apiToken}
+  <Authenticated api={new AuthenticatedApiClient(apiToken)} />
 {:else}
   <div class="login-container">
     <h1>Hi! If you have an account, you can log in:</h1>

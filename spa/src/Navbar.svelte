@@ -4,7 +4,6 @@
   import { links, link } from "svelte-routing";
 
   export let title: Title;
-  export let csrfToken: string;
 
   let menu = false;
 
@@ -50,8 +49,9 @@
         Urgent Support
       </a>
       <a href="/will-pool" on:click={closeMenu} class="button"> Will Pool </a>
+      <!-- TODO: log out -->
       <form method="POST" action="/users/log-out">
-        <input type="hidden" name="_csrf_token" value={csrfToken} />
+        <input type="hidden" name="_csrf_token" value="ok" />
         <input type="hidden" name="_method" value="delete" />
         <button type="submit" class="button">Log Out</button>
       </form>
