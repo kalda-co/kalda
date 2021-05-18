@@ -146,7 +146,7 @@ defmodule KaldaWeb.Router do
   scope "/v1", KaldaWeb.Api.V1, as: :api_v1 do
     pipe_through [:api]
 
-    post "/users/log-in", SessionController, :create
+    post "/users/session", SessionController, :create
   end
 
   scope "/", KaldaWeb do
