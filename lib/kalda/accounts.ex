@@ -241,6 +241,23 @@ defmodule Kalda.Accounts do
   end
 
   @doc """
+  Generates an API authentication token.
+  """
+  def generate_api_auth_token(user) do
+    {token, user_token} = UserToken.build_api_auth_token(user)
+    Repo.insert!(user_token)
+    token
+  end
+
+  @doc """
+  Gets the user with the given API session token.
+  """
+  def get_user_by_api_auth_token(token) do
+    {:ok, query} = UserToken.verify_api_auth_token(token)
+    Repo.one(query)
+  end
+
+  @doc """
   Gets the user with the given signed token.
   """
   def get_user_by_session_token(token) do

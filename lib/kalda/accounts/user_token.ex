@@ -32,6 +32,16 @@ defmodule Kalda.Accounts.UserToken do
   end
 
   @doc """
+  Builds a token with a hashed counter part.
+
+  The non-hashed token is returned to the user via the API while the
+  hashed part is stored in the database, to avoid reconstruction.
+  """
+  def build_api_auth_token(user) do
+    build_hashed_token(user, "api-auth", nil)
+  end
+
+  @doc """
   Checks if the token is valid and returns its underlying lookup query.
 
   The query returns the user found by the token.
@@ -51,8 +61,6 @@ defmodule Kalda.Accounts.UserToken do
 
   The non-hashed token is sent to the user email while the
   hashed part is stored in the database, to avoid reconstruction.
-  The token is valid for a week as long as users don't change
-  their email.
   """
   def build_email_token(user, context) do
     build_hashed_token(user, context, user.email)
@@ -86,6 +94,29 @@ defmodule Kalda.Accounts.UserToken do
           from token in token_and_context_query(hashed_token, context),
             join: user in assoc(token, :user),
             where: token.inserted_at > ago(^days, "day") and token.sent_to == user.email,
+            select: user
+
+        {:ok, query}
+
+      :error ->
+        :error
+    end
+  end
+
+  @doc """
+  Checks if the token is valid and returns its underlying lookup query.
+
+  The query returns the user found by the token.
+  """
+  def verify_api_auth_token(token) do
+    case Base.url_decode64(token, padding: false) do
+      {:ok, decoded_token} ->
+        hashed_token = :crypto.hash(@hash_algorithm, decoded_token)
+
+        query =
+          from token in token_and_context_query(hashed_token, "api-auth"),
+            join: user in assoc(token, :user),
+            where: token.inserted_at > ago(@session_validity_in_days, "day"),
             select: user
 
         {:ok, query}

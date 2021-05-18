@@ -17,7 +17,7 @@
 <main>
   <Router>
     <Route path="daily-reflection">
-      <Navbar title="Daily Reflection" csrfToken={api.getCsrfToken()} />
+      <Navbar title="Daily Reflection" />
       <!-- TODO: gracefully handle zero posts -->
       {#each state.reflections as post (post.id)}
         <Thread
@@ -31,7 +31,7 @@
     </Route>
 
     <Route path="will-pool">
-      <Navbar title="Will Pool" csrfToken={api.getCsrfToken()} />
+      <Navbar title="Will Pool" />
       {#each state.pools as post (post.id)}
         <Thread
           placeholder="Your commitment here"
@@ -44,28 +44,28 @@
     </Route>
 
     <Route path="guidelines">
-      <Navbar title="Guidelines" csrfToken={api.getCsrfToken()} />
+      <Navbar title="Guidelines" />
       <Guidelines />
     </Route>
 
     <Route path="group-info">
-      <Navbar title="Session Info" csrfToken={api.getCsrfToken()} />
+      <Navbar title="Session Info" />
       <GroupSessions />
     </Route>
 
     <Route path="therapy-sessions">
-      <Navbar title="Therapy Sessions" csrfToken={api.getCsrfToken()} />
+      <Navbar title="Therapy Sessions" />
       <TherapySessions therapies={state.therapies} />
     </Route>
 
     <Route path="urgent-support">
-      <Navbar title="Urgent Support" csrfToken={api.getCsrfToken()} />
+      <Navbar title="Urgent Support" />
       <UrgentSupport />
     </Route>
 
     <!-- Default catch all route -->
     <Route>
-      <Navbar title="Kalda" csrfToken={api.getCsrfToken()} />
+      <Navbar title="Kalda" />
       <Dashboard
         user={state.currentUser}
         post={state.reflections[0]}

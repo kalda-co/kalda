@@ -70,3 +70,7 @@ export interface BubbleContent {
   content: string;
   reactions: Array<Reaction>;
 }
+
+export type LoginSuccess = { type: "ok"; apiToken: string };
+export type LoginError = { type: "error"; errorMessage: string };
+export type LoginResult = LoginSuccess | LoginError;

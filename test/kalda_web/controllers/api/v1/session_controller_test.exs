@@ -19,17 +19,15 @@ defmodule KaldaWeb.Api.V1.SessionControllerTest do
     test "renders 422 with errors for invalid attributes", %{conn: conn} do
       assert conn = post(conn, "/v1/users/session", @invalid_user_input)
 
-      assert json_response(conn, 404) == "Not Found"
+      assert json_response(conn, 422)
     end
 
     test "valid attributes", %{conn: conn} do
       user = Kalda.AccountsFixtures.user(@valid_user_input)
       assert conn = post(conn, "/v1/users/session", @valid_user_input)
-
-      assert get_session(conn, :user_token)
-      assert conn.resp_body =~ "#{user.id}"
-      assert conn.resp_body =~ "#{user.username}"
-      assert conn.status == 201
+      assert %{"token" => token} = json_response(conn, 201)
+      assert user2 = Kalda.Accounts.get_user_by_api_auth_token(token)
+      assert user.id == user2.id
     end
   end
 end

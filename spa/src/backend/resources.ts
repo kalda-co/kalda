@@ -15,6 +15,7 @@ import type {
   Comment,
   Therapy,
   Reaction,
+  LoginSuccess,
 } from "../state";
 
 export function appState(json: unknown): AppState {
@@ -79,5 +80,12 @@ export function reaction(json: unknown): Reaction {
     author: field("author", user)(json),
     relate: field("relate", boolean)(json),
     sendLove: field("send_love", boolean)(json),
+  };
+}
+
+export function loginSuccess(json: unknown): LoginSuccess {
+  return {
+    type: "ok",
+    apiToken: field("token", string)(json),
   };
 }

@@ -5,28 +5,34 @@ type Response = {
 
 export function assertStatus(resp: Response, expected: number) {
   if (resp.status !== expected) {
-    throw new Error(`Unexpected HTTP status ${resp.status}: ${resp.body}`);
+    throw new Error(
+      `Unexpected HTTP status ${resp.status}: ${JSON.stringify(resp.body)}`
+    );
   }
 }
 
+// TODO: make apiToken required and expose the request function for
+// unauthenticated requests
 export class HttpClient {
-  csrfToken: string;
+  apiToken: undefined | string;
 
-  constructor(csrfToken: string) {
-    this.csrfToken = csrfToken;
+  constructor(apiToken: undefined | string) {
+    this.apiToken = apiToken;
   }
 
   async request(method: string, url: string, body: null | object) {
-    let request = {
-      headers: {
-        "content-type": "application/json",
-        "x-csrf-token": this.csrfToken,
-        accept: "application/json",
-      },
+    let headers: Record<string, string> = {
+      "content-type": "application/json",
+      accept: "application/json",
+    };
+    if (this.apiToken) {
+      headers["authorization"] = "Bearer " + this.apiToken;
+    }
+    let resp = await fetch(url, {
+      headers,
       method,
       body: body ? JSON.stringify(body) : body,
-    };
-    let resp = await fetch(url, request);
+    });
     if (resp.status >= 500) {
       let body = await resp.text();
       throw new Error(`Internal server error ${resp.status} ${body}`);

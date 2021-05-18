@@ -1,11 +1,15 @@
 defmodule KaldaWeb.Api.V1.SessionView do
   use KaldaWeb, :view
-  alias KaldaWeb.Api.V1.UserView
 
-  def render("show.json", %{user: user}) do
+  def render("show.json", %{token: token}) do
     %{
-      user: UserView.render_user(user),
-      csrf_token: Plug.CSRFProtection.get_csrf_token()
+      token: token
+    }
+  end
+
+  def render("invalid.json", _) do
+    %{
+      errors: %{email: ["invalid email or password"]}
     }
   end
 end
