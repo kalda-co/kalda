@@ -1,15 +1,10 @@
 <script lang="ts">
   import type { Comment, User } from "../state";
-  import {
-    createReply,
-    reportReply,
-    reportComment,
-    createCommentReaction,
-    createReplyReaction,
-  } from "../backend";
+  import type { ApiClient } from "../backend";
   import ContentTextForm from "./ContentTextForm.svelte";
   import ContentBubble from "./ContentBubble.svelte";
 
+  export let api: ApiClient;
   export let comment: Comment;
   export let currentUser: User;
   let replying = false;
@@ -19,7 +14,7 @@
   }
 
   async function saveReply(content: string) {
-    let reply = await createReply(comment.id, content);
+    let reply = await api.createReply(comment.id, content);
     comment.replies = [...comment.replies, reply];
     replying = false;
   }
@@ -33,9 +28,10 @@
 <article>
   <ContentBubble
     item={comment}
-    report={reportComment}
+    report={(id, reason) => api.reportComment(id, reason)}
     reply={toggleReplying}
-    reaction={createCommentReaction}
+    reaction={(id, relate, sendLove) =>
+      api.createCommentReaction(id, relate, sendLove)}
     {currentUser}
     {replyLine}
   />
@@ -44,9 +40,10 @@
     {#each comment.replies as reply (reply.id)}
       <ContentBubble
         item={reply}
-        report={reportReply}
+        report={(id, reason) => api.reportReply(id, reason)}
         reply={toggleReplying}
-        reaction={createReplyReaction}
+        reaction={(id, relate, sendLove) =>
+          api.createReplyReaction(id, relate, sendLove)}
         {currentUser}
       />
     {/each}

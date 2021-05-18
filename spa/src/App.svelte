@@ -1,22 +1,14 @@
 <script lang="ts">
-  import { setCSRFToken, getInitialAppState } from "./backend";
-  import Loaded from "./Loaded.svelte";
+  import Authenticated from "./Authenticated.svelte";
+  import type { ApiClient } from "./backend";
+  import { AuthenticatedApiClient } from "./backend";
 
-  // Load the CSRF token into the backend API client module so we can make HTTP
-  // requests using cookie auth
-  export let csrfToken: string;
-  setCSRFToken(csrfToken);
-
-  let state = getInitialAppState();
+  export let csrfToken: string | undefined;
 </script>
 
-{#await state}
-  <!-- TODO: Loading design -->
-  ... Loading
-{:then state}
-  <Loaded {state} />
-{:catch error}
-  <!-- TODO: Error design -->
-  failed to load :(
-  <div>{error}</div>
-{/await}
+<!-- If we have a csrfToken we must be logged in -->
+{#if csrfToken}
+  <Authenticated api={new AuthenticatedApiClient(csrfToken)} />
+{:else}
+  Not logged in
+{/if}

@@ -1,32 +1,25 @@
 <script lang="ts">
-  import CommentComponent from "./CommentComponent.svelte";
+  import CommentComponent from "./Comment.svelte";
   import ContentTextForm from "./ContentTextForm.svelte";
   import type { Post, User, Comment } from "../state";
-  // import type { Comment as Alias } from "../state";
-  import { createComment } from "../backend";
+  import type { ApiClient } from "../backend";
 
+  export let api: ApiClient;
   export let post: Post;
   export let placeholder: string;
   export let commentName: string;
   export let currentUser: User;
-  // export let comments: Array<Comment>;
-
-  // let comment: Comment;
 
   async function saveComment(content: string) {
-    let comment = await createComment(post.id, content);
+    let comment = await api.createComment(post.id, content);
     post.comments = [comment, ...post.comments];
   }
 
   function countReplies(postComments: Array<Comment>) {
-    // let replies = post.comments[0].replies;
-    // let replyAcc = 0;
     let replyNum = postComments.reduce(
       (count, comment) => count + comment.replies.length,
       0
     );
-    // replies.forEach(reply);
-    console.log("repliesCount", replyNum);
     return replyNum;
   }
 
@@ -66,7 +59,7 @@
   <section class="comments content">
     <ContentTextForm {placeholder} save={saveComment} buttonText="Send" />
     {#each post.comments as comment (comment.id)}
-      <CommentComponent {comment} {currentUser} />
+      <CommentComponent {comment} {currentUser} {api} />
     {/each}
   </section>
 </article>
