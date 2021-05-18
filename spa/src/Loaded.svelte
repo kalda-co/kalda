@@ -20,7 +20,7 @@
       {#each state.reflections as post (post.id)}
         <Thread
           placeholder="Your reflection here"
-          commentName="responses"
+          commentName="response"
           currentUser={state.currentUser}
           {post}
         />
