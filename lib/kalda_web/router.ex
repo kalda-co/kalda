@@ -27,6 +27,11 @@ defmodule KaldaWeb.Router do
     plug :fetch_current_user
   end
 
+  pipeline :unauthenticated_api do
+    plug :accepts, ["json"]
+    # TODO: add session
+  end
+
   pipeline :api do
     plug :accepts, ["json"]
     plug :fetch_session
