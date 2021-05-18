@@ -7,4 +7,11 @@ defmodule KaldaWeb.Api.V1.UserView do
       username: author.username
     }
   end
+
+  def render_user(user = %User{}) do
+    %{
+      id: user.id,
+      username: user.username
+    }
+  end
 end

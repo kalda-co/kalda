@@ -138,6 +138,12 @@ defmodule KaldaWeb.Router do
     get "/*anything", NotFoundController, :not_found
   end
 
+  scope "/v1", KaldaWeb.Api.V1, as: :api_v1 do
+    pipe_through [:api]
+
+    post "/users/log-in", SessionController, :create
+  end
+
   scope "/", KaldaWeb do
     pipe_through [:browser, :require_authenticated_user, :require_confirmed_email]
 
