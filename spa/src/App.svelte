@@ -1,14 +1,111 @@
 <script lang="ts">
   import Authenticated from "./Authenticated.svelte";
-  import type { ApiClient } from "./backend";
-  import { AuthenticatedApiClient } from "./backend";
+  import { AuthenticatedApiClient, login } from "./backend";
 
   export let csrfToken: string | undefined;
+
+  let email = "";
+  let password = "";
+  let error = "";
+  let submitting = false;
+
+  async function submit() {
+    if (submitting) return;
+    submitting = true;
+    error = "";
+    let result = await login(email, password);
+    submitting = false;
+    if (result.type === "ok") {
+      csrfToken = result.csrfToken;
+    } else {
+      error = result.errorMessage;
+    }
+  }
 </script>
 
 <!-- If we have a csrfToken we must be logged in -->
 {#if csrfToken}
   <Authenticated api={new AuthenticatedApiClient(csrfToken)} />
 {:else}
-  Not logged in
+  <div class="login-container">
+    <h1>Hi! If you have an account, you can log in:</h1>
+
+    {#if error}
+      <div class="alert alert-danger">
+        <p>{error}</p>
+      </div>
+    {/if}
+
+    <form on:submit|preventDefault={submit}>
+      <label for="email">Email</label>
+      <input
+        type="email"
+        name="email"
+        required
+        disabled={submitting}
+        bind:value={email}
+      />
+
+      <label for="password">Password</label>
+      <input
+        name="password"
+        type="password"
+        required
+        disabled={submitting}
+        bind:value={password}
+      />
+      <div>
+        <button type="submit" disabled={submitting} class="submit-button">
+          Log in
+        </button>
+      </div>
+    </form>
+  </div>
 {/if}
+
+<style>
+  /* Styles copied from app.css. Should probably go somewhere else to avoid so
+   * much duplication? */
+
+  .login-container {
+    margin: auto;
+    display: block;
+    max-width: 536px;
+    letter-spacing: -0.02rem;
+    padding: var(--gap);
+  }
+
+  input {
+    margin-right: var(--gap-s);
+    border-radius: 100px;
+    border: 2px solid var(--color-purple);
+    padding: var(--button-padding);
+    width: 100%;
+  }
+
+  label {
+    font-weight: var(--font-weight-large);
+    font-size: var(--font-size-l);
+    color: var(--color-purple);
+  }
+
+  .submit-button {
+    background-color: var(--color-purple);
+    color: var(--color-white);
+    border: none;
+    padding: var(--gap) var(--gap-m);
+    font-weight: 600;
+    border-radius: 100px;
+    font-size: var(--font-size-s);
+    text-decoration: none;
+    margin-top: var(--gap);
+    cursor: pointer;
+  }
+
+  h1 {
+    font-size: var(--font-size-xl);
+    line-height: var(--line-height-l);
+    font-weight: var(--font-weight-large);
+    color: var(--color-purple);
+  }
+</style>

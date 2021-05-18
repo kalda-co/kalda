@@ -2,6 +2,19 @@ import type { Reply, AppState, Comment, Reaction } from "../state";
 import { appState, reply, comment, reaction } from "./resources";
 import { assertStatus, HttpClient } from "./http";
 
+type LoginSuccess = { type: "ok"; csrfToken: string };
+type LoginError = { type: "error"; errorMessage: string };
+type LoginResult = LoginSuccess | LoginError;
+
+export async function login(
+  email: string,
+  password: string
+): Promise<LoginResult> {
+  // TODO: Real implementation
+  console.log("email is", email, "password is", password);
+  return { type: "ok", csrfToken: "some-token" };
+}
+
 // An interface for the API client.
 // Our components ask for this interface rather than the actual
 // AuthenticatedApiClient class so that we can provide an inert mock

@@ -7,11 +7,28 @@
   --color-white: #fff;
   --font-color-dark: #404040;
 
-  --gap-xs: calc(var(--gap-s) * 0.5);
-  --gap-s: 8px;
-  --gap: calc(var(--gap-s) * 2);
-  --gap-l: calc(var(--gap-s) * 4);
-  --gap-xl: calc(var(--gap-s) * 6);
+  /* Sizes */
+  --gap: 16px;
+  --gap-xs: calc(var(--gap-s) * 0.25);
+  --gap-s: calc(var(--gap) * 0.5); /* 8px */
+  --gap-m: calc(var(--gap) * 1.5); /* 24px */
+  --gap-l: calc(var(--gap) * 2); /* 32 px */
+  --gap-xl: calc(var(--gap) * 3); /* 48 px */
+  --gap-xxl: calc(var(--gap) * 4); /* 64 px */
+  --gap-xxxl: calc(var(--gap) * 5); /* 80 px */
+
+  /* FONT WEIGHT */
+  --font-weight: 500; /* poppins semibold == weight 600 */
+  --font-weight-large: 600;
+  /* FONT SIZE */
+  --font-size: 16px; /* small = 14 points */
+  --font-size-s: 0.875rem; /* large = 18 points, for l and H2 mobile */
+  --font-size-l: 1.125rem; /* xl = 24 points, for H2 desktop, h1 mobile */
+  --font-size-xl: 1.5rem; /* xxl = 32 points, h1 desktop */
+  --font-size-xxl: 2rem; /* xxxl = 40 points, same as xl-blog-header */
+  --font-size-xxxl: 2.5rem;
+
+  --button-padding: 10px 22px;
 
   --font-size: 14px;
   --font-size-s: 12px;
