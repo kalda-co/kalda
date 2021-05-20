@@ -2,6 +2,8 @@
   import Authenticated from "./Authenticated.svelte";
   import { AuthenticatedApiClient, login } from "./backend";
 
+  export let apiBase: string;
+
   // TODO: loac token from storage
   let apiToken: string | undefined;
 
@@ -27,7 +29,7 @@
 
 <!-- If we have a csrfToken we must be logged in -->
 {#if apiToken}
-  <Authenticated api={new AuthenticatedApiClient(apiToken)} />
+  <Authenticated api={new AuthenticatedApiClient(apiBase, apiToken)} />
 {:else}
   <div class="login-container">
     <h1>Hi! If you have an account, you can log in:</h1>
