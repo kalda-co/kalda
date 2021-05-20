@@ -1,5 +1,12 @@
 import type { Reply, AppState, Comment, Reaction, LoginResult } from "../state";
-import { loginSuccess, appState, reply, comment, reaction } from "./resources";
+import {
+  loginSuccess,
+  appState,
+  reply,
+  comment,
+  reaction,
+  therapy,
+} from "./resources";
 import { assertStatus, HttpClient } from "./http";
 
 export async function login(
@@ -46,10 +53,16 @@ export interface ApiClient {
 // An implementation of ApiClient that actually connects to the backend.
 // How handy!
 export class AuthenticatedApiClient implements ApiClient {
-  httpClient: HttpClient;
+  private httpClient: HttpClient;
+  private apiBase: string;
 
-  constructor(apiToken: string | undefined) {
+  constructor(apiBase: string, apiToken: string | undefined) {
     this.httpClient = new HttpClient(apiToken);
+    this.apiBase = apiBase;
+  }
+
+  private route(path: string): string {
+    return this.apiBase + path;
   }
 
   async getInitialAppState(): Promise<AppState> {
@@ -59,14 +72,14 @@ export class AuthenticatedApiClient implements ApiClient {
   }
 
   async createComment(postId: number, content: string): Promise<Comment> {
-    let url = `/v1/token/posts/${postId}/comments`;
+    let url = this.route(`/v1/token/posts/${postId}/comments`);
     let resp = await this.httpClient.post(url, { content });
     assertStatus(resp, 201);
     return comment(resp.body);
   }
 
   async createReply(commentId: number, content: string): Promise<Reply> {
-    let url = `/v1/token/comments/${commentId}/replies`;
+    let url = this.route(`/v1/token/comments/${commentId}/replies`);
     let resp = await this.httpClient.post(url, { content });
     assertStatus(resp, 201);
     return reply(resp.body);
@@ -77,7 +90,7 @@ export class AuthenticatedApiClient implements ApiClient {
     relate: boolean,
     sendLove: boolean
   ): Promise<Reaction> {
-    let url = `/v1/token/comments/${commentId}/reactions`;
+    let url = this.route(`/v1/token/comments/${commentId}/reactions`);
     let resp = await this.httpClient.patch(url, {
       relate,
       send_love: sendLove,
@@ -91,7 +104,7 @@ export class AuthenticatedApiClient implements ApiClient {
     relate: boolean,
     sendLove: boolean
   ): Promise<Reaction> {
-    let url = `/v1/token/replies/${replyId}/reactions`;
+    let url = this.route(`/v1/token/replies/${replyId}/reactions`);
     let resp = await this.httpClient.patch(url, {
       relate,
       send_love: sendLove,
@@ -104,13 +117,13 @@ export class AuthenticatedApiClient implements ApiClient {
     commentId: number,
     reporter_reason: string
   ): Promise<void> {
-    let url = `/v1/token/comments/${commentId}/reports`;
+    let url = this.route(`/v1/token/comments/${commentId}/reports`);
     let resp = await this.httpClient.post(url, { reporter_reason });
     assertStatus(resp, 201);
   }
 
   async reportReply(replyId: number, reporter_reason: string): Promise<void> {
-    let url = `/v1/token/replies/${replyId}/reports`;
+    let url = this.route(`/v1/token/replies/${replyId}/reports`);
     let resp = await this.httpClient.post(url, { reporter_reason });
     assertStatus(resp, 201);
   }
