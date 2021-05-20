@@ -1,3 +1,4 @@
+// TODO: build scripts for mobile mode
 import App from "./App.svelte";
 
 declare global {

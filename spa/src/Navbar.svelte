@@ -1,7 +1,8 @@
 <script>
   import type { Title } from "./state";
   import { fly } from "svelte/transition";
-  import { links, link } from "svelte-routing";
+  import { link } from "svelte-routing";
+  import { deleteApiToken } from "./local-storage";
 
   export let title: Title;
 
@@ -13,6 +14,10 @@
 
   function closeMenu() {
     menu = false;
+  }
+
+  function logout(): void {
+    deleteApiToken();
   }
 </script>
 
@@ -36,25 +41,26 @@
       <img src="/images/cross.svg" alt="close menu cross" />
     </button>
 
-    <div use:links class="content button-grid">
-      <a href="/dashboard" on:click={closeMenu} class="button"> Home </a>
-      <a href="/guidelines" on:click={closeMenu} class="button"> Guidelines </a>
-      <a href="/daily-reflection" on:click={closeMenu} class="button">
+    <div class="content button-grid">
+      <a use:link href="/dashboard" on:click={closeMenu} class="button">
+        Home
+      </a>
+      <a use:link href="/guidelines" on:click={closeMenu} class="button">
+        Guidelines
+      </a>
+      <a use:link href="/daily-reflection" on:click={closeMenu} class="button">
         Daily Reflection
       </a>
-      <a href="/therapy-sessions" on:click={closeMenu} class="button">
+      <a use:link href="/therapy-sessions" on:click={closeMenu} class="button">
         Group Sessions
       </a>
-      <a href="/urgent-support" on:click={closeMenu} class="button">
+      <a use:link href="/urgent-support" on:click={closeMenu} class="button">
         Urgent Support
       </a>
-      <a href="/will-pool" on:click={closeMenu} class="button"> Will Pool </a>
-      <!-- TODO: log out -->
-      <form method="POST" action="/users/log-out">
-        <input type="hidden" name="_csrf_token" value="ok" />
-        <input type="hidden" name="_method" value="delete" />
-        <button type="submit" class="button">Log Out</button>
-      </form>
+      <a use:link href="/will-pool" on:click={closeMenu} class="button">
+        Will Pool
+      </a>
+      <a href="/" on:click={logout} class="button"> Log Out </a>
     </div>
     <button on:click|preventDefault={toggleMenu} class="close-purple">
       <img src="/images/cross-purple.svg" alt="close menu cross" />

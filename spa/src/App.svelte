@@ -1,26 +1,24 @@
 <script lang="ts">
   import Authenticated from "./Authenticated.svelte";
   import { AuthenticatedApiClient, login } from "./backend";
+  import { loadApiToken, saveApiToken } from "./local-storage";
 
   export let apiBase: string;
 
-  // TODO: loac token from storage
-  let apiToken: string | undefined;
-
+  let apiToken = loadApiToken();
   let email = "";
   let password = "";
   let error = "";
   let submitting = false;
 
-  // TODO: preserve token in storage
   async function submit() {
     if (submitting) return;
     submitting = true;
     error = "";
-    let result = await login(email, password);
+    let result = await login(apiBase, email, password);
     submitting = false;
     if (result.type === "ok") {
-      apiToken = result.apiToken;
+      apiToken = saveApiToken(result.apiToken);
     } else {
       error = result.errorMessage;
     }
