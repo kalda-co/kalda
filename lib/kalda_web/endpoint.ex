@@ -8,8 +8,7 @@ defmodule KaldaWeb.Endpoint do
   @session_options [
     store: :cookie,
     key: "_kalda_key",
-    signing_salt: "9jq4g0ME",
-    same_site: "Lax"
+    signing_salt: "9jq4g0ME"
   ]
 
   socket "/socket", KaldaWeb.UserSocket,

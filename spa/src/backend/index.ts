@@ -7,14 +7,15 @@ import {
   reaction,
   therapy,
 } from "./resources";
-import { assertStatus, HttpClient } from "./http";
+import { request, assertStatus, HttpClient } from "./http";
 
 export async function login(
+  apiBase: string,
   email: string,
   password: string
 ): Promise<LoginResult> {
-  let http = new HttpClient(undefined);
-  let resp = await http.post("/v1/users/session", { email, password });
+  let url = apiBase + "/v1/users/session";
+  let resp = await request("POST", url, { email, password });
   if (resp.status === 201) {
     return loginSuccess(resp.body);
   } else {
@@ -56,7 +57,7 @@ export class AuthenticatedApiClient implements ApiClient {
   private httpClient: HttpClient;
   private apiBase: string;
 
-  constructor(apiBase: string, apiToken: string | undefined) {
+  constructor(apiBase: string, apiToken: string) {
     this.httpClient = new HttpClient(apiToken);
     this.apiBase = apiBase;
   }
