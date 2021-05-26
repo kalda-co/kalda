@@ -3,7 +3,7 @@ let browser = "browser";
 let environments = {
   mobile: {
     out: "mobile/www",
-    apiBase: "https://kalda.co/",
+    apiBase: "https://kalda.co",
   },
   browser: {
     out: "priv/static/",

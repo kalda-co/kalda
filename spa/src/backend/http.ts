@@ -53,7 +53,7 @@ export async function request(
     headers["authorization"] = "Bearer " + apiToken;
   }
   let body = jsonBody ? JSON.stringify(jsonBody) : null;
-  let resp = await fetch(url, { headers, method, body });
+  let resp = await fetch(url, { headers, method, body, mode: "cors" });
   if (resp.status >= 500) {
     let body = await resp.text();
     throw new Error(`Internal server error ${resp.status} ${body}`);
