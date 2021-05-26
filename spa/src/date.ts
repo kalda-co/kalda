@@ -51,8 +51,7 @@ export function datetimeToURI(therapy: Therapy) {
   return `https://www.google.com/calendar/render?action=TEMPLATE&text=${title}&details=${desc}&location=${therapy.link}&dates=${datetimeString}`;
 }
 
-export function fixDate(datetime: Date) {
-  const d = new Date(datetime);
-  const local = d.toLocaleString(); // unused?
-  return `${d}`;
+// TODO: Make this date easier to read (lol)
+export function readableDate(date: Date) {
+  return date.toString();
 }
