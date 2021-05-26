@@ -2,16 +2,10 @@
   <a href="/"><img  class='site-page-logo' src="/images/kalda-logo.svg"></a>
   <div class="site-page-header-spacer"></div>
   <nav class="site-page-header-links">
-    <%= if @current_user do %>
-      <%#= link "Log out" , to: Routes.user_session_path(@conn, :delete), class: "gradient button" , method: :delete %>
-      <a class="gradient button" href="/dashboard">App</a>
-      <a class="gradient button" href="">Contact Us</a>
-      <%= if @current_user.is_admin do %>
-        <a class="gradient button" href="/admin">Admin</a>
-      <% end %>
-    <% else %>
-      <%= link "Log in" , to: Routes.user_session_path(@conn, :new), class: "gradient button" %>
-      <a class="gradient button" name="contact" href="mailto:hello@kalda.co">Contact Us</a>
+    <a class="gradient button" href="/dashboard">App</a>
+    <%= if @current_user && @current_user.is_admin do %>
+      <a class="gradient button" href="/admin">Admin</a>
     <% end %>
+    <a class="gradient button" name="contact" href="mailto:hello@kalda.co">Contact Us</a>
   </nav>
 </header>
