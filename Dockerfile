@@ -31,7 +31,7 @@ RUN mix compile
 
 # Compile frontend app
 COPY . .
-RUN npm run deploy && mix phx.digest
+RUN npm run frontend-build && mix phx.digest
 
 # Compile the release
 RUN mix release

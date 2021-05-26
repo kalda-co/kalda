@@ -6,7 +6,8 @@
     "check": "svelte-check --watch spa",
     "check-once": "svelte-check spa",
     "webpack": "webpack --mode development --watch",
-    "deploy": "svelte-check && snowpack build && webpack --mode production",
+    "frontend-build": "snowpack build && webpack --mode production",
+    "mobile-frontend-build": "KALDA_TARGET=mobile snowpack build",
     "backend": "mix phx.server",
     "test": "jest --watch",
     "test-once": "jest"

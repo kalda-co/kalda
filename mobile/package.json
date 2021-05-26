@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "devDependencies": {
+    "@capacitor/cli": "^3.0.0",
+    "@capacitor/core": "^3.0.0"
+  }
+}

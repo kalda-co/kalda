@@ -3,7 +3,7 @@ let browser = "browser";
 let environments = {
   mobile: {
     out: "mobile/www",
-    apiBase: "https://kalda.co/",
+    apiBase: "https://kalda.co",
   },
   browser: {
     out: "priv/static/",
@@ -21,6 +21,7 @@ process.env.SNOWPACK_PUBLIC_KALDA_API_BASE = environment.apiBase;
 module.exports = {
   mount: {
     "spa/static": { url: "/", static: true },
+    "assets/static": { url: "/", static: true },
     "spa/src": { url: "/src" },
   },
   plugins: ["@snowpack/plugin-svelte", "@snowpack/plugin-typescript"],
