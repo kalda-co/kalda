@@ -67,7 +67,8 @@ export class AuthenticatedApiClient implements ApiClient {
   }
 
   async getInitialAppState(): Promise<AppState> {
-    let resp = await this.httpClient.get("/v1/token/dashboard");
+    let url = this.route("/v1/token/dashboard");
+    let resp = await this.httpClient.get(url);
     assertStatus(resp, 200);
     return appState(resp.body);
   }

@@ -53,7 +53,6 @@ export function datetimeToURI(therapy: Therapy) {
 
 export function fixDate(datetime: Date) {
   const d = new Date(datetime);
-  console.log(d);
-  const local = d.toLocaleString();
+  const local = d.toLocaleString(); // unused?
   return `${d}`;
 }
