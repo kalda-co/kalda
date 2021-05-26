@@ -77,7 +77,7 @@ defmodule KaldaWeb.Router do
 
   scope "/admin", KaldaWeb.Admin, as: :admin do
     import Phoenix.LiveDashboard.Router
-    pipe_through [:browser, :require_admin]
+    pipe_through [:browser, :require_authenticated_user, :require_admin]
 
     get "/", AdminController, :index
 
