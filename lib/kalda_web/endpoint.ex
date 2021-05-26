@@ -50,6 +50,11 @@ defmodule KaldaWeb.Endpoint do
   plug Sentry.PlugContext
   plug Plug.MethodOverride
   plug Plug.Head
+
+  plug Corsica,
+    origins: ["http://localhost", "http://localhost:3000", "capacitor://localhost"],
+    log: [rejected: :warn, invalid: :warn, accepted: :warn]
+
   plug Plug.Session, @session_options
   plug KaldaWeb.Router
 end
