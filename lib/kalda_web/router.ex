@@ -36,7 +36,7 @@ defmodule KaldaWeb.Router do
   end
 
   pipeline :token_api do
-    plug Corsica, origins: @cors_origins
+    plug Corsica, origins: @cors_origins, log: [rejected: :warn, invalid: :warn, accepted: :warn]
     plug :accepts, ["json"]
     plug :fetch_current_user_from_api_auth_token
   end
