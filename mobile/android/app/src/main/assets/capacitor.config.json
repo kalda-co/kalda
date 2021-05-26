@@ -1,0 +1,6 @@
+{
+	"appId": "co.kalda.app",
+	"appName": "Kalda",
+	"webDir": "static",
+	"bundledWebRuntime": false
+}

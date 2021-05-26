@@ -1,3 +1,5 @@
+import { deleteApiToken } from "../local-storage";
+
 export type Response = {
   status: number;
   body: unknown;
@@ -35,7 +37,11 @@ export class HttpClient {
     url: string,
     jsonBody?: object
   ): Promise<Response> {
-    return request(method, url, jsonBody, this.apiToken);
+    let response = await request(method, url, jsonBody, this.apiToken);
+    if (response.status === 401) {
+      deleteApiToken();
+    }
+    return response;
   }
 }
 
