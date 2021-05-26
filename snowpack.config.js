@@ -1,19 +1,17 @@
+let browser = "browser";
+
 let environments = {
   mobile: {
-    out: "priv/static/",
+    out: "mobile/www",
     apiBase: "https://kalda.co/",
   },
   browser: {
-    out: "mobile/www",
-    apiBase: "",
-  },
-  development: {
     out: "priv/static/",
     apiBase: "",
   },
 };
 
-let environment = environments[process.env.KALDA_TARGET || "development"];
+let environment = environments[process.env.KALDA_TARGET || browser];
 
 // Set environment variables to be included in the JavaScript bundle under
 // the `import.meta.env` object
