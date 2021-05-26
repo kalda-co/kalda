@@ -3,6 +3,7 @@ defmodule KaldaWeb.Router do
   use Plug.ErrorHandler
 
   import KaldaWeb.UserAuth
+  @cors_origins ["http://localhost", "http://localhost:3000", "capacitor://localhost"]
 
   defp handle_errors(conn, data) do
     KaldaWeb.Errors.handle_errors(conn, data)
@@ -35,6 +36,7 @@ defmodule KaldaWeb.Router do
   end
 
   pipeline :token_api do
+    plug Corsica, origins: @cors_origins
     plug :accepts, ["json"]
     plug :fetch_current_user_from_api_auth_token
   end

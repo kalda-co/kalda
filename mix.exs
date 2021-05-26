@@ -45,6 +45,8 @@ defmodule Kalda.MixProject do
       {:phoenix, "~> 1.5.7"},
       {:phoenix_live_view, "~> 0.15.0"},
       {:phoenix_html, "~> 2.11"},
+      # CORS API support
+      {:corsica, "~> 1.0"},
       # Postgresql database access
       {:phoenix_ecto, "~> 4.1"},
       {:ecto_sql, "~> 3.4"},
