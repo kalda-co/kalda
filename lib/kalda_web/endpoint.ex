@@ -2,6 +2,8 @@ defmodule KaldaWeb.Endpoint do
   use Sentry.PlugCapture
   use Phoenix.Endpoint, otp_app: :kalda
 
+  @cors_origins ["http://localhost", "http://localhost:3000", "capacitor://localhost"]
+
   # The session will be stored in the cookie and signed,
   # this means its contents can be read but not tampered with.
   # Set :encryption_salt if you would also like to encrypt it.
@@ -50,11 +52,7 @@ defmodule KaldaWeb.Endpoint do
   plug Sentry.PlugContext
   plug Plug.MethodOverride
   plug Plug.Head
-
-  plug Corsica,
-    origins: ["http://localhost", "http://localhost:3000", "capacitor://localhost"],
-    log: [rejected: :warn, invalid: :warn, accepted: :warn]
-
+  plug Corsica, origins: @cors_origins, allow_headers: :all
   plug Plug.Session, @session_options
   plug KaldaWeb.Router
 end
