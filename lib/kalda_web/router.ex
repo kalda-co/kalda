@@ -4,6 +4,7 @@ defmodule KaldaWeb.Router do
 
   import KaldaWeb.UserAuth
   @cors_origins ["http://localhost", "http://localhost:3000", "capacitor://localhost"]
+  @cors_origins "*"
 
   defp handle_errors(conn, data) do
     KaldaWeb.Errors.handle_errors(conn, data)
