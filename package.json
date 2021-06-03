@@ -7,7 +7,6 @@
     "check-once": "svelte-check spa",
     "webpack": "webpack --mode development --watch",
     "frontend-build": "snowpack build && webpack --mode production",
-    "mobile-frontend-build": "KALDA_TARGET=mobile snowpack build",
     "backend": "mix phx.server",
     "test": "jest --watch",
     "test-once": "jest"
@@ -32,7 +31,6 @@
       "node_modules/(?!(svelte-routing|other-module)/)"
     ]
   },
-  "dependencies-comment": "these ones are used by webpack. We could remove them later",
   "dependencies": {
     "@babel/core": "^7.0.0",
     "@babel/preset-env": "^7.0.0",
@@ -52,6 +50,9 @@
     "webpack-cli": "^3.3.2"
   },
   "devDependencies": {
+    "@capacitor/android": "^3.0.0",
+    "@capacitor/cli": "^3.0.0",
+    "@capacitor/core": "^3.0.0",
     "@snowpack/plugin-svelte": "^3.5.0",
     "@snowpack/plugin-typescript": "^1.2.0",
     "@snowpack/web-test-runner-plugin": "^0.2.0",

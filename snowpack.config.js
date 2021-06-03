@@ -1,22 +1,5 @@
 let browser = "browser";
 
-let environments = {
-  mobile: {
-    out: "mobile/static",
-    apiBase: "https://kalda.co",
-  },
-  browser: {
-    out: "priv/static/",
-    apiBase: "",
-  },
-};
-
-let environment = environments[process.env.KALDA_TARGET || browser];
-
-// Set environment variables to be included in the JavaScript bundle under
-// the `import.meta.env` object
-process.env.SNOWPACK_PUBLIC_KALDA_API_BASE = environment.apiBase;
-
 /** @type {import("snowpack").SnowpackUserConfig } */
 module.exports = {
   mount: {
@@ -43,6 +26,6 @@ module.exports = {
     hmrPort: 4452,
   },
   buildOptions: {
-    out: environment.out,
+    out: "priv/static",
   },
 };
