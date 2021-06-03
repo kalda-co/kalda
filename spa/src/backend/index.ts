@@ -57,8 +57,8 @@ export class AuthenticatedApiClient implements ApiClient {
   private httpClient: HttpClient;
   private apiBase: string;
 
-  constructor(apiBase: string, apiToken: string) {
-    this.httpClient = new HttpClient(apiToken);
+  constructor(apiBase: string, apiToken: string, authFailed: () => void) {
+    this.httpClient = new HttpClient(apiToken, authFailed);
     this.apiBase = apiBase;
   }
 

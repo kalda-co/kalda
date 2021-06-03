@@ -1,7 +1,8 @@
 <script lang="ts">
   import Authenticated from "./Authenticated.svelte";
   import { AuthenticatedApiClient, login } from "./backend";
-  import { loadApiToken, saveApiToken } from "./local-storage";
+  import { loadApiToken, saveApiToken, deleteApiToken } from "./local-storage";
+  import { Dialog } from "@capacitor/dialog";
 
   export let apiBase: string;
 
@@ -23,11 +24,22 @@
       error = result.errorMessage;
     }
   }
+
+  function authFailed() {
+    deleteApiToken();
+    apiToken = undefined;
+    Dialog.alert({
+      title: "Authentication needed",
+      message: "Your session has expired, please log in again",
+    });
+  }
 </script>
 
 <!-- If we have an API token we must be logged in -->
 {#if apiToken}
-  <Authenticated api={new AuthenticatedApiClient(apiBase, apiToken)} />
+  <Authenticated
+    api={new AuthenticatedApiClient(apiBase, apiToken, authFailed)}
+  />
 {:else}
   <div class="login-container">
     <h1>Hi! If you have an account, you can log in:</h1>
