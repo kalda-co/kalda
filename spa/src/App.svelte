@@ -25,7 +25,7 @@
   }
 </script>
 
-<!-- If we have a csrfToken we must be logged in -->
+<!-- If we have an API token we must be logged in -->
 {#if apiToken}
   <Authenticated api={new AuthenticatedApiClient(apiBase, apiToken)} />
 {:else}

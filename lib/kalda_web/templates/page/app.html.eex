@@ -5,6 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kalda</title>
+  <link rel="stylesheet" href="<%= spa_static_path("/spa.css") %>" />
   <%# Social media sharing tags %>
   <meta property="og:image" content="<%= KaldaWeb.Endpoint.url() %>/images/og-logo-fb.png">
   <meta name="twitter:card" content="summary_large_image">
@@ -25,17 +26,14 @@
   <script async defer data-domain="kalda.co" src="https://plausible.io/js/plausible.outbound-links.js"></script>
   <script>window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }</script>
 </head>
-<body>
-<script>
-window.csrfToken = "<%= Plug.CSRFProtection.get_csrf_token() %>";
-</script>
+<body data-api-base="">
   <%# HACK: We shouldn't need to set this here %>
   <script>window.HMR_WEBSOCKET_PORT = 4452</script>
-  <link rel="stylesheet" href="<%= spa_static_path("/spa.css") %>" />
+  <script type="module" src="<%= spa_static_path("/src/index.js") %>"></script>
+
   <%= if Application.get_env(:kalda, :load_spa_css) do %>
     <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/src/index.css") %>" />
   <% end %>
-  <script type="module" src="<%= spa_static_path("/src/index.js") %>"></script>
   <noscript>Please enable JavaScript to view this page.</noscript>
 </body>
 </html>
