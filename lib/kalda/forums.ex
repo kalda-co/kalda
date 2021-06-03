@@ -9,6 +9,7 @@ defmodule Kalda.Forums do
   alias Kalda.Forums.Post
   alias Kalda.Forums.Comment
   alias Kalda.Forums.Reply
+  alias Kalda.Forums.Notification
 
   @doc """
   Parses the forum from the route
@@ -1034,4 +1035,33 @@ defmodule Kalda.Forums do
   end
 
   # TODO Background job that deletes all rows for reply_reactions that have relate and send_love as both false. Perhaps 1x per day?
+
+  @doc """
+  Returns all notifications for user OR empty list if no notifications.
+  Orders as most recently publised first. Limit can be provided as an optional argument.
+
+  ## Examples
+
+      iex> get_notifications(user)
+      [%Notification{}, ...]
+
+      iex> get_notification(user, [limit: 2])
+      [%Notification{}, %Notification{}]
+  """
+
+  def get_notifications(user, opts \\ []) do
+    now = NaiveDateTime.local_now()
+    limit = opts[:limit] || 100
+
+    Repo.all(
+      from n in Notification,
+        where: n.user_id == ^user.id,
+        where: n.inserted_at <= ^now,
+        where: n.read == false,
+        where: n.expired == false,
+        limit: ^limit,
+        order_by: [desc: n.inserted_at],
+        preload: [:author]
+    )
+  end
 end

@@ -19,6 +19,7 @@ alias Kalda.Forums.CommentReaction
 alias Kalda.Forums.ReplyReaction
 alias Kalda.Forums.Reply
 alias Kalda.Forums.Report
+alias Kalda.Forums.Notification
 alias Kalda.Events.TherapySession
 alias Kalda.EmailLists.Signup
 
@@ -74,6 +75,12 @@ post =
   Kalda.Repo.insert!(%Post{
     content: "This is your very first Daily Reflection - does it feel powerful?",
     author_id: user.id
+  })
+
+_notification =
+  Kalda.Repo.insert!(%Notification{
+    user_id: user.id,
+    post_id: post.id
   })
 
 _post2 =
