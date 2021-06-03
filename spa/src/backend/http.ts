@@ -15,9 +15,11 @@ export function assertStatus(resp: Response, expected: number) {
 
 export class HttpClient {
   apiToken: string;
+  authFailed: () => void;
 
-  constructor(apiToken: string) {
+  constructor(apiToken: string, authFailed: () => void) {
     this.apiToken = apiToken;
+    this.authFailed = authFailed;
   }
 
   async get(url: string): Promise<Response> {
@@ -39,7 +41,7 @@ export class HttpClient {
   ): Promise<Response> {
     let response = await request(method, url, jsonBody, this.apiToken);
     if (response.status === 401) {
-      deleteApiToken();
+      this.authFailed();
     }
     return response;
   }
