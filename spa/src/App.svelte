@@ -3,6 +3,7 @@
   import { AuthenticatedApiClient, login } from "./backend";
   import { loadApiToken, saveApiToken, deleteApiToken } from "./local-storage";
   import { Dialog } from "@capacitor/dialog";
+  import { cancelDailyReflectionNotification } from "./local-notification";
 
   export let apiBase: string;
 
@@ -26,8 +27,9 @@
   }
 
   function authFailed() {
-    deleteApiToken();
     apiToken = undefined;
+    deleteApiToken();
+    cancelDailyReflectionNotification();
     Dialog.alert({
       title: "Authentication needed",
       message: "Your session has expired, please log in again",
