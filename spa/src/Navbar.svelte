@@ -3,7 +3,7 @@
   import { fly } from "svelte/transition";
   import { link } from "svelte-routing";
   import { deleteApiToken } from "./local-storage";
-  import { cancelDailyReflectionNotification } from "./local-notification";
+  import { cancelDailyReflectionNotifications } from "./local-notification";
 
   export let title: Title;
 
@@ -18,7 +18,7 @@
   }
 
   function logout(): void {
-    cancelDailyReflectionNotification();
+    cancelDailyReflectionNotifications();
     deleteApiToken();
   }
 </script>
