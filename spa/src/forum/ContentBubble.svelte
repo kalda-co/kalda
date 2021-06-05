@@ -1,11 +1,12 @@
 <script lang="ts">
   import type { BubbleContent, Reaction, User } from "../state";
+  import type { Response } from "../backend/http";
   import ContentTextForm from "./ContentTextForm.svelte";
   import { scale } from "svelte/transition";
   import { makeReactionsCountText } from "./content-bubble";
 
   export let item: BubbleContent;
-  export let report: (id: number, reason: string) => Promise<any>;
+  export let report: (id: number, reason: string) => Promise<Response<any>>;
   export let reply: () => any;
   export let replyLine: boolean = false;
   export let currentUser: User;
@@ -13,7 +14,7 @@
     id: number,
     relate: boolean,
     sendLove: boolean
-  ) => Promise<Reaction>;
+  ) => Promise<Response<Reaction>>;
 
   let currentUserReactions = item.reactions.find(
     (reaction) => reaction.author.id === currentUser.id
@@ -25,10 +26,13 @@
   let reporting = false;
   let thanks = false;
 
-  async function saveReport(reporter_reason: string) {
-    await report(item.id, reporter_reason);
-    reporting = false;
-    toggleThanks();
+  async function saveReport(reporter_reason: string): Promise<Response<null>> {
+    let response = await report(item.id, reporter_reason);
+    if (response.type === "Success") {
+      reporting = false;
+      toggleThanks();
+    }
+    return response;
   }
 
   function insertOrUpdateReaction(
@@ -51,28 +55,40 @@
     }
   }
 
+  // TODO: DUPE: saveRelate & saveLove
   async function saveRelate(bool: boolean) {
     let newReactions = item.reactions.find(
       (reaction) => reaction.author.id === currentUser.id
     );
     let hasLoved = newReactions?.sendLove || false;
     isRelated = bool;
-    let ownReaction = await reaction(item.id, bool, hasLoved);
-    item.reactions = insertOrUpdateReaction(ownReaction, item.reactions);
-    reactionsCount = makeReactionsCount();
-    reactionsCountText = makeReactionsCountText(item.reactions);
+    let response = await reaction(item.id, bool, hasLoved);
+    if (response.type === "Success") {
+      item.reactions = insertOrUpdateReaction(
+        response.resource,
+        item.reactions
+      );
+      reactionsCount = makeReactionsCount();
+      reactionsCountText = makeReactionsCountText(item.reactions);
+    }
   }
 
+  // TODO: DUPE: saveRelate & saveLove
   async function saveLove(bool: boolean) {
     let newReactions = item.reactions.find(
       (reaction) => reaction.author.id === currentUser.id
     );
     let hasRelated = newReactions?.relate || false;
     isLoved = bool;
-    let ownReaction = await reaction(item.id, hasRelated, bool);
-    item.reactions = insertOrUpdateReaction(ownReaction, item.reactions);
-    reactionsCount = makeReactionsCount();
-    reactionsCountText = makeReactionsCountText(item.reactions);
+    let response = await reaction(item.id, hasRelated, bool);
+    if (response.type === "Success") {
+      item.reactions = insertOrUpdateReaction(
+        response.resource,
+        item.reactions
+      );
+      reactionsCount = makeReactionsCount();
+      reactionsCountText = makeReactionsCountText(item.reactions);
+    }
   }
 
   function toggleReporting() {
@@ -94,12 +110,8 @@
   import { fly } from "svelte/transition";
 
   function makeReactionsCount() {
-    let loveCount = item.reactions.filter(
-      (reaction) => reaction.sendLove === true
-    );
-    let relateCount = item.reactions.filter(
-      (reaction) => reaction.relate === true
-    );
+    let loveCount = item.reactions.filter((reaction) => reaction.sendLove);
+    let relateCount = item.reactions.filter((reaction) => reaction.relate);
     let total = loveCount.length + relateCount.length;
     return total;
   }

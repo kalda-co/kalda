@@ -3,6 +3,6 @@
 
 import { Dialog } from "@capacitor/dialog";
 
-export function alert(title: string, message: string) {
+export function alertbox(title: string, message: string) {
   Dialog.alert({ title, message });
 }

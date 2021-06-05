@@ -2,7 +2,7 @@
   import CommentComponent from "./Comment.svelte";
   import ContentTextForm from "./ContentTextForm.svelte";
   import type { Post, User, Comment } from "../state";
-  import type { ApiClient } from "../backend";
+  import type { ApiClient, Response } from "../backend";
 
   export let api: ApiClient;
   export let post: Post;
@@ -10,9 +10,12 @@
   export let commentName: string;
   export let currentUser: User;
 
-  async function saveComment(content: string) {
-    let comment = await api.createComment(post.id, content);
-    post.comments = [comment, ...post.comments];
+  async function saveComment(content: string): Promise<Response<Comment>> {
+    let response = await api.createComment(post.id, content);
+    if (response.type === "Success") {
+      post.comments = [response.resource, ...post.comments];
+    }
+    return response;
   }
 
   function countReplies(postComments: Array<Comment>) {
