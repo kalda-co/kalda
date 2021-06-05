@@ -1,14 +1,17 @@
+import { Storage } from "@capacitor/storage";
+
 const API_TOKEN_STORAGE_KEY = "api-token";
 
-export function saveApiToken(token: string): string {
-  localStorage.setItem(API_TOKEN_STORAGE_KEY, token);
+export async function saveApiToken(token: string): Promise<string> {
+  await Storage.set({ key: API_TOKEN_STORAGE_KEY, value: token });
   return token;
 }
 
-export function deleteApiToken(): void {
-  localStorage.removeItem(API_TOKEN_STORAGE_KEY);
+export async function deleteApiToken(): Promise<void> {
+  await Storage.remove({ key: API_TOKEN_STORAGE_KEY });
 }
 
-export function loadApiToken(): string | undefined {
-  return localStorage.getItem(API_TOKEN_STORAGE_KEY) || undefined;
+export async function loadApiToken(): Promise<string | undefined> {
+  let result = await Storage.get({ key: API_TOKEN_STORAGE_KEY });
+  return result.value || undefined;
 }

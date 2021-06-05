@@ -7,20 +7,24 @@
 
   export let apiBase: string;
 
-  let apiToken = loadApiToken();
+  let apiToken: string | undefined;
   let email = "";
   let password = "";
   let error = "";
   let submitting = false;
 
-  async function submit() {
+  loadApiToken().then((token) => {
+    apiToken = token;
+  });
+
+  async function submitLoginForm() {
     if (submitting) return;
     submitting = true;
     error = "";
     let result = await login(apiBase, email, password);
     submitting = false;
     if (result.type === "ok") {
-      apiToken = saveApiToken(result.apiToken);
+      apiToken = await saveApiToken(result.apiToken);
     } else {
       error = result.errorMessage;
     }
@@ -52,7 +56,7 @@
       </div>
     {/if}
 
-    <form on:submit|preventDefault={submit}>
+    <form on:submit|preventDefault={submitLoginForm}>
       <label for="email">Email</label>
       <input
         type="email"
