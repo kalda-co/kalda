@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { ApiClient } from "./backend";
-  import { alert } from "./dialog";
+  import { alertbox } from "./dialog";
   import Loaded from "./Loaded.svelte";
   import { onDestroy } from "svelte";
   import { MINUTE } from "./constants";
@@ -45,8 +45,9 @@
   // fixes the problem.
   // This should never happen, if it does it means we have a bug.
   window.onunhandledrejection = async (error: any) => {
+    // TODO: register exception with tracker
     console.error(error);
-    await alert(
+    await alertbox(
       "Oh no! Something went wrong!",
       "Sorry, an unexpected error occurred. Please try again later and contact us if it happens again."
     );
@@ -57,8 +58,14 @@
 {#await state}
   <!-- TODO: Loading design -->
   ... Loading
-{:then state}
-  <Loaded {state} {api} />
+{:then response}
+  {#if response.type === "Success"}
+    <Loaded state={response.resource} {api} />
+  {:else}
+    <!-- TODO: Error design -->
+    failed to load :(
+    <div>{response.detail}</div>
+  {/if}
 {:catch error}
   <!-- TODO: Error design -->
   failed to load :(

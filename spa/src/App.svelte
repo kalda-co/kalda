@@ -5,7 +5,8 @@
   import { cancelDailyReflectionNotifications } from "./local-notification";
   import { setStatusBarColor } from "./device";
   import { KALDA_PURPLE } from "./constants";
-  import { alert } from "./dialog";
+  import { alertbox } from "./dialog";
+  import type { ErrorHandlers } from "./backend/http";
 
   export let apiBase: string;
 
@@ -38,18 +39,57 @@
   function authFailed() {
     deleteApiToken();
     cancelDailyReflectionNotifications();
-    alert(
+    alertbox(
       "Authentication needed",
       "Your session has expired, please log in again"
     );
     apiToken = undefined;
   }
+
+  function serverError() {
+    // TODO: register exception with tracker
+    alertbox(
+      "Server error",
+      "An unexpected server error occurred. Please try again later"
+    );
+  }
+
+  function networkError() {
+    alertbox(
+      "Connection problems",
+      "We couldn't reach our servers right now. Please try again later"
+    );
+  }
+
+  function unexpectedBody() {
+    // TODO: register exception with tracker
+    alertbox(
+      "Unexpected response",
+      "We got an unexpected response from our servers. Please try again later"
+    );
+  }
+
+  function unexpectedStatus() {
+    // TODO: register exception with tracker
+    alertbox(
+      "Unexpected status",
+      "We got an unexpected status from our servers. Please try again later"
+    );
+  }
+
+  let errorHandlers: ErrorHandlers = {
+    authFailed,
+    serverError,
+    networkError,
+    unexpectedBody,
+    unexpectedStatus,
+  };
 </script>
 
 <!-- If we have an API token we must be logged in -->
 {#if apiToken}
   <Authenticated
-    api={new AuthenticatedApiClient(apiBase, apiToken, authFailed)}
+    api={new AuthenticatedApiClient(apiBase, apiToken, errorHandlers)}
   />
 {:else}
   <div class="login-container">

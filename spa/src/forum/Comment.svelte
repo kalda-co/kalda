@@ -1,6 +1,6 @@
 <script lang="ts">
-  import type { Comment, User } from "../state";
-  import type { ApiClient } from "../backend";
+  import type { Comment, User, Reply } from "../state";
+  import type { ApiClient, Response } from "../backend";
   import ContentTextForm from "./ContentTextForm.svelte";
   import ContentBubble from "./ContentBubble.svelte";
 
@@ -13,10 +13,13 @@
     replying = !replying;
   }
 
-  async function saveReply(content: string) {
-    let reply = await api.createReply(comment.id, content);
-    comment.replies = [...comment.replies, reply];
-    replying = false;
+  async function saveReply(content: string): Promise<Response<Reply>> {
+    let response = await api.createReply(comment.id, content);
+    if (response.type === "Success") {
+      comment.replies = [...comment.replies, response.resource];
+      replying = false;
+    }
+    return response;
   }
 
   let replyLine: boolean;

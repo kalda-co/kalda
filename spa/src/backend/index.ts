@@ -7,7 +7,10 @@ import {
   reaction,
   therapy,
 } from "./resources";
-import { request, assertStatus, HttpClient } from "./http";
+import { request, Response, HttpClient, ErrorHandlers } from "./http";
+import { UnmatchedError } from "../exhaustive";
+
+export type { Response };
 
 export async function login(
   apiBase: string,
@@ -15,11 +18,29 @@ export async function login(
   password: string
 ): Promise<LoginResult> {
   let url = apiBase + "/v1/users/session";
-  let resp = await request("POST", url, { email, password });
-  if (resp.status === 201) {
-    return loginSuccess(resp.body);
-  } else {
-    return { type: "error", errorMessage: "Unrecognised email or password" };
+  let result = await request([201], "POST", url, loginSuccess, {
+    email,
+    password,
+  });
+  switch (result.type) {
+    case "Success":
+      return result.resource;
+
+    case "UnexpectedBody":
+    case "NetworkError":
+    case "ServerError":
+      return {
+        type: "error",
+        errorMessage:
+          "We're having trouble logging in right now. Please try again later",
+      };
+
+    case "AuthError":
+    case "UnexpectedStatus":
+      return { type: "error", errorMessage: "Unrecognised email or password" };
+
+    default:
+      throw new UnmatchedError(result);
   }
 }
 
@@ -28,27 +49,33 @@ export async function login(
 // AuthenticatedApiClient class so that we can provide an inert mock
 // client in tests.
 export interface ApiClient {
-  getInitialAppState(): Promise<AppState>;
+  getInitialAppState(): Promise<Response<AppState>>;
 
-  createComment(postId: number, content: string): Promise<Comment>;
+  createComment(postId: number, content: string): Promise<Response<Comment>>;
 
-  createReply(commentId: number, content: string): Promise<Reply>;
+  createReply(commentId: number, content: string): Promise<Response<Reply>>;
 
   createCommentReaction(
     commentId: number,
     relate: boolean,
     send_love: boolean
-  ): Promise<Reaction>;
+  ): Promise<Response<Reaction>>;
 
   createReplyReaction(
     replyId: number,
     relate: boolean,
     sendLove: boolean
-  ): Promise<Reaction>;
+  ): Promise<Response<Reaction>>;
 
-  reportComment(commentId: number, reporter_reason: string): Promise<void>;
+  reportComment(
+    commentId: number,
+    reporter_reason: string
+  ): Promise<Response<null>>;
 
-  reportReply(replyId: number, reporter_reason: string): Promise<void>;
+  reportReply(
+    replyId: number,
+    reporter_reason: string
+  ): Promise<Response<null>>;
 }
 
 // An implementation of ApiClient that actually connects to the backend.
@@ -57,8 +84,8 @@ export class AuthenticatedApiClient implements ApiClient {
   private httpClient: HttpClient;
   private apiBase: string;
 
-  constructor(apiBase: string, apiToken: string, authFailed: () => void) {
-    this.httpClient = new HttpClient(apiToken, authFailed);
+  constructor(apiBase: string, apiToken: string, errorHandlers: ErrorHandlers) {
+    this.httpClient = new HttpClient(apiToken, errorHandlers);
     this.apiBase = apiBase;
   }
 
@@ -66,68 +93,83 @@ export class AuthenticatedApiClient implements ApiClient {
     return this.apiBase + path;
   }
 
-  async getInitialAppState(): Promise<AppState> {
+  async getInitialAppState(): Promise<Response<AppState>> {
     let url = this.route("/v1/token/dashboard");
-    let resp = await this.httpClient.get(url);
-    assertStatus(resp, 200);
-    return appState(resp.body);
+    return await this.httpClient.get(url).expect(200).request(appState);
   }
 
-  async createComment(postId: number, content: string): Promise<Comment> {
+  async createComment(
+    postId: number,
+    content: string
+  ): Promise<Response<Comment>> {
     let url = this.route(`/v1/token/posts/${postId}/comments`);
-    let resp = await this.httpClient.post(url, { content });
-    assertStatus(resp, 201);
-    return comment(resp.body);
+    return await this.httpClient
+      .post(url)
+      .expect(201)
+      .body({ content })
+      .request(comment);
   }
 
-  async createReply(commentId: number, content: string): Promise<Reply> {
+  async createReply(
+    commentId: number,
+    content: string
+  ): Promise<Response<Reply>> {
     let url = this.route(`/v1/token/comments/${commentId}/replies`);
-    let resp = await this.httpClient.post(url, { content });
-    assertStatus(resp, 201);
-    return reply(resp.body);
+    return await this.httpClient
+      .post(url)
+      .expect(201)
+      .body({ content })
+      .request(reply);
   }
 
   async createCommentReaction(
     commentId: number,
     relate: boolean,
     sendLove: boolean
-  ): Promise<Reaction> {
+  ): Promise<Response<Reaction>> {
     let url = this.route(`/v1/token/comments/${commentId}/reactions`);
-    let resp = await this.httpClient.patch(url, {
-      relate,
-      send_love: sendLove,
-    });
-    assertStatus(resp, 201);
-    return reaction(resp.body);
+    return await this.httpClient
+      .patch(url)
+      .expect(201)
+      .body({ relate, send_love: sendLove })
+      .request(reaction);
   }
 
   async createReplyReaction(
     replyId: number,
     relate: boolean,
     sendLove: boolean
-  ): Promise<Reaction> {
+  ): Promise<Response<Reaction>> {
     let url = this.route(`/v1/token/replies/${replyId}/reactions`);
-    let resp = await this.httpClient.patch(url, {
-      relate,
-      send_love: sendLove,
-    });
-    assertStatus(resp, 201);
-    return reaction(resp.body);
+    return await this.httpClient
+      .patch(url)
+      .expect(201)
+      .body({ relate, send_love: sendLove })
+      .request(reaction);
   }
 
   async reportComment(
     commentId: number,
     reporter_reason: string
-  ): Promise<void> {
+  ): Promise<Response<null>> {
     let url = this.route(`/v1/token/comments/${commentId}/reports`);
-    let resp = await this.httpClient.post(url, { reporter_reason });
-    assertStatus(resp, 201);
+    return await this.httpClient
+      .post(url)
+      .expect(201)
+      .body({ reporter_reason })
+      .request((_) => null);
   }
 
-  async reportReply(replyId: number, reporter_reason: string): Promise<void> {
+  async reportReply(
+    replyId: number,
+    reporter_reason: string
+  ): Promise<Response<null>> {
     let url = this.route(`/v1/token/replies/${replyId}/reports`);
-    let resp = await this.httpClient.post(url, { reporter_reason });
-    assertStatus(resp, 201);
+    return await this.httpClient
+      .post(url)
+      .expect(201)
+      .body({ reporter_reason })
+      .request((_) => null);
   }
 }
 
@@ -136,33 +178,39 @@ export class MockApiClient implements ApiClient {
   getCsrfToken(): string {
     return "some-csrf-token";
   }
-  getInitialAppState(): Promise<AppState> {
+  getInitialAppState(): Promise<Response<AppState>> {
     throw new Error("Method not implemented.");
   }
-  createComment(postId: number, content: string): Promise<Comment> {
+  createComment(postId: number, content: string): Promise<Response<Comment>> {
     throw new Error("Method not implemented.");
   }
-  createReply(commentId: number, content: string): Promise<Reply> {
+  createReply(commentId: number, content: string): Promise<Response<Reply>> {
     throw new Error("Method not implemented.");
   }
   createCommentReaction(
     commentId: number,
     relate: boolean,
     sendLove: boolean
-  ): Promise<Reaction> {
+  ): Promise<Response<Reaction>> {
     throw new Error("Method not implemented.");
   }
   createReplyReaction(
     replyId: number,
     relate: boolean,
     sendLove: boolean
-  ): Promise<Reaction> {
+  ): Promise<Response<Reaction>> {
     throw new Error("Method not implemented.");
   }
-  reportComment(commentId: number, reporter_reason: string): Promise<void> {
+  reportComment(
+    commentId: number,
+    reporter_reason: string
+  ): Promise<Response<null>> {
     throw new Error("Method not implemented.");
   }
-  reportReply(replyId: number, reporter_reason: string): Promise<void> {
+  reportReply(
+    replyId: number,
+    reporter_reason: string
+  ): Promise<Response<null>> {
     throw new Error("Method not implemented.");
   }
 }

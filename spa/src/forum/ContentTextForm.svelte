@@ -1,5 +1,7 @@
 <script lang="ts">
-  export let save: (text: string) => Promise<any>;
+  import type { Response } from "../backend";
+
+  export let save: (text: string) => Promise<Response<any>>;
   export let placeholder: string;
   export let focus: boolean = false;
   export let buttonText: string;
@@ -10,13 +12,11 @@
   async function submitComment() {
     let content = newContent;
     let sanitisedContent = stripHtml(content);
-    try {
-      newContent = "";
-      await save(sanitisedContent);
-    } catch (error) {
+    newContent = "";
+    let response = await save(sanitisedContent);
+    if (response.type !== "Success") {
       // Saving failed, reset the text input so the user can try again
       newContent = content;
-      console.error(error);
     }
   }
 
