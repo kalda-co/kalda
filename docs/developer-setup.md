@@ -80,7 +80,7 @@ brew install coreutils curl git
 ## Install asdf.
 
 ```sh
-git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.8.0
+git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.8.1
 ```
 
 Add the asdf config to your shell.
@@ -107,6 +107,9 @@ asdf plugin-add elixir
 ```
 
 ```sh
+# If on OSX
+brew install gnupg
+
 asdf plugin-add nodejs
 ```
 
