@@ -74,6 +74,10 @@
         </button>
       </div>
     </form>
+
+    <p class="forgot-password">
+      <a href="https://kalda.co/users/reset-password">Forgot your password?</a>
+    </p>
   </div>
 {/if}
 
@@ -121,5 +125,10 @@
     line-height: var(--line-height-l);
     font-weight: var(--font-weight-large);
     color: var(--color-purple);
+  }
+
+  .forgot-password {
+    font-weight: var(--font-weight-large);
+    color: unset;
   }
 </style>
