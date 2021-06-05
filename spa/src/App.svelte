@@ -12,7 +12,7 @@
   let apiToken: string | undefined;
   let email = "";
   let password = "";
-  let error = "";
+  let loginError = "";
   let submitting = false;
 
   loadApiToken().then((token) => {
@@ -24,14 +24,14 @@
   async function submitLoginForm() {
     if (submitting) return;
     submitting = true;
-    error = "";
+    loginError = "";
     let result = await login(apiBase, email, password);
     submitting = false;
     if (result.type === "ok") {
       apiToken = result.apiToken;
       saveApiToken(apiToken);
     } else {
-      error = result.errorMessage;
+      loginError = result.errorMessage;
     }
   }
 
@@ -55,9 +55,9 @@
   <div class="login-container">
     <h1>Hi! If you have an account, you can log in:</h1>
 
-    {#if error}
+    {#if loginError}
       <div class="alert alert-danger">
-        <p>{error}</p>
+        <p>{loginError}</p>
       </div>
     {/if}
 
