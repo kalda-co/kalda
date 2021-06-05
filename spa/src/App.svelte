@@ -24,7 +24,8 @@
     let result = await login(apiBase, email, password);
     submitting = false;
     if (result.type === "ok") {
-      apiToken = await saveApiToken(result.apiToken);
+      apiToken = result.apiToken;
+      saveApiToken(apiToken);
     } else {
       error = result.errorMessage;
     }
