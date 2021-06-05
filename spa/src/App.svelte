@@ -2,10 +2,10 @@
   import Authenticated from "./Authenticated.svelte";
   import { AuthenticatedApiClient, login } from "./backend";
   import { loadApiToken, saveApiToken, deleteApiToken } from "./local-storage";
-  import { Dialog } from "@capacitor/dialog";
   import { cancelDailyReflectionNotifications } from "./local-notification";
   import { setStatusBarColor } from "./device";
   import { KALDA_PURPLE } from "./constants";
+  import { alert } from "./dialog";
 
   export let apiBase: string;
 
@@ -36,13 +36,13 @@
   }
 
   function authFailed() {
-    apiToken = undefined;
     deleteApiToken();
     cancelDailyReflectionNotifications();
-    Dialog.alert({
-      title: "Authentication needed",
-      message: "Your session has expired, please log in again",
-    });
+    alert(
+      "Authentication needed",
+      "Your session has expired, please log in again"
+    );
+    apiToken = undefined;
   }
 </script>
 
