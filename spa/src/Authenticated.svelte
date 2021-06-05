@@ -1,7 +1,6 @@
 <script lang="ts">
   import type { ApiClient } from "./backend";
-  import { Dialog } from "@capacitor/dialog";
-  import { navigate } from "svelte-routing";
+  import { alert } from "./dialog";
   import Loaded from "./Loaded.svelte";
   import { onDestroy } from "svelte";
   import { MINUTE } from "./constants";
@@ -47,11 +46,10 @@
   // This should never happen, if it does it means we have a bug.
   window.onunhandledrejection = async (error: any) => {
     console.error(error);
-    await Dialog.alert({
-      title: "Oh no! Something went wrong!",
-      message:
-        "Sorry, an unexpected error occurred. Please try again later and contact us if it happens again.",
-    });
+    await alert(
+      "Oh no! Something went wrong!",
+      "Sorry, an unexpected error occurred. Please try again later and contact us if it happens again."
+    );
     window.location.pathname = "/dashboard";
   };
 </script>
