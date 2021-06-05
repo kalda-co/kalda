@@ -81,7 +81,6 @@
   </Router>
 </main>
 
-<!-- TODO: Error design -->
 <style>
   main {
     margin: 0 auto;

@@ -1,7 +1,9 @@
 <script lang="ts">
+  import type { ApiClient } from "./backend";
+  import { Dialog } from "@capacitor/dialog";
+  import { navigate } from "svelte-routing";
   import Loaded from "./Loaded.svelte";
   import { onDestroy } from "svelte";
-  import type { ApiClient } from "./backend";
   import { MINUTE } from "./constants";
   import {
     currentNetworkConnectionStatus,
@@ -36,9 +38,25 @@
   // passed since the previous loading of the state.
   let foregroundListenerHandle = whenAppForegrounded(refreshStateIfStale);
   onDestroy(() => foregroundListenerHandle.cancel());
+
+  let state = api.getInitialAppState();
+
+  // When there is an uncaught exception we show a message to the user to let
+  // them know there is a problem and reload the application. Hopefully that
+  // fixes the problem.
+  // This should never happen, if it does it means we have a bug.
+  window.onunhandledrejection = async (error: any) => {
+    console.error(error);
+    await Dialog.alert({
+      title: "Oh no! Something went wrong!",
+      message:
+        "Sorry, an unexpected error occurred. Please try again later and contact us if it happens again.",
+    });
+    window.location.pathname = "/dashboard";
+  };
 </script>
 
-{#await appState}
+{#await state}
   <!-- TODO: Loading design -->
   ... Loading
 {:then state}
