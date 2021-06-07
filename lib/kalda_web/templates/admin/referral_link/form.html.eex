@@ -13,6 +13,7 @@
 
   <p>Name of the link. It will appear in the form "kalda.co/get/name" for example "buffy" would create the link: "kalda.co/get/buffy"</p>
   <p>The name must only contain lowercase letters, numbers, and hyphens</p>
+  <p>The naming convention is $NAME-$MONTH-$DAY, for example if you are creating a link for Facebook on 13th June it would be "FB-June-13" or if you created a link for Laurie it would be "Laurie-June-13" etc.</p>
 
   <%= label f, :name %>
   <%= text_input f, :name, required: true %>
