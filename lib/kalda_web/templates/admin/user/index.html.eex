@@ -1,11 +1,13 @@
 <%# TODO add pagination, here and in controller, and Accounts %>
 <div class="admin-container">
 <h1>Listing Users</h1>
+<h3>User Count: &nbsp; <%=Enum.count(@users) %></h3>
 <br />
 
 <%= for user <- @users do %>
 <p>Username: &nbsp
 <span style="color: var(--color-purple)"><%= user.username %></span>
+<span style="color: var(--color-purple)"> &nbsp;&nbsp;&nbsp;ID: <%= user.id %></span>
 </p>
 <p>Email: &nbsp
 <span style="color: var(--color-purple)"><%= user.email %></span>
