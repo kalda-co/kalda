@@ -14,6 +14,16 @@
     <p>Referrer link name: &nbsp
       <span style="color: var(--color-purple)">
       <%= referral_link.name %>
+      &nbsp;
+      &nbsp;
+      &nbsp;
+      &nbsp;
+      &nbsp;
+      &nbsp;
+      &nbsp;
+      &nbsp;
+      &nbsp;
+      <a href="https://kalda.co/get/<%=referral_link.name %>">https://kalda.co/get/<%=referral_link.name %></a>
       </span>
     </p>
     <p>Referrer slots remaining: &nbsp
@@ -31,6 +41,11 @@
       <% days_away = Float.round((NaiveDateTime.diff(referral_link.expires_at, NaiveDateTime.local_now()) / (24 * 60 * 60)), 1)%>
         <%= days_away %>
         days
+      </span>
+    </p>
+    <p>Date link created: &nbsp
+      <span style="color: var(--color-purple)">
+      <%= referral_link.inserted_at %>
       </span>
     </p>
     <hr>

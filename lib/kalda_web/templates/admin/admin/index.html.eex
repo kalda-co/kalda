@@ -18,6 +18,8 @@
       <li><%= link "All Therapy Sessions (including scheduled)", to: Routes.admin_therapy_session_path(@conn, :index) %>
 
       <li><%= link "Referral links", to: Routes.admin_referral_link_path(@conn, :index) %>
+
+      <li><%= link "Users", to: Routes.admin_user_path(@conn, :index) %>
     </ul>
   </nav>
 

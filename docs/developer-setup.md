@@ -8,11 +8,6 @@ For first time git users there is a need to do some set up to get their git acco
 
 You can follow the instructions [here.](https://docs.github.com/en/free-pro-team@latest/github/getting-started-with-github/set-up-git)
 
-### Install GPG
-
-There is also a need to install GPG if you don't already have it. (see getting ASDF below)
-**_Make sure that you are in the kalda project directory when running asdf install for GPG_**
-
 ## Setup the Postgresql database
 
 Install the Postgresql database though a means of your chosing. OSX
@@ -26,44 +21,20 @@ sudo apt install postgresql
 brew install postgres
 ```
 
-```sh
-# On Mac check installation and set postgres to run at startup
-pg_ctl -D /usr/local/var/postgres start && brew services start postgresql
-# check it works
-postgres -V
-# Connect to database with your username 'whoami'
-# This is because on Mac the default user is you.
-psql -U 'whoami' postgres
-# If this fails
-cd /usr/local/var/postgres
-initdb postgres
-# now repeat
-psql -U 'whoami' postgres
-# view users
-\du
-```
-
-### Ensuring there is a `postgres` user
-
-Ensure there is a Postgresql user called `postgres` with the password
-`postgres`.
-
-#### ON MAC
+#### On OSX
 
 ```sh
-createuser -s --replication postgres -P
+# Start postgres
+brew services start postgresql
+
+# Create postgres user with password postgres
+createuser --username=$USER --superuser --pwprompt postgres
 ```
 
-This will run the command to create the postgres user.
 
--s means it will be created as a super user.
---replication means it will be given the replication privilege.
--P prompts for the password. Then you only need to enter postgres for the password.
-Instructions in the documentation [here.](https://www.postgresql.org/docs/13/app-createuser.html
+#### On Debian/Ubuntu Linux
 
-OR (if that didnt work for you) more instructions [here](https://www.codementor.io/@engineerapart/getting-started-with-postgresql-on-mac-osx-are8jcopb#a1-create-role-with-psql)
-
-#### ON LINUX
+Set the postgres user's username to postgres
 
 ```sh
 # On Ubuntu Linux
@@ -109,7 +80,7 @@ brew install coreutils curl git
 ## Install asdf.
 
 ```sh
-git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.8.0
+git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.8.1
 ```
 
 Add the asdf config to your shell.
@@ -121,7 +92,7 @@ Add the asdf config to your shell.
 Now restart your shell so the config takes effect. Be sure to `cd` back to
 the Kalda project directory.
 
-Add the language plugins and their deps
+Add the language plugins and their deps. If you have any problems with these see the READMEs of the plugins on GitHub for installation instructions.
 
 ```sh
 asdf plugin-add erlang
@@ -136,8 +107,10 @@ asdf plugin-add elixir
 ```
 
 ```sh
+# If on OSX
+brew install gnupg
+
 asdf plugin-add nodejs
-bash -c '${ASDF_DATA_DIR:=$HOME/.asdf}/plugins/nodejs/bin/import-release-team-keyring'
 ```
 
 Install Elixir, Erlang, and NodeJS using asdf.
