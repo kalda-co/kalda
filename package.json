@@ -1,7 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "start": "concurrently npm:serve npm:check npm:webpack npm:backend",
+    "start": "concurrently npm:serve npm:webpack npm:backend",
     "serve": "snowpack dev",
     "check": "svelte-check --watch spa",
     "check-once": "svelte-check spa",
