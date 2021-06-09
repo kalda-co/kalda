@@ -19,9 +19,33 @@ defmodule Kalda.Forums.Notification do
       foreign_key: :comment_id,
       references: :id
 
-    belongs_to :reply, Kalda.Forums.Reply,
-      foreign_key: :reply_id,
+    # belongs_to :reply, Kalda.Forums.Reply,
+    #   foreign_key: :reply_id,
+    #   references: :id
+
+    # belongs_to :notification_author, Kalda.Accounts.User,
+    #   foreign_key: :notification_author_id,
+    #   references: :id
+
+    # belongs_to :notification_post, Kalda.Forums.Post,
+    #   foreign_key: :notification_post_id,
+    #   references: :id
+
+    belongs_to :notification_comment, Kalda.Forums.Comment,
+      foreign_key: :notification_comment_id,
       references: :id
+
+    belongs_to :notification_reply, Kalda.Forums.Reply,
+      foreign_key: :notification_reply_id,
+      references: :id
+
+    # belongs_to :notification_reply_reaction, Kalda.Forums.ReplyReaction,
+    #   foreign_key: :notification_reply_reaction_id,
+    #   references: :reply_reactions_pkey
+
+    # belongs_to :notification_comment_reaction, Kalda.Forums.CommentReaction,
+    #   foreign_key: :notification_comment_reaction_id,
+    #   references: :comment_id, :author_id
 
     timestamps()
   end
@@ -29,7 +53,17 @@ defmodule Kalda.Forums.Notification do
   @doc false
   def changeset(notification, attrs) do
     notification
-    |> cast(attrs, [:sent, :read, :expired])
+    |> cast(attrs, [
+      :sent,
+      :read,
+      :expired,
+      # :notification_author,
+      # :notification_post_id,
+      :notification_comment_id,
+      :notificaion_reply_id
+      # :notification_reply_reaction_id,
+      # :notification_comment_reaction_id
+    ])
     |> validate_required([:user_id])
   end
 end

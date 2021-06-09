@@ -77,12 +77,6 @@ post =
     author_id: user.id
   })
 
-_notification =
-  Kalda.Repo.insert!(%Notification{
-    user_id: user.id,
-    post_id: post.id
-  })
-
 _post2 =
   Kalda.Repo.insert!(%Post{
     content: "What have you done today to make you feel proud?",
@@ -180,6 +174,13 @@ _reply1 =
     comment_id: comment.id
   })
 
+reply2 =
+  Kalda.Repo.insert!(%Reply{
+    content: "you can tell me about it!",
+    author_id: user2.id,
+    comment_id: comment.id
+  })
+
 _reply_reaction =
   Kalda.Repo.insert!(%ReplyReaction{
     reply_id: reply.id,
@@ -213,6 +214,17 @@ _reply_reaction =
     reply_id: reply.id,
     author_id: user5.id,
     send_love: true
+  })
+
+# TODO: test and enforce that the user must be the author of the post/comment/reply that the notification is on,
+# and the auth of the reply MUST be the correct one for the reply...
+# TODO: does this mean that the noticiation does not need to reference the user or author (except through preloads?)
+_notification =
+  Kalda.Repo.insert!(%Notification{
+    user_id: user.id,
+    comment_id: comment.id,
+    notification_reply_id: reply2.id
+    # notification_author_id: user2.id
   })
 
 _report =

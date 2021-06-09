@@ -986,13 +986,13 @@ defmodule Kalda.ForumsTest do
   describe "notifications" do
     alias Kalda.Forums.Notification
 
-    @valid_dr_notification %{read: false, expired: false}
+    # @valid_dr_notification %{read: false, expired: false}
 
-    test "get_notifications/1 for daily ref" do
+    test "get_notifications/1 for user" do
       user = AccountsFixtures.user()
-      author = AccountsFixtures.user()
+      # author = AccountsFixtures.user()
       # This should create a notification???
-      post = ForumsFixtures.post(author)
+      # post = ForumsFixtures.post(author)
 
       assert {:ok, %Notification{} = notification} = Forums.get_notifications(user)
 
