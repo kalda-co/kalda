@@ -3,6 +3,8 @@ defmodule KaldaWeb.Api.V1.NotificationView do
   alias KaldaWeb.Api.V1.UserView
 
   def render("index.json", params) do
+    IO.inspect(params)
+
     %{
       current_user: UserView.render_author(params.user),
       notifications: Enum.map(params.notifications, &render_notification/1)

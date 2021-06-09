@@ -61,6 +61,19 @@ defmodule KaldaWeb.Api.V1.ReplyControllerTest do
                "errors" => %{"content" => ["can't be blank"]}
              }
     end
+
+    test "creates a notification for each reply", %{conn: conn, user: _current_user} do
+      user = Kalda.AccountsFixtures.user()
+      post = Kalda.ForumsFixtures.post(user)
+      comment = Kalda.ForumsFixtures.comment(post, user)
+
+      assert _conn = post(conn, "/v1/comments/#{comment.id}/replies", @valid_reply_content)
+
+      assert [reply] = Kalda.Forums.get_replies()
+      assert [notification] = Kalda.Forums.get_notifications(user)
+      assert reply.id == notification.notification_reply_id
+      assert user.id == notification.user_id
+    end
   end
 
   describe "POST create reply with unsubscribed user" do

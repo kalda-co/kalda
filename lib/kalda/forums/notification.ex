@@ -56,13 +56,9 @@ defmodule Kalda.Forums.Notification do
     |> cast(attrs, [
       :sent,
       :read,
-      :expired,
-      # :notification_author,
-      # :notification_post_id,
-      :notification_comment_id,
-      :notificaion_reply_id
-      # :notification_reply_reaction_id,
-      # :notification_comment_reaction_id
+      :expired
+      # :notification_comment_id,
+      # :notificaion_reply_id
     ])
     |> validate_required([:user_id])
   end
