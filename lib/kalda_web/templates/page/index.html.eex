@@ -8,7 +8,7 @@
         and get it together.
       </h2>
       <p>
-        Get on the waiting list here!
+        Join our wait list today
       </p>
 
       <%= if @signup_changeset.action do %>
