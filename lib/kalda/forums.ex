@@ -1057,11 +1057,24 @@ defmodule Kalda.Forums do
       from n in Notification,
         where: n.user_id == ^user.id,
         where: n.inserted_at <= ^now,
+        # TODO should be sent and read = false and expires_at nil OR in future??
         where: n.read == false,
         where: n.expired == false,
         limit: ^limit,
-        order_by: [desc: n.inserted_at],
-        preload: [:author]
+        order_by: [desc: n.inserted_at]
+      # preload: [:author]
+      # TODO make sure that like replies and comments I do have an association for the comment/reply etc NOT just the id.
     )
+  end
+
+  def create_reply_notification(comment, reply, attrs \\ %{}) do
+    %Notification{
+      user_id: comment.author_id,
+      comment_id: comment.id,
+      notification_reply_id: reply.id
+      # TODO could put expires at in here as a default
+    }
+    |> Notification.changeset(attrs)
+    |> Repo.insert()
   end
 end
