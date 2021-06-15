@@ -174,7 +174,7 @@
     <cite>{item.author.username}</cite>
   </div>
   <div class="bubble-content">
-    {#each item.content.split(/\n/) as line}
+    {#each item.content.trim().split(/\n/) as line}
       <p>{line}</p>
     {/each}
   </div>
