@@ -47,6 +47,7 @@
         .replaceAll("&nbsp;", " ")
         // Collapse repeat newlines
         .replaceAll(/\n+/g, "\n")
+        .trim()
     );
   }
 
