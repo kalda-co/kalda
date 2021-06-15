@@ -2,5 +2,11 @@
 	"appId": "co.kalda.app",
 	"appName": "Kalda",
 	"webDir": "priv/static",
-	"bundledWebRuntime": false
+	"bundledWebRuntime": false,
+	"plugins": {
+		"LocalNotifications": {
+			"smallIcon": "ic_stat_onesignal_default",
+			"iconColor": "#4a00b0"
+		}
+	}
 }

@@ -3,31 +3,38 @@
   import { AuthenticatedApiClient, login } from "./backend";
   import { loadApiToken, saveApiToken, deleteApiToken } from "./local-storage";
   import { Dialog } from "@capacitor/dialog";
+  import { cancelDailyReflectionNotifications } from "./local-notification";
 
   export let apiBase: string;
 
-  let apiToken = loadApiToken();
+  let apiToken: string | undefined;
   let email = "";
   let password = "";
   let error = "";
   let submitting = false;
 
-  async function submit() {
+  loadApiToken().then((token) => {
+    apiToken = token;
+  });
+
+  async function submitLoginForm() {
     if (submitting) return;
     submitting = true;
     error = "";
     let result = await login(apiBase, email, password);
     submitting = false;
     if (result.type === "ok") {
-      apiToken = saveApiToken(result.apiToken);
+      apiToken = result.apiToken;
+      saveApiToken(apiToken);
     } else {
       error = result.errorMessage;
     }
   }
 
   function authFailed() {
-    deleteApiToken();
     apiToken = undefined;
+    deleteApiToken();
+    cancelDailyReflectionNotifications();
     Dialog.alert({
       title: "Authentication needed",
       message: "Your session has expired, please log in again",
@@ -50,7 +57,7 @@
       </div>
     {/if}
 
-    <form on:submit|preventDefault={submit}>
+    <form on:submit|preventDefault={submitLoginForm}>
       <label for="email">Email</label>
       <input
         type="email"

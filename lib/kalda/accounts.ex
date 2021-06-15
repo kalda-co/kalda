@@ -253,8 +253,10 @@ defmodule Kalda.Accounts do
   Gets the user with the given API session token.
   """
   def get_user_by_api_auth_token(token) do
-    {:ok, query} = UserToken.verify_api_auth_token(token)
-    Repo.one(query)
+    case UserToken.verify_api_auth_token(token) do
+      {:ok, query} -> Repo.one(query)
+      _ -> nil
+    end
   end
 
   @doc """

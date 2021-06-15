@@ -153,7 +153,7 @@
   }
 
   section {
-    margin-bottom: var(--gap);
+    padding-bottom: var(--gap);
   }
 
   .inline-icon {
