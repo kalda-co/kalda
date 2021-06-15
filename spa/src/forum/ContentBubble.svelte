@@ -2,6 +2,7 @@
   import type { BubbleContent, Reaction, User } from "../state";
   import ContentTextForm from "./ContentTextForm.svelte";
   import { scale } from "svelte/transition";
+  import { makeReactionsCountText } from "./content-bubble";
 
   export let item: BubbleContent;
   export let report: (id: number, reason: string) => Promise<any>;
@@ -59,7 +60,7 @@
     let ownReaction = await reaction(item.id, bool, hasLoved);
     item.reactions = insertOrUpdateReaction(ownReaction, item.reactions);
     reactionsCount = makeReactionsCount();
-    reactionsCountText = makeReactionsCountText();
+    reactionsCountText = makeReactionsCountText(item.reactions);
   }
 
   async function saveLove(bool: boolean) {
@@ -71,7 +72,7 @@
     let ownReaction = await reaction(item.id, hasRelated, bool);
     item.reactions = insertOrUpdateReaction(ownReaction, item.reactions);
     reactionsCount = makeReactionsCount();
-    reactionsCountText = makeReactionsCountText();
+    reactionsCountText = makeReactionsCountText(item.reactions);
   }
 
   function toggleReporting() {
@@ -103,76 +104,13 @@
     return total;
   }
 
-  function makeReactionsCountText() {
-    let loveCount = item.reactions.filter(
-      (reaction) => reaction.sendLove === true
-    );
-    let loveCountAuthors = loveCount.map((item) => item.author.username);
-    let relateCount = item.reactions.filter(
-      (reaction) => reaction.relate === true
-    );
-    let relateCountAuthors = relateCount.map((item) => item.author.username);
-    let reactAuthors = [
-      ...new Set([...loveCountAuthors, ...relateCountAuthors]),
-    ];
-    let total = loveCount.length + relateCount.length;
-    if (reactAuthors.length > 4) {
-      let string =
-        total +
-        " " +
-        "\xa0 " +
-        reactAuthors[0] +
-        ", " +
-        reactAuthors[1] +
-        ", " +
-        reactAuthors[2] +
-        " & " +
-        (total - 3) +
-        " others";
-      return string;
-    } else if (reactAuthors.length > 3) {
-      let string =
-        total +
-        " " +
-        "\xa0 " +
-        reactAuthors[0] +
-        ", " +
-        reactAuthors[1] +
-        ", " +
-        reactAuthors[2] +
-        " & " +
-        (total - 3) +
-        " other";
-      return string;
-    } else if (reactAuthors.length > 2) {
-      let string =
-        total +
-        " " +
-        "\xa0 " +
-        reactAuthors[0] +
-        ", " +
-        reactAuthors[1] +
-        ", " +
-        reactAuthors[2];
-      return string;
-    } else if (reactAuthors.length > 1) {
-      let string =
-        total + " " + "\xa0 " + reactAuthors[0] + ", " + reactAuthors[1];
-      return string;
-    } else {
-      let string = total + " " + "\xa0 " + reactAuthors[0];
-      return string;
-    }
-    // TODO: which reaction is it for react-count image?
-    // TODO: randomise
-  }
   let reactionsCount: number;
   $: {
     reactionsCount = makeReactionsCount();
   }
   let reactionsCountText: string;
   $: {
-    reactionsCountText = makeReactionsCountText();
+    reactionsCountText = makeReactionsCountText(item.reactions);
   }
 </script>
 
