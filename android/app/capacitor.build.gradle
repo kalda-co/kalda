@@ -12,6 +12,7 @@ dependencies {
     implementation project(':capacitor-storage')
     implementation project(':capacitor-dialog')
     implementation project(':capacitor-local-notifications')
+    implementation project(':capacitor-status-bar')
 
 }
 
