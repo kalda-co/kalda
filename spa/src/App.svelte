@@ -4,11 +4,10 @@
   import { loadApiToken, saveApiToken, deleteApiToken } from "./local-storage";
   import { Dialog } from "@capacitor/dialog";
   import { cancelDailyReflectionNotifications } from "./local-notification";
-  import { StatusBar } from "@capacitor/status-bar";
+  import { setStatusBarColor } from "./device";
+  import { KALDA_PURPLE } from "./constants";
 
   export let apiBase: string;
-
-  const KALDA_PURPLE = "#4a00b0";
 
   let apiToken: string | undefined;
   let email = "";
@@ -20,7 +19,7 @@
     apiToken = token;
   });
 
-  StatusBar.setBackgroundColor({ color: KALDA_PURPLE });
+  setStatusBarColor(KALDA_PURPLE);
 
   async function submitLoginForm() {
     if (submitting) return;
