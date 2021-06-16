@@ -3,6 +3,8 @@
 // import { MockApiClient } from "../backend";
 // import type { AppState } from "../state";
 
+// An example of how to test a component
+//
 // test("should render", () => {
 //   let api = new MockApiClient();
 //   let state: AppState = {
