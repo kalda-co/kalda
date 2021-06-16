@@ -10,8 +10,10 @@ android {
 apply from: "../capacitor-cordova-android-plugins/cordova.variables.gradle"
 dependencies {
     implementation project(':capacitor-storage')
+    implementation project(':capacitor-app')
     implementation project(':capacitor-dialog')
     implementation project(':capacitor-local-notifications')
+    implementation project(':capacitor-network')
     implementation project(':capacitor-status-bar')
 
 }
