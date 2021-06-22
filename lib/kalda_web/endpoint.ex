@@ -1,5 +1,4 @@
 defmodule KaldaWeb.Endpoint do
-  use Sentry.PlugCapture
   use Phoenix.Endpoint, otp_app: :kalda
 
   @cors_origins ["http://localhost", "http://localhost:3000", "capacitor://localhost"]
@@ -49,7 +48,6 @@ defmodule KaldaWeb.Endpoint do
     pass: ["*/*"],
     json_decoder: Phoenix.json_library()
 
-  plug Sentry.PlugContext
   plug Plug.MethodOverride
   plug Plug.Head
   plug Corsica, origins: @cors_origins, allow_headers: :all

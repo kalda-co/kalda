@@ -31,17 +31,6 @@ config :kalda, Kalda.Mailer,
     recv_timeout: :timer.minutes(1)
   ]
 
-# Sentry for exception tracking
-config :sentry,
-  dsn: "https://67cd9caf0b384a50aa46775b36d6517a@o523474.ingest.sentry.io/5635561",
-  environment_name: :prod,
-  enable_source_code_context: true,
-  root_source_code_path: File.cwd!(),
-  tags: %{
-    env: "production"
-  },
-  included_environments: [:prod]
-
 # ## SSL Support
 #
 # To get SSL working, you will need to add the `https` key
