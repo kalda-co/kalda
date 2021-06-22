@@ -37,20 +37,20 @@ defmodule Kalda.MixProject do
   # Specifies your project dependencies.
   defp deps do
     [
-      # SMTP email sending
-      {:bamboo, "~> 1.7.0"},
+      # Email sending
+      {:bamboo, "~> 1.7"},
       # Date time library
       {:timex, "~> 3.6"},
       # Web framework
-      {:phoenix, "~> 1.5.7"},
-      {:phoenix_live_view, "~> 0.15.0"},
+      {:phoenix, "~> 1.5"},
+      {:phoenix_live_view, "~> 0.15"},
       {:phoenix_html, "~> 2.11"},
       # CORS API support
       {:corsica, "~> 1.0"},
       # Postgresql database access
       {:phoenix_ecto, "~> 4.1"},
       {:ecto_sql, "~> 3.4"},
-      {:postgrex, ">= 0.0.0"},
+      {:postgrex, "~> 0.15"},
       # Metrics
       {:phoenix_live_dashboard, "~> 0.4"},
       {:telemetry_metrics, "~> 0.4"},
@@ -64,18 +64,15 @@ defmodule Kalda.MixProject do
       # Secure password hashing
       {:bcrypt_elixir, "~> 2.0"},
       # Markdown blog post engine
-      {:nimble_publisher, "~> 0.1.0"},
+      {:nimble_publisher, "~> 0.1"},
       # Http client
       {:httpoison, "~> 1.8"},
-      # Exception tracking (note also upgraded jason to 1.1 and cowboy to 2.3 for this dep.)
-      {:sentry, "8.0.0"},
-      {:hackney, "~> 1.8"},
       # Exception tracking with Rollbar
-      {:rollbax, ">= 0.0.0"},
+      {:rollbax, "~> 0.11"},
       # Automatic page reloading
       {:phoenix_live_reload, "~> 1.2", only: :dev},
       # HTML parsing
-      {:floki, ">= 0.27.0", only: :test},
+      {:floki, "~> 0.27", only: :test},
       # Automatic test runner
       {:mix_test_watch, "~> 1.0", only: :dev, runtime: false}
     ]
