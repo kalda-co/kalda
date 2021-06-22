@@ -45,7 +45,7 @@
   // fixes the problem.
   // This should never happen, if it does it means we have a bug.
   window.onunhandledrejection = async (error: any) => {
-    // TODO: register exception with tracker
+    window.Rollbar.error(error);
     console.error(error);
     await alertbox(
       "Oh no! Something went wrong!",

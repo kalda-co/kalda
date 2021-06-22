@@ -26,7 +26,7 @@
   <script async defer data-domain="kalda.co" src="https://plausible.io/js/plausible.outbound-links.js"></script>
   <script>window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }</script>
 </head>
-<body data-api-base="">
+<body data-api-base="" data-environment="<%= Application.get_env(:rollbax, :environment) %>">
   <%# HACK: We shouldn't need to set this here %>
   <script>window.HMR_WEBSOCKET_PORT = 4452</script>
   <script type="module" src="<%= spa_static_path("/src/index.js") %>"></script>

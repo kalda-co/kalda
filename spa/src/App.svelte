@@ -47,7 +47,6 @@
   }
 
   function serverError() {
-    // TODO: register exception with tracker
     alertbox(
       "Server error",
       "An unexpected server error occurred. Please try again later"
@@ -62,7 +61,8 @@
   }
 
   function unexpectedBody() {
-    // TODO: register exception with tracker
+    // TODO
+    window.Rollbar.error("unexpected body");
     alertbox(
       "Unexpected response",
       "We got an unexpected response from our servers. Please try again later"
@@ -70,7 +70,8 @@
   }
 
   function unexpectedStatus() {
-    // TODO: register exception with tracker
+    // TODO
+    window.Rollbar.error("unexpected status");
     alertbox(
       "Unexpected status",
       "We got an unexpected status from our servers. Please try again later"
