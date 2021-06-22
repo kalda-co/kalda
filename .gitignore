@@ -1,6 +1,9 @@
 # Apple detritus 
 .DS_Store
 
+# Generated apk Android files
+/android/app/release/
+
 # The directory Mix will write compiled artifacts to.
 /_build/
 
