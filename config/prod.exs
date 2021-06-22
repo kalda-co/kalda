@@ -16,7 +16,7 @@ config :kalda, KaldaWeb.Endpoint,
 # Do not print debug messages in production
 config :logger,
   level: :info,
-  backends: [:console, Sentry.LoggerBackend]
+  backends: [:console]
 
 # Mailing list endpoint
 config :kalda,
