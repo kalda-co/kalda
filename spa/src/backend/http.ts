@@ -46,9 +46,9 @@ export type Success<Resource> = {
 export interface ErrorHandlers {
   authFailed: () => void;
   serverError: () => void;
-  networkError: () => void;
-  unexpectedBody: () => void;
-  unexpectedStatus: () => void;
+  networkError: (error: string) => void;
+  unexpectedBody: (body: string) => void;
+  unexpectedStatus: (status: number) => void;
 }
 
 export class RequestBuilder {
@@ -138,7 +138,7 @@ export class HttpClient {
         return response;
 
       case "NetworkError":
-        this.errorHandlers.networkError();
+        this.errorHandlers.networkError(response.detail);
         return response;
 
       case "AuthError":
@@ -150,11 +150,11 @@ export class HttpClient {
         return response;
 
       case "UnexpectedStatus":
-        this.errorHandlers.unexpectedStatus();
+        this.errorHandlers.unexpectedStatus(response.status);
         return response;
 
       case "UnexpectedBody":
-        this.errorHandlers.unexpectedBody();
+        this.errorHandlers.unexpectedBody(response.detail);
         return response;
 
       default:
