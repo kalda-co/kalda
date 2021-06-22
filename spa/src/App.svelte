@@ -53,25 +53,24 @@
     );
   }
 
-  function networkError() {
+  function networkError(detail: string) {
+    console.error(detail);
     alertbox(
       "Connection problems",
       "We couldn't reach our servers right now. Please try again later"
     );
   }
 
-  function unexpectedBody() {
-    // TODO
-    window.Rollbar.error("unexpected body");
+  function unexpectedBody(body: string) {
+    window.Rollbar.error("unexpected body:", body);
     alertbox(
       "Unexpected response",
       "We got an unexpected response from our servers. Please try again later"
     );
   }
 
-  function unexpectedStatus() {
-    // TODO
-    window.Rollbar.error("unexpected status");
+  function unexpectedStatus(status: number) {
+    window.Rollbar.error("unexpected status:", status.toString());
     alertbox(
       "Unexpected status",
       "We got an unexpected status from our servers. Please try again later"
