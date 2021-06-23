@@ -31,7 +31,6 @@ brew services start postgresql
 createuser --username=$USER --superuser --pwprompt postgres
 ```
 
-
 #### On Debian/Ubuntu Linux
 
 Set the postgres user's username to postgres

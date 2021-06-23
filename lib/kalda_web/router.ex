@@ -55,26 +55,8 @@ defmodule KaldaWeb.Router do
     end
   end
 
-  scope "/", KaldaWeb do
-    pipe_through :browser
-    get "/", PageController, :index
-    get "/blog/:id", BlogController, :show
-    get "/blog", BlogController, :index
-    get "/thanks", PageController, :thanks
-    get "/privacy-policy", PageController, :privacy_policy
-    get "/terms", PageController, :terms
-
-    post "/signups/new", SignupController, :create
-    delete "/users/log-out", UserSessionController, :delete
-    get "/users/confirm", UserConfirmationController, :new
-    post "/users/confirm", UserConfirmationController, :create
-    get "/users/confirm/:token", UserConfirmationController, :confirm
-
-    # All other get requests go to the SPA
-    get "/*path", PageController, :app
-  end
-
   ## Authentication routes
+
   scope "/", KaldaWeb do
     pipe_through [:browser, :redirect_if_user_is_authenticated]
     get "/users/log-in", UserSessionController, :new
@@ -171,4 +153,22 @@ defmodule KaldaWeb.Router do
     get "/users/settings/confirm-email/:token", UserSettingsController, :confirm_email
   end
 
+  scope "/", KaldaWeb do
+    pipe_through :browser
+    get "/", PageController, :index
+    get "/blog/:id", BlogController, :show
+    get "/blog", BlogController, :index
+    get "/thanks", PageController, :thanks
+    get "/privacy-policy", PageController, :privacy_policy
+    get "/terms", PageController, :terms
+
+    post "/signups/new", SignupController, :create
+    delete "/users/log-out", UserSessionController, :delete
+    get "/users/confirm", UserConfirmationController, :new
+    post "/users/confirm", UserConfirmationController, :create
+    get "/users/confirm/:token", UserConfirmationController, :confirm
+
+    # All other get requests go to the SPA
+    get "/*path", PageController, :app
+  end
 end
