@@ -1,5 +1,8 @@
 import { LocalNotifications } from "@capacitor/local-notifications";
-import type { LocalNotificationSchema } from "@capacitor/local-notifications";
+import type {
+  LocalNotificationSchema,
+  LocalNotificationDescriptor,
+} from "@capacitor/local-notifications";
 
 const DAILY_REFLECTION_FIRST_ID = 10000;
 const DAILY_REFLECTION_DAYS_TO_SCHEDULE = 14;
@@ -10,11 +13,7 @@ export async function scheduleDailyReflectionNotifications(): Promise<void> {
   // a bug where this does not work on Android.
   // https://github.com/ionic-team/capacitor/issues/4332
   await cancelDailyReflectionNotifications();
-  await LocalNotifications.schedule({
-    notifications: range(DAILY_REFLECTION_DAYS_TO_SCHEDULE).map(
-      dailyReflection
-    ),
-  });
+  await schedule(range(DAILY_REFLECTION_DAYS_TO_SCHEDULE).map(dailyReflection));
 }
 
 function dailyReflection(index: number): LocalNotificationSchema {
@@ -36,11 +35,31 @@ export async function cancelDailyReflectionNotifications(): Promise<void> {
   let notifications = range(DAILY_REFLECTION_DAYS_TO_SCHEDULE).map((index) => ({
     id: DAILY_REFLECTION_FIRST_ID + index,
   }));
-  await LocalNotifications.cancel({ notifications });
+  cancel(notifications);
 }
 
 function range(upTo: number) {
   return Array(upTo)
     .fill(0)
     .map((_, index) => index);
+}
+
+async function cancel(
+  notifications: Array<LocalNotificationDescriptor>
+): Promise<void> {
+  try {
+    await LocalNotifications.cancel({ notifications });
+  } catch (_error) {
+    console.trace("Local notifications not supported");
+  }
+}
+
+async function schedule(
+  notifications: Array<LocalNotificationSchema>
+): Promise<void> {
+  try {
+    await LocalNotifications.schedule({ notifications });
+  } catch (_error) {
+    console.trace("Local notifications not supported");
+  }
 }
