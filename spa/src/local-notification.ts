@@ -68,21 +68,6 @@ async function schedule(
   }
 }
 
-// Date.getDay() returns integer where Sunday == 0
-const DAY_BEFORE_NOTIFICATION_DAY = 2; // Tuesday
-const DAY_BEFORE_NOTIFICATION_TIME = 19; // 19:00pm
-const DAY_BEFORE_NOTIFICATION_FIRST_ID = 20000;
-const DAY_BEFORE_NOTIFICATION_MESSAGE_BODY =
-  "Your kalda Group Session is tomorrow at 7pm.";
-const HOUR_BEFORE_NOTIFICATION_DAY = 3; // Wednesday
-const HOUR_BEFORE_NOTIFICATION_TIME = 18; // 18:00pm
-const HOUR_BEFORE_NOTIFICATION_FIRST_ID = 30000;
-const HOUR_BEFORE_NOTIFICATION_MESSAGE_BODY =
-  "Your Kalda Group Session starts in 1 hour at 7pm";
-
-const NOTIFICATIONS_TO_SCHEDULE = 3; //up to 3 weeks
-var TEST_DATE: Date;
-
 const THERAPY_FIRST_ID = 20000;
 
 export function notificationsForTherapies(
@@ -92,21 +77,20 @@ export function notificationsForTherapies(
     .flatMap((therapy) => {
       return [
         {
-          // title: `Your therapy starts in 24 hours at ${therapy.startsAt.getHours()}`, // Make a title using the therapy
-          title: "Your therapy starts in 24 hours",
+          body: `Your therapy session '${therapy.title}' is in 24 hours.`, // Make a body using the therapy
           timeBefore: 1 * DAY,
           therapy,
         },
         {
-          title: "Your therapy starts in 1 hour",
+          body: `Your therapy session '${therapy.title}' starts in 1 hour.`,
           timeBefore: 1 * HOUR,
           therapy,
         },
       ];
     })
     .map((notificationData, index) => {
-      let { therapy, title, timeBefore } = notificationData;
-      return therapyNotification(therapy, index, timeBefore, title);
+      let { therapy, body, timeBefore } = notificationData;
+      return therapyNotification(therapy, index, timeBefore, body);
     });
 }
 
