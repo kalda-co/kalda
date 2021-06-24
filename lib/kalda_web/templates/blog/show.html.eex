@@ -11,12 +11,17 @@
 
   <div class="blog-details-container">
     <div class="blog-details">
-      <div class="blog-date">
         <%= @date_string %>
-      </div>
-      <div class="blog-author">
+        <span></span>
         <%= @post.author %>
-      </div>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
     </div>
   </div>
 

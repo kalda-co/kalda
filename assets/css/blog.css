@@ -81,7 +81,7 @@ blockquote p {
 }
 
 p {
-  font-weight: 500;
+  font-weight: 400;
   font-size: 16px;
   line-height: 24px;
   letter-spacing: -0.02em;
@@ -90,8 +90,15 @@ p {
 
 /* Index */
 .blog-container {
-  width: 95%;
-  margin: auto;
+  /* width: 95%; */
+  /* margin: auto; */
+  display: block;
+  max-width: 100%;
+  width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 13px;
+  padding-right: 13px;
 }
 
 .unfeatured-blog-container {
@@ -114,15 +121,14 @@ p {
   line-height: 32px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
+  /* align-items: center; */
 }
 .unfeatured-blog {
   display: flex;
   flex-direction: column;
   margin-top: var(--gap-l);
   margin-bottom: var(--gap);
-  width: 344px;
+  width: 323px;
   padding-right: var(--gap-s);
 }
 
@@ -143,7 +149,7 @@ p {
   font-weight: 600;
   font-size: 18px;
   line-height: 24px;
-  text-align: center;
+  /* text-align: center; */
 }
 
 .blog-hero {
