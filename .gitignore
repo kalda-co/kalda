@@ -4,6 +4,9 @@
 # The directory Mix will write compiled artifacts to.
 /_build/
 
+# Android APK generated files
+/android/app/release/
+
 # If you run "mix test --cover", coverage assets end up here.
 /cover/
 
