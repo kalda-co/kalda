@@ -10,12 +10,16 @@
   import { Router, Route } from "svelte-routing";
   import type { AppState } from "./state";
   import type { ApiClient } from "./backend";
-  import { scheduleDailyReflectionNotifications } from "./local-notification";
+  import {
+    scheduleDailyReflectionNotifications,
+    scheduleTherapyNotifications,
+  } from "./local-notification";
 
   export let state: AppState;
   export let api: ApiClient;
 
   scheduleDailyReflectionNotifications();
+  scheduleTherapyNotifications(state.therapies);
 </script>
 
 <main>
