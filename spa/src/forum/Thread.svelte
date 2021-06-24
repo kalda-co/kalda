@@ -84,6 +84,7 @@
   .question {
     font-weight: 500;
     margin: var(--gap-s) 0;
+    font-size: var(--font-size-l);
   }
 
   .comments {
