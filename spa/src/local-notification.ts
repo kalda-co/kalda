@@ -1,9 +1,11 @@
 import { LocalNotifications } from "@capacitor/local-notifications";
+import type { Therapy } from "./state";
 import type {
   LocalNotificationSchema,
   LocalNotificationDescriptor,
 } from "@capacitor/local-notifications";
 import * as log from "./log";
+import { HOUR, DAY } from "./constants";
 
 const DAILY_REFLECTION_FIRST_ID = 10000;
 const DAILY_REFLECTION_DAYS_TO_SCHEDULE = 14;
@@ -81,90 +83,46 @@ const HOUR_BEFORE_NOTIFICATION_MESSAGE_BODY =
 const NOTIFICATIONS_TO_SCHEDULE = 3; //up to 3 weeks
 var TEST_DATE: Date;
 
-// export function weeklySessionDayBefore(index: number): LocalNotificationSchema {
-//   let date = TEST_DATE || new Date();
-//   let afterReminderTime = date.getHours() >= DAY_BEFORE_NOTIFICATION_TIME;
-//   let effectiveDayOfWeek = date.getDay() + (afterReminderTime ? 1 : 0);
-//   // For example if day of week is monday, getDay returns 1.
-//   // 7 - (1 - 2) is 7 - -1 is 8
-//   // 8 mod 7 is 1 so on monday reminderInDays returns 1, reminding on Tuesday
-//   // if today is thursday, effectiveDayOfWeek is 4, reminderInDays returns 5 (Tuesday)
-//   // if today is tuesday before 19:00 effective day of week is 2. reminderInDays (7 - (2 - 2)) mod 7, returns 0
-//   let reminderInDays =
-//     (7 - (effectiveDayOfWeek - DAY_BEFORE_NOTIFICATION_DAY)) % 7;
-//   date.setDate(date.getDate() + reminderInDays);
-//   date.setHours(DAY_BEFORE_NOTIFICATION_TIME);
-//   date.setMinutes(0);
-//   return {
-//     id: DAY_BEFORE_NOTIFICATION_FIRST_ID + index,
-//     title: "Therapy Reminder",
-//     body: "Your Kalda Group Session is tomorrow at 7pm",
-//     schedule: { at: date },
-//   };
-// }
+const THERAPY_FIRST_ID = 20000;
 
-export function weeklySessionNotification(
+export function notificationsForTherapies(
+  therapies: Array<Therapy>
+): Array<LocalNotificationSchema> {
+  return therapies
+    .flatMap((therapy) => {
+      return [
+        {
+          // title: `Your therapy starts in 24 hours at ${therapy.startsAt.getHours()}`, // Make a title using the therapy
+          title: "Your therapy starts in 24 hours",
+          timeBefore: 1 * DAY,
+          therapy,
+        },
+        {
+          title: "Your therapy starts in 1 hour",
+          timeBefore: 1 * HOUR,
+          therapy,
+        },
+      ];
+    })
+    .map((notificationData, index) => {
+      let { therapy, title, timeBefore } = notificationData;
+      return therapyNotification(therapy, index, timeBefore, title);
+    });
+}
+
+export function therapyNotification(
+  therapy: Therapy,
   index: number,
-  notificationDay: number,
-  notificationTime: number,
-  notificationFirstID: number,
-  notificationBody: string
+  timeBefore: number,
+  body: string
 ): LocalNotificationSchema {
-  let date = TEST_DATE || new Date();
-  let afterReminderTime = date.getHours() >= notificationTime;
-  let effectiveDayOfWeek = date.getDay() + (afterReminderTime ? 1 : 0);
-  let reminderInDays = (7 - (effectiveDayOfWeek - notificationDay)) % 7;
-  date.setDate(date.getDate() + reminderInDays);
-  date.setHours(notificationTime);
-  date.setMinutes(0);
+  let id = THERAPY_FIRST_ID + index;
+  let title = "Therapy Reminder"; // Can use info from the Therapy here
+  let date = new Date(therapy?.startsAt?.getTime() - timeBefore);
   return {
-    id: notificationFirstID + index,
-    title: "Therapy Reminder",
-    // body: "Your Kalda Group Session starts in 1 hour at 7pm",
-    body: notificationBody,
+    id,
+    title,
+    body,
     schedule: { at: date },
   };
-}
-
-export async function cancelNotifications(
-  firstNotificationID: number,
-  numberNotificationsScheduled: number
-): Promise<void> {
-  let notifications = range(numberNotificationsScheduled).map((index) => ({
-    id: firstNotificationID + index,
-  }));
-  await LocalNotifications.cancel({ notifications });
-}
-
-export async function scheduleTherapyNotifications(): Promise<void> {
-  await cancelNotifications(
-    DAY_BEFORE_NOTIFICATION_FIRST_ID,
-    NOTIFICATIONS_TO_SCHEDULE
-  );
-  await cancelNotifications(
-    HOUR_BEFORE_NOTIFICATION_FIRST_ID,
-    NOTIFICATIONS_TO_SCHEDULE
-  );
-  await LocalNotifications.schedule({
-    notifications: range(NOTIFICATIONS_TO_SCHEDULE).map((x) =>
-      weeklySessionNotification(
-        x,
-        DAY_BEFORE_NOTIFICATION_FIRST_ID,
-        DAY_BEFORE_NOTIFICATION_DAY,
-        DAY_BEFORE_NOTIFICATION_TIME,
-        DAY_BEFORE_NOTIFICATION_MESSAGE_BODY
-      )
-    ),
-  });
-  await LocalNotifications.schedule({
-    notifications: range(NOTIFICATIONS_TO_SCHEDULE).map((x) =>
-      weeklySessionNotification(
-        x,
-        HOUR_BEFORE_NOTIFICATION_DAY,
-        HOUR_BEFORE_NOTIFICATION_TIME,
-        HOUR_BEFORE_NOTIFICATION_FIRST_ID,
-        HOUR_BEFORE_NOTIFICATION_MESSAGE_BODY
-      )
-    ),
-  });
 }
