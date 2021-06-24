@@ -20,6 +20,13 @@ export async function scheduleDailyReflectionNotifications(): Promise<void> {
   log.info("Daily reflection notifications scheduled");
 }
 
+export async function scheduleTherapyNotifications(
+  therapies: Array<Therapy>
+): Promise<void> {
+  await cancel(notificationsForTherapies(therapies));
+  await schedule(notificationsForTherapies(therapies));
+}
+
 function dailyReflection(index: number): LocalNotificationSchema {
   let date = new Date();
   let hasAlreadyFiredToday = date.getHours() >= DAILY_REFLECTION_TIME_HOURS;
