@@ -104,7 +104,6 @@ function range(upTo: number) {
     .map((_, index) => index);
 }
 
-<<<<<<< HEAD
 async function cancel(
   notifications: Array<LocalNotificationDescriptor>
 ): Promise<void> {
@@ -123,7 +122,8 @@ async function schedule(
   } catch (_error) {
     log.info("Local notifications not supported");
   }
-=======
+}
+
 export async function cancelNotifications(
   firstNotificationID: number,
   numberNotificationsScheduled: number
@@ -159,5 +159,4 @@ export async function scheduleTherapyNotifications(): Promise<void> {
       )
     ),
   });
->>>>>>> 198796f (Test and notification for day and hour before group session)
 }
