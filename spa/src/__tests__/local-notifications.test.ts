@@ -1,8 +1,5 @@
 import { LocalNotifications } from "@capacitor/local-notifications";
-import {
-  notificationsForTherapies,
-  weeklySessionNotification,
-} from "../local-notification";
+import { notificationsForTherapies } from "../local-notification";
 import type { LocalNotificationSchema } from "@capacitor/local-notifications";
 import { date } from "../backend/decode";
 import type { Therapy } from "../state";
@@ -52,7 +49,7 @@ test("notificationsForTherapies/1", () => {
     {
       id: 20000,
       title: "Therapy Reminder",
-      body: "Your therapy starts in 24 hours",
+      body: "Your therapy session 'Mindfulness' is in 24 hours.",
       schedule: {
         at: new Date("June 02, 2026 19:00:00"),
       },
@@ -60,7 +57,7 @@ test("notificationsForTherapies/1", () => {
     {
       id: 20001,
       title: "Therapy Reminder",
-      body: "Your therapy starts in 1 hour",
+      body: "Your therapy session 'Mindfulness' starts in 1 hour.",
       schedule: {
         at: new Date("June 03, 2026 18:00:00"),
       },
@@ -68,7 +65,7 @@ test("notificationsForTherapies/1", () => {
     {
       id: 20002,
       title: "Therapy Reminder",
-      body: "Your therapy starts in 24 hours",
+      body: "Your therapy session 'Gratitude' is in 24 hours.",
       schedule: {
         at: new Date("June 09, 2026 19:00:00"),
       },
@@ -76,7 +73,7 @@ test("notificationsForTherapies/1", () => {
     {
       id: 20003,
       title: "Therapy Reminder",
-      body: "Your therapy starts in 1 hour",
+      body: "Your therapy session 'Gratitude' starts in 1 hour.",
       schedule: {
         at: new Date("June 10, 2026 18:00:00"),
       },
@@ -84,7 +81,7 @@ test("notificationsForTherapies/1", () => {
     {
       id: 20004,
       title: "Therapy Reminder",
-      body: "Your therapy starts in 24 hours",
+      body: "Your therapy session 'Movement' is in 24 hours.",
       schedule: {
         at: new Date("June 16, 2026 19:00:00"),
       },
@@ -92,7 +89,7 @@ test("notificationsForTherapies/1", () => {
     {
       id: 20005,
       title: "Therapy Reminder",
-      body: "Your therapy starts in 1 hour",
+      body: "Your therapy session 'Movement' starts in 1 hour.",
       schedule: {
         at: new Date("June 17, 2026 18:00:00"),
       },
@@ -100,7 +97,7 @@ test("notificationsForTherapies/1", () => {
     {
       id: 20006,
       title: "Therapy Reminder",
-      body: "Your therapy starts in 24 hours",
+      body: "Your therapy session 'Stillness' is in 24 hours.",
       schedule: {
         at: new Date("June 23, 2026 19:00:00"),
       },
@@ -108,7 +105,7 @@ test("notificationsForTherapies/1", () => {
     {
       id: 20007,
       title: "Therapy Reminder",
-      body: "Your therapy starts in 1 hour",
+      body: "Your therapy session 'Stillness' starts in 1 hour.",
       schedule: {
         at: new Date("June 24, 2026 18:00:00"),
       },
