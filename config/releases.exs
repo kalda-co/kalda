@@ -29,7 +29,9 @@ config :kalda,
   # Sendfox api (email signups management)
   sendfox_api_token: read_env.("SENDFOX_TOKEN"),
   # Optionally require basic browser auth
-  basic_auth_password: read_env_or.("BASIC_AUTH_PASSWORD", nil)
+  basic_auth_password: read_env_or.("BASIC_AUTH_PASSWORD", nil),
+  # Payments with Stripe
+  stripe_publishable_key: read_env.("STRIPE_PUBLISHABLE_KEY")
 
 config :kalda, Kalda.Mailer,
   adapter: Bamboo.SendGridAdapter,
@@ -43,7 +45,9 @@ config :rollbax,
   enabled: true,
   access_token: "3096585f75844cdaa1b70815ea70d849",
   environment: read_env.("ROLLBAR_ENV"),
-  enable_crash_reports: true
+
+config :stripity_stripe,
+  api_key: read_env.("STRIPE_SECRET_KEY"),
 
 # Optionally require basic browser auth
 config :kalda, :basic_auth_password, read_env_or.("BASIC_AUTH_PASSWORD", nil)
