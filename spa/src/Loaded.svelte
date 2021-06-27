@@ -1,6 +1,7 @@
 <script lang="ts">
   import Navbar from "./Navbar.svelte";
   import Thread from "./forum/Thread.svelte";
+  import NerdData from "./NerdData.svelte";
   import Guidelines from "./Guidelines.svelte";
   import GroupSessions from "./SessionInfo.svelte";
   import Dashboard from "./Dashboard.svelte";
@@ -64,6 +65,11 @@
     <Route path="urgent-support">
       <Navbar title="Urgent Support" />
       <UrgentSupport />
+    </Route>
+
+    <Route path="nerd-data">
+      <Navbar title="Nerd data" />
+      <NerdData />
     </Route>
 
     <!-- Default catch all route -->

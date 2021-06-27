@@ -1,14 +1,17 @@
 import { Storage } from "@capacitor/storage";
+import * as log from "./log";
 
 const API_TOKEN_STORAGE_KEY = "api-token";
 
 export async function saveApiToken(token: string): Promise<string> {
   await Storage.set({ key: API_TOKEN_STORAGE_KEY, value: token });
+  log.info("API token saved to storage");
   return token;
 }
 
 export async function deleteApiToken(): Promise<void> {
   await Storage.remove({ key: API_TOKEN_STORAGE_KEY });
+  log.info("API token deleted to storage");
 }
 
 export async function loadApiToken(): Promise<string | undefined> {

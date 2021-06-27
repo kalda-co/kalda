@@ -8,6 +8,8 @@
     currentNetworkConnectionStatus,
     whenAppForegrounded,
   } from "./device";
+  import * as log from "./log";
+  import { UnmatchedError } from "./exhaustive";
 
   export let api: ApiClient;
 
@@ -16,8 +18,27 @@
 
   async function refreshStateIfStale() {
     let status = await currentNetworkConnectionStatus();
-    if (status === "wifi" || (status === "cellular" && enoughTimeElapsed())) {
-      refreshAppState();
+    switch (status) {
+      case "wifi":
+        log.info("On wifi, reloading state");
+        refreshAppState();
+        break;
+
+      case "cellular":
+        if (enoughTimeElapsed()) {
+          log.info("On cellular with stale data, reloading state");
+          refreshAppState();
+        } else {
+          log.info("On cellular with fresh data, not reloading state");
+        }
+        break;
+
+      case "none":
+        log.info("No network connection. Not reloading state.");
+        break;
+
+      default:
+        throw new UnmatchedError(status);
     }
   }
 
@@ -45,13 +66,19 @@
   // fixes the problem.
   // This should never happen, if it does it means we have a bug.
   window.onunhandledrejection = async (error: any) => {
-    window.Rollbar.error(error);
-    console.error(error);
-    await alertbox(
-      "Oh no! Something went wrong!",
-      "Sorry, an unexpected error occurred. Please try again later and contact us if it happens again."
-    );
-    window.location.pathname = "/dashboard";
+    try {
+      log.error(error);
+      window.Rollbar.error(error);
+      await alertbox(
+        "Oh no! Something went wrong!",
+        "Sorry, an unexpected error occurred. Please try again later and contact us if it happens again."
+      );
+    } catch (error) {
+      console.error(error);
+    }
+    setTimeout(() => {
+      window.location.pathname = "/dashboard";
+    }, 250);
   };
 </script>
 

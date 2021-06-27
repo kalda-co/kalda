@@ -5,6 +5,7 @@ export type Title =
   | "Daily Reflection"
   | "Therapy Sessions"
   | "Urgent Support"
+  | "Nerd data"
   | "Will Pool";
 
 export type AppState = {
