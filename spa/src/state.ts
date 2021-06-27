@@ -6,7 +6,8 @@ export type Title =
   | "Therapy Sessions"
   | "Urgent Support"
   | "Nerd data"
-  | "Will Pool";
+  | "Will Pool"
+  | "Subscription";
 
 export type AppState = {
   currentUser: User;

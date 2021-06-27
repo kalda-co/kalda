@@ -2,12 +2,15 @@
   import Navbar from "./Navbar.svelte";
   import Thread from "./forum/Thread.svelte";
   import NerdData from "./NerdData.svelte";
+  import Loading from "./Loading.svelte";
   import Guidelines from "./Guidelines.svelte";
   import GroupSessions from "./SessionInfo.svelte";
   import Dashboard from "./Dashboard.svelte";
   import TherapySessions from "./GroupSessions.svelte";
   import UrgentSupport from "./UrgentSupport.svelte";
+  import Subscription from "./Subscription.svelte";
   import { Router, Route } from "svelte-routing";
+  import type { Stripe } from "./stripe";
   import type { AppState } from "./state";
   import type { ApiClient } from "./backend";
   import {
@@ -17,11 +20,13 @@
 
   export let state: AppState;
   export let api: ApiClient;
+  export let stripe: Promise<Stripe>;
 
   scheduleDailyReflectionNotifications();
   scheduleTherapyNotifications(state.therapies);
 </script>
 
+// TODO: rename to Router
 <main>
   <Router>
     <Route path="daily-reflection">
@@ -74,6 +79,15 @@
     <Route path="nerd-data">
       <Navbar title="Nerd data" />
       <NerdData />
+    </Route>
+
+    <Route path="subscription">
+      <Navbar title="Subscription" />
+      {#await stripe}
+        <Loading />
+      {:then stripe}
+        <Subscription {stripe} />
+      {/await}
     </Route>
 
     <!-- Default catch all route -->

@@ -8,8 +8,10 @@
   import { alertbox } from "./dialog";
   import type { ErrorHandlers } from "./backend/http";
   import * as log from "./log";
+  import { loadStripe } from "./stripe";
 
   export let apiBase: string;
+  export let stripePublishableKey: string;
 
   let apiToken: string | undefined;
   let email = "";
@@ -95,6 +97,7 @@
 {#if apiToken}
   <Authenticated
     api={new AuthenticatedApiClient(apiBase, apiToken, errorHandlers)}
+    stripe={loadStripe(stripePublishableKey)}
   />
 {:else}
   <div class="login-container">

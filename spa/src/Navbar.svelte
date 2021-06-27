@@ -62,6 +62,9 @@
       <a use:link href="/will-pool" on:click={closeMenu} class="button">
         Will Pool
       </a>
+      <a use:link href="/subscription" on:click={closeMenu} class="button">
+        Subscription
+      </a>
       <a href="/" on:click={logout} class="button"> Log Out </a>
     </div>
     <a use:link href="/nerd-data" on:click={closeMenu} class="debug-button">
