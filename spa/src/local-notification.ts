@@ -3,6 +3,7 @@ import type {
   LocalNotificationSchema,
   LocalNotificationDescriptor,
 } from "@capacitor/local-notifications";
+import * as log from "./log";
 
 const DAILY_REFLECTION_FIRST_ID = 10000;
 const DAILY_REFLECTION_DAYS_TO_SCHEDULE = 14;
@@ -14,6 +15,7 @@ export async function scheduleDailyReflectionNotifications(): Promise<void> {
   // https://github.com/ionic-team/capacitor/issues/4332
   await cancelDailyReflectionNotifications();
   await schedule(range(DAILY_REFLECTION_DAYS_TO_SCHEDULE).map(dailyReflection));
+  log.info("Daily reflection notifications scheduled");
 }
 
 function dailyReflection(index: number): LocalNotificationSchema {
@@ -50,7 +52,7 @@ async function cancel(
   try {
     await LocalNotifications.cancel({ notifications });
   } catch (_error) {
-    console.trace("Local notifications not supported");
+    log.info("Local notifications not supported");
   }
 }
 
@@ -60,6 +62,6 @@ async function schedule(
   try {
     await LocalNotifications.schedule({ notifications });
   } catch (_error) {
-    console.trace("Local notifications not supported");
+    log.info("Local notifications not supported");
   }
 }

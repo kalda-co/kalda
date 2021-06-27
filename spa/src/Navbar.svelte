@@ -64,9 +64,9 @@
       </a>
       <a href="/" on:click={logout} class="button"> Log Out </a>
     </div>
-    <button on:click|preventDefault={toggleMenu} class="close-purple">
+    <a use:link href="/nerd-data" on:click={closeMenu} class="debug-button">
       <img src="/images/cross-purple.svg" alt="close menu cross" />
-    </button>
+    </a>
   </section>
 {/if}
 
@@ -124,5 +124,11 @@
   .close {
     margin: var(--gap-s) var(--gap);
     text-align: right;
+  }
+
+  .debug-button {
+    margin: 0;
+    display: inline-block;
+    width: min-content;
   }
 </style>

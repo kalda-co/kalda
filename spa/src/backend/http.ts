@@ -1,5 +1,6 @@
 import { deleteApiToken } from "../local-storage";
 import { UnmatchedError } from "../exhaustive";
+import * as log from "../log";
 
 export type Response<Resource> = Success<Resource> | ErrorResponse;
 
@@ -180,9 +181,13 @@ export async function request<T>(
   }
   let body = jsonBody ? JSON.stringify(jsonBody) : null;
   try {
+    log.info("HTTP request", method, url);
     let resp = await fetch(url, { headers, method, body });
-    return await handleResponse(resp, expectedStatuses, decoder);
+    let response = await handleResponse(resp, expectedStatuses, decoder);
+    log.info("HTTP response", response.type, method, url);
+    return response;
   } catch (error) {
+    log.info("HTTP response", "NetworkError", method, url);
     return { type: "NetworkError", detail: error };
   }
 }

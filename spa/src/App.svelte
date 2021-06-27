@@ -7,6 +7,7 @@
   import { KALDA_PURPLE } from "./constants";
   import { alertbox } from "./dialog";
   import type { ErrorHandlers } from "./backend/http";
+  import * as log from "./log";
 
   export let apiBase: string;
 
@@ -24,11 +25,13 @@
 
   async function submitLoginForm() {
     if (submitting) return;
+    log.info("Logging in");
     submitting = true;
     loginError = "";
     let result = await login(apiBase, email, password);
     submitting = false;
     if (result.type === "ok") {
+      log.info("Logged in");
       apiToken = result.apiToken;
       saveApiToken(apiToken);
     } else {
@@ -54,7 +57,7 @@
   }
 
   function networkError(detail: string) {
-    console.error(detail);
+    log.error(detail);
     alertbox(
       "Connection problems",
       "We couldn't reach our servers right now. Please try again later"
@@ -84,6 +87,8 @@
     unexpectedBody,
     unexpectedStatus,
   };
+
+  log.info("App loaded");
 </script>
 
 <!-- If we have an API token we must be logged in -->

@@ -9,6 +9,7 @@ import {
 } from "./resources";
 import { request, Response, HttpClient, ErrorHandlers } from "./http";
 import { UnmatchedError } from "../exhaustive";
+import * as log from "../log";
 
 export type { Response };
 
