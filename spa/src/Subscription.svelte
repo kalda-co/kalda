@@ -1,7 +1,18 @@
 <script>
   import type { Stripe } from "./stripe";
+  import Offer from "./Subscription/Offer.svelte";
+  import PaymentForm from "./Subscription/PaymentForm.svelte";
 
   export let stripe: Stripe;
+
+  let purchasing = false;
 </script>
 
-<h1>hello</h1>
+{#if purchasing}
+  <PaymentForm {stripe} />
+{:else}
+  <Offer buttonClicked={() => (purchasing = true)} />
+{/if}
+
+<style>
+</style>

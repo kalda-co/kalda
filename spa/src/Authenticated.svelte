@@ -2,7 +2,7 @@
   import type { ApiClient } from "./backend";
   import type { Stripe } from "@stripe/stripe-js";
   import { alertbox } from "./dialog";
-  import Loaded from "./Loaded.svelte";
+  import Router from "./Router.svelte";
   import Loading from "./Loading.svelte";
   import { onDestroy } from "svelte";
   import { MINUTE } from "./constants";
@@ -89,7 +89,7 @@
   <Loading />
 {:then response}
   {#if response.type === "Success"}
-    <Loaded state={response.resource} {api} {stripe} />
+    <Router state={response.resource} {api} {stripe} />
   {:else}
     <!-- TODO: Error design -->
     failed to load :(

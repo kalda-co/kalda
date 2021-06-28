@@ -26,7 +26,6 @@
   scheduleTherapyNotifications(state.therapies);
 </script>
 
-// TODO: rename to Router
 <main>
   <Router>
     <Route path="daily-reflection">
@@ -82,7 +81,6 @@
     </Route>
 
     <Route path="subscription">
-      <Navbar title="Subscription" />
       {#await stripe}
         <Loading />
       {:then stripe}
