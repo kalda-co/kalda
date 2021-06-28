@@ -101,7 +101,7 @@ export function notificationsForTherapies(
     .flatMap((therapy) => {
       return [
         {
-          body: `Your therapy session '${therapy.title}' is in 24 hours.`, // Make a body using the therapy
+          body: `Your therapy session '${therapy.title}' is in 24 hours.`,
           timeBefore: 1 * DAY,
           therapy,
         },
@@ -125,7 +125,7 @@ export function therapyNotification(
   body: string
 ): LocalNotificationSchema {
   let id = THERAPY_FIRST_ID + index;
-  let title = "Therapy Reminder"; // Can use info from the Therapy here
+  let title = "Therapy Reminder";
   let date = new Date(therapy?.startsAt?.getTime() - timeBefore);
   return {
     id,
