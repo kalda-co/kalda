@@ -23,7 +23,24 @@ export async function scheduleDailyReflectionNotifications(): Promise<void> {
 export async function scheduleTherapyNotifications(
   therapies: Array<Therapy>
 ): Promise<void> {
-  await cancel(notificationsForTherapies(therapies));
+  // await cancel(notificationsForTherapies(therapies));
+  // We want to cancel a fixed larger number of notifications rather than ones based upon the data from the API. If the data changes in the backend the notifications will be wrong.
+
+  // Reproduction:
+
+  // Notifications scheduled for 1 therapy
+  // App closed
+  //  Admin cancels therapy
+  // App opened
+  // API returns no therapies
+  // No therapies so no notifications are cancelled
+  // User gets notification about therapy that doesn't exist
+  let presumedMaxTherapies = 10;
+  let notificationsPerTherapy = 2;
+  let notifications = range(presumedMaxTherapies * notificationsPerTherapy).map(
+    (index) => ({ id: THERAPY_FIRST_ID + index })
+  );
+  await cancel(notifications);
   await schedule(notificationsForTherapies(therapies));
 }
 
