@@ -619,7 +619,7 @@ defmodule Kalda.ForumsTest do
       assert Forums.get_reply!(reply.id) == reply
     end
 
-    test "create_reply!/3 creates the reply for the given user and comment" do
+    test "create_reply/3 creates the reply for the given user and comment" do
       user = AccountsFixtures.user()
       assert {:ok, %Post{} = post} = Forums.create_post(user, @valid_post_attrs)
       assert {:ok, %Comment{} = comment} = Forums.create_comment(user, post, @valid_comment_attrs)
@@ -988,15 +988,9 @@ defmodule Kalda.ForumsTest do
 
     @valid_rn_notification %{read: false, expired: false}
 
-    # test "get_notifications/1 for user" do
-    #   user = AccountsFixtures.user()
-    # author = AccountsFixtures.user()
-    # This should create a notification???
-    # post = ForumsFixtures.post(author)
+    # TODO: Creating a reply or reply_fixture should always create a notification???
 
-    # assert {:ok, %Notification{} = notification} = Forums.get_notifications(user)
-
-    # assert notification.read == false
+    # TODO: test after fixed time notification is expired, notification is read (after it is fetched from db?)
 
     test "create_reply_notification/3" do
       user = AccountsFixtures.user()
@@ -1009,6 +1003,93 @@ defmodule Kalda.ForumsTest do
                Forums.create_reply_notification(comment, reply, @valid_rn_notification)
 
       assert Forums.get_notifications(user) == [notification]
+    end
+
+    test "create_reply_notification/3 sad path no reply" do
+      user = AccountsFixtures.user()
+      post = ForumsFixtures.post(user)
+      comment = ForumsFixtures.comment(post, user)
+      author = AccountsFixtures.user()
+      reply = ForumsFixtures.reply(comment, author)
+
+      assert {:ok, %Forums.Reply{}} = Forums.delete_reply(reply)
+
+      assert_raise Ecto.ConstraintError, fn ->
+        Forums.create_reply_notification(comment, reply, @valid_rn_notification)
+      end
+    end
+
+    test "create_reply_notification!/2" do
+      user = AccountsFixtures.user()
+      post = ForumsFixtures.post(user)
+      comment = ForumsFixtures.comment(post, user)
+      author = AccountsFixtures.user()
+      reply = ForumsFixtures.reply(comment, author)
+
+      assert %Notification{} = notification = Forums.create_reply_notification!(comment, reply)
+
+      assert Forums.get_notifications(user) == [notification]
+    end
+
+    test "create_reply_notification!/2 sad path no reply" do
+      user = AccountsFixtures.user()
+      post = ForumsFixtures.post(user)
+      comment = ForumsFixtures.comment(post, user)
+      author = AccountsFixtures.user()
+      reply = ForumsFixtures.reply(comment, author)
+
+      # Delete reply
+      assert {:ok, %Forums.Reply{}} = Forums.delete_reply(reply)
+
+      assert_raise Ecto.ConstraintError, fn ->
+        Forums.create_reply_notification!(comment, reply)
+      end
+    end
+
+    test "create_reply_notification!/2 sad path no comment" do
+      user = AccountsFixtures.user()
+      post = ForumsFixtures.post(user)
+      comment = ForumsFixtures.comment(post, user)
+      author = AccountsFixtures.user()
+      reply = ForumsFixtures.reply(comment, author)
+
+      assert {:ok, %Forums.Comment{}} = Forums.delete_comment(comment)
+
+      assert_raise Ecto.ConstraintError, fn ->
+        Forums.create_reply_notification!(comment, reply)
+      end
+
+      # assert Forums.get_notifications(user) == [notification]
+      # assert_raise Ecto.NoResultsError, fn -> Forums.get_post!(post.id) end
+    end
+
+    test "create_reply_with_notification/3" do
+      user = AccountsFixtures.user()
+      post = ForumsFixtures.post(user)
+      comment = ForumsFixtures.comment(post, user)
+
+      assert {:ok, %Forums.Reply{}} =
+               Forums.create_reply_with_notification(user, comment, @valid_reply_attrs)
+    end
+
+    test "create_reply_with_notification/3 sad path invalid reply attrs" do
+      user = AccountsFixtures.user()
+      post = ForumsFixtures.post(user)
+      comment = ForumsFixtures.comment(post, user)
+
+      assert {:error, %Ecto.Changeset{}} =
+               Forums.create_reply_with_notification(user, comment, @invalid_reply_attrs)
+    end
+
+    test "create_reply_with_notification/3 sad path no comment" do
+      user = AccountsFixtures.user()
+      post = ForumsFixtures.post(user)
+      comment = ForumsFixtures.comment(post, user)
+
+      Forums.delete_comment(comment)
+
+      assert {:error, %Ecto.Changeset{}} =
+               Forums.create_reply_with_notification(user, comment, @valid_reply_attrs)
     end
   end
 end

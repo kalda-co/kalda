@@ -19,4 +19,14 @@ defmodule KaldaWeb.Api.V1.CommentView do
         Enum.map(comment.comment_reactions, &CommentReactionView.render_comment_reaction/1)
     }
   end
+
+  def render_basic_comment(comment) do
+    %{
+      id: comment.id,
+      content: comment.content,
+      inserted_at: comment.inserted_at,
+      author: UserView.render_author(comment.author),
+      replies: Enum.map(comment.replies, &ReplyView.render_basic_reply/1)
+    }
+  end
 end
