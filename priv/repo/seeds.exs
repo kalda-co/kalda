@@ -167,7 +167,7 @@ reply =
     comment_id: comment.id
   })
 
-_reply1 =
+reply1 =
   Kalda.Repo.insert!(%Reply{
     content: "I do not feel powerful I feel a bit B minus",
     author_id: user.id,
@@ -224,7 +224,20 @@ _notification =
     user_id: user.id,
     comment_id: comment.id,
     notification_reply_id: reply2.id
-    # notification_author_id: user2.id
+  })
+
+_notification =
+  Kalda.Repo.insert!(%Notification{
+    user_id: user.id,
+    comment_id: comment.id,
+    notification_reply_id: reply.id
+  })
+
+_notification =
+  Kalda.Repo.insert!(%Notification{
+    user_id: user.id,
+    comment_id: comment.id,
+    notification_reply_id: reply1.id
   })
 
 _report =
