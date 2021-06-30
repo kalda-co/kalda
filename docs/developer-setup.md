@@ -147,3 +147,45 @@ Any front-end changes will be automatically synced with the browser, no need
 to hit refresh.
 
 You're now ready to developer Kalda!
+
+## Getting your local environment up to date
+
+If it has been a while since you did any coding locally, you might struggle to get your environments and branches working correctly, here are a few steps that might help:
+
+- Your local environment is out of date with main
+
+```sh
+#check out the main branch
+git checkout main
+# get the latest version locally
+git pull
+# make sure your branch has the latest version of main 'behind' it
+git checkout mybranch
+git fetch origin
+git rebase origin/main
+# IF this works and there are no conflicts:
+git push --force
+```
+
+If you have merge conflicts, it is best to grab one of the dev team to help you resolve them.
+
+- The app doesn't work locally/at localhost:4000
+
+```sh
+# make sure you have all the latest npm dependencies
+npm install --save-dev
+# make sure all the migrations have run
+mix ecto.reset
+```
+
+- The tests fail
+
+```sh
+mix test
+# lots of tests fail that you don't expect them to
+# this means your test migrations are out of sync with the app migrations
+MIX_ENV=test mix do ecto.drop, ecto.create, ecto.migrate end
+# This runs the migrations for the test environment
+# This should now behave as you expect, run it to check:
+mix test
+```
