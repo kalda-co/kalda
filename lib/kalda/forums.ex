@@ -1050,20 +1050,19 @@ defmodule Kalda.Forums do
   """
 
   def get_notifications(user, opts \\ []) do
-    now = NaiveDateTime.local_now()
+    # TODO: can opts be limit and preload?
     limit = opts[:limit] || 100
+    preload = opts[:preload] || []
 
     Repo.all(
       from n in Notification,
         where: n.user_id == ^user.id,
-        where: n.inserted_at <= ^now,
         # TODO should be sent and read = false and expires_at nil OR in future??
         where: n.read == false,
         where: n.expired == false,
         limit: ^limit,
-        order_by: [desc: n.inserted_at]
-      # preload: [:author]
-      # TODO make sure that like replies and comments I do have an association for the comment/reply etc NOT just the id.
+        order_by: [desc: n.inserted_at],
+        preload: ^preload
     )
   end
 
@@ -1076,5 +1075,32 @@ defmodule Kalda.Forums do
     }
     |> Notification.changeset(attrs)
     |> Repo.insert()
+  end
+
+  # attrs always empty on create, just required for update
+
+  def create_reply_notification!(comment, reply) do
+    %Notification{
+      user_id: comment.author_id,
+      comment_id: comment.id,
+      notification_reply_id: reply.id
+      # TODO could put expires at in here as a default
+    }
+    |> Notification.changeset(%{})
+    |> Repo.insert!()
+  end
+
+  def create_reply_with_notification(user, comment, reply_attrs \\ %{}) do
+    case create_reply(user, comment, reply_attrs) do
+      {:ok, %Reply{} = reply} ->
+        create_reply_notification!(comment, reply)
+        {:ok, reply}
+
+      # TODO: check above that this is the rightway to retun this
+      # Should raise if notification not created. Otherwise should return the {ok, reply} tuple
+
+      _ ->
+        {:error, %Ecto.Changeset{}}
+    end
   end
 end

@@ -13,6 +13,7 @@ defmodule KaldaWeb.Api.V1.ReplyController do
       reply =
         reply
         |> Map.put(:author, user)
+        # |> Map.put(:comment, comment)
         |> Map.put(:reply_reactions, [])
 
       conn
