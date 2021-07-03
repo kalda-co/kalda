@@ -1,11 +1,11 @@
-defmodule Kalda.Payments.StripeCustomer do
+defmodule Kalda.Payments.StripeSubscription do
   use Ecto.Schema
   import Ecto.Changeset
-  alias Kalda.Accounts.User
+  alias Kalda.Payments.StripeCustomer
 
-  schema "stripe_customers" do
+  schema "stripe_subscriptions" do
     field :stripe_id, :string, null: false
-    belongs_to :user, User, foreign_key: :user_id, references: :id
+    belongs_to :stripe_customer, StripeCustomer, foreign_key: :user_id, references: :id
     timestamps()
   end
 
