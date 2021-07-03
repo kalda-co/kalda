@@ -8,7 +8,7 @@
   import Dashboard from "./Dashboard.svelte";
   import TherapySessions from "./GroupSessions.svelte";
   import UrgentSupport from "./UrgentSupport.svelte";
-  import Subscription from "./Subscription.svelte";
+  import Subscription from "./Subscription/Subscription.svelte";
   import { Router, Route } from "svelte-routing";
   import type { Stripe } from "./stripe";
   import type { AppState } from "./state";

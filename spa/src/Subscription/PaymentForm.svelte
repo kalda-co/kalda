@@ -57,6 +57,8 @@
   }
 </script>
 
+<!-- TODO: close button to exit this screen -->
+
 <div class="payment">
   <form class="content">
     <label for={STRIPE_ELEMENT_ID}>Card</label>
