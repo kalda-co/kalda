@@ -7,9 +7,26 @@ defmodule Kalda.Payments do
   alias Kalda.Payments.StripeSubscription
   alias Kalda.Accounts.User
   alias Stripe, as: StripeLibrary
+  require Ecto.Query, as: Query
 
-  # GBP pence
-  @subscription_price 250
+  @doc """
+  Get the stripe customer for a user if it exists. Alternatively create a new
+  stripe customer using the Stripe API and insert it into our database.
+  """
+  @spec get_or_create_stripe_customer(User.t()) ::
+          {:ok, StripeCustomer.t()} | {:error, StripeLibrary.Error.t()}
+  def get_or_create_stripe_customer(user = %User{}) do
+    case get_stripe_customer(user) do
+      nil -> create_stripe_customer(user)
+      customer -> {:ok, customer}
+    end
+  end
+
+  @spec get_stripe_customer(User.t()) :: StripeCustomer.t() | nil
+  defp get_stripe_customer(user = %User{}) do
+    Query.from(customer in StripeCustomer, where: customer.user_id == ^user.id)
+    |> Kalda.Repo.one()
+  end
 
   @doc """
   Create a new stripe customer using the Stripe API and insert it into our database.
@@ -54,14 +71,14 @@ defmodule Kalda.Payments do
   @spec create_subscription_via_stripe_api(StripeCustomer.t()) ::
           {:ok, StripeLibrary.Subscription.t()} | {:error, StripeLibrary.Error.t()}
   defp create_subscription_via_stripe_api(customer = %StripeCustomer{}) do
-    import StripeLibrary.Request
-
     params = %{
       customer: customer.stripe_id,
       payment_behavior: "default_imcomplete",
       expand: ["latest_invoice.payment_intent"],
       items: []
     }
+
+    import StripeLibrary.Request
 
     new_request([])
     |> put_endpoint("subscriptions")
