@@ -23,6 +23,7 @@ defmodule Kalda.AccountsFixtures do
         is_admin: false,
         confirmed_at: NaiveDateTime.local_now() |> NaiveDateTime.add(-1)
       }
+      |> Ecto.Changeset.cast(attrs, [:stripe_customer_id])
       |> Kalda.Accounts.User.registration_changeset(attrs)
       |> Kalda.Repo.insert()
 

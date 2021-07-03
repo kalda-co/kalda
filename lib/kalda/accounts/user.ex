@@ -2,6 +2,8 @@ defmodule Kalda.Accounts.User do
   use Ecto.Schema
   import Ecto.Changeset
 
+  @type t() :: %__MODULE__{}
+
   @derive {Inspect, except: [:password]}
   schema "users" do
     field :is_admin, :boolean, default: false
@@ -11,6 +13,9 @@ defmodule Kalda.Accounts.User do
     field :hashed_password, :string
     field :confirmed_at, :naive_datetime
     field :mobile, :string
+
+    # Subscription billing information
+    field :stripe_customer_id, :string
 
     belongs_to :referral_link, Kalda.Accounts.ReferralLink,
       foreign_key: :referred_by,

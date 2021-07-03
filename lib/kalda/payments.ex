@@ -3,88 +3,55 @@ defmodule Kalda.Payments do
   The Payments context.
   """
 
-  alias Kalda.Payments.StripeCustomer
-  alias Kalda.Payments.StripeSubscription
   alias Kalda.Accounts.User
-  alias Stripe, as: StripeLibrary
-  require Ecto.Query, as: Query
+  alias Kalda.Payments.Stripe
 
   @doc """
   Get the stripe customer for a user if it exists. Alternatively create a new
   stripe customer using the Stripe API and insert it into our database.
   """
-  @spec get_or_create_stripe_customer(User.t()) ::
-          {:ok, StripeCustomer.t()} | {:error, StripeLibrary.Error.t()}
-  def get_or_create_stripe_customer(user = %User{}) do
-    case get_stripe_customer(user) do
-      nil -> create_stripe_customer(user)
-      customer -> {:ok, customer}
+  @spec get_or_create_stripe_subscription!(User.t(), Stripe.Interface.t()) ::
+          Stripe.Subscription.t()
+  def get_or_create_stripe_subscription!(user = %User{}, stripe \\ Stripe) do
+    customer = get_or_create_stripe_customer(user, stripe)
+
+    case customer.subscription do
+      nil -> stripe.create_subscription!(customer)
+      subscription -> subscription
     end
   end
 
-  @spec get_stripe_customer(User.t()) :: StripeCustomer.t() | nil
-  defp get_stripe_customer(user = %User{}) do
-    Query.from(customer in StripeCustomer, where: customer.user_id == ^user.id)
-    |> Kalda.Repo.one()
-  end
-
-  @doc """
-  Create a new stripe customer using the Stripe API and insert it into our database.
-  """
-  @spec create_stripe_customer(User.t()) ::
-          {:ok, StripeCustomer.t()} | {:error, StripeLibrary.Error.t()}
-  def create_stripe_customer(user = %User{}) do
-    case StripeLibrary.Customer.create(%{email: user.email}) do
-      {:ok, customer} -> {:ok, insert_stripe_customer!(user, customer)}
-      {:error, _} = error -> error
+  # Get the stripe customer for a user if it exists. Alternatively create a new
+  # stripe customer using the Stripe API.
+  @spec get_or_create_stripe_customer(User.t(), Stripe.Interface.t()) :: Stripe.Customer.t()
+  defp get_or_create_stripe_customer(user = %User{}, stripe) do
+    case get_stripe_customer(user, stripe) do
+      nil -> user |> Map.put(:stripe_customer_id, nil) |> create_stripe_customer(stripe)
+      customer -> customer
     end
   end
 
-  @spec insert_stripe_customer!(User.t(), StripeLibrary.Customer.t()) :: StripeCustomer.t()
-  defp insert_stripe_customer!(user = %User{}, customer = %StripeLibrary.Customer{}) do
-    %StripeCustomer{user_id: user.id, stripe_id: customer.id}
-    |> StripeCustomer.changeset(%{})
-    |> Kalda.Repo.insert!()
+  # Fetch a customer from the Stripe API
+  @spec get_stripe_customer(User.t(), Stripe.Interface.t()) :: Stripe.Customer.t() | nil
+  defp get_stripe_customer(user = %User{}, stripe) do
+    case user.stripe_customer_id do
+      nil -> nil
+      id -> stripe.get_customer!(id)
+    end
   end
 
-  @spec insert_stripe_subscription!(StripeCustomer.t(), StripeLibrary.Subscription.t()) ::
-          StripeSubscription.t()
-  defp insert_stripe_subscription!(
-         customer = %StripeCustomer{},
-         subscription = %StripeLibrary.Subscription{}
-       ) do
-    %StripeSubscription{stripe_customer: customer, stripe_id: subscription.id}
-    |> StripeSubscription.changeset(%{})
-    |> Kalda.Repo.insert!()
-  end
+  # Create a new stripe customer using the Stripe API and record it in the
+  # database.
+  # Errors if the user already has a stripe customer id.
+  @spec create_stripe_customer(User.t(), Stripe.Interface.t()) :: StripeCustomer.t()
+  defp create_stripe_customer(user = %User{stripe_customer_id: id}, stripe)
+       when is_nil(id) do
+    customer = stripe.create_customer!(user)
 
-  @doc """
-  Create a new pending stripe subscription using the Stripe API and insert it
-  into our database.
-  """
-  @spec create_stripe_subscription!(StripeCustomer.t()) :: StripeSubscription.t()
-  def create_stripe_subscription!(customer = %StripeCustomer{}) do
-    {:ok, subscription} = create_subscription_via_stripe_api(customer)
-    insert_stripe_subscription!(customer, subscription)
-  end
+    user
+    |> Ecto.Changeset.change(stripe_customer_id: customer.stripe_id)
+    |> Kalda.Repo.update!()
 
-  @spec create_subscription_via_stripe_api(StripeCustomer.t()) ::
-          {:ok, StripeLibrary.Subscription.t()} | {:error, StripeLibrary.Error.t()}
-  defp create_subscription_via_stripe_api(customer = %StripeCustomer{}) do
-    params = %{
-      customer: customer.stripe_id,
-      payment_behavior: "default_imcomplete",
-      expand: ["latest_invoice.payment_intent"],
-      items: []
-    }
-
-    import StripeLibrary.Request
-
-    new_request([])
-    |> put_endpoint("subscriptions")
-    |> put_params(params)
-    |> put_method(:post)
-    |> cast_to_id([:coupon, :customer])
-    |> make_request()
+    customer
   end
 end
