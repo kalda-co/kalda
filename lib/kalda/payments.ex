@@ -7,6 +7,9 @@ defmodule Kalda.Payments do
   alias Kalda.Accounts.User
   alias Stripe, as: StripeLibrary
 
+  # GBP pence
+  @subscription_price 250
+
   @doc """
   Create a new stripe customer using the Stripe API and insert it into our database.
   """
@@ -19,6 +22,13 @@ defmodule Kalda.Payments do
   end
 
   @spec insert_stripe_customer!(User.t(), StripeLibrary.Customer.t()) :: StripeCustomer.t()
+  defp insert_stripe_customer!(user = %User{}, customer = %Stripe.Customer{}) do
+    %StripeCustomer{user: user, stripe_id: customer.id}
+    |> StripeCustomer.changeset(%{})
+    |> Kalda.Repo.insert!()
+  end
+
+  @spec create_stripe_subscription!(StripeCustomer.t()) :: StripeCustomer.t()
   defp insert_stripe_customer!(user = %User{}, customer = %Stripe.Customer{}) do
     %StripeCustomer{user: user, stripe_id: customer.id}
     |> StripeCustomer.changeset(%{})

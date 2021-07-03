@@ -44,10 +44,10 @@ config :kalda, Kalda.Mailer,
 config :rollbax,
   enabled: true,
   access_token: "3096585f75844cdaa1b70815ea70d849",
-  environment: read_env.("ROLLBAR_ENV"),
+  environment: read_env.("ROLLBAR_ENV")
 
 config :stripity_stripe,
-  api_key: read_env.("STRIPE_SECRET_KEY"),
+  api_key: read_env.("STRIPE_SECRET_KEY")
 
 # Optionally require basic browser auth
 config :kalda, :basic_auth_password, read_env_or.("BASIC_AUTH_PASSWORD", nil)
