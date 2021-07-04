@@ -3,6 +3,7 @@ defmodule Kalda.Payments do
   The Payments context.
   """
 
+  require Logger
   alias Kalda.Accounts.User
   alias Kalda.Payments.Stripe
 
@@ -26,8 +27,18 @@ defmodule Kalda.Payments do
   @spec get_or_create_stripe_customer(User.t(), Stripe.Interface.t()) :: Stripe.Customer.t()
   defp get_or_create_stripe_customer(user = %User{}, stripe) do
     case get_stripe_customer(user, stripe) do
-      nil -> user |> Map.put(:stripe_customer_id, nil) |> create_stripe_customer(stripe)
-      customer -> customer
+      # Here the user has a customer id but the stripe API returned no customer.
+      # The customer must have been deleted in the stripe admin console
+      nil when user.stripe_customer_id != nil ->
+        sid = user.stripe_customer_id
+        Logger.warn("User #{user.id} had stripe customer id #{sid} but no customer was found")
+        user |> Map.put(:stripe_customer_id, nil) |> create_stripe_customer(stripe)
+
+      nil ->
+        create_stripe_customer(user, stripe)
+
+      customer ->
+        customer
     end
   end
 
@@ -35,8 +46,8 @@ defmodule Kalda.Payments do
   @spec get_stripe_customer(User.t(), Stripe.Interface.t()) :: Stripe.Customer.t() | nil
   defp get_stripe_customer(user = %User{}, stripe) do
     case user.stripe_customer_id do
+      id when not is_nil(id) -> stripe.get_customer!(id)
       nil -> nil
-      id -> stripe.get_customer!(id)
     end
   end
 
@@ -44,8 +55,7 @@ defmodule Kalda.Payments do
   # database.
   # Errors if the user already has a stripe customer id.
   @spec create_stripe_customer(User.t(), Stripe.Interface.t()) :: StripeCustomer.t()
-  defp create_stripe_customer(user = %User{stripe_customer_id: id}, stripe)
-       when is_nil(id) do
+  defp create_stripe_customer(%User{stripe_customer_id: nil} = user, stripe) do
     customer = stripe.create_customer!(user)
 
     user
