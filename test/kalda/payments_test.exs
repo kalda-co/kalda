@@ -33,6 +33,7 @@ defmodule Kalda.PaymentsTest do
 
       user = AccountsFixtures.user(stripe_customer_id: "id")
       assert Payments.get_or_create_stripe_subscription!(user, MockStripe) == @subscription
+      assert Accounts.get_user!(user.id).stripe_customer_id == "id"
     end
 
     test "customer with subscription" do
@@ -41,6 +42,26 @@ defmodule Kalda.PaymentsTest do
 
       user = AccountsFixtures.user(stripe_customer_id: "id")
       assert Payments.get_or_create_stripe_subscription!(user, MockStripe) == @subscription
+      assert Accounts.get_user!(user.id).stripe_customer_id == "id"
+    end
+
+    test "user has stripe customer id but no customer was found" do
+      MockStripe
+      |> Hammox.expect(:get_customer!, 1, fn _ -> nil end)
+      |> Hammox.expect(:create_customer!, 1, fn _ -> @customer end)
+      |> Hammox.expect(:create_subscription!, 1, fn _ -> @subscription end)
+
+      user = AccountsFixtures.user(stripe_customer_id: "some-id")
+
+      log =
+        ExUnit.CaptureLog.capture_log(fn ->
+          assert Payments.get_or_create_stripe_subscription!(user, MockStripe) == @subscription
+        end)
+
+      assert log =~
+               "[warn] User #{user.id} had stripe customer id some-id but no customer was found"
+
+      assert Accounts.get_user!(user.id).stripe_customer_id == @customer.stripe_id
     end
   end
 end
