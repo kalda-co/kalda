@@ -570,4 +570,37 @@ defmodule Kalda.Accounts do
 
     :ok
   end
+
+  def remove_stripe_subscription(%User{} = user) do
+    user
+    |> Ecto.Changeset.change(has_stripe_subscription: false)
+    |> Repo.update!()
+
+    user
+  end
+
+  def add_free_subscription(%User{} = user) do
+    user
+    |> Ecto.Changeset.change(has_free_subscription: true)
+    |> Repo.update!()
+
+    user
+  end
+
+  def remove_free_subscription(%User{} = user) do
+    user
+    |> Ecto.Changeset.change(has_free_subscription: false)
+    |> Repo.update!()
+
+    user
+  end
+
+  def has_subscription?(%User{} = user) do
+    if user.has_free_subscription || user.has_stripe_subscription do
+      true
+    else
+      false
+    end
+>>>>>>> 1ec31ea (WIP add subscription functions in accounts context)
+  end
 end
