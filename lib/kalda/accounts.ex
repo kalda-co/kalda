@@ -543,4 +543,49 @@ defmodule Kalda.Accounts do
     )
     |> Repo.get!(id)
   end
+
+  #############
+  # Subscriptions
+  ##############
+
+  def add_stripe_subscription(%User{} = user) do
+    user
+    |> Ecto.Changeset.change(has_stripe_subscription: true)
+    |> Repo.update!()
+
+    IO.inspect(user)
+    user
+  end
+
+  def remove_stripe_subscription(%User{} = user) do
+    user
+    |> Ecto.Changeset.change(has_stripe_subscription: false)
+    |> Repo.update!()
+
+    user
+  end
+
+  def add_free_subscription(%User{} = user) do
+    user
+    |> Ecto.Changeset.change(has_free_subscription: true)
+    |> Repo.update!()
+
+    user
+  end
+
+  def remove_free_subscription(%User{} = user) do
+    user
+    |> Ecto.Changeset.change(has_free_subscription: false)
+    |> Repo.update!()
+
+    user
+  end
+
+  def has_subscription?(%User{} = user) do
+    if user.has_free_subscription || user.has_stripe_subscription do
+      true
+    else
+      false
+    end
+  end
 end

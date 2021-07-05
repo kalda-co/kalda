@@ -7,7 +7,7 @@ defmodule Kalda.Repo.Migrations.UsersAddHasSubscription do
       add :has_free_subscription, :boolean, null: false, default: false
 
       # Do we need this for when the webhook says unpaid...
-      add :subscription_expires_at, :naive_datetime
+      # add :subscription_expires_at, :naive_datetime
     end
   end
 end

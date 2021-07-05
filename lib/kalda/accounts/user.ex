@@ -13,7 +13,7 @@ defmodule Kalda.Accounts.User do
     field :mobile, :string
     field :has_stripe_subscription, :boolean, default: false
     field :has_free_subscription, :boolean, default: false
-    field :subscription_expires_at, :naive_datetime
+    # field :subscription_expires_at, :naive_datetime
 
     belongs_to :referral_link, Kalda.Accounts.ReferralLink,
       foreign_key: :referred_by,

@@ -836,4 +836,14 @@ defmodule Kalda.AccountsTest do
   end
 
   # TODO add guidelines to signup flow
+  describe "add_stripe_subscription/1" do
+    test "updates user.has_stripe_sbscription from false to true" do
+      user = AccountsFixtures.user()
+      assert user.has_stripe_subscription == false
+
+      assert updated_user = Accounts.add_stripe_subscription(user)
+
+      assert updated_user.has_stripe_subscription == true
+    end
+  end
 end
