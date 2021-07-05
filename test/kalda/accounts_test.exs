@@ -169,6 +169,25 @@ defmodule Kalda.AccountsTest do
       updated_user = Accounts.get_user_by_email(user.email)
       assert updated_user.has_free_subscription == true
     end
+
+    test "registers all users with has_stripe_subscription false" do
+      email = AccountsFixtures.unique_user_email()
+      username = AccountsFixtures.unique_username()
+
+      {:ok, user} =
+        Accounts.register_user(%{
+          username: username,
+          email: email,
+          password: AccountsFixtures.valid_user_password()
+        })
+
+      assert user.email == email
+      assert user.username == username
+      assert user.has_stripe_subscription == false
+
+      updated_user = Accounts.get_user_by_email(user.email)
+      assert updated_user.has_stripe_subscription == false
+    end
   end
 
   describe "change_user_registration/2" do
