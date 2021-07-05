@@ -10,6 +10,7 @@
   import UrgentSupport from "./UrgentSupport.svelte";
   import Subscription from "./Subscription/Subscription.svelte";
   import MyAccount from "./Subscription/MyAccount.svelte";
+  import Notifications from "./Notifications.svelte";
   import { Router, Route } from "svelte-routing";
   import type { Stripe } from "./stripe";
   import type { AppState } from "./state";
@@ -97,6 +98,10 @@
           <Subscription {stripe} {api} />
         {/await}
       {/if}
+      
+    <Route path="notifications">
+      <Navbar title="Notifications" />
+      <Notifications notifications={state.comment_notifications} />
     </Route>
 
     <!-- Default catch all route -->
