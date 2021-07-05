@@ -84,7 +84,7 @@
       {#await stripe}
         <Loading />
       {:then stripe}
-        <Subscription {stripe} />
+        <Subscription {stripe} {api} />
       {/await}
     </Route>
 

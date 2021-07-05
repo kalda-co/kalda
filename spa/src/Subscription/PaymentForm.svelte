@@ -1,10 +1,14 @@
 <script>
   import type { Stripe } from "../stripe";
+  import type { StripePaymentIntent } from "../state";
   import { onMount, onDestroy } from "svelte";
   import { UnmatchedError } from "../exhaustive";
+  import * as log from "../log";
 
   export let stripe: Stripe;
-  export let paymentIntentSecret: string;
+  export let paymentIntent: StripePaymentIntent;
+  export let success: () => void;
+  export let failure: () => void;
 
   const STRIPE_ELEMENT_ID = "stripe-card-element";
 
@@ -25,8 +29,8 @@
   });
 
   async function submit() {
-    let result = await stripe.confirmCardPayment(paymentIntentSecret, {
-      receipt_email: "todo", // TODO
+    log.info("Attempting Stripe payment");
+    let result = await stripe.confirmCardPayment(paymentIntent.clientSecret, {
       payment_method: {
         card,
         billing_details: {},
@@ -37,10 +41,10 @@
     let type = result.error?.type;
     switch (type) {
       case undefined:
-        // TODO: success
+        log.info("Stripe Payment success");
+        success();
         break;
 
-      // TODO: errors
       case "api_connection_error":
       case "api_error":
       case "authentication_error":
@@ -49,6 +53,8 @@
       case "invalid_request_error":
       case "rate_limit_error":
       case "validation_error":
+        log.error("Stripe Payment failure: ", type, result.error?.message);
+        failure();
         break;
 
       default:
@@ -59,22 +65,20 @@
 
 <!-- TODO: close button to exit this screen -->
 
-<div class="payment">
-  <form class="content">
-    <label for={STRIPE_ELEMENT_ID}>Card</label>
-    <div id={STRIPE_ELEMENT_ID} />
-    <div id="card-element-errors" role="alert">{error}</div>
-    <button type="submit" on:submit|preventDefault={submit}>Subscribe</button>
-  </form>
-</div>
+<form on:submit|preventDefault={submit}>
+  <label for={STRIPE_ELEMENT_ID}>Card</label>
+  <div id={STRIPE_ELEMENT_ID} class="card-inputs" />
+  <div id="card-element-errors" role="alert">{error}</div>
+  <button class="button" type="submit">Subscribe</button>
+</form>
 
 <style>
-  .payment {
-    background-color: var(--color-purple);
-    padding: var(--gap) 0;
+  button {
+    display: block;
+    width: 100%;
   }
 
-  form {
-    background-color: var(--color-white);
+  .card-inputs {
+    margin: var(--gap-s) 0 var(--gap) 0;
   }
 </style>

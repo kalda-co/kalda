@@ -6,7 +6,9 @@ defmodule Kalda.Payments.Stripe do
 
   @impl true
   def get_customer!(stripe_customer_id) do
-    case Stripe.Customer.retrieve(stripe_customer_id) do
+    case Stripe.Customer.retrieve(stripe_customer_id,
+           expand: ["subscriptions.data.latest_invoice.payment_intent"]
+         ) do
       {:ok, customer} -> Customer.from_stripe_payload(customer)
       {:error, %{extra: %{http_status: 404}}} -> nil
     end

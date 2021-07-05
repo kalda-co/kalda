@@ -1,15 +1,21 @@
-import type { Reply, AppState, Comment, Reaction, LoginResult } from "../state";
+import type {
+  Reply,
+  AppState,
+  Comment,
+  Reaction,
+  LoginResult,
+  StripePaymentIntent,
+} from "../state";
 import {
   loginSuccess,
   appState,
   reply,
   comment,
   reaction,
-  therapy,
+  stripePaymentIntent,
 } from "./resources";
 import { request, Response, HttpClient, ErrorHandlers } from "./http";
 import { UnmatchedError } from "../exhaustive";
-import * as log from "../log";
 
 export type { Response };
 
@@ -77,6 +83,8 @@ export interface ApiClient {
     replyId: number,
     reporter_reason: string
   ): Promise<Response<null>>;
+
+  getStripePaymentIntent(): Promise<Response<StripePaymentIntent>>;
 }
 
 // An implementation of ApiClient that actually connects to the backend.
@@ -172,6 +180,14 @@ export class AuthenticatedApiClient implements ApiClient {
       .body({ reporter_reason })
       .request((_) => null);
   }
+
+  async getStripePaymentIntent(): Promise<Response<StripePaymentIntent>> {
+    let url = this.route(`/v1/token/stripe-payment-intent`);
+    return await this.httpClient
+      .post(url)
+      .expect(201)
+      .request(stripePaymentIntent);
+  }
 }
 
 // A mock API client used in tests
@@ -212,6 +228,9 @@ export class MockApiClient implements ApiClient {
     replyId: number,
     reporter_reason: string
   ): Promise<Response<null>> {
+    throw new Error("Method not implemented.");
+  }
+  getStripePaymentIntent(): Promise<Response<StripePaymentIntent>> {
     throw new Error("Method not implemented.");
   }
 }
