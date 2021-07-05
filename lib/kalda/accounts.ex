@@ -92,7 +92,7 @@ defmodule Kalda.Accounts do
 
   """
   def register_user(attrs) do
-    %User{}
+    %User{has_free_subscription: true}
     |> User.registration_changeset(attrs)
     |> Repo.insert()
   end
