@@ -101,7 +101,7 @@
       
     <Route path="notifications">
       <Navbar title="Notifications" />
-      <Notifications notifications={state.comment_notifications} />
+      <Notifications notifications={state.commentNotifications} />
     </Route>
 
     <!-- Default catch all route -->

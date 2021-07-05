@@ -18,6 +18,7 @@ import type {
   Reaction,
   LoginSuccess,
   StripePaymentIntent,
+  CommentNotification,
 } from "../state";
 
 export function appState(json: unknown): AppState {
@@ -27,6 +28,10 @@ export function appState(json: unknown): AppState {
     pools: field("pools", array(post))(json),
     next_therapy: field("next_therapy", optional(therapy))(json),
     therapies: field("therapies", array(therapy))(json),
+    commentNotifications: field(
+      "comment_notifications",
+      array(commentNotification)
+    )(json),
   };
 }
 
@@ -42,6 +47,16 @@ export function therapy(json: unknown): Therapy {
   };
 }
 
+export function commentNotification(json: unknown): CommentNotification {
+  return {
+    commentContent: field("comment_content", string)(json),
+    commentId: field("comment_id", number)(json),
+    insertedAt: field("inserted_at", date)(json),
+    replyId: field("notification_reply_id", number)(json),
+    replyAuthor: field("reply_author", user)(json),
+    replyContent: field("reply_content", string)(json),
+  };
+}
 export function post(json: unknown): Post {
   return {
     id: field("id", number)(json),
