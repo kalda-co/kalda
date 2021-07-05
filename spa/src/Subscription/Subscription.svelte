@@ -10,7 +10,7 @@
   export let api: ApiClient;
 
   type Stage = "displayingOffer" | "purchasing" | "success" | "failure";
-  let stage: Stage = "success";
+  let stage: Stage = "displayingOffer";
 
   function to(newStage: Stage): () => void {
     return () => (stage = newStage);
