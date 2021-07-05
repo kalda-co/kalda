@@ -8,7 +8,7 @@ defmodule Kalda.PaymentsTest do
   alias Kalda.Payments.Stripe.Subscription
 
   @customer %Customer{stripe_id: "123"}
-  @subscription %Subscription{stripe_id: "456"}
+  @subscription %Subscription{stripe_id: "456", payment_intent_client_secret: "secret"}
   @subscribed_customer %Customer{@customer | subscription: @subscription}
 
   setup ctx do

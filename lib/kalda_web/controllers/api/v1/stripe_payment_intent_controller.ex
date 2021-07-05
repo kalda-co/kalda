@@ -1,23 +1,14 @@
 defmodule KaldaWeb.Api.V1.StripePaymentIntentController do
   use KaldaWeb, :controller
 
-  alias Kalda.Payments
-
+  @spec create(any, any) :: none
   def create(conn, _params) do
-    # user = conn.assigns.current_user
-    # post = Forums.get_post!(post_id)
+    user = conn.assigns.current_user
+    stripe_client = Map.get(conn.assigns, :stripe, Kalda.Payments.Stripe)
+    subscription = Kalda.Payments.get_or_create_stripe_subscription!(user, stripe_client)
 
-    # with {:ok, %Comment{} = comment} <- Forums.create_comment(user, post, comment_params) do
-    #   comment =
-    #     comment
-    #     |> Map.put(:author, user)
-    #     |> Map.put(:replies, [])
-    #     |> Map.put(:comment_reactions, [])
-
-    #   conn
-    #   |> put_status(201)
-    #   |> render("show.json", comment: comment)
-    # end
-    # |> KaldaWeb.Api.V1.handle_error(conn)
+    conn
+    |> put_status(201)
+    |> render("show.json", client_secret: subscription.payment_intent_client_secret)
   end
 end

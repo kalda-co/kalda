@@ -143,6 +143,7 @@ defmodule KaldaWeb.Router do
     post "/replies/:id/reports", ReportController, :report_reply
     patch "/comments/:id/reactions", CommentReactionController, :update
     patch "/replies/:id/reactions", ReplyReactionController, :update
+    post "/stripe-payment-intent", StripePaymentIntentController, :create
     get "/*anything", NotFoundController, :not_found
   end
 
