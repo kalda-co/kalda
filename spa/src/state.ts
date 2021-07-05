@@ -16,7 +16,7 @@ export type AppState = {
   pools: Array<Post>;
   next_therapy?: Therapy;
   therapies: Array<Therapy>;
-  comment_notifications: Array<CommentNotification>;
+  commentNotifications: Array<CommentNotification>;
 };
 
 export type Post = {
@@ -80,13 +80,13 @@ export type Notifications = {
 };
 
 export type CommentNotification = {
-  comment_content: string;
-  comment_id: number;
-  inserted_at: Date;
+  commentContent: string;
+  commentId: number;
+  insertedAt: Date;
   // TODO: do we need this reply_id
-  notification_reply_id: number;
-  reply_author: User;
-  reply_content: string;
+  replyId: number;
+  replyAuthor: User;
+  replyContent: string;
 };
 
 export type PostNotification = {

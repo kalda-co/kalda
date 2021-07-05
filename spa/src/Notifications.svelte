@@ -9,9 +9,9 @@
     <div class="card">
       <div class="card-text">
         <p>
-          <!-- {notification.reply_author.username} replied to your comment: "{notification.comment_content}" -->
-          <!-- with: "{notification.reply_content} -->
-          {notification.comment_content}
+          {notification.replyAuthor.username} replied to your comment: "{notification.commentContent}"
+          with: "{notification.replyContent}
+          <!-- {notification.commentContent} -->
         </p>
       </div>
     </div>
