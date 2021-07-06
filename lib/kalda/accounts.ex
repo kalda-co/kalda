@@ -576,7 +576,7 @@ defmodule Kalda.Accounts do
     |> Ecto.Changeset.change(has_stripe_subscription: false)
     |> Repo.update!()
 
-    user
+    :ok
   end
 
   def add_free_subscription(%User{} = user) do
@@ -584,7 +584,7 @@ defmodule Kalda.Accounts do
     |> Ecto.Changeset.change(has_free_subscription: true)
     |> Repo.update!()
 
-    user
+    :ok
   end
 
   def remove_free_subscription(%User{} = user) do
@@ -592,7 +592,7 @@ defmodule Kalda.Accounts do
     |> Ecto.Changeset.change(has_free_subscription: false)
     |> Repo.update!()
 
-    user
+    :ok
   end
 
   def has_subscription?(%User{} = user) do
