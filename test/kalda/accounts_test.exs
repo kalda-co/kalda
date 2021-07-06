@@ -835,15 +835,109 @@ defmodule Kalda.AccountsTest do
     end
   end
 
-  # TODO add guidelines to signup flow
   describe "add_stripe_subscription/1" do
-    test "updates user.has_stripe_sbscription from false to true" do
+    test "updates user.has_stripe_subscription from false to true" do
       user = AccountsFixtures.user()
       assert user.has_stripe_subscription == false
 
-      assert updated_user = Accounts.add_stripe_subscription(user)
+      assert :ok == Accounts.add_stripe_subscription(user)
 
-      assert updated_user.has_stripe_subscription == true
+      assert Accounts.get_user!(user.id).has_stripe_subscription == true
+    end
+
+    test "updates user.has_stripe_subscription when true remains true" do
+      user = AccountsFixtures.user_with_subscription(:stripe)
+      assert user.has_stripe_subscription == true
+
+      assert :ok == Accounts.add_stripe_subscription(user)
+
+      assert Accounts.get_user!(user.id).has_stripe_subscription == true
     end
   end
+
+  describe "remove_stripe_subscription/1" do
+    test "updates user.has_stripe_subscription from true to false" do
+      user = AccountsFixtures.user_with_subscription(:stripe)
+      assert user.has_stripe_subscription == true
+
+      assert :ok == Accounts.remove_stripe_subscription(user)
+
+      assert Accounts.get_user!(user.id).has_stripe_subscription == false
+    end
+
+    test "updates user.has_stripe_subscription when false remains false" do
+      user = AccountsFixtures.user()
+      assert user.has_stripe_subscription == false
+
+      assert :ok == Accounts.remove_stripe_subscription(user)
+
+      assert Accounts.get_user!(user.id).has_stripe_subscription == false
+    end
+  end
+
+  describe "add_free_subscription/1" do
+    test "updates user.has_free_subscription from false to true" do
+      user = AccountsFixtures.user()
+      assert user.has_free_subscription == false
+
+      assert :ok == Accounts.add_free_subscription(user)
+
+      assert Accounts.get_user!(user.id).has_free_subscription == true
+    end
+
+    test "updates user.has_free_subscription when true remains true" do
+      user = AccountsFixtures.user_with_subscription(:free)
+      assert user.has_free_subscription == true
+
+      assert :ok == Accounts.add_free_subscription(user)
+
+      assert Accounts.get_user!(user.id).has_free_subscription == true
+    end
+  end
+
+  describe "remove_free_subscription/1" do
+    test "updates user.has_free_subscription from true to false" do
+      user = AccountsFixtures.user_with_subscription(:free)
+      assert user.has_free_subscription == true
+
+      assert :ok == Accounts.remove_free_subscription(user)
+
+      assert Accounts.get_user!(user.id).has_free_subscription == false
+    end
+
+    test "updates user.has_free_subscription when false remains false" do
+      user = AccountsFixtures.user()
+      assert user.has_free_subscription == false
+
+      assert :ok == Accounts.remove_free_subscription(user)
+
+      assert Accounts.get_user!(user.id).has_free_subscription == false
+    end
+  end
+
+  describe "has_subscription?/1" do
+    test "returns true if user has a free subscription" do
+      user = AccountsFixtures.user_with_subscription(:free)
+      assert user.has_free_subscription == true
+
+      assert Accounts.has_subscription?(user) == true
+    end
+
+    test "returns true if user has a stripe subscription" do
+      user = AccountsFixtures.user_with_subscription(:stripe)
+      assert user.has_stripe_subscription == true
+
+      assert Accounts.has_subscription?(user) == true
+    end
+
+    test "returns false if user has neither a free or a stripe subscription" do
+      user = AccountsFixtures.user()
+      assert user.has_free_subscription == false
+      assert user.has_stripe_subscription == false
+
+      assert Accounts.has_subscription?(user) == false
+    end
+  end
+
+  # TODO add guidelines to signup flow
 end
