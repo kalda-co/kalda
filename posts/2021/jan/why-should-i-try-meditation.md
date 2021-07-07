@@ -2,7 +2,7 @@
 title: "Why should I try meditation?",
 subtitle: "Why meditation could help you improve your mental health, and how to get started
 ",
-author: "Charlotte Fountain & Al Dee",
+author: "Charlotte Fountaine & Al Dee",
 tags: ["Meditation", "mental health"],
 description: "Our thoughts, and some science, on why meditation can help with all kinds of mental health, from depression, through anxiety and grief, even FOMO",
 date: "2021-05-11",
