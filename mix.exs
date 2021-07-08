@@ -69,6 +69,8 @@ defmodule Kalda.MixProject do
       {:httpoison, "~> 1.8"},
       # Exception tracking with Rollbar
       {:rollbax, "~> 0.11"},
+      # Stripe API client and webhook verifier
+      {:stripity_stripe, github: "code-corps/stripity_stripe", ref: "588daa4"},
       # Automatic page reloading
       {:phoenix_live_reload, "~> 1.2", only: :dev},
       # HTML parsing

@@ -43,10 +43,16 @@ defmodule KaldaWeb.Endpoint do
   plug Plug.RequestId
   plug Plug.Telemetry, event_prefix: [:phoenix, :endpoint]
 
-  plug Plug.Parsers,
+  plug Stripe.WebhookPlug,
+    at: "/webhook/stripe",
+    handler: KaldaWeb.StripeHandler,
+    secret: {Application, :get_env, [:kalda, :stripe_webhook_secret]}
+
+  plug(Plug.Parsers,
     parsers: [:urlencoded, :multipart, :json],
     pass: ["*/*"],
     json_decoder: Phoenix.json_library()
+  )
 
   plug Plug.MethodOverride
   plug Plug.Head
