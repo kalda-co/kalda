@@ -123,6 +123,17 @@ defmodule KaldaWeb.Router do
     pipe_through [:token_api, :json_require_authenticated_user, :json_require_confirmed_email]
     get "/dashboard", DashboardController, :index
     get "/ping", PingController, :show
+    get "/*anything", NotFoundController, :not_found
+  end
+
+  scope "/v1/token", KaldaWeb.Api.V1, as: :api_v1_token do
+    pipe_through [
+      :token_api,
+      :json_require_authenticated_user,
+      :json_require_subscribed_user,
+      :json_require_confirmed_email
+    ]
+
     post "/posts/:id/comments", CommentController, :create
     post "/comments/:id/replies", ReplyController, :create
     post "/comments/:id/reports", ReportController, :report_comment
@@ -146,6 +157,22 @@ defmodule KaldaWeb.Router do
     patch "/replies/:id/reactions", ReplyReactionController, :update
     post "/stripe-payment-intent", StripePaymentIntentController, :create
     get "/*anything", NotFoundController, :not_found
+  end
+
+  scope "/v1", KaldaWeb.Api.V1, as: :api_v1 do
+    pipe_through [
+      :api,
+      :json_require_authenticated_user,
+      :json_require_confirmed_email,
+      :json_require_subscribed_user
+    ]
+
+    post "/posts/:id/comments", CommentController, :create
+    post "/comments/:id/replies", ReplyController, :create
+    post "/comments/:id/reports", ReportController, :report_comment
+    post "/replies/:id/reports", ReportController, :report_reply
+    patch "/comments/:id/reactions", CommentReactionController, :update
+    patch "/replies/:id/reactions", ReplyReactionController, :update
   end
 
   scope "/", KaldaWeb do

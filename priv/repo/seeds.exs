@@ -39,8 +39,9 @@ user2 =
     email: "user@kalda.co",
     password: "thisisatestpassword",
     hashed_password: Bcrypt.hash_pwd_salt("thisisatestpassword"),
+    is_admin: true,
     confirmed_at: NaiveDateTime.local_now(),
-    has_free_subscription: false
+    has_free_subscription: true
   })
 
 user3 =
