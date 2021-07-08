@@ -49,5 +49,6 @@ config :rollbax,
   environment: read_env.("ROLLBAR_ENV"),
   enable_crash_reports: true
 
+# Elixir Stripe library
 config :stripity_stripe,
   api_key: read_env.("STRIPE_SECRET_KEY")
