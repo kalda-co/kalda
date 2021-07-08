@@ -24,26 +24,30 @@ alias Kalda.Waitlist.Signup
 
 user =
   Kalda.Repo.insert!(%User{
-    is_admin: true,
     username: "KaldaSquid",
     email: "demo@kalda.co",
     password: "thisisademopassword",
     hashed_password: Bcrypt.hash_pwd_salt("thisisademopassword"),
-    confirmed_at: NaiveDateTime.local_now()
+    is_admin: true,
+    confirmed_at: NaiveDateTime.local_now(),
+    has_free_subscription: true
   })
 
 user2 =
   Kalda.Repo.insert!(%User{
     username: "Puppy_queen",
-    email: "user@example.com",
+    email: "user@kalda.co",
     password: "thisisatestpassword",
-    hashed_password: Bcrypt.hash_pwd_salt("thisisatestpassword")
+    hashed_password: Bcrypt.hash_pwd_salt("thisisatestpassword"),
+    is_admin: true,
+    confirmed_at: NaiveDateTime.local_now(),
+    has_free_subscription: true
   })
 
 user3 =
   Kalda.Repo.insert!(%User{
     username: "Billy_Idol",
-    email: "idol@example.com",
+    email: "idol@kalda.co",
     password: "thisisatestpassword",
     hashed_password: Bcrypt.hash_pwd_salt("thisisatestpassword")
   })
@@ -51,7 +55,7 @@ user3 =
 user4 =
   Kalda.Repo.insert!(%User{
     username: "Janelle_M",
-    email: "janem@example.com",
+    email: "janem@kalda.co",
     password: "thisisatestpassword",
     hashed_password: Bcrypt.hash_pwd_salt("thisisatestpassword")
   })
