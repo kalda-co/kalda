@@ -20,7 +20,7 @@ defmodule KaldaWeb.Api.V1.ReportControllerTest do
   end
 
   describe "POST report_comment" do
-    setup [:register_and_log_in_user]
+    setup [:register_and_log_in_subscribed_user]
 
     test "creates report for user (reporter) on a comment in daily reflections", %{
       conn: conn,
@@ -54,8 +54,28 @@ defmodule KaldaWeb.Api.V1.ReportControllerTest do
     end
   end
 
-  describe "POST report_reply" do
+  describe "POST report_comment with user not subscribed" do
     setup [:register_and_log_in_user]
+
+    test "creates report for user (reporter) on a comment in daily reflections", %{
+      conn: conn,
+      user: _current_user
+    } do
+      user = Kalda.AccountsFixtures.user()
+      post = Kalda.ForumsFixtures.post(user)
+      comment = Kalda.ForumsFixtures.comment(post, user)
+
+      assert conn =
+               post(conn, "/v1/comments/#{comment.id}/reports", @valid_reporter_reason_content)
+
+      assert json_response(conn, 401) == %{
+               "error" => "You must be subscribed to access this resource"
+             }
+    end
+  end
+
+  describe "POST report_reply" do
+    setup [:register_and_log_in_subscribed_user]
 
     test "creates report for user (reporter) on a reply in daily reflections", %{
       conn: conn,
@@ -85,6 +105,26 @@ defmodule KaldaWeb.Api.V1.ReportControllerTest do
                "post_id" => nil,
                "comment_id" => nil,
                "inserted_at" => NaiveDateTime.to_iso8601(report.inserted_at)
+             }
+    end
+  end
+
+  describe "POST report_reply unsubscribed user" do
+    setup [:register_and_log_in_user]
+
+    test "creates report for user (reporter) on a reply in daily reflections", %{
+      conn: conn,
+      user: _current_user
+    } do
+      user = Kalda.AccountsFixtures.user()
+      post = Kalda.ForumsFixtures.post(user)
+      comment = Kalda.ForumsFixtures.comment(post, user)
+      reply = Kalda.ForumsFixtures.reply(comment, user)
+
+      assert conn = post(conn, "/v1/replies/#{reply.id}/reports", @valid_reporter_reason_content)
+
+      assert json_response(conn, 401) == %{
+               "error" => "You must be subscribed to access this resource"
              }
     end
   end

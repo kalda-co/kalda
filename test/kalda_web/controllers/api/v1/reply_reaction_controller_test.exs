@@ -26,7 +26,7 @@ defmodule KaldaWeb.Api.V1.ReplyReactionControllerTest do
   end
 
   describe "PATCH update" do
-    setup [:register_and_log_in_user]
+    setup [:register_and_log_in_subscribed_user]
 
     test "creates reply_reaction relate for user on reply in daily reflections", %{
       conn: conn,
@@ -156,6 +156,52 @@ defmodule KaldaWeb.Api.V1.ReplyReactionControllerTest do
 
       assert json_response(conn, 422) == %{
                "errors" => %{"relate" => ["can't be blank"]}
+             }
+    end
+  end
+
+  describe "PATCH update with unsubscribed user" do
+    setup [:register_and_log_in_user]
+
+    test "does not create reply_reaction relate for user on reply in daily reflections", %{
+      conn: conn,
+      user: _current_user
+    } do
+      user = Kalda.AccountsFixtures.user()
+      post = Kalda.ForumsFixtures.post(user)
+      comment = Kalda.ForumsFixtures.comment(post, user)
+      reply = Kalda.ForumsFixtures.reply(comment, user)
+
+      assert conn =
+               patch(
+                 conn,
+                 "/v1/replies/#{reply.id}/reactions",
+                 @valid_reply_reaction_content
+               )
+
+      assert json_response(conn, 401) == %{
+               "error" => "You must be subscribed to access this resource"
+             }
+    end
+
+    test "renders 401 with invalid attributes as not submitted", %{
+      conn: conn,
+      user: _current_user
+    } do
+      user = Kalda.AccountsFixtures.user()
+      post = Kalda.ForumsFixtures.post(user)
+      comment = Kalda.ForumsFixtures.comment(post, user)
+      reply = Kalda.ForumsFixtures.reply(comment, user)
+
+      assert conn =
+               patch(
+                 conn,
+                 "/v1/replies/#{reply.id}/reactions",
+                 @invalid_reply_reaction_content
+               )
+
+      assert json_response(conn, 401) == %{
+               "error" => "You must be subscribed to access this resource"
              }
     end
   end
