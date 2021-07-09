@@ -47,6 +47,7 @@ export type Reply = {
 export type User = {
   id: number;
   username: string;
+  hasSubscription: boolean;
 };
 
 export type ReportComment = {

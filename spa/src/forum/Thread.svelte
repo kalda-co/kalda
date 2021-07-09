@@ -60,10 +60,23 @@
   </section>
 
   <section class="comments content">
-    <ContentTextForm {placeholder} save={saveComment} buttonText="Send" />
-    {#each post.comments as comment (comment.id)}
-      <CommentComponent {comment} {currentUser} {api} />
-    {/each}
+    <!-- if content is filtered by rendering as if 0 comments in array, the responses number is also zero -->
+    <!-- {#if post.comments.length > 0}
+      <ContentTextForm {placeholder} save={saveComment} buttonText="Send" />
+      {#each post.comments as comment (comment.id)}
+        <CommentComponent {comment} {currentUser} {api} />
+      {/each}
+    {:else}
+      <p>subscribe here to post a reflection and view the community</p>
+    {/if} -->
+    {#if currentUser.hasSubscription}
+      <ContentTextForm {placeholder} save={saveComment} buttonText="Send" />
+      {#each post.comments as comment (comment.id)}
+        <CommentComponent {comment} {currentUser} {api} />
+      {/each}
+    {:else}
+      <p>subscribe here to post a reflection and view the community</p>
+    {/if}
   </section>
 </article>
 

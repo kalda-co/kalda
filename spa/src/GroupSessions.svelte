@@ -1,9 +1,10 @@
 <script lang="ts">
-  import type { Therapy } from "./state";
+  import type { Therapy, User } from "./state";
   import { link } from "svelte-routing";
   import { datetimeToURI, readableDate } from "./date";
 
   export let therapies: Therapy[];
+  export let currentUser: User;
 
   function therapyImage(index: number) {
     let images = [
@@ -59,6 +60,17 @@
       </div>
     </div>
   {/each}
+  <!-- Why does this fail?
+  {#if currentUser.hasSubscription == false}
+    <p>subscribe here to attend group sessions via zoom</p>
+  {/if} -->
+
+  {#if therapies.length == 0}
+    <p>
+      Can't see anything? That might be because you don't have a subscription.
+      You can subscribe here to attend group sessions via zoom
+    </p>
+  {/if}
 </article>
 
 <style>

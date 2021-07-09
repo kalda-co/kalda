@@ -72,6 +72,7 @@ export function user(json: unknown): User {
   return {
     id: field("id", number)(json),
     username: field("username", string)(json),
+    hasSubscription: field("has_subscription", boolean)(json),
   };
 }
 
