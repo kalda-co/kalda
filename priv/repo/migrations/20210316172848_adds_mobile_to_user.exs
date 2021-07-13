@@ -5,6 +5,5 @@ defmodule Kalda.Repo.Migrations.AddsMobileToUser do
     alter table(:users) do
       add :mobile, :string
     end
-
   end
 end
