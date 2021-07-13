@@ -25,8 +25,11 @@ config :kalda, KaldaWeb.Endpoint,
   secret_key_base: read_env.("SECRET_KEY_BASE"),
   server: true
 
-# Sendfox api (email signups management)
-config :kalda, :sendfox_api_token, read_env.("SENDFOX_TOKEN")
+config :kalda,
+  # Sendfox api (email signups management)
+  sendfox_api_token: read_env.("SENDFOX_TOKEN"),
+  # Optionally require basic browser auth
+  basic_auth_password: read_env_or.("BASIC_AUTH_PASSWORD", nil)
 
 config :kalda, Kalda.Mailer,
   adapter: Bamboo.SendGridAdapter,
@@ -44,3 +47,6 @@ config :rollbax,
 
 # Optionally require basic browser auth
 config :kalda, :basic_auth_password, read_env_or.("BASIC_AUTH_PASSWORD", nil)
+
+config :stripity_stripe,
+  api_key: read_env.("STRIPE_SECRET_KEY")
