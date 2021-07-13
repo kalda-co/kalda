@@ -55,6 +55,7 @@ defmodule KaldaWeb.Api.V1.CommentControllerTest do
                "id" => comment.id,
                "content" => @valid_comment_content.content,
                "author" => %{
+                 "has_subscription" => true,
                  "id" => comment.author_id,
                  "username" => comment.author.username
                },
@@ -93,6 +94,7 @@ defmodule KaldaWeb.Api.V1.CommentControllerTest do
                "id" => comment.id,
                "content" => @valid_comment_content.content,
                "author" => %{
+                 "has_subscription" => true,
                  "id" => comment.author_id,
                  "username" => comment.author.username
                },
@@ -137,6 +139,7 @@ defmodule KaldaWeb.Api.V1.CommentControllerTest do
                "id" => comment.id,
                "content" => @valid_long_comment_content.content,
                "author" => %{
+                 "has_subscription" => true,
                  "id" => comment.author_id,
                  "username" => comment.author.username
                },

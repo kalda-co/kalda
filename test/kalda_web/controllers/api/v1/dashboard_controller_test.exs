@@ -15,7 +15,7 @@ defmodule KaldaWeb.Api.V1.DashboardControllerTest do
   end
 
   describe "GET index" do
-    setup [:register_and_log_in_user]
+    setup [:register_and_log_in_subscribed_user]
 
     test "lists dashboard attributes", %{conn: conn, user: current_user} do
       author1 = AccountsFixtures.user()
@@ -48,7 +48,8 @@ defmodule KaldaWeb.Api.V1.DashboardControllerTest do
       assert json_response(conn, 200) == %{
                "current_user" => %{
                  "id" => current_user.id,
-                 "username" => current_user.username
+                 "username" => current_user.username,
+                 "has_subscription" => true
                },
                "next_therapy" => %{
                  "link" => therapy_session.link,
@@ -77,6 +78,7 @@ defmodule KaldaWeb.Api.V1.DashboardControllerTest do
                    "published_at" => NaiveDateTime.to_iso8601(post1.published_at),
                    "content" => post1.content,
                    "author" => %{
+                     "has_subscription" => false,
                      "id" => author1.id,
                      "username" => author1.username
                    },
@@ -88,6 +90,7 @@ defmodule KaldaWeb.Api.V1.DashboardControllerTest do
                    "content" => post2.content,
                    "published_at" => NaiveDateTime.to_iso8601(post2.published_at),
                    "author" => %{
+                     "has_subscription" => false,
                      "id" => author1.id,
                      "username" => author1.username
                    },
@@ -98,6 +101,7 @@ defmodule KaldaWeb.Api.V1.DashboardControllerTest do
                        "inserted_at" => NaiveDateTime.to_iso8601(comment1.inserted_at),
                        "reactions" => [],
                        "author" => %{
+                         "has_subscription" => false,
                          "id" => author2.id,
                          "username" => author2.username
                        },
@@ -109,6 +113,7 @@ defmodule KaldaWeb.Api.V1.DashboardControllerTest do
                            "inserted_at" => NaiveDateTime.to_iso8601(reply1.inserted_at),
                            "reactions" => [],
                            "author" => %{
+                             "has_subscription" => false,
                              "id" => author1.id,
                              "username" => author1.username
                            }
@@ -125,6 +130,7 @@ defmodule KaldaWeb.Api.V1.DashboardControllerTest do
                    "published_at" => NaiveDateTime.to_iso8601(post3.published_at),
                    "content" => post3.content,
                    "author" => %{
+                     "has_subscription" => false,
                      "id" => author1.id,
                      "username" => author1.username
                    },
@@ -154,6 +160,7 @@ defmodule KaldaWeb.Api.V1.DashboardControllerTest do
 
       assert json_response(conn, 200) == %{
                "current_user" => %{
+                 "has_subscription" => true,
                  "id" => current_user.id,
                  "username" => current_user.username
                },
@@ -166,6 +173,7 @@ defmodule KaldaWeb.Api.V1.DashboardControllerTest do
                    "published_at" => NaiveDateTime.to_iso8601(post1.published_at),
                    "content" => post1.content,
                    "author" => %{
+                     "has_subscription" => false,
                      "id" => author1.id,
                      "username" => author1.username
                    },
@@ -176,6 +184,7 @@ defmodule KaldaWeb.Api.V1.DashboardControllerTest do
                        "inserted_at" => NaiveDateTime.to_iso8601(comment1.inserted_at),
                        "reactions" => [],
                        "author" => %{
+                         "has_subscription" => false,
                          "id" => author1.id,
                          "username" => author1.username
                        },
@@ -187,6 +196,7 @@ defmodule KaldaWeb.Api.V1.DashboardControllerTest do
                            "inserted_at" => NaiveDateTime.to_iso8601(reply1.inserted_at),
                            "reactions" => [],
                            "author" => %{
+                             "has_subscription" => false,
                              "id" => author1.id,
                              "username" => author1.username
                            }
@@ -203,6 +213,7 @@ defmodule KaldaWeb.Api.V1.DashboardControllerTest do
                    "published_at" => NaiveDateTime.to_iso8601(post3.published_at),
                    "content" => post3.content,
                    "author" => %{
+                     "has_subscription" => false,
                      "id" => author1.id,
                      "username" => author1.username
                    },
