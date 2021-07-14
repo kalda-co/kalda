@@ -17,7 +17,7 @@ defmodule KaldaWeb.Api.V1.CommentView do
       id: comment.id,
       content: comment.content,
       inserted_at: comment.inserted_at,
-      author: UserView.render_author_with_subscription(comment.author),
+      author: UserView.render_author(comment.author),
       replies: Enum.map(comment.replies, &ReplyView.render_reply/1),
       reactions:
         Enum.map(comment.comment_reactions, &CommentReactionView.render_comment_reaction/1)

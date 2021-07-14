@@ -43,7 +43,7 @@ defmodule KaldaWeb.Api.V1.ReportControllerTest do
                "id" => report.id,
                "reporter_reason" => @valid_reporter_reason_content.reporter_reason,
                "reporter" => %{
-                 "has_subscription" => false,
+                 "has_subscription" => true,
                  "id" => current_user.id,
                  "username" => current_user.username
                },
@@ -99,7 +99,7 @@ defmodule KaldaWeb.Api.V1.ReportControllerTest do
                "id" => report.id,
                "reporter_reason" => @valid_reporter_reason_content.reporter_reason,
                "reporter" => %{
-                 "has_subscription" => false,
+                 "has_subscription" => true,
                  "id" => current_user.id,
                  "username" => current_user.username
                },

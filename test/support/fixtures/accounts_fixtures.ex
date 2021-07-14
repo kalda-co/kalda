@@ -57,7 +57,11 @@ defmodule Kalda.AccountsFixtures do
       })
 
     {:ok, user} =
-      %Kalda.Accounts.User{is_admin: true, confirmed_at: NaiveDateTime.local_now()}
+      %Kalda.Accounts.User{
+        is_admin: true,
+        confirmed_at: NaiveDateTime.local_now(),
+        has_free_subscription: true
+      }
       |> Kalda.Accounts.User.registration_changeset(attrs)
       |> Kalda.Repo.insert()
 

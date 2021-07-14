@@ -65,7 +65,7 @@ defmodule Kalda.ForumsTest do
 
     test "get_posts with forum daily_reflection" do
       now = NaiveDateTime.local_now()
-      user1 = AccountsFixtures.user()
+      user1 = AccountsFixtures.user_with_subscription(:free)
       user2 = AccountsFixtures.user()
       post1 = ForumsFixtures.post(user1)
       post2 = ForumsFixtures.post(user1)
@@ -110,7 +110,7 @@ defmodule Kalda.ForumsTest do
       set_inserted_at.(reply3, NaiveDateTime.add(now, -80))
 
       result =
-        Forums.get_posts(:daily_reflection)
+        Forums.get_posts(user1, :daily_reflection)
         |> Enum.map(fn post ->
           %{
             id: post.id,

@@ -85,7 +85,7 @@ defmodule Kalda.Forums do
   end
 
   @doc """
-  Returns all posts for forum, except scheduled future ones
+  Returns all posts for forum, except scheduled future ones, if current user is subscribed
   Orders as most recently publised first. Limit can be provided as an optional argument.
 
   ## Examples
@@ -96,40 +96,46 @@ defmodule Kalda.Forums do
       iex> get_posts(forum, [limit: 2])
       [%Post{}, %Post{}]
   """
-  def get_posts(forum, opts \\ []) do
+  def get_posts(user, forum, opts \\ []) do
     now = NaiveDateTime.local_now()
     limit = opts[:limit] || 100
 
-    Repo.all(
-      from post in Post,
-        where: post.forum == ^forum,
-        where: post.published_at <= ^now,
-        limit: ^limit,
-        order_by: [desc: post.published_at],
-        preload: [
-          :author,
-          comments:
-            ^from(comment in Comment,
-              order_by: [desc: comment.inserted_at],
-              preload: [
-                :author,
-                comment_reactions: [
-                  :author
-                ],
-                replies:
-                  ^from(reply in Reply,
-                    order_by: [asc: reply.inserted_at],
-                    preload: [
-                      :author,
-                      reply_reactions: [
-                        :author
-                      ]
-                    ]
-                  )
-              ]
-            )
-        ]
-    )
+    case Kalda.Accounts.has_subscription?(user) do
+      true ->
+        Repo.all(
+          from post in Post,
+            where: post.forum == ^forum,
+            where: post.published_at <= ^now,
+            limit: ^limit,
+            order_by: [desc: post.published_at],
+            preload: [
+              :author,
+              comments:
+                ^from(comment in Comment,
+                  order_by: [desc: comment.inserted_at],
+                  preload: [
+                    :author,
+                    comment_reactions: [
+                      :author
+                    ],
+                    replies:
+                      ^from(reply in Reply,
+                        order_by: [asc: reply.inserted_at],
+                        preload: [
+                          :author,
+                          reply_reactions: [
+                            :author
+                          ]
+                        ]
+                      )
+                  ]
+                )
+            ]
+        )
+
+      false ->
+        []
+    end
   end
 
   @doc """
