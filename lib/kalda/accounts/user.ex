@@ -13,6 +13,7 @@ defmodule Kalda.Accounts.User do
     field :hashed_password, :string
     field :confirmed_at, :naive_datetime
     field :mobile, :string
+    field :has_stripe_subscription, :boolean, default: false
 
     # Subscription billing information
     field :stripe_customer_id, :string
