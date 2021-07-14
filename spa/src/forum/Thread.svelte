@@ -26,19 +26,25 @@
     return replyNum;
   }
 
+  // TODO: As we now do not load the comments or replies, unsubscribed users see no responses
   function makeCommentsCountText() {
-    switch (post.comments.length) {
-      case 0:
-        return `No ${commentName}s yet`;
-      case 1:
-        let replyCount = post.comments[0].replies.length;
-        let replyCommentCount = replyCount + 1;
-        return `${replyCommentCount} ${commentName}(s)`;
-      default:
-        let rcc2 = post.comments.length + countReplies(post.comments);
-        return `${rcc2} ${commentName}s`;
+    if (currentUser.hasSubscription) {
+      switch (post.comments.length) {
+        case 0:
+          return `No ${commentName}s yet`;
+        case 1:
+          let replyCount = post.comments[0].replies.length;
+          let replyCommentCount = replyCount + 1;
+          return `${replyCommentCount} ${commentName}(s)`;
+        default:
+          let rcc2 = post.comments.length + countReplies(post.comments);
+          return `${rcc2} ${commentName}s`;
+      }
+    } else {
+      return "responses hidden";
     }
   }
+
   let commentsCountText: string;
   $: {
     commentsCountText = makeCommentsCountText();
