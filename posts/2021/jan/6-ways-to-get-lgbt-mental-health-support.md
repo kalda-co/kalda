@@ -3,7 +3,7 @@ title: "6 ways to get LGBT+ mental health support near me",
 subtitle: "Find the perfect way to help your mental health",
 author: "Boris Shoalwise",
 tags: ["mental health", "LGBTQIA+", "support"],
-description: "6 ways to find LGBTQIA+ mental health support onlineh",
+description: "6 ways to find LGBTQIA+ mental health support online",
 date: "2021-01-11",
 image: "/images/rainbow-paint.jpeg",
 alt: "rainbow paint in streaks"
