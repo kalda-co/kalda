@@ -4,6 +4,7 @@ defmodule Kalda.Payments do
   """
 
   require Logger
+  alias Stripe, as: StripeLib
   alias Kalda.Accounts.User
   alias Kalda.Payments.Stripe
 

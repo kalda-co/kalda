@@ -91,7 +91,8 @@ config :kalda,
   spa_static_prefix: "http://localhost:4451",
   stripe_publishable_key:
     "pk_test_51J5oHmH9c3MnXq26wjjl8Ty6zIYXoTVML5WERafCzZRTN9N85u2MbFZqf97OgXupy1PoVDURfIEnKgUt0Cs7JuOn00PX4ZKkIR",
-  stripe_subscription_price_id: "price_1J7QYDH9c3MnXq26bc2BNiBo"
+  stripe_subscription_price_id: "price_1J7QYDH9c3MnXq26bc2BNiBo",
+  stripe_webhook_secret: "whsec_aOPKBPO3OfyLqz88gqtrK2PLkryi2iG9"
 
 try do
   import_config "dev_secrets.exs"

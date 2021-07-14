@@ -44,6 +44,13 @@ defmodule Kalda.Accounts do
   end
 
   @doc """
+  Gets a user by Stripe customer id.
+  """
+  def get_user_by_stripe_customer_id!(stripe_customer_id) when is_binary(stripe_customer_id) do
+    Repo.get_by!(User, stripe_customer_id: stripe_customer_id)
+  end
+
+  @doc """
   Gets a user by email and password.
 
   ## Examples
@@ -542,5 +549,17 @@ defmodule Kalda.Accounts do
       preload: ^preload
     )
     |> Repo.get!(id)
+  end
+
+  #################
+  # Subscriptions #
+  #################
+
+  def add_stripe_subscription!(%User{} = user) do
+    user
+    |> Ecto.Changeset.change(has_stripe_subscription: true)
+    |> Repo.update!()
+
+    :ok
   end
 end

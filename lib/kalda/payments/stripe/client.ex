@@ -48,4 +48,17 @@ defmodule Kalda.Payments.Stripe.Client do
       {:ok, subscription} -> Subscription.from_stripe_payload(subscription)
     end
   end
+
+  @impl true
+  def get_payment_intent_payment_method!(payment_intent_id) do
+    {:ok, payment_intent} = Stripe.PaymentIntent.retrieve(payment_intent_id, %{})
+    payment_intent.payment_method
+  end
+
+  @impl true
+  def set_subscription_payment_method!(subscription_id, payment_method) do
+    StripeLib.Subscription.update(subscription_id, %{
+      default_payment_method: payment_method
+    })
+  end
 end
