@@ -76,7 +76,9 @@ defmodule Kalda.MixProject do
       # HTML parsing
       {:floki, "~> 0.27", only: :test},
       # Automatic test runner
-      {:mix_test_watch, "~> 1.0", only: :dev, runtime: false}
+      {:mix_test_watch, "~> 1.0", only: :dev, runtime: false},
+      # Mock services in tests
+      {:hammox, "~> 0.5", only: :test}
     ]
   end
 
