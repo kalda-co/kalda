@@ -4,8 +4,7 @@
   import { link } from "svelte-routing";
   import { datetimeToURI, readableDate } from "./date";
 
-  export let therapies: Therapy[];
-  export let currentUser: User;
+  export let therapies: Therapy[] | [];
 
   function therapyImage(index: number) {
     let images = [
