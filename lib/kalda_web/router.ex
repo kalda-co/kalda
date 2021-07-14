@@ -152,7 +152,6 @@ defmodule KaldaWeb.Router do
     get "/*anything", NotFoundController, :not_found
   end
 
-  # TODO: Users can still navigate by route to /daily-reflection and still see the API contents of dashboard although the link from the dashboard itself (home, /) to /daily-reflection is disabled! This is because /daily-reflection is not a real route.
   scope "/v1", KaldaWeb.Api.V1, as: :api_v1 do
     pipe_through [
       :api,

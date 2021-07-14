@@ -34,11 +34,8 @@ defmodule Kalda.Policy do
   end
 
   # Authorizes access for subscription-only content
-  def authorize!(%User{has_stripe_subscription: true}, :view_subscription_content, Kalda),
-    do: true
-
-  def authorize!(%User{has_free_subscription: true}, :view_subscription_content, Kalda),
-    do: true
+  def authorize!(%User{} = user, :view_subscription_content, Kalda),
+    do: Kalda.Accounts.has_subscription?(user)
 
   # When authorization is required but user has none
   def authorize!(%User{} = _user, _action, _subject) do

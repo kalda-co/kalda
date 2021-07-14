@@ -86,6 +86,7 @@ defmodule Kalda.Forums do
 
   @doc """
   Returns all posts for forum, except scheduled future ones, if current user is subscribed
+  comments and replies are also shown.
   Orders as most recently publised first. Limit can be provided as an optional argument.
 
   ## Examples
@@ -134,7 +135,36 @@ defmodule Kalda.Forums do
         )
 
       false ->
-        []
+        Repo.all(
+          from post in Post,
+            where: post.forum == ^forum,
+            where: post.published_at <= ^now,
+            limit: ^limit,
+            order_by: [desc: post.published_at],
+            preload: [
+              :author,
+              comments:
+                ^from(comment in Comment,
+                  limit: 0,
+                  preload: [
+                    :author,
+                    comment_reactions: [
+                      :author
+                    ],
+                    replies:
+                      ^from(reply in Reply,
+                        limit: 0,
+                        preload: [
+                          :author,
+                          reply_reactions: [
+                            :author
+                          ]
+                        ]
+                      )
+                  ]
+                )
+            ]
+        )
     end
   end
 
