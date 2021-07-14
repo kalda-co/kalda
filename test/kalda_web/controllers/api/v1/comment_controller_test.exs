@@ -175,7 +175,7 @@ defmodule KaldaWeb.Api.V1.CommentControllerTest do
 
       assert conn = post(conn, "/v1/posts/#{post.id}/comments", @valid_comment_content)
 
-      assert json_response(conn, 401) == %{
+      assert json_response(conn, 402) == %{
                "error" => "You must be subscribed to access this resource"
              }
     end
@@ -188,7 +188,7 @@ defmodule KaldaWeb.Api.V1.CommentControllerTest do
       post = Kalda.ForumsFixtures.post(user)
       assert conn = post(conn, "/v1/posts/#{post.id}/comments", @invalid_comment_content)
 
-      assert json_response(conn, 401) == %{
+      assert json_response(conn, 402) == %{
                "error" => "You must be subscribed to access this resource"
              }
     end

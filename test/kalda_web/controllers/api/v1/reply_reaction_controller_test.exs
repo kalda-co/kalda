@@ -183,12 +183,12 @@ defmodule KaldaWeb.Api.V1.ReplyReactionControllerTest do
                  @valid_reply_reaction_content
                )
 
-      assert json_response(conn, 401) == %{
+      assert json_response(conn, 402) == %{
                "error" => "You must be subscribed to access this resource"
              }
     end
 
-    test "renders 401 with invalid attributes as not submitted", %{
+    test "renders 402 with invalid attributes as not submitted", %{
       conn: conn,
       user: _current_user
     } do
@@ -204,7 +204,7 @@ defmodule KaldaWeb.Api.V1.ReplyReactionControllerTest do
                  @invalid_reply_reaction_content
                )
 
-      assert json_response(conn, 401) == %{
+      assert json_response(conn, 402) == %{
                "error" => "You must be subscribed to access this resource"
              }
     end

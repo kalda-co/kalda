@@ -69,7 +69,7 @@ defmodule KaldaWeb.Api.V1.ReportControllerTest do
       assert conn =
                post(conn, "/v1/comments/#{comment.id}/reports", @valid_reporter_reason_content)
 
-      assert json_response(conn, 401) == %{
+      assert json_response(conn, 402) == %{
                "error" => "You must be subscribed to access this resource"
              }
     end
@@ -125,7 +125,7 @@ defmodule KaldaWeb.Api.V1.ReportControllerTest do
 
       assert conn = post(conn, "/v1/replies/#{reply.id}/reports", @valid_reporter_reason_content)
 
-      assert json_response(conn, 401) == %{
+      assert json_response(conn, 402) == %{
                "error" => "You must be subscribed to access this resource"
              }
     end

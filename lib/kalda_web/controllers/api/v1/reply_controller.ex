@@ -22,30 +22,9 @@ defmodule KaldaWeb.Api.V1.ReplyController do
         |> KaldaWeb.Api.V1.handle_error(conn)
 
       _ ->
-        with {:ok, %Reply{} = reply} <- Forums.create_reply(user, comment, reply_params) do
-          reply =
-            reply
-            |> Map.put(:author, user)
-            |> Map.put(:reply_reactions, [])
-
-          conn
-          |> put_status(201)
-          |> render("show_unsubscribed_author.json", reply: reply)
-        end
+        conn
+        |> put_status(402)
         |> KaldaWeb.Api.V1.handle_error(conn)
-    end
-  end
-
-  def show(conn, %{"id" => id}) do
-    reply =
-      Forums.get_reply!(id, preload: [:author, replies: [:author], reply_reactions: [:author]])
-
-    case Kalda.Accounts.has_subscription?(reply.author) do
-      true ->
-        render(conn, "show.json", reply: reply)
-
-      _ ->
-        render(conn, "show_unsubscribed_author.json", reply: reply)
     end
   end
 end

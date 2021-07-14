@@ -156,16 +156,13 @@ defmodule KaldaWeb.UserAuth do
   end
 
   def require_subscribed_user(conn, _opts) do
-    if conn.assigns.current_user.has_stripe_subscription ||
-         conn.assigns.current_user.has_free_subscription do
+    if Kalda.Accounts.has_subscription?(conn.assigns.current_user) do
       conn
-      # TODO: test
     else
       # TODO: redirect to subscriptions
       conn
-      |> put_flash(:error, "You require a subscription to access this content.")
-      |> maybe_store_return_to()
-      |> redirect(to: Routes.user_session_path(conn, :new))
+      |> put_flash(:error, "You must be subscribed to access this resource")
+      |> redirect(to: Routes.api_v1_token_dashboard_path(conn, :index))
       |> halt()
     end
   end
@@ -218,7 +215,7 @@ defmodule KaldaWeb.UserAuth do
       conn
     else
       conn
-      |> put_status(401)
+      |> put_status(402)
       |> json(%{error: "You must be subscribed to access this resource"})
       |> halt()
     end
