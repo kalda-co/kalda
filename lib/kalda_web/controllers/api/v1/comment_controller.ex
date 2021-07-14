@@ -19,7 +19,7 @@ defmodule KaldaWeb.Api.V1.CommentController do
 
           conn
           |> put_status(201)
-          |> render("show_subscribed_author.json", comment: comment)
+          |> render("show.json", comment: comment)
         end
         |> KaldaWeb.Api.V1.handle_error(conn)
 

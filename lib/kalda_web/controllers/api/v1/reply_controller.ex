@@ -17,7 +17,7 @@ defmodule KaldaWeb.Api.V1.ReplyController do
 
           conn
           |> put_status(201)
-          |> render("show_subscribed_author.json", reply: reply)
+          |> render("show.json", reply: reply)
         end
         |> KaldaWeb.Api.V1.handle_error(conn)
 
@@ -42,7 +42,7 @@ defmodule KaldaWeb.Api.V1.ReplyController do
 
     case Kalda.Accounts.has_subscription?(reply.author) do
       true ->
-        render(conn, "show_subscribed_author.json", reply: reply)
+        render(conn, "show.json", reply: reply)
 
       _ ->
         render(conn, "show_unsubscribed_author.json", reply: reply)
