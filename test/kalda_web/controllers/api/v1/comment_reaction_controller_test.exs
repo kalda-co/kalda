@@ -52,6 +52,7 @@ defmodule KaldaWeb.Api.V1.CommentReactionControllerTest do
                "relate" => @valid_comment_reaction_content.relate,
                "send_love" => false,
                "author" => %{
+                 "has_subscription" => false,
                  "id" => current_user.id,
                  "username" => current_user.username
                }
@@ -82,6 +83,7 @@ defmodule KaldaWeb.Api.V1.CommentReactionControllerTest do
                "send_love" => @valid_comment_reaction_love_content.send_love,
                "relate" => false,
                "author" => %{
+                 "has_subscription" => false,
                  "id" => current_user.id,
                  "username" => current_user.username
                }
@@ -112,6 +114,7 @@ defmodule KaldaWeb.Api.V1.CommentReactionControllerTest do
                "send_love" => true,
                "relate" => false,
                "author" => %{
+                 "has_subscription" => false,
                  "id" => current_user.id,
                  "username" => current_user.username
                }
@@ -128,6 +131,7 @@ defmodule KaldaWeb.Api.V1.CommentReactionControllerTest do
                "send_love" => false,
                "relate" => false,
                "author" => %{
+                 "has_subscription" => false,
                  "id" => current_user.id,
                  "username" => current_user.username
                }

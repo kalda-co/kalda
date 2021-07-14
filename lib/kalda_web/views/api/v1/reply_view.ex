@@ -7,6 +7,10 @@ defmodule KaldaWeb.Api.V1.ReplyView do
     render_reply_with_subscription(reply)
   end
 
+  def render("show_unsubscribed_author.json", %{reply: reply}) do
+    render_reply(reply)
+  end
+
   def render_reply_with_subscription(reply) do
     %{
       id: reply.id,
@@ -16,10 +20,6 @@ defmodule KaldaWeb.Api.V1.ReplyView do
       inserted_at: reply.inserted_at,
       reactions: Enum.map(reply.reply_reactions, &ReplyReactionView.render_reply_reaction/1)
     }
-  end
-
-  def render("show_unsubscribed_author.json", %{reply: reply}) do
-    render_reply(reply)
   end
 
   def render_reply(reply) do

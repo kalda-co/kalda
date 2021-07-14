@@ -596,11 +596,6 @@ defmodule Kalda.Accounts do
   end
 
   def has_subscription?(%User{} = user) do
-    if user.has_free_subscription || user.has_stripe_subscription do
-      true
-    else
-      false
-    end
->>>>>>> 1ec31ea (WIP add subscription functions in accounts context)
+    user.has_free_subscription || user.has_stripe_subscription
   end
 end

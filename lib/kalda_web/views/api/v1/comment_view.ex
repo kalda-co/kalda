@@ -8,6 +8,10 @@ defmodule KaldaWeb.Api.V1.CommentView do
     render_comment_subscribed_author(comment)
   end
 
+  def render("show.json", %{comment: comment}) do
+    render_comment(comment)
+  end
+
   def render_comment_subscribed_author(comment) do
     %{
       id: comment.id,
@@ -18,10 +22,6 @@ defmodule KaldaWeb.Api.V1.CommentView do
       reactions:
         Enum.map(comment.comment_reactions, &CommentReactionView.render_comment_reaction/1)
     }
-  end
-
-  def render("show.json", %{comment: comment}) do
-    render_comment(comment)
   end
 
   def render_comment(comment) do
