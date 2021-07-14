@@ -11,6 +11,8 @@ defmodule Kalda.Accounts.User do
     field :hashed_password, :string
     field :confirmed_at, :naive_datetime
     field :mobile, :string
+    field :stripe_customer_id, :string
+    field :has_stripe_subscription, :boolean, default: false
 
     belongs_to :referral_link, Kalda.Accounts.ReferralLink,
       foreign_key: :referred_by,

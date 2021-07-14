@@ -21,7 +21,8 @@ defmodule Kalda.AccountsFixtures do
     {:ok, user} =
       %Kalda.Accounts.User{
         is_admin: false,
-        confirmed_at: NaiveDateTime.local_now() |> NaiveDateTime.add(-1)
+        confirmed_at: NaiveDateTime.local_now() |> NaiveDateTime.add(-1),
+        stripe_customer_id: attrs[:stripe_customer_id]
       }
       |> Kalda.Accounts.User.registration_changeset(attrs)
       |> Kalda.Repo.insert()

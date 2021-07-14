@@ -26,7 +26,8 @@ config :kalda,
   spa_static_prefix: "http://example.com/assets"
 
 # Print only warnings and errors during test
-config :logger, level: :warn
+config :logger, level: :info
+config :logger, :console, level: :warning
 
 # Bamboo email sending
 config :kalda, Kalda.Mailer, adapter: Bamboo.TestAdapter

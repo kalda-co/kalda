@@ -88,7 +88,8 @@ config :phoenix, :plug_init_mode, :runtime
 
 config :kalda,
   sendfox_list_id: "211119",
-  spa_static_prefix: "http://localhost:4451"
+  spa_static_prefix: "http://localhost:4451",
+  stripe_webhook_secret: "whsec_aOPKBPO3OfyLqz88gqtrK2PLkryi2iG9"
 
 try do
   import_config "dev_secrets.exs"
