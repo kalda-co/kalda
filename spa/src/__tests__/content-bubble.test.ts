@@ -11,7 +11,7 @@ test("both false", () => {
     {
       sendLove: false,
       relate: false,
-      author: { id: 1, username: "Tim" },
+      author: { id: 1, username: "Tim", hasSubscription: true },
     },
   ];
   expect(makeReactionsCountText(reactions)).toBe("");
@@ -22,7 +22,7 @@ test("sendLove", () => {
     {
       sendLove: true,
       relate: false,
-      author: { id: 1, username: "Tim" },
+      author: { id: 1, username: "Tim", hasSubscription: true },
     },
   ];
   expect(makeReactionsCountText(reactions)).toBe("1 \xa0 Tim");
@@ -33,7 +33,7 @@ test("sendLove and relate", () => {
     {
       sendLove: true,
       relate: true,
-      author: { id: 1, username: "Tim" },
+      author: { id: 1, username: "Tim", hasSubscription: true },
     },
   ];
   expect(makeReactionsCountText(reactions)).toBe("2 \xa0 Tim");
@@ -44,12 +44,12 @@ test("2 users", () => {
     {
       sendLove: true,
       relate: true,
-      author: { id: 1, username: "Tim" },
+      author: { id: 1, username: "Tim", hasSubscription: true },
     },
     {
       sendLove: true,
       relate: true,
-      author: { id: 2, username: "Tom" },
+      author: { id: 1, username: "Tom", hasSubscription: true },
     },
   ];
   expect(makeReactionsCountText(reactions)).toBe("4 \xa0 Tim, Tom");
@@ -60,17 +60,17 @@ test("3 users", () => {
     {
       sendLove: true,
       relate: true,
-      author: { id: 1, username: "Tim" },
+      author: { id: 1, username: "Tim", hasSubscription: true },
     },
     {
       sendLove: true,
       relate: true,
-      author: { id: 2, username: "Tom" },
+      author: { id: 2, username: "Tom", hasSubscription: true },
     },
     {
       sendLove: false,
       relate: true,
-      author: { id: 3, username: "Tum" },
+      author: { id: 3, username: "Tum", hasSubscription: true },
     },
   ];
   expect(makeReactionsCountText(reactions)).toBe("5 \xa0 Tim, Tom, Tum");
@@ -81,22 +81,22 @@ test("4 users", () => {
     {
       sendLove: true,
       relate: true,
-      author: { id: 1, username: "Tim" },
+      author: { id: 1, username: "Tim", hasSubscription: true },
     },
     {
       sendLove: true,
       relate: false,
-      author: { id: 2, username: "Tom" },
+      author: { id: 2, username: "Tom", hasSubscription: true },
     },
     {
       sendLove: false,
       relate: true,
-      author: { id: 3, username: "Tum" },
+      author: { id: 3, username: "Tum", hasSubscription: true },
     },
     {
       sendLove: false,
       relate: true,
-      author: { id: 4, username: "Tam" },
+      author: { id: 4, username: "Tam", hasSubscription: true },
     },
   ];
   expect(makeReactionsCountText(reactions)).toBe(
@@ -109,27 +109,27 @@ test("5 users", () => {
     {
       sendLove: true,
       relate: false,
-      author: { id: 1, username: "Tim" },
+      author: { id: 1, username: "Tim", hasSubscription: true },
     },
     {
       sendLove: true,
       relate: false,
-      author: { id: 2, username: "Tom" },
+      author: { id: 2, username: "Tom", hasSubscription: true },
     },
     {
       sendLove: false,
       relate: true,
-      author: { id: 3, username: "Tum" },
+      author: { id: 3, username: "Tum", hasSubscription: true },
     },
     {
       sendLove: false,
       relate: true,
-      author: { id: 4, username: "Tam" },
+      author: { id: 4, username: "Tam", hasSubscription: true },
     },
     {
       sendLove: false,
       relate: true,
-      author: { id: 5, username: "Tem" },
+      author: { id: 5, username: "Tem", hasSubscription: true },
     },
   ];
   expect(makeReactionsCountText(reactions)).toBe(

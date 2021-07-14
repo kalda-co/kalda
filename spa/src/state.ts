@@ -13,7 +13,7 @@ export type AppState = {
   reflections: Array<Post>;
   pools: Array<Post>;
   next_therapy?: Therapy;
-  therapies: Array<Therapy>;
+  therapies: Array<Therapy> | [];
 };
 
 export type Post = {

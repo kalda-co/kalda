@@ -1,5 +1,6 @@
 <script lang="ts">
-  import type { Therapy, User } from "./state";
+  import type { Therapy } from "./state";
+  import type { User } from "./state";
   import { link } from "svelte-routing";
   import { datetimeToURI, readableDate } from "./date";
 

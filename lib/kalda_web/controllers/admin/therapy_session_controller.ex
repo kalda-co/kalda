@@ -5,7 +5,7 @@ defmodule KaldaWeb.Admin.TherapySessionController do
   alias Kalda.Policy
 
   def index(conn, _params) do
-    Policy.authorize!(conn, :view_therapy_session, Kalda)
+    Policy.authorize!(conn, :view_subscription_content, Kalda)
     therapy_sessions = Events.get_therapy_sessions()
     render(conn, "index.html", therapy_sessions: therapy_sessions)
   end
