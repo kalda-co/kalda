@@ -263,7 +263,7 @@ referral_link =
     expires_at: ~N[2100-01-01 00:00:00]
   })
 
-_user4 =
+_userx =
   Kalda.Repo.insert!(%User{
     username: "KateBush",
     email: "wuthering@example.com",
@@ -280,6 +280,12 @@ _signup1 =
 _signup2 =
   Kalda.Repo.insert!(%Signup{
     email: "al777@example.com"
+  })
+
+_subscription_event =
+  Kalda.Repo.insert!(%Kalda.Payments.SubscriptionEvent{
+    user_id: user.id,
+    event: :subscription_created
   })
 
 IO.puts("""
