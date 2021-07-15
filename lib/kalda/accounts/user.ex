@@ -13,6 +13,7 @@ defmodule Kalda.Accounts.User do
     field :mobile, :string
     field :stripe_customer_id, :string
     field :has_stripe_subscription, :boolean, default: false
+    field :has_free_subscription, :boolean, default: false
 
     belongs_to :referral_link, Kalda.Accounts.ReferralLink,
       foreign_key: :referred_by,
