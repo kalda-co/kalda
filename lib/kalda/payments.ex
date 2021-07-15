@@ -7,6 +7,9 @@ defmodule Kalda.Payments do
   alias Kalda.Accounts.User
   alias Kalda.Payments.Stripe
   alias Kalda.Payments.BillingNotifier
+  import Ecto.Query, warn: false
+  alias Kalda.Repo
+  alias Kalda.Payments.SubscriptionEvent
 
   @doc """
   Get the stripe customer for a user if it exists. Alternatively create a new
@@ -73,5 +76,53 @@ defmodule Kalda.Payments do
     |> Kalda.Mailer.deliver_now()
 
     :ok
+  end
+
+  ## Database getters
+
+  @doc """
+  Gets subscription events by user id.
+
+  ## Examples
+
+      iex> get_subscription_event_by_user_id(user_id)
+      [%SubscriptionEvent{}, %SubscriptionEvent{} ...]
+
+      iex> get_subscription_event_by_user_id(user_id, [limit: 2])
+      [%SubscriptionEvent{}, %SubscriptionEvent{}]
+
+      iex> get_subscription_event_by_user(user_id)
+      []
+
+  """
+  def get_subscription_events_by_user_id(user_id, opts \\ []) do
+    limit = opts[:limit] || 100
+
+    from(event in SubscriptionEvent,
+      where: event.user_id == ^user_id,
+      limit: ^limit,
+      order_by: [desc: event.inserted_at]
+    )
+    |> Repo.all()
+  end
+
+  ## Setters
+
+  @doc """
+  Creates a subscription_event for a user, given an event of ENUM type.
+
+  ## Examples
+
+      iex> create_subscription_event(user, :subscription_created, %{field: value})
+      {:ok, %SubscriptionEvent{}}
+
+      iex> create_subscription_event(user, event, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_subscription_event(user, event, attrs \\ %{}) do
+    %SubscriptionEvent{user_id: user.id, event: event}
+    |> SubscriptionEvent.changeset(attrs)
+    |> Repo.insert()
   end
 end
