@@ -147,6 +147,27 @@ defmodule Kalda.AccountsTest do
       assert user.username == username
       assert user.is_admin == false
     end
+
+    # TODO: When paywall is implemented this should test that all users register with has_free_subscription == false
+    test "registers all users with has_free_subscription true" do
+      email = AccountsFixtures.unique_user_email()
+      username = AccountsFixtures.unique_username()
+
+      {:ok, user} =
+        Accounts.register_user(%{
+          username: username,
+          email: email,
+          password: AccountsFixtures.valid_user_password()
+        })
+
+      assert user.email == email
+      assert user.username == username
+      assert user.is_admin == false
+      assert user.has_free_subscription == true
+
+      updated_user = Accounts.get_user_by_email(user.email)
+      assert updated_user.has_free_subscription == true
+    end
   end
 
   describe "change_user_registration/2" do
