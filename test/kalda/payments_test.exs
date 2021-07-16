@@ -4,6 +4,7 @@ defmodule Kalda.PaymentsTest do
   alias Kalda.MockStripe
   alias Kalda.Accounts
   alias Kalda.AccountsFixtures
+  alias Kalda.PaymentsFixtures
   alias Kalda.Payments.Stripe.Customer
   alias Kalda.Payments.Stripe.Subscription
 
@@ -64,12 +65,6 @@ defmodule Kalda.PaymentsTest do
       assert Accounts.get_user!(user.id).stripe_customer_id == @customer.stripe_id
     end
   end
-
-  use Kalda.DataCase
-
-  alias Kalda.Payments
-  alias Kalda.PaymentsFixtures
-  alias Kalda.AccountsFixtures
 
   describe "get_subscription_event_by_user_id/2" do
     test "does not return events that do not belong to user" do
