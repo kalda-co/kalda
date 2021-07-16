@@ -6,6 +6,7 @@ defmodule Kalda.Payments do
   require Logger
   alias Kalda.Accounts.User
   alias Kalda.Payments.Stripe
+  alias Kalda.Payments.BillingNotifier
 
   @doc """
   Get the stripe customer for a user if it exists. Alternatively create a new
@@ -63,5 +64,14 @@ defmodule Kalda.Payments do
     |> Kalda.Repo.update!()
 
     customer
+  end
+
+  @spec send_subscription_created_email(User.t()) :: :ok
+  def send_subscription_created_email(user) do
+    user
+    |> BillingNotifier.subscription_created_email()
+    |> Kalda.Mailer.deliver_now()
+
+    :ok
   end
 end
