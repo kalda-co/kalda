@@ -5,7 +5,7 @@ defmodule Kalda.Payments.BillingNotifier do
 
   defp base_email() do
     new_email()
-    |> from("hello@kalda.co")
+    |> from("subscriptions@kalda.co")
   end
 
   @spec subscription_created_email(User.t()) :: Bamboo.Email.t()
