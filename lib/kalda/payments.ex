@@ -108,21 +108,18 @@ defmodule Kalda.Payments do
 
   ## Setters
 
+  @spec create_subscription_event!(User.t(), SubscriptionEvent.name()) :: SubscriptionEvent.t()
   @doc """
   Creates a subscription_event for a user, given an event of ENUM type.
 
   ## Examples
 
-      iex> create_subscription_event(user, :subscription_created, %{field: value})
-      {:ok, %SubscriptionEvent{}}
-
-      iex> create_subscription_event(user, event, %{field: bad_value})
-      {:error, %Ecto.Changeset{}}
+      iex> create_subscription_event!(user, :stripe_subscription_created)
+      %SubscriptionEvent{}
 
   """
-  def create_subscription_event(user, event, attrs \\ %{}) do
-    %SubscriptionEvent{user_id: user.id, event: event}
-    |> SubscriptionEvent.changeset(attrs)
-    |> Repo.insert()
+  def create_subscription_event!(user, event_name) do
+    %SubscriptionEvent{user_id: user.id, name: event_name}
+    |> Repo.insert!()
   end
 end

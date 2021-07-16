@@ -45,10 +45,6 @@ defmodule Kalda.Accounts.User do
 
     has_many :referral_links, Kalda.Accounts.ReferralLink, foreign_key: :owner_id, references: :id
 
-    has_many :subscription_events, Kalda.Payments.SubscriptionEvent,
-      foreign_key: :user_id,
-      references: :id
-
     timestamps()
   end
 

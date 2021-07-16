@@ -2,6 +2,7 @@ defmodule Kalda.AccountsTest do
   use Kalda.DataCase
 
   alias Kalda.Accounts
+  alias Kalda.Payments
   alias Kalda.AccountsFixtures
   alias Kalda.Accounts.{User, UserToken, Invite, ReferralLink}
 
@@ -821,6 +822,27 @@ defmodule Kalda.AccountsTest do
       _referral = AccountsFixtures.referral_link(owner, %{name: "name", referring_slots: 0})
 
       refute Accounts.get_referral_link_by_name("name")
+    end
+  end
+
+  describe "add_stripe_subscription/1" do
+    test "adds has_stripe_subscription: true to user and updates subscription_events log" do
+      user = AccountsFixtures.user()
+
+      assert :ok == Accounts.add_stripe_subscription!(user)
+
+      [subscription_event] = Payments.get_subscription_events_by_user_id(user.id)
+
+      assert subscription_event.user_id == user.id
+      updated_user = Accounts.get_user_by_email(user.email)
+      assert updated_user.has_stripe_subscription == true
+    end
+
+    test "raises exception if user does not exist" do
+      user = AccountsFixtures.user()
+      Kalda.Repo.delete!(user)
+
+      assert_raise Ecto.StaleEntryError, fn -> Accounts.add_stripe_subscription!(user) end
     end
   end
 

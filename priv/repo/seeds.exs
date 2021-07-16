@@ -285,7 +285,7 @@ _signup2 =
 _subscription_event =
   Kalda.Repo.insert!(%Kalda.Payments.SubscriptionEvent{
     user_id: user.id,
-    event: :subscription_created
+    name: :stripe_subscription_created
   })
 
 IO.puts("""

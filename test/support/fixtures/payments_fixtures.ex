@@ -8,18 +8,16 @@ defmodule Kalda.PaymentsFixtures do
     NaiveDateTime.add(now, -96000)
   end
 
-  def subscription_event(user, event \\ :subscription_created, attrs \\ %{}) do
-    {:ok, subscription_event} = Kalda.Payments.create_subscription_event(user, event, attrs)
-    subscription_event
+  def subscription_event(user, name \\ :stripe_subscription_created) do
+    Kalda.Payments.create_subscription_event!(user, name)
   end
 
-  def past_subscription_event(user, event \\ :subscription_created, attrs \\ %{}) do
-    # {:ok, subscription_event} = Kalda.Payments.create_subscription_event(user, event, attrs)
+  def past_subscription_event(user, name \\ :stripe_subscription_created) do
     # subscription_event
 
     {:ok, subscription_event} =
-      %Kalda.Payments.SubscriptionEvent{user_id: user.id, event: event}
-      |> Kalda.Payments.SubscriptionEvent.changeset(attrs)
+      %Kalda.Payments.SubscriptionEvent{user_id: user.id, name: name}
+      |> Kalda.Payments.SubscriptionEvent.changeset(%{})
       |> Ecto.Changeset.force_change(:inserted_at, past_datetime())
       |> Ecto.Changeset.force_change(:updated_at, past_datetime())
       |> Kalda.Repo.insert()
