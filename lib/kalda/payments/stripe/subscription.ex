@@ -14,9 +14,11 @@ defmodule Kalda.Payments.Stripe.Subscription do
 
   @spec from_stripe_payload(Stripe.Subscription.t()) :: t()
   def from_stripe_payload(subscription = %Stripe.Subscription{}) do
+    client_secret = subscription.latest_invoice.payment_intent.client_secret
+
     %__MODULE__{
       stripe_id: subscription.id,
-      payment_intent_client_secret: subscription.latest_invoice.payment_intent.client_secret
+      payment_intent_client_secret: client_secret
     }
   end
 end

@@ -2,6 +2,22 @@ defmodule Kalda.Accounts.User do
   use Ecto.Schema
   import Ecto.Changeset
 
+  @type t() :: %__MODULE__{
+          id: integer(),
+          is_admin: boolean(),
+          username: String.t(),
+          email: String.t(),
+          mobile: String.t() | nil,
+          password: String.t() | nil,
+          hashed_password: String.t(),
+          stripe_customer_id: String.t() | nil,
+          has_free_subscription: boolean(),
+          has_free_subscription: boolean(),
+          confirmed_at: NaiveDateTime.t() | nil,
+          inserted_at: NaiveDateTime.t(),
+          updated_at: NaiveDateTime.t()
+        }
+
   @derive {Inspect, except: [:password]}
   schema "users" do
     field :is_admin, :boolean, default: false
@@ -11,7 +27,11 @@ defmodule Kalda.Accounts.User do
     field :hashed_password, :string
     field :confirmed_at, :naive_datetime
     field :mobile, :string
+
+    # The user's id in the Stripe third party payment servier
     field :stripe_customer_id, :string
+
+    # Types of subscription the user can have
     field :has_stripe_subscription, :boolean, default: false
     field :has_free_subscription, :boolean, default: false
 
