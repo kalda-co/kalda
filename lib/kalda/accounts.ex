@@ -563,6 +563,8 @@ defmodule Kalda.Accounts do
     |> Ecto.Changeset.change(has_stripe_subscription: true)
     |> Repo.update!()
 
+    Kalda.Payments.send_subscription_created_email(user)
+
     :ok
   end
 end
