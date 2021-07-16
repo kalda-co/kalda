@@ -103,29 +103,31 @@ defmodule Kalda.PaymentsTest do
   end
 
   describe "create_subscription_event" do
-    test "creates an event for type 'subscription_created" do
+    test "creates an event for type 'stripe_subscription_created" do
       user = AccountsFixtures.user()
 
-      assert {:ok, subscription_event = %Payments.SubscriptionEvent{}} =
-               Kalda.Payments.create_subscription_event(user, :subscription_created)
+      assert subscription_event =
+               %Payments.SubscriptionEvent{} =
+               Kalda.Payments.create_subscription_event!(user, :stripe_subscription_created)
 
-      assert subscription_event.event == :subscription_created
+      assert subscription_event.name == :stripe_subscription_created
     end
 
-    test "creates an event for type 'subscription_deleted" do
+    test "creates an event for type 'stripe_subscription_deleted" do
       user = AccountsFixtures.user()
 
-      assert {:ok, subscription_event = %Payments.SubscriptionEvent{}} =
-               Kalda.Payments.create_subscription_event(user, :subscription_deleted)
+      assert subscription_event =
+               %Payments.SubscriptionEvent{} =
+               Kalda.Payments.create_subscription_event!(user, :stripe_subscription_deleted)
 
-      assert subscription_event.event == :subscription_deleted
+      assert subscription_event.name == :stripe_subscription_deleted
     end
 
     test "does not create subscription_event for invalid event ENUM type" do
       user = AccountsFixtures.user()
 
       assert_raise Ecto.ChangeError, fn ->
-        Kalda.Payments.create_subscription_event(user, :subscriptghejwkfion_deleted)
+        Kalda.Payments.create_subscription_event!(user, :subscriptghejwkfion_deleted)
       end
     end
   end

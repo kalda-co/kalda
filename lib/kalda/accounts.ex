@@ -559,9 +559,12 @@ defmodule Kalda.Accounts do
   #################
 
   def add_stripe_subscription!(%User{} = user) do
-    user
-    |> Ecto.Changeset.change(has_stripe_subscription: true)
-    |> Repo.update!()
+    changeset = Ecto.Changeset.change(user, %{has_stripe_subscription: true})
+
+    Repo.transaction!(fn ->
+      Repo.update!(changeset)
+      Kalda.Payments.create_subscription_event!(user, :stripe_subscription_created)
+    end)
 
     Kalda.Payments.send_subscription_created_email(user)
 

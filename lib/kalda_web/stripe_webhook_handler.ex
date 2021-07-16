@@ -45,7 +45,6 @@ defmodule KaldaWeb.StripeWebhookHandler do
       payment_method = stripe.get_payment_intent_payment_method!(payment_intent_id)
       stripe.set_subscription_payment_method!(subscription_id, payment_method)
 
-      # TODO: update subscription_events log/table
       Logger.info("Stripe subscription added for user:#{user.id}")
     end)
 
