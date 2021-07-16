@@ -3,10 +3,11 @@ defmodule Kalda.Payments.Stripe.Client do
 
   alias Kalda.Payments.Stripe.Customer
   alias Kalda.Payments.Stripe.Subscription
+  alias Stripe, as: StripeLib
 
   @impl true
   def get_customer!(stripe_customer_id) do
-    case Stripe.Customer.retrieve(stripe_customer_id,
+    case StripeLib.Customer.retrieve(stripe_customer_id,
            expand: ["subscriptions.data.latest_invoice.payment_intent"]
          ) do
       {:ok, customer} -> Customer.from_stripe_payload(customer)
@@ -16,7 +17,7 @@ defmodule Kalda.Payments.Stripe.Client do
 
   @impl true
   def create_customer!(user) do
-    {:ok, customer} = Stripe.Customer.create(%{email: user.email})
+    {:ok, customer} = StripeLib.Customer.create(%{email: user.email})
     Customer.from_stripe_payload(customer)
   end
 
@@ -33,7 +34,7 @@ defmodule Kalda.Payments.Stripe.Client do
       items: [%{price: price_id}]
     }
 
-    import Stripe.Request
+    import StripeLib.Request
 
     response =
       new_request([])
@@ -51,14 +52,16 @@ defmodule Kalda.Payments.Stripe.Client do
 
   @impl true
   def get_payment_intent_payment_method!(payment_intent_id) do
-    {:ok, payment_intent} = Stripe.PaymentIntent.retrieve(payment_intent_id, %{})
+    {:ok, payment_intent} = StripeLib.PaymentIntent.retrieve(payment_intent_id, %{})
     payment_intent.payment_method
   end
 
   @impl true
   def set_subscription_payment_method!(subscription_id, payment_method) do
-    Stripe.Subscription.update(subscription_id, %{
+    StripeLib.Subscription.update(subscription_id, %{
       default_payment_method: payment_method
     })
+
+    :ok
   end
 end

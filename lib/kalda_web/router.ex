@@ -129,9 +129,11 @@ defmodule KaldaWeb.Router do
     post "/replies/:id/reports", ReportController, :report_reply
     patch "/comments/:id/reactions", CommentReactionController, :update
     patch "/replies/:id/reactions", ReplyReactionController, :update
+    post "/stripe-payment-intent", StripePaymentIntentController, :create
     get "/*anything", NotFoundController, :not_found
   end
 
+  # TODO: remove these routes that use the old cookie based auth
   scope "/v1", KaldaWeb.Api.V1, as: :api_v1 do
     pipe_through [:api, :json_require_authenticated_user, :json_require_confirmed_email]
     get "/dashboard", DashboardController, :index
@@ -142,6 +144,7 @@ defmodule KaldaWeb.Router do
     post "/replies/:id/reports", ReportController, :report_reply
     patch "/comments/:id/reactions", CommentReactionController, :update
     patch "/replies/:id/reactions", ReplyReactionController, :update
+    post "/stripe-payment-intent", StripePaymentIntentController, :create
     get "/*anything", NotFoundController, :not_found
   end
 

@@ -8,7 +8,7 @@ defmodule Kalda.Payments.Stripe.ClientInterface do
   alias Kalda.Payments.Stripe.Subscription
 
   # Elixir has no typespec for modules
-  @type t() :: atom()
+  @type t() :: module()
   @type subscription_id() :: String.t()
   @type payment_intent_id() :: String.t()
   @type payment_method() :: String.t()

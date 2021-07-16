@@ -89,6 +89,10 @@ config :phoenix, :plug_init_mode, :runtime
 config :kalda,
   sendfox_list_id: "211119",
   spa_static_prefix: "http://localhost:4451",
+  # Stripe payments (using test data mode)
+  stripe_publishable_key:
+    "pk_test_51J5oHmH9c3MnXq26wjjl8Ty6zIYXoTVML5WERafCzZRTN9N85u2MbFZqf97OgXupy1PoVDURfIEnKgUt0Cs7JuOn00PX4ZKkIR",
+  stripe_subscription_price_id: "price_1J7QYDH9c3MnXq26bc2BNiBo",
   stripe_webhook_secret: "whsec_aOPKBPO3OfyLqz88gqtrK2PLkryi2iG9"
 
 try do

@@ -31,7 +31,9 @@ config :kalda,
   # Optionally require basic browser auth
   basic_auth_password: read_env_or.("BASIC_AUTH_PASSWORD", nil),
   # Stripe payments
-  stripe_webhook_secret: read_env.("STRIPE_WEBHOOK_SECRET")
+  stripe_publishable_key: read_env.("STRIPE_PUBLISHABLE_KEY"),
+  stripe_webhook_secret: read_env.("STRIPE_WEBHOOK_SECRET"),
+  stripe_subscription_price_id: read_env.("STRIPE_SUBSCRIPTION_PRICE_ID")
 
 config :kalda, Kalda.Mailer,
   adapter: Bamboo.SendGridAdapter,

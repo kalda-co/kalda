@@ -45,7 +45,8 @@ defmodule Kalda.Accounts do
 
   @doc """
   Gets a user by Stripe customer id.
-  Raises exception if Stripe customer id doesn't exist
+
+  Raises an exception if no user is found with that Stripe customer id.
   """
   def get_user_by_stripe_customer_id!(stripe_customer_id) when is_binary(stripe_customer_id) do
     Repo.get_by!(User, stripe_customer_id: stripe_customer_id)
