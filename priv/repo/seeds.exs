@@ -232,7 +232,17 @@ _therapy_session_past =
     description: "How to get still and present and reduce anxiety",
     therapist: "Al Dee",
     credentials: "FreeMind hypnotherapist and mindfulness coach",
-    starts_at: NaiveDateTime.new!(~D[2020-01-01], ~T[18:30:00]),
+    starts_at: NaiveDateTime.new!(~D[2020-01-01], ~T[19:00:00]),
+    link: "https://us02web.zoom.us/j/9367762569"
+  })
+
+_therapy_session_summer =
+  Kalda.Repo.insert!(%TherapySession{
+    title: "Identity",
+    description: "Special Sunday afternoon deep dive into Identity",
+    therapist: "Al Dee",
+    credentials: "FreeMind hypnotherapist and mindfulness coach",
+    starts_at: NaiveDateTime.new!(~D[2030-06-30], ~T[15:00:00]),
     link: "https://us02web.zoom.us/j/9367762569"
   })
 
@@ -242,13 +252,13 @@ _therapy_session_future =
     description: "How to get still and present and reduce anxiety",
     therapist: "Al Dee",
     credentials: "FreeMind hypnotherapist and mindfulness coach",
-    starts_at: NaiveDateTime.new!(~D[2030-01-01], ~T[18:30:00]),
+    starts_at: NaiveDateTime.new!(~D[2030-07-01], ~T[19:00:00]),
     link: "https://us02web.zoom.us/j/9367762569"
   })
 
 _therapy_session_future =
   Kalda.Repo.insert!(%TherapySession{
-    starts_at: NaiveDateTime.new!(~D[2022-02-01], ~T[18:30:00]),
+    starts_at: NaiveDateTime.new!(~D[2022-02-01], ~T[19:00:00]),
     link: "https://us02web.zoom.us/j/9367762569"
   })
 

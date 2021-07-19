@@ -53,5 +53,13 @@ export function datetimeToURI(therapy: Therapy) {
 
 // TODO: Make this date easier to read (lol)
 export function readableDate(date: Date) {
-  return date.toString();
+  return date.toDateString();
+}
+
+export function readableTime(date: Date) {
+  let ht = date.getHours();
+  const hh = ht < 10 ? `0${ht}` : `${ht}`;
+  let hm = date.getMinutes();
+  const mi = hm < 10 ? `0${hm}` : `${hm}`;
+  return `${hh}:${mi}`;
 }
