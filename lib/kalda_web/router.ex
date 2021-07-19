@@ -141,7 +141,6 @@ defmodule KaldaWeb.Router do
     patch "/comments/:id/reactions", CommentReactionController, :update
     patch "/replies/:id/reactions", ReplyReactionController, :update
     post "/stripe-payment-intent", StripePaymentIntentController, :create
-    get "/*anything", NotFoundController, :not_found
   end
 
   # TODO: remove these routes that use the old cookie based auth
