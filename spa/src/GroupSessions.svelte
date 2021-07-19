@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { Therapy } from "./state";
   import { link } from "svelte-routing";
-  import { datetimeToURI, readableDate } from "./date";
+  import { datetimeToURI, readableDate, readableTime } from "./date";
 
   export let therapies: Therapy[];
 
@@ -34,7 +34,10 @@
       <div class="card-text">
         <div class="date-container">
           <img src="images/cal-dark.svg" alt="calendar icon" />
-          <p>{readableDate(therapy.startsAt)}</p>
+          <p>
+            {readableDate(therapy.startsAt)}, {readableTime(therapy.startsAt)} (British
+            Summer Time)
+          </p>
         </div>
         <h1>{therapy.title}</h1>
         <h2>Led by {therapy.therapist}</h2>
@@ -48,13 +51,13 @@
             rel="noopener"
             href={therapy.link}><button>Zoom link</button></a
           >
-          <a
+          <!-- <a
             class="light-button"
             target="_blank"
             rel="nofollow"
             href={datetimeToURI(therapy)}
             ><button>Add to calendar</button>
-          </a>
+          </a> -->
         </div>
       </div>
     </div>

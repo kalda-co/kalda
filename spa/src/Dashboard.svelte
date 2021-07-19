@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { User, Post, Therapy } from "./state";
-  import { datetimeToURI, readableDate } from "./date";
+  import { datetimeToURI, readableDate, readableTime } from "./date";
   import { link } from "svelte-routing";
 
   export let user: User;
@@ -33,10 +33,13 @@
       <div class="card background-pink">
         <div class="date-container">
           <img class="inline-icon" src="images/cal.svg" alt="calendar icon" />
-          <p>{readableDate(therapy.startsAt)}</p>
-          <a href={datetimeToURI(therapy)} target="_blank" rel="nofollow">
+          <p>
+            {readableDate(therapy.startsAt)}, {readableTime(therapy.startsAt)} (British
+            Summer Time)
+          </p>
+          <!-- <a href={datetimeToURI(therapy)} target="_blank" rel="nofollow">
             <p class="link">Add to calendar</p>
-          </a>
+          </a> -->
         </div>
         <div class="therapy-session">
           <a use:link href="/therapy-sessions">
