@@ -19,11 +19,4 @@ defmodule KaldaWeb.Api.V1.ReplyController do
     end
     |> KaldaWeb.Api.V1.handle_error(conn)
   end
-
-  def show(conn, %{"id" => id}) do
-    reply =
-      Forums.get_reply!(id, preload: [:author, replies: [:author], reply_reactions: [:author]])
-
-    render(conn, "show.json", reply: reply)
-  end
 end

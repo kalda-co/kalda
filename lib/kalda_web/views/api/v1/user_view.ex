@@ -11,7 +11,8 @@ defmodule KaldaWeb.Api.V1.UserView do
   def render_user(user = %User{}) do
     %{
       id: user.id,
-      username: user.username
+      username: user.username,
+      has_subscription: Kalda.Accounts.has_subscription?(user)
     }
   end
 end

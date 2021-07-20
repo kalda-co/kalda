@@ -21,11 +21,4 @@ defmodule KaldaWeb.Api.V1.CommentController do
     end
     |> KaldaWeb.Api.V1.handle_error(conn)
   end
-
-  def show(conn, %{"id" => id}) do
-    comment =
-      Forums.get_comment!(id, preload: [:author, replies: [:author], comment_reactions: [:author]])
-
-    render(conn, "show.json", comment: comment)
-  end
 end

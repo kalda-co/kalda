@@ -13,7 +13,12 @@ defmodule KaldaWeb.UserAuthTest do
       |> Map.replace!(:secret_key_base, KaldaWeb.Endpoint.config(:secret_key_base))
       |> init_test_session(%{})
 
-    %{user: AccountsFixtures.user(), conn: conn, admin: AccountsFixtures.admin()}
+    %{
+      user: AccountsFixtures.user(),
+      conn: conn,
+      admin: AccountsFixtures.admin(),
+      subscribed_user: AccountsFixtures.user_with_subscription(:free)
+    }
   end
 
   describe "log_in_user/3" do
@@ -181,6 +186,61 @@ defmodule KaldaWeb.UserAuthTest do
 
     test "does not redirect if user is authenticated", %{conn: conn, user: user} do
       conn = conn |> assign(:current_user, user) |> UserAuth.require_authenticated_user([])
+      refute conn.halted
+      refute conn.status
+    end
+  end
+
+  describe "require_subscribed_user/2" do
+    test "redirects if user is not subscribed", %{conn: conn, user: user} do
+      conn =
+        conn
+        |> assign(:current_user, user)
+        |> fetch_flash()
+        |> UserAuth.require_subscribed_user([])
+
+      assert conn.halted
+      assert redirected_to(conn) == Routes.api_v1_token_dashboard_path(conn, :index)
+      assert get_flash(conn, :error) == "You must be subscribed to access this resource"
+    end
+
+    test "does not redirect if user is subscribed", %{
+      conn: conn,
+      subscribed_user: subscribed_user
+    } do
+      conn =
+        conn
+        |> assign(:current_user, subscribed_user)
+        |> fetch_flash()
+        |> UserAuth.require_subscribed_user([])
+
+      refute conn.halted
+      refute conn.status
+    end
+  end
+
+  describe "json_require_subscribed_user/2" do
+    test "redirects if user is not subscribed", %{conn: conn, user: user} do
+      conn =
+        conn
+        |> assign(:current_user, user)
+        |> UserAuth.json_require_subscribed_user([])
+
+      assert conn.halted
+
+      assert json_response(conn, :payment_required) ==
+               %{"error" => "You must be subscribed to access this resource"}
+    end
+
+    test "does not redirect if user is subscribed", %{
+      conn: conn,
+      subscribed_user: subscribed_user
+    } do
+      conn =
+        conn
+        |> assign(:current_user, subscribed_user)
+        |> UserAuth.json_require_subscribed_user([])
+
       refute conn.halted
       refute conn.status
     end

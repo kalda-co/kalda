@@ -846,5 +846,29 @@ defmodule Kalda.AccountsTest do
     end
   end
 
+  describe "has_subscription?/1" do
+    test "returns true if user has a free subscription" do
+      user = AccountsFixtures.user_with_subscription(:free)
+      assert user.has_free_subscription == true
+
+      assert Accounts.has_subscription?(user) == true
+    end
+
+    test "returns true if user has a stripe subscription" do
+      user = AccountsFixtures.user_with_subscription(:stripe)
+      assert user.has_stripe_subscription == true
+
+      assert Accounts.has_subscription?(user) == true
+    end
+
+    test "returns false if user has neither a free or a stripe subscription" do
+      user = AccountsFixtures.user()
+      assert user.has_free_subscription == false
+      assert user.has_stripe_subscription == false
+
+      assert Accounts.has_subscription?(user) == false
+    end
+  end
+
   # TODO add guidelines to signup flow
 end
