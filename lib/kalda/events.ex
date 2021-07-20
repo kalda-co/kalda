@@ -22,7 +22,13 @@ defmodule Kalda.Events do
   """
   def get_therapy_sessions(opts \\ []) do
     now = NaiveDateTime.local_now()
-    limit = opts[:limit] || 100
+
+    limit =
+      if opts[:hide_sessions] do
+        0
+      else
+        opts[:limit] || 100
+      end
 
     Repo.all(
       from sesh in TherapySession,

@@ -6,10 +6,27 @@ defmodule KaldaWeb.Api.V1.DashboardController do
 
   def index(conn, _params) do
     user = conn.assigns.current_user
-    reflections = Forums.get_posts(:daily_reflection, limit: 10)
-    pools = Forums.get_posts(:will_pool, limit: 10)
+
+    reflections =
+      Forums.get_posts(:daily_reflection,
+        limit: 10,
+        # if user has_subscription(true) we do NOT want to hide comments
+        hide_comments: !Kalda.Accounts.has_subscription?(user)
+      )
+
+    pools =
+      Forums.get_posts(:will_pool,
+        limit: 10,
+        hide_comments: !Kalda.Accounts.has_subscription?(user)
+      )
+
     next_therapy = Events.get_next_therapy_session!()
-    therapies = Events.get_therapy_sessions(limit: 10)
+
+    therapies =
+      Events.get_therapy_sessions(
+        limit: 10,
+        hide_sessions: !Kalda.Accounts.has_subscription?(user)
+      )
 
     conn
     |> render("index.json",

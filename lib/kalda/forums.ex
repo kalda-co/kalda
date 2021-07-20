@@ -86,7 +86,9 @@ defmodule Kalda.Forums do
 
   @doc """
   Returns all posts for forum, except scheduled future ones
-  Orders as most recently publised first. Limit can be provided as an optional argument.
+  Orders as most recently publised first.
+  Limit for number of records can be provided as an optional argument.
+  :hide_comments can be provided as an optional argument
 
   ## Examples
 
@@ -95,10 +97,20 @@ defmodule Kalda.Forums do
 
       iex> get_posts(forum, [limit: 2])
       [%Post{}, %Post{}]
+
+      iex> get_posts(forum, [:hide_comments])
+      [%Post{}, %Post{}... ]  # Where comments and replies, and their reactions are not retrieved
   """
   def get_posts(forum, opts \\ []) do
     now = NaiveDateTime.local_now()
     limit = opts[:limit] || 100
+
+    comments_limit =
+      if opts[:hide_comments] do
+        0
+      else
+        100
+      end
 
     Repo.all(
       from post in Post,
@@ -110,6 +122,7 @@ defmodule Kalda.Forums do
           :author,
           comments:
             ^from(comment in Comment,
+              limit: ^comments_limit,
               order_by: [desc: comment.inserted_at],
               preload: [
                 :author,

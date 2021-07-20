@@ -238,4 +238,91 @@ defmodule KaldaWeb.Api.V1.DashboardControllerTest do
       assert length(posts) == 10
     end
   end
+
+  describe "GET index for unsubscribed user" do
+    setup [:register_and_log_in_user]
+
+    test "lists dashboard attributes", %{conn: conn, user: current_user} do
+      author1 = AccountsFixtures.user()
+      author2 = AccountsFixtures.user()
+      therapy_session = EventsFixtures.future_therapy_session()
+      # Future post - should not be returned
+      _post =
+        ForumsFixtures.post(author1, %{
+          published_at: NaiveDateTime.new!(~D[2030-01-01], ~T[00:00:00])
+        })
+
+      post1 =
+        ForumsFixtures.post(author1, %{
+          published_at: NaiveDateTime.new!(~D[2020-01-01], ~T[00:00:00])
+        })
+
+      post2 =
+        ForumsFixtures.post(author1, %{
+          published_at: NaiveDateTime.new!(~D[2018-01-01], ~T[00:00:00])
+        })
+
+      post3 = ForumsFixtures.post(author1, %{}, :will_pool)
+      _post4 = ForumsFixtures.post(author1, %{}, :community)
+      _post5 = ForumsFixtures.post(author1, %{}, :co_working)
+      comment1 = ForumsFixtures.comment(post2, author2)
+      _reply1 = ForumsFixtures.reply(comment1, author1)
+      conn = get(conn, "/v1/dashboard")
+
+      assert json_response(conn, 200) == %{
+               "current_user" => %{
+                 "id" => current_user.id,
+                 "username" => current_user.username,
+                 "has_subscription" => false
+               },
+               "next_therapy" => %{
+                 "link" => therapy_session.link,
+                 "id" => therapy_session.id,
+                 "starts_at" => NaiveDateTime.to_iso8601(therapy_session.starts_at),
+                 "title" => therapy_session.title,
+                 "therapist" => therapy_session.therapist,
+                 "credentials" => therapy_session.credentials,
+                 "description" => therapy_session.description
+               },
+               "therapies" => [],
+               "reflections" => [
+                 %{
+                   "forum" => "daily_reflection",
+                   "id" => post1.id,
+                   "published_at" => NaiveDateTime.to_iso8601(post1.published_at),
+                   "content" => post1.content,
+                   "author" => %{
+                     "id" => author1.id,
+                     "username" => author1.username
+                   },
+                   "comments" => []
+                 },
+                 %{
+                   "forum" => "daily_reflection",
+                   "id" => post2.id,
+                   "content" => post2.content,
+                   "published_at" => NaiveDateTime.to_iso8601(post2.published_at),
+                   "author" => %{
+                     "id" => author1.id,
+                     "username" => author1.username
+                   },
+                   "comments" => []
+                 }
+               ],
+               "pools" => [
+                 %{
+                   "forum" => "will_pool",
+                   "id" => post3.id,
+                   "published_at" => NaiveDateTime.to_iso8601(post3.published_at),
+                   "content" => post3.content,
+                   "author" => %{
+                     "id" => author1.id,
+                     "username" => author1.username
+                   },
+                   "comments" => []
+                 }
+               ]
+             }
+    end
+  end
 end

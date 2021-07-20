@@ -57,11 +57,31 @@ defmodule Kalda.ForumsTest do
       assert {:error, %Ecto.Changeset{}} = Forums.create_post(user, @invalid_post_attrs)
     end
 
-    # test "get_posts/1 returns all posts" do
-    #   user = AccountsFixtures.user()
-    #   assert {:ok, %Post{} = post} = Forums.create_post(user, @valid_post_attrs)
-    #   assert Forums.get_posts() == [post]
-    # end
+    test "get_posts with limit n returns n posts" do
+      user = AccountsFixtures.user_with_subscription(:free)
+      _post = ForumsFixtures.post(user)
+      _post = ForumsFixtures.post(user)
+      _post = ForumsFixtures.post(user)
+      _post = ForumsFixtures.post(user)
+
+      array_posts = Forums.get_posts(:daily_reflection)
+      assert length(array_posts) == 4
+
+      array_posts_limit = Forums.get_posts(:daily_reflection, limit: 2)
+      assert length(array_posts_limit) == 2
+    end
+
+    test "get_posts with [hide_comments: true] option does not display comments, replies or their reactions" do
+      user1 = AccountsFixtures.user()
+      user2 = AccountsFixtures.user()
+      post1 = ForumsFixtures.post(user1)
+      comment1 = ForumsFixtures.comment(post1, user2)
+      _reply1 = ForumsFixtures.reply(comment1, user1)
+
+      [post] = Forums.get_posts(:daily_reflection, hide_comments: true, limit: 2)
+      assert post.id == post1.id
+      assert post.comments == []
+    end
 
     test "get_posts with forum daily_reflection" do
       now = NaiveDateTime.local_now()
