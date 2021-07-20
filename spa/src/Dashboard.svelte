@@ -10,6 +10,13 @@
 </script>
 
 <article>
+  {#if user.hasSubscription == false}
+    <div class="banner">
+      <a use:link href="/subscription">
+        <div class="subscription-button">📣 PREMIUM OFFER £2.99 a month</div>
+      </a>
+    </div>
+  {/if}
   {#if post}
     <div class="todays-reflection">
       <div class="content">
@@ -69,6 +76,23 @@
 </article>
 
 <style>
+  .banner {
+    background-color: var(--color-purple);
+  }
+
+  .subscription-button {
+    background-color: #8bffde;
+    border: solid 1px #8bffde;
+    padding: 12px 24px;
+    margin: 0px 16px;
+    border-radius: 40px;
+    font-weight: 500;
+    color: #404040;
+    font-size: 16px;
+    display: block;
+    text-align: center;
+  }
+
   .hi {
     word-break: break-all;
   }
