@@ -8,6 +8,7 @@ import {
   boolean,
 } from "./decode";
 import type {
+  Author,
   User,
   Post,
   Reply,
@@ -45,7 +46,7 @@ export function post(json: unknown): Post {
   return {
     id: field("id", number)(json),
     content: field("content", string)(json),
-    author: field("author", user)(json),
+    author: field("author", author)(json),
     comments: field("comments", array(comment))(json),
   };
 }
@@ -54,7 +55,7 @@ export function comment(json: unknown): Comment {
   return {
     id: field("id", number)(json),
     content: field("content", string)(json),
-    author: field("author", user)(json),
+    author: field("author", author)(json),
     replies: field("replies", array(reply))(json),
     reactions: field("reactions", array(reaction))(json),
   };
@@ -64,7 +65,7 @@ export function reply(json: unknown): Reply {
   return {
     id: field("id", number)(json),
     content: field("content", string)(json),
-    author: field("author", user)(json),
+    author: field("author", author)(json),
     reactions: field("reactions", array(reaction))(json),
   };
 }
@@ -73,12 +74,20 @@ export function user(json: unknown): User {
   return {
     id: field("id", number)(json),
     username: field("username", string)(json),
+    hasSubscription: field("has_subscription", boolean)(json),
+  };
+}
+
+export function author(json: unknown): Author {
+  return {
+    id: field("id", number)(json),
+    username: field("username", string)(json),
   };
 }
 
 export function reaction(json: unknown): Reaction {
   return {
-    author: field("author", user)(json),
+    author: field("author", author)(json),
     relate: field("relate", boolean)(json),
     sendLove: field("send_love", boolean)(json),
   };
