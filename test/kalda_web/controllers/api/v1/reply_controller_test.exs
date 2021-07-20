@@ -18,8 +18,8 @@ defmodule KaldaWeb.Api.V1.ReplyControllerTest do
     end
   end
 
-  describe "POST create" do
-    setup [:register_and_log_in_user]
+  describe "POST create reply" do
+    setup [:register_and_log_in_subscribed_user]
 
     test "creates reply for user on comment in daily reflections", %{
       conn: conn,
@@ -35,6 +35,7 @@ defmodule KaldaWeb.Api.V1.ReplyControllerTest do
       assert reply.content == @valid_reply_content.content
       assert reply.author_id == current_user.id
       assert reply.comment_id == comment.id
+      assert true == Kalda.Accounts.has_subscription?(current_user)
 
       assert json_response(conn, 201) == %{
                "id" => reply.id,
@@ -58,6 +59,40 @@ defmodule KaldaWeb.Api.V1.ReplyControllerTest do
 
       assert json_response(conn, 422) == %{
                "errors" => %{"content" => ["can't be blank"]}
+             }
+    end
+  end
+
+  describe "POST create reply with unsubscribed user" do
+    setup [:register_and_log_in_user]
+
+    test "creates reply for user on comment in daily reflections", %{
+      conn: conn,
+      user: _current_user
+    } do
+      user = Kalda.AccountsFixtures.user()
+      post = Kalda.ForumsFixtures.post(user)
+      comment = Kalda.ForumsFixtures.comment(post, user)
+
+      assert conn = post(conn, "/v1/comments/#{comment.id}/replies", @valid_reply_content)
+
+      assert json_response(conn, 402) == %{
+               "error" => "You must be subscribed to access this resource"
+             }
+    end
+
+    test "renders 402 because does not submit reply for invalid attributes", %{
+      conn: conn,
+      user: _current_user
+    } do
+      user = Kalda.AccountsFixtures.user()
+      post = Kalda.ForumsFixtures.post(user)
+      comment = Kalda.ForumsFixtures.comment(post, user)
+
+      assert conn = post(conn, "/v1/comments/#{comment.id}/replies", @invalid_reply_content)
+
+      assert json_response(conn, 402) == %{
+               "error" => "You must be subscribed to access this resource"
              }
     end
   end

@@ -6,7 +6,7 @@ defmodule KaldaWeb.Api.V1.DashboardView do
 
   def render("index.json", params) do
     %{
-      current_user: UserView.render_author(params.user),
+      current_user: UserView.render_user(params.user),
       reflections: Enum.map(params.reflections, &render_post/1),
       pools: Enum.map(params.pools, &render_post/1),
       next_therapy: TherapyView.render_therapy_session(params.next_therapy),

@@ -155,6 +155,22 @@ defmodule KaldaWeb.UserAuth do
     end
   end
 
+  @doc """
+  Used for routes that require the user to be subscribed (paid OR free)
+
+  """
+  def require_subscribed_user(conn, _opts) do
+    if Kalda.Accounts.has_subscription?(conn.assigns.current_user) do
+      conn
+    else
+      # TODO: redirect to subscriptions
+      conn
+      |> put_flash(:error, "You must be subscribed to access this resource")
+      |> redirect(to: Routes.api_v1_token_dashboard_path(conn, :index))
+      |> halt()
+    end
+  end
+
   def require_confirmed_email(conn, _opts) do
     if conn.assigns.current_user.confirmed_at do
       conn
@@ -193,6 +209,17 @@ defmodule KaldaWeb.UserAuth do
       conn
       |> put_status(401)
       |> json(%{error: "You must be authenticated to access this resource"})
+      |> halt()
+    end
+  end
+
+  def json_require_subscribed_user(conn, _opts) do
+    if Kalda.Accounts.has_subscription?(conn.assigns.current_user) do
+      conn
+    else
+      conn
+      |> put_status(402)
+      |> json(%{error: "You must be subscribed to access this resource"})
       |> halt()
     end
   end

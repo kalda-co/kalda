@@ -25,8 +25,8 @@ defmodule KaldaWeb.Api.V1.CommentReactionControllerTest do
     end
   end
 
-  describe "POST create" do
-    setup [:register_and_log_in_user]
+  describe "POST create comment reaction" do
+    setup [:register_and_log_in_subscribed_user]
 
     test "creates comment_reaction relate for user on comment in daily reflections", %{
       conn: conn,
@@ -152,6 +152,50 @@ defmodule KaldaWeb.Api.V1.CommentReactionControllerTest do
 
       assert json_response(conn, 422) == %{
                "errors" => %{"relate" => ["can't be blank"]}
+             }
+    end
+  end
+
+  describe "POST create comment reaction not allowed for unsubscribed user" do
+    setup [:register_and_log_in_user]
+
+    test "does not create comment_reaction relate for user on comment", %{
+      conn: conn,
+      user: _current_user
+    } do
+      user = Kalda.AccountsFixtures.user()
+      post = Kalda.ForumsFixtures.post(user)
+      comment = Kalda.ForumsFixtures.comment(post, user)
+
+      assert conn =
+               patch(
+                 conn,
+                 "/v1/comments/#{comment.id}/reactions",
+                 @valid_comment_reaction_content
+               )
+
+      assert json_response(conn, 402) == %{
+               "error" => "You must be subscribed to access this resource"
+             }
+    end
+
+    test "does not post comment_reaction with invalid attributes for unsubscribed user", %{
+      conn: conn,
+      user: _current_user
+    } do
+      user = Kalda.AccountsFixtures.user()
+      post = Kalda.ForumsFixtures.post(user)
+      comment = Kalda.ForumsFixtures.comment(post, user)
+
+      assert conn =
+               patch(
+                 conn,
+                 "/v1/comments/#{comment.id}/reactions",
+                 @invalid_comment_reaction_content
+               )
+
+      assert json_response(conn, 402) == %{
+               "error" => "You must be subscribed to access this resource"
              }
     end
   end

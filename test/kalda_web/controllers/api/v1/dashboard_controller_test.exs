@@ -15,7 +15,7 @@ defmodule KaldaWeb.Api.V1.DashboardControllerTest do
   end
 
   describe "GET index" do
-    setup [:register_and_log_in_user]
+    setup [:register_and_log_in_subscribed_user]
 
     test "lists dashboard attributes", %{conn: conn, user: current_user} do
       author1 = AccountsFixtures.user()
@@ -48,7 +48,8 @@ defmodule KaldaWeb.Api.V1.DashboardControllerTest do
       assert json_response(conn, 200) == %{
                "current_user" => %{
                  "id" => current_user.id,
-                 "username" => current_user.username
+                 "username" => current_user.username,
+                 "has_subscription" => true
                },
                "next_therapy" => %{
                  "link" => therapy_session.link,
@@ -154,6 +155,7 @@ defmodule KaldaWeb.Api.V1.DashboardControllerTest do
 
       assert json_response(conn, 200) == %{
                "current_user" => %{
+                 "has_subscription" => true,
                  "id" => current_user.id,
                  "username" => current_user.username
                },

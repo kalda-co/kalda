@@ -68,6 +68,22 @@ defmodule KaldaWeb.ConnCase do
   end
 
   @doc """
+  Setup helper that registers and logs in subscribed user.
+      setup :register_and_log_in_subscribed_user
+  It stores an updated connection and a registered, subscribed user in the
+  test context.
+  """
+  def register_and_log_in_subscribed_user(%{conn: conn}) do
+    user = Kalda.AccountsFixtures.user_with_subscription(:free)
+    %{conn: log_in_user(conn, user), user: user}
+  end
+
+  def register_and_log_in_subscribed_stripe_user(%{conn: conn}) do
+    user = Kalda.AccountsFixtures.user_with_subscription(:stripe)
+    %{conn: log_in_user(conn, user), user: user}
+  end
+
+  @doc """
   Logs the given `user` into the `conn`.
 
   It returns an updated `conn`.

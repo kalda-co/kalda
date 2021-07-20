@@ -570,4 +570,8 @@ defmodule Kalda.Accounts do
 
     :ok
   end
+
+  def has_subscription?(%User{} = user) do
+    user.has_free_subscription || user.has_stripe_subscription
+  end
 end
