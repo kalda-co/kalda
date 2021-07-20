@@ -30,6 +30,7 @@ user =
     password: "thisisademopassword",
     hashed_password: Bcrypt.hash_pwd_salt("thisisademopassword"),
     confirmed_at: NaiveDateTime.local_now()
+    # has_free_subscription: true
   })
 
 user2 =
