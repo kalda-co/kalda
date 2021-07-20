@@ -26,12 +26,12 @@
 <div class="navbar">
   <a href="/dashboard" class="button-link" use:link on:click={closeMenu}>
     <img
-      src="/images/kalda-rainbow-purple-logo.svg"
+      src="/images/kalda-rainbow-logo.svg"
       alt="Kalda's Rainbow Logo"
       class="logo"
     />
   </a>
-  <h1>{title}</h1>
+  <h1 class="title">{title}</h1>
   <button on:click|preventDefault={toggleMenu}>
     <img src="/images/burger-menu.svg" alt="hamburger-menu" class="hamburger" />
   </button>
@@ -75,10 +75,15 @@
 
 <style>
   .navbar {
+    background-color: var(--color-purple);
     padding: var(--gap);
     display: flex;
     flex-direction: row;
     justify-items: center;
+  }
+
+  .title {
+    color: var(--color-white);
   }
 
   h1 {
