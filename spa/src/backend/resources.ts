@@ -16,6 +16,7 @@ import type {
   Therapy,
   Reaction,
   LoginSuccess,
+  StripePaymentIntent,
 } from "../state";
 
 export function appState(json: unknown): AppState {
@@ -87,5 +88,11 @@ export function loginSuccess(json: unknown): LoginSuccess {
   return {
     type: "ok",
     apiToken: field("token", string)(json),
+  };
+}
+
+export function stripePaymentIntent(json: unknown): StripePaymentIntent {
+  return {
+    clientSecret: field("client_secret", string)(json),
   };
 }

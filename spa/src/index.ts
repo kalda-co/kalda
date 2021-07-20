@@ -9,6 +9,8 @@ declare global {
 
 let apiBase: string = document.body.dataset.apiBase || "";
 let environment: string = document.body.dataset.environment || "unknown";
+let stripePublishableKey: string =
+  document.body.dataset.stripePublishableKey || "bad-key";
 
 window.Rollbar = new Rollbar({
   accessToken: "5bf70821e7bb4dbc8c77e91549809bee",
@@ -20,7 +22,7 @@ window.Rollbar = new Rollbar({
 
 let app = new App({
   target: document.body,
-  props: { apiBase },
+  props: { apiBase, stripePublishableKey },
 });
 
 export default app;
