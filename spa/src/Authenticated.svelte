@@ -16,7 +16,7 @@
   export let api: ApiClient;
   export let stripe: Promise<Stripe>;
 
-  let appState = api.getInitialAppState();
+  let state = api.getInitialAppState();
   let stateLastRefreshedAt = new Date();
 
   async function refreshStateIfStale() {
@@ -47,7 +47,7 @@
 
   async function refreshAppState() {
     let newState = await api.getInitialAppState();
-    appState = Promise.resolve(newState);
+    state = Promise.resolve(newState);
   }
 
   function enoughTimeElapsed(): boolean {
@@ -56,13 +56,11 @@
     return now > cacheInvalidationTime;
   }
 
-  // Add an event listener so that the appState can be refreshed from the
+  // Add an event listener so that the state can be refreshed from the
   // backend when the user returns to the app, assuming that enough time has
   // passed since the previous loading of the state.
   let foregroundListenerHandle = whenAppForegrounded(refreshStateIfStale);
   onDestroy(() => foregroundListenerHandle.cancel());
-
-  let state = api.getInitialAppState();
 
   // When there is an uncaught exception we show a message to the user to let
   // them know there is a problem and reload the application. Hopefully that
@@ -72,7 +70,7 @@
     try {
       log.error(error);
       window.Rollbar.error(error);
-      await alertbox(
+      alertbox(
         "Oh no! Something went wrong!",
         "Sorry, an unexpected error occurred. Please try again later and contact us if it happens again."
       );

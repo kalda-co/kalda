@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { Therapy } from "./state";
   import { link } from "svelte-routing";
-  import { datetimeToURI, readableDate, readableTime } from "./date";
+  import { readableDate, readableTime } from "./date";
 
   export let therapies: Therapy[];
 
@@ -129,15 +129,6 @@
   }
   a.zoom-button button {
     color: #ededed;
-  }
-
-  .light-button {
-    border: solid 2px var(--color-purple);
-    padding: 16px 24px;
-    border-radius: 40px;
-    font-weight: 600;
-    padding: var(--gap);
-    background-color: #eeeeee;
   }
 
   #move {

@@ -1,5 +1,6 @@
 <script>
   import type { Stripe } from "../stripe";
+  import type { StripeCardElementChangeEvent } from "@stripe/stripe-js";
   import type { StripePaymentIntent } from "../state";
   import { onMount, onDestroy } from "svelte";
   import { UnmatchedError } from "../exhaustive";
@@ -12,7 +13,7 @@
   let error = "";
   let elements = stripe.elements();
   let card = elements.create("card", { hidePostalCode: false });
-  card.on("change", (event) => {
+  card.on("change", (event: StripeCardElementChangeEvent) => {
     error = event.error?.message || "";
   });
   onMount(() => {
@@ -35,7 +36,7 @@
       case undefined:
         log.info("Stripe Payment success");
         success();
-        break;
+        return;
       case "api_connection_error":
       case "api_error":
       case "authentication_error":
@@ -46,7 +47,7 @@
       case "validation_error":
         log.error("Stripe Payment failure: ", type, result.error?.message);
         failure();
-        break;
+        return;
       default:
         throw new UnmatchedError(type);
     }

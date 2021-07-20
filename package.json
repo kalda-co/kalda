@@ -62,6 +62,7 @@
     "@snowpack/plugin-svelte": "^3.5.0",
     "@snowpack/plugin-typescript": "^1.2.0",
     "@snowpack/web-test-runner-plugin": "^0.2.0",
+    "@stripe/stripe-js": "^1.16.0",
     "@testing-library/jest-dom": "^5.11.10",
     "@testing-library/svelte": "^3.0.3",
     "@tsconfig/svelte": "^1.0.10",
