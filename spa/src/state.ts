@@ -19,20 +19,20 @@ export type AppState = {
 export type Post = {
   id: number;
   content: string;
-  author: User;
+  author: Author;
   comments: Array<Comment>;
 };
 
 export type Comment = {
   id: number;
   content: string;
-  author: User;
+  author: Author;
   replies: Array<Reply>;
   reactions: Array<Reaction>;
 };
 
 export type Reaction = {
-  author: User;
+  author: Author;
   relate: boolean;
   sendLove: boolean;
 };
@@ -40,11 +40,17 @@ export type Reaction = {
 export type Reply = {
   id: number;
   content: string;
-  author: User;
+  author: Author;
   reactions: Array<Reaction>;
 };
 
 export type User = {
+  id: number;
+  username: string;
+  hasSubscription: boolean;
+};
+
+export type Author = {
   id: number;
   username: string;
 };
@@ -52,7 +58,7 @@ export type User = {
 export type ReportComment = {
   id: number;
   reporter_reason: string;
-  reporter: User;
+  reporter: Author;
 };
 
 export type Therapy = {
@@ -67,7 +73,7 @@ export type Therapy = {
 
 export interface BubbleContent {
   id: number;
-  author: User;
+  author: Author;
   content: string;
   reactions: Array<Reaction>;
 }
