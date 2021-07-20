@@ -4,7 +4,7 @@
   import Loading from "../Loading.svelte";
   import Offer from "./Offer.svelte";
   import PaymentForm from "./PaymentForm.svelte";
-  import type { ApiClient, Response } from "../backend";
+  import type { ApiClient } from "../backend";
   export let stripe: Stripe;
   export let api: ApiClient;
   type Stage = "displayingOffer" | "purchasing" | "success" | "failure";

@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { User, Post, Therapy } from "./state";
-  import { datetimeToURI, readableDate, readableTime } from "./date";
+  import { readableDate, readableTime } from "./date";
   import { link } from "svelte-routing";
 
   export let user: User;
@@ -146,12 +146,6 @@
   }
 
   .underline {
-    text-decoration: underline;
-  }
-
-  .link {
-    padding-left: var(--gap-l);
-    color: var(--color-white);
     text-decoration: underline;
   }
 
