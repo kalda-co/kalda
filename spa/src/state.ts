@@ -72,6 +72,10 @@ export interface BubbleContent {
   reactions: Array<Reaction>;
 }
 
+export type StripePaymentIntent = {
+  clientSecret: string;
+};
+
 export type LoginSuccess = { type: "ok"; apiToken: string };
 export type LoginError = { type: "error"; errorMessage: string };
 export type LoginResult = LoginSuccess | LoginError;
