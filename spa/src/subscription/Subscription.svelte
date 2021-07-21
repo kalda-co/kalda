@@ -21,6 +21,15 @@
         throw res;
       }
     });
+
+  async function updateUserSubscription(): Promise<Response<User>> {
+    let response = await api.updateUser(user.id);
+    if (response.type === "Success") {
+      // user.hasSubscription = response.resource;
+      user.hasSubscription = true;
+    }
+    return response;
+  }
 </script>
 
 {#if stage === "purchasing"}
@@ -43,12 +52,14 @@
     </div>
   {/await}
 {:else if stage === "success"}
+  <!-- TODO: send update subscription to true -->
+  {#await updateUserSubscription()}{/await}
   <div class="content">
     <a href="/app" class="close">×</a>
     <h1>Welcome to Kalda premium!</h1>
     <p>
       Your subscription was successful. You will be billed £2.99 each month. You
-      can cancel any time.
+      can cancel any time, just email subscriptions@kalda.co
     </p>
   </div>
 {:else if stage === "failure"}
