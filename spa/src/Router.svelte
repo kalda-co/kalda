@@ -81,11 +81,17 @@
     </Route>
 
     <Route path="subscription">
-      {#await stripe}
-        <Loading />
-      {:then stripe}
-        <Subscription {stripe} {api} />
-      {/await}
+      {#if state.currentUser.hasSubscription}
+        You're subscribed!
+        <!-- TODO: Date subscription ends -->
+        <!-- TODO: Cancel button -->
+      {:else}
+        {#await stripe}
+          <Loading />
+        {:then stripe}
+          <Subscription {stripe} {api} />
+        {/await}
+      {/if}
     </Route>
 
     <!-- Default catch all route -->

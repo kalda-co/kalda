@@ -5,10 +5,14 @@
   import Offer from "./Offer.svelte";
   import PaymentForm from "./PaymentForm.svelte";
   import type { ApiClient } from "../backend";
+
   export let stripe: Stripe;
   export let api: ApiClient;
+
   type Stage = "displayingOffer" | "purchasing" | "success" | "failure";
+
   let stage: Stage = "displayingOffer";
+
   function to(newStage: Stage): () => void {
     return () => (stage = newStage);
   }
@@ -22,13 +26,8 @@
       }
     });
 
-  async function updateUserSubscription(): Promise<Response<User>> {
-    let response = await api.updateUser(user.id);
-    if (response.type === "Success") {
-      // user.hasSubscription = response.resource;
-      user.hasSubscription = true;
-    }
-    return response;
+  function refresh(): void {
+    window.location.pathname = "/app";
   }
 </script>
 
@@ -52,10 +51,10 @@
     </div>
   {/await}
 {:else if stage === "success"}
-  <!-- TODO: send update subscription to true -->
-  {#await updateUserSubscription()}{/await}
   <div class="content">
-    <a href="/app" class="close">×</a>
+    <button class="button-close" on:click|preventDefault={refresh}>
+      <img src="/images/cross-purple.svg" alt="close menu cross" />
+    </button>
     <h1>Welcome to Kalda premium!</h1>
     <p>
       Your subscription was successful. You will be billed £2.99 each month. You
@@ -78,6 +77,9 @@
   }
   .close {
     font-size: 2.5rem;
+  }
+  .button-close {
+    text-align: left;
   }
   .content {
     padding-top: var(--gap);
