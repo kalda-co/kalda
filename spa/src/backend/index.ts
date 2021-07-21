@@ -60,8 +60,6 @@ export async function login(
 export interface ApiClient {
   getInitialAppState(): Promise<Response<AppState>>;
 
-  updateUser(hasSubscription: boolean): Promise<Response<User>>;
-
   createComment(postId: number, content: string): Promise<Response<Comment>>;
 
   createReply(commentId: number, content: string): Promise<Response<Reply>>;

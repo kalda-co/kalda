@@ -78,7 +78,7 @@
       console.error(error);
     }
     setTimeout(() => {
-      window.location.pathname = "/dashboard";
+      window.location.pathname = "/app";
     }, 250);
   };
 </script>

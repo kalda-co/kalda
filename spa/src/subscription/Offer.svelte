@@ -1,30 +1,40 @@
 <script>
+  import { link } from "svelte-routing";
   export let buttonClicked: () => void;
 </script>
 
 <div class="offer">
+  <a use:link href="/dashboard">
+    <button class="close">
+      <img src="/images/cross.svg" alt="close menu cross" />
+    </button>
+  </a>
   <div class="content">
-    <div class="squids">
-      <img
-        src="/images/three-jellyfish.svg"
-        alt="A trio of peaceful cartoon squids"
-      />
-    </div>
+    <div>
+      <div class="squids">
+        <img
+          src="/images/three-jellyfish.svg"
+          alt="A trio of peaceful cartoon squids"
+        />
+      </div>
 
-    <div class="offer-bubble">
-      <h2>Upgrade to Premium</h2>
-      <ul>
-        <li>Weekly group mental health sessions on Zoom</li>
-        <li>
-          Daily reflection questions in a peer support community, here and in
-          your browser
-        </li>
-        <li>Mindfulness recordings</li>
-        <li>First access to Kalda Zoom courses and events</li>
-      </ul>
-    </div>
+      <div class="offer-bubble">
+        <h2>Upgrade to Premium</h2>
+        <ul>
+          <li>Weekly group mental health sessions on Zoom</li>
+          <li>
+            Daily reflection questions in a peer support community, here and in
+            your browser
+          </li>
+          <li>Mindfulness recordings</li>
+          <li>First access to Kalda Zoom courses and events</li>
+        </ul>
+      </div>
 
-    <button class="offer-button" on:click={buttonClicked}>£2.99 / month</button>
+      <button class="offer-button" on:click={buttonClicked}
+        >£2.99 / month</button
+      >
+    </div>
   </div>
 </div>
 
@@ -32,9 +42,17 @@
   .offer {
     min-height: 100vh;
     background-color: var(--color-purple);
-    padding: var(--gap) 0 var(--gap-xxxl) 0;
+    padding: 0 0 var(--gap-xxxl) 0;
+  }
+  .content {
     display: flex;
     align-items: center;
+  }
+  .close {
+    margin-top: var(--gap);
+    margin-left: var(--gap);
+    text-align: left;
+    background-color: var(--color-purple);
   }
   .offer-bubble {
     color: var(--color-purple);
@@ -67,7 +85,6 @@
     font-weight: var(--font-weight-large);
   }
   .squids {
-    padding-top: var(--gap-l);
     margin-bottom: var(--gap);
     text-align: center;
   }
