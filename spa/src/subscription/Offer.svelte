@@ -6,7 +6,7 @@
   <div class="content">
     <div class="squids">
       <img
-        src="/images/speech-icon.svg"
+        src="/images/three-jellyfish.svg"
         alt="A trio of peaceful cartoon squids"
       />
     </div>
@@ -14,10 +14,13 @@
     <div class="offer-bubble">
       <h2>Upgrade to Premium</h2>
       <ul>
-        <li>Weekly group mental health sessions</li>
-        <li>Daily reflection questions in a peer support community</li>
+        <li>Weekly group mental health sessions on Zoom</li>
+        <li>
+          Daily reflection questions in a peer support community, here and in
+          your browser
+        </li>
         <li>Mindfulness recordings</li>
-        <li>First access to Kalda events</li>
+        <li>First access to Kalda Zoom courses and events</li>
       </ul>
     </div>
 
@@ -64,10 +67,22 @@
     font-weight: var(--font-weight-large);
   }
   .squids {
-    margin-bottom: var(--gap-l);
+    padding-top: var(--gap-l);
+    margin-bottom: var(--gap);
     text-align: center;
   }
   .squids img {
-    height: 150px;
+    height: 180px;
+  }
+  ul {
+    list-style: none;
+    padding-left: 1em;
+  }
+  li:before {
+    content: "\2713";
+    display: inline-block;
+    height: 1em;
+    width: 1em;
+    margin-right: 0.5em;
   }
 </style>

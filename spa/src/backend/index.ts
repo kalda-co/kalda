@@ -5,6 +5,7 @@ import type {
   Reaction,
   LoginResult,
   StripePaymentIntent,
+  User,
 } from "../state";
 import {
   loginSuccess,
@@ -58,6 +59,8 @@ export async function login(
 // client in tests.
 export interface ApiClient {
   getInitialAppState(): Promise<Response<AppState>>;
+
+  updateUser(hasSubscription: boolean): Promise<Response<User>>;
 
   createComment(postId: number, content: string): Promise<Response<Comment>>;
 
