@@ -10,20 +10,6 @@
 </script>
 
 <article>
-  {#if user.hasSubscription == false}
-    <div class="banner">
-      <a use:link href="/subscription">
-        <div class="subscription-button">
-          <img
-            class="inline-icon banner-image"
-            src="images/loudhailer.svg"
-            alt="loud hailer icon"
-          />
-          PREMIUM OFFER £2.99 a month
-        </div>
-      </a>
-    </div>
-  {/if}
   {#if post}
     <div class="todays-reflection">
       <div class="content">
@@ -83,24 +69,8 @@
 </article>
 
 <style>
-  .banner {
-    background-color: var(--color-purple);
-  }
-
-  .subscription-button {
-    background-color: #8bffde;
-    border: solid 1px #8bffde;
-    padding: 10px 24px;
-    margin: 0px 16px;
-    border-radius: 20px;
-    font-weight: 500;
-    color: #404040;
-    font-size: 16px;
-    display: block;
-    text-align: center;
-  }
-
   .hi {
+    margin-block-start: var(--gap-s);
     word-break: break-all;
   }
 
@@ -187,11 +157,5 @@
   .inline-icon {
     margin-right: var(--gap-s);
     width: 34px;
-  }
-
-  .banner-image {
-    height: 19px;
-    margin-right: 0px;
-    margin-bottom: -5px;
   }
 </style>

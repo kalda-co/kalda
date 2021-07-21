@@ -29,8 +29,11 @@
 <main>
   <Router>
     <Route path="daily-reflection">
-      <Navbar title="Daily Reflection" />
-      <!-- TODO: gracefully handle zero posts -->
+      <Navbar
+        title="Daily Reflection"
+        currentUser={state.currentUser}
+        {state}
+      />
       {#each state.reflections as post (post.id)}
         <Thread
           placeholder="Your reflection here"
@@ -38,12 +41,13 @@
           currentUser={state.currentUser}
           {api}
           {post}
+          {state}
         />
       {/each}
     </Route>
 
     <Route path="will-pool">
-      <Navbar title="Will Pool" />
+      <Navbar title="Will Pool" currentUser={state.currentUser} {state} />
       {#each state.pools as post (post.id)}
         <Thread
           placeholder="Your commitment here"
@@ -51,32 +55,40 @@
           currentUser={state.currentUser}
           {api}
           {post}
+          {state}
         />
       {/each}
     </Route>
 
     <Route path="guidelines">
-      <Navbar title="Guidelines" />
+      <Navbar title="Guidelines" currentUser={state.currentUser} {state} />
       <Guidelines />
     </Route>
 
     <Route path="group-info">
-      <Navbar title="Session Info" />
+      <Navbar title="Session Info" currentUser={state.currentUser} {state} />
       <GroupSessions />
     </Route>
 
     <Route path="therapy-sessions">
-      <Navbar title="Therapy Sessions" />
-      <TherapySessions therapies={state.therapies} />
+      <Navbar
+        title="Therapy Sessions"
+        currentUser={state.currentUser}
+        {state}
+      />
+      <TherapySessions
+        therapies={state.therapies}
+        currentUser={state.currentUser}
+      />
     </Route>
 
     <Route path="urgent-support">
-      <Navbar title="Urgent Support" />
+      <Navbar title="Urgent Support" currentUser={state.currentUser} {state} />
       <UrgentSupport />
     </Route>
 
     <Route path="nerd-data">
-      <Navbar title="Nerd data" />
+      <Navbar title="Nerd data" currentUser={state.currentUser} {state} />
       <NerdData />
     </Route>
 
@@ -96,7 +108,7 @@
 
     <!-- Default catch all route -->
     <Route>
-      <Navbar title="Kalda" />
+      <Navbar title="Kalda" currentUser={state.currentUser} {state} />
       <Dashboard
         user={state.currentUser}
         post={state.reflections[0]}
