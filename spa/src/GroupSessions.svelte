@@ -1,8 +1,10 @@
 <script lang="ts">
-  import type { Therapy } from "./state";
+  import type { Therapy, User } from "./state";
   import { link } from "svelte-routing";
   import { readableDate, readableTime } from "./date";
 
+  // export let state: AppState;
+  export let currentUser: User;
   export let therapies: Therapy[];
 
   function therapyImage(index: number) {
@@ -24,6 +26,29 @@
     </p>
   </div>
   <h1>Coming Up</h1>
+
+  <!-- {#if currentUser.hasSubscription == false} -->
+  {#if therapies.length == 0}
+    <div class="card">
+      <div
+        class="card-image"
+        style="background-image: url({therapyImage(0)})"
+      />
+      <div class="card-text">
+        <div class="date-container">
+          <img src="images/cal-dark.svg" alt="calendar icon" />
+          <p>Weekly Group Therapy Sessions, Mindfulness and Sharing</p>
+        </div>
+        <h1>Join Us!</h1>
+        <!-- <a use:link href="/subscription">
+          <button class="button subscribe-button">Subscribe</button>
+        </a> -->
+        <a use:link href="/subscription">
+          <div class="subscription-button">Subscribe</div>
+        </a>
+      </div>
+    </div>
+  {/if}
 
   {#each therapies as therapy, i (therapy.id)}
     <div class="card">
@@ -99,6 +124,7 @@
     border-radius: 20px;
     background-color: var(--color-grey);
     padding: var(--gap);
+    margin-top: var(--gap-s);
   }
 
   .card-image {
@@ -141,5 +167,17 @@
     padding-bottom: 24px !important;
     padding-top: 24px !important;
     text-decoration: underline;
+  }
+  .subscription-button {
+    background-color: #8bffde;
+    border: solid 1px #8bffde;
+    padding: 10px 24px;
+    margin: 0px 16px;
+    border-radius: 20px;
+    font-weight: 500;
+    color: #404040;
+    font-size: 16px;
+    display: block;
+    text-align: center;
   }
 </style>

@@ -1,10 +1,12 @@
 <script>
-  import type { Title } from "./state";
+  import type { Title, User, AppState } from "./state";
   import { fly } from "svelte/transition";
   import { link } from "svelte-routing";
   import { deleteApiToken } from "./local-storage";
   import { cancelDailyReflectionNotifications } from "./local-notification";
 
+  export let currentUser: User;
+  export let state: AppState;
   export let title: Title;
 
   let menu = false;
@@ -36,6 +38,20 @@
     <img src="/images/burger-menu.svg" alt="hamburger-menu" class="hamburger" />
   </button>
 </div>
+{#if currentUser.hasSubscription == false}
+  <div class="banner">
+    <a use:link href="/subscription">
+      <div class="subscription-button">
+        <img
+          class="inline-icon banner-image"
+          src="images/loudhailer.svg"
+          alt="loud hailer icon"
+        />
+        PREMIUM OFFER £2.99 a month
+      </div>
+    </a>
+  </div>
+{/if}
 
 {#if menu}
   <section class="sidebar" transition:fly={{ y: 200, duration: 400 }}>
@@ -138,5 +154,28 @@
     margin: 0;
     display: inline-block;
     width: min-content;
+  }
+  .banner-image {
+    height: 19px;
+    margin-right: 0px;
+    margin-bottom: -5px;
+  }
+
+  .banner {
+    background-color: var(--color-purple);
+    padding-bottom: 8px;
+  }
+
+  .subscription-button {
+    background-color: #8bffde;
+    border: solid 1px #8bffde;
+    padding: 10px 24px;
+    margin: 0px 16px;
+    border-radius: 20px;
+    font-weight: 500;
+    color: #404040;
+    font-size: 16px;
+    display: block;
+    text-align: center;
   }
 </style>
