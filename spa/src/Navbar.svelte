@@ -1,11 +1,10 @@
 <script>
-  import type { Title, User, AppState } from "./state";
+  import type { Title, AppState } from "./state";
   import { fly } from "svelte/transition";
   import { link } from "svelte-routing";
   import { deleteApiToken } from "./local-storage";
   import { cancelDailyReflectionNotifications } from "./local-notification";
 
-  export let currentUser: User;
   export let state: AppState;
   export let title: Title;
 
@@ -38,7 +37,7 @@
     <img src="/images/burger-menu.svg" alt="hamburger-menu" class="hamburger" />
   </button>
 </div>
-{#if currentUser.hasSubscription == false}
+{#if state.currentUser.hasSubscription == false}
   <div class="banner">
     <a use:link href="/subscription">
       <div class="subscription-button">

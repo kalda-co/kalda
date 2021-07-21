@@ -27,8 +27,7 @@
   </div>
   <h1>Coming Up</h1>
 
-  <!-- {#if currentUser.hasSubscription == false} -->
-  {#if therapies.length == 0}
+  {#if currentUser.hasSubscription == false}
     <div class="card">
       <div
         class="card-image"
@@ -40,9 +39,6 @@
           <p>Weekly Group Therapy Sessions, Mindfulness and Sharing</p>
         </div>
         <h1>Join Us!</h1>
-        <!-- <a use:link href="/subscription">
-          <button class="button subscribe-button">Subscribe</button>
-        </a> -->
         <a use:link href="/subscription">
           <div class="subscription-button">Subscribe</div>
         </a>

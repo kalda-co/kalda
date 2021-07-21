@@ -29,11 +29,7 @@
 <main>
   <Router>
     <Route path="daily-reflection">
-      <Navbar
-        title="Daily Reflection"
-        currentUser={state.currentUser}
-        {state}
-      />
+      <Navbar title="Daily Reflection" {state} />
       {#each state.reflections as post (post.id)}
         <Thread
           placeholder="Your reflection here"
@@ -47,7 +43,7 @@
     </Route>
 
     <Route path="will-pool">
-      <Navbar title="Will Pool" currentUser={state.currentUser} {state} />
+      <Navbar title="Will Pool" {state} />
       {#each state.pools as post (post.id)}
         <Thread
           placeholder="Your commitment here"
@@ -61,21 +57,17 @@
     </Route>
 
     <Route path="guidelines">
-      <Navbar title="Guidelines" currentUser={state.currentUser} {state} />
+      <Navbar title="Guidelines" {state} />
       <Guidelines />
     </Route>
 
     <Route path="group-info">
-      <Navbar title="Session Info" currentUser={state.currentUser} {state} />
+      <Navbar title="Session Info" {state} />
       <GroupSessions />
     </Route>
 
     <Route path="therapy-sessions">
-      <Navbar
-        title="Therapy Sessions"
-        currentUser={state.currentUser}
-        {state}
-      />
+      <Navbar title="Therapy Sessions" {state} />
       <TherapySessions
         therapies={state.therapies}
         currentUser={state.currentUser}
@@ -83,12 +75,12 @@
     </Route>
 
     <Route path="urgent-support">
-      <Navbar title="Urgent Support" currentUser={state.currentUser} {state} />
+      <Navbar title="Urgent Support" {state} />
       <UrgentSupport />
     </Route>
 
     <Route path="nerd-data">
-      <Navbar title="Nerd data" currentUser={state.currentUser} {state} />
+      <Navbar title="Nerd data" {state} />
       <NerdData />
     </Route>
 
@@ -108,7 +100,7 @@
 
     <!-- Default catch all route -->
     <Route>
-      <Navbar title="Kalda" currentUser={state.currentUser} {state} />
+      <Navbar title="Kalda" {state} />
       <Dashboard
         user={state.currentUser}
         post={state.reflections[0]}
