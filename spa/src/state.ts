@@ -6,6 +6,7 @@ export type Title =
   | "Therapy Sessions"
   | "Urgent Support"
   | "Nerd data"
+  | "My Account"
   | "Will Pool";
 
 export type AppState = {
