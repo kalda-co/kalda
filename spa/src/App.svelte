@@ -136,6 +136,18 @@
     <p class="forgot-password">
       <a href="https://kalda.co/users/reset-password">Forgot your password?</a>
     </p>
+    <div>
+      <p>
+        Haven't created an account yet? <span class="forgot-password">
+          <a href="https://kalda.co/users/register">Register here.</a>
+        </span>
+      </p>
+      <p>
+        Please note that for security reasons, registration and password reset
+        will take you to your default browser, outside of the app. You can
+        return here to log in.
+      </p>
+    </div>
   </div>
 {/if}
 
