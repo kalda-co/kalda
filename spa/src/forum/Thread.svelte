@@ -133,8 +133,6 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    /* padding-left: 8px; */
-    /* padding-right: 8px; */
     border-radius: 30px;
     border: 2px solid var(--color-purple);
     padding-left: var(--gap);

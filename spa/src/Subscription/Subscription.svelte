@@ -36,6 +36,9 @@
     <Loading />
   {:then paymentIntent}
     <div class="content">
+      <button class="button-close" on:click|preventDefault={refresh}>
+        <img src="/images/cross-purple.svg" alt="close menu cross" />
+      </button>
       <h1>Upgrade to premium</h1>
       <p>
         Total due now £2.99. You will be billed £2.99 each month. You can cancel
