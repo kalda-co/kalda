@@ -43,7 +43,7 @@
       <div class="subscription-button">
         <img
           class="inline-icon banner-image"
-          src="images/loudhailer.svg"
+          src="/images/loudhailer.svg"
           alt="loud hailer icon"
         />
         PREMIUM OFFER £2.99 a month
