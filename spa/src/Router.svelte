@@ -9,6 +9,7 @@
   import TherapySessions from "./GroupSessions.svelte";
   import UrgentSupport from "./UrgentSupport.svelte";
   import Subscription from "./Subscription/Subscription.svelte";
+  import MyAccount from "./Subscription/MyAccount.svelte";
   import { Router, Route } from "svelte-routing";
   import type { Stripe } from "./stripe";
   import type { AppState } from "./state";
@@ -86,7 +87,7 @@
 
     <Route path="subscription">
       {#if state.currentUser.hasSubscription}
-        You're subscribed!
+        <MyAccount />
         <!-- TODO: Date subscription ends -->
         <!-- TODO: Cancel button -->
       {:else}
