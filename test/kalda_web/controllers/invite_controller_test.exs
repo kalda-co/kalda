@@ -53,6 +53,8 @@ defmodule KaldaWeb.InviteControllerTest do
 
       assert get_flash(conn, :info) == "Account created successfully"
       assert redirected_to(conn, 302) =~ "/dashboard"
+
+      assert user.has_free_subscription == true
     end
 
     test "invalid attrs", %{conn: conn} do

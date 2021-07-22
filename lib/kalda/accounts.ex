@@ -437,13 +437,15 @@ defmodule Kalda.Accounts do
     end
   end
 
+  # TODO: change this when invites are no longer for free subscriptions
   def create_user_from_invite(token, attrs) do
     # This also checks if there is already a user
     case get_invite_for_token(token) do
       %Invite{invitee_email: email} ->
         now = NaiveDateTime.utc_now() |> NaiveDateTime.truncate(:second)
 
-        %User{email: email, confirmed_at: now}
+        # TODO: change this when invites are no longer for free subscriptions
+        %User{email: email, confirmed_at: now, has_free_subscription: true}
         |> User.registration_changeset(attrs)
         |> Repo.insert()
 
@@ -486,6 +488,7 @@ defmodule Kalda.Accounts do
     |> Repo.insert()
   end
 
+  # TODO: change this when referrals are no longer for free subscriptions
   def create_user_from_referral(name, attrs) do
     # TODO check this creates unconfirmed user and sends email confirmation instructions
     # Transaction that also deprecates referral_link_slots and checks expirey? Or do that part in controller? (purobably do in both)
@@ -499,6 +502,7 @@ defmodule Kalda.Accounts do
     end
   end
 
+  # TODO: change this when referrals are no longer for free subscriptions
   defp referral_link_transaction(referral_link, attrs) do
     case Timex.after?(referral_link.expires_at, NaiveDateTime.local_now()) &&
            referral_link.referring_slots > 0 do
@@ -510,7 +514,10 @@ defmodule Kalda.Accounts do
         Ecto.Multi.new()
         |> Ecto.Multi.insert(
           :user,
-          User.registration_changeset(%User{referred_by: referral_link.id}, attrs)
+          User.registration_changeset(
+            %User{referred_by: referral_link.id, has_free_subscription: true},
+            attrs
+          )
         )
         |> Ecto.Multi.update(:referral_link, changeset)
         |> Repo.transaction()

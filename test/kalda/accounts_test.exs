@@ -867,6 +867,20 @@ defmodule Kalda.AccountsTest do
       assert user.referred_by == referral_link.id
     end
 
+    # TODO: change this when referrals no longer free subscriptions
+    test "user created HAS FREE Subscription" do
+      owner = AccountsFixtures.user()
+      referral_link = AccountsFixtures.referral_link(owner)
+
+      assert {:ok, %User{} = user} =
+               Accounts.create_user_from_referral(referral_link.name, @user_attrs)
+
+      assert user.confirmed_at == nil
+      assert user.referred_by == referral_link.id
+      assert user.has_free_subscription == true
+      assert user.has_stripe_subscription == false
+    end
+
     test "does not create user if name(referral_link) does not exist" do
       assert :not_found = Accounts.create_user_from_referral("name", @user_attrs)
     end
