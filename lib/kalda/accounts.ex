@@ -108,6 +108,24 @@ defmodule Kalda.Accounts do
   end
 
   @doc """
+  Registers a user WITHOUT a free subscription, used if not invited by admin, or referred, ie from a cold link.
+
+  ## Examples
+
+      iex> register_user_without_free_subscription(%{field: value})
+      {:ok, %User{}}
+
+      iex> register_user_without_free_subscription(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def register_user_without_free_subscription(attrs) do
+    %User{}
+    |> User.registration_changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
   Returns an `%Ecto.Changeset{}` for tracking user changes.
 
   ## Examples

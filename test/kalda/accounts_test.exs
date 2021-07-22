@@ -165,9 +165,133 @@ defmodule Kalda.AccountsTest do
       assert user.username == username
       assert user.is_admin == false
       assert user.has_free_subscription == true
+      assert user.has_stripe_subscription == false
 
       updated_user = Accounts.get_user_by_email(user.email)
       assert updated_user.has_free_subscription == true
+      assert updated_user.has_stripe_subscription == false
+    end
+  end
+
+  describe "register_user_without_free_subscription_without_free_subscription/1" do
+    test "requires email and password and username to be set" do
+      {:error, changeset} = Accounts.register_user_without_free_subscription(%{})
+
+      assert %{
+               username: ["can't be blank"],
+               password: ["can't be blank"],
+               email: ["can't be blank"]
+             } = errors_on(changeset)
+    end
+
+    test "validates username, email and password when given" do
+      {:error, changeset} =
+        Accounts.register_user_without_free_subscription(%{
+          email: "not valid",
+          password: "not valid",
+          username: "not valid"
+        })
+
+      assert %{
+               username: ["can only use letters, numbers, hyphens and underscores"],
+               email: ["must have the @ sign and no spaces"],
+               password: ["should be at least 12 character(s)"]
+             } = errors_on(changeset)
+    end
+
+    test "validates maximum values for email and password for security" do
+      too_long = String.duplicate("db", 130)
+
+      {:error, changeset} =
+        Accounts.register_user_without_free_subscription(%{email: too_long, password: too_long})
+
+      assert "should be at most 254 character(s)" in errors_on(changeset).email
+    end
+
+    test "validates maximum value for username" do
+      username = "A_valid_username_EXCEPT-that-it-Contains-too-many-CHARACTERS-the-max-is_35"
+
+      {:error, changeset} =
+        Accounts.register_user_without_free_subscription(%{username: username})
+
+      assert "should be at most 35 character(s)" in errors_on(changeset).username
+    end
+
+    test "validates email uniqueness" do
+      %{email: email} = AccountsFixtures.user()
+      {:error, changeset} = Accounts.register_user_without_free_subscription(%{email: email})
+      assert "has already been taken" in errors_on(changeset).email
+
+      # Now try with the upper cased email too, to check that email case is ignored.
+      {:error, changeset} =
+        Accounts.register_user_without_free_subscription(%{email: String.upcase(email)})
+
+      assert "has already been taken" in errors_on(changeset).email
+    end
+
+    test "validates username uniqueness" do
+      %{username: username} = AccountsFixtures.user()
+
+      {:error, changeset} =
+        Accounts.register_user_without_free_subscription(%{username: username})
+
+      assert "has already been taken" in errors_on(changeset).username
+    end
+
+    test "registers users with a hashed password" do
+      email = AccountsFixtures.unique_user_email()
+      username = AccountsFixtures.unique_username()
+
+      {:ok, user} =
+        Accounts.register_user_without_free_subscription(%{
+          username: username,
+          email: email,
+          password: AccountsFixtures.valid_user_password()
+        })
+
+      assert user.email == email
+      assert user.username == username
+      assert is_binary(user.hashed_password)
+      assert is_nil(user.confirmed_at)
+      assert is_nil(user.password)
+    end
+
+    test "registers all users with is_admin false" do
+      email = AccountsFixtures.unique_user_email()
+      username = AccountsFixtures.unique_username()
+
+      {:ok, user} =
+        Accounts.register_user_without_free_subscription(%{
+          username: username,
+          email: email,
+          password: AccountsFixtures.valid_user_password()
+        })
+
+      assert user.email == email
+      assert user.username == username
+      assert user.is_admin == false
+    end
+
+    test "registers all users with has_free_subscription or stripe false" do
+      email = AccountsFixtures.unique_user_email()
+      username = AccountsFixtures.unique_username()
+
+      {:ok, user} =
+        Accounts.register_user_without_free_subscription(%{
+          username: username,
+          email: email,
+          password: AccountsFixtures.valid_user_password()
+        })
+
+      assert user.email == email
+      assert user.username == username
+      assert user.is_admin == false
+      assert user.has_free_subscription == false
+      assert user.has_stripe_subscription == false
+
+      updated_user = Accounts.get_user_by_email(user.email)
+      assert updated_user.has_free_subscription == false
+      assert updated_user.has_stripe_subscription == false
     end
   end
 

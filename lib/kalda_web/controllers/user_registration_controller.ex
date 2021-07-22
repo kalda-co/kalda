@@ -11,7 +11,7 @@ defmodule KaldaWeb.UserRegistrationController do
   end
 
   def create(conn, %{"user" => user_params}) do
-    case Accounts.register_user(user_params) do
+    case Accounts.register_user_without_free_subscription(user_params) do
       {:ok, user} ->
         Accounts.deliver_user_confirmation_instructions(
           user,
