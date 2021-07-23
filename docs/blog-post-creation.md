@@ -218,6 +218,9 @@ npm install
 npm start
 ```
 
+Check your work regularly on the localhost, to make sure that the code you're writing is working! 
+
+
 ### Uploading work to Github
 
 1. In your terminal/shell create a Git branch:
