@@ -73,7 +73,7 @@ author: "Al Dee",
 tags: ["tag-one", "tag-two", "tag-three"],
 description: "This description will not appear on the page but can contain search terms",
 date: "2021-01-11",
-image: "/images/my-image",
+image: "/images/blog_images/my-image",
 alt: "Image description"
 }
 
@@ -94,7 +94,7 @@ author: "Al Dee",
 tags: ["LGBTQIA", "Kalda", "inclusion"],
 description: "This article answers the questions: Why do you have to be LGBTQIA+?; Is Kalda for everyone?; Why isn't Kalda for everyone?; Why do you need to be invited to Kalda?; What if I don't have friends who are LGBTQIA+?; What if I am not out?; What if I need Kalda but have no one to invite me?",
 date: "2021-02-04",
-image: "images/questionmark.jpg"
+image: "images/blog_images/questionmark.jpg"
 alt: "A photograph of a sign in the style of a circus sign, shaped like a questionmark outline, lit with incandescent lightbulbs inside the shape"
 }
 
@@ -119,7 +119,7 @@ To preview your copy in VSCode, do `Ctrl+Shift+v` or `Ctrl+V` on a PC/Linux, and
 # 4. STEP FOUR Adding Images
 
 Your images should live in this folder:
-`kalda/assets/static/images/`
+`kalda/assets/static/images/blog_images/`
 
 The path to your main or head image, should go in the title code of your file.
 
@@ -207,6 +207,9 @@ npm install
 # start server
 npm start
 ```
+
+Check your work regularly on the localhost, to make sure that the code you're writing is working! 
+
 
 ### Uploading work to Github
 
