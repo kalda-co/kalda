@@ -127,6 +127,28 @@ The path to your main or head image, should go in the title code of your file.
 
 Large images make page loading slow, you should make sure that your image is optimised for a web page. You can learn more about this [here](https://web.dev/fast/#optimize-your-images), or learn to compress your images from the command line [here](https://css-tricks.com/converting-and-optimizing-images-from-the-command-line/) Your image editor should have some compression options
 
+The way I do it is from the command line with [imagemin](https://github.com/imagemin/imagemin-cli)
+
+You can install it as follows but be sure to do asdf reshim nodejs after the install if you use asdf.
+
+```sh
+npm install --global imagemin-cli
+# optional if you use asdf package manager
+asdf reshim nodejs
+```
+
+First resize the images, preserving the aspect ratio. A good width would be 974px.
+Next run your image compression. If you use imagemin and your images are in a folder called `images` then you could use this command:
+
+```sh
+# In the directory above your images folder:
+imagemin images/* --out-dir=output
+```
+
+This would compress all the images in the folder /images, and save them in a folder called /output. The asterisk (\*) denotes all files and filetypes.
+
+All images should be under 244kb for mobile. If any are still larger than this, you will have to make them smaller by adjusting the width.
+
 ### Image alignment in markdown
 
 Normal markdown image tags don’t allow for any alignment properties. They kind of go where they want. They will be the dimension you upload - so keep them to a max of 400px wide, for mobile.
