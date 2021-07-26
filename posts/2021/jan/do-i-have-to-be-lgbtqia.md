@@ -17,13 +17,13 @@ We know that people in the LGBTQIA+ community are disproportionately affected by
 
 ### Why is having a shared identity so important in the community?
 
-Google did [a study](https://www.nytimes.com/2016/02/28/magazine/what-google-learned-from-its-quest-to-build-the-perfect-team.html) on what conditions create the most productive teams. They discovered it’s not about the age of the people in the teams, or shared hobbies, or how many years of experience people in that team have. The teams that performed the best at the Google headquarters felt it was safe space to be heard and to make mistakes.
+Google did [a study](https://www.nytimes.com/2016/02/28/magazine/what-google-learned-from-its-quest-to-build-the-perfect-team.html){:target="_blank"} on what conditions create the most productive teams. They discovered it’s not about the age of the people in the teams, or shared hobbies, or how many years of experience people in that team have. The teams that performed the best at the Google headquarters felt it was safe space to be heard and to make mistakes.
 
 At Kalda we know that teams, groups and therapy are all better when people feel safe. People feel safer when they have a shared identity of shared purpose. That’s why Kalda is for and by the LGBTQIA+ community.
 
 ### Why is having a shared identity important in group therapy?
 
-The make-up of the group is important because it creates a feeling of psychological safety. Group therapy has been scientifically proven to be most successful when the group have a shared identity or shared purpose [(NCBI)](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5553121/). This is why Kalda provides group therapy for the LGBTQIA+ community.
+The make-up of the group is important because it creates a feeling of psychological safety. Group therapy has been scientifically proven to be most successful when the group have a shared identity or shared purpose [(NCBI)](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5553121/){:target="_blank"}. This is why Kalda provides group therapy for the LGBTQIA+ community.
 
 ### What about LGBTQIA+ people who aren’t out?
 
