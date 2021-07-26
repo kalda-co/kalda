@@ -42,3 +42,5 @@ My main instacrush of the moment, Dr Price shares areas from their research as a
 
 [@DrDevonPrice](https://www.instagram.com/DrDevonPrice/) 
 
+### [Back to Blog](http://kalda.co/blog)
+

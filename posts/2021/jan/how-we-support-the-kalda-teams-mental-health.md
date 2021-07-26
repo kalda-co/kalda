@@ -96,3 +96,6 @@ We start with the challenging things, to discuss anything difficult. The moral c
 We've been a remote team from the start, due to lockdown. Having a little Zoom drink on a Friday has helped us through. We've become so accustomed to Zoom that it kind of feels like an in-person drink, chatting away. And whenever someone says something ridiculous it ends up on the #Kalda-quotes Slack channel.
 
 I hope you can integrate some of these practices into your team. None of these things stop people from feeling stressed at work, but they can alleviate the feeling of having to hide and deny those feelings from your team mates. Give each member the space and time they need to look after their own mental health.
+
+
+### [Back to Blog](http://kalda.co/blog)

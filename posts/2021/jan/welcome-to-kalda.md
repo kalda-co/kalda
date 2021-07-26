@@ -11,7 +11,6 @@ alt: "A neon sign made up of seven hearts each inside one another, in the differ
 
 ---
 
-
 Welcome to Kalda, a community for LGBTQIA+ and sex positive humans looking for connection, support, therapy, meditation, and cephalopod related content. We are here to help you with your communication and connection woes in these covid times.
 
 Kalda is a safe space and supportive environment for us to support each other on the road to mental health. For the community, by the community.

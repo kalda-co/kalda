@@ -65,3 +65,5 @@ We run guided group mindfulness sessions every Wednesday at 19:00 British Summer
 [If you're new to Kalda, learn more here](https://www.eventbrite.com/e/kalda-mindfulness-session-tickets-150015096191)
 
 [If you're already a Kalda member](https://kalda.co/therapy-sessions)
+
+### [Back to Blog](http://kalda.co/blog)

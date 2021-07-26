@@ -187,3 +187,4 @@ Another thing to consider is that everyone is different. Your needs won’t matc
 You are an individual, and what works well for you is important, regardless of what other people might say. 
 
 
+### [Back to Blog](http://kalda.co/blog)

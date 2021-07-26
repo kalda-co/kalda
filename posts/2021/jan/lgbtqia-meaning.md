@@ -1,5 +1,5 @@
 %{
-title: "What does the LGBTQIA+ mean? Why do we use it?",
+title: "What does the LGBTQIA+ acronym mean? Why do we use it?",
 subtitle: "A glossary of terms for the LGBTQIA+ community",
 author: "Boris Shoalwise",
 tags: ["LGBTQIA+", "LGBT", "communication"],
@@ -13,8 +13,6 @@ alt: "the rainbow in an abstract form, what does LGBTQIA mean?"
 
 # What does LGBTQIA+ mean?
 
----
-
 LGBTQIA+ is an acronym that represents: lesbian, gay, bisexual, transgender, queer, questioning, intersex, asexual people. The + represents further sexual preferences, gender identities and expressions. We will explore this in more detail in this post. 
 
 The way that we discuss sexuality, attraction and gender identity is constantly changing. The language used to describe the way in which we are attracted to someone is in a constant state of flux. 
@@ -22,8 +20,6 @@ The way that we discuss sexuality, attraction and gender identity is constantly 
 New terms and definitions are being developed all the time, often spreading from individuals to communities to wider usage. The ways in which groups name themselves is important, because as discourse about the topic of sexuality and gender identity shifts, we can only understand each other and engage in or with this discourse when we understand the terms people are using. 
 
 # LGBTQIA+ is an umbrella term 
-
----
 
 It’s used for a diverse group, and generally it is most helpful if we think of the people in that group as those with an identity that falls under the LGBTQIA+ descriptors, who have ALSO chosen to also identify as part of the collective group. 
 
@@ -33,11 +29,11 @@ Those things are very different, isn't that confusing?
 
 Well there are a few schools of thought, but here are just two of the more prominent ones:
 
-#### **Oppression in the same/similar ways**
+### **Oppression in the same/similar ways**
 
 People who are not heterosexual have historically been considered and are still discriminated against. There is a perspective that their kind of sexual attraction is somehow deviant or perverse, ‘wrong’ or a mental illness in much the same way that gender nonconforming and transgender people have about their gender. 
 
-#### **A rejection of the idea of the gender binary and rejection of discrimination based on the flawed premise of this binary**
+### **A rejection of the idea of the gender binary and rejection of discrimination based on the flawed premise of this binary**
 
 Think about it, if gender is a spectrum and it’s okay to sit anywhere on it, then there is no need for a label to describe specific sexual alignment. They are just a person with a shade of gender and not a ‘condition’. 
 Similarly wherever your gender sits on that spectrum is also okay too! 
@@ -48,9 +44,7 @@ Each one of these headings deserves their own article going into more details, b
 
 ---
 
-### **L - Lesbian** 
-<!---- Flag ----->
-<!------>
+### **L - Lesbian**
 
 A woman or non binary person whose enduring physical, romantic, and/or emotional attraction is to other women or non binary persons. Some lesbians may prefer to identify as gay (adj.) or as gay women.
 
@@ -59,7 +53,7 @@ A woman or non binary person whose enduring physical, romantic, and/or emotional
 
 The adjective used to describe people whose enduring physical, romantic, and/ or emotional attractions are to people of the same/ similar physical characteristics as their own. Gay, (like ‘Queer’, see below) is also used as a catch-all term by some members of the LGBTQIA+ to self-refer. Note that it is generally not appropriate to refer to someone else as gay unless they self-describe as such, this is because not everyone under the umbrella uses the word as a blanket term. In addition, unless you know someone self identifies as gay, calling them such would mean you had made assumptions about either their gender, OR that of the person/people they are attracted to.
 
-### **B - Bisexual** (often shortened to Bi) 
+### **B - Bisexual** (often shortened to Bi)
 
 A person who has the capacity to form enduring physical, romantic, and/ or emotional attractions to those of the same gender or to those of another gender. People may experience this attraction in differing ways and degrees over their lifetime. Bisexual people need not have had specific sexual experiences to be bisexual; in fact, they need not have had any sexual experience at all to identify as bisexual.
 
@@ -68,7 +62,6 @@ A person who has the capacity to form enduring physical, romantic, and/ or emoti
 Transgender is an umbrella term for people whose gender identity differs from the sex they were assigned at birth. People under the transgender umbrella may describe themselves using one or more of a wide variety of terms - including transgender.
 
 Transsexual is an older term that originated in the medical and psychological communities. Still preferred by some people who have permanently changed - or seek to change - their bodies through medical interventions, including but not limited to hormones and/or surgeries. Unlike transgender, **transsexual is not an umbrella term**.
-
 
 ### **Q - Queer / Questioning** 
 
@@ -96,7 +89,7 @@ Allies are people who align themselves with the community and fight for civil ri
 
 There are several more sexual preferences, gender identities and expressions which we believe you should at least be familiar with. This is by no means an exhaustive list, there are many different ways that people have been identifying for years, but these are the most common ones outside of the big seven.
 
-### **P - Pansexual** (often shortened to Pan)
+### **P - Pansexual** 
 
 This is a term which refers to someone who is attracted to people regardless of their gender identity or expression. 
 
@@ -143,4 +136,9 @@ They have articles which are very detailed and cover a wide range of definitions
 [Stonewall](https://www.stonewall.org.uk/help-advice/faqs-and-glossary/glossary-terms)
 
 [GLAAD](https://www.glaad.org/reference/lgbtq)
+
+### [Back to Blog](http://kalda.co/blog)
+
+
+
 

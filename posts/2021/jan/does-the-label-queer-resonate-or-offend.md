@@ -86,6 +86,8 @@ Inevitably there are people who will try to use the word without thinking about 
 
 ### We are people after all. 
 
+### [Back to Blog](http://kalda.co/blog)
+
 ---
 
 This post was written by the wonderful Boris Shoalwise (they/them). You can see more about Boris [here](https://www.instagram.com/wan.deringlens/) and [here](https://www.tiktok.com/@enby_in_wonderland?lang=en). Boris does the marketing for Kalda, and when they’re not doing that they enjoy making art and eating too much ice cream. 
