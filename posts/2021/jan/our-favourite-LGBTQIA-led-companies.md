@@ -17,31 +17,30 @@ Let’s face it, times have been tough of late and we’re all thinking carefull
 
 A wellbeing coffee house based in Manchester’s northern Quarter. As well as being a coffee house (no bookings needed), they spread their joy online, selling clothing and other merchandise emblazoned with motivating messages. The club is led by Kiera and Amy, two wives on a mission to support you in becoming your best and happiest self.
 
-[Instagram](https://www.instagram.com/wearefeelgoodclub/){:target="_blank"} / [Website](https://www.feelgoodclub.co/){:target="_blank"}
+[Instagram](https://www.instagram.com/wearefeelgoodclub/){:target="\_blank"} / [Website](https://www.feelgoodclub.co/){:target="\_blank"}
 
 ### Couplet Coffee
 
 Another coffee company (we drink a lot of coffee) this time a direct to consumer coffee startup led by tech whizz Gene Skolnick, who raised angel investments for her enterprise using only twitter. As well as serving up freshly roasted beans, Couplet collaborates with artists on limited edition merch drops of clothing to coffee cups.
 
-[Instagram](https://www.instagram.com/couplet){:target="_blank"}/ [Website](https://coupletcoffee.com/){:target="_blank"}
+[Instagram](https://www.instagram.com/couplet){:target="\_blank"}/ [Website](https://coupletcoffee.com/){:target="\_blank"}
 
 ### Spectrum Outfitters
 
 Sell eco friendly binders to help people feel more like themselves. The binders are beautifully made and fit up to a 46.5” chest. They come in recyclable packaging and the packaging is not recognisable from the outside, in case you want to keep your purchase private.
 
-[Instagram](https://www.instagram.com/spectrumoutfitters/){:target="_blank"} / [Website](https://spectrumoutfitters.co.uk/){:target="_blank"}
+[Instagram](https://www.instagram.com/spectrumoutfitters/){:target="\_blank"} / [Website](https://spectrumoutfitters.co.uk/){:target="\_blank"}
 
 ### Birdsong
 
 Started life as a feminist brand making slogan T-shirts and has developed into a sustainable fashion company for people who want their clothing choices to protest against fast fashion and the systemic abuses of women in the production line. Creators Susanna Wen and Sophie Slater work with expert makers who face barriers to employment in the UK, paying them a London living wage to produce the designs.
 
-[Instagram](https://www.instagram.com/birdsonglondon/){:target="_blank"} / [Website](https://birdsong.london/){:target="_blank"}
+[Instagram](https://www.instagram.com/birdsonglondon/){:target="\_blank"} / [Website](https://birdsong.london/){:target="\_blank"}
 
 ### The Read
 
 Is a podcast led by Kid Fury and Crissle, covering hip-hop and pop culture’s most trying stars. Always rude, always hilarious. Every time we listen, we learn about something terrible Chris Brown has done and what Blue Ivy has been wearing to nursery.
 
-[Soundcloud](https://soundcloud.com/theread){:target="_blank"} / [Website](http://thisistheread.com/){:target="_blank"}
-
+[Soundcloud](https://soundcloud.com/theread){:target="\_blank"} / [Website](http://thisistheread.com/){:target="\_blank"}
 
 ### [Back to Blog](http://kalda.co/blog)

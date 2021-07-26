@@ -67,7 +67,11 @@ Transsexual is an older term that originated in the medical and psychological co
 
 Queer is an umbrella term which is divisive amongst our community, but there are people who chose to identify as such. Queer is a term used by those wanting to reject specific labels of romantic orientation, sexual orientation and/or gender identity. It can also be a way of rejecting the perceived norms of the LGBT community. 
 
+<<<<<<< HEAD
 We explore the term ‘queer’ in [this blog post](https://kalda.co/blog/does-the-label-queer-resonate-or-offend){:target="_blank"}.
+=======
+We explore the term ‘queer’ in [this blog post](https://kalda.co/blog/does-the-label-queer-resonate-or-offend).
+>>>>>>> 73cc57f (some small changes to links)
 
 Questioning is a broad term which refers to someone who is unsure about their sexuality or gender identity. 
 
@@ -79,7 +83,11 @@ A term used to describe a person who may have the biological attributes of both 
 ### **A - Asexual / Ally** 
 
 Asexuals are people who do not experience, or experience at a low level, sexual desire.
+<<<<<<< HEAD
 A person can also be [aromantic](https://kalda.co/blog/what-does-it-mean-to-be-aromantic){:target="_blank"}, meaning they do not experience romantic attraction.
+=======
+A person can also be aromantic, meaning they do not experience romantic attraction.
+>>>>>>> 73cc57f (some small changes to links)
 
 Allies are people who align themselves with the community and fight for civil rights or provide support to those affected by issues, but are themselves not Lesbian, Gay, Bisexual, Trans, Queer, Questioning or Asexual. 
 
@@ -93,7 +101,11 @@ There are several more sexual preferences, gender identities and expressions whi
 
 This is a term which refers to someone who is attracted to people regardless of their gender identity or expression. 
 
+<<<<<<< HEAD
 ### **eNBie & GQ - Non binary & Gender Queer** 
+=======
+### **NB & GQ - Non binary & Gender Queer** 
+>>>>>>> 73cc57f (some small changes to links)
 
 Terms used by some people who experience their gender identity and/or gender expression as falling outside the categories of man and woman. They may define their gender as falling somewhere in between man and woman, or they may define it as wholly different from these terms.
 
@@ -133,9 +145,15 @@ The best way to be certain about how to describe someone else **is to ask them**
 This article would not have been possible without the exhaustive work of both GLAAD and Stonewall. 
 They have articles which are very detailed and cover a wide range of definitions, words to use and avoid and general advice. 
 
+<<<<<<< HEAD
 [Stonewall](https://www.stonewall.org.uk/help-advice/faqs-and-glossary/glossary-terms){:target="_blank"}
 
 [GLAAD](https://www.glaad.org/reference/lgbtq){:target="_blank"}
+=======
+[Stonewall](https://www.stonewall.org.uk/help-advice/faqs-and-glossary/glossary-terms)
+
+[GLAAD](https://www.glaad.org/reference/lgbtq)
+>>>>>>> 73cc57f (some small changes to links)
 
 ### [Back to Blog](http://kalda.co/blog)
 
