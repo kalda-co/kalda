@@ -19,7 +19,7 @@ We asked our community how they feel about the word, and whether or not they cho
 
 Does the phrase “queer as a 9 bob note” ring a bell? Because that was one of the original uses of the word queer. It has always been used to signify something different or outside of normal conventions. Oh, and it was (and still is) a slur.
 
-It was only with the advent of the various [recent gay rights movements](https://www.cjr.org/language_corner/queer.php) that the word was first used as a slur, primarily used as an insult to homosexual men, and then it expanded outwards to include more identities within the LGBTQIA+ community. It has been used as an insult for several years.
+It was only with the advent of the various [recent gay rights movements](https://www.cjr.org/language_corner/queer.php){:target="_blank"} that the word was first used as a slur, primarily used as an insult to homosexual men, and then it expanded outwards to include more identities within the LGBTQIA+ community. It has been used as an insult for several years.
 
 > I like it for myself but I don't like it when people use it to refer to LGBTQIA+ people as a whole. For many it is still a slur (especially the older generations) and to use it alienates them.
 
@@ -27,7 +27,7 @@ It was only with the advent of the various [recent gay rights movements](https:/
 
 Queer, is a **divisive** label. There are people within the LGBT community who still remember its use as a slur, or they feel it doesn’t represent them at all. 
 
-There are others who have embraced its history as a slur, and used that as a way of refusing conventional norms. For instance [Queer House Party](https://www.instagram.com/queerhouseparty/?hl=en), a DJ collective who run accessible clubnights embrace the word, and wear it with pride. 
+There are others who have embraced its history as a slur, and used that as a way of refusing conventional norms. For instance [Queer House Party](https://www.instagram.com/queerhouseparty/?hl=en){:target="_blank"}, a DJ collective who run accessible clubnights embrace the word, and wear it with pride. 
 Neither of these uses is the right or wrong way to use it.  
 
 This is a particularly important conversation to have because of the increasing awareness of the LGBTQIA+ community in recent years, and there are many organisations that are using the word queer to refer to the entire LGBT+ community, and I can understand why they are doing so. 

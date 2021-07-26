@@ -37,7 +37,7 @@ One could describe the process of being mindful as a meta-thought, that is to sa
 
 Through the act of becoming more aware of our thought processes, it allows us to maintain a certain distance from them. This can allow us to have a look at the potential causes of the stress, or perhaps the true root of the problem. 
 
-Taking a mental step back from the stress can also help to identify when the amygdala (the part of the brain which regulates emotion) is overactive, or potentially even [hijacked](https://www.healthline.com/health/stress/amygdala-hijack#overview), which allows us to practice soothing techniques. 
+Taking a mental step back from the stress can also help to identify when the amygdala (the part of the brain which regulates emotion) is overactive, or potentially even [hijacked](https://www.healthline.com/health/stress/amygdala-hijack#overview){:target="_blank"}, which allows us to practice soothing techniques. 
 
 Being stressed is a physical experience as well as mental. Checking in with yourself, both physically and mentally, can help you to recognise the physical actions that one performs when one is stressed (biting the lip, tensing the shoulders etc.). Recognizing these actions and physical reactions to stress can help to alleviate them. 
 
@@ -53,7 +53,7 @@ Not only can it improve your own mental wellbeing, it also gives you the space t
 
 Mindfulness (and meditation) is an active process, it is not simply sitting still and “clearing the mind”, anyone who has tried this will attest to the fact that our minds are often very busy with thoughts. 
 
-Mindfulness is a skill that can be developed. By improving this skill, you are literally training your mind to remain focused on something for long periods of time. As you train your mind, you will find that it requires fewer and fewer resources to focus on a task as your practice increases. This sounds like a spurious claim, but [there is evidence that this is the case](https://www.apa.org/monitor/2012/07-08/ce-corner). 
+Mindfulness is a skill that can be developed. By improving this skill, you are literally training your mind to remain focused on something for long periods of time. As you train your mind, you will find that it requires fewer and fewer resources to focus on a task as your practice increases. This sounds like a spurious claim, but [there is evidence that this is the case](https://www.apa.org/monitor/2012/07-08/ce-corner){:target="_blank"}. 
 
 # To conclude
 

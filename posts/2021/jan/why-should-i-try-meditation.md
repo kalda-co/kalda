@@ -13,7 +13,7 @@ alt: "A person with short dark hair, lying in a field of daisies with closed eye
 
 ### What is meditation?
 
-[Mindfulness](https://kalda.co/blog/3-reasons-mindfulness) and meditation is about relaxing the mind to be fully focused on "the now" so you can acknowledge and accept your thoughts, feelings, and sensations without judgment.
+[Mindfulness](https://kalda.co/blog/3-reasons-mindfulness){:target="_blank"} and meditation is about relaxing the mind to be fully focused on "the now" so you can acknowledge and accept your thoughts, feelings, and sensations without judgment.
 
 ### Where did meditation come from?
 
@@ -27,21 +27,21 @@ Guided meditation is a great way to learn how to meditate, although meditation c
 
 ### Decrease in stress, anxiety and depression
 
-Many studies have shown that meditation supports people to recover from stress. This study conducted a meta-analysis of many scientific studies and showed that: [Meditation appears to be effective for PTSD and depression symptoms.](https://pubmed.ncbi.nlm.nih.gov/27537781/) The Mayo clinic also states that:
+Many studies have shown that meditation supports people to recover from stress. This study conducted a meta-analysis of many scientific studies and showed that: [Meditation appears to be effective for PTSD and depression symptoms.](https://pubmed.ncbi.nlm.nih.gov/27537781/){:target="_blank"} The Mayo clinic also states that:
 
 > Meditation can give you a sense of calm, peace and balance that can benefit both your emotional well-being and your overall health.
 
 ### Decrease high blood blood pressure
 
-This recent study showed that people who meditation over 8-weeks had a change in the expression of 172 genes that regulate inflammation, circadian rhythms and glucose metabolism. There was a decrease in blood pressure. [Reference](https://pubmed.ncbi.nlm.nih.gov/29616846/)
+This recent study showed that people who meditation over 8-weeks had a change in the expression of 172 genes that regulate inflammation, circadian rhythms and glucose metabolism. There was a decrease in blood pressure. [Reference](https://pubmed.ncbi.nlm.nih.gov/29616846/){:target="_blank"}
 
 ### Increased life expectancy
 
-Shinzen Young a meditation teacher and author of [The Science of Enlightenment](https://bookshop.theguardian.com/science-of-enlightenment.html) said that if you meditation for a few minutes a day, you’ll increase your lifespan. If you want a great read about meditation, check out the link above for the Guardian review and link to buy.
+Shinzen Young a meditation teacher and author of [The Science of Enlightenment](https://bookshop.theguardian.com/science-of-enlightenment.html){:target="_blank"} said that if you meditation for a few minutes a day, you’ll increase your lifespan. If you want a great read about meditation, check out the link above for the Guardian review and link to buy.
 
 ### Increased attention span
 
-This study shows that meditation training improved perceptual discrimination and sustained attendion. The paper states that: “These results suggest that perceptual improvements can reduce the resource demand imposed by target discrimination and thus make it easier to sustain voluntary attention.” In short, mindfulness meditation led to longer attention spans.[Reference]()
+This study shows that meditation training improved perceptual discrimination and sustained attendion. The paper states that: “These results suggest that perceptual improvements can reduce the resource demand imposed by target discrimination and thus make it easier to sustain voluntary attention.” In short, mindfulness meditation led to longer attention spans.
 
 ### Overcoming challenges in mindfulness
 
@@ -53,7 +53,7 @@ Jay Shetty is a buddhist monk. How Jay experiences meditation changes each time 
 
       - Jay Shetty
 
-You know, if even the Bhuddist monks can feel like it isn't working sometimes, that you're NOT doing it wrong! For some bon mots from Shetty to keep at it when it feels like it isn't helping, see [here.](https://www.awakenthegreatnesswithin.com/35-inspirational-jay-shetty-quotes-on-success) He encourages people to persevere with meditation, even when it feels like it doesn’t come naturally.
+You know, if even the Bhuddist monks can feel like it isn't working sometimes, that you're NOT doing it wrong! For some bon mots from Shetty to keep at it when it feels like it isn't helping, see [here.](https://www.awakenthegreatnesswithin.com/35-inspirational-jay-shetty-quotes-on-success){:target="_blank"} He encourages people to persevere with meditation, even when it feels like it doesn’t come naturally.
 
 And trust us, we were skeptics too, at first. It IS helping, even when it doesn't feel like it.
 

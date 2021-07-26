@@ -61,9 +61,9 @@ This is a difficult option to pick, because it shows a vulnerability which frien
 
 # The NHS
 
-The National Health Service (NHS) is a truly huge organization, which can make it very daunting for someone who is starting out. There are several services that can help you, for example there is a programme called [Improving Access to Psychological Treatment](https://www.nhs.uk/service-search/find-a-psychological-therapies-service/) (IAPT), which is designed to improve access to mental health services across the UK. 
+The National Health Service (NHS) is a truly huge organization, which can make it very daunting for someone who is starting out. There are several services that can help you, for example there is a programme called [Improving Access to Psychological Treatment](https://www.nhs.uk/service-search/find-a-psychological-therapies-service/){:target="_blank"} (IAPT), which is designed to improve access to mental health services across the UK. 
 
-This programme is designed to help people with [common mental health problems](https://www.nhs.uk/mental-health/talking-therapies-medicine-treatments/talking-therapies-and-counselling/nhs-talking-therapies/), such as depression, social anxiety, eating disorders and body dysmorphic disorder. As a result of the size of the NHS (and budget cuts), it can often take a very long time to be assigned a therapist through IAPT, and if you require referral if you have more complex mental health disorders it can take even longer to receive the help you need. 
+This programme is designed to help people with [common mental health problems](https://www.nhs.uk/mental-health/talking-therapies-medicine-treatments/talking-therapies-and-counselling/nhs-talking-therapies/){:target="_blank"}, such as depression, social anxiety, eating disorders and body dysmorphic disorder. As a result of the size of the NHS (and budget cuts), it can often take a very long time to be assigned a therapist through IAPT, and if you require referral if you have more complex mental health disorders it can take even longer to receive the help you need. 
 
 **Pros**
 
@@ -80,7 +80,7 @@ This programme is designed to help people with [common mental health problems](h
 - Help with more complex issues can be difficult to access 
 - The NHS system can be very difficult to navigate, often requiring advice from someone who has already navigated it 
 
-### [NHS Website](https://www.nhs.uk/mental-health/nhs-voluntary-charity-services/nhs-services/)
+### [NHS Website](https://www.nhs.uk/mental-health/nhs-voluntary-charity-services/nhs-services/){:target="_blank"}
 
 ---
 
@@ -88,7 +88,7 @@ This programme is designed to help people with [common mental health problems](h
 
 With the increasing awareness of mental health issues, more and more employers and educational institutions are providing free mental health support. This generally tends to be geared towards maintaining a healthy work-life balance. 
 
-The legislation on this issue is ongoing, there are currently two aspects to this which can be used to your advantage: [the stress risk assessment](https://www.hse.gov.uk/stress/risk-assessment.htm) (a legal requirement by all businesses) and the [Equality Act 2010](https://www.gov.uk/guidance/equality-act-2010-guidance) (which prevents discrimination against someone because of a mental disorder). 
+The legislation on this issue is ongoing, there are currently two aspects to this which can be used to your advantage: [the stress risk assessment](https://www.hse.gov.uk/stress/risk-assessment.htm){:target="_blank"} (a legal requirement by all businesses) and the [Equality Act 2010](https://www.gov.uk/guidance/equality-act-2010-guidance){:target="_blank"} (which prevents discrimination against someone because of a mental disorder). 
 
 There is no legal requirement for a company to provide mental health support, but this is an ongoing demand by pressure groups. Universities and other institutions will often have a department which focuses on student and staff wellbeing, which can be a way of accessing therapy. 
 
@@ -102,7 +102,7 @@ There is no legal requirement for a company to provide mental health support, bu
 - Can be underfunded or unhelpful 
 - Can be invasive and not particularly private or secure 
 
-### [ACAS Website](https://www.acas.org.uk/supporting-mental-health-workplace) 
+### [ACAS Website](https://www.acas.org.uk/supporting-mental-health-workplace){:target="_blank"}
 
 ---
 
@@ -126,7 +126,7 @@ And finally, they can provide crisis support and helplines, which are all run by
 - No direct access to a therapist 
 - Advice can be very broad and not super personalised 
 
-### [Our list of the best LGBTQIA+ mental health websites](https://kalda.co/blog/8-lgbt-mental-health-websites)
+### [Our list of the best LGBTQIA+ mental health websites](https://kalda.co/blog/8-lgbt-mental-health-websites){:target="_blank"}
 
 ---
 
@@ -134,7 +134,7 @@ And finally, they can provide crisis support and helplines, which are all run by
  
 As the demand for therapy and therapists have increased over the years, there have been several innovations in the digital space for mental wellbeing applications and services. These are often designed to work in parallel with traditional talking therapy, but can also be used on their own. 
 
-There are several companies which have come up in recent years, including [Headspace](https://www.headspace.com/) and [Moodfit](https://www.getmoodfit.com/) to name but a few. These applications provide generalised support for everyone. Many of these services are designed to be customizable; with specific goals and progress tracking, which is beneficial for several disorders. 
+There are several companies which have come up in recent years, including [Headspace](https://www.headspace.com/){:target="_blank"} and [Moodfit](https://www.getmoodfit.com/){:target="_blank"} to name but a few. These applications provide generalised support for everyone. Many of these services are designed to be customizable; with specific goals and progress tracking, which is beneficial for several disorders. 
 
 **Pros**
 - Customizable 
@@ -148,7 +148,7 @@ There are several companies which have come up in recent years, including [Heads
 - Free versions frequently lacking in content 
 - Options can be overwhelming and time consuming to filter out 
 
-### [A reviewed list of the best mental health apps](https://www.verywellmind.com/best-mental-health-apps-4692902)
+### [A reviewed list of the best mental health apps](https://www.verywellmind.com/best-mental-health-apps-4692902){:target="_blank"}
 
 ---
 
@@ -174,7 +174,7 @@ The other major drawback is the fact that the therapist is another person, and t
 - Trusting the therapist can be challenging 
 - LGBT acceptance isn’t a given across therapists 
 
-### [Pink Therapy, a repository for LGBTQIA+ friendly therapists](https://www.pinktherapy.com/)
+### [Pink Therapy, a repository for LGBTQIA+ friendly therapists](https://www.pinktherapy.com/){:target="_blank"}
 
 ---
 
