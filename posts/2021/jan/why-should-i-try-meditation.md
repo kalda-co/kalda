@@ -13,7 +13,7 @@ alt: "A person with short dark hair, lying in a field of daisies with closed eye
 
 ### What is meditation?
 
-Mindfulness and meditation is about relaxing the mind to be fully focused on "the now" so you can acknowledge and accept your thoughts, feelings, and sensations without judgment.
+[Mindfulness](https://kalda.co/blog/3-reasons-mindfulness) and meditation is about relaxing the mind to be fully focused on "the now" so you can acknowledge and accept your thoughts, feelings, and sensations without judgment.
 
 ### Where did meditation come from?
 
@@ -58,3 +58,6 @@ You know, if even the Bhuddist monks can feel like it isn't working sometimes, t
 And trust us, we were skeptics too, at first. It IS helping, even when it doesn't feel like it.
 
 In conclusion, meditation is a powerful way of relaxing the mind. Meditation must be continually practiced for maximum benefits, and the benefits may not always be immediately obvious. However, we are in no doubt that meditation has long term physical and mental health benefits. If you want to try it, in a supportive group of LGBTQIA+ folks, put your email in the box below!
+
+### [Back to Blog](http://kalda.co/blog)
+

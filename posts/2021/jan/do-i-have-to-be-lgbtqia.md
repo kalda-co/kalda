@@ -34,3 +34,5 @@ Thank you for your indignation there. We are here for those people. We hear thos
 If you feel you don’t identify strictly as being LGBTQIA+ but you’re an ally, or someone who is questioning or curious, you’re still welcome on the Kalda platform. A Kaldan (someone who uses Kalda!) has invited you and wants you in their support network.
 
 Someone has invited you and vouched for you. They’ve said that you are important to their mental health journey and their community and their support network. And that means that YOUR mental health is important to them, and so it is important to US.
+
+### [Back to Blog](http://kalda.co/blog)

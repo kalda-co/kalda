@@ -63,3 +63,5 @@ What do people say about Kalda group therapy?
       - Kalda group therapy participant.
 
 Want to learn more, get group therapy with a group of people with lived experiences similar to yours, and join a vibrant LGBTQIA+ community to support you on your mental wellbeing journey? The join us by signing up below.
+
+### [Back to Blog](http://kalda.co/blog)

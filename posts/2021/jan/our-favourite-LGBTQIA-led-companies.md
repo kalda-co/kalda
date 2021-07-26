@@ -42,3 +42,6 @@ Started life as a feminist brand making slogan T-shirts and has developed into a
 Is a podcast led by Kid Fury and Crissle, covering hip-hop and pop culture’s most trying stars. Always rude, always hilarious. Every time we listen, we learn about something terrible Chris Brown has done and what Blue Ivy has been wearing to nursery.
 
 [Soundcloud](https://soundcloud.com/theread) / [Website](http://thisistheread.com/)
+
+
+### [Back to Blog](http://kalda.co/blog)
