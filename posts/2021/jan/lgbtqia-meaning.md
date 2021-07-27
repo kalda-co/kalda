@@ -93,7 +93,7 @@ There are several more sexual preferences, gender identities and expressions whi
 
 This is a term which refers to someone who is attracted to people regardless of their gender identity or expression. 
 
-### **NB & GQ - Non binary & Gender Queer** 
+### **eNBie & GQ - Non binary & Gender Queer** 
 
 Terms used by some people who experience their gender identity and/or gender expression as falling outside the categories of man and woman. They may define their gender as falling somewhere in between man and woman, or they may define it as wholly different from these terms.
 
