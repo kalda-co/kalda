@@ -123,7 +123,7 @@ For example:
 
 ```md
 [Example link](example.com){:target="_blank"}
-```md
+```
 
 # 4. STEP FOUR Adding Images
 
