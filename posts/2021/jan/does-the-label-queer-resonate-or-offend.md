@@ -86,7 +86,7 @@ Inevitably there are people who will try to use the word without thinking about 
 
 ### We are people after all. 
 
-### [Back to Blog](http://kalda.co/blog)
+
 
 ---
 

@@ -1,3 +1,7 @@
+<head>
+<script defer data-domain="kalda.co/blog" src="https://plausible.io/js/plausible.js"></script>
+</head>
+
 <div class="blog-hero">
   <a target="_blank" href="/">
     <img src="images/kalda-neon-white.svg" alt="Kalda lettering in neon white" />
