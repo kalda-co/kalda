@@ -33,4 +33,4 @@ So what should you do if a person with whom you are close tells you that they th
 
 You might wonder if you are aro yourself. Perhaps you feel like you just don’t ‘get’ crushes or the whole appeal of sentimental love. Being dependable or trustworthy may be far more important qualities to you. So should you ‘out’ yourself as aro, to a partner? If you feel that you are ‘faking’ behaviours to meet their needs, then an honest discussion is likely needed. You may well be able to come up with other ways to communicate your commitment to each other that don’t feel uncomfortable. Whilst it may be really important for some people to believe their own feelings are being mirrored back by a partner, ultimately no one can ever be sure that what they experience as ‘romance’ is the same as another person’s definition.
 
-
+### [Back to Blog](http://kalda.co/blog)
