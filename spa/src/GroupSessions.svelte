@@ -20,31 +20,20 @@
 
 <article class="content">
   <div class="card-text-only">
-    <p>
-      All events happen on Zoom. When the event is live you can connect here or
-      via a link in your email inbox.
-    </p>
+    {#if currentUser.hasSubscription == false}
+      <p>
+        Kalda premium members get access to weekly mindfulness and group therapy
+        sessions via Zoom.
+      </p>
+    {/if}
+    {#if currentUser.hasSubscription == true}
+      <p>
+        All events happen on Zoom. When the event is live you can connect here
+        or via a link in your email inbox.
+      </p>
+    {/if}
   </div>
   <h1>Coming Up</h1>
-
-  {#if currentUser.hasSubscription == false}
-    <div class="card">
-      <div
-        class="card-image"
-        style="background-image: url({therapyImage(0)})"
-      />
-      <div class="card-text">
-        <div class="date-container">
-          <img src="images/cal-dark.svg" alt="calendar icon" />
-          <p>Weekly Group Therapy Sessions, Mindfulness and Sharing</p>
-        </div>
-        <h1>Join Us!</h1>
-        <a use:link href="/subscription">
-          <div class="subscription-button">Subscribe</div>
-        </a>
-      </div>
-    </div>
-  {/if}
 
   {#each therapies as therapy, i (therapy.id)}
     <div class="card">
@@ -65,21 +54,37 @@
         <h4>{therapy.credentials}</h4>
         <p id="move">{therapy.description}</p>
         <a use:link href="/group-info" id="learn-more">Learn more.</a>
-        <div class="button-container">
-          <a
-            class="zoom-button"
-            target="_blank"
-            rel="noopener"
-            href={therapy.link}><button>Zoom link</button></a
-          >
-          <!-- <a
+        {#if currentUser.hasSubscription == true}
+          <div class="button-container">
+            <a
+              class="zoom-button"
+              target="_blank"
+              rel="noopener"
+              href={therapy.link}><button>Zoom link</button></a
+            >
+            <!-- <a
             class="light-button"
             target="_blank"
             rel="nofollow"
             href={datetimeToURI(therapy)}
             ><button>Add to calendar</button>
           </a> -->
-        </div>
+          </div>
+        {/if}
+        {#if currentUser.hasSubscription == false}
+          <div class="button-container">
+            <a use:link href="/subscription" class="subscribe-button">
+              <button>
+                <img
+                  class="inline-icon unlock-icon"
+                  src="/images/unlock.svg"
+                  alt="closed lock icon"
+                />
+                Subscribe to access
+              </button></a
+            >
+          </div>
+        {/if}
       </div>
     </div>
   {/each}
@@ -164,16 +169,17 @@
     padding-top: 24px !important;
     text-decoration: underline;
   }
-  .subscription-button {
-    background-color: #8bffde;
-    border: solid 1px #8bffde;
-    padding: 10px 24px;
-    margin: 0px 16px;
-    border-radius: 20px;
-    font-weight: 500;
-    color: #404040;
-    font-size: 16px;
-    display: block;
-    text-align: center;
+  .subscribe-button {
+    border: solid 1px var(--color-purple);
+    padding: 16px 24px;
+    border-radius: 40px;
+    font-weight: 600;
+    display: inline-block;
+  }
+  .unlock-icon {
+    padding-right: var(--gap-s);
+    height: 19px;
+    margin-right: 0px;
+    margin-bottom: -5px;
   }
 </style>
