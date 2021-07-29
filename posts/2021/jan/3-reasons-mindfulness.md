@@ -66,3 +66,8 @@ We run guided group mindfulness sessions every Wednesday at 19:00 British Summer
 
 [If you're already a Kalda member](https://kalda.co/therapy-sessions)
 
+<hr>
+
+## This article was written by Boris Shoalwise 
+<img src="/kalda/assets/static/images/blog_images/Profile pics/boris-profile.JPG" alt="Profile picture of Boris" width="120" height="120" style="float:right;margin-left:10px">
+Boris is the marketing person for Kalda. When they aren't working they enjoy making art and eating too much ice cream. 

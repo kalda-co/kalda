@@ -63,3 +63,9 @@ The benefit of making friends at work is that you already have a good grasp on t
 If you’re feeling intimidated, that’s understandable. Friendships require commitment and actively making time for each other. Some friendships require less effort than others, but they all require effort from everyone involved. Communication, coordination and committing to plans are just some of the things that it takes to make a friendship work. 
 
 I think it’s also important to remember that some friendships don’t last forever, and that’s okay. As people, we are constantly in a state of change, and some people grow apart from one another. There’s over 7 billion people on the planet, and I’m sure that there’s more than enough friends out there for all of us. 
+
+<hr>
+
+## This article was written by Boris Shoalwise 
+<img src="/kalda/assets/static/images/blog_images/Profile pics/boris-profile.JPG" alt="Profile picture of Boris" width="120" height="120" style="float:right;margin-left:10px">
+Boris is the marketing person for Kalda. When they aren't working they enjoy making art and eating too much ice cream. 

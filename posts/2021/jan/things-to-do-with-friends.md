@@ -39,7 +39,11 @@ A lot of these options are things that will appeal to different people, and that
 
 There are a huge number of activities that you can do with friends which don’t involve intoxicants, and more often than not can be arranged quite easily with some planning and coordination. 
 
+<hr>
 
+## This article was written by Boris Shoalwise 
+<img src="/kalda/assets/static/images/blog_images/Profile pics/boris-profile.JPG" alt="Profile picture of Boris" width="120" height="120" style="float:right;margin-left:10px">
+Boris is the marketing person for Kalda. When they aren't working they enjoy making art and eating too much ice cream. 
 
 
 
