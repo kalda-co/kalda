@@ -186,4 +186,9 @@ There are people that you can reach out to, and even though it can feel impossib
 Another thing to consider is that everyone is different. Your needs won’t match mine, and I wouldn’t want them to. Part of what makes mental health such a difficult topic to discuss in broad terms is that everyone’s mental landscape is very different. 
 You are an individual, and what works well for you is important, regardless of what other people might say. 
 
+<hr>
+
+## This article was written by Boris Shoalwise 
+<img src="/kalda/assets/static/images/blog_images/Profile pics/boris-profile.JPG" alt="Profile picture of Boris" width="120" height="120" style="float:right;margin-left:10px">
+Boris is the marketing person for Kalda. When they aren't working they enjoy making art and eating too much ice cream. 
 

@@ -47,21 +47,8 @@
   </div>
 </div>
 
-<!---- Blog authour --->
-
-<div class="blog-hero-slug">
-
-<hr>
 <br/>
-  <h2>
-    This post was written by <%=@post.author %> <img src="https://ideas.ted.com/wp-content/uploads/sites/3/2021/03/FINAL_Bees.jpg" width="120" height="100" style="float:right">
-  </h2>
-  <p>
-    Boris does the marketing for Kalda, and when they’re not doing that  they enjoy making art and eating too much ice cream.
-  </p>
 
-<br/>
-<hr>
 </div>
 <br/>
 <br/>

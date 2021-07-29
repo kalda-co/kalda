@@ -46,6 +46,7 @@ Each one of these headings deserves their own article going into more details, b
 
 ### **L - Lesbian**
 
+<img src="assets/static/images/blog_images/Flags/lesbian-flag.png" style="float:right;" height="100px" width="150px">
 A woman or non binary person whose enduring physical, romantic, and/or emotional attraction is to other women or non binary persons. Some lesbians may prefer to identify as gay (adj.) or as gay women.
 
 ### **G - Gay**
@@ -125,7 +126,12 @@ There is currently contention around the use of the LGBTQIA+ label to describe p
 
 The best way to be certain about how to describe someone else **is to ask them**.
 
----
+<hr>
+
+## This article was written by Boris Shoalwise
+
+<img src="/kalda/assets/static/images/blog_images/Profile pics/boris-profile.JPG" alt="Profile picture of Boris" width="120" height="120" style="float:right;margin-left:10px">
+Boris is the marketing person for Kalda. When they aren't working they enjoy making art and eating too much ice cream.
 
 This article would not have been possible without the exhaustive work of both GLAAD and Stonewall.
 They have articles which are very detailed and cover a wide range of definitions, words to use and avoid and general advice.
