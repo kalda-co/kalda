@@ -19,9 +19,21 @@
         <h2>Today's reflection question.</h2>
         <div class="card">
           <p class="question">{post.content}</p>
+          <!-- {#if user.hasSubscription} -->
           <a use:link href="/daily-reflection">
             <div class="post-button">Post a reflection</div>
           </a>
+          <!-- {:else}
+            <a use:link href="/subscription">
+              <div class="subscribe-button">
+                <img
+                  class="inline-icon unlock-icon"
+                  src="/images/unlock.svg"
+                  alt="closed lock icon"
+                />Subscribe to access
+              </div>
+            </a>
+          {/if} -->
         </div>
       </div>
     </div>
@@ -158,4 +170,17 @@
     margin-right: var(--gap-s);
     width: 34px;
   }
+  /* .subscribe-button {
+    border: solid 1px var(--color-purple);
+    padding: 16px 24px;
+    border-radius: 40px;
+    font-weight: 600;
+    display: inline-block;
+  }
+  .unlock-icon {
+    padding-right: var(--gap-s);
+    height: 19px;
+    margin-right: 0px;
+    margin-bottom: -5px;
+  } */
 </style>

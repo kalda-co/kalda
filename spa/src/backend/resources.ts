@@ -33,7 +33,7 @@ export function appState(json: unknown): AppState {
 export function therapy(json: unknown): Therapy {
   return {
     id: field("id", number)(json),
-    link: field("link", string)(json),
+    link: field("link", optional(string))(json),
     startsAt: field("starts_at", date)(json),
     title: field("title", string)(json),
     description: field("description", string)(json),

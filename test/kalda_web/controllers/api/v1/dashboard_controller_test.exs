@@ -284,7 +284,17 @@ defmodule KaldaWeb.Api.V1.DashboardControllerTest do
                  "credentials" => therapy_session.credentials,
                  "description" => therapy_session.description
                },
-               "therapies" => [],
+               "therapies" => [
+                 %{
+                   "link" => nil,
+                   "id" => therapy_session.id,
+                   "starts_at" => NaiveDateTime.to_iso8601(therapy_session.starts_at),
+                   "title" => therapy_session.title,
+                   "therapist" => therapy_session.therapist,
+                   "credentials" => therapy_session.credentials,
+                   "description" => therapy_session.description
+                 }
+               ],
                "reflections" => [
                  %{
                    "forum" => "daily_reflection",

@@ -40,13 +40,15 @@
 {#if state.currentUser.hasSubscription == false}
   <div class="banner">
     <a use:link href="/subscription">
-      <div class="subscription-button">
-        <img
-          class="inline-icon banner-image"
-          src="/images/loudhailer.svg"
-          alt="loud hailer icon"
-        />
-        PREMIUM OFFER £2.99 a month
+      <div class="button-content">
+        <div class="subscription-button">
+          <img
+            class="inline-icon banner-image"
+            src="/images/loudhailer.svg"
+            alt="loud hailer icon"
+          />
+          PREMIUM OFFER £2.99 a month
+        </div>
       </div>
     </a>
   </div>
@@ -165,11 +167,23 @@
     padding-bottom: 8px;
   }
 
+  .button-content {
+    width: 100%;
+    max-width: var(--full-width);
+    padding-left: var(--gap);
+    padding-right: var(--gap);
+    margin-left: auto;
+    margin-right: auto;
+  }
+
   .subscription-button {
+    max-width: calc(var(--full-width) - var(--gap-l));
+    margin-left: auto;
+    margin-right: auto;
     background-color: #8bffde;
     border: solid 1px #8bffde;
-    padding: 10px 24px;
-    margin: 0px 16px;
+    padding-top: 10px;
+    padding-bottom: 10px;
     border-radius: 20px;
     font-weight: 500;
     color: #404040;

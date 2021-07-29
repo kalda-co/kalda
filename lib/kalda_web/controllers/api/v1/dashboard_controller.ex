@@ -22,11 +22,13 @@ defmodule KaldaWeb.Api.V1.DashboardController do
 
     next_therapy = Events.get_next_therapy_session!()
 
-    therapies =
-      Events.get_therapy_sessions(
-        limit: 10,
-        hide_sessions: !Kalda.Accounts.has_subscription?(user)
-      )
+    therapies = Events.get_therapy_sessions(limit: 10)
+
+    therapies_subscribed? =
+      case Kalda.Accounts.has_subscription?(user) do
+        true -> therapies
+        _ -> therapies |> Enum.map(fn therapy -> %{therapy | link: nil} end)
+      end
 
     conn
     |> render("index.json",
@@ -34,7 +36,7 @@ defmodule KaldaWeb.Api.V1.DashboardController do
       reflections: reflections,
       pools: pools,
       next_therapy: next_therapy,
-      therapies: therapies
+      therapies: therapies_subscribed?
     )
   end
 end

@@ -64,7 +64,7 @@ export type ReportComment = {
 
 export type Therapy = {
   id: number;
-  link: string;
+  link: string | undefined;
   startsAt: Date;
   title: string;
   description: string;
