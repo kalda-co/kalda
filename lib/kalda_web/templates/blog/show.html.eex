@@ -35,6 +35,15 @@
     <%= raw @post.body %>
   </article>
 
+<div class="blog-navigation-container">
+  <div class="blog-navigation">
+  <br/>
+    <a class="blog-button-home" href=".">Kalda Blog</a>
+    <a class="blog-button-current"><%=@post.title%> </a>
+  </div>
+ </div>
+
+
   <br/>
   <h3 class="text-center"> Get Kalda the app, and our newsletter here! <h3>
   <h2 class="text-center"> Get well, get happy, get it, together.  </h2>

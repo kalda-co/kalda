@@ -44,4 +44,4 @@ Is a podcast led by Kid Fury and Crissle, covering hip-hop and pop culture’s m
 [Soundcloud](https://soundcloud.com/theread){:target="_blank"} / [Website](http://thisistheread.com/){:target="_blank"}
 
 
-### [Back to Blog](http://kalda.co/blog)
+

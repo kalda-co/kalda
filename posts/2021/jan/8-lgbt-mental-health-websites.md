@@ -59,4 +59,3 @@ Mermaids are another incredible charity which everyone should be aware of. Their
 We are Kalda, the world’s first LGBTQIA+ community oriented mental wellbeing app. We offer daily reflections, weekly group mindfulness sessions and access to a like minded community of LGBTQIA+ people. We help our users feel through their problems and support one another through the hard times in life. 
 If you’re interested in signing up for Kalda, please follow this link. 
 
-### [Back to Blog](http://kalda.co/blog)

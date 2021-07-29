@@ -59,4 +59,4 @@ Marsha P. Johnson was an Africian-American drag artist from New Jersey, whose ac
 
 A gay Pakistani American poet. Having moved to the United States to escape persecution for his sexual orientation, he became known locally for establishing Sangat, an organization to support LGBT south-Asian youths, and internationally for publishing Narman, a poetry collection that was the first open expression of homosexual themes in the Urdu language.
 
-### [Back to Blog](http://kalda.co/blog)
+

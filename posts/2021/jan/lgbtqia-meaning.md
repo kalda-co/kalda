@@ -20,6 +20,10 @@ The way that we discuss sexuality, attraction and gender identity is constantly 
 New terms and definitions are being developed all the time, often spreading from individuals to communities to wider usage. The ways in which groups name themselves is important, because as discourse about the topic of sexuality and gender identity shifts, we can only understand each other and engage in or with this discourse when we understand the terms people are using. 
 
 # LGBTQIA+ is an umbrella term 
+<figure class="image-in-blog">
+    <img src="../images/blog_images/flags/lgbt-flag.png" style="float:right;margin:-4px 10px;padding-right:10px;padding-top:10px" width="200px" alt="The LGBTQIA+ pride flag">
+    <figcaption class="image-caption">The rainbow flag represents all of the different parts of the LGBTQIA+ community. 
+</figure>
 
 It’s used for a diverse group, and generally it is most helpful if we think of the people in that group as those with an identity that falls under the LGBTQIA+ descriptors, who have ALSO chosen to also identify as part of the collective group. 
 
@@ -45,19 +49,24 @@ Each one of these headings deserves their own article going into more details, b
 ---
 
 ### **L - Lesbian**
+<img src="../images/blog_images/flags/lesbian-flag.png" style="float:left;margin:-4px 5px;padding-right:10px" width="80px" alt="The lesbian pride flag">
 
-A woman or non binary person whose enduring physical, romantic, and/or emotional attraction is to other women or non binary persons. Some lesbians may prefer to identify as gay (adj.) or as gay women.
+A woman or non binary person whose enduring physical, romantic, and/or emotional attraction is to other women or non binary persons. Some lesbians may prefer to identify as gay (adj.) or as gay women. 
 
 
 ### **G - Gay**
+<img src="../images/blog_images/flags/gay-men-flag.jpeg" style="float:left;margin:-4px 5px;padding-right:10px" width="80px" alt="The gay men pride flag">
 
 The adjective used to describe people whose enduring physical, romantic, and/ or emotional attractions are to people of the same/ similar physical characteristics as their own. Gay, (like ‘Queer’, see below) is also used as a catch-all term by some members of the LGBTQIA+ to self-refer. Note that it is generally not appropriate to refer to someone else as gay unless they self-describe as such, this is because not everyone under the umbrella uses the word as a blanket term. In addition, unless you know someone self identifies as gay, calling them such would mean you had made assumptions about either their gender, OR that of the person/people they are attracted to.
 
 ### **B - Bisexual** (often shortened to Bi)
+<img src="../images/blog_images/flags/bisexual-flag.png" style="float:left;margin:-4px 5px;padding-right:10px" width="80px" alt="The bisexual pride flag">
+
 
 A person who has the capacity to form enduring physical, romantic, and/ or emotional attractions to those of the same gender or to those of another gender. People may experience this attraction in differing ways and degrees over their lifetime. Bisexual people need not have had specific sexual experiences to be bisexual; in fact, they need not have had any sexual experience at all to identify as bisexual.
 
 ### **T - Transgender / Transsexual** (often shortened to Trans)
+<img src="../images/blog_images/flags/trans-flag.png" style="float:left;margin:-4px 5px;padding-right:10px" width="80px" alt="The transgender/ transexual pride flag">
 
 Transgender is an umbrella term for people whose gender identity differs from the sex they were assigned at birth. People under the transgender umbrella may describe themselves using one or more of a wide variety of terms - including transgender.
 
@@ -73,14 +82,17 @@ Questioning is a broad term which refers to someone who is unsure about their se
 
 
 ### **I - Intersex**
+<img src="../images/blog_images/flags/intersex-flag.png" style="float:left;margin:-4px 5px;padding-right:10px" width="80px" alt="The intersex pride flag">
 
 A term used to describe a person who may have the biological attributes of both sexes or whose biological attributes do not fit with societal assumptions about what constitutes male or female. While some intersex people also identify as transgender, the two are separate and should not be conflated.
 
 ### **A - Asexual / Ally** 
+<img src="../images/blog_images/flags/ace-flag.png" style="float:left;margin:-4px 5px;padding-right:10px" width="80px" alt="The asexual pride flag">
 
 Asexuals are people who do not experience, or experience at a low level, sexual desire.
 A person can also be [aromantic](https://kalda.co/blog/what-does-it-mean-to-be-aromantic){:target="_blank"}, meaning they do not experience romantic attraction.
 
+<img src="../images/blog_images/flags/ally-flag.png" style="float:left;margin:-4px 5px;padding-right:10px" width="80px" alt="The ally pride flag">
 Allies are people who align themselves with the community and fight for civil rights or provide support to those affected by issues, but are themselves not Lesbian, Gay, Bisexual, Trans, Queer, Questioning or Asexual. 
 
 ------
@@ -90,18 +102,24 @@ Allies are people who align themselves with the community and fight for civil ri
 There are several more sexual preferences, gender identities and expressions which we believe you should at least be familiar with. This is by no means an exhaustive list, there are many different ways that people have been identifying for years, but these are the most common ones outside of the big seven.
 
 ### **P - Pansexual** 
+<img src="../images/blog_images/flags/pansexual-flag.png" style="float:left;margin:-4px 5px;padding-right:10px" width="80px" alt="The pansexual pride flag">
 
 This is a term which refers to someone who is attracted to people regardless of their gender identity or expression. 
 
+<br/>
+
 ### **eNBie & GQ - Non binary & Gender Queer** 
+<img src="../images/blog_images/flags/nonbinary-flag.png" style="float:left;margin:-4px 5px;padding-right:10px" width="80px" alt="The non-binary pride flag">
 
 Terms used by some people who experience their gender identity and/or gender expression as falling outside the categories of man and woman. They may define their gender as falling somewhere in between man and woman, or they may define it as wholly different from these terms.
 
 ### **GNC - Gender non-conforming**
+<img src="../images/blog_images/flags/genderqueer-flag.png" style="float:left;margin:-4px 5px;padding-right:10px" width="80px" alt="The genderqueer pride flag">
 
 A term used to describe some people whose gender expression is different from conventional expectations of masculinity and femininity.
 
 ### **D - Demisexual**
+<img src="../images/blog_images/flags/demisexual-flag.png" style="float:left;margin:-4px 5px;padding-right:10px" width="80px" alt="The demisexual pride flag">
 
 An umbrella term used to describe people who may only feel sexually or romantically attracted to people with whom they have formed an emotional bond. 
 
@@ -137,7 +155,7 @@ They have articles which are very detailed and cover a wide range of definitions
 
 [GLAAD](https://www.glaad.org/reference/lgbtq){:target="_blank"}
 
-### [Back to Blog](http://kalda.co/blog)
+
 
 
 
