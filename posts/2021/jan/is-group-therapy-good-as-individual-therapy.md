@@ -21,7 +21,7 @@ Group therapy gives an opportunity to not only learn about ourselves, but learn 
 
 ### What is group therapy?
 
-Group therapy is mental health support delivered to more than one person at once. It can be delivered in small intimate groups where people have the opportunity to talk about what they’re going through and listen to others. Group therapy can be delivered in large groups - even 100+, where the therapist talks through the exercises and the participants carry out activities and have opportunities to speak. Even the act of listening to others has proven health benefits. [See mentalhealth.org.uk](https://mentalhealth.org.uk){:target="_blank"}
+Group therapy is mental health support delivered to more than one person at once. It can be delivered in small intimate groups where people have the opportunity to talk about what they’re going through and listen to others. Group therapy can be delivered in large groups - even 100+, where the therapist talks through the exercises and the participants carry out activities and have opportunities to speak. Even the act of listening to others has proven health benefits. [See mentalhealth.org.uk](https://mentalhealth.org.uk){:target="\_blank"}
 
 ### What is the science behind it?
 
@@ -64,3 +64,4 @@ What do people say about Kalda group therapy?
 
 Want to learn more, get group therapy with a group of people with lived experiences similar to yours, and join a vibrant LGBTQIA+ community to support you on your mental wellbeing journey? The join us by signing up below.
 
+### [Back to Blog](http://kalda.co/blog)

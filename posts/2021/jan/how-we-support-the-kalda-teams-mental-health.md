@@ -26,7 +26,7 @@ Both the user manual and the wellness action plan encourage each team member to 
 <li>- What do I need at work</li>
 <li>- What are the signs that I'm not doing so well</li>
 <li>- How do I like people to communicate with me</li>
-</ul> 
+</ul>
 
 Writing our user manuals was one of the first things we did together as a team. We had a session where we each wrote our user manuals, then shared what we'd written with the rest of the team. We've been able to look back at them when the team stress levels are high, to understand what people need and how they like to communicate.
 
@@ -42,7 +42,7 @@ Each of our user manuals is about 1 A4 sheet long and it outlines:
 <li>- Things I love</li>
 <li>- Other things to know about me</li>
 
-</ul> 
+</ul>
 
 We learned we all like deep-work time. Now we bundle meetings together on Monday's and Friday's so that each of us have time to get into our individual work. We also recently tried an 'under-the-sea' no meetings day, where we turned off Slack and got our own thing done.
 
@@ -58,7 +58,7 @@ Because Kalda is moving very fast, and we are all working remotely, we actually 
 
 The pressure of trying to gain investment, launch a product mounted. Exercrise, drinking water and getting enough sleep seemed to fall by the wayside. We set up a Health and Wellness Questionnaire so that each team member could keep track of how they were looking after themselves.
 
->"We try to help each other be accountable to our health (and wellness) goals…telling each other about how we are doing in terms of getting enough movement has been really useful as a motivator" Al Dee
+> "We try to help each other be accountable to our health (and wellness) goals…telling each other about how we are doing in terms of getting enough movement has been really useful as a motivator" Al Dee
 
 We each have a little Slackbot reminder to complete the questionnaire each day. It asks:
 
@@ -66,7 +66,7 @@ We each have a little Slackbot reminder to complete the questionnaire each day. 
 <li>- Score my movement today</li>
 <li>- How is your sleeping?</li>
 <li>- How is your hydration?</li>
-</ul> 
+</ul>
 
 And this allows us to see a graph of these things over time. It's a nudge and a reminder to move a little during the day, make sure you drink some water.
 
@@ -87,7 +87,7 @@ We have a retrospective every couple of weeks. This is a space for people to say
 <li>- What was challenging</li>
 <li>- Moral compass check-in</li>
 <li>- Actions to take</li>
-</ul> 
+</ul>
 
 We start with the challenging things, to discuss anything difficult. The moral compass check-in is about looking at what we've been building, to evaluate whether it aligns with the Kalda mission. It's a constant: "are we doing right by our users?" check. We like to end on "What went well", it's a chance to celebrate other team members work and talk about the big successes of the last 2 weeks.
 
@@ -97,4 +97,4 @@ We've been a remote team from the start, due to lockdown. Having a little Zoom d
 
 I hope you can integrate some of these practices into your team. None of these things stop people from feeling stressed at work, but they can alleviate the feeling of having to hide and deny those feelings from your team mates. Give each member the space and time they need to look after their own mental health.
 
-
+### [Back to Blog](http://kalda.co/blog)

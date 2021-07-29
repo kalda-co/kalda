@@ -189,6 +189,6 @@ You are an individual, and what works well for you is important, regardless of w
 <hr>
 
 ## This article was written by Boris Shoalwise 
-<img src="/kalda/assets/static/images/blog_images/Profile pics/boris-profile.JPG" alt="Profile picture of Boris" width="120" height="120" style="float:right;margin-left:10px">
+<img src="/images/blog_images/profile-pics/boris-profile.jpeg" alt="profile picture of boris" width="120" height="120" style="float:right;margin-left:10px">
 Boris is the marketing person for Kalda. When they aren't working they enjoy making art and eating too much ice cream. 
 
