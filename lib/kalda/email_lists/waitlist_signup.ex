@@ -1,16 +1,16 @@
-defmodule Kalda.Waitlist.Signup do
+defmodule Kalda.EmailLists.WaitlistSignup do
   use Ecto.Schema
   import Ecto.Changeset
 
-  schema "signups" do
+  schema "waitlist_signups" do
     field :email, :string
 
     timestamps()
   end
 
   @doc false
-  def changeset(signup, attrs) do
-    signup
+  def changeset(waitlist_signup, attrs) do
+    waitlist_signup
     |> cast(attrs, [:email])
     |> validate_required([:email])
     |> validate_format(:email, ~r/^[^\s]+@[^\s]+$/, message: "must have the @ sign and no spaces")

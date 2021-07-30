@@ -1,3 +1,3 @@
-defmodule KaldaWeb.SignupView do
+defmodule KaldaWeb.WaitlistSignupView do
   use KaldaWeb, :view
 end

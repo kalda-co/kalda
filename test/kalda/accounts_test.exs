@@ -1008,5 +1008,5 @@ defmodule Kalda.AccountsTest do
     end
   end
 
-  # TODO add guidelines to signup flow
+  # TODO add guidelines to waitlist_signup flow
 end

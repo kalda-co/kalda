@@ -18,6 +18,9 @@ defmodule KaldaWeb.UserRegistrationController do
           &Routes.user_confirmation_url(conn, :confirm, &1)
         )
 
+        # Tries to add to sendfox user freemium list
+        # TODO: log if fails but do not raise.
+
         conn
         |> put_flash(
           :info,
