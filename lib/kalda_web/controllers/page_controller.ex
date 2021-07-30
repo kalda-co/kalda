@@ -1,14 +1,14 @@
 defmodule KaldaWeb.PageController do
   use KaldaWeb, :controller
 
-  alias Kalda.Waitlist
-  alias Kalda.Waitlist.Signup
+  alias Kalda.EmailLists
+  alias Kalda.EmailLists.WaitlistSignup
 
   plug :put_root_layout, {KaldaWeb.LayoutView, :site_page}
 
   def index(conn, _params) do
-    changeset = Waitlist.change_signup(%Signup{})
-    render(conn, "index.html", signup_changeset: changeset)
+    changeset = EmailLists.change_waitlist_signup(%WaitlistSignup{})
+    render(conn, "index.html", waitlist_signup_changeset: changeset)
   end
 
   def thanks(conn, _params) do
@@ -22,8 +22,8 @@ defmodule KaldaWeb.PageController do
   end
 
   def terms(conn, _params) do
-    changeset = Waitlist.change_signup(%Signup{})
-    render(conn, "terms.html", signup_changeset: changeset)
+    changeset = EmailLists.change_waitlist_signup(%WaitlistSignup{})
+    render(conn, "terms.html", waitlist_signup_changeset: changeset)
   end
 
   # TODO: move to its own controller that pre-seeds data as required

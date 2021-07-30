@@ -20,7 +20,7 @@ alias Kalda.Forums.ReplyReaction
 alias Kalda.Forums.Reply
 alias Kalda.Forums.Report
 alias Kalda.Events.TherapySession
-alias Kalda.Waitlist.Signup
+alias Kalda.EmailLists.WaitlistSignup
 
 user =
   Kalda.Repo.insert!(%User{
@@ -282,13 +282,13 @@ _userx =
     referred_by: referral_link.id
   })
 
-_signup1 =
-  Kalda.Repo.insert!(%Signup{
+_waitlist_signup1 =
+  Kalda.Repo.insert!(%WaitlistSignup{
     email: "al666@example.com"
   })
 
-_signup2 =
-  Kalda.Repo.insert!(%Signup{
+_waitlist_signup2 =
+  Kalda.Repo.insert!(%WaitlistSignup{
     email: "al777@example.com"
   })
 

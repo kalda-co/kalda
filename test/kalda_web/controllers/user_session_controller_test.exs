@@ -69,7 +69,8 @@ defmodule KaldaWeb.UserSessionControllerTest do
     end
 
     test "emits error message with invalid credentials", %{conn: conn, user: user} do
-      signup_changeset = Kalda.Waitlist.change_signup(%Kalda.Waitlist.Signup{})
+      waitlist_signup_changeset =
+        Kalda.EmailLists.change_waitlist_signup(%Kalda.EmailLists.WaitlistSignup{})
 
       conn =
         post(
@@ -77,7 +78,7 @@ defmodule KaldaWeb.UserSessionControllerTest do
           Routes.user_session_path(conn, :create),
           %{
             "user" => %{"email" => user.email, "password" => "invalid_password"},
-            "signup_changeset" => signup_changeset
+            "waitlist_signup_changeset" => waitlist_signup_changeset
           }
         )
 

@@ -1,4 +1,4 @@
-// const registerForm = document.querySelector(".js-waitlist-form");
+// const registerForm = document.querySelector(".js-email_lists-form");
 
 // if (registerForm) {
 //   registerForm.addEventListener('submit', function (e) {
@@ -13,7 +13,7 @@
 //       }
 //     }
 
-//     plausible('waitlist', { callback: submitForm });
+//     plausible('email_lists', { callback: submitForm });
 //   })
 
 // }

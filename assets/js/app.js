@@ -15,7 +15,7 @@ import "../css/app.css"
 // Custom JS
 // TODO import only on required pages see https://stackoverflow.com/questions/59171197/how-should-i-include-javascript-in-a-template-in-phoenix-1-5
 // import "plausible"
-// const registerForm = document.querySelector(".js-waitlist-form");
+// const registerForm = document.querySelector(".js-email_lists-form");
 // import { registerForm } from "plausible"
 
 import "phoenix_html"
@@ -39,7 +39,7 @@ liveSocket.connect()
 // >> liveSocket.disableLatencySim()
 window.liveSocket = liveSocket
 
-const registerForm = document.querySelector(".js-waitlist-form");
+const registerForm = document.querySelector(".js-email_lists-form");
 
 if (registerForm) {
   registerForm.addEventListener('submit', function (e) {
@@ -54,7 +54,7 @@ if (registerForm) {
       }
     }
 
-    plausible('waitlist', { callback: submitForm });
+    plausible('email_lists', { callback: submitForm });
   })
 
 }
