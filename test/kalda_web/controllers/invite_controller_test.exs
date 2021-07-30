@@ -52,7 +52,7 @@ defmodule KaldaWeb.InviteControllerTest do
       assert user.email == invite.invitee_email
 
       assert get_flash(conn, :info) == "Account created successfully"
-      assert redirected_to(conn, 302) =~ "/dashboard"
+      assert redirected_to(conn, 302) =~ "/app"
 
       assert user.has_free_subscription == true
     end
@@ -96,7 +96,7 @@ defmodule KaldaWeb.InviteControllerTest do
       conn = get(conn, Routes.invite_path(conn, :show, token))
 
       # User stays logged in, just redirected to app
-      assert redirected_to(conn, 302) =~ "/dashboard"
+      assert redirected_to(conn, 302) =~ "/app"
       assert user == conn.assigns.current_user
     end
 

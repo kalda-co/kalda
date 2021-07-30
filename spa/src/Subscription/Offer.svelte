@@ -4,7 +4,7 @@
 </script>
 
 <div class="offer">
-  <a use:link href="/dashboard">
+  <a use:link href="/app">
     <button class="close">
       <img src="/images/cross.svg" alt="close menu cross" />
     </button>

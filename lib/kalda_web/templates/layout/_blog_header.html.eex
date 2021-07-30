@@ -2,7 +2,7 @@
   <a href="/"><img  class='site-page-logo' src="/images/kalda-rainbow-logo.svg"></a>
   <div class="site-page-header-spacer"></div>
   <nav class="site-page-header-links">
-    <a class="gradient button" href="/dashboard">App</a>
+    <a class="gradient button" href="/app">App</a>
     <%= if Routes.blog_path(@conn, :index) == @conn.request_path do %>
       <%= if @current_user do %>
         <%= if @current_user.is_admin do %>
