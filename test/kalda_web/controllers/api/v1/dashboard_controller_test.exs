@@ -286,7 +286,7 @@ defmodule KaldaWeb.Api.V1.DashboardControllerTest do
                },
                "therapies" => [
                  %{
-                   "link" => nil,
+                   "link" => "",
                    "id" => therapy_session.id,
                    "starts_at" => NaiveDateTime.to_iso8601(therapy_session.starts_at),
                    "title" => therapy_session.title,

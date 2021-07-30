@@ -27,7 +27,7 @@ defmodule KaldaWeb.Api.V1.DashboardController do
     therapies_subscribed? =
       case Kalda.Accounts.has_subscription?(user) do
         true -> therapies
-        _ -> therapies |> Enum.map(fn therapy -> %{therapy | link: nil} end)
+        _ -> therapies |> Enum.map(fn therapy -> %{therapy | link: ""} end)
       end
 
     conn
