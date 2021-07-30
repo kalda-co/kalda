@@ -18,7 +18,7 @@ defmodule KaldaWeb.UserSessionControllerTest do
 
     test "redirects if already logged in", %{conn: conn, user: user} do
       conn = conn |> log_in_user(user) |> get(Routes.user_session_path(conn, :new))
-      assert redirected_to(conn) == "/dashboard"
+      assert redirected_to(conn) == "/app"
     end
   end
 
@@ -30,7 +30,7 @@ defmodule KaldaWeb.UserSessionControllerTest do
         })
 
       assert get_session(conn, :user_token)
-      assert redirected_to(conn) =~ "/dashboard"
+      assert redirected_to(conn) =~ "/app"
 
       # Now do a logged in request and assert on the menu
       conn = get(conn, "/")

@@ -146,7 +146,7 @@
             <p>
               Thank you for keeping the community a safe and respectful space.
             </p>
-            <a href="/dashboard">
+            <a href="/app">
               <button class="button">Back to community</button>
             </a>
           </div>

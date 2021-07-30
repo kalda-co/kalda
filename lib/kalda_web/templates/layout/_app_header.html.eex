@@ -9,7 +9,7 @@
         <%= if @current_user.is_admin do %>
           <li><%= link "Dashboard", to: Routes.admin_admin_path(@conn, :index) %></li>
           <li>
-            <a href="/dashboard">App</a>
+            <a href="/app">App</a>
           </li>
         <% end %>
     <% else %>
