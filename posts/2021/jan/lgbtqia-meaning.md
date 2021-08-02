@@ -46,12 +46,6 @@ Each one of these headings deserves their own article going into more details, b
 
 ### **L - Lesbian**
 
-# <<<<<<< HEAD
-
-<img src="assets/static/images/blog_images/flags/lesbian-flag.png" style="float:right;" height="100px" width="150px">
->>>>>>> 9c60678 (Changes to image file names and formatting)
-
-<img src="assets/static/images/blog_images/Flags/lesbian-flag.png" style="float:right;" height="100px" width="150px">
 A woman or non binary person whose enduring physical, romantic, and/or emotional attraction is to other women or non binary persons. Some lesbians may prefer to identify as gay (adj.) or as gay women.
 
 ### **G - Gay**
@@ -145,4 +139,4 @@ They have articles which are very detailed and cover a wide range of definitions
 
 [GLAAD](https://www.glaad.org/reference/lgbtq){:target="\_blank"}
 
-### [Back to Blog](http://kalda.co/blog)
+
