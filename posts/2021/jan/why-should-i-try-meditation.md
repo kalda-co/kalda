@@ -59,4 +59,4 @@ And trust us, we were skeptics too, at first. It IS helping, even when it doesn'
 
 In conclusion, meditation is a powerful way of relaxing the mind. Meditation must be continually practiced for maximum benefits, and the benefits may not always be immediately obvious. However, we are in no doubt that meditation has long term physical and mental health benefits. If you want to try it, in a supportive group of LGBTQIA+ folks, put your email in the box below!
 
-### [Back to Blog](http://kalda.co/blog)
+

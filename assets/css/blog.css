@@ -29,6 +29,16 @@
   padding-bottom: 32px;
 }
 
+
+.image-caption {
+  font-size: small;
+  font-style: italic;
+  text-align: center;
+  position: relative;
+  display: inline-flex;
+  float: inline-end;
+  margin: 5px;
+}
 .blog-button-home {
 
   background-color: #4a00b0;
@@ -39,13 +49,6 @@
   text-decoration: blue;
   display: inline-block;
   font-size: 14px;
-
-}
-
-.blog-hero-slug {
-
-  padding-right: 10%;
-
 
 }
 

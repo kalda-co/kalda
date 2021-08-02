@@ -74,4 +74,4 @@ We run guided group mindfulness sessions every Wednesday at 19:00 British Summer
 <img src="/images/blog_images/profile-pics/boris-profile.jpeg" alt="profile picture of boris" width="120" height="120" style="float:right;margin-left:10px">
 Boris is the marketing person for Kalda. When they aren't working they enjoy making art and eating too much ice cream.
 
-### [Back to Blog](http://kalda.co/blog)
+
