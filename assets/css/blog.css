@@ -30,6 +30,20 @@
 }
 
 
+.figure {
+  border: 1px #cccccc solid;
+  padding: 4px;
+
+}
+
+.figcaption {
+  color: white;
+  font-style: italic;
+  padding: 2px;
+  text-align: left;
+}
+
+
 .image-caption {
   font-size: small;
   font-style: italic;
@@ -39,6 +53,7 @@
   float: inline-end;
   margin: 5px;
 }
+
 .blog-button-home {
 
   background-color: #4a00b0;
