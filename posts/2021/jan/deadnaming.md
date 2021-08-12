@@ -11,6 +11,10 @@ alt: "a person in a hijab and carrying a backpack walking away from the camera t
 
 ---
 
+<head>
+    <meta property="og:image" content="/images/blog_images/deadnaming-cover-3.jpeg">
+</head>
+
 # What is a deadname?
 
 For those unaware, a deadname is a name (either given by parents or a nickname) which the person no longer wishes to associate with. This term is specific to [the trans community](https://www.healthline.com/health/transgender/deadnaming){:target="_blank"}, and selecting a new name can be an important step for an individual who is transitioning. 
