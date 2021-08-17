@@ -134,12 +134,12 @@
     </form>
 
     <p class="forgot-password">
-      <a href="https://kalda.co/users/reset-password">Forgot your password?</a>
+      <a href="/users/reset-password">Forgot your password?</a>
     </p>
     <div>
       <p>
         Haven't created an account yet? <span class="forgot-password">
-          <a href="https://kalda.co/users/register">Register here.</a>
+          <a href="/users/register">Register here.</a>
         </span>
       </p>
       <p>

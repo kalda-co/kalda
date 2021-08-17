@@ -23,6 +23,7 @@ config :kalda, KaldaWeb.Endpoint,
 
 config :kalda,
   sendfox_waitlist_id: "0",
+  sendfox_freemium_id: "0",
   spa_static_prefix: "http://example.com/assets"
 
 # Print only warnings and errors during test

@@ -24,6 +24,7 @@ config :kalda,
   # List IDs can be found in the list URLs. For example:
   # https://sendfox.com/dashboard/lists/56109/contacts
   sendfox_waitlist_id: "56109",
+  sendfox_freemium_id: "270116",
   load_spa_css: true,
   spa_static_prefix: nil
 
