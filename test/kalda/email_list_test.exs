@@ -54,4 +54,11 @@ defmodule Kalda.EmailListsTest do
       assert length(EmailLists.list_waitlist_signups()) == 1
     end
   end
+
+  # TODO implement dummy Sendfox for testing
+  # describe "register with sendfox/1" do
+  #   test "returns :ok if email included" do
+  #     assert :ok = EmailLists.register_with_sendfox!("email@example.com")
+  #   end
+  # end
 end

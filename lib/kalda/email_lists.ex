@@ -20,16 +20,18 @@ defmodule Kalda.EmailLists do
   end
 
   @doc """
-  Makes a post request to the sendfox contact list (EmailLists Newsletter)
+  Makes a post request to the sendfox contact list
+  List IDs can be found in the list URLs. For example:
+  https://sendfox.com/dashboard/lists/267383/contacts
   Raises exception if fails
+  Can be verified from localhost at the above list url.
   ## Examples
-    iex> register_with_sendfox(email)
+    iex> register_with_sendfox(email, list_id)
     :ok
-    iex> register_with_sendfox("")
+    iex> register_with_sendfox("", list_id)
     ** throws exception
   """
-  def register_with_sendfox!(email) do
-    list_id = Application.get_env(:kalda, :sendfox_list_id)
+  def register_with_sendfox!(email, list_id) do
     token = Application.get_env(:kalda, :sendfox_api_token)
 
     # This is hardcoded to the list 'EmailLists Newsletter'
