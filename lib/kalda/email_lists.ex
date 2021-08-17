@@ -23,18 +23,49 @@ defmodule Kalda.EmailLists do
   Makes a post request to the sendfox contact list
   List IDs can be found in the list URLs. For example:
   https://sendfox.com/dashboard/lists/267383/contacts
-  Raises exception if fails
-  Can be verified from localhost at the above list url.
+  info logs warning if fails.
+  Can be verified from localhost at the above list url in dev..
   ## Examples
     iex> register_with_sendfox(email, list_id)
     :ok
     iex> register_with_sendfox("", list_id)
+    :error
+  """
+  def register_with_sendfox(email, list_id) do
+    token = Application.get_env(:kalda, :sendfox_api_token)
+
+    url =
+      "https://api.sendfox.com/contacts?" <>
+        URI.encode_query(%{"email" => email, "lists[]" => list_id})
+
+    headers = [Authorization: "Bearer #{token}", Accept: "application/json; charset=utf-8"]
+
+    case HTTPoison.post!(url, "", headers) do
+      %{status_code: 200} ->
+        Logger.info("Successfully registered user with Sendfox list #{list_id}")
+        :ok
+
+      _ ->
+        Logger.warn("User #{email} could not be registered to Sendfox list #{list_id}")
+        :error
+    end
+  end
+
+  @doc """
+  Makes a post request to the sendfox contact list
+  List IDs can be found in the list URLs. For example:
+  https://sendfox.com/dashboard/lists/267383/contacts
+  Raises exception if fails
+  Can be verified from localhost at the above list url if in dev.
+  ## Examples
+    iex> register_with_sendfox!(email, list_id)
+    :ok
+    iex> register_with_sendfox!("", list_id)
     ** throws exception
   """
   def register_with_sendfox!(email, list_id) do
     token = Application.get_env(:kalda, :sendfox_api_token)
 
-    # This is hardcoded to the list 'EmailLists Newsletter'
     url =
       "https://api.sendfox.com/contacts?" <>
         URI.encode_query(%{"email" => email, "lists[]" => list_id})

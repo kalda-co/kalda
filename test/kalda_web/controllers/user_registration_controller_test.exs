@@ -23,7 +23,8 @@ defmodule KaldaWeb.UserRegistrationControllerTest do
 
   describe "POST /users/register" do
     @tag :capture_log
-    test "creates account and logs the user in", %{conn: conn} do
+    # test "creates account and logs in user", %{conn: conn} do
+    test "creates account and prompts user to check email", %{conn: conn} do
       email = AccountsFixtures.unique_user_email()
       username = AccountsFixtures.unique_username()
       mobile = "07277 123 456"
@@ -38,15 +39,17 @@ defmodule KaldaWeb.UserRegistrationControllerTest do
           }
         })
 
-      assert get_session(conn, :user_token)
+      # assert get_session(conn, :user_token)
+      assert get_flash(conn, :info) ==
+               "User created successfully. Please check your email for confirmation instructions"
+
       assert redirected_to(conn) =~ "/"
 
       # Now do a logged in request and assert on the menu
       conn = get(conn, "/")
       response = html_response(conn, 200)
-      # assert response =~ "user email"
-      # assert response =~ "Settings</a>"
       assert response =~ "App</a>"
+      # Assert user created
       user = Kalda.Accounts.get_user_by_email(email)
       assert user.mobile == mobile
       assert user.has_stripe_subscription == false
