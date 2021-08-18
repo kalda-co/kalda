@@ -35,7 +35,7 @@ Now! If you want to. We have a really lovely community on our Facebook group, wh
 
 ### Not into Facebook?
 
-Ehhhh, us neither. BUT we have a browser app up and running, you can join that by giving us your email below. Trust us, early adopters will get huge discounts when it comes to the mobile app! But we are building the mobile app as fast as we can and you can get on the list to be notified as soon as it is ready. Yay! We are aiming for the end of May, but you need to be on the browser app or the email_lists!
+Ehhhh, us neither. BUT we have a browser app up and running, you can join that by giving us your email below. Trust us, early adopters will get huge discounts when it comes to the mobile app! But we are building the mobile app as fast as we can and you can get on the list to be notified as soon as it is ready. Yay! We are aiming for the end of May, but you need to be on the browser app or the waitlist!
 
 ### Squid of the Week
 
