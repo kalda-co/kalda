@@ -26,9 +26,11 @@ defmodule KaldaWeb.UserRegistrationController do
         conn
         |> put_flash(
           :info,
-          "User created successfully. Please check your email for confirmation instructions"
+          "Success. Please check your emails and click the link to confirm your account."
         )
-        |> redirect(to: "/")
+        |> render("show.html")
+
+      # TODO: have a link to open or download the app here see [link](https://stackoverflow.com/questions/11710902/can-i-make-a-link-that-will-open-in-my-app-if-its-installed-and-fall-back-to-a/20489470)
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)
