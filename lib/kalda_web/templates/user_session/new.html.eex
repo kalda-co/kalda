@@ -1,5 +1,5 @@
 <div class="login-container">
-  <h1>Hi! If you have an account, you can log in:</h1>
+  <h1>Admin log in</h1>
 
   <%= form_for @conn, Routes.user_session_path(@conn, :create), [as: :user], fn f -> %>
     <%= if @error_message do %>
@@ -19,21 +19,6 @@
     </div>
   <% end %>
 
-  <p>Don't have an account? Join our waiting list!</p>
-
-      <%= if @signup_changeset.action do %>
-        <div class="alert alert-danger">
-          Oops, something went wrong! Please try again.
-        </div>
-      <% end %>
-      <%= form_for @signup_changeset, Routes.signup_path(@conn, :create), [class: "landing-form js-waitlist-form"], fn f -> %>
-        <%= email_input f, :email, required: true, placeholder: "me@email.com" %>
-        <%= submit "Sign up", class: "gradient button" %>
-      <% end %>
-
-    <p>
-      We will never sell your data. Ever.
-    </p>
   <p>
     <%#= link "Register", to: Routes.user_registration_path(@conn, :new) %>
     <%# | %>
