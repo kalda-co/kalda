@@ -3,7 +3,6 @@ defmodule KaldaWeb.UserRegistrationController do
 
   alias Kalda.Accounts
   alias Kalda.Accounts.User
-  # alias KaldaWeb.UserAuth
   alias Kalda.EmailLists
 
   def new(conn, _params) do
@@ -29,7 +28,6 @@ defmodule KaldaWeb.UserRegistrationController do
           :info,
           "User created successfully. Please check your email for confirmation instructions"
         )
-        # |> UserAuth.log_in_user(user)
         |> redirect(to: "/")
 
       {:error, %Ecto.Changeset{} = changeset} ->
