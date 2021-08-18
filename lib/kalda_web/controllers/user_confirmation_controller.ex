@@ -39,7 +39,7 @@ defmodule KaldaWeb.UserConfirmationController do
       {:ok, _} ->
         conn
         |> put_flash(:info, "Account confirmed successfully.")
-        |> redirect(to: Routes.user_session_path(conn, :new))
+        |> redirect(to: "/")
 
       :error ->
         # If there is a current user and the account was already confirmed,

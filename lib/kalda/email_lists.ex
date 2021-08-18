@@ -97,31 +97,6 @@ defmodule Kalda.EmailLists do
   end
 
   @doc """
-  Makes a post request to the sendfox contact list
-  Raises exception if fails
-  List IDs can be found in the list URLs. For example:
-  https://sendfox.com/dashboard/lists/267383/contacts
-  Can be verified from localhost at the above list url if in dev.
-  ## Examples
-    iex> register_with_sendfox!(email, list_id)
-    :ok
-    iex> register_with_sendfox!("", list_id)
-    ** throws exception
-  """
-  def register_with_sendfox!(email, list_id) do
-    token = Application.get_env(:kalda, :sendfox_api_token)
-
-    url =
-      "https://api.sendfox.com/contacts?" <>
-        URI.encode_query(%{"email" => email, "lists[]" => list_id})
-
-    headers = [Authorization: "Bearer #{token}", Accept: "application/json; charset=utf-8"]
-    %{status_code: 200} = HTTPoison.post!(url, "", headers)
-    Logger.info("Successfully registered user with Sendfox list #{list_id}")
-    :ok
-  end
-
-  @doc """
   Gets a signup or creates a new one for the email if it does not exist.
   Uses default list = waitlist_56109
   ## Examples

@@ -8,7 +8,7 @@ defmodule KaldaWeb.SignupController do
 
     case EmailLists.get_or_create_signup(email) do
       {:ok, signup} ->
-        EmailLists.register_with_sendfox!(signup.email, list_id)
+        EmailLists.register_with_sendfox(signup.email, list_id)
 
         conn
         |> put_flash(:info, "Signup created successfully.")
