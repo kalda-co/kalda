@@ -20,7 +20,46 @@ defmodule Kalda.EmailLists do
   end
 
   @doc """
-  Makes a post request to the sendfox contact list
+  Makes a DELETE request to ALL sendfox contact lists!
+  List IDs can be found in the list URLs. For example:
+  https://sendfox.com/dashboard/lists/267383/contacts
+  info logs warning if fails.
+  Can be verified from localhost at the above list url in dev..
+
+  ## Examples
+
+    iex> unregister_with_sendfox(email, list_id)
+    :ok
+
+    iex> unregister_with_sendfox("", list_id)
+    :error
+
+  """
+  def unregister_with_sendfox(email, list_id) do
+    token = Application.get_env(:kalda, :sendfox_api_token)
+
+    url =
+      "https://api.sendfox.com/unsubscribe?" <>
+        URI.encode_query(%{"email" => email, "lists[]" => list_id})
+
+    headers = [Authorization: "Bearer #{token}", Accept: "application/json; charset=utf-8"]
+
+    case HTTPoison.patch(url, "", headers) do
+      {:ok, _response} ->
+        Logger.info("Successfully removed user from Sendfox list #{list_id}")
+        :ok
+
+      {:error, reason} ->
+        Logger.warn(
+          "User #{email} could not be removed from Sendfox list #{list_id} because #{reason}"
+        )
+
+        :error
+    end
+  end
+
+  @doc """
+  Attempts to make a post request to the sendfox contact list
   List IDs can be found in the list URLs. For example:
   https://sendfox.com/dashboard/lists/267383/contacts
   info logs warning if fails.
@@ -40,22 +79,25 @@ defmodule Kalda.EmailLists do
 
     headers = [Authorization: "Bearer #{token}", Accept: "application/json; charset=utf-8"]
 
-    case HTTPoison.post!(url, "", headers) do
-      %{status_code: 200} ->
+    case HTTPoison.post(url, "", headers) do
+      {:ok, _response} ->
         Logger.info("Successfully registered user with Sendfox list #{list_id}")
         :ok
 
-      _ ->
-        Logger.warn("User #{email} could not be registered to Sendfox list #{list_id}")
+      {:error, reason} ->
+        Logger.warn(
+          "User #{email} could not be registered to Sendfox list #{list_id}, because #{reason}"
+        )
+
         :error
     end
   end
 
   @doc """
   Makes a post request to the sendfox contact list
+  Raises exception if fails
   List IDs can be found in the list URLs. For example:
   https://sendfox.com/dashboard/lists/267383/contacts
-  Raises exception if fails
   Can be verified from localhost at the above list url if in dev.
   ## Examples
     iex> register_with_sendfox!(email, list_id)

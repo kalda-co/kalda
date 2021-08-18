@@ -25,6 +25,7 @@ config :kalda,
   # https://sendfox.com/dashboard/lists/56109/contacts
   sendfox_waitlist_id: "56109",
   sendfox_freemium_id: "270116",
+  sendfox_premium_id: "270115",
   load_spa_css: true,
   spa_static_prefix: nil
 
