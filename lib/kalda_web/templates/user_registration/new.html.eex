@@ -27,12 +27,12 @@
 
  <p>Usernames can be up to 35 characters long and can only contain letters, numbers, hyphens and underscores.</p>
 
+  <p>By clicking submit you accept Kalda’s
+  <%= link "terms and conditions.", to: "/terms", target: "_blank" %></p>
     <div>
-      <%= submit "Submit", class: "button"%>
+      <%= submit "Submit", class: "button no-margin-top"%>
     </div>
 
-  <p>By clicking the button above you accept Kalda’s
-  <%= link "terms and conditions.", to: "/terms" %></p>
   <% end %>
 
   <p>Already have an account?
