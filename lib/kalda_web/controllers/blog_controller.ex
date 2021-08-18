@@ -2,7 +2,7 @@ defmodule KaldaWeb.BlogController do
   use KaldaWeb, :controller
 
   alias Kalda.EmailLists
-  alias Kalda.EmailLists.WaitlistSignup
+  alias Kalda.EmailLists.Signup
 
   plug :put_root_layout, {KaldaWeb.LayoutView, :site_page}
 
@@ -11,14 +11,14 @@ defmodule KaldaWeb.BlogController do
 
     date_string = Kalda.Blog.date_string(post.date)
 
-    waitlist_signup_changeset = EmailLists.change_waitlist_signup(%WaitlistSignup{})
+    signup_changeset = EmailLists.change_signup(%Signup{})
 
     # TODO: add alt image text as a param here
     conn
     |> assign(:page_title, post.title)
     |> assign(:page_description, post.description)
     |> assign(:date_string, date_string)
-    |> render("show.html", post: post, waitlist_signup_changeset: waitlist_signup_changeset)
+    |> render("show.html", post: post, signup_changeset: signup_changeset)
   end
 
   def index(conn, _params) do

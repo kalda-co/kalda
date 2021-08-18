@@ -21,12 +21,12 @@
 
   <p>Don't have an account? Join our waiting list!</p>
 
-      <%= if @waitlist_signup_changeset.action do %>
+      <%= if @signup_changeset.action do %>
         <div class="alert alert-danger">
           Oops, something went wrong! Please try again.
         </div>
       <% end %>
-      <%= form_for @waitlist_signup_changeset, Routes.waitlist_signup_path(@conn, :create), [class: "landing-form js-email_lists-form"], fn f -> %>
+      <%= form_for @signup_changeset, Routes.signup_path(@conn, :create), [class: "landing-form js-email_lists-form"], fn f -> %>
         <%= email_input f, :email, required: true, placeholder: "me@email.com" %>
         <%= submit "Sign up", class: "gradient button" %>
       <% end %>

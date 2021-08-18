@@ -26,7 +26,7 @@ config :kalda, KaldaWeb.Endpoint,
   server: true
 
 config :kalda,
-  # Sendfox api (email waitlist_signups management)
+  # Sendfox api (email signups management)
   sendfox_api_token: read_env.("SENDFOX_TOKEN"),
   # Optionally require basic browser auth
   basic_auth_password: read_env_or.("BASIC_AUTH_PASSWORD", nil),

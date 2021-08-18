@@ -185,7 +185,7 @@ defmodule KaldaWeb.Router do
     get "/privacy-policy", PageController, :privacy_policy
     get "/terms", PageController, :terms
 
-    post "/waitlist_signups/new", WaitlistSignupController, :create
+    post "/signups/new", SignupController, :create
     delete "/users/log-out", UserSessionController, :delete
     get "/users/confirm", UserConfirmationController, :new
     post "/users/confirm", UserConfirmationController, :create

@@ -7,16 +7,21 @@ defmodule Kalda.EmailLists do
   require Logger
   alias Kalda.Repo
 
-  alias Kalda.EmailLists.WaitlistSignup
+  alias Kalda.EmailLists.Signup
 
   @doc """
-  Returns the list of waitlist_signups.
+  Returns the list of signups.
   ## Examples
-      iex> list_waitlist_signups()
-      [%WaitlistSignup{}, ...]
+      iex> list_signups()
+      [%Signup{}, ...]
   """
-  def list_waitlist_signups do
-    Repo.all(WaitlistSignup)
+  def list_signups do
+    default = "waitlist_56109"
+
+    Repo.all(
+      from s in Signup,
+        where: s.list == ^default
+    )
   end
 
   @doc """
@@ -117,43 +122,44 @@ defmodule Kalda.EmailLists do
   end
 
   @doc """
-  Gets a waitlist_signup or creates a new one for the email if it does not exist.
+  Gets a signup or creates a new one for the email if it does not exist.
+  Uses default list = waitlist_56109
   ## Examples
-      iex> create_waitlist_signup(%{field: value})
-      {:ok, %WaitlistSignup{}}
-      iex> create_waitlist_signup(%{field: bad_value})
+      iex> create_signup(%{field: value})
+      {:ok, %Signup{}}
+      iex> create_signup(%{field: bad_value})
       {:error, %Ecto.Changeset{}}
   """
-  def get_or_create_waitlist_signup(email) do
-    case get_waitlist_signup_by_email(email) do
+  def get_or_create_signup(email) do
+    case get_signup_by_email(email) do
       nil ->
-        %WaitlistSignup{email: email}
-        |> WaitlistSignup.changeset(%{})
+        %Signup{email: email}
+        |> Signup.changeset(%{})
         |> Repo.insert()
 
-      waitlist_signup ->
-        {:ok, waitlist_signup}
+      signup ->
+        {:ok, signup}
     end
   end
 
-  def get_waitlist_signup_by_email(email) do
+  def get_signup_by_email(email) do
     case email do
       nil ->
         nil
 
       _ ->
-        from(waitlist_signup in WaitlistSignup, where: waitlist_signup.email == ^email)
+        from(signup in Signup, where: signup.email == ^email)
         |> Repo.one()
     end
   end
 
   @doc """
-  Returns an `%Ecto.Changeset{}` for tracking waitlist_signup changes.
+  Returns an `%Ecto.Changeset{}` for tracking signup changes.
   ## Examples
-      iex> change_waitlist_signup(waitlist_signup)
-      %Ecto.Changeset{data: %WaitlistSignup{}}
+      iex> change_signup(signup)
+      %Ecto.Changeset{data: %Signup{}}
   """
-  def change_waitlist_signup(%WaitlistSignup{} = waitlist_signup, attrs \\ %{}) do
-    WaitlistSignup.changeset(waitlist_signup, attrs)
+  def change_signup(%Signup{} = signup, attrs \\ %{}) do
+    Signup.changeset(signup, attrs)
   end
 end
