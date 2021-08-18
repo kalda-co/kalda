@@ -19,7 +19,7 @@ defmodule KaldaWeb.UserRegistrationController do
         )
 
         # Tries to add to sendfox user freemium list
-        # TODO: log if fails as warn in rollbar?
+        # TODO: Test that error logs if fails is captured by Rollbar
         list_id = Application.get_env(:kalda, :sendfox_freemium_id)
         EmailLists.register_with_sendfox(user.email, list_id)
 
