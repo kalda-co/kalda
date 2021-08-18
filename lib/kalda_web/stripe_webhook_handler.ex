@@ -12,6 +12,7 @@ defmodule KaldaWeb.StripeWebhookHandler do
   require Logger
   alias Kalda.Accounts
   alias Kalda.Payments.Stripe.ClientInterface
+  alias Kalda.EmailLists
 
   @spec handle_event(Stripe.Event.t()) :: :ok
   def handle_event(event) do
@@ -46,6 +47,12 @@ defmodule KaldaWeb.StripeWebhookHandler do
       stripe.set_subscription_payment_method!(subscription_id, payment_method)
 
       Logger.info("Stripe subscription added for user:#{user.id}")
+
+      # Tries to add to sendfox user premium list
+      # TODO: Test if fails, captured by rollbar
+      list_id = Application.get_env(:kalda, :sendfox_premium_id)
+      EmailLists.register_with_sendfox(user.email, list_id)
+      # TODO: Remove to sendfox user from freemium list
     end)
 
     :ok

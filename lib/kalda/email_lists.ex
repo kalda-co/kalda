@@ -21,38 +21,34 @@ defmodule Kalda.EmailLists do
 
   @doc """
   Makes a DELETE request to ALL sendfox contact lists!
-  List IDs can be found in the list URLs. For example:
-  https://sendfox.com/dashboard/lists/267383/contacts
   info logs warning if fails.
   Can be verified from localhost at the above list url in dev..
 
   ## Examples
 
-    iex> unregister_with_sendfox(email, list_id)
+    iex> unregister_with_sendfox(email)
     :ok
 
-    iex> unregister_with_sendfox("", list_id)
+    iex> unregister_with_sendfox("")
     :error
 
   """
-  def unregister_with_sendfox(email, list_id) do
+  def unregister_with_sendfox(email) do
     token = Application.get_env(:kalda, :sendfox_api_token)
 
     url =
       "https://api.sendfox.com/unsubscribe?" <>
-        URI.encode_query(%{"email" => email, "lists[]" => list_id})
+        URI.encode_query(%{"email" => email})
 
     headers = [Authorization: "Bearer #{token}", Accept: "application/json; charset=utf-8"]
 
     case HTTPoison.patch(url, "", headers) do
-      {:ok, _response} ->
-        Logger.info("Successfully removed user from Sendfox list #{list_id}")
+      {:ok, %{status_code: 200}} ->
+        Logger.info("Successfully removed user from Sendfox")
         :ok
 
-      {:error, reason} ->
-        Logger.warn(
-          "User #{email} could not be removed from Sendfox list #{list_id} because #{reason}"
-        )
+      reason ->
+        Logger.error("User #{email} could not be removed from Sendfox because #{inspect(reason)}")
 
         :error
     end
@@ -80,13 +76,15 @@ defmodule Kalda.EmailLists do
     headers = [Authorization: "Bearer #{token}", Accept: "application/json; charset=utf-8"]
 
     case HTTPoison.post(url, "", headers) do
-      {:ok, _response} ->
+      {:ok, %{status_code: 200}} ->
         Logger.info("Successfully registered user with Sendfox list #{list_id}")
         :ok
 
-      {:error, reason} ->
-        Logger.warn(
-          "User #{email} could not be registered to Sendfox list #{list_id}, because #{reason}"
+      result ->
+        Logger.error(
+          "User #{email} could not be registered to Sendfox list #{list_id}, because #{
+            inspect(result)
+          }"
         )
 
         :error
