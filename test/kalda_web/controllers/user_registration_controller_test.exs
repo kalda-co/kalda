@@ -8,7 +8,6 @@ defmodule KaldaWeb.UserRegistrationControllerTest do
       conn = get(conn, Routes.user_registration_path(conn, :new))
       response = html_response(conn, 200)
       assert response =~ "<h1>Create an account</h1>"
-      assert response =~ "Log in</a>"
     end
 
     test "redirects if already logged in", %{conn: conn} do
