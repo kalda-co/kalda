@@ -12,7 +12,7 @@
           Oops, something went wrong! Please try again.
         </div>
       <% end %>
-      <%= form_for @signup_changeset, Routes.signup_path(@conn, :create), [class: "landing-form js-email_lists-form"], fn f -> %>
+      <%= form_for @signup_changeset, Routes.signup_path(@conn, :create), [class: "landing-form js-waitlist-form"], fn f -> %>
         <%= email_input f, :email, required: true, placeholder: "me@email.com" %>
         <%= submit "Sign up", class: "gradient button" %>
       <% end %>

@@ -23,7 +23,6 @@ defmodule KaldaWeb.UserRegistrationControllerTest do
 
   describe "POST /users/register" do
     @tag :capture_log
-    # test "creates account and logs in user", %{conn: conn} do
     test "creates account and prompts user to check email", %{conn: conn} do
       email = AccountsFixtures.unique_user_email()
       username = AccountsFixtures.unique_username()
@@ -39,7 +38,6 @@ defmodule KaldaWeb.UserRegistrationControllerTest do
           }
         })
 
-      # assert get_session(conn, :user_token)
       assert get_flash(conn, :info) ==
                "User created successfully. Please check your email for confirmation instructions"
 
