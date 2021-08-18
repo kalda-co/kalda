@@ -4,19 +4,19 @@ defmodule KaldaWeb.UserSessionController do
   alias Kalda.Accounts
   alias KaldaWeb.UserAuth
   alias Kalda.EmailLists
-  alias Kalda.EmailLists.WaitlistSignup
+  alias Kalda.EmailLists.Signup
 
   def new(conn, _params) do
-    waitlist_signup_changeset = EmailLists.change_waitlist_signup(%WaitlistSignup{})
+    signup_changeset = EmailLists.change_signup(%Signup{})
 
     render(conn, "new.html",
-      waitlist_signup_changeset: waitlist_signup_changeset,
+      signup_changeset: signup_changeset,
       error_message: nil
     )
   end
 
   def create(conn, %{"user" => user_params}) do
-    waitlist_signup_changeset = EmailLists.change_waitlist_signup(%WaitlistSignup{})
+    signup_changeset = EmailLists.change_signup(%Signup{})
     %{"email" => email, "password" => password} = user_params
 
     if user = Accounts.get_user_by_email_and_password(email, password) do
@@ -24,7 +24,7 @@ defmodule KaldaWeb.UserSessionController do
     else
       render(conn, "new.html",
         error_message: "Invalid email or password",
-        waitlist_signup_changeset: waitlist_signup_changeset
+        signup_changeset: signup_changeset
       )
     end
   end
