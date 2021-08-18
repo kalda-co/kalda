@@ -12,8 +12,6 @@
             <a href="/app">App</a>
           </li>
         <% end %>
-    <% else %>
-      <li><%= link "Log in", to: Routes.user_session_path(@conn, :new) %></li>
     <% end %>
     </ul>
   <div class="app-header-spacer"><span></span></div>
