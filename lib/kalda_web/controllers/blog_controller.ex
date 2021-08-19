@@ -1,8 +1,8 @@
 defmodule KaldaWeb.BlogController do
   use KaldaWeb, :controller
 
-  alias Kalda.Waitlist
-  alias Kalda.Waitlist.Signup
+  alias Kalda.EmailLists
+  alias Kalda.EmailLists.Signup
 
   plug :put_root_layout, {KaldaWeb.LayoutView, :site_page}
 
@@ -11,7 +11,7 @@ defmodule KaldaWeb.BlogController do
 
     date_string = Kalda.Blog.date_string(post.date)
 
-    signup_changeset = Waitlist.change_signup(%Signup{})
+    signup_changeset = EmailLists.change_signup(%Signup{})
 
     # TODO: add alt image text as a param here
     conn

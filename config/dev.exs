@@ -87,7 +87,9 @@ config :phoenix, :stacktrace_depth, 20
 config :phoenix, :plug_init_mode, :runtime
 
 config :kalda,
-  sendfox_list_id: "211119",
+  sendfox_waitlist_id: "275878",
+  sendfox_freemium_id: "275878",
+  sendfox_premium_id: "275879",
   spa_static_prefix: "http://localhost:4451",
   # Stripe payments (using test data mode)
   stripe_publishable_key:

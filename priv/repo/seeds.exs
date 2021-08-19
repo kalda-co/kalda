@@ -20,7 +20,7 @@ alias Kalda.Forums.ReplyReaction
 alias Kalda.Forums.Reply
 alias Kalda.Forums.Report
 alias Kalda.Events.TherapySession
-alias Kalda.Waitlist.Signup
+alias Kalda.EmailLists.Signup
 
 user =
   Kalda.Repo.insert!(%User{

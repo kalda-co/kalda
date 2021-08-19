@@ -1,12 +1,14 @@
 defmodule KaldaWeb.SignupController do
   use KaldaWeb, :controller
 
-  alias Kalda.Waitlist
+  alias Kalda.EmailLists
 
   def create(conn, %{"signup" => %{"email" => email}}) do
-    case Waitlist.get_or_create_signup(email) do
+    list_id = Application.get_env(:kalda, :sendfox_waitlist_id)
+
+    case EmailLists.get_or_create_signup(email) do
       {:ok, signup} ->
-        Waitlist.register_with_sendfox!(signup.email)
+        EmailLists.register_with_sendfox(signup.email, list_id)
 
         conn
         |> put_flash(:info, "Signup created successfully.")

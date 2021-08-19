@@ -1,6 +1,14 @@
 defmodule KaldaWeb.Api.V1.StripePaymentIntentController do
   use KaldaWeb, :controller
 
+  @doc """
+  In order to test stripe transactions, use the stripe CLI:
+  ```sh
+  stripe login
+  stripe listen --forward-to localhost:4000/webhook/stripe
+  ```
+  Ensure that the dev_secrets signing secret is up to date.
+  """
   @spec create(Plug.Conn.t(), map()) :: Plug.Conn.t()
   def create(conn, _params) do
     user = conn.assigns.current_user

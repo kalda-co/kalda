@@ -3,7 +3,7 @@ defmodule KaldaWeb.UserRegistrationController do
 
   alias Kalda.Accounts
   alias Kalda.Accounts.User
-  alias KaldaWeb.UserAuth
+  alias Kalda.EmailLists
 
   def new(conn, _params) do
     changeset = Accounts.change_user_registration(%User{})
@@ -18,12 +18,17 @@ defmodule KaldaWeb.UserRegistrationController do
           &Routes.user_confirmation_url(conn, :confirm, &1)
         )
 
+        # Tries to add to sendfox user freemium list
+        # TODO: Test that error logs if fails is captured by Rollbar
+        list_id = Application.get_env(:kalda, :sendfox_freemium_id)
+        EmailLists.register_with_sendfox(user.email, list_id)
+
         conn
         |> put_flash(
           :info,
           "User created successfully. Please check your email for confirmation instructions"
         )
-        |> UserAuth.log_in_user(user)
+        |> redirect(to: "/")
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)

@@ -69,7 +69,7 @@ defmodule KaldaWeb.UserSessionControllerTest do
     end
 
     test "emits error message with invalid credentials", %{conn: conn, user: user} do
-      signup_changeset = Kalda.Waitlist.change_signup(%Kalda.Waitlist.Signup{})
+      signup_changeset = Kalda.EmailLists.change_signup(%Kalda.EmailLists.Signup{})
 
       conn =
         post(
