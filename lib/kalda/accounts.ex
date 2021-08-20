@@ -324,7 +324,12 @@ defmodule Kalda.Accounts do
     else
       {encoded_token, user_token} = UserToken.build_email_token(user, "confirm")
       Repo.insert!(user_token)
-      UserNotifier.deliver_confirmation_instructions(user, confirmation_url_fun.(encoded_token))
+      link = confirmation_url_fun.(encoded_token)
+
+      UserNotifier.deliver_confirmation_instructions(
+        user,
+        link
+      )
     end
   end
 

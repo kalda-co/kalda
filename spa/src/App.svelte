@@ -11,9 +11,11 @@
   import { loadStripe } from "./stripe";
   export let apiBase: string;
   export let stripePublishableKey: string;
+  export let showConfirmation: boolean;
+  export let emailConfirmation: string;
 
+  let email = emailConfirmation;
   let apiToken: string | undefined;
-  let email = "";
   let password = "";
   let loginError = "";
   let submitting = false;
@@ -100,6 +102,15 @@
   />
 {:else}
   <div class="login-container">
+    {#if showConfirmation}
+      <h1>Your account is confirmed!</h1>
+      <p>
+        You're ready to log in and join the community. You can do that here in
+        your browser or in our Android app.
+      </p>
+      <p>Don't have the app yet? Download it here.</p>
+      <!-- TODO: link to play store -->
+    {/if}
     <h1>Log in</h1>
 
     {#if loginError}

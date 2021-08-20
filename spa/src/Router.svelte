@@ -106,7 +106,6 @@
         user={state.currentUser}
         post={state.reflections[0]}
         therapy={state.next_therapy}
-        pool={state.pools[0]}
       />
     </Route>
 

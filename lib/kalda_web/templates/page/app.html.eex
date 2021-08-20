@@ -30,7 +30,10 @@
   data-api-base=""
   data-environment="<%= Application.get_env(:rollbax, :environment) %>"
   data-stripe-publishable-key="<%= Application.get_env(:kalda, :stripe_publishable_key) %>"
+  data-show-confirmation="<%= @conn.assigns[:show_confirmation] %>"
+  data-email-confirmation="<%= @conn.assigns[:email_confirmation] %>"
 >
+
   <%# HACK: We shouldn't need to set this here %>
   <script>window.HMR_WEBSOCKET_PORT = 4452</script>
   <script type="module" src="<%= spa_static_path("/src/index.js") %>"></script>
