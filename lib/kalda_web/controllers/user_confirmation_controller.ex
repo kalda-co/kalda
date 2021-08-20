@@ -36,10 +36,15 @@ defmodule KaldaWeb.UserConfirmationController do
   # leaked token giving the user access to the account.
   def confirm(conn, %{"token" => token}) do
     case Accounts.confirm_user(token) do
-      {:ok, _} ->
+      {:ok, user} ->
         conn
-        |> put_flash(:info, "Account confirmed successfully.")
-        |> redirect(to: "/")
+        |> put_layout(false)
+        |> put_root_layout(false)
+        |> put_view(KaldaWeb.PageView)
+        |> render("app.html",
+          show_confirmation: true,
+          email_confirmation: user.email
+        )
 
       :error ->
         # If there is a current user and the account was already confirmed,

@@ -55,6 +55,8 @@ defmodule KaldaWeb.UserConfirmationControllerTest do
     end
   end
 
+  # TODO: assert confirm path response 200 and SPA app rendered test
+  # TODO: test generated url
   describe "GET /users/confirm/:token" do
     test "confirms the given token once", %{conn: conn, user: user} do
       token =
@@ -63,8 +65,7 @@ defmodule KaldaWeb.UserConfirmationControllerTest do
         end)
 
       conn = get(conn, Routes.user_confirmation_path(conn, :confirm, token))
-      assert redirected_to(conn) == "/"
-      assert get_flash(conn, :info) =~ "Account confirmed successfully"
+
       assert Accounts.get_user!(user.id).confirmed_at
       refute get_session(conn, :user_token)
       assert Repo.all(Accounts.UserToken) == []
