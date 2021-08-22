@@ -85,7 +85,7 @@ export type CommentNotification = {
   insertedAt: Date;
   // TODO: do we need this reply_id
   replyId: number;
-  replyAuthor: User;
+  replyAuthor: Author;
   replyContent: string;
 };
 
@@ -95,7 +95,7 @@ export type PostNotification = {
   inserted_at: Date;
   // TODO: do we need this comment_id
   notification_comment_id: number;
-  comment_author: User;
+  comment_author: Author;
   comment_content: string;
 };
 

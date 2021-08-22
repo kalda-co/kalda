@@ -150,7 +150,7 @@ defmodule KaldaWeb.Router do
     get "/dashboard", DashboardController, :index
     get "/ping", PingController, :show
     post "/stripe-payment-intent", StripePaymentIntentController, :create
-    get "/*anything", NotFoundController, :not_found
+    # get "/*anything", NotFoundController, :not_found
   end
 
   scope "/v1", KaldaWeb.Api.V1, as: :api_v1 do
