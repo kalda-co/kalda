@@ -161,6 +161,7 @@ defmodule KaldaWeb.Router do
       :json_require_subscribed_user
     ]
 
+    get "/posts/:id", PostController, :show
     post "/posts/:id/comments", CommentController, :create
     post "/comments/:id/replies", ReplyController, :create
     post "/comments/:id/reports", ReportController, :report_comment
