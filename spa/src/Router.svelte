@@ -98,9 +98,10 @@
           <Subscription {stripe} {api} />
         {/await}
       {/if}
-      
+    </Route>
+
     <Route path="notifications">
-      <Navbar title="Notifications" />
+      <Navbar title="Notifications" {state} />
       <Notifications notifications={state.commentNotifications} />
     </Route>
 

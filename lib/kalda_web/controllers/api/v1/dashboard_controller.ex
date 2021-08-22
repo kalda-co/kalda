@@ -39,7 +39,7 @@ defmodule KaldaWeb.Api.V1.DashboardController do
       reflections: reflections,
       pools: pools,
       next_therapy: next_therapy,
-      therapies: therapies_subscribed?
+      therapies: therapies_subscribed?,
       comment_notifications: comment_notifications
     )
   end

@@ -1,7 +1,6 @@
 defmodule KaldaWeb.Api.V1.NotificationView do
   use KaldaWeb, :view
   alias KaldaWeb.Api.V1.UserView
-  alias KaldaWeb.Api.V1.CommentView
 
   def render("index.json", params) do
     %{

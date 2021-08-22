@@ -131,7 +131,8 @@ defmodule KaldaWeb.Api.V1.DashboardControllerTest do
                    },
                    "comments" => []
                  }
-               ]
+               ],
+               "comment_notifications" => []
              }
     end
 
@@ -210,7 +211,8 @@ defmodule KaldaWeb.Api.V1.DashboardControllerTest do
                    },
                    "comments" => []
                  }
-               ]
+               ],
+               "comment_notifications" => []
              }
     end
 
@@ -331,7 +333,8 @@ defmodule KaldaWeb.Api.V1.DashboardControllerTest do
                    },
                    "comments" => []
                  }
-               ]
+               ],
+               "comment_notifications" => []
              }
     end
   end

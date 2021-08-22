@@ -13,8 +13,8 @@ defmodule KaldaWeb.Api.V1.NotificationControllerTest do
     end
   end
 
-  describe "GET index" do
-    setup [:register_and_log_in_user]
+  describe "GET notification index, user stripe subscibed" do
+    setup [:register_and_log_in_subscribed_stripe_user]
 
     # TODO daily reflection posts should generate a notification to all users??
     # TODO test the route is just for the currentuser and not all ie
@@ -98,7 +98,7 @@ defmodule KaldaWeb.Api.V1.NotificationControllerTest do
       user2 = AccountsFixtures.user()
       comment2 = ForumsFixtures.comment(post1, user2)
       # Reply3 should not show in notifications as it is not on a comment by current_user
-      reply3 = ForumsFixtures.reply_with_notification(comment2, reply_auth1)
+      _reply3 = ForumsFixtures.reply_with_notification(comment2, reply_auth1)
 
       conn = get(conn, "/v1/notifications")
 
@@ -134,6 +134,21 @@ defmodule KaldaWeb.Api.V1.NotificationControllerTest do
                    }
                  ]
                }
+             }
+    end
+  end
+
+  describe "GET notification index, unsubscibed user" do
+    setup [:register_and_log_in_user]
+
+    test "does not list notifications", %{
+      conn: conn,
+      user: _current_user
+    } do
+      conn = get(conn, "/v1/notifications")
+
+      assert json_response(conn, 402) == %{
+               "error" => "You must be subscribed to access this resource"
              }
     end
   end

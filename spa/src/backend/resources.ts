@@ -53,7 +53,7 @@ export function commentNotification(json: unknown): CommentNotification {
     commentId: field("comment_id", number)(json),
     insertedAt: field("inserted_at", date)(json),
     replyId: field("notification_reply_id", number)(json),
-    replyAuthor: field("reply_author", user)(json),
+    replyAuthor: field("reply_author", author)(json),
     replyContent: field("reply_content", string)(json),
   };
 }
