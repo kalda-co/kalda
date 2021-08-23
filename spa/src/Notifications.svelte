@@ -1,7 +1,6 @@
 <script lang="ts">
   import type { CommentNotification } from "./state";
   import { link } from "svelte-routing";
-  import { post } from "./backend/resources";
 
   export let notifications: CommentNotification[];
 </script>
