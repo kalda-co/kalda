@@ -10,7 +10,7 @@ defmodule KaldaWeb.Api.V1.NotificationController do
     # The notification_reply cannot be accessed through the comment because there may be multiple replies per comment
     # TODO do not show notifications for when user replies to own comment!
     notifications =
-      Forums.get_notifications(user, preload: [:comment, notification_reply: [:author]])
+      Forums.get_notifications(user, preload: [comment: [:post], notification_reply: [:author]])
 
     conn
     |> render("index.json",

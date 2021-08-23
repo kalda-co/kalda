@@ -13,8 +13,8 @@
   import Notifications from "./Notifications.svelte";
   import { Router, Route } from "svelte-routing";
   import type { Stripe } from "./stripe";
-  import type { AppState } from "./state";
-  import type { ApiClient } from "./backend";
+  import type { AppState, Post } from "./state";
+  import type { ApiClient, Response } from "./backend";
   import {
     scheduleDailyReflectionNotifications,
     scheduleTherapyNotifications,
@@ -23,9 +23,21 @@
   export let state: AppState;
   export let api: ApiClient;
   export let stripe: Promise<Stripe>;
+  // TODO: work out if poststate can be defined as a function to call with postId, see how otherroutes are returned like eg createComment that isnt in Appstate
+  // let postState: Post;
+  let post: Post;
 
   scheduleDailyReflectionNotifications();
   scheduleTherapyNotifications(state.therapies);
+
+  async function getPostById(paramId: string): Promise<Response<Post>> {
+    let id: number = parseInt(paramId);
+    let response = await api.getPostState(id);
+    if (response.type === "Success") {
+      post = response.resource;
+    }
+    return response;
+  }
 </script>
 
 <main>
@@ -103,6 +115,29 @@
     <Route path="notifications">
       <Navbar title="Notifications" {state} />
       <Notifications notifications={state.commentNotifications} />
+    </Route>
+
+    <Route path="posts/:id" let:params>
+      <Navbar title="Post" {state} />
+      <!-- maybe you can interpolate here? -->
+      <!-- TODO: await bit goes after getting postState -->
+      <!-- let postState = api.getPostState({params.id}) -->
+      <!-- requires fetching more state -->
+      <!-- poststate.post below muct just be post and this needs to just be post in here and I need to GET that post by being able to define and call a fn that takes (params) for postId -->
+
+      <!-- post={getPostById("{params.id}"} -->
+      {#await getPostById(params.id)}
+        <Loading />
+      {:then}
+        <Thread
+          placeholder="Your reflection here"
+          commentName="response"
+          currentUser={state.currentUser}
+          {api}
+          {post}
+          {state}
+        />
+      {/await}
     </Route>
 
     <!-- Default catch all route -->

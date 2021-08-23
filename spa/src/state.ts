@@ -8,6 +8,7 @@ export type Title =
   | "Nerd data"
   | "My Account"
   | "Notifications"
+  | "Post"
   | "Will Pool";
 
 export type AppState = {
@@ -17,6 +18,10 @@ export type AppState = {
   next_therapy?: Therapy;
   therapies: Array<Therapy>;
   commentNotifications: Array<CommentNotification>;
+};
+
+export type PostState = {
+  post: Post;
 };
 
 export type Post = {
@@ -80,6 +85,7 @@ export type Notifications = {
 };
 
 export type CommentNotification = {
+  parentPostId: number,
   commentContent: string;
   commentId: number;
   insertedAt: Date;

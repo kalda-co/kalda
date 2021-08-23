@@ -124,7 +124,6 @@ defmodule KaldaWeb.Router do
     get "/dashboard", DashboardController, :index
     get "/ping", PingController, :show
     post "/stripe-payment-intent", StripePaymentIntentController, :create
-    get "/*anything", NotFoundController, :not_found
   end
 
   scope "/v1/token", KaldaWeb.Api.V1, as: :api_v1_token do
@@ -135,12 +134,14 @@ defmodule KaldaWeb.Router do
       :json_require_subscribed_user
     ]
 
+    get "/posts/:id", PostController, :show
     post "/posts/:id/comments", CommentController, :create
     post "/comments/:id/replies", ReplyController, :create
     post "/comments/:id/reports", ReportController, :report_comment
     post "/replies/:id/reports", ReportController, :report_reply
     patch "/comments/:id/reactions", CommentReactionController, :update
     patch "/replies/:id/reactions", ReplyReactionController, :update
+    get "/*anything", NotFoundController, :not_found
   end
 
   # TODO: remove these routes that use the old cookie based auth
