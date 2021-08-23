@@ -196,7 +196,7 @@ export class AuthenticatedApiClient implements ApiClient {
   }
 
   async getPostState(postId: number): Promise<Response<Post>> {
-    let url = this.route(`v1/token/posts/${postId}`)
+    let url = this.route(`/v1/token/posts/${postId}`)
     return await this.httpClient.get(url).expect(200).request(post);
   }
 }

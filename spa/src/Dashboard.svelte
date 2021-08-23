@@ -90,10 +90,6 @@
     background-image: url("/images/pink-jellyfish.png");
   }
 
-  .background-purple {
-    background-image: url("/images/purple-jellyfish.png");
-  }
-
   .card {
     padding: var(--gap);
     background-color: var(--color-white);
