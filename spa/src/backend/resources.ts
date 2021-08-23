@@ -13,6 +13,7 @@ import type {
   Post,
   Reply,
   AppState,
+  PostState,
   Comment,
   Therapy,
   Reaction,
@@ -35,6 +36,12 @@ export function appState(json: unknown): AppState {
   };
 }
 
+export function postState(json: unknown): PostState {
+  return {
+    post: field("post", post)(json),
+  }
+}
+
 export function therapy(json: unknown): Therapy {
   return {
     id: field("id", number)(json),
@@ -49,6 +56,7 @@ export function therapy(json: unknown): Therapy {
 
 export function commentNotification(json: unknown): CommentNotification {
   return {
+    parentPostId: field("parent_post_id", number)(json),
     commentContent: field("comment_content", string)(json),
     commentId: field("comment_id", number)(json),
     insertedAt: field("inserted_at", date)(json),

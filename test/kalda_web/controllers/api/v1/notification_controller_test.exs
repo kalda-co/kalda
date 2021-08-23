@@ -52,6 +52,7 @@ defmodule KaldaWeb.Api.V1.NotificationControllerTest do
                  "post_notifications" => nil,
                  "comment_notifications" => [
                    %{
+                     "parent_post_id" => post1.id,
                      "comment_id" => comment1.id,
                      "comment_content" => comment1.content,
                      "inserted_at" => NaiveDateTime.to_iso8601(reply1.inserted_at),
@@ -63,6 +64,7 @@ defmodule KaldaWeb.Api.V1.NotificationControllerTest do
                      }
                    },
                    %{
+                     "parent_post_id" => post1.id,
                      "comment_id" => comment1.id,
                      "comment_content" => comment1.content,
                      "inserted_at" => NaiveDateTime.to_iso8601(reply2.inserted_at),
@@ -111,6 +113,7 @@ defmodule KaldaWeb.Api.V1.NotificationControllerTest do
                  "post_notifications" => nil,
                  "comment_notifications" => [
                    %{
+                     "parent_post_id" => post1.id,
                      "comment_id" => comment1.id,
                      "comment_content" => comment1.content,
                      "inserted_at" => NaiveDateTime.to_iso8601(reply1.inserted_at),
@@ -122,6 +125,7 @@ defmodule KaldaWeb.Api.V1.NotificationControllerTest do
                      }
                    },
                    %{
+                     "parent_post_id" => post1.id,
                      "comment_id" => comment1.id,
                      "comment_content" => comment1.content,
                      "inserted_at" => NaiveDateTime.to_iso8601(reply2.inserted_at),
