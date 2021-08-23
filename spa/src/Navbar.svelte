@@ -1,5 +1,6 @@
 <script>
   import type { Title, AppState } from "./state";
+  import type { CommentNotification } from "./state";
   import { fly } from "svelte/transition";
   import { link } from "svelte-routing";
   import { deleteApiToken } from "./local-storage";
@@ -7,6 +8,7 @@
 
   export let state: AppState;
   export let title: Title;
+  export let notifications: CommentNotification[];
 
   let menu = false;
 
@@ -25,14 +27,40 @@
 </script>
 
 <div class="navbar">
-  <a href="/dashboard" class="button-link" use:link on:click={closeMenu}>
-    <img
-      src="/images/kalda-rainbow-logo.svg"
-      alt="Kalda's Rainbow Logo"
-      class="logo"
-    />
-  </a>
-  <h1 class="title">{title}</h1>
+  <div class="left-links">
+    <a href="/dashboard" class="button-link" use:link on:click={closeMenu}>
+      <img
+        src="/images/kalda-rainbow-logo.svg"
+        alt="Kalda's Rainbow Logo"
+        class="logo"
+      />
+    </a>
+    {#if title == "Kalda"}
+      <a use:link href="/notifications" on:click={closeMenu}>
+        <button class="alert-button">
+          {#if !notifications.length}
+            <img
+              src="/images/unalert.svg"
+              alt="Bell for notifications"
+              class="alert-image"
+            />
+          {:else}
+            <img
+              src="/images/alert.svg"
+              alt="Bell for notifications"
+              class="alert-image"
+            />
+          {/if}
+          <span>Alerts</span>
+        </button>
+      </a>
+    {/if}
+  </div>
+  {#if title == "Kalda"}
+    <h1 class="title-hidden">{title}</h1>
+  {:else}
+    <h1 class="title">{title}</h1>
+  {/if}
   <button on:click|preventDefault={toggleMenu}>
     <img src="/images/burger-menu.svg" alt="hamburger-menu" class="hamburger" />
   </button>
@@ -101,7 +129,35 @@
     flex-direction: row;
     justify-items: center;
   }
-
+  .left-links {
+    display: flex;
+    flex-direction: row;
+  }
+  .logo {
+    margin-top: 2px;
+  }
+  button.alert-button {
+    border: solid white 1px;
+    border-radius: 90px;
+    padding-left: var(--gap-s);
+    padding-right: var(--gap-s);
+    margin-left: var(--gap);
+    color: var(--color-white);
+  }
+  button > img,
+  button > span {
+    vertical-align: middle;
+  }
+  button > span {
+    padding-left: 4px;
+  }
+  .alert-image {
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+  .title-hidden {
+    color: var(--color-purple);
+  }
   .title {
     color: var(--color-white);
   }
@@ -148,7 +204,6 @@
     margin: var(--gap);
     padding: var(--gap) var(--gap-l);
   }
-
   .close {
     margin: var(--gap-s) var(--gap);
     text-align: right;
