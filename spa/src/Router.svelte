@@ -149,7 +149,11 @@
     </Route>
 
     <Route path="posts/:id" let:params>
-      <!-- <Navbar title="Post" id={params.id} {state} /> -->
+      <Navbar
+        notifications={state.commentNotifications}
+        title="Notification"
+        {state}
+      />
       {#await getPostById(params.id)}
         <Loading />
       {:then}
