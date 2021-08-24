@@ -27,7 +27,7 @@ export function appState(json: unknown): AppState {
     currentUser: field("current_user", user)(json),
     reflections: field("reflections", array(post))(json),
     pools: field("pools", array(post))(json),
-    next_therapy: field("next_therapy", optional(therapy))(json),
+    nextTherapy: field("next_therapy", optional(therapy))(json),
     therapies: field("therapies", array(therapy))(json),
     commentNotifications: field(
       "comment_notifications",

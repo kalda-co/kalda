@@ -218,7 +218,6 @@ _reply_reaction =
 
 # TODO: test and enforce that the user must be the author of the post/comment/reply that the notification is on,
 # and the auth of the reply MUST be the correct one for the reply...
-# TODO: does this mean that the noticiation does not need to reference the user or author (except through preloads?)
 _notification =
   Kalda.Repo.insert!(%Notification{
     user_id: user.id,
