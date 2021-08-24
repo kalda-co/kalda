@@ -1,3 +1,57 @@
+
+
+
+@media only screen and (max-device-width: 400px) and (min-device-width:100px) 
+
+{
+
+  div.blog-profile-container {
+
+
+  }
+
+  .pansexual-text {
+    padding-bottom: 0px;
+  }
+
+  img.blog-profile-image {
+    float: center; 
+    width: 100%;
+    height: 100%;
+  }
+  
+  h3.blog-profile-caption {
+    color: white;
+    text-align: center;
+    background-color: #5004b4;
+
+  }
+
+}
+
+p.pansexual-text {
+  padding-bottom: 25px;
+}
+
+.blog-profile-caption {
+  color: white;
+  box-align: center;
+  background-color: #5004b4;
+}
+
+.blog-profile-image {
+  float: left;
+  height: 210px;
+  width: 200px;
+  margin-right: 25px;
+
+}
+
+.blog-profile-container {
+
+
+}
+
 .top-image-container {
   height: 400px;
   background-size: cover;
@@ -30,17 +84,24 @@
 }
 
 
-.figure {
-  border: 1px #cccccc solid;
-  padding: 4px;
 
+.blog-inline-image {
+  float:left; 
+  padding-right:25px;
+  height:200px;
 }
 
-.figcaption {
+
+
+
+
+.blog-figcaption {
   color: white;
   font-style: italic;
   padding: 2px;
   text-align: left;
+  background-color:#5004b4; 
+  
 }
 
 
@@ -221,3 +282,4 @@ p {
   display: block;
   padding-bottom: var(--gap-l);
 }
+
