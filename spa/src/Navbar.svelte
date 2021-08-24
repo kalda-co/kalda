@@ -90,7 +90,7 @@
 
     <div class="content button-grid">
       <a use:link href="/dashboard" on:click={closeMenu} class="button">
-        Home
+        Dashboard
       </a>
       <a use:link href="/guidelines" on:click={closeMenu} class="button">
         Guidelines
@@ -103,9 +103,6 @@
       </a>
       <a use:link href="/urgent-support" on:click={closeMenu} class="button">
         Urgent Support
-      </a>
-      <a use:link href="/will-pool" on:click={closeMenu} class="button">
-        Will Pool
       </a>
       <a use:link href="/subscription" on:click={closeMenu} class="button">
         Subscription
@@ -201,8 +198,8 @@
   .button {
     background-color: var(--color-white);
     color: var(--color-purple);
-    margin: var(--gap);
-    padding: var(--gap) var(--gap-l);
+    margin: var(--gap-s);
+    padding: var(--gap) 28px;
   }
   .close {
     margin: var(--gap-s) var(--gap);
