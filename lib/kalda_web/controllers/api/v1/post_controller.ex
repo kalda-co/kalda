@@ -4,24 +4,7 @@ defmodule KaldaWeb.Api.V1.PostController do
   alias Kalda.Forums
 
   def show(conn, %{"id" => id}) do
-    post =
-      Forums.get_post!(id,
-        preload: [
-          :author,
-          comments: [
-            :author,
-            comment_reactions: [
-              :author
-            ],
-            replies: [
-              :author,
-              reply_reactions: [
-                :author
-              ]
-            ]
-          ]
-        ]
-      )
+    post = Forums.get_post_order_preloads!(id)
 
     conn
     |> put_status(200)

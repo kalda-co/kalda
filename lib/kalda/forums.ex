@@ -289,6 +289,50 @@ defmodule Kalda.Forums do
   end
 
   @doc """
+  Gets a single post, with the comments preloaded and ordered descending, and the replies preloaded ordered ascending
+
+  Raises `Ecto.NoResultsError` if the Post does not exist.
+
+  ## Examples
+
+      iex> get_post_order_preloads!(123)
+      %Post{}
+
+      iex> get_post_order_preloads!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_post_order_preloads!(id) do
+    from(post in Post,
+      where: post.id == ^id,
+      preload: [
+        :author,
+        comments:
+          ^from(comment in Comment,
+            order_by: [desc: comment.inserted_at],
+            preload: [
+              :author,
+              comment_reactions: [
+                :author
+              ],
+              replies:
+                ^from(reply in Reply,
+                  order_by: [asc: reply.inserted_at],
+                  preload: [
+                    :author,
+                    reply_reactions: [
+                      :author
+                    ]
+                  ]
+                )
+            ]
+          )
+      ]
+    )
+    |> Repo.get!(id)
+  end
+
+  @doc """
   Deletes a post.
 
   ## Examples
@@ -1037,8 +1081,8 @@ defmodule Kalda.Forums do
   # TODO Background job that deletes all rows for reply_reactions that have relate and send_love as both false. Perhaps 1x per day?
 
   @doc """
-  Returns all notifications for user OR empty list if no notifications.
-  Orders as most recently publised first. Limit can be provided as an optional argument.
+  Returns most recent 20 notifications, newest first, for user OR empty list if no notifications.
+  Orders as most recently published first. Greater/lesser Limit can be provided as an optional argument.
 
   ## Examples
 
@@ -1050,8 +1094,7 @@ defmodule Kalda.Forums do
   """
 
   def get_notifications(user, opts \\ []) do
-    # TODO: can opts be limit and preload?
-    limit = opts[:limit] || 100
+    limit = opts[:limit] || 20
     preload = opts[:preload] || []
 
     Repo.all(
