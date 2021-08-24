@@ -14,8 +14,6 @@ defmodule KaldaWeb.Api.V1.NotificationView do
 
   def render_comment_notification(notification) do
     %{
-      # Cannot currently access notification id
-      # id: notification.id,
       parent_post_id: notification.comment.post_id,
       comment_id: notification.comment_id,
       comment_content: notification.comment.content,

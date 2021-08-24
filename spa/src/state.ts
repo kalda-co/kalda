@@ -15,7 +15,7 @@ export type AppState = {
   currentUser: User;
   reflections: Array<Post>;
   pools: Array<Post>;
-  next_therapy?: Therapy;
+  nextTherapy?: Therapy;
   therapies: Array<Therapy>;
   commentNotifications: Array<CommentNotification>;
 };
@@ -80,8 +80,8 @@ export type Therapy = {
 };
 
 export type Notifications = {
-  comment_notifications: Array<CommentNotification>;
-  post_notifications: Array<PostNotification>;
+  commentNotifications: Array<CommentNotification>;
+  postNotifications: Array<PostNotification>;
 };
 
 export type CommentNotification = {
@@ -89,20 +89,18 @@ export type CommentNotification = {
   commentContent: string;
   commentId: number;
   insertedAt: Date;
-  // TODO: do we need this reply_id
   replyId: number;
   replyAuthor: Author;
   replyContent: string;
 };
 
 export type PostNotification = {
-  post_content: string;
-  post_id: number;
-  inserted_at: Date;
-  // TODO: do we need this comment_id
-  notification_comment_id: number;
-  comment_author: Author;
-  comment_content: string;
+  postContent: string;
+  postId: number;
+  insertedAt: Date;
+  commentId: number;
+  commentAuthor: Author;
+  commentContent: string;
 };
 
 export interface BubbleContent {

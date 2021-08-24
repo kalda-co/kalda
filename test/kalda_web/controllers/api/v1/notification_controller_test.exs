@@ -16,7 +16,6 @@ defmodule KaldaWeb.Api.V1.NotificationControllerTest do
   describe "GET notification index, user stripe subscibed" do
     setup [:register_and_log_in_subscribed_stripe_user]
 
-    # TODO daily reflection posts should generate a notification to all users??
     # TODO test the route is just for the currentuser and not all ie
     # uses /v1/notifications
     # TODO tests that other notifications not shown
@@ -36,10 +35,7 @@ defmodule KaldaWeb.Api.V1.NotificationControllerTest do
 
       comment1 = ForumsFixtures.comment(post1, current_user)
       reply1 = ForumsFixtures.reply_with_notification(comment1, reply_auth1)
-      # TODO: No way of knowing the notification id!! Is it required?
       reply2 = ForumsFixtures.reply_with_notification(comment1, reply_auth2)
-
-      # TODO daily reflection posts should generate a notification to all users??
 
       conn = get(conn, "/v1/notifications")
 

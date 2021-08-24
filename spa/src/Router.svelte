@@ -138,7 +138,7 @@
       <Dashboard
         user={state.currentUser}
         post={state.reflections[0]}
-        therapy={state.next_therapy}
+        therapy={state.nextTherapy}
       />
     </Route>
 
