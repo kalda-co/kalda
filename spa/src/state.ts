@@ -8,7 +8,7 @@ export type Title =
   | "Nerd data"
   | "My Account"
   | "Notifications"
-  | "Post"
+  | "Notification"
   | "Will Pool";
 
 export type AppState = {
@@ -95,8 +95,8 @@ export type CommentNotification = {
 };
 
 export type PostNotification = {
+  parentPostId: number;
   postContent: string;
-  postId: number;
   insertedAt: Date;
   commentId: number;
   commentAuthor: Author;
