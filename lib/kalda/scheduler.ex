@@ -13,3 +13,6 @@ defmodule Scheduler do
     {:noreply, state}
   end
 end
+
+# TODO: add it to your list of child processes in Kalda.Application
+# See [tutorial](https://blog.appsignal.com/2020/06/24/best-practices-for-background-jobs-in-elixir.html)
