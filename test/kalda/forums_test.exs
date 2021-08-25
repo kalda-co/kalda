@@ -1127,7 +1127,7 @@ defmodule Kalda.ForumsTest do
       post = ForumsFixtures.post(user)
       comment = ForumsFixtures.comment(post, user)
 
-      assert {:ok, %Forums.Reply{}} =
+      assert {:ok, {%Forums.Reply{}, %Forums.Notification{}}} =
                Forums.create_reply_with_notification(user, comment, @valid_reply_attrs)
     end
 

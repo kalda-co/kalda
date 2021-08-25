@@ -34,8 +34,10 @@ defmodule KaldaWeb.Api.V1.NotificationControllerTest do
         })
 
       comment1 = ForumsFixtures.comment(post1, current_user)
-      reply1 = ForumsFixtures.reply_with_notification(comment1, reply_auth1)
-      reply2 = ForumsFixtures.reply_with_notification(comment1, reply_auth2)
+
+      {reply1, _notification1} = ForumsFixtures.reply_with_notification(comment1, reply_auth1)
+
+      {reply2, _notification2} = ForumsFixtures.reply_with_notification(comment1, reply_auth2)
 
       conn = get(conn, "/v1/notifications")
 
@@ -90,13 +92,15 @@ defmodule KaldaWeb.Api.V1.NotificationControllerTest do
         })
 
       comment1 = ForumsFixtures.comment(post1, current_user)
-      reply1 = ForumsFixtures.reply_with_notification(comment1, reply_auth1)
-      reply2 = ForumsFixtures.reply_with_notification(comment1, reply_auth2)
+
+      {reply1, _notification1} = ForumsFixtures.reply_with_notification(comment1, reply_auth1)
+
+      {reply2, _notification2} = ForumsFixtures.reply_with_notification(comment1, reply_auth2)
 
       user2 = AccountsFixtures.user()
       comment2 = ForumsFixtures.comment(post1, user2)
       # Reply3 should not show in notifications as it is not on a comment by current_user
-      _reply3 = ForumsFixtures.reply_with_notification(comment2, reply_auth1)
+      {_reply3, _notification3} = ForumsFixtures.reply_with_notification(comment2, reply_auth1)
 
       conn = get(conn, "/v1/notifications")
 
