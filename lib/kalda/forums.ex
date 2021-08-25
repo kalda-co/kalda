@@ -1135,39 +1135,63 @@ defmodule Kalda.Forums do
     )
   end
 
+  @doc """
+  Creates a notification for the author of the (given) comment, that a (given) reply has been created on said comment.
+
+  If a user decides to opt out of all notifications, attrs can be passed in such as %{read: true, expired: true} on creation
+
+  ## Examples
+      iex> create_reply_notification(comment, reply)
+      {:ok, %Notification{}}
+
+      iex> create_reply_notification(comment, reply, %{field: value})
+      {:ok, %Notification{}}
+
+      iex> create_reply_notification(comment, reply, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
   def create_reply_notification(comment, reply, attrs \\ %{}) do
     %Notification{
       user_id: comment.author_id,
       comment_id: comment.id,
       notification_reply_id: reply.id
-      # TODO could put expires at in here as a default
     }
     |> Notification.changeset(attrs)
     |> Repo.insert()
   end
 
-  # attrs always empty on create, just required for update
-
+  # Only used in tests
   def create_reply_notification!(comment, reply) do
     %Notification{
       user_id: comment.author_id,
       comment_id: comment.id,
       notification_reply_id: reply.id
-      # TODO could put expires at in here as a default
     }
     |> Notification.changeset(%{})
     |> Repo.insert!()
   end
 
-  # TODO: spec
+  @doc """
+  Only used in test fixtures and tests.
+  Creates a reply for the given user, on a comment, and creates a notification for the comment-author that their comment has been replied to.
+  If the notification cannot be created, for example because the comment or author has now been deleted, an exception is raised.
+  TODO: decide if this (raising exception) is the correct behaviour
+
+  ## Examples
+
+      iex> create_reply_with_notification(user, comment, %{field: value})
+      {:ok, %Reply{}}
+
+      iex> create_reply_with_notification(user, comment, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
   def create_reply_with_notification(user, comment, reply_attrs \\ %{}) do
     case create_reply(user, comment, reply_attrs) do
       {:ok, %Reply{} = reply} ->
         notification = create_reply_notification!(comment, reply)
         {:ok, {reply, notification}}
-
-      # TODO: check above that this is the rightway to retun this
-      # Should raise if notification not created. Otherwise should return the {ok, reply} tuple
 
       _ ->
         {:error, %Ecto.Changeset{}}

@@ -23,8 +23,6 @@ defmodule KaldaWeb.Api.V1.ReplyController do
     |> KaldaWeb.Api.V1.handle_error(conn)
   end
 
-  # TODO: make sure this also creates a notification.
-
   def show(conn, %{"id" => id}) do
     reply =
       Forums.get_reply!(id, preload: [:author, replies: [:author], reply_reactions: [:author]])
