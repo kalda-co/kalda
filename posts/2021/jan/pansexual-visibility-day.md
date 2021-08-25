@@ -26,7 +26,7 @@ In a literal sense, the term is more inclusive when compared to the term bisexua
 May 24th of every year is Pansexual Visibility Day, and we believe that it is important to spread awareness about the existence of pansexuals everywhere. 
 
 # Why do we do this? 
-There is an unfortunate amount of erasure that happens when it comes to pansexual people, and the point of visibility days like these are to promote awareness and dispell the notion thatansexual people don’t exist. 
+There is an unfortunate amount of erasure that happens when it comes to pansexual people, and the point of visibility days like these are to promote awareness and dispell the notion that pansexual people don’t exist. 
 
 We have compiled a list of famous people who are pansexual, who you may not have known about: 
 
@@ -45,7 +45,7 @@ We have compiled a list of famous people who are pansexual, who you may not have
 
 
 <p>
-Best known for their roles as Brandy Epps in <strong>Orange is the New Black   </strong>   and Taylor Mason in <strong>Billions</strong>, Asia Kate Dillon is an American actor who uses singular they pronouns. Interestingly, their role on *Billions* is the first non-binary main character on North American television! 
+Best known for their roles as Brandy Epps in <strong>Orange is the New Black   </strong>   and Taylor Mason in <strong>Billions</strong>, Asia Kate Dillon is an American actor who uses singular they pronouns. Interestingly, their role on <strong>Billions</strong> is the first non-binary main character on North American television! 
 </p> 
 
 
@@ -74,7 +74,7 @@ Best known for their roles as Brandy Epps in <strong>Orange is the New Black   <
 </h3>
 
 <p>
-Amandla Stenberg is an American actress and singer, she has starred in *The Hunger Games* and *Sleepy Hollow* to name just two. She is a non-binary person and was included in Time's list of Most Influencial Teens in both 2015 and 2016. She has been an outspoken supporter of LGBTQIA+ rights. 
+Amandla Stenberg is an American actress and singer, she has starred in <strong>The Hunger Games</strong> and <strong>Sleepy Hollow</strong> to name just two. She is a non-binary person and was included in Time's list of Most Influencial Teens in both 2015 and 2016. She has been an outspoken supporter of LGBTQIA+ rights. 
 </p>
 
 <p>
@@ -100,13 +100,13 @@ Amandla Stenberg is an American actress and singer, she has starred in *The Hung
 </h3>
 
 <p>
-        James Stephanie Sterling is a British-American YouTuber and pundit, who's focus is on the video games industry. They have written for many different companies, including Destructiod and the Escapist. They are non-binary and identify using singular they pronouns. 
+        James Stephanie Sterling is a British-American YouTuber and pundit, who's focus is on the video games industry. They have written for many different companies, including Destructoid and the Escapist. They are non-binary and identify using singular they pronouns. 
 
         They are a crowdfunding success story, and use their considerable online presence to expose the horrid treatment of those who work in the video games industry, as well as other topics. 
 </p>
 
 <p>
-<strong> "As I've said before, in the UK as a kid, culture had only *just* started to begrudgingly accept bisexuals were real. I didn't *know* about the actual scope of sexuality and gender." 
+<strong> "As I've said before, in the UK as a kid, culture had only *just* started to begrudgingly accept bisexuals were real. I didn't <i>know</i> about the actual scope of sexuality and gender." 
  </strong>
 </p>
 
@@ -152,6 +152,7 @@ I really enjoy visibility days, and their purpose is to highlight the existence 
 
 Even if it isn’t Pansexual Visibility Day. 
 </p>
+<br/>
 <hr/>
 
 <h2> This article was written by Boris Shoalwise </h2>
