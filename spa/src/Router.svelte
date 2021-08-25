@@ -42,7 +42,11 @@
 <main>
   <Router>
     <Route path="daily-reflection">
-      <Navbar title="Daily Reflection" {state} />
+      <Navbar
+        notifications={state.commentNotifications}
+        title="Daily Reflection"
+        {state}
+      />
       {#each state.reflections as post (post.id)}
         <Thread
           placeholder="Your reflection here"
@@ -56,7 +60,11 @@
     </Route>
 
     <Route path="will-pool">
-      <Navbar title="Will Pool" {state} />
+      <Navbar
+        notifications={state.commentNotifications}
+        title="Will Pool"
+        {state}
+      />
       {#each state.pools as post (post.id)}
         <Thread
           placeholder="Your commitment here"
@@ -70,17 +78,29 @@
     </Route>
 
     <Route path="guidelines">
-      <Navbar title="Guidelines" {state} />
+      <Navbar
+        notifications={state.commentNotifications}
+        title="Guidelines"
+        {state}
+      />
       <Guidelines />
     </Route>
 
     <Route path="group-info">
-      <Navbar title="Session Info" {state} />
+      <Navbar
+        notifications={state.commentNotifications}
+        title="Session Info"
+        {state}
+      />
       <GroupSessions />
     </Route>
 
     <Route path="therapy-sessions">
-      <Navbar title="Therapy Sessions" {state} />
+      <Navbar
+        notifications={state.commentNotifications}
+        title="Therapy Sessions"
+        {state}
+      />
       <TherapySessions
         therapies={state.therapies}
         currentUser={state.currentUser}
@@ -88,12 +108,20 @@
     </Route>
 
     <Route path="urgent-support">
-      <Navbar title="Urgent Support" {state} />
+      <Navbar
+        notifications={state.commentNotifications}
+        title="Urgent Support"
+        {state}
+      />
       <UrgentSupport />
     </Route>
 
     <Route path="nerd-data">
-      <Navbar title="Nerd data" {state} />
+      <Navbar
+        notifications={state.commentNotifications}
+        title="Nerd data"
+        {state}
+      />
       <NerdData />
     </Route>
 
@@ -112,12 +140,20 @@
     </Route>
 
     <Route path="notifications">
-      <Navbar title="Notifications" {state} />
+      <Navbar
+        notifications={state.commentNotifications}
+        title="Notifications"
+        {state}
+      />
       <Notifications notifications={state.commentNotifications} />
     </Route>
 
     <Route path="posts/:id" let:params>
-      <!-- <Navbar title="Post" id={params.id} {state} /> -->
+      <Navbar
+        notifications={state.commentNotifications}
+        title="Notification"
+        {state}
+      />
       {#await getPostById(params.id)}
         <Loading />
       {:then}
@@ -134,7 +170,11 @@
 
     <!-- Default catch all route -->
     <Route>
-      <Navbar title="Kalda" {state} />
+      <Navbar
+        notifications={state.commentNotifications}
+        title="Kalda"
+        {state}
+      />
       <Dashboard
         user={state.currentUser}
         post={state.reflections[0]}

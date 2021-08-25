@@ -289,6 +289,77 @@ defmodule Kalda.Forums do
   end
 
   @doc """
+  Gets a single post, with the comments preloaded and ordered descending, and the replies preloaded ordered ascending
+
+  Raises `Ecto.NoResultsError` if the Post does not exist.
+
+  ## Examples
+
+      iex> get_post_order_preloads!(123)
+      %Post{
+        author: %User{},
+        comments: [
+          %Comment{
+            author: %User{},
+            comment_reactions: [
+              %Comment_Reaction{
+                author: %User{}
+              },
+              ...%Comment_Reaction{},
+            ]
+            replies: [
+              %Reply{
+                author: %User{},
+                reply_reactions: [
+                  %Reply_Reaction{
+                    author: %User{}
+                  },
+                  ...%Reply_Reaction{},
+                ]
+
+              },
+              ...%Reply{}
+            ]
+          },
+          ...%Comment{}
+        ]
+      }
+
+      iex> get_post_order_preloads!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_post_order_preloads!(id) do
+    from(post in Post,
+      where: post.id == ^id,
+      preload: [
+        :author,
+        comments:
+          ^from(comment in Comment,
+            order_by: [desc: comment.inserted_at],
+            preload: [
+              :author,
+              comment_reactions: [
+                :author
+              ],
+              replies:
+                ^from(reply in Reply,
+                  order_by: [asc: reply.inserted_at],
+                  preload: [
+                    :author,
+                    reply_reactions: [
+                      :author
+                    ]
+                  ]
+                )
+            ]
+          )
+      ]
+    )
+    |> Repo.get!(id)
+  end
+
+  @doc """
   Deletes a post.
 
   ## Examples
@@ -1037,8 +1108,8 @@ defmodule Kalda.Forums do
   # TODO Background job that deletes all rows for reply_reactions that have relate and send_love as both false. Perhaps 1x per day?
 
   @doc """
-  Returns all notifications for user OR empty list if no notifications.
-  Orders as most recently publised first. Limit can be provided as an optional argument.
+  Returns most recent 20 notifications, newest first, for user OR empty list if no notifications.
+  Orders as most recently published first. Greater/lesser Limit can be provided as an optional argument.
 
   ## Examples
 
@@ -1050,18 +1121,16 @@ defmodule Kalda.Forums do
   """
 
   def get_notifications(user, opts \\ []) do
-    # TODO: can opts be limit and preload?
-    limit = opts[:limit] || 100
+    limit = opts[:limit] || 20
     preload = opts[:preload] || []
 
     Repo.all(
       from n in Notification,
         where: n.user_id == ^user.id,
-        # TODO should be sent and read = false and expires_at nil OR in future??
         where: n.read == false,
         where: n.expired == false,
-        limit: ^limit,
         order_by: [desc: n.inserted_at],
+        limit: ^limit,
         preload: ^preload
     )
   end
@@ -1090,11 +1159,12 @@ defmodule Kalda.Forums do
     |> Repo.insert!()
   end
 
+  # TODO: spec
   def create_reply_with_notification(user, comment, reply_attrs \\ %{}) do
     case create_reply(user, comment, reply_attrs) do
       {:ok, %Reply{} = reply} ->
-        create_reply_notification!(comment, reply)
-        {:ok, reply}
+        notification = create_reply_notification!(comment, reply)
+        {:ok, {reply, notification}}
 
       # TODO: check above that this is the rightway to retun this
       # Should raise if notification not created. Otherwise should return the {ok, reply} tuple
@@ -1102,5 +1172,26 @@ defmodule Kalda.Forums do
       _ ->
         {:error, %Ecto.Changeset{}}
     end
+  end
+
+  def auto_expire_notifications(days) do
+    now = NaiveDateTime.local_now()
+    days_in_seconds = days * 86400
+
+    days_ago = NaiveDateTime.add(now, -days_in_seconds, :second)
+
+    from(n in Notification,
+      where: n.expired == false,
+      # Older than days_ago
+      where: n.inserted_at <= ^days_ago
+    )
+    |> Kalda.Repo.update_all(set: [expired: true])
+  end
+
+  def get_notification!(id) do
+    from(n in Notification,
+      where: n.id == ^id
+    )
+    |> Repo.get!(id)
   end
 end

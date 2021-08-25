@@ -248,7 +248,7 @@ defmodule Kalda.ForumsTest do
              ]
     end
 
-    test "get_scheduled_posts as daily reflections" do
+    test "get_scheduled_posts only gets posts(daily reflections) in future" do
       now = NaiveDateTime.local_now()
       user1 = AccountsFixtures.user()
       user2 = AccountsFixtures.user()
@@ -311,7 +311,7 @@ defmodule Kalda.ForumsTest do
              ]
     end
 
-    test "get_forums_posts_limit/2 returns all posts" do
+    test "get_forums_posts_limit/2 returns n most recent posts from given forum" do
       now = NaiveDateTime.local_now()
       user = AccountsFixtures.user()
       user1 = AccountsFixtures.user()
@@ -428,6 +428,65 @@ defmodule Kalda.ForumsTest do
                  comments: []
                }
              ]
+    end
+
+    test "get_post_order_preloads!/1 gets post by id with comments in descending order and replies in ascending order" do
+      now = NaiveDateTime.local_now()
+      user1 = AccountsFixtures.user()
+      user2 = AccountsFixtures.user()
+      post1 = ForumsFixtures.post(user1)
+      comment1 = ForumsFixtures.comment(post1, user1)
+      comment2 = ForumsFixtures.comment(post1, user2)
+      reply1 = ForumsFixtures.reply(comment1, user1)
+      reply2 = ForumsFixtures.reply(comment1, user2)
+
+      set_inserted_at = fn thing, time ->
+        Repo.update_all(
+          from(r in thing.__struct__, where: r.id == ^thing.id),
+          set: [inserted_at: time]
+        )
+      end
+
+      # Makes comment 1 older than comment 2
+      set_inserted_at.(comment1, NaiveDateTime.add(now, -10000))
+      # Makes reply1 older than reply2
+      set_inserted_at.(reply1, NaiveDateTime.add(now, -10000))
+
+      result = Forums.get_post_order_preloads!(post1.id)
+
+      res2 =
+        [result]
+        |> Enum.map(fn post ->
+          %{
+            id: post.id,
+            comments:
+              Enum.map(post.comments, fn comment ->
+                replies = Enum.map(comment.replies, fn reply -> %{id: reply.id} end)
+                %{id: comment.id, replies: replies}
+              end)
+          }
+        end)
+
+      assert res2 == [
+               %{
+                 id: post1.id,
+                 comments: [
+                   %{id: comment2.id, replies: []},
+                   %{
+                     id: comment1.id,
+                     replies: [
+                       %{id: reply1.id},
+                       %{id: reply2.id}
+                     ]
+                   }
+                 ]
+               }
+             ]
+    end
+
+    # TODO: At some point might be nice to change this to 'This post may have been deleted by an admin and is no longer available'
+    test "get_post_order_preloads!/1 raises?? if no post, ie deleted" do
+      assert_raise(Ecto.NoResultsError, fn -> Forums.get_post_order_preloads!(12) end)
     end
 
     test "change_post/1 returns a post changeset" do
@@ -1068,7 +1127,7 @@ defmodule Kalda.ForumsTest do
       post = ForumsFixtures.post(user)
       comment = ForumsFixtures.comment(post, user)
 
-      assert {:ok, %Forums.Reply{}} =
+      assert {:ok, {%Forums.Reply{}, %Forums.Notification{}}} =
                Forums.create_reply_with_notification(user, comment, @valid_reply_attrs)
     end
 
@@ -1090,6 +1149,46 @@ defmodule Kalda.ForumsTest do
 
       assert {:error, %Ecto.Changeset{}} =
                Forums.create_reply_with_notification(user, comment, @valid_reply_attrs)
+    end
+
+    test "auto_expire_notifications/1 sets all notifications older than days to expired == true" do
+      now = NaiveDateTime.local_now()
+      user1 = AccountsFixtures.user()
+      user2 = AccountsFixtures.user()
+      post = ForumsFixtures.post(user1)
+      comment = ForumsFixtures.comment(post, user1)
+
+      {_reply1, notification1} = ForumsFixtures.reply_with_notification(comment, user2)
+
+      {_reply2, notification2} = ForumsFixtures.reply_with_notification(comment, user1)
+
+      {_reply3, notification3} = ForumsFixtures.reply_with_notification(comment, user2)
+
+      set_inserted_at = fn thing, time ->
+        Repo.update_all(
+          from(r in thing.__struct__, where: r.id == ^thing.id),
+          set: [inserted_at: time]
+        )
+      end
+
+      days_15 = 86400 * 15
+      days_16 = 86400 * 16
+      # Makes comment 1 older than comment 2
+      set_inserted_at.(notification1, NaiveDateTime.add(now, -days_15))
+      set_inserted_at.(notification2, NaiveDateTime.add(now, -days_16))
+
+      assert notification1.expired == false
+      assert notification2.expired == false
+
+      assert {2, nil} = Forums.auto_expire_notifications(14)
+
+      n1 = Forums.get_notification!(notification1.id)
+      n2 = Forums.get_notification!(notification2.id)
+      n3 = Forums.get_notification!(notification3.id)
+
+      assert n2.expired == true
+      assert n1.expired == true
+      assert n3.expired == false
     end
   end
 end
