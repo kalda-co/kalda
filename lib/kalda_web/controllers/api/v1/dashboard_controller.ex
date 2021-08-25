@@ -30,13 +30,17 @@ defmodule KaldaWeb.Api.V1.DashboardController do
         _ -> therapies |> Enum.map(fn therapy -> %{therapy | link: ""} end)
       end
 
+    comment_notifications =
+      Forums.get_notifications(user, preload: [:comment, notification_reply: [:author]])
+
     conn
     |> render("index.json",
       user: user,
       reflections: reflections,
       pools: pools,
       next_therapy: next_therapy,
-      therapies: therapies_subscribed?
+      therapies: therapies_subscribed?,
+      comment_notifications: comment_notifications
     )
   end
 end

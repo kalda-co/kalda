@@ -5,7 +5,6 @@
 
   export let user: User;
   export let post: Post | undefined;
-  export let pool: Post | undefined;
   export let therapy: Therapy | undefined;
 </script>
 
@@ -32,7 +31,7 @@
       <h2>Activities</h2>
       <div class="card background-pink">
         <div class="date-container">
-          <img class="inline-icon" src="images/cal.svg" alt="calendar icon" />
+          <img class="inline-icon" src="/images/cal.svg" alt="calendar icon" />
           <p>
             {readableDate(therapy.startsAt)}, {readableTime(therapy.startsAt)} (British
             Summer Time)
@@ -47,20 +46,6 @@
           </a>
         </div>
       </div>
-    </section>
-  {/if}
-
-  {#if pool}
-    <section class="content">
-      <a use:link href="/will-pool">
-        <div class="card background-purple pointer">
-          <h1>Will Pool</h1>
-          <p>
-            <span class="underline">Make a commitment</span> to do something that
-            you need to get done
-          </p>
-        </div>
-      </a>
     </section>
   {/if}
 </article>
@@ -102,11 +87,7 @@
   }
 
   .background-pink {
-    background-image: url("./images/pink-jellyfish.png");
-  }
-
-  .background-purple {
-    background-image: url("./images/purple-jellyfish.png");
+    background-image: url("/images/pink-jellyfish.png");
   }
 
   .card {
@@ -118,7 +99,6 @@
     color: var(--color-purple);
   }
 
-  .card.background-purple,
   .card.background-pink a,
   .card.background-pink {
     color: var(--color-white);
@@ -137,10 +117,6 @@
 
   .card h1 {
     margin: 0px;
-  }
-
-  .background-purple h1 {
-    padding-top: 80px;
   }
 
   .underline {

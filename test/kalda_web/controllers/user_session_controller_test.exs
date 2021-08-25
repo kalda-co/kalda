@@ -11,8 +11,7 @@ defmodule KaldaWeb.UserSessionControllerTest do
     test "renders log in page", %{conn: conn} do
       conn = get(conn, Routes.user_session_path(conn, :new))
       response = html_response(conn, 200)
-      assert response =~ "log in:</h1>"
-      assert response =~ "Log in</a>"
+      assert response =~ "log in</h1>"
       assert response =~ "Forgot your password?</a>"
     end
 
@@ -82,7 +81,7 @@ defmodule KaldaWeb.UserSessionControllerTest do
         )
 
       response = html_response(conn, 200)
-      assert response =~ "log in:</h1>"
+      assert response =~ "log in</h1>"
       assert response =~ "Invalid email or password"
     end
   end

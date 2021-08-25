@@ -37,6 +37,17 @@ defmodule Kalda.ForumsFixtures do
     reply
   end
 
+  # TODO app breaks if try to delete a reply created this way!!!
+  def reply_with_notification(comment = %Comment{}, author = %User{}, attrs \\ %{}) do
+    defaults = %{
+      content: unique_content()
+    }
+
+    attrs = Map.merge(defaults, attrs)
+    {:ok, reply} = Kalda.Forums.create_reply_with_notification(author, comment, attrs)
+    reply
+  end
+
   def unmoderated_report(reporter = %User{}, content_type, p_c_r, attrs \\ %{}) do
     defaults = %{
       reporter_reason: "A good reason"

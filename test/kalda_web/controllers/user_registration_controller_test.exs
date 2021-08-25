@@ -8,7 +8,6 @@ defmodule KaldaWeb.UserRegistrationControllerTest do
       conn = get(conn, Routes.user_registration_path(conn, :new))
       response = html_response(conn, 200)
       assert response =~ "<h1>Create an account</h1>"
-      assert response =~ "Log in</a>"
     end
 
     test "redirects if already logged in", %{conn: conn} do
@@ -39,9 +38,7 @@ defmodule KaldaWeb.UserRegistrationControllerTest do
         })
 
       assert get_flash(conn, :info) ==
-               "User created successfully. Please check your email for confirmation instructions"
-
-      assert redirected_to(conn) =~ "/"
+               "Success. Please check your emails and click the link to confirm your account."
 
       # Now do a logged in request and assert on the menu
       conn = get(conn, "/")

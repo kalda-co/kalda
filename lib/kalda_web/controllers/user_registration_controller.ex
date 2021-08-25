@@ -26,9 +26,9 @@ defmodule KaldaWeb.UserRegistrationController do
         conn
         |> put_flash(
           :info,
-          "User created successfully. Please check your email for confirmation instructions"
+          "Success. Please check your emails and click the link to confirm your account."
         )
-        |> redirect(to: "/")
+        |> render("show.html")
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)

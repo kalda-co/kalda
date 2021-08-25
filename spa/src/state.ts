@@ -7,14 +7,21 @@ export type Title =
   | "Urgent Support"
   | "Nerd data"
   | "My Account"
+  | "Notifications"
+  | "Post"
   | "Will Pool";
 
 export type AppState = {
   currentUser: User;
   reflections: Array<Post>;
   pools: Array<Post>;
-  next_therapy?: Therapy;
+  nextTherapy?: Therapy;
   therapies: Array<Therapy>;
+  commentNotifications: Array<CommentNotification>;
+};
+
+export type PostState = {
+  post: Post;
 };
 
 export type Post = {
@@ -70,6 +77,30 @@ export type Therapy = {
   description: string;
   therapist: string;
   credentials: string;
+};
+
+export type Notifications = {
+  commentNotifications: Array<CommentNotification>;
+  postNotifications: Array<PostNotification>;
+};
+
+export type CommentNotification = {
+  parentPostId: number,
+  commentContent: string;
+  commentId: number;
+  insertedAt: Date;
+  replyId: number;
+  replyAuthor: Author;
+  replyContent: string;
+};
+
+export type PostNotification = {
+  postContent: string;
+  postId: number;
+  insertedAt: Date;
+  commentId: number;
+  commentAuthor: Author;
+  commentContent: string;
 };
 
 export interface BubbleContent {

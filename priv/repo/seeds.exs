@@ -19,6 +19,7 @@ alias Kalda.Forums.CommentReaction
 alias Kalda.Forums.ReplyReaction
 alias Kalda.Forums.Reply
 alias Kalda.Forums.Report
+alias Kalda.Forums.Notification
 alias Kalda.Events.TherapySession
 alias Kalda.EmailLists.Signup
 
@@ -166,10 +167,17 @@ reply =
     comment_id: comment.id
   })
 
-_reply1 =
+reply1 =
   Kalda.Repo.insert!(%Reply{
     content: "I do not feel powerful I feel a bit B minus",
     author_id: user.id,
+    comment_id: comment.id
+  })
+
+reply2 =
+  Kalda.Repo.insert!(%Reply{
+    content: "you can tell me about it!",
+    author_id: user2.id,
     comment_id: comment.id
   })
 
@@ -206,6 +214,29 @@ _reply_reaction =
     reply_id: reply.id,
     author_id: user5.id,
     send_love: true
+  })
+
+# TODO: test and enforce that the user must be the author of the post/comment/reply that the notification is on,
+# and the auth of the reply MUST be the correct one for the reply...
+_notification =
+  Kalda.Repo.insert!(%Notification{
+    user_id: user.id,
+    comment_id: comment.id,
+    notification_reply_id: reply2.id
+  })
+
+_notification =
+  Kalda.Repo.insert!(%Notification{
+    user_id: user.id,
+    comment_id: comment.id,
+    notification_reply_id: reply.id
+  })
+
+_notification =
+  Kalda.Repo.insert!(%Notification{
+    user_id: user.id,
+    comment_id: comment.id,
+    notification_reply_id: reply1.id
   })
 
 _report =

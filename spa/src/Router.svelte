@@ -10,10 +10,11 @@
   import UrgentSupport from "./UrgentSupport.svelte";
   import Subscription from "./Subscription/Subscription.svelte";
   import MyAccount from "./Subscription/MyAccount.svelte";
+  import Notifications from "./Notifications.svelte";
   import { Router, Route } from "svelte-routing";
   import type { Stripe } from "./stripe";
-  import type { AppState } from "./state";
-  import type { ApiClient } from "./backend";
+  import type { AppState, Post } from "./state";
+  import type { ApiClient, Response } from "./backend";
   import {
     scheduleDailyReflectionNotifications,
     scheduleTherapyNotifications,
@@ -23,8 +24,19 @@
   export let api: ApiClient;
   export let stripe: Promise<Stripe>;
 
+  let post: Post;
+
   scheduleDailyReflectionNotifications();
   scheduleTherapyNotifications(state.therapies);
+
+  async function getPostById(paramId: string): Promise<Response<Post>> {
+    let id: number = parseInt(paramId);
+    let response = await api.getPostState(id);
+    if (response.type === "Success") {
+      post = response.resource;
+    }
+    return response;
+  }
 </script>
 
 <main>
@@ -99,14 +111,34 @@
       {/if}
     </Route>
 
+    <Route path="notifications">
+      <Navbar title="Notifications" {state} />
+      <Notifications notifications={state.commentNotifications} />
+    </Route>
+
+    <Route path="posts/:id" let:params>
+      <!-- <Navbar title="Post" id={params.id} {state} /> -->
+      {#await getPostById(params.id)}
+        <Loading />
+      {:then}
+        <Thread
+          placeholder="Your reflection here"
+          commentName="response"
+          currentUser={state.currentUser}
+          {api}
+          {post}
+          {state}
+        />
+      {/await}
+    </Route>
+
     <!-- Default catch all route -->
     <Route>
       <Navbar title="Kalda" {state} />
       <Dashboard
         user={state.currentUser}
         post={state.reflections[0]}
-        therapy={state.next_therapy}
-        pool={state.pools[0]}
+        therapy={state.nextTherapy}
       />
     </Route>
 

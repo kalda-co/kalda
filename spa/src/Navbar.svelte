@@ -82,6 +82,9 @@
       <a use:link href="/subscription" on:click={closeMenu} class="button">
         Subscription
       </a>
+      <a use:link href="/notifications" on:click={closeMenu} class="button">
+        Notifications
+      </a>
       <a href="/" on:click={logout} class="button"> Log Out </a>
     </div>
     <a use:link href="/nerd-data" on:click={closeMenu} class="debug-button">

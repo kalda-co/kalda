@@ -125,6 +125,10 @@ button {
   margin-top: var(--gap);
 }
 
+.no-margin-top {
+  margin-top: unset;
+}
+
 textarea {
   font-family: var(--font-family);
 }

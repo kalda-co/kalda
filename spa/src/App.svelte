@@ -11,9 +11,11 @@
   import { loadStripe } from "./stripe";
   export let apiBase: string;
   export let stripePublishableKey: string;
+  export let showConfirmation: boolean;
+  export let emailConfirmation: string;
 
+  let email = emailConfirmation;
   let apiToken: string | undefined;
-  let email = "";
   let password = "";
   let loginError = "";
   let submitting = false;
@@ -100,7 +102,16 @@
   />
 {:else}
   <div class="login-container">
-    <h1>Hi! If you have an account, you can log in:</h1>
+    {#if showConfirmation}
+      <h1>Your account is confirmed!</h1>
+      <p>
+        You're ready to log in and join the community. You can do that here in
+        your browser or in our Android app.
+      </p>
+      <p>Don't have the app yet? Download it here.</p>
+      <!-- TODO: link to play store -->
+    {/if}
+    <h1>Log in</h1>
 
     {#if loginError}
       <div class="alert alert-danger">
@@ -141,11 +152,6 @@
         Haven't created an account yet? <span class="forgot-password">
           <a href="/users/register">Register here.</a>
         </span>
-      </p>
-      <p>
-        Please note that for security reasons, registration and password reset
-        will take you to your default browser, outside of the app. You can
-        return here to log in.
       </p>
     </div>
   </div>

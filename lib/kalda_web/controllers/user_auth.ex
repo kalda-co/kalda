@@ -194,6 +194,7 @@ defmodule KaldaWeb.UserAuth do
       conn
       |> put_flash(:error, "You are not authorised to access this page.")
       |> maybe_store_return_to()
+      |> renew_session()
       |> redirect(to: "/")
       |> halt()
     end

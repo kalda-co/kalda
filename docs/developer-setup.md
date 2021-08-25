@@ -126,6 +126,7 @@ asdf install
 ```sh
 mix deps.get
 npm install
+asdf reshim nodejs
 ```
 
 ## Setup the Kalda database
@@ -147,3 +148,68 @@ Any front-end changes will be automatically synced with the browser, no need
 to hit refresh.
 
 You're now ready to developer Kalda!
+
+## Getting your local environment up to date
+
+If it has been a while since you did any coding locally, you might struggle to get your environments and branches working correctly, here are a few steps that might help:
+
+NB!!! Make sure you are always working on a branch, and that it is up to date with main (the Kalda codebase in production):
+
+- Your local environment or branch is not up to date 
+
+## OPTION A: you haven't started any new work on a new branch:
+
+```sh
+# ALWAYS MAKE SURE YOU ARE ON MAIN
+git checkout main
+# ALWAYS MAKE SURE MAIN IS UP TO DATE BEFORE YOU START
+git pull
+# Make a new branch off of main, to work on:
+git checkout -b nameofmynewbranch
+# start coding!
+```
+## OPTION B: IF you already have a branch (called, e.g.  mybranch)
+
+```sh
+#check out the main branch
+git checkout main
+# get the latest version locally
+git pull
+# make sure your branch is up to date, i.e. it has the latest version of main 'behind' it.
+git checkout mybranch
+git fetch origin
+git rebase origin/main
+# IF there are CONFLICTS, please contact a developer, DO NOT DO `git push --force`
+# IF this works and there are no conflicts, it will say "... rebase successful":
+git push --force
+```
+
+If you have merge conflicts, it is best to grab one of the dev team to help you resolve them.
+
+- You get a postgres error AND/OR
+- The app doesn't work locally/at localhost:4000
+
+```sh
+# make sure you have all the latest npm dependencies
+mix deps.get
+# install them
+npm install
+# make sure the new installations are all in the right place
+asdf reshim nodejs
+# make sure all the migrations have run
+mix ecto.reset
+```
+
+- You did all of the above and the tests still fail
+
+```sh
+mix test
+# lots of tests fail that you don't expect them to
+# this means your test migrations are out of sync with the app migrations
+mix ecto.reset
+# This can take a while.
+MIX_ENV=test mix do ecto.drop, ecto.create, ecto.migrate end
+# This runs the migrations for the test environment
+# This should now behave as you expect, run it to check:
+mix test
+```

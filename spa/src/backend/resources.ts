@@ -13,11 +13,13 @@ import type {
   Post,
   Reply,
   AppState,
+  PostState,
   Comment,
   Therapy,
   Reaction,
   LoginSuccess,
   StripePaymentIntent,
+  CommentNotification,
 } from "../state";
 
 export function appState(json: unknown): AppState {
@@ -25,9 +27,19 @@ export function appState(json: unknown): AppState {
     currentUser: field("current_user", user)(json),
     reflections: field("reflections", array(post))(json),
     pools: field("pools", array(post))(json),
-    next_therapy: field("next_therapy", optional(therapy))(json),
+    nextTherapy: field("next_therapy", optional(therapy))(json),
     therapies: field("therapies", array(therapy))(json),
+    commentNotifications: field(
+      "comment_notifications",
+      array(commentNotification)
+    )(json),
   };
+}
+
+export function postState(json: unknown): PostState {
+  return {
+    post: field("post", post)(json),
+  }
 }
 
 export function therapy(json: unknown): Therapy {
@@ -42,6 +54,17 @@ export function therapy(json: unknown): Therapy {
   };
 }
 
+export function commentNotification(json: unknown): CommentNotification {
+  return {
+    parentPostId: field("parent_post_id", number)(json),
+    commentContent: field("comment_content", string)(json),
+    commentId: field("comment_id", number)(json),
+    insertedAt: field("inserted_at", date)(json),
+    replyId: field("notification_reply_id", number)(json),
+    replyAuthor: field("reply_author", author)(json),
+    replyContent: field("reply_content", string)(json),
+  };
+}
 export function post(json: unknown): Post {
   return {
     id: field("id", number)(json),

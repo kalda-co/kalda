@@ -8,9 +8,12 @@ defmodule KaldaWeb.Api.V1.ReplyController do
     comment = Forums.get_comment!(comment_id)
 
     with {:ok, %Reply{} = reply} <- Forums.create_reply(user, comment, reply_params) do
+      {:ok, _} = Forums.create_reply_notification(comment, reply)
+
       reply =
         reply
         |> Map.put(:author, user)
+        # |> Map.put(:comment, comment)
         |> Map.put(:reply_reactions, [])
 
       conn
@@ -18,5 +21,14 @@ defmodule KaldaWeb.Api.V1.ReplyController do
       |> render("show.json", reply: reply)
     end
     |> KaldaWeb.Api.V1.handle_error(conn)
+  end
+
+  # TODO: make sure this also creates a notification.
+
+  def show(conn, %{"id" => id}) do
+    reply =
+      Forums.get_reply!(id, preload: [:author, replies: [:author], reply_reactions: [:author]])
+
+    render(conn, "show.json", reply: reply)
   end
 end
