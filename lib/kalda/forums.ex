@@ -296,7 +296,34 @@ defmodule Kalda.Forums do
   ## Examples
 
       iex> get_post_order_preloads!(123)
-      %Post{}
+      %Post{
+        author: %User{},
+        comments: [
+          %Comment{
+            author: %User{},
+            comment_reactions: [
+              %Comment_Reaction{
+                author: %User{}
+              },
+              ...%Comment_Reaction{},
+            ]
+            replies: [
+              %Reply{
+                author: %User{},
+                reply_reactions: [
+                  %Reply_Reaction{
+                    author: %User{}
+                  },
+                  ...%Reply_Reaction{},
+                ]
+
+              },
+              ...%Reply{}
+            ]
+          },
+          ...%Comment{}
+        ]
+      }
 
       iex> get_post_order_preloads!(456)
       ** (Ecto.NoResultsError)
@@ -1100,11 +1127,10 @@ defmodule Kalda.Forums do
     Repo.all(
       from n in Notification,
         where: n.user_id == ^user.id,
-        # TODO should be sent and read = false and expires_at nil OR in future??
         where: n.read == false,
         where: n.expired == false,
-        limit: ^limit,
         order_by: [desc: n.inserted_at],
+        limit: ^limit,
         preload: ^preload
     )
   end
@@ -1133,11 +1159,12 @@ defmodule Kalda.Forums do
     |> Repo.insert!()
   end
 
+  # TODO: spec
   def create_reply_with_notification(user, comment, reply_attrs \\ %{}) do
     case create_reply(user, comment, reply_attrs) do
       {:ok, %Reply{} = reply} ->
-        create_reply_notification!(comment, reply)
-        {:ok, reply}
+        notification = create_reply_notification!(comment, reply)
+        {:ok, {reply, notification}}
 
       # TODO: check above that this is the rightway to retun this
       # Should raise if notification not created. Otherwise should return the {ok, reply} tuple
@@ -1145,5 +1172,26 @@ defmodule Kalda.Forums do
       _ ->
         {:error, %Ecto.Changeset{}}
     end
+  end
+
+  def auto_expire_notifications(days) do
+    now = NaiveDateTime.local_now()
+    days_in_seconds = days * 86400
+
+    days_ago = NaiveDateTime.add(now, -days_in_seconds, :second)
+
+    from(n in Notification,
+      where: n.expired == false,
+      # Older than days_ago
+      where: n.inserted_at <= ^days_ago
+    )
+    |> Kalda.Repo.update_all(set: [expired: true])
+  end
+
+  def get_notification!(id) do
+    from(n in Notification,
+      where: n.id == ^id
+    )
+    |> Repo.get!(id)
   end
 end

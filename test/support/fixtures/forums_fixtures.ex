@@ -27,6 +27,7 @@ defmodule Kalda.ForumsFixtures do
     post
   end
 
+  # TODO: should I remove this? so one cannot create one without the other, same in Forum.ex
   def reply(comment = %Comment{}, author = %User{}, attrs \\ %{}) do
     defaults = %{
       content: unique_content()
@@ -44,8 +45,11 @@ defmodule Kalda.ForumsFixtures do
     }
 
     attrs = Map.merge(defaults, attrs)
-    {:ok, reply} = Kalda.Forums.create_reply_with_notification(author, comment, attrs)
-    reply
+
+    {:ok, {reply, notification}} =
+      Kalda.Forums.create_reply_with_notification(author, comment, attrs)
+
+    {reply, notification}
   end
 
   def unmoderated_report(reporter = %User{}, content_type, p_c_r, attrs \\ %{}) do

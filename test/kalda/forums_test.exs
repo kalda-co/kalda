@@ -1127,7 +1127,7 @@ defmodule Kalda.ForumsTest do
       post = ForumsFixtures.post(user)
       comment = ForumsFixtures.comment(post, user)
 
-      assert {:ok, %Forums.Reply{}} =
+      assert {:ok, {%Forums.Reply{}, %Forums.Notification{}}} =
                Forums.create_reply_with_notification(user, comment, @valid_reply_attrs)
     end
 
@@ -1149,6 +1149,46 @@ defmodule Kalda.ForumsTest do
 
       assert {:error, %Ecto.Changeset{}} =
                Forums.create_reply_with_notification(user, comment, @valid_reply_attrs)
+    end
+
+    test "auto_expire_notifications/1 sets all notifications older than days to expired == true" do
+      now = NaiveDateTime.local_now()
+      user1 = AccountsFixtures.user()
+      user2 = AccountsFixtures.user()
+      post = ForumsFixtures.post(user1)
+      comment = ForumsFixtures.comment(post, user1)
+
+      {_reply1, notification1} = ForumsFixtures.reply_with_notification(comment, user2)
+
+      {_reply2, notification2} = ForumsFixtures.reply_with_notification(comment, user1)
+
+      {_reply3, notification3} = ForumsFixtures.reply_with_notification(comment, user2)
+
+      set_inserted_at = fn thing, time ->
+        Repo.update_all(
+          from(r in thing.__struct__, where: r.id == ^thing.id),
+          set: [inserted_at: time]
+        )
+      end
+
+      days_15 = 86400 * 15
+      days_16 = 86400 * 16
+      # Makes comment 1 older than comment 2
+      set_inserted_at.(notification1, NaiveDateTime.add(now, -days_15))
+      set_inserted_at.(notification2, NaiveDateTime.add(now, -days_16))
+
+      assert notification1.expired == false
+      assert notification2.expired == false
+
+      assert {2, nil} = Forums.auto_expire_notifications(14)
+
+      n1 = Forums.get_notification!(notification1.id)
+      n2 = Forums.get_notification!(notification2.id)
+      n3 = Forums.get_notification!(notification3.id)
+
+      assert n2.expired == true
+      assert n1.expired == true
+      assert n3.expired == false
     end
   end
 end
