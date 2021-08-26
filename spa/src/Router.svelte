@@ -24,18 +24,18 @@
   export let api: ApiClient;
   export let stripe: Promise<Stripe>;
 
-  let post: Post;
-
   scheduleDailyReflectionNotifications();
   scheduleTherapyNotifications(state.therapies);
 
-  async function getPostById(paramId: string): Promise<Response<Post>> {
+  async function getPostById(paramId: string): Promise<Post | undefined> {
     let id: number = parseInt(paramId);
+    // Look for the post in the daily reflections
+    let foundPost = state.reflections.find((post) => post.id == id);
+    if (foundPost) return foundPost;
+
+    // We don't have this post yet so get it from the API
     let response = await api.getPostState(id);
-    if (response.type === "Success") {
-      post = response.resource;
-    }
-    return response;
+    if (response.type === "Success") return response.resource;
   }
 </script>
 
@@ -156,15 +156,19 @@
       />
       {#await getPostById(params.id)}
         <Loading />
-      {:then}
-        <Thread
-          placeholder="Your reflection here"
-          commentName="response"
-          currentUser={state.currentUser}
-          {api}
-          {post}
-          {state}
-        />
+      {:then post}
+        {#if post}
+          <Thread
+            placeholder="Your reflection here"
+            commentName="response"
+            currentUser={state.currentUser}
+            {api}
+            {post}
+            {state}
+          />
+        {:else}
+          Post not found
+        {/if}
       {/await}
     </Route>
 
