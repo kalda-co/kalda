@@ -8,7 +8,9 @@
 
   export let state: AppState;
   export let title: Title;
-  export let notifications: CommentNotification[];
+  // export let notifications: CommentNotification[];
+
+  let notifications: Array<CommentNotification> = state.commentNotifications;
 
   let menu = false;
 

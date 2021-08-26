@@ -1,11 +1,12 @@
 <script lang="ts">
-  import type { Therapy, User } from "./state";
+  import type { AppState } from "./state";
   import { link } from "svelte-routing";
   import { readableDate, readableTime } from "./date";
 
-  // export let state: AppState;
-  export let currentUser: User;
-  export let therapies: Therapy[];
+  export let state: AppState;
+
+  let currentUser = state.currentUser;
+  let therapies = state.therapies;
 
   function therapyImage(index: number) {
     let images = [

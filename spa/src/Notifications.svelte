@@ -1,8 +1,10 @@
 <script lang="ts">
-  import type { CommentNotification } from "./state";
+  import type { AppState, CommentNotification } from "./state";
   import { link } from "svelte-routing";
 
-  export let notifications: CommentNotification[];
+  export let state: AppState;
+  // export let notifications: CommentNotification[];
+  let notifications: Array<CommentNotification> = state.commentNotifications;
 </script>
 
 {#each notifications as notification}

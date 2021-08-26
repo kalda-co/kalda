@@ -14,7 +14,7 @@
   import { Router, Route } from "svelte-routing";
   import type { Stripe } from "./stripe";
   import type { AppState, Post } from "./state";
-  import type { ApiClient, Response } from "./backend";
+  import type { ApiClient } from "./backend";
   import {
     scheduleDailyReflectionNotifications,
     scheduleTherapyNotifications,
@@ -45,11 +45,7 @@
 <main>
   <Router>
     <Route path="daily-reflection">
-      <Navbar
-        notifications={state.commentNotifications}
-        title="Daily Reflection"
-        {state}
-      />
+      <Navbar title="Daily Reflection" {state} />
       {#each state.reflections as post (post.id)}
         <Thread
           placeholder="Your reflection here"
@@ -62,11 +58,7 @@
     </Route>
 
     <Route path="will-pool">
-      <Navbar
-        notifications={state.commentNotifications}
-        title="Will Pool"
-        {state}
-      />
+      <Navbar title="Will Pool" {state} />
       {#each state.pools as post (post.id)}
         <Thread
           placeholder="Your commitment here"
@@ -79,47 +71,27 @@
     </Route>
 
     <Route path="guidelines">
-      <Navbar
-        notifications={state.commentNotifications}
-        title="Guidelines"
-        {state}
-      />
+      <Navbar title="Guidelines" {state} />
       <Guidelines />
     </Route>
 
     <Route path="group-info">
-      <Navbar
-        notifications={state.commentNotifications}
-        title="Session Info"
-        {state}
-      />
+      <Navbar title="Session Info" {state} />
       <GroupSessions />
     </Route>
 
     <Route path="therapy-sessions">
-      <Navbar
-        notifications={state.commentNotifications}
-        title="Therapy Sessions"
-        {state}
-      />
-      <TherapySessions therapies={state.therapies} />
+      <Navbar title="Therapy Sessions" {state} />
+      <TherapySessions {state} />
     </Route>
 
     <Route path="urgent-support">
-      <Navbar
-        notifications={state.commentNotifications}
-        title="Urgent Support"
-        {state}
-      />
+      <Navbar title="Urgent Support" {state} />
       <UrgentSupport />
     </Route>
 
     <Route path="nerd-data">
-      <Navbar
-        notifications={state.commentNotifications}
-        title="Nerd data"
-        {state}
-      />
+      <Navbar title="Nerd data" {state} />
       <NerdData />
     </Route>
 
@@ -138,20 +110,12 @@
     </Route>
 
     <Route path="notifications">
-      <Navbar
-        notifications={state.commentNotifications}
-        title="Notifications"
-        {state}
-      />
-      <Notifications notifications={state.commentNotifications} />
+      <Navbar title="Notifications" {state} />
+      <Notifications {state} />
     </Route>
 
     <Route path="posts/:id" let:params>
-      <Navbar
-        notifications={state.commentNotifications}
-        title="Notification"
-        {state}
-      />
+      <Navbar title="Notification" {state} />
       {#await getPostById(state, params.id)}
         <Loading />
       {:then post}
@@ -171,11 +135,7 @@
 
     <!-- Default catch all route -->
     <Route>
-      <Navbar
-        notifications={state.commentNotifications}
-        title="Kalda"
-        {state}
-      />
+      <Navbar title="Kalda" {state} />
       <Dashboard
         user={state.currentUser}
         post={state.reflections[0]}
