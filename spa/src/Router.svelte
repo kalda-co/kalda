@@ -27,7 +27,10 @@
   scheduleDailyReflectionNotifications();
   scheduleTherapyNotifications(state.therapies);
 
-  async function getPostById(paramId: string): Promise<Post | undefined> {
+  async function getPostById(
+    state: AppState,
+    paramId: string
+  ): Promise<Post | undefined> {
     let id: number = parseInt(paramId);
     // Look for the post in the daily reflections
     let foundPost = state.reflections.find((post) => post.id == id);
@@ -51,7 +54,6 @@
         <Thread
           placeholder="Your reflection here"
           commentName="response"
-          currentUser={state.currentUser}
           {api}
           {post}
           {state}
@@ -69,7 +71,6 @@
         <Thread
           placeholder="Your commitment here"
           commentName="commitment"
-          currentUser={state.currentUser}
           {api}
           {post}
           {state}
@@ -101,10 +102,7 @@
         title="Therapy Sessions"
         {state}
       />
-      <TherapySessions
-        therapies={state.therapies}
-        currentUser={state.currentUser}
-      />
+      <TherapySessions therapies={state.therapies} />
     </Route>
 
     <Route path="urgent-support">
@@ -154,14 +152,13 @@
         title="Notification"
         {state}
       />
-      {#await getPostById(params.id)}
+      {#await getPostById(state, params.id)}
         <Loading />
       {:then post}
         {#if post}
           <Thread
             placeholder="Your reflection here"
             commentName="response"
-            currentUser={state.currentUser}
             {api}
             {post}
             {state}

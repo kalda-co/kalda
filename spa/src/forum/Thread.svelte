@@ -10,8 +10,9 @@
   export let post: Post;
   export let placeholder: string;
   export let commentName: string;
-  export let currentUser: User;
   export let state: AppState;
+
+  let currentUser = state.currentUser;
 
   async function saveComment(content: string): Promise<Response<Comment>> {
     let response = await api.createComment(post.id, content);
