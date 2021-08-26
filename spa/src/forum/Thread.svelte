@@ -2,7 +2,7 @@
   import CommentComponent from "./Comment.svelte";
   import ContentTextForm from "./ContentTextForm.svelte";
   import { link } from "svelte-routing";
-  import type { Post, User, Comment } from "../state";
+  import type { Post, Comment } from "../state";
   import type { ApiClient, Response } from "../backend";
   import type { AppState } from "../state";
 
