@@ -18,7 +18,10 @@
           <span class="italic">with: </span>
           "{notification.replyContent}."
           <span class="underline">
-            <a use:link href="/posts/{notification.parentPostId}">
+            <a
+              use:link
+              href="/posts/{notification.parentPostId}/comments/{notification.commentId}"
+            >
               See the whole thread
             </a>
           </span>

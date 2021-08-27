@@ -29,15 +29,18 @@
 
   async function getPostById(
     state: AppState,
-    paramId: string
+    paramPostId: string,
+    paramCommentId: string
   ): Promise<Post | undefined> {
-    let id: number = parseInt(paramId);
+    let postId: number = parseInt(paramPostId);
+    let commentId: number = parseInt(paramCommentId);
     // Look for the post in the daily reflections
-    let foundPost = state.reflections.find((post) => post.id == id);
+    let foundPost = state.reflections.find((post) => post.id == postId);
+    // TODO: REORDER THE COMMENTS
     if (foundPost) return foundPost;
 
     // We don't have this post yet so get it from the API
-    let response = await api.getPostState(id);
+    let response = await api.getPostState(postId, commentId);
     if (response.type === "Success") return response.resource;
   }
 </script>
@@ -114,9 +117,9 @@
       <Notifications {state} />
     </Route>
 
-    <Route path="posts/:id" let:params>
+    <Route path="posts/:postId/comments/:commentId" let:params>
       <Navbar title="Notification" {state} />
-      {#await getPostById(state, params.id)}
+      {#await getPostById(state, params.postId, params.commentId)}
         <Loading />
       {:then post}
         {#if post}
