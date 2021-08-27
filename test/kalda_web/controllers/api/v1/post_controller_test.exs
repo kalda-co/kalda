@@ -24,7 +24,7 @@ defmodule KaldaWeb.Api.V1.PostControllerTest do
           published_at: NaiveDateTime.new!(~D[2020-01-01], ~T[00:00:00])
         })
 
-      comment1 = ForumsFixtures.comment(post1, current_user)
+      comment1 = ForumsFixtures.comment(post1, current_user, %{content: "abc"})
       comment2 = ForumsFixtures.comment(post1, author1)
       reply1 = ForumsFixtures.reply(comment1, author1)
       conn = get(conn, "/v1/posts/#{post1.id}")
