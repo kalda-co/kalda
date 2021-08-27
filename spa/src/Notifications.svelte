@@ -3,8 +3,15 @@
   import { link } from "svelte-routing";
 
   export let state: AppState;
-  // export let notifications: CommentNotification[];
   let notifications: Array<CommentNotification> = state.commentNotifications;
+
+  function truncate(content: string): string {
+    if (content.length > 30) {
+      return content.substring(0, 30) + "...";
+    } else {
+      return content;
+    }
+  }
 </script>
 
 {#each notifications as notification}
@@ -14,9 +21,11 @@
         <p>
           <span class="author">{notification.replyAuthor.username}</span>
           <span class="italic"> replied to your comment: </span>
-          "{notification.commentContent}"
+          "{truncate(notification.commentContent)}"
+        </p>
+        <p>
           <span class="italic">with: </span>
-          "{notification.replyContent}."
+          "{truncate(notification.replyContent)}."
           <span class="underline">
             <a
               use:link
