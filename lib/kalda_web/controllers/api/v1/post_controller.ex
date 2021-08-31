@@ -26,7 +26,9 @@ defmodule KaldaWeb.Api.V1.PostController do
 
     ordered_comments = List.flatten(original_comment ++ other_comments)
 
-    # IO.inspect(ordered_comments, label: "[ordered comments]")
+    # Update notification as read
+    # Put n_id in route
+    # update n.
 
     conn
     |> put_status(200)

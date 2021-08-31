@@ -31,10 +31,12 @@
   async function getPostById(
     state: AppState,
     paramPostId: string,
-    paramCommentId: string
+    paramCommentId: string,
+    paramNotificationId: string
   ): Promise<Post | undefined> {
     let postId: number = parseInt(paramPostId);
     let commentId: number = parseInt(paramCommentId);
+    let notificationId: number = parseInt(paramNotificationId);
     // Look for the post in the daily reflections
     let foundPost = state.reflections.find((post) => post.id == postId);
 
@@ -49,17 +51,12 @@
           (comment) => comment.id != commentId
         );
 
-        let foundPostCommentFirstArray = [foundPostCommentFirst];
-        let resultComments = foundPostCommentFirstArray
-          .concat(otherComments)
-          .flat();
-
-        console.log(resultComments);
+        let resultComments = [foundPostCommentFirst, ...otherComments];
 
         let newPost: Post = {
-          id: foundPost?.id,
-          content: foundPost?.content,
-          author: foundPost?.author,
+          id: foundPost.id,
+          content: foundPost.content,
+          author: foundPost.author,
           comments: resultComments,
         };
         return newPost;
@@ -67,7 +64,7 @@
     }
 
     // We don't have this post yet so get it from the API, with reordered comments
-    let response = await api.getPostState(postId, commentId);
+    let response = await api.getPostState(postId, commentId, notificationId);
     if (response.type === "Success") return response.resource;
   }
 </script>
@@ -144,9 +141,12 @@
       <Notifications {state} />
     </Route>
 
-    <Route path="posts/:postId/comments/:commentId" let:params>
+    <Route
+      path="posts/:postId/comments/:commentId/n/:notificationId"
+      let:params
+    >
       <Navbar title="Notification" {state} />
-      {#await getPostById(state, params.postId, params.commentId)}
+      {#await getPostById(state, params.postId, params.commentId, params.notificationId)}
         <Loading />
       {:then post}
         {#if post}
