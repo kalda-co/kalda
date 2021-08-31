@@ -1198,9 +1198,12 @@ defmodule Kalda.Forums do
     end
   end
 
-  def get_notification!(id) do
+  def get_notification!(id, opts \\ []) do
+    preload = opts[:preload] || []
+
     from(n in Notification,
-      where: n.id == ^id
+      where: n.id == ^id,
+      preload: ^preload
     )
     |> Repo.get!(id)
   end

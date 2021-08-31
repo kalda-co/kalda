@@ -85,6 +85,7 @@ export type Notifications = {
 };
 
 export type CommentNotification = {
+  id: number,
   parentPostId: number,
   commentContent: string;
   commentId: number;
@@ -95,6 +96,7 @@ export type CommentNotification = {
 };
 
 export type PostNotification = {
+  id: number;
   parentPostId: number;
   postContent: string;
   insertedAt: Date;
