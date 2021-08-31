@@ -4,35 +4,43 @@ defmodule KaldaWeb.Api.V1.PostController do
   alias Kalda.Forums
 
   @doc """
-  This 'show' shows the single post to the user when they click on a notification, and reoders the comments so that their comment is first
+  'Old' show - remains to preserve API
+  This 'show' shows the single post to the user when they click on a notification
   """
 
-  def show(conn, %{"post_id" => post_id, "comment_id" => comment_id}) do
-    post = Forums.get_post_order_preloads!(post_id)
-    comments = post.comments
-
-    {comment_id_int, _} = Integer.parse(comment_id)
-
-    original_comment =
-      Enum.filter(comments, fn
-        comment ->
-          comment.id == comment_id_int
-      end)
-
-    other_comments =
-      Enum.filter(comments, fn
-        comment -> comment.id != comment_id_int
-      end)
-
-    ordered_comments = List.flatten(original_comment ++ other_comments)
-
+  def show(conn, %{"id" => id}) do
+    post = Forums.get_post_order_preloads!(id)
     # Update notification as read
     # Put n_id in route
     # update n.
 
     conn
     |> put_status(200)
-    |> render("show.json", post: post, ordered_comments: ordered_comments)
+    |> render("show.json", post: post)
+    |> KaldaWeb.Api.V1.handle_error(conn)
+  end
+
+  @doc """
+  This 'show' shows the single post to the user when they click on a notification
+  """
+
+  # TODO: test
+  def show_notification_post_comment(conn, %{"notification_id" => notification_id}) do
+    notification =
+      Forums.get_notification!(notification_id,
+        preload: [:comment, [:author, post: [:author, replies: [:author]]]]
+      )
+
+    IO.inspect(notification.comment.post_id)
+
+    post = Forums.get_post_order_preloads!(notification.comment.post_id)
+    # Update notification as read
+    # Put n_id in route
+    # update n.
+
+    conn
+    |> put_status(200)
+    |> render("show.json", post: post)
     |> KaldaWeb.Api.V1.handle_error(conn)
   end
 end

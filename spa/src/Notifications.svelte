@@ -1,17 +1,11 @@
 <script lang="ts">
   import type { AppState, CommentNotification } from "./state";
   import { link } from "svelte-routing";
+  import { truncate } from "./functions";
 
   export let state: AppState;
-  let notifications: Array<CommentNotification> = state.commentNotifications;
 
-  function truncate(content: string): string {
-    if (content.length > 30) {
-      return content.substring(0, 30) + "...";
-    } else {
-      return content;
-    }
-  }
+  let notifications: Array<CommentNotification> = state.commentNotifications;
 </script>
 
 {#each notifications as notification}

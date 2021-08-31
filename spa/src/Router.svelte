@@ -19,7 +19,7 @@
     scheduleDailyReflectionNotifications,
     scheduleTherapyNotifications,
   } from "./local-notification";
-  // import { post } from "./backend/resources";
+  import { reorderComments } from "./functions";
 
   export let state: AppState;
   export let api: ApiClient;
@@ -42,30 +42,16 @@
 
     if (foundPost) {
       // REORDER THE COMMENTS
-      let foundPostCommentFirst = foundPost.comments.find(
-        (comment) => comment.id == commentId
-      );
-
-      if (foundPostCommentFirst) {
-        let otherComments = foundPost.comments.filter(
-          (comment) => comment.id != commentId
-        );
-
-        let resultComments = [foundPostCommentFirst, ...otherComments];
-
-        let newPost: Post = {
-          id: foundPost.id,
-          content: foundPost.content,
-          author: foundPost.author,
-          comments: resultComments,
-        };
-        return newPost;
-      }
+      return reorderComments(foundPost, commentId);
     }
 
     // We don't have this post yet so get it from the API, with reordered comments
     let response = await api.getPostState(postId, commentId, notificationId);
-    if (response.type === "Success") return response.resource;
+    if (response.type === "Success") {
+      let responsePost = response.resource;
+      // REORDER THE COMMENTS
+      return reorderComments(responsePost, commentId);
+    }
   }
 </script>
 
@@ -141,10 +127,7 @@
       <Notifications {state} />
     </Route>
 
-    <Route
-      path="posts/:postId/comments/:commentId/n/:notificationId"
-      let:params
-    >
+    <Route path="notifications/:notificationId" let:params>
       <Navbar title="Notification" {state} />
       {#await getPostById(state, params.postId, params.commentId, params.notificationId)}
         <Loading />
