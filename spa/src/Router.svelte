@@ -13,7 +13,7 @@
   import Notifications from "./Notifications.svelte";
   import { Router, Route } from "svelte-routing";
   import type { Stripe } from "./stripe";
-  import type { AppState, Post } from "./state";
+  import type { AppState, CommentNotification, Post } from "./state";
   import type { ApiClient } from "./backend";
   import {
     scheduleDailyReflectionNotifications,
@@ -28,26 +28,34 @@
   scheduleDailyReflectionNotifications();
   scheduleTherapyNotifications(state.therapies);
 
-  async function getPostById(
+  async function getPostByNotificationId(
     state: AppState,
-    paramPostId: string,
-    paramCommentId: string
+    paramNotificationId: string
   ): Promise<Post | undefined> {
-    let postId: number = parseInt(paramPostId);
-    let commentId: number = parseInt(paramCommentId);
+    let notificationId: number = parseInt(paramNotificationId);
+
+    let notification = state.commentNotifications.find(
+      (notification: CommentNotification) =>
+        notification.notificationId == notificationId
+    );
+    let commentId = notification?.commentId;
+    let postId = notification?.parentPostId;
+
     // Look for the post in the daily reflections
     let foundPost = state.reflections.find((post) => post.id == postId);
 
-    if (foundPost) {
+    if (foundPost && commentId) {
       // REORDER THE COMMENTS
       return reorderComments(foundPost, commentId);
     }
     // We don't have this post yet so get it from the API, with reordered comments
-    let response = await api.getPostState(postId, commentId);
-    if (response.type === "Success") {
-      let responsePost = response.resource;
-      // REORDER THE COMMENTS
-      return reorderComments(responsePost, commentId);
+    if (postId && commentId) {
+      let response = await api.getPostState(postId, commentId);
+      if (response.type === "Success") {
+        let responsePost = response.resource;
+        // REORDER THE COMMENTS
+        return reorderComments(responsePost, commentId);
+      }
     }
   }
 </script>
@@ -124,9 +132,9 @@
       <Notifications {state} />
     </Route>
 
-    <Route path="posts/:postId/comments/:commentId" let:params>
+    <Route path="posts/notifications/:notificationId" let:params>
       <Navbar title="Notification" {state} />
-      {#await getPostById(state, params.postId, params.commentId)}
+      {#await getPostByNotificationId(state, params.notificationId)}
         <Loading />
       {:then post}
         {#if post}
