@@ -134,7 +134,8 @@ defmodule KaldaWeb.Router do
       :json_require_subscribed_user
     ]
 
-    get "/posts/:post_id/comments/:comment_id", PostController, :show
+    get "/posts/:post_id/comments/:comment_id", PostController, :show_comment_notification
+    get "/posts/:id", PostController, :show
     post "/posts/:id/comments", CommentController, :create
     post "/comments/:id/replies", ReplyController, :create
     post "/comments/:id/reports", ReportController, :report_comment
@@ -162,7 +163,8 @@ defmodule KaldaWeb.Router do
       :json_require_subscribed_user
     ]
 
-    get "/posts/:post_id/comments/:comment_id", PostController, :show
+    get "/posts/:post_id/comments/:comment_id", PostController, :show_comment_notification
+    get "/posts/:id", PostController, :show
     post "/posts/:id/comments", CommentController, :create
     post "/comments/:id/replies", ReplyController, :create
     post "/comments/:id/reports", ReportController, :report_comment
