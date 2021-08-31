@@ -19,6 +19,7 @@
     scheduleDailyReflectionNotifications,
     scheduleTherapyNotifications,
   } from "./local-notification";
+  // import { post } from "./backend/resources";
 
   export let state: AppState;
   export let api: ApiClient;
@@ -36,10 +37,36 @@
     let commentId: number = parseInt(paramCommentId);
     // Look for the post in the daily reflections
     let foundPost = state.reflections.find((post) => post.id == postId);
-    // TODO: REORDER THE COMMENTS
-    if (foundPost) return foundPost;
 
-    // We don't have this post yet so get it from the API
+    if (foundPost) {
+      // REORDER THE COMMENTS
+      let foundPostCommentFirst = foundPost.comments.find(
+        (comment) => comment.id == commentId
+      );
+
+      if (foundPostCommentFirst) {
+        let otherComments = foundPost.comments.filter(
+          (comment) => comment.id != commentId
+        );
+
+        let foundPostCommentFirstArray = [foundPostCommentFirst];
+        let resultComments = foundPostCommentFirstArray
+          .concat(otherComments)
+          .flat();
+
+        console.log(resultComments);
+
+        let newPost: Post = {
+          id: foundPost?.id,
+          content: foundPost?.content,
+          author: foundPost?.author,
+          comments: resultComments,
+        };
+        return newPost;
+      }
+    }
+
+    // We don't have this post yet so get it from the API, with reordered comments
     let response = await api.getPostState(postId, commentId);
     if (response.type === "Success") return response.resource;
   }
