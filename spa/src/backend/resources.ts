@@ -56,6 +56,7 @@ export function therapy(json: unknown): Therapy {
 
 export function commentNotification(json: unknown): CommentNotification {
   return {
+    id: field("id", number)(json),
     parentPostId: field("parent_post_id", number)(json),
     commentContent: field("comment_content", string)(json),
     commentId: field("comment_id", number)(json),

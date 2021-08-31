@@ -19,6 +19,7 @@
     scheduleDailyReflectionNotifications,
     scheduleTherapyNotifications,
   } from "./local-notification";
+  // import { post } from "./backend/resources";
 
   export let state: AppState;
   export let api: ApiClient;
@@ -29,15 +30,41 @@
 
   async function getPostById(
     state: AppState,
-    paramId: string
+    paramPostId: string,
+    paramCommentId: string,
+    paramNotificationId: string
   ): Promise<Post | undefined> {
-    let id: number = parseInt(paramId);
+    let postId: number = parseInt(paramPostId);
+    let commentId: number = parseInt(paramCommentId);
+    let notificationId: number = parseInt(paramNotificationId);
     // Look for the post in the daily reflections
-    let foundPost = state.reflections.find((post) => post.id == id);
-    if (foundPost) return foundPost;
+    let foundPost = state.reflections.find((post) => post.id == postId);
 
-    // We don't have this post yet so get it from the API
-    let response = await api.getPostState(id);
+    if (foundPost) {
+      // REORDER THE COMMENTS
+      let foundPostCommentFirst = foundPost.comments.find(
+        (comment) => comment.id == commentId
+      );
+
+      if (foundPostCommentFirst) {
+        let otherComments = foundPost.comments.filter(
+          (comment) => comment.id != commentId
+        );
+
+        let resultComments = [foundPostCommentFirst, ...otherComments];
+
+        let newPost: Post = {
+          id: foundPost.id,
+          content: foundPost.content,
+          author: foundPost.author,
+          comments: resultComments,
+        };
+        return newPost;
+      }
+    }
+
+    // We don't have this post yet so get it from the API, with reordered comments
+    let response = await api.getPostState(postId, commentId, notificationId);
     if (response.type === "Success") return response.resource;
   }
 </script>
@@ -114,9 +141,12 @@
       <Notifications {state} />
     </Route>
 
-    <Route path="posts/:id" let:params>
+    <Route
+      path="posts/:postId/comments/:commentId/n/:notificationId"
+      let:params
+    >
       <Navbar title="Notification" {state} />
-      {#await getPostById(state, params.id)}
+      {#await getPostById(state, params.postId, params.commentId, params.notificationId)}
         <Loading />
       {:then post}
         {#if post}
