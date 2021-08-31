@@ -54,8 +54,6 @@
           .concat(otherComments)
           .flat();
 
-        console.log(resultComments);
-
         let newPost: Post = {
           id: foundPost?.id,
           content: foundPost?.content,
