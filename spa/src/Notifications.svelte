@@ -22,7 +22,7 @@
           <span class="underline">
             <a
               use:link
-              href="/posts/{notification.parentPostId}/comments/{notification.commentId}"
+              href="/posts/notifications/{notification.notificationId}"
             >
               See the whole thread
             </a>

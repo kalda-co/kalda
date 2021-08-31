@@ -35,9 +35,9 @@ defmodule KaldaWeb.Api.V1.NotificationControllerTest do
 
       comment1 = ForumsFixtures.comment(post1, current_user)
 
-      {reply1, _notification1} = ForumsFixtures.reply_with_notification(comment1, reply_auth1)
+      {reply1, notification1} = ForumsFixtures.reply_with_notification(comment1, reply_auth1)
 
-      {reply2, _notification2} = ForumsFixtures.reply_with_notification(comment1, reply_auth2)
+      {reply2, notification2} = ForumsFixtures.reply_with_notification(comment1, reply_auth2)
 
       conn = get(conn, "/v1/notifications")
 
@@ -50,6 +50,7 @@ defmodule KaldaWeb.Api.V1.NotificationControllerTest do
                  "post_notifications" => nil,
                  "comment_notifications" => [
                    %{
+                     "notification_id" => notification1.id,
                      "parent_post_id" => post1.id,
                      "comment_id" => comment1.id,
                      "comment_content" => comment1.content,
@@ -62,6 +63,7 @@ defmodule KaldaWeb.Api.V1.NotificationControllerTest do
                      }
                    },
                    %{
+                     "notification_id" => notification2.id,
                      "parent_post_id" => post1.id,
                      "comment_id" => comment1.id,
                      "comment_content" => comment1.content,
@@ -93,9 +95,9 @@ defmodule KaldaWeb.Api.V1.NotificationControllerTest do
 
       comment1 = ForumsFixtures.comment(post1, current_user)
 
-      {reply1, _notification1} = ForumsFixtures.reply_with_notification(comment1, reply_auth1)
+      {reply1, notification1} = ForumsFixtures.reply_with_notification(comment1, reply_auth1)
 
-      {reply2, _notification2} = ForumsFixtures.reply_with_notification(comment1, reply_auth2)
+      {reply2, notification2} = ForumsFixtures.reply_with_notification(comment1, reply_auth2)
 
       user2 = AccountsFixtures.user()
       comment2 = ForumsFixtures.comment(post1, user2)
@@ -113,6 +115,7 @@ defmodule KaldaWeb.Api.V1.NotificationControllerTest do
                  "post_notifications" => nil,
                  "comment_notifications" => [
                    %{
+                     "notification_id" => notification1.id,
                      "parent_post_id" => post1.id,
                      "comment_id" => comment1.id,
                      "comment_content" => comment1.content,
@@ -125,6 +128,7 @@ defmodule KaldaWeb.Api.V1.NotificationControllerTest do
                      }
                    },
                    %{
+                     "notification_id" => notification2.id,
                      "parent_post_id" => post1.id,
                      "comment_id" => comment1.id,
                      "comment_content" => comment1.content,
