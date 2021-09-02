@@ -25,6 +25,8 @@
   export let api: ApiClient;
   export let stripe: Promise<Stripe>;
 
+  let updatedState = api.getInitialAppState();
+
   scheduleDailyReflectionNotifications();
   scheduleTherapyNotifications(state.therapies);
 
@@ -127,11 +129,21 @@
       {/if}
     </Route>
 
+    <!-- Update state for notifications page to account for marking as 'read: true' -->
     <Route path="notifications">
       <Navbar title="Notifications" {state} />
-      <Notifications {state} />
+      {#await updatedState}
+        <Loading />
+      {:then response}
+        {#if response.type === "Success"}
+          <Notifications state={response.resource} />
+        {:else}
+          <Notifications {state} />
+        {/if}
+      {/await}
     </Route>
 
+    <!-- TODO: getting post by notification to also return updated notification state? -->
     <Route path="posts/notifications/:notificationId" let:params>
       <Navbar title="Notification" {state} />
       {#await getPostByNotificationId(state, params.notificationId)}

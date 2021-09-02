@@ -135,6 +135,7 @@ defmodule KaldaWeb.Router do
     ]
 
     # get "/posts/:post_id/comments/:comment_id", PostController, :show_comment_notification
+    get "/posts/:notifications/:id", PostController, :show_read
     get "/posts/:id", PostController, :show
     post "/posts/:id/comments", CommentController, :create
     post "/comments/:id/replies", ReplyController, :create
@@ -164,6 +165,7 @@ defmodule KaldaWeb.Router do
     ]
 
     # get "/posts/:post_id/comments/:comment_id", PostController, :show_comment_notification
+    get "/posts/:notifications/:id", PostController, :show_read
     get "/posts/:id", PostController, :show
     post "/posts/:id/comments", CommentController, :create
     post "/comments/:id/replies", ReplyController, :create

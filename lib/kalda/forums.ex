@@ -1198,10 +1198,29 @@ defmodule Kalda.Forums do
     end
   end
 
-  def get_notification!(id) do
+  def get_notification!(id, opts \\ []) do
+    preload = opts[:preload] || []
+
     from(n in Notification,
-      where: n.id == ^id
+      where: n.id == ^id,
+      preload: ^preload
     )
     |> Repo.get!(id)
+  end
+
+  @doc """
+  Updates a notification, raises error if notification not found.
+
+  ## Examples
+
+      iex> update_notification!(notification, %{field: new_value})
+      %Notification{}
+
+
+  """
+  def update_notification!(%Notification{} = notification, attrs) do
+    notification
+    |> Notification.changeset(attrs)
+    |> Repo.update!()
   end
 end
