@@ -110,7 +110,7 @@ defmodule Kalda.Forums do
       if opts[:hide_comments] do
         0
       else
-        100
+        1000
       end
 
     Repo.all(

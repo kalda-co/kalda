@@ -7,7 +7,7 @@ defmodule KaldaWeb.Admin.PostController do
   def index(conn, params) do
     Policy.authorize!(conn, :view_admin_posts, Kalda)
     forum = Forums.parse_forum!(params["forum"])
-    posts = Forums.get_posts(forum)
+    posts = Forums.get_posts(forum, limit: 50)
     scheduled = Forums.get_scheduled_posts(forum)
     name_string = Forums.name_string(forum)
 
