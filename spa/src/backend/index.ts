@@ -7,6 +7,7 @@ import type {
   StripePaymentIntent,
   User,
   Post,
+  CommentNotification,
 } from "../state";
 import {
   loginSuccess,
@@ -16,6 +17,7 @@ import {
   reaction,
   stripePaymentIntent,
   post,
+  commentNotification,
 } from "./resources";
 import { request, Response, HttpClient, ErrorHandlers } from "./http";
 import { UnmatchedError } from "../exhaustive";
@@ -91,6 +93,8 @@ export interface ApiClient {
   getStripePaymentIntent(): Promise<Response<StripePaymentIntent>>;
 
   getPostState(postId: number, commentId: number): Promise<Response<Post>>;
+
+  getNotification(replyId: number): Promise<Response<CommentNotification>>
 }
 
 // An implementation of ApiClient that actually connects to the backend.
@@ -199,6 +203,11 @@ export class AuthenticatedApiClient implements ApiClient {
     let url = this.route(`/v1/token/posts/${postId}`)
     return await this.httpClient.get(url).expect(200).request(post);
   }
+
+  async getNotification(replyId: number): Promise<Response<CommentNotification>> {
+    let url = this.route(`/v1/token/comment-notifications/${replyId}`)
+    return await this.httpClient.get(url).expect(200).request(commentNotification);
+  }
 }
 
 // A mock API client used in tests
@@ -247,5 +256,9 @@ export class MockApiClient implements ApiClient {
   getPostState(postId: number, commentId: number): Promise<Response<Post>> {
     throw new Error("Method not implemented.");
   }
+  getNotification(replyId: number): Promise<Response<CommentNotification>> {
+    throw new Error("Method not implemented.");
+  }
+  
 }
 

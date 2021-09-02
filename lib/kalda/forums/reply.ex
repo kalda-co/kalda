@@ -16,6 +16,10 @@ defmodule Kalda.Forums.Reply do
 
     has_many :reply_reactions, Kalda.Forums.ReplyReaction
 
+    has_one :notification, Kalda.Forums.Notification,
+      foreign_key: :notification_reply_id,
+      references: :id
+
     timestamps()
   end
 

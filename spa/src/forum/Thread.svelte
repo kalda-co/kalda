@@ -72,7 +72,7 @@
     {#if state.currentUser.hasSubscription}
       <ContentTextForm {placeholder} save={saveComment} buttonText="Send" />
       {#each post.comments as comment (comment.id)}
-        <CommentComponent {comment} {currentUser} {api} />
+        <CommentComponent {comment} {currentUser} {api} {state} />
       {/each}
     {:else}
       <div class="form-dupe-container">

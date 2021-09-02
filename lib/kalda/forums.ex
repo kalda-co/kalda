@@ -1204,4 +1204,18 @@ defmodule Kalda.Forums do
     )
     |> Repo.get!(id)
   end
+
+  @doc """
+  When authorX replies to a comment by userN, a notification is generated for the comment and userN
+
+  """
+  def get_comment_notification_by_reply_id!(notification_reply_id, opts \\ []) do
+    preload = opts[:preload] || []
+
+    from(n in Notification,
+      # where: n.notification_reply_id == ^notification_reply_id,
+      preload: ^preload
+    )
+    |> Repo.get_by!(notification_reply_id: notification_reply_id)
+  end
 end

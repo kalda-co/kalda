@@ -12,6 +12,10 @@ defmodule KaldaWeb.Api.V1.NotificationView do
     }
   end
 
+  def render("show_by_reply.json", params) do
+    render_comment_notification(params.notification)
+  end
+
   def render_comment_notification(notification) do
     %{
       notification_id: notification.id,
