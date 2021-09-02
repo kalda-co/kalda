@@ -13,32 +13,52 @@
   import Notifications from "./Notifications.svelte";
   import { Router, Route } from "svelte-routing";
   import type { Stripe } from "./stripe";
-  import type { AppState, Post } from "./state";
+  import type { AppState, CommentNotification, Post } from "./state";
   import type { ApiClient } from "./backend";
   import {
     scheduleDailyReflectionNotifications,
     scheduleTherapyNotifications,
   } from "./local-notification";
+  import { reorderComments } from "./functions";
 
   export let state: AppState;
   export let api: ApiClient;
   export let stripe: Promise<Stripe>;
 
+  let updatedState = api.getInitialAppState();
+
   scheduleDailyReflectionNotifications();
   scheduleTherapyNotifications(state.therapies);
 
-  async function getPostById(
+  async function getPostByNotificationId(
     state: AppState,
-    paramId: string
+    paramNotificationId: string
   ): Promise<Post | undefined> {
-    let id: number = parseInt(paramId);
-    // Look for the post in the daily reflections
-    let foundPost = state.reflections.find((post) => post.id == id);
-    if (foundPost) return foundPost;
+    let notificationId: number = parseInt(paramNotificationId);
 
-    // We don't have this post yet so get it from the API
-    let response = await api.getPostState(id);
-    if (response.type === "Success") return response.resource;
+    let notification = state.commentNotifications.find(
+      (notification: CommentNotification) =>
+        notification.notificationId == notificationId
+    );
+    let commentId = notification?.commentId;
+    let postId = notification?.parentPostId;
+
+    // Look for the post in the daily reflections
+    let foundPost = state.reflections.find((post) => post.id == postId);
+
+    if (foundPost && commentId) {
+      // REORDER THE COMMENTS
+      return reorderComments(foundPost, commentId);
+    }
+    // We don't have this post yet so get it from the API, with reordered comments
+    if (postId && commentId) {
+      let response = await api.getPostState(postId, commentId);
+      if (response.type === "Success") {
+        let responsePost = response.resource;
+        // REORDER THE COMMENTS
+        return reorderComments(responsePost, commentId);
+      }
+    }
   }
 </script>
 
@@ -109,14 +129,24 @@
       {/if}
     </Route>
 
+    <!-- Update state for notifications page to account for marking as 'read: true' -->
     <Route path="notifications">
       <Navbar title="Notifications" {state} />
-      <Notifications {state} />
+      {#await updatedState}
+        <Loading />
+      {:then response}
+        {#if response.type === "Success"}
+          <Notifications state={response.resource} />
+        {:else}
+          <Notifications {state} />
+        {/if}
+      {/await}
     </Route>
 
-    <Route path="posts/:id" let:params>
+    <!-- TODO: getting post by notification to also return updated notification state? -->
+    <Route path="posts/notifications/:notificationId" let:params>
       <Navbar title="Notification" {state} />
-      {#await getPostById(state, params.id)}
+      {#await getPostByNotificationId(state, params.notificationId)}
         <Loading />
       {:then post}
         {#if post}

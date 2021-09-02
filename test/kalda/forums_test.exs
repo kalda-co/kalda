@@ -1046,6 +1046,7 @@ defmodule Kalda.ForumsTest do
     alias Kalda.Forums.Notification
 
     @valid_rn_notification %{read: false, expired: false}
+    @update_n_attrs %{read: true}
 
     # TODO: Creating a reply or reply_fixture should always create a notification???
 
@@ -1149,6 +1150,18 @@ defmodule Kalda.ForumsTest do
 
       assert {:error, %Ecto.Changeset{}} =
                Forums.create_reply_with_notification(user, comment, @valid_reply_attrs)
+    end
+
+    test "update_notification1/2 with valid data updates the notification" do
+      user = AccountsFixtures.user()
+      post = ForumsFixtures.post(user)
+      comment = ForumsFixtures.comment(post, user)
+      {_reply, notification} = ForumsFixtures.reply_with_notification(comment, user)
+
+      assert %Notification{} =
+               notification = Forums.update_notification!(notification, @update_n_attrs)
+
+      assert notification.read == true
     end
   end
 end

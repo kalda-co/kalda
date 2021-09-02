@@ -90,7 +90,7 @@ export interface ApiClient {
 
   getStripePaymentIntent(): Promise<Response<StripePaymentIntent>>;
 
-  getPostState(postId: number): Promise<Response<Post>>;
+  getPostState(postId: number, commentId: number): Promise<Response<Post>>;
 }
 
 // An implementation of ApiClient that actually connects to the backend.
@@ -195,7 +195,7 @@ export class AuthenticatedApiClient implements ApiClient {
       .request(stripePaymentIntent);
   }
 
-  async getPostState(postId: number): Promise<Response<Post>> {
+  async getPostState(postId: number, commentId: number): Promise<Response<Post>> {
     let url = this.route(`/v1/token/posts/${postId}`)
     return await this.httpClient.get(url).expect(200).request(post);
   }
@@ -244,7 +244,7 @@ export class MockApiClient implements ApiClient {
   getStripePaymentIntent(): Promise<Response<StripePaymentIntent>> {
     throw new Error("Method not implemented.");
   }
-  getPostState(postId: number): Promise<Response<Post>> {
+  getPostState(postId: number, commentId: number): Promise<Response<Post>> {
     throw new Error("Method not implemented.");
   }
 }

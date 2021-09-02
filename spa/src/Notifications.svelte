@@ -1,9 +1,13 @@
 <script lang="ts">
+  // import type { CommentNotification } from "./state";
   import type { AppState, CommentNotification } from "./state";
   import { link } from "svelte-routing";
+  import { truncate } from "./functions";
+  // import type { ApiClient } from "./backend";
 
   export let state: AppState;
-  // export let notifications: CommentNotification[];
+  // export let api: ApiClient;
+  // let state = api.getInitialAppState();
   let notifications: Array<CommentNotification> = state.commentNotifications;
 </script>
 
@@ -14,11 +18,16 @@
         <p>
           <span class="author">{notification.replyAuthor.username}</span>
           <span class="italic"> replied to your comment: </span>
-          "{notification.commentContent}"
+          "{truncate(notification.commentContent)}"
+        </p>
+        <p>
           <span class="italic">with: </span>
-          "{notification.replyContent}."
+          "{truncate(notification.replyContent)}."
           <span class="underline">
-            <a use:link href="/posts/{notification.parentPostId}">
+            <a
+              use:link
+              href="/posts/notifications/{notification.notificationId}"
+            >
               See the whole thread
             </a>
           </span>
