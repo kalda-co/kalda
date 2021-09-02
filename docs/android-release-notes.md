@@ -30,6 +30,26 @@ No links to registration, which is still external (webapp only)
 ## In Open Testing
 
 ----
+### versionName 5.2 code versionCode 8 as APK
+- Purpose:
+fix notification mistake in 7 - 5.2, that added a notification if a user left a reply!!!
+- Released to open testing
+- Approved by Play
+- Submitted for Review
+- Submitted for open review
+
+- Submitted for internal testing and closed review
+02/sept/2021 17:36
+- Codebase PR & Branch
+PR #1051 -b patch-notification-state
+- Release Notes
+```md
+Default language – en-GB
+```
+- Comments:
+
+- Issues:
+----
 
 ### versionName 5.2 code versionCode 7 as APK
 - Purpose:
@@ -37,6 +57,8 @@ Undo breaking changes of 5.1 but resolve issues of notification refresh in 5.0
 - Released to open testing
 - Approved by Play
 - Submitted for Review
+- Submitted for open review
+02/Sept/2021 ????
 - Submitted for internal testing and closed review
 02/Sept/2021 12:40
 - Codebase PR & Branch
@@ -52,6 +74,7 @@ Kalda Update
 - Comments:
 
 - Issues:
+becasue of the notifications updating when a reply is made - stupid mistake - this isnt meant to go on this users state
 ----
 
 
@@ -106,3 +129,26 @@ Find the release in kalda/android/app/release/app-release.apk
 
 In kalda dev account: kaldadev@gmail.com go to [Play console](https://play.google.com/console/)
 in Internal testing, create new release
+
+## Template
+
+### versionName X.X code versionCode X as APK
+- Purpose:
+
+- Released to open testing
+- Approved by Play
+- Submitted for Review
+- Submitted for open review
+
+- Submitted for internal testing and closed review
+
+- Codebase PR & Branch
+
+- Release Notes
+```md
+Default language – en-GB
+```
+- Comments:
+
+- Issues:
+----
