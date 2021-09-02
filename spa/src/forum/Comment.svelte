@@ -1,11 +1,5 @@
 <script lang="ts">
-  import type {
-    Comment,
-    User,
-    Reply,
-    AppState,
-    // CommentNotification,
-  } from "../state";
+  import type { Comment, User, Reply } from "../state";
   import type { ApiClient, Response } from "../backend";
   import ContentTextForm from "./ContentTextForm.svelte";
   import ContentBubble from "./ContentBubble.svelte";
@@ -13,7 +7,7 @@
   export let api: ApiClient;
   export let comment: Comment;
   export let currentUser: User;
-  export let state: AppState;
+
   let replying = false;
 
   function toggleReplying() {

@@ -28,8 +28,8 @@ No links to registration, which is still external (webapp only)
 ----
 
 ## In Open Testing
-
 ----
+
 ### versionName 5.2 code versionCode 8 as APK
 - Purpose:
 fix notification mistake in 7 - 5.2, that added a notification if a user left a reply!!!
@@ -37,7 +37,7 @@ fix notification mistake in 7 - 5.2, that added a notification if a user left a 
 - Approved by Play
 - Submitted for Review
 - Submitted for open review
-
+02/Sept/2021 1824
 - Submitted for internal testing and closed review
 02/sept/2021 17:36
 - Codebase PR & Branch
@@ -92,6 +92,7 @@ Links for registration broken from mobile APP.
 ----
 
 ## In Closed and Internal
+
 
 ----
 
