@@ -20,6 +20,7 @@
           <span class="italic">with: </span>
           "{truncate(notification.replyContent)}."
           <span class="underline">
+            <!-- what I want to do here is redirect to the notification AND in the background the app both updates the notfications state AND marks read when this link is clicked -->
             <a
               use:link
               href="/posts/notifications/{notification.notificationId}"

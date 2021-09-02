@@ -4,7 +4,7 @@
     User,
     Reply,
     AppState,
-    CommentNotification,
+    // CommentNotification,
   } from "../state";
   import type { ApiClient, Response } from "../backend";
   import ContentTextForm from "./ContentTextForm.svelte";
@@ -25,15 +25,15 @@
     if (response.type === "Success") {
       let replyNew = response.resource;
       comment.replies = [...comment.replies, replyNew];
-      let notificationResponse = await api.getNotification(replyNew.id);
-      if (notificationResponse.type === "Success") {
-        let notificationNew: CommentNotification =
-          notificationResponse.resource;
-        state.commentNotifications = [
-          notificationNew,
-          ...state.commentNotifications,
-        ];
-      }
+      // let notificationResponse = await api.getNotification(replyNew.id);
+      // if (notificationResponse.type === "Success") {
+      //   let notificationNew: CommentNotification =
+      //     notificationResponse.resource;
+      //   state.commentNotifications = [
+      //     notificationNew,
+      //     ...state.commentNotifications,
+      //   ];
+      // }
       replying = false;
     }
     return response;
