@@ -1,5 +1,11 @@
 <script lang="ts">
-  import type { Comment, User, Reply } from "../state";
+  import type {
+    Comment,
+    User,
+    Reply,
+    AppState,
+    CommentNotification,
+  } from "../state";
   import type { ApiClient, Response } from "../backend";
   import ContentTextForm from "./ContentTextForm.svelte";
   import ContentBubble from "./ContentBubble.svelte";
@@ -7,6 +13,7 @@
   export let api: ApiClient;
   export let comment: Comment;
   export let currentUser: User;
+  export let state: AppState;
   let replying = false;
 
   function toggleReplying() {
@@ -16,7 +23,17 @@
   async function saveReply(content: string): Promise<Response<Reply>> {
     let response = await api.createReply(comment.id, content);
     if (response.type === "Success") {
-      comment.replies = [...comment.replies, response.resource];
+      let replyNew = response.resource;
+      comment.replies = [...comment.replies, replyNew];
+      let notificationResponse = await api.getNotification(replyNew.id);
+      if (notificationResponse.type === "Success") {
+        let notificationNew: CommentNotification =
+          notificationResponse.resource;
+        state.commentNotifications = [
+          notificationNew,
+          ...state.commentNotifications,
+        ];
+      }
       replying = false;
     }
     return response;

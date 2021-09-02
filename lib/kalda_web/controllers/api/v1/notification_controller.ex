@@ -19,4 +19,15 @@ defmodule KaldaWeb.Api.V1.NotificationController do
       notifications: notifications
     )
   end
+
+  def show_by_reply(conn, %{"reply_id" => reply_id}) do
+    # TODO: should this raise if not found?
+    notification =
+      Forums.get_comment_notification_by_reply_id!(reply_id,
+        preload: [comment: [:post], notification_reply: [:author]]
+      )
+
+    conn
+    |> render("show_by_reply.json", notification: notification)
+  end
 end

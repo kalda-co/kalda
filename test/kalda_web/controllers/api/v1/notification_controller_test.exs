@@ -160,4 +160,55 @@ defmodule KaldaWeb.Api.V1.NotificationControllerTest do
              }
     end
   end
+
+  describe "SHOW_BY_REPLY notification, user  is stripe subscibed" do
+    setup [:register_and_log_in_subscribed_stripe_user]
+
+    # uses /v1/notifications
+    # should use v1/token/notifications
+    test "gets the comment-notification by the notification_reply_id", %{
+      conn: conn,
+      user: current_user
+    } do
+      author1 = AccountsFixtures.user()
+      reply_auth1 = AccountsFixtures.user()
+      reply_auth2 = AccountsFixtures.user()
+
+      post1 =
+        ForumsFixtures.post(author1, %{
+          published_at: NaiveDateTime.new!(~D[2020-01-01], ~T[00:00:00])
+        })
+
+      comment1 = ForumsFixtures.comment(post1, current_user)
+
+      {reply1, notification1} = ForumsFixtures.reply_with_notification(comment1, reply_auth1)
+
+      {_reply2, _notification2} = ForumsFixtures.reply_with_notification(comment1, reply_auth2)
+
+      conn = get(conn, "/v1/comment-notifications/#{reply1.id}")
+
+      assert json_response(conn, 200) == %{
+               "notification_id" => notification1.id,
+               "parent_post_id" => post1.id,
+               "comment_id" => comment1.id,
+               "comment_content" => comment1.content,
+               "inserted_at" => NaiveDateTime.to_iso8601(reply1.inserted_at),
+               "notification_reply_id" => reply1.id,
+               "reply_content" => reply1.content,
+               "reply_author" => %{
+                 "id" => reply_auth1.id,
+                 "username" => reply_auth1.username
+               }
+             }
+    end
+
+    test "does not get the comment-notification if the current user did not author the comment",
+         %{
+           conn: _conn,
+           user: _current_user
+         } do
+      # TODO implement (note that the user never sees this show and so it is non-urgent, as notifications index is filtered by user)
+      # TODO: Also bar access for unsubscribed users, but non-urgent as above
+    end
+  end
 end
