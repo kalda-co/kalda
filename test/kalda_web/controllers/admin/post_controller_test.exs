@@ -48,6 +48,15 @@ defmodule KaldaWeb.Admin.PostControllerTest do
       conn = get(conn, Routes.admin_post_path(conn, :index, "co_working"))
       assert html_response(conn, 200) =~ "Co Working"
     end
+
+    test "shows post comments", %{conn: conn, user: _current_user} do
+      user2 = Kalda.AccountsFixtures.admin()
+      post = Kalda.ForumsFixtures.post(user2)
+      _comment = Kalda.ForumsFixtures.comment(post, user2, %{content: "testing 123"})
+
+      conn = get(conn, Routes.admin_post_path(conn, :index, "daily-reflection"))
+      assert html_response(conn, 200) =~ "testing 123"
+    end
   end
 
   describe "new post" do
